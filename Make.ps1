@@ -12,10 +12,10 @@ $newCommand.OriginalCommandElements = @('status')
 
 $CrescendoCommands += $newCommand
 
-Export-CrescendoCommand -command $CrescendoCommands -fileName .\out\Svn.json -Force
-
 if (!(Test-Path .\out\)) {
     $null = mkdir .\out\
 }
+
+Export-CrescendoCommand -command $CrescendoCommands -fileName .\out\Svn.json -Force
 
 Export-CrescendoModule -ConfigurationFile .\out\Svn.json -ModuleName .\out\Svn.psm1 -Force
