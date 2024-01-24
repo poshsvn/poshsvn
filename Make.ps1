@@ -30,7 +30,7 @@ while ($i -lt $out.Length) {
     if ($line -match " : ") {
         $parameterNames = @()
 
-        if ($line -match "-([a-z]([a-z]|-)*)") {
+        if ($line -match " -([a-z]([a-z]|-)*)") {
             $parameterNames += FormatParameter $Matches[1]
         }
         if ($line -match "--([a-z]([a-z]|-)*)") {
@@ -67,7 +67,7 @@ foreach ($parameter in $parameters) {
     $newParameter.NoGap = $false
     $newParameter.Description = $parameter.Description
 
-    for ($i = 2; $i -lt $parameter.ParameterNames.Count; $i++) {
+    for ($i = 0; $i -lt $parameter.ParameterNames.Count - 1; $i++) {
         $newParameter.Aliases += $parameter.ParameterNames[$i]
     }
 
