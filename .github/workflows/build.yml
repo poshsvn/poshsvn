@@ -9,6 +9,9 @@ jobs:
   
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install Crescendo
+        run: Install-Module Microsoft.PowerShell.Crescendo -Force
   
       - name: Build
         run: .\Make.ps1
