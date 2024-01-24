@@ -10,17 +10,49 @@ $parameters = @{
 $newCommand = New-CrescendoCommand @parameters
 $newCommand.OriginalCommandElements = @('status')
 
-$parameter = New-ParameterInfo -OriginalName '--show-updates' -Name 'ShowUpdates'
-$parameter.ParameterType = 'switch'
-$parameter.NoGap = $true
-$parameter.Description = "display update information"
-$newCommand.Parameters += $parameter
+$out = svn.exe help status
 
-$parameter = New-ParameterInfo -OriginalName '-v' -Name 'v'
-$parameter.ParameterType = 'switch'
-$parameter.NoGap = $true
-$parameter.Description = "print extra information"
-$newCommand.Parameters += $parameter
+$i = 0;
+while ($i -lt $out.Length -and $out[$i] -ne "Valid options:") {
+    $i++
+}
+$i++
+$parameters = @()
+while ($i -lt $out.Length) {
+    $line = $out[$i]
+    if ($line -match " : ") {
+
+        $null = $line -match "-([a-z]|-)*"
+        $parameterName = $Matches[0]
+
+        $null = $line -match ": (.*)"
+        $description = $Matches[1]
+
+        $isParameter = $line -match "ARG"
+
+        $parameters +=  @{
+            ParameterName = $parameterName
+            Description   = $description
+            Type = $isParameter ? "string" : "switch"
+        }
+    }
+    else {
+        $null = $line -match " {29}(.*)"
+        $description = $Matches[1]
+        $parameters[-1].Description += "`n$description"
+    }
+
+    $i++
+}
+
+foreach ($parameter in $parameters) {
+    $newParameter = New-ParameterInfo -OriginalName $parameter.ParameterName -Name $parameter.ParameterName.Replace("-", "")
+
+    $newParameter.ParameterType = $parameter.Type
+    $newParameter.NoGap = $false
+    $newParameter.Description = $parameter.Description
+    $newCommand.Parameters += $newParameter
+}
 
 $CrescendoCommands += $newCommand
 
