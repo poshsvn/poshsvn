@@ -20,6 +20,7 @@ function NewCommand {
     }
 
     $newCommand = New-CrescendoCommand @parameters
+    $newCommand.Aliases += "svn-" + $CommandName
     $newCommand.OriginalCommandElements = @($CommandName)
     
     $out = svn.exe help $CommandName
