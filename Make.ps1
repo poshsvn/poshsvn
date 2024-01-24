@@ -2,8 +2,8 @@
 $exeFileName = "C:\Program Files\TortoiseSVN\bin\svn.exe"
 
 $parameters = @{
-    Verb = 'Get'
-    Noun = 'SvnStatus'
+    Verb         = 'Get'
+    Noun         = 'SvnStatus'
     OriginalName = $exeFileName
 }
 
