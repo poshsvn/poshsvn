@@ -81,12 +81,20 @@ function NewCommand {
 }
 
 $CrescendoCommands = @()
-$CrescendoCommands += NewCommand "status"
+
+$commandList = svn.exe help
+for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
+    $null = $commandList[$i] -match "^   ([a-z]+)"
+    $command = $Matches[1]
+    Write-Progress -Activity "Processing command" -Status "$command" -PercentComplete (($i - 12) / ($commandList.Length - 3 - 12) * 100)
+    $CrescendoCommands += NewCommand $command
+}
 
 if (!(Test-Path .\out\)) {
     $null = mkdir .\out\
 }
 
+Write-Progress -Activity "Generating Code..."
 Export-CrescendoCommand -command $CrescendoCommands -fileName .\out\Svn.json -Force
 
 Export-CrescendoModule -ConfigurationFile .\out\Svn.json -ModuleName .\out\Svn.psm1 -Force
