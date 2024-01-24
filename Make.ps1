@@ -57,7 +57,7 @@ while ($i -lt $out.Length) {
     $i++
 }
 
-$parameters | Format-List
+$parameters | Format-Table
 
 foreach ($parameter in $parameters) {
     $originalName = ($parameter.ParameterNames[0].Length -eq 1) ? "-" + $parameter.ParameterNames[0] : "--" + $parameter.ParameterNames[0]
