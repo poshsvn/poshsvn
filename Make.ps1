@@ -7,6 +7,13 @@ $parameters = @{
     OriginalName = $exeFileName
 }
 
+function FormatParameter {
+    param (
+        [string]$ParameterName
+    )
+    $ParameterName.Replace("-", "").Replace("verbose", "full")
+}
+
 $newCommand = New-CrescendoCommand @parameters
 $newCommand.OriginalCommandElements = @('status')
 
@@ -21,19 +28,24 @@ $parameters = @()
 while ($i -lt $out.Length) {
     $line = $out[$i]
     if ($line -match " : ") {
+        $parameterNames = @()
 
-        $null = $line -match "-([a-z]|-)*"
-        $parameterName = $Matches[0]
+        if ($line -match "-([a-z]([a-z]|-)*)") {
+            $parameterNames += FormatParameter $Matches[1]
+        }
+        if ($line -match "--([a-z]([a-z]|-)*)") {
+            $parameterNames += FormatParameter $Matches[1]
+        }
 
         $null = $line -match ": (.*)"
         $description = $Matches[1]
 
         $isParameter = $line -match "ARG"
 
-        $parameters +=  @{
-            ParameterName = $parameterName
-            Description   = $description
-            Type = $isParameter ? "string" : "switch"
+        $parameters += @{
+            ParameterNames    = $parameterNames
+            Description       = $description
+            Type              = $isParameter ? "string" : "switch"
         }
     }
     else {
@@ -45,16 +57,24 @@ while ($i -lt $out.Length) {
     $i++
 }
 
+$parameters | Format-List
+
 foreach ($parameter in $parameters) {
-    $newParameter = New-ParameterInfo -OriginalName $parameter.ParameterName -Name $parameter.ParameterName.Replace("-", "")
+    $originalName = ($parameter.ParameterNames[0].Length -eq 1) ? "-" + $parameter.ParameterNames[0] : "--" + $parameter.ParameterNames[0]
+    $newParameter = New-ParameterInfo -OriginalName $originalName -Name $parameter.ParameterNames[-1]
 
     $newParameter.ParameterType = $parameter.Type
     $newParameter.NoGap = $false
     $newParameter.Description = $parameter.Description
+
+    for ($i = 2; $i -lt $parameter.ParameterNames.Count; $i++) {
+        $newParameter.Aliases += $parameter.ParameterNames[$i]
+    }
+
     $newCommand.Parameters += $newParameter
 }
 
-$CrescendoCommands += $newCommand
+$CrescendoCommands = @($newCommand)
 
 if (!(Test-Path .\out\)) {
     $null = mkdir .\out\
