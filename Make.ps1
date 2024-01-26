@@ -12,7 +12,7 @@ if (!(Test-Path .\tmp\subversion.zip)) {
 Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
 
 # TODO: Correct filename
-$exeFileName = "$PSScriptRoot\out\subversion\bin\svn.exe"
+$subversionPath = "$PSScriptRoot\out\subversion\bin\svn.exe"
 
 $parameterMapping = @{
     "verbose" = "full"
@@ -43,7 +43,7 @@ function NewCommand {
     $parameters = @{
         Verb         = 'Invoke'
         Noun         = 'Svn' + (Get-Culture).TextInfo.ToTitleCase($CommandName)
-        OriginalName = $exeFileName
+        OriginalName = $subversionPath
     }
 
     $newCommand = New-CrescendoCommand @parameters
