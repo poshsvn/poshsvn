@@ -62,8 +62,10 @@ function NewCommand {
 
         $i++
     }
-    
-    if ($out[1] -match "PATH\.\.\.") {
+
+    $usageLine = $out[1]
+
+    if ($usageLine -match "PATH\.\.\.") {
         $newParameter = New-ParameterInfo -OriginalName "" -Name "Path"
         $newParameter.Position = 0
         $newParameter.ParameterType = "string[]"
