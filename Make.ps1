@@ -1,18 +1,18 @@
-if (!(Test-Path .\out\)) {
-    $null = mkdir .\out\
+if (!(Test-Path "$PSScriptRoot\out\")) {
+    $null = mkdir "$PSScriptRoot\out\"
 }
-if (!(Test-Path .\tmp\)) {
-    $null = mkdir .\tmp\
+if (!(Test-Path "$PSScriptRoot\tmp\")) {
+    $null = mkdir "$PSScriptRoot\tmp\"
 }
-if (!(Test-Path .\tmp\subversion.zip)) {
+if (!(Test-Path "$PSScriptRoot\tmp\subversion.zip")) {
     $url = "https://www.visualsvn.com/files/Apache-Subversion-1.14.3.zip"
-    Invoke-WebRequest -Uri $url -OutFile .\tmp\subversion.zip
+    Invoke-WebRequest -Uri $url -OutFile "$PSScriptRoot\tmp\subversion.zip"
 }
 
 Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
 
 $PSScriptRoot
-$subversionPath = ".\out\subversion\bin\svn.exe"
+$subversionPath = "$PSScriptRoot\out\subversion\bin\svn.exe"
 
 $parameterMapping = @{
     "verbose" = "full"
@@ -157,6 +157,6 @@ for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
 }
 
 Write-Progress -Activity "Generating Code..."
-Export-CrescendoCommand -command $CrescendoCommands -fileName .\tmp\Svn.json -Force
+Export-CrescendoCommand -command $CrescendoCommands -fileName "$PSScriptRoot\tmp\Svn.json" -Force
 
-Export-CrescendoModule -ConfigurationFile .\tmp\Svn.json -ModuleName .\out\Svn.psm1 -Force
+Export-CrescendoModule -ConfigurationFile "$PSScriptRoot\tmp\Svn.json" -ModuleName "$PSScriptRoot\out\Svn.psm1" -Force
