@@ -1,11 +1,24 @@
 # TODO: Correct filename
 $exeFileName = "C:\Program Files\TortoiseSVN\bin\svn.exe"
 
+$parameterMapping = @{
+    "verbose" = "full"
+}
+
 function FormatParameter {
     param (
         [string]$ParameterName
     )
-    $ParameterName.Replace("-", "").Replace("verbose", "full")
+
+    $ParameterName = $ParameterName.Replace("-", "")
+
+    foreach ($mapping in $parameterMapping.GetEnumerator()) {
+        if ($ParameterName -eq $mapping.Key) {
+            $ParameterName = $mapping.Value
+        }
+    }
+
+    $ParameterName
 }
 
 function NewCommand {
