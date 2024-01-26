@@ -11,8 +11,8 @@ if (!(Test-Path .\tmp\subversion.zip)) {
 
 Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
 
-# TODO: Correct filename
-$subversionPath = "$PSScriptRoot\out\subversion\bin\svn.exe"
+$PSScriptRoot
+$subversionPath = ".\out\subversion\bin\svn.exe"
 
 $parameterMapping = @{
     "verbose" = "full"
@@ -43,14 +43,14 @@ function NewCommand {
     $parameters = @{
         Verb         = 'Invoke'
         Noun         = 'Svn' + (Get-Culture).TextInfo.ToTitleCase($CommandName)
-        OriginalName = $subversionPath
+        OriginalName = "`$PSScriptRoot\subversion\bin\svn.exe"
     }
 
     $newCommand = New-CrescendoCommand @parameters
     $newCommand.Aliases += "svn-" + $CommandName
     $newCommand.OriginalCommandElements = @($CommandName)
     
-    $out = svn.exe help $CommandName
+    $out = & $subversionPath help $CommandName
     
     $i = 0;
     while ($i -lt $out.Length -and $out[$i] -ne "Valid options:") {
@@ -147,7 +147,8 @@ function NewCommand {
 
 $CrescendoCommands = @()
 
-$commandList = svn.exe help
+$commandList = & $subversionPath "help"
+
 for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
     $null = $commandList[$i] -match "^   ([a-z]+)"
     $command = $Matches[1]
