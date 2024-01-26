@@ -1,3 +1,10 @@
+if (!(Test-Path .\out\)) {
+    $null = mkdir .\out\
+}
+if (!(Test-Path .\tmp\)) {
+    $null = mkdir .\tmp\
+}
+
 # TODO: Correct filename
 $exeFileName = "C:\Program Files\TortoiseSVN\bin\svn.exe"
 
@@ -140,13 +147,6 @@ for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
     $command = $Matches[1]
     Write-Progress -Activity "Processing command" -Status "$command" -PercentComplete (($i - 12) / ($commandList.Length - 3 - 12) * 100)
     $CrescendoCommands += NewCommand $command
-}
-
-if (!(Test-Path .\out\)) {
-    $null = mkdir .\out\
-}
-if (!(Test-Path .\tmp\)) {
-    $null = mkdir .\tmp\
 }
 
 Write-Progress -Activity "Generating Code..."
