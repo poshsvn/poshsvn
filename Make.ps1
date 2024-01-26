@@ -145,8 +145,11 @@ for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
 if (!(Test-Path .\out\)) {
     $null = mkdir .\out\
 }
+if (!(Test-Path .\tmp\)) {
+    $null = mkdir .\tmp\
+}
 
 Write-Progress -Activity "Generating Code..."
-Export-CrescendoCommand -command $CrescendoCommands -fileName .\out\Svn.json -Force
+Export-CrescendoCommand -command $CrescendoCommands -fileName .\tmp\Svn.json -Force
 
-Export-CrescendoModule -ConfigurationFile .\out\Svn.json -ModuleName .\out\Svn.psm1 -Force
+Export-CrescendoModule -ConfigurationFile .\tmp\Svn.json -ModuleName .\out\Svn.psm1 -Force
