@@ -4,9 +4,15 @@ if (!(Test-Path .\out\)) {
 if (!(Test-Path .\tmp\)) {
     $null = mkdir .\tmp\
 }
+if (!(Test-Path .\tmp\subversion.zip)) {
+    $url = "https://www.visualsvn.com/files/Apache-Subversion-1.14.3.zip"
+    Invoke-WebRequest -Uri $url -OutFile .\tmp\subversion.zip
+}
+
+Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
 
 # TODO: Correct filename
-$exeFileName = "C:\Program Files\TortoiseSVN\bin\svn.exe"
+$exeFileName = "$PSScriptRoot\out\subversion\bin\svn.exe"
 
 $parameterMapping = @{
     "verbose" = "full"
