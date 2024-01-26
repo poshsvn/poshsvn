@@ -65,10 +65,33 @@ function NewCommand {
 
     $usageLine = $out[1]
 
-    if ($usageLine -match "PATH\.\.\.") {
-        $newParameter = New-ParameterInfo -OriginalName "" -Name "Path"
+    if ($usageLine -match "URL\[@REV\]\.\.\.") {
+        $newParameter = New-ParameterInfo -OriginalName "" -Name "Url"
         $newParameter.Position = 0
         $newParameter.ParameterType = "string[]"
+        $newParameter.NoGap = $false
+        $newParameter.Description = ""
+        $newParameter.Mandatory = $true
+        $newParameter.ValueFromPipeline = $true
+
+        $newCommand.Parameters += $newParameter
+    }
+
+    if ($usageLine -match "PATH\.\.\.") {
+        $newParameter = New-ParameterInfo -OriginalName "" -Name "Path"
+        $newParameter.Position = 1
+        $newParameter.ParameterType = "string[]"
+        $newParameter.NoGap = $false
+        $newParameter.Description = ""
+        $newParameter.Mandatory = $false # do something ?
+        $newParameter.ValueFromPipeline = $true
+
+        $newCommand.Parameters += $newParameter
+    }
+    elseif ($usageLine -match "\[PATH\]") {
+        $newParameter = New-ParameterInfo -OriginalName "" -Name "Path"
+        $newParameter.Position = 1
+        $newParameter.ParameterType = "string"
         $newParameter.NoGap = $false
         $newParameter.Description = ""
         $newParameter.Mandatory = $false # do something ?
