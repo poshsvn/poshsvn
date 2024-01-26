@@ -3,6 +3,7 @@ $exeFileName = "C:\Program Files\TortoiseSVN\bin\svn.exe"
 
 $parameterMapping = @{
     "verbose" = "full"
+    "R"       = "rec"
 }
 
 function FormatParameter {
@@ -13,7 +14,7 @@ function FormatParameter {
     $ParameterName = $ParameterName.Replace("-", "")
 
     foreach ($mapping in $parameterMapping.GetEnumerator()) {
-        if ($ParameterName -eq $mapping.Key) {
+        if ($ParameterName -ceq $mapping.Key) {
             $ParameterName = $mapping.Value
         }
     }
