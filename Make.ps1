@@ -168,7 +168,7 @@ for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
 
 Write-Progress -Activity "Generating Code..."
 Write-Verbose "Generating Code..."
-Export-CrescendoCommand -command $CrescendoCommands -fileName "$PSScriptRoot\tmp\Svn.json" -Force
+Export-CrescendoCommand -command $CrescendoCommands -fileName "$PSScriptRoot\tmp\PoshSvn.json" -Force
 
-Export-CrescendoModule -ConfigurationFile "$PSScriptRoot\tmp\Svn.json" -ModuleName "$PSScriptRoot\out\Svn.psm1" -Force
+Export-CrescendoModule -ConfigurationFile "$PSScriptRoot\tmp\PoshSvn.json" -ModuleName "$PSScriptRoot\out\PoshSvn.psm1" -Force
 Write-Verbose "Generating Code finished"
