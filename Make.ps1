@@ -5,16 +5,21 @@ if (!(Test-Path "$PSScriptRoot\tmp\")) {
     $null = mkdir "$PSScriptRoot\tmp\"
 }
 if (!(Test-Path "$PSScriptRoot\tmp\subversion.zip")) {
-    
+    Write-Host "Downloading Subversion..."
     $url = "https://www.visualsvn.com/files/Apache-Subversion-1.14.3.zip"
     Invoke-WebRequest -Uri $url -OutFile "$PSScriptRoot\tmp\subversion.zip"
+    Write-Host "Subversion downloaded"
 }
 
 if (!(Get-Module -ListAvailable -Name Microsoft.PowerShell.Crescendo)) {
+    Write-Host "Installing Crescendo..."
     Install-Module Microsoft.PowerShell.Crescendo -Force
+    Write-Host "Crescendo Installed"
 }
 
+Write-Verbose "Coping Subversion to 'out' directory..."
 Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
+Write-Verbose "Coping Subversion to 'out' directory finished"
 
 $subversionPath = "$PSScriptRoot\out\subversion\bin\svn.exe"
 
@@ -43,7 +48,7 @@ function NewCommand {
     param (
         [string]$CommandName
     )
-    
+
     $parameters = @{
         Verb         = 'Invoke'
         Noun         = 'Svn' + (Get-Culture).TextInfo.ToTitleCase($CommandName)
@@ -158,9 +163,12 @@ for ($i = 12; $i -lt $commandList.Length - 3; $i++) {
     $command = $Matches[1]
     Write-Progress -Activity "Processing command" -Status "$command" -PercentComplete (($i - 12) / ($commandList.Length - 3 - 12) * 100)
     $CrescendoCommands += NewCommand $command
+    Write-Verbose "Command '$command' processed!"
 }
 
 Write-Progress -Activity "Generating Code..."
+Write-Verbose "Generating Code..."
 Export-CrescendoCommand -command $CrescendoCommands -fileName "$PSScriptRoot\tmp\Svn.json" -Force
 
 Export-CrescendoModule -ConfigurationFile "$PSScriptRoot\tmp\Svn.json" -ModuleName "$PSScriptRoot\out\Svn.psm1" -Force
+Write-Verbose "Generating Code finished"
