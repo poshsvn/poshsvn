@@ -9,6 +9,10 @@ if (!(Test-Path "$PSScriptRoot\tmp\subversion.zip")) {
     Invoke-WebRequest -Uri $url -OutFile "$PSScriptRoot\tmp\subversion.zip"
 }
 
+if (!(Get-Module -ListAvailable -Name Microsoft.PowerShell.Crescendo)) {
+    Install-Module Microsoft.PowerShell.Crescendo -Force
+}
+
 Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
 
 $subversionPath = "$PSScriptRoot\out\subversion\bin\svn.exe"
