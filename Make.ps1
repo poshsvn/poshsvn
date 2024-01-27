@@ -171,4 +171,12 @@ Write-Verbose "Generating Code..."
 Export-CrescendoCommand -command $CrescendoCommands -fileName "$PSScriptRoot\tmp\PoshSvn.json" -Force
 
 Export-CrescendoModule -ConfigurationFile "$PSScriptRoot\tmp\PoshSvn.json" -ModuleName "$PSScriptRoot\out\PoshSvn.psm1" -Force
+
+$moduleManifestData = @{
+    Author      = "Timofei Zhakov" 
+    CompanyName = "Rinrab"
+    Copyright   = "(c) Timofei Zhakov. All rights reserved."
+}
+Update-ModuleManifest -Path "$PSScriptRoot\out\PoshSvn.psd1" @moduleManifestData
+
 Write-Verbose "Generating Code finished"
