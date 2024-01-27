@@ -11,7 +11,6 @@ if (!(Test-Path "$PSScriptRoot\tmp\subversion.zip")) {
 
 Expand-Archive -Path "$PSScriptRoot\tmp\subversion.zip" -DestinationPath "$PSScriptRoot\out\subversion" -Force
 
-$PSScriptRoot
 $subversionPath = "$PSScriptRoot\out\subversion\bin\svn.exe"
 
 $parameterMapping = @{
