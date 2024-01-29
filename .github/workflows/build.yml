@@ -19,4 +19,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: PoshSvn
-          path: .\out\
+          path: .\Crescendo\out\
