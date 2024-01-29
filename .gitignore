@@ -1,2 +1,5 @@
-/out
-/tmp
+out
+tmp
+bin
+obj
+.vs
