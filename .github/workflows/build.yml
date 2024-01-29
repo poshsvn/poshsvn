@@ -13,7 +13,7 @@ jobs:
       - name: Build
         run: |
           $VerbosePreference = "Continue"
-          .\Make.ps1
+          .\Crescendo\Make.ps1
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
