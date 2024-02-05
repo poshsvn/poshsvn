@@ -5,6 +5,7 @@ using System.Management.Automation;
 namespace SvnPosh
 {
     [Cmdlet("Invoke", "SvnStatus")]
+    [Alias("svn-status")]
     [OutputType(typeof(SvnStatusOutput))]
     public class SvnStatus : Cmdlet
     {
