@@ -14,5 +14,6 @@
     )
     FunctionsToExport = @()
     FormatsToProcess = @(
+        "SvnStatus.format.ps1xml"
     )
 }

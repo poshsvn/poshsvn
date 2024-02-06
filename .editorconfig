@@ -1,0 +1,5 @@
+[*]
+indent_style=space
+
+[*.{xml,ps1xml}]
+indent_size=2
