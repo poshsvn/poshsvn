@@ -17,6 +17,9 @@ namespace SvnPosh
         [Parameter(ValueFromRemainingArguments = true)]
         public string[] Path { get; set; } = new string[] { "" };
 
+        [Parameter()]
+        public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
+
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
@@ -31,7 +34,8 @@ namespace SvnPosh
                             resolvedPath,
                             new SvnStatusArgs()
                             {
-                                RetrieveAllEntries = All
+                                RetrieveAllEntries = All,
+                                Depth = Depth.ConvertToSharpSvnDepth(),
                             },
                             new EventHandler<SvnStatusEventArgs>((sender, e) =>
                                 {
