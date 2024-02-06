@@ -3,7 +3,7 @@
     "SvnPosh": {
       "commandName": "Executable",
       "executablePath": "powershell.exe",
-      "commandLineArgs": "-NoExit -Command \"& ipmo .\\SvnPosh.dll -Verbose"
+      "commandLineArgs": "-NoExit -Command \"& ipmo .\\SvnPosh.psd1 -Verbose"
     }
   }
 }

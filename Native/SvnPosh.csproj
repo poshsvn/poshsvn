@@ -10,4 +10,10 @@
 	<PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="SvnPosh.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
