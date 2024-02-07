@@ -1,6 +1,7 @@
 ﻿using SharpSvn;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Management.Automation;
 
@@ -73,20 +74,20 @@ namespace SvnPosh
         protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
         {
             List<string> result = new List<string>();
+
             if (literalPathList != null)
             {
-                foreach (var literalPath in literalPathList)
+                foreach (string literalPath in literalPathList)
                 {
-                    var unresolvedPath = GetUnresolvedProviderPathFromPSPath(literalPath);
+                    string unresolvedPath = GetUnresolvedProviderPathFromPSPath(literalPath);
                     result.Add(unresolvedPath);
                 }
             }
             else if (pathList != null)
             {
-                ProviderInfo provider;
-                foreach (var path in pathList)
+                foreach (string path in pathList)
                 {
-                    var resolvedPath = GetResolvedProviderPathFromPSPath(path, out provider);
+                    Collection<string> resolvedPath = GetResolvedProviderPathFromPSPath(path, out _);
                     result.AddRange(resolvedPath);
                 }
             }
