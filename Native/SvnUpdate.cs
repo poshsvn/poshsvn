@@ -12,6 +12,7 @@ namespace SvnPosh
     public class SvnUpdate : PSCmdlet
     {
         [Parameter()]
+        [Alias("r", "rev")]
         public SvnRevision Revision { get; set; } = null;
 
         [Parameter(ValueFromRemainingArguments = true)]
