@@ -13,6 +13,7 @@
   <ItemGroup>
     <Content Include="SvnPosh.psd1" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="SvnStatus.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="SvnUpdate.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

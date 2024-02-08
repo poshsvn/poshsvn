@@ -1,0 +1,23 @@
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>SvnPosh.SvnUpdateOutput</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Text>Updated to revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

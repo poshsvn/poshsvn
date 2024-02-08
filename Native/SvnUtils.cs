@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpSvn;
+using System;
 
 namespace SvnPosh
 {
@@ -67,6 +68,36 @@ namespace SvnPosh
             else
             {
                 return time;
+            }
+        }
+
+        public static string GetActionStringShort(SvnNotifyAction action)
+        {
+            switch (action)
+            {
+                case SvnNotifyAction.UpdateAdd: return "A";
+                case SvnNotifyAction.UpdateDelete: return "D";
+                case SvnNotifyAction.UpdateUpdate: return "U";
+                // case SvnNotifyAction.Conflict: return "C";
+                // case SvnNotifyAction.UpdateMerge: return "G";
+                // case SvnNotifyAction.UpdateExist: return "E";
+                case SvnNotifyAction.UpdateReplace: return "R";
+                default: return action.ToString();
+            }
+        }
+
+        public static string GetActionStringLong(SvnNotifyAction action)
+        {
+            switch (action)
+            {
+                case SvnNotifyAction.UpdateAdd: return "Added";
+                case SvnNotifyAction.UpdateDelete: return "Deleted";
+                case SvnNotifyAction.UpdateUpdate: return "Updated";
+                // case SvnNotifyAction.Conflict: return "Conflict";
+                // case SvnNotifyAction.UpdateMerge: return "Merged";
+                // case SvnNotifyAction.UpdateExist: return "Existed";
+                case SvnNotifyAction.UpdateReplace: return "Replaced";
+                default: return action.ToString();
             }
         }
     }
