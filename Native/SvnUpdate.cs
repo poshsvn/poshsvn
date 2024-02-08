@@ -8,7 +8,7 @@ namespace SvnPosh
 {
     [Cmdlet("Invoke", "SvnUpdate")]
     [Alias("svn-update")]
-    [OutputType(typeof(SvnStatusOutput))]
+    [OutputType(typeof(SvnUpdateOutput))]
     public class SvnUpdate : PSCmdlet
     {
         [Parameter()]
