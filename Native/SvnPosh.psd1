@@ -8,12 +8,15 @@
     RootModule = "SvnPosh.dll"
     CmdletsToExport= @(
         "Invoke-SvnStatus"
+        "Invoke-SvnUpdate"
     )
     AliasesToExport = @(
         "svn-status"
+        "svn-update"
     )
     FunctionsToExport = @()
     FormatsToProcess = @(
         "SvnStatus.format.ps1xml"
+        "SvnUpdate.format.ps1xml"
     )
 }
