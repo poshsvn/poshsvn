@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SvnPosh
 {
