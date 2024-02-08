@@ -1,7 +1,5 @@
 ﻿using SharpSvn;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Management.Automation;
 
 namespace SvnPosh
@@ -9,13 +7,10 @@ namespace SvnPosh
     [Cmdlet("Invoke", "SvnStatus")]
     [Alias("svn-status")]
     [OutputType(typeof(SvnStatusOutput))]
-    public class SvnStatus : PSCmdlet
+    public class SvnStatus : SvnCmdletBase
     {
         [Parameter()]
         public SwitchParameter All { get; set; }
-
-        [Parameter(ValueFromRemainingArguments = true)]
-        public string[] Path { get; set; } = new string[] { "" };
 
         [Parameter()]
         public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
@@ -68,30 +63,6 @@ namespace SvnPosh
                     }
                 }
             }
-        }
-
-        protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
-        {
-            List<string> result = new List<string>();
-
-            if (literalPathList != null)
-            {
-                foreach (string literalPath in literalPathList)
-                {
-                    string unresolvedPath = GetUnresolvedProviderPathFromPSPath(literalPath);
-                    result.Add(unresolvedPath);
-                }
-            }
-            else if (pathList != null)
-            {
-                foreach (string path in pathList)
-                {
-                    Collection<string> resolvedPath = GetResolvedProviderPathFromPSPath(path, out _);
-                    result.AddRange(resolvedPath);
-                }
-            }
-
-            return result.ToArray();
         }
     }
 
