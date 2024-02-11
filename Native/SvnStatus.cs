@@ -1,6 +1,5 @@
 ﻿using SharpSvn;
 using System;
-using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace SvnPosh
