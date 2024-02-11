@@ -10,6 +10,9 @@ namespace SvnPosh
     [OutputType(typeof(SvnStatusOutput))]
     public class SvnStatus : SvnCmdletBase
     {
+        [Parameter(Position = 0)]
+        public string[] Path { get; set; } = new string[] { "" };
+
         [Parameter()]
         public SwitchParameter All { get; set; }
 

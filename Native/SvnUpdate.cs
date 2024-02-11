@@ -9,6 +9,9 @@ namespace SvnPosh
     [OutputType(typeof(SvnUpdateOutput))]
     public class SvnUpdate : SvnCmdletBase
     {
+        [Parameter(Position = 0)]
+        public string[] Path { get; set; } = new string[] { "" };
+
         [Parameter()]
         [Alias("r", "rev")]
         public SvnRevision Revision { get; set; } = null;
