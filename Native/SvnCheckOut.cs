@@ -6,7 +6,7 @@ using System.Management.Automation;
 namespace SvnPosh
 {
     [Cmdlet("Invoke", "SvnCheckOut")]
-    [Alias("svn-checkout", "svn-co")]
+    [Alias("svn-checkout")]
     [OutputType(typeof(SvnCheckOutOutput))]
     public class SvnCheckOut : SvnCmdletBase
     {
