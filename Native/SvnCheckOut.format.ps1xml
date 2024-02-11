@@ -1,0 +1,23 @@
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>SvnPosh.SvnCheckOutOutput</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Text>Checked out revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

@@ -30,5 +30,10 @@ namespace SvnPosh
 
             return result.ToArray();
         }
+
+        protected string GetPathTarget(string path)
+        {
+            return GetUnresolvedProviderPathFromPSPath(path);
+        }
     }
 }

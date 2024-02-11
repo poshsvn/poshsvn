@@ -9,11 +9,13 @@
     CmdletsToExport= @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
+        "Invoke-SvnCheckOut"
         "Invoke-SvnAdminCreate"
     )
     AliasesToExport = @(
         "svn-status"
         "svn-update"
+        "svn-checkout"
         "svnadmin-create"
         "svn-admin-create"
     )
@@ -21,5 +23,6 @@
     FormatsToProcess = @(
         "SvnStatus.format.ps1xml"
         "SvnUpdate.format.ps1xml"
+        "SvnCheckOut.format.ps1xml"
     )
 }
