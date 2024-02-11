@@ -15,24 +15,9 @@ namespace SvnPosh.Tests
         [Test]
         public void SimpleTest()
         {
-            PowerShell ps = PowerShell.Create();
-
-            var assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            ps.AddCommand("ipmo").AddArgument(Path.Combine(assemblyDirectory, @"..\SvnPosh\SvnPosh.psd1")).Invoke();
-
             using (var sb = new WcSandbox())
             {
-                Collection<PSObject> actual = ps.AddScript($"(svn-status '{sb.WcPath}' -All | Out-String -stream).TrimEnd()").Invoke();
-
-                foreach (var o in ps.Streams.Warning)
-                {
-                    Console.WriteLine(o);
-                }
-
-                foreach (var o in ps.Streams.Error)
-                {
-                    Console.Error.WriteLine(o);
-                }
+                Collection<PSObject> actual = PowerShellUtils.RunScript($"(svn-status '{sb.WcPath}' -All | Out-String -stream).TrimEnd()");
 
                 CollectionAssert.AreEqual(
                     new string[]
