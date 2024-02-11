@@ -6,18 +6,21 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      Configuration: Release
+      Architecture: x64
   
     steps:
       - uses: actions/checkout@v3
 
       - name: Build
-        run: dotnet build
+        run: dotnet build --configuration ${{ env.Configuration }} --arch ${{ env.Architecture }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: PoshSvn
-          path: .\bin\Debug\SvnPosh
+          path: .\bin\${{ env.Configuration }}\SvnPosh
 
       # - name: Test
       #   run: dotnet test --no-build
