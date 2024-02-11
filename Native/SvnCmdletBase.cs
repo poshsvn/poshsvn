@@ -6,7 +6,7 @@ namespace SvnPosh
 {
     public abstract class SvnCmdletBase : PSCmdlet
     {
-        [Parameter(ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0)]
         public string[] Path { get; set; } = new string[] { "" };
 
         protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
