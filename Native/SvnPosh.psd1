@@ -9,10 +9,13 @@
     CmdletsToExport= @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
+        "Invoke-SvnAdminCreate"
     )
     AliasesToExport = @(
         "svn-status"
         "svn-update"
+        "svnadmin-create"
+        "svn-admin-create"
     )
     FunctionsToExport = @()
     FormatsToProcess = @(
