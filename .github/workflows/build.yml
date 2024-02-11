@@ -17,7 +17,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: PoshSvn
-          path: .\bin\SvnPosh
+          path: .\bin\Debug\SvnPosh
 
       # - name: Test
       #   run: dotnet test --no-build
