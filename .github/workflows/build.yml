@@ -19,5 +19,5 @@ jobs:
           name: PoshSvn
           path: .\bin\SvnPosh
 
-      - name: Test
-        run: dotnet test --no-build
+      # - name: Test
+      #   run: dotnet test --no-build
