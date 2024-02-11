@@ -8,13 +8,12 @@ jobs:
     runs-on: windows-latest
     env:
       Configuration: Release
-      Architecture: x64
   
     steps:
       - uses: actions/checkout@v3
 
       - name: Build
-        run: dotnet build --configuration ${{ env.Configuration }} --arch ${{ env.Architecture }}
+        run: dotnet build --configuration ${{ env.Configuration }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
