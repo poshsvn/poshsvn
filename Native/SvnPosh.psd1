@@ -10,12 +10,14 @@
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
         "Invoke-SvnCheckOut"
+        "Invoke-SvnCommit"
         "Invoke-SvnAdminCreate"
     )
     AliasesToExport = @(
         "svn-status"
         "svn-update"
         "svn-checkout"
+        "svn-commit"
         "svnadmin-create"
         "svn-admin-create"
     )
@@ -24,5 +26,6 @@
         "SvnStatus.format.ps1xml"
         "SvnUpdate.format.ps1xml"
         "SvnCheckOut.format.ps1xml"
+        "SvnCommit.format.ps1xml"
     )
 }
