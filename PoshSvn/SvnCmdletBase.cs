@@ -50,7 +50,8 @@ namespace PoshSvn
             {
                 UpdateAction(GetActivityTitle(e));
             }
-            else if (e.Action == SvnNotifyAction.UpdateCompleted)
+            else if (e.Action == SvnNotifyAction.UpdateCompleted ||
+                     e.Action == SvnNotifyAction.Add)
             {
                 WriteObject(GetNotifyOutput(e));
             }
