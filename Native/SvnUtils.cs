@@ -75,7 +75,9 @@ namespace SvnPosh
         {
             switch (action)
             {
-                case SvnNotifyAction.UpdateAdd: return "A";
+                case SvnNotifyAction.UpdateAdd:
+                case SvnNotifyAction.Add:
+                    return "A";
                 case SvnNotifyAction.UpdateDelete: return "D";
                 case SvnNotifyAction.UpdateUpdate: return "U";
                 // case SvnNotifyAction.Conflict: return "C";
