@@ -17,7 +17,7 @@ namespace PoshSvn
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
         {
-            return string.Format("Updating '{0}'", e.Path);
+            return e == null ? "Updating" : string.Format("Updating '{0}'", e.Path);
         }
 
         protected override object GetNotifyOutput(SvnNotifyEventArgs e)
