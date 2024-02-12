@@ -1,6 +1,7 @@
 ﻿using SharpSvn;
 using System;
 using System.Management.Automation;
+using System.Runtime.Remoting.Messaging;
 
 namespace SvnPosh
 {
@@ -24,6 +25,8 @@ namespace SvnPosh
 
                 try
                 {
+                    ProgressRecord childProgress = new ProgressRecord(1, "Updating", "Loading...");
+
                     SvnUpdateArgs args = new SvnUpdateArgs
                     {
                         Revision = Revision,
@@ -33,7 +36,22 @@ namespace SvnPosh
 
                     args.Notify += new EventHandler<SvnNotifyEventArgs>((sender, e) =>
                     {
-                        if (e.Action == SvnNotifyAction.UpdateCompleted)
+                        if (e.Action == SvnNotifyAction.UpdateStarted)
+                        {
+                            WriteVerbose(string.Format("Updating '{0}':", e.Path));
+
+                            WriteProgress(new ProgressRecord(0, "Updating", string.Format("Updating {0} of {1}", pathsCompletedCount, resolvedPaths.Length))
+                            {
+                                PercentComplete = pathsCompletedCount * 100 / resolvedPaths.Length
+                            });
+
+                            childProgress = new ProgressRecord(1, string.Format("Updating '{0}'", e.Path), "Updating")
+                            {
+                                ParentActivityId = 0
+                            };
+                            WriteProgress(childProgress);
+                        }
+                        else if(e.Action == SvnNotifyAction.UpdateCompleted)
                         {
                             WriteObject(new SvnUpdateOutput
                             {
@@ -42,24 +60,10 @@ namespace SvnPosh
 
                             pathsCompletedCount++;
                         }
-                        else if (e.Action == SvnNotifyAction.UpdateStarted)
-                        {
-                            WriteVerbose(string.Format("Updating '{0}':", e.Path));
-
-                            WriteProgress(new ProgressRecord(0, "Updating", string.Format("Updating '{0}':", e.Path))
-                            {
-                                RecordType = ProgressRecordType.Processing,
-                                PercentComplete = pathsCompletedCount * 100 / resolvedPaths.Length
-                            });
-                        }
                         else
                         {
-                            WriteVerbose(string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path));
-
-                            WriteProgress(new ProgressRecord(1, SvnUtils.GetActionStringLong(e.Action), e.Path)
-                            {
-                                ParentActivityId = 0
-                            });
+                            childProgress.StatusDescription = string.Format("{0,-10} {1}", SvnUtils.GetActionStringLong(e.Action), e.Path);
+                            WriteProgress(childProgress);
                         }
                     });
 

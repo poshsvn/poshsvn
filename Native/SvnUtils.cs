@@ -116,7 +116,7 @@ namespace SvnPosh
             }
         }
 
-        public static string FormatBasicProgress(long progress)
+        public static string FormatProgress(long progress)
         {
             if (progress == -1)
             {
@@ -124,7 +124,7 @@ namespace SvnPosh
             }
             else
             {
-                return string.Format("{0,10} kb", progress / 1024);
+                return string.Format("Transfered: {0} kb", progress / 1024);
             }
         }
     }

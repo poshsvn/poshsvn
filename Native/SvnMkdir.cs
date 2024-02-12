@@ -23,19 +23,21 @@ namespace SvnPosh
         [Parameter()]
         public SwitchParameter Parents { get; set; }
 
-        private string state = "Creating transaction...";
-        private long progress = -1;
-
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
             {
                 if (Path != null)
                 {
+                    ProgressRecord progressRecord = new ProgressRecord(0, "Creating directory", "Initializing...");
+
                     SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
                     {
                         CreateParents = Parents,
                     };
+
+                    string[] resolvedPaths = GetPathTargets(null, Path);
+                    int filesProcessedCount = 0;
 
                     args.Notify += new EventHandler<SvnNotifyEventArgs>((_, e) =>
                     {
@@ -44,33 +46,37 @@ namespace SvnPosh
                             Action = e.Action,
                             Path = e.Path
                         });
-                    });
 
-                    string[] resolvedPaths = GetPathTargets(null, Path);
+                        progressRecord.PercentComplete = 100 * filesProcessedCount / resolvedPaths.Length;
+                        progressRecord.StatusDescription = e.Path;
+
+                        WriteProgress(progressRecord);
+
+                        filesProcessedCount++;
+                    });
 
                     client.CreateDirectories(resolvedPaths, args);
                 }
                 else
                 {
+                    ProgressRecord progressRecord = new ProgressRecord(0, "Creating directory", "Creating transaction...");
+
                     SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
                     {
                         CreateParents = Parents,
                         LogMessage = Message
                     };
 
-                    WriteVerbose(state);
-
                     args.Committing += new EventHandler<SvnCommittingEventArgs>((_, e) =>
                     {
-                        state = "Committing transaction...";
-                        WriteVerbose(state);
-                        UpdateProgress();
+                        progressRecord.StatusDescription = "Committing transaction...";
+                        WriteVerbose("Committing transaction...");
                     });
 
                     args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
                     {
-                        progress = e.Progress;
-                        UpdateProgress();
+                        progressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+                        WriteProgress(progressRecord);
                     });
 
                     args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
@@ -84,11 +90,6 @@ namespace SvnPosh
                     client.RemoteCreateDirectories(Url, args);
                 }
             }
-        }
-
-        private void UpdateProgress()
-        {
-            WriteProgress(new ProgressRecord(0, state, SvnUtils.FormatBasicProgress(progress)));
         }
     }
 
