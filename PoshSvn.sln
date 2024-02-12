@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvnPosh", "SvnPosh\SvnPosh.csproj", "{9F7A62EF-F20C-4249-B00B-17F9380B7564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn", "PoshSvn\PoshSvn.csproj", "{9F7A62EF-F20C-4249-B00B-17F9380B7564}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99FBE8C5-F431-4596-BB22-56EE1C9D9BC2}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvnPosh.Tests", "SvnPosh.Tests\SvnPosh.Tests.csproj", "{A1B1668F-130B-4254-9143-4ABD20CF12D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Tests", "PoshSvn.Tests\PoshSvn.Tests.csproj", "{A1B1668F-130B-4254-9143-4ABD20CF12D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -20,7 +20,7 @@
     <Content Include="SvnCommit.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SvnPosh.psd1" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="PoshSvn.psd1" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="SvnMkdir.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
