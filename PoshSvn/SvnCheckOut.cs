@@ -1,5 +1,6 @@
 ﻿using SharpSvn;
 using System;
+using System.IO;
 using System.Linq;
 using System.Management.Automation;
 
@@ -28,6 +29,19 @@ namespace PoshSvn
         [Alias("-f")]
         public SwitchParameter Force { get; set; }
 
+        protected override string GetActivityTitle(SvnNotifyEventArgs e)
+        {
+            return string.Format("Checking out '{0}'", e.Path);
+        }
+
+        protected override object GetOutput(SvnNotifyEventArgs e)
+        {
+            return new SvnCheckOutOutput
+            {
+                Revision = e.Revision
+            };
+        }
+
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
@@ -39,38 +53,8 @@ namespace PoshSvn
                     //TODO: AllowObstructions = Force
                 };
 
-                ProgressRecord progress = new ProgressRecord(0, "Checking out", "Initializing...");
-
-                args.Notify += new EventHandler<SvnNotifyEventArgs>((_, e) =>
-                {
-                    if (e.Action == SvnNotifyAction.UpdateStarted)
-                    {
-                        string text = string.Format("Checking out '{0}'", e.Path);
-                        WriteVerbose(text);
-                        progress.Activity = text;
-
-                        WriteProgress(progress);
-                    }
-                    else if (e.Action == SvnNotifyAction.UpdateCompleted)
-                    {
-                        WriteObject(new SvnCheckOutOutput
-                        {
-                            Revision = e.Revision
-                        });
-                    }
-                    else
-                    {
-                        string text = string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path);
-                        progress.StatusDescription = text;
-                        WriteVerbose(text);
-                        WriteProgress(progress);
-                    }
-                });
-                args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
-                {
-                    progress.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
-                    WriteProgress(progress);
-                });
+                args.Notify += Notify;
+                args.Progress += Progress;
 
                 string resolvedPath;
                 if (Path == null)
