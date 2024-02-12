@@ -85,7 +85,7 @@ namespace SvnPosh
 
         private void WriteParrentProgress()
         {
-            WriteProgress(new ProgressRecord(0, "Checking out...", SvnUtils.FormatBasicProgress(progress)));
+            WriteProgress(new ProgressRecord(0, "Checking out...", SvnUtils.FormatProgress(progress)));
         }
     }
 

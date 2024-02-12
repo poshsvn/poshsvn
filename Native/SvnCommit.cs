@@ -15,9 +15,7 @@ namespace SvnPosh
         [Parameter(Mandatory = true)]
         public string Message { get; set; }
 
-        private string state = "Creating transaction...";
-        private string action;
-        private string path;
+        private readonly ProgressRecord progressRecord = new ProgressRecord(0, "Commit", "Initializing...");
 
         protected override void ProcessRecord()
         {
@@ -31,22 +29,20 @@ namespace SvnPosh
                 {
                     if (e.Action == SvnNotifyAction.CommitFinalizing)
                     {
-                        WriteVerbose(state);
+                        WriteVerbose("Committing transaction...");
+                        progressRecord.StatusDescription = "Committing transaction...";
+                        WriteProgress(progressRecord);
+                    }
+                    else if (e.Action == SvnNotifyAction.CommitSendData)
+                    {
+                        progressRecord.StatusDescription = "Transmitting file data...";
+                        WriteProgress(progressRecord);
                     }
                     else
                     {
-                        action = SvnUtils.GetCommitActionString(e.Action);
-                        path = e.Path;
-                        WriteVerbose(string.Format("{0,-10} {1}", action, path));
-                        UpdateProgress();
+                        progressRecord.StatusDescription = e.Path;
+                        WriteProgress(progressRecord);
                     }
-                });
-                WriteVerbose(state);
-                args.Committing += new EventHandler<SvnCommittingEventArgs>((_, e) =>
-                {
-                    state = "Commiting transaction...";
-                    WriteVerbose(state);
-                    UpdateProgress();
                 });
                 args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
                 {
@@ -57,10 +53,8 @@ namespace SvnPosh
                 });
                 args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
                 {
-                    WriteProgress(new ProgressRecord(1, "Transfering data...", SvnUtils.FormatBasicProgress(e.Progress))
-                    {
-                        ParentActivityId = 0
-                    });
+                    progressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+                    WriteProgress(progressRecord);
                 });
 
                 try
@@ -79,11 +73,6 @@ namespace SvnPosh
                     }
                 }
             }
-        }
-
-        private void UpdateProgress()
-        {
-            WriteProgress(new ProgressRecord(0, state, string.Format("{0,-10} {1}", action, path)));
         }
     }
 
