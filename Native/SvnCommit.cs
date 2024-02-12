@@ -58,8 +58,7 @@ namespace SvnPosh
                 }
                 catch (SvnException ex)
                 {
-                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY,
-                                         SvnErrorCode.SVN_ERR_WC_PATH_NOT_FOUND))
+                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
                     {
                         WriteWarning(ex.Message);
                     }
