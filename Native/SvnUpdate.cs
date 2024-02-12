@@ -1,7 +1,6 @@
 ﻿using SharpSvn;
 using System;
 using System.Management.Automation;
-using System.Runtime.Remoting.Messaging;
 
 namespace SvnPosh
 {
@@ -25,7 +24,7 @@ namespace SvnPosh
 
                 try
                 {
-                    ProgressRecord childProgress = new ProgressRecord(1, "Updating", "Loading...");
+                    ProgressRecord progress = new ProgressRecord(0, "Updating", "Initializing...");
 
                     SvnUpdateArgs args = new SvnUpdateArgs
                     {
@@ -38,18 +37,11 @@ namespace SvnPosh
                     {
                         if (e.Action == SvnNotifyAction.UpdateStarted)
                         {
-                            WriteVerbose(string.Format("Updating '{0}':", e.Path));
+                            string text = string.Format("Updating '{0}'", e.Path);
+                            WriteVerbose(text);
+                            progress.Activity = text;
 
-                            WriteProgress(new ProgressRecord(0, "Updating", string.Format("Updating {0} of {1}", pathsCompletedCount, resolvedPaths.Length))
-                            {
-                                PercentComplete = pathsCompletedCount * 100 / resolvedPaths.Length
-                            });
-
-                            childProgress = new ProgressRecord(1, string.Format("Updating '{0}'", e.Path), "Updating")
-                            {
-                                ParentActivityId = 0
-                            };
-                            WriteProgress(childProgress);
+                            WriteProgress(progress);
                         }
                         else if(e.Action == SvnNotifyAction.UpdateCompleted)
                         {
@@ -62,9 +54,16 @@ namespace SvnPosh
                         }
                         else
                         {
-                            childProgress.StatusDescription = string.Format("{0,-10} {1}", SvnUtils.GetActionStringLong(e.Action), e.Path);
-                            WriteProgress(childProgress);
+                            string text = string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path);
+                            progress.StatusDescription = text;
+                            WriteVerbose(text);
+                            WriteProgress(progress);
                         }
+                    });
+                    args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
+                    {
+                        progress.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+                        WriteProgress(progress);
                     });
 
                     client.Update(resolvedPaths, args);
