@@ -1,6 +1,5 @@
 ﻿using SharpSvn;
 using System;
-using System.Diagnostics;
 using System.Management.Automation;
 
 namespace PoshSvn
@@ -23,44 +22,39 @@ namespace PoshSvn
         [Parameter()]
         public SwitchParameter Parents { get; set; }
 
+        protected override string GetActivityTitle(SvnNotifyEventArgs e) => "Creating directory";
+
+        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
+        {
+            return new SvnMkdirLocalOutput
+            {
+                Action = e.Action,
+                Path = e.Path
+            };
+        }
+
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
             {
                 if (Path != null)
                 {
-                    ProgressRecord progressRecord = new ProgressRecord(0, "Creating directory", "Initializing...");
-
                     SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
                     {
                         CreateParents = Parents,
                     };
 
                     string[] resolvedPaths = GetPathTargets(null, Path);
-                    int filesProcessedCount = 0;
+                    // TODO: maybe, I'll do it after
+                    // int filesProcessedCount = 0;
 
-                    args.Notify += new EventHandler<SvnNotifyEventArgs>((_, e) =>
-                    {
-                        WriteObject(new SvnMkdirLocalOutput
-                        {
-                            Action = e.Action,
-                            Path = e.Path
-                        });
-
-                        progressRecord.PercentComplete = 100 * filesProcessedCount / resolvedPaths.Length;
-                        progressRecord.StatusDescription = e.Path;
-
-                        WriteProgress(progressRecord);
-
-                        filesProcessedCount++;
-                    });
+                    args.Notify += Notify;
+                    args.Progress += Progress;
 
                     client.CreateDirectories(resolvedPaths, args);
                 }
                 else
                 {
-                    ProgressRecord progressRecord = new ProgressRecord(0, "Creating directory", "Creating transaction...");
-
                     SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
                     {
                         CreateParents = Parents,
@@ -69,15 +63,10 @@ namespace PoshSvn
 
                     args.Committing += new EventHandler<SvnCommittingEventArgs>((_, e) =>
                     {
-                        progressRecord.StatusDescription = "Committing transaction...";
-                        WriteVerbose("Committing transaction...");
+                         UpdateAction("Committing transaction...");
                     });
 
-                    args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
-                    {
-                        progressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
-                        WriteProgress(progressRecord);
-                    });
+                    args.Progress += Progress;
 
                     args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
                     {
@@ -87,6 +76,7 @@ namespace PoshSvn
                         });
                     });
 
+                    UpdateAction("Creating transaction...");
                     client.RemoteCreateDirectories(Url, args);
                 }
             }
