@@ -91,18 +91,19 @@
     <View>
       <Name>SvnRemoteStatus</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnRemoteStatus</TypeName>
+        <TypeName>PoshSvn.SvnRemoteStatusOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Width>10</Width>
+            <Width>7</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Width>20</Width>
+            <Label>Revision</Label>
+            <Width>8</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Width>20</Width>
+            <Width>100</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -112,7 +113,14 @@
                 <PropertyName>Status</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>RemoteRevision</PropertyName>
+                <ScriptBlock>
+                  if ($_.RemoteUpdateRevision -eq -1) {
+                  "";
+                  }
+                  else {
+                  $_.RemoteUpdateRevision
+                  }
+                </ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Path</PropertyName>

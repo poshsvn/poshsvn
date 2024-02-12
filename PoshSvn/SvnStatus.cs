@@ -4,19 +4,26 @@ using System.Management.Automation;
 
 namespace PoshSvn
 {
-    [Cmdlet("Invoke", "SvnStatus")]
+    [Cmdlet("Invoke", "SvnStatus", DefaultParameterSetName = "Local")]
     [Alias("svn-status")]
-    [OutputType(typeof(SvnStatusOutput))]
+    [OutputType(typeof(SvnLocalStatusOutput))]
     public class SvnStatus : SvnCmdletBase
     {
-        [Parameter(Position = 0)]
+        [Parameter(Position = 1)]
         public string[] Path { get; set; } = new string[] { "" };
+
+        [Parameter(ParameterSetName = "Remote", Mandatory = true)]
+        public SwitchParameter ShowUpdates { get; set; }
 
         [Parameter()]
         public SwitchParameter All { get; set; }
 
         [Parameter()]
         public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
+
+        [Parameter(ParameterSetName = "Remote")]
+        [Alias("r", "rev")]
+        public SvnRevision Revision { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -32,6 +39,7 @@ namespace PoshSvn
                         {
                             RetrieveAllEntries = All,
                             Depth = Depth.ConvertToSharpSvnDepth(),
+                            RetrieveRemoteStatus = ShowUpdates
                         };
 
                         client.Status(resolvedPath, args, StatusHandler);
@@ -54,23 +62,52 @@ namespace PoshSvn
 
         private void StatusHandler(object sender, SvnStatusEventArgs e)
         {
-            WriteObject(new SvnStatusOutput
+            if (ShowUpdates)
             {
-                LocalNodeStatus = e.LocalNodeStatus,
-                LocalTextStatus = e.LocalTextStatus,
-                Versioned = e.Versioned,
-                Conflicted = e.Conflicted,
-                LocalCopied = e.LocalCopied,
-                Path = e.Path,
-                LastChangedAuthor = e.LastChangeAuthor,
-                LastChangedRevision = SvnUtils.ConvertRevision(e.LastChangeRevision),
-                LastChangedTime = SvnUtils.ConvertTime(e.LastChangeTime),
-                Revision = SvnUtils.ConvertRevision(e.Revision)
-            });
+                WriteObject(new SvnRemoteStatusOutput
+                {
+                    LocalNodeStatus = e.LocalNodeStatus,
+                    LocalTextStatus = e.LocalTextStatus,
+                    Versioned = e.Versioned,
+                    Conflicted = e.Conflicted,
+                    LocalCopied = e.LocalCopied,
+                    Path = e.Path,
+                    LastChangedAuthor = e.LastChangeAuthor,
+                    LastChangedRevision = SvnUtils.ConvertRevision(e.LastChangeRevision),
+                    LastChangedTime = SvnUtils.ConvertTime(e.LastChangeTime),
+                    Revision = SvnUtils.ConvertRevision(e.Revision),
+
+                    RemoteContentStatus = e.RemoteContentStatus,
+                    RemoteLock = e.RemoteLock,
+                    RemoteNodeStatus = e.RemoteNodeStatus,
+                    RemoteTextStatus = e.RemoteTextStatus,
+                    RemotePropertyStatus = e.RemotePropertyStatus,
+                    RemoteUpdateCommitAuthor = e.RemoteUpdateCommitAuthor,
+                    RemoteUpdateCommitTime = e.RemoteUpdateCommitTime,
+                    RemoteUpdateNodeKind = e.RemoteUpdateNodeKind,
+                    RemoteUpdateRevision = e.RemoteUpdateRevision
+                });
+            }
+            else
+            {
+                WriteObject(new SvnLocalStatusOutput
+                {
+                    LocalNodeStatus = e.LocalNodeStatus,
+                    LocalTextStatus = e.LocalTextStatus,
+                    Versioned = e.Versioned,
+                    Conflicted = e.Conflicted,
+                    LocalCopied = e.LocalCopied,
+                    Path = e.Path,
+                    LastChangedAuthor = e.LastChangeAuthor,
+                    LastChangedRevision = SvnUtils.ConvertRevision(e.LastChangeRevision),
+                    LastChangedTime = SvnUtils.ConvertTime(e.LastChangeTime),
+                    Revision = SvnUtils.ConvertRevision(e.Revision)
+                });
+            }
         }
     }
 
-    public class SvnStatusOutput
+    public class SvnLocalStatusOutput
     {
         public SharpSvn.SvnStatus LocalNodeStatus { get; set; }
         public string Status
@@ -99,5 +136,18 @@ namespace PoshSvn
         public long? LastChangedRevision { get; set; }
         public string LastChangedAuthor { get; set; }
         public DateTime? LastChangedTime { get; set; }
+    }
+
+    public class SvnRemoteStatusOutput : SvnLocalStatusOutput
+    {
+        public SharpSvn.SvnStatus RemoteContentStatus { get; set; }
+        public SharpSvn.SvnStatus RemoteNodeStatus { get; set; }
+        public SharpSvn.SvnStatus RemoteTextStatus { get; set; }
+        public SharpSvn.SvnStatus RemotePropertyStatus { get; set; }
+        public SvnLockInfo RemoteLock { get; set; }
+        public long RemoteUpdateRevision { get; set; }
+        public DateTime RemoteUpdateCommitTime { get; set; }
+        public string RemoteUpdateCommitAuthor { get; set; }
+        public SvnNodeKind RemoteUpdateNodeKind { get; set;  }
     }
 }
