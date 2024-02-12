@@ -115,5 +115,17 @@ namespace SvnPosh
                 default: return action.ToString();
             }
         }
+
+        public static string FormatBasicProgress(long progress)
+        {
+            if (progress == -1)
+            {
+                return "Loading...";
+            }
+            else
+            {
+                return string.Format("{0,10} kb", progress / 1024);
+            }
+        }
     }
 }
