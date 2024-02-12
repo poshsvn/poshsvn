@@ -124,7 +124,7 @@ namespace PoshSvn
             }
             else
             {
-                return string.Format("Transfered: {0} kb", progress / 1024);
+                return string.Format("Transfered: {0} KB", progress / 1024);
             }
         }
     }
