@@ -5,7 +5,7 @@
     ModuleVersion="0.1.0.0"
     PowerShellVersion="3.0"
     CLRVersion="4.0"
-    RootModule = "SvnPosh.dll"
+    RootModule = "PoshSvn.dll"
     CmdletsToExport= @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
