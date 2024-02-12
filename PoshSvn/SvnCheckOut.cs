@@ -28,8 +28,6 @@ namespace PoshSvn
         [Alias("-f")]
         public SwitchParameter Force { get; set; }
 
-        private long progress = 0;
-
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
@@ -41,11 +39,17 @@ namespace PoshSvn
                     //TODO: AllowObstructions = Force
                 };
 
+                ProgressRecord progress = new ProgressRecord(0, "Checking out", "Initializing...");
+
                 args.Notify += new EventHandler<SvnNotifyEventArgs>((_, e) =>
                 {
                     if (e.Action == SvnNotifyAction.UpdateStarted)
                     {
-                        WriteParrentProgress();
+                        string text = string.Format("Checking out '{0}'", e.Path);
+                        WriteVerbose(text);
+                        progress.Activity = text;
+
+                        WriteProgress(progress);
                     }
                     else if (e.Action == SvnNotifyAction.UpdateCompleted)
                     {
@@ -56,17 +60,16 @@ namespace PoshSvn
                     }
                     else
                     {
-                        WriteVerbose(string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path));
-                        WriteProgress(new ProgressRecord(1, SvnUtils.GetActionStringLong(e.Action), e.Path)
-                        {
-                            ParentActivityId = 0
-                        });
+                        string text = string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path);
+                        progress.StatusDescription = text;
+                        WriteVerbose(text);
+                        WriteProgress(progress);
                     }
                 });
                 args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
                 {
-                    progress = e.Progress;
-                    WriteParrentProgress();
+                    progress.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+                    WriteProgress(progress);
                 });
 
                 string resolvedPath;
@@ -81,11 +84,6 @@ namespace PoshSvn
 
                 client.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
             }
-        }
-
-        private void WriteParrentProgress()
-        {
-            WriteProgress(new ProgressRecord(0, "Checking out...", SvnUtils.FormatProgress(progress)));
         }
     }
 
