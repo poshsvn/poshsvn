@@ -103,7 +103,7 @@ namespace SvnPosh
             }
         }
 
-        public static object GetCommitActionString(SvnNotifyAction action)
+        public static string GetCommitActionString(SvnNotifyAction action)
         {
             switch (action)
             {
