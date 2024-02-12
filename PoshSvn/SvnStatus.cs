@@ -42,6 +42,8 @@ namespace PoshSvn
                             RetrieveRemoteStatus = ShowUpdates
                         };
 
+                        args.Progress += Progress;
+
                         client.Status(resolvedPath, args, StatusHandler);
                     }
                     catch (SvnException ex)
