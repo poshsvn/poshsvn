@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Management.Automation;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     [Cmdlet("Invoke", "SvnCheckOut")]
     [Alias("svn-checkout")]

@@ -1,7 +1,7 @@
 ﻿using SharpSvn;
 using System.Management.Automation;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     [Cmdlet("Invoke", "SvnAdminCreate")]
     [Alias("svnadmin-create")]

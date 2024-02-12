@@ -3,7 +3,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>SvnPosh.SvnUpdateOutput</TypeName>
+        <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>

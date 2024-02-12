@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     public enum SvnDepth
     {

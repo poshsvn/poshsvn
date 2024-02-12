@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework.Legacy;
 using NUnit.Framework;
-using SvnPosh.Tests.TestUtils;
+using PoshSvn.Tests.TestUtils;
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 
-namespace SvnPosh.Tests
+namespace PoshSvn.Tests
 {
     public class SvnMkdirTests
     {

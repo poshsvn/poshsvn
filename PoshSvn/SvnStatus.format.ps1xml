@@ -3,7 +3,7 @@
     <View>
       <Name>SvnLocalStatus</Name>
       <ViewSelectedBy>
-        <TypeName>SvnPosh.SvnStatusOutput</TypeName>
+        <TypeName>PoshSvn.SvnStatusOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -31,7 +31,7 @@
     <View>
       <Name>Detailed</Name>
       <ViewSelectedBy>
-        <TypeName>SvnPosh.SvnStatusOutput</TypeName>
+        <TypeName>PoshSvn.SvnStatusOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -91,7 +91,7 @@
     <View>
       <Name>SvnRemoteStatus</Name>
       <ViewSelectedBy>
-        <TypeName>SvnPosh.SvnRemoteStatus</TypeName>
+        <TypeName>PoshSvn.SvnRemoteStatus</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

@@ -1,12 +1,12 @@
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using SvnPosh.Tests.TestUtils;
+using PoshSvn.Tests.TestUtils;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
 
-namespace SvnPosh.Tests
+namespace PoshSvn.Tests
 {
     public class SvnStatusTests
     {

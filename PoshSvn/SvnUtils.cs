@@ -1,7 +1,7 @@
 ﻿using SharpSvn;
 using System;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     public static class SvnUtils
     {

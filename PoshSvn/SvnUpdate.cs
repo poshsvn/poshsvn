@@ -2,7 +2,7 @@
 using System;
 using System.Management.Automation;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     [Cmdlet("Invoke", "SvnUpdate")]
     [Alias("svn-update")]
