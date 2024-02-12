@@ -4,7 +4,7 @@ using System.IO;
 using System.Management.Automation;
 using System.Reflection;
 
-namespace SvnPosh.Tests.TestUtils
+namespace PoshSvn.Tests.TestUtils
 {
     public class PowerShellUtils
     {
@@ -14,7 +14,7 @@ namespace SvnPosh.Tests.TestUtils
 
             PowerShell ps = PowerShell.Create();
 
-            ps.AddCommand("ipmo").AddArgument(Path.Combine(assemblyDirectory, @"..\SvnPosh\SvnPosh.psd1"));
+            ps.AddCommand("ipmo").AddArgument(Path.Combine(assemblyDirectory, @"..\PoshSvn\PoshSvn.psd1"));
 
             foreach (string command in commands)
             {

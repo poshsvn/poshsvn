@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SvnPosh.Tests.TestUtils
+namespace PoshSvn.Tests.TestUtils
 {
     public class WcSandbox : Sandbox
     {

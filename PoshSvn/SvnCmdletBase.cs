@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     public abstract class SvnCmdletBase : PSCmdlet
     {

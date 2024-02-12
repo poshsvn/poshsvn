@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Management.Automation;
 
-namespace SvnPosh
+namespace PoshSvn
 {
     [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
     [Alias("svn-mkdir")]
