@@ -4,7 +4,7 @@ using System.Management.Automation;
 namespace SvnPosh
 {
     [Cmdlet("Invoke", "SvnAdminCreate")]
-    [Alias("svnadmin-create", "svn-admin-create")]
+    [Alias("svnadmin-create")]
     public class SvnAdminCreate : SvnCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
