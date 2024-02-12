@@ -28,29 +28,13 @@ namespace PoshSvn
                 {
                     try
                     {
-                        client.Status(
-                            resolvedPath,
-                            new SvnStatusArgs()
-                            {
-                                RetrieveAllEntries = All,
-                                Depth = Depth.ConvertToSharpSvnDepth(),
-                            },
-                            new EventHandler<SvnStatusEventArgs>((sender, e) =>
-                                {
-                                    WriteObject(new SvnStatusOutput
-                                    {
-                                        LocalNodeStatus = e.LocalNodeStatus,
-                                        LocalTextStatus = e.LocalTextStatus,
-                                        Versioned = e.Versioned,
-                                        Conflicted = e.Conflicted,
-                                        LocalCopied = e.LocalCopied,
-                                        Path = e.Path,
-                                        LastChangedAuthor = e.LastChangeAuthor,
-                                        LastChangedRevision = SvnUtils.ConvertRevision(e.LastChangeRevision),
-                                        LastChangedTime = SvnUtils.ConvertTime(e.LastChangeTime),
-                                        Revision = SvnUtils.ConvertRevision(e.Revision)
-                                    });
-                                }));
+                        SvnStatusArgs args = new SvnStatusArgs()
+                        {
+                            RetrieveAllEntries = All,
+                            Depth = Depth.ConvertToSharpSvnDepth(),
+                        };
+
+                        client.Status(resolvedPath, args, StatusHandler);
                     }
                     catch (SvnException ex)
                     {
@@ -66,6 +50,23 @@ namespace PoshSvn
                     }
                 }
             }
+        }
+
+        private void StatusHandler(object sender, SvnStatusEventArgs e)
+        {
+            WriteObject(new SvnStatusOutput
+            {
+                LocalNodeStatus = e.LocalNodeStatus,
+                LocalTextStatus = e.LocalTextStatus,
+                Versioned = e.Versioned,
+                Conflicted = e.Conflicted,
+                LocalCopied = e.LocalCopied,
+                Path = e.Path,
+                LastChangedAuthor = e.LastChangeAuthor,
+                LastChangedRevision = SvnUtils.ConvertRevision(e.LastChangeRevision),
+                LastChangedTime = SvnUtils.ConvertTime(e.LastChangeTime),
+                Revision = SvnUtils.ConvertRevision(e.Revision)
+            });
         }
     }
 
