@@ -21,7 +21,6 @@
         "svn-commit"
         "svn-mkdir"
         "svnadmin-create"
-        "svn-admin-create"
     )
     FunctionsToExport = @()
     FormatsToProcess = @(
