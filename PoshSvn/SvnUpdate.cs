@@ -20,7 +20,7 @@ namespace PoshSvn
             return string.Format("Updating '{0}'", e.Path);
         }
 
-        protected override object GetOutput(SvnNotifyEventArgs e)
+        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
         {
             return new SvnUpdateOutput
             {

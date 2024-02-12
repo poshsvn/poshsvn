@@ -1,5 +1,4 @@
 ﻿using SharpSvn;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
@@ -12,7 +11,7 @@ namespace PoshSvn
 
         protected SvnCmdletBase()
         {
-            ProgressRecord = new ProgressRecord(0, "TODO", "Initializing...");
+            ProgressRecord = new ProgressRecord(0, GetActivityTitle(null), "Initializing...");
         }
 
         protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
@@ -49,21 +48,33 @@ namespace PoshSvn
         {
             if (e.Action == SvnNotifyAction.UpdateStarted)
             {
-                string text = GetActivityTitle(e);
-                WriteVerbose(text);
-                ProgressRecord.Activity = text;
-                WriteProgress(ProgressRecord);
+                UpdateAction(GetActivityTitle(e));
             }
             else if (e.Action == SvnNotifyAction.UpdateCompleted)
             {
-                WriteObject(GetOutput(e));
+                WriteObject(GetNotifyOutput(e));
+            }
+            else if (e.Action == SvnNotifyAction.CommitFinalizing)
+            {
+                UpdateAction("Committing transaction...");
+            }
+            else if (e.Action == SvnNotifyAction.CommitSendData)
+            {
+                UpdateAction("Transmitting file data...");
+            }
+            else if (e.Action == SvnNotifyAction.CommitAdded ||
+                     e.Action == SvnNotifyAction.CommitAddCopy ||
+                     e.Action == SvnNotifyAction.CommitAddCopy ||
+                     e.Action == SvnNotifyAction.CommitDeleted ||
+                     e.Action == SvnNotifyAction.CommitModified ||
+                     e.Action == SvnNotifyAction.CommitReplaced ||
+                     e.Action == SvnNotifyAction.CommitReplacedWithCopy)
+            {
+                UpdateAction(string.Format("{0,-8} {1}", SvnUtils.GetCommitActionString(e.Action), e.Path));
             }
             else
             {
-                string text = string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path);
-                ProgressRecord.StatusDescription = text;
-                WriteVerbose(text);
-                WriteProgress(ProgressRecord);
+                UpdateAction(string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path));
             }
         }
 
@@ -73,15 +84,14 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        // TODO: make them abstract
-        protected virtual string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return null;
-        }
+        protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
+        protected virtual object GetNotifyOutput(SvnNotifyEventArgs e) => null;
 
-        protected virtual object GetOutput(SvnNotifyEventArgs e)
+        protected void UpdateAction(string action)
         {
-            return null;
+            WriteVerbose(action);
+            ProgressRecord.StatusDescription = action;
+            WriteProgress(ProgressRecord);
         }
     }
 }

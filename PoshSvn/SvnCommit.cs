@@ -15,8 +15,6 @@ namespace PoshSvn
         [Parameter(Mandatory = true)]
         public string Message { get; set; }
 
-        private readonly ProgressRecord progressRecord = new ProgressRecord(0, "Commit", "Initializing...");
-
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
@@ -25,36 +23,14 @@ namespace PoshSvn
                 {
                     LogMessage = Message,
                 };
-                args.Notify += new EventHandler<SvnNotifyEventArgs>((_, e) =>
-                {
-                    if (e.Action == SvnNotifyAction.CommitFinalizing)
-                    {
-                        WriteVerbose("Committing transaction...");
-                        progressRecord.StatusDescription = "Committing transaction...";
-                        WriteProgress(progressRecord);
-                    }
-                    else if (e.Action == SvnNotifyAction.CommitSendData)
-                    {
-                        progressRecord.StatusDescription = "Transmitting file data...";
-                        WriteProgress(progressRecord);
-                    }
-                    else
-                    {
-                        progressRecord.StatusDescription = e.Path;
-                        WriteProgress(progressRecord);
-                    }
-                });
+                args.Notify += Notify;
+                args.Progress += Progress;
                 args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
                 {
                     WriteObject(new SvnCommitOutput
                     {
                         Revision = e.Revision
                     });
-                });
-                args.Progress += new EventHandler<SvnProgressEventArgs>((_, e) =>
-                {
-                    progressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
-                    WriteProgress(progressRecord);
                 });
 
                 try
@@ -73,6 +49,16 @@ namespace PoshSvn
                     }
                 }
             }
+        }
+
+        protected override string GetActivityTitle(SvnNotifyEventArgs e)
+        {
+            return "Committing";
+        }
+
+        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
+        {
+            return null;
         }
     }
 
