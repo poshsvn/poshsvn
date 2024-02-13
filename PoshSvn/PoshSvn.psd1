@@ -13,6 +13,7 @@
         "Invoke-SvnCleanup"
         "Invoke-SvnCommit"
         "Invoke-SvnMkdir"
+        "Invoke-SvnInfo"
         "Invoke-SvnAdminCreate"
     )
     AliasesToExport = @(
@@ -22,6 +23,7 @@
         "svn-cleanup"
         "svn-commit"
         "svn-mkdir"
+        "svn-info"
         "svnadmin-create"
     )
     FunctionsToExport = @()
