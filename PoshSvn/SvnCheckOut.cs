@@ -26,7 +26,7 @@ namespace PoshSvn
         public SwitchParameter IgnoreExternals { get; set; }
 
         [Parameter()]
-        [Alias("-f")]
+        [Alias("f")]
         public SwitchParameter Force { get; set; }
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
