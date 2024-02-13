@@ -31,7 +31,7 @@ namespace PoshSvn
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
         {
-            return string.Format("Checking out '{0}'", e.Path);
+            return e == null ? "Checking out" : string.Format("Checking out '{0}'", e.Path);
         }
 
         protected override object GetNotifyOutput(SvnNotifyEventArgs e)
