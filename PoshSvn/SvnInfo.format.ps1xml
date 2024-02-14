@@ -1,0 +1,121 @@
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>Local</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnInfoLocalOutput</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <Label>Path</Label>
+                <!-- TODO: ? -->
+                <ScriptBlock>$_.Path|Resolve-Path -Relative</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Working Copy Root Path</Label>
+                <PropertyName>WorkingCopyRoot</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>URL</Label>
+                <PropertyName>Url</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Relative URL</Label>
+                <PropertyName>RelativeUrl</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Repository Root</Label>
+                <PropertyName>RepositoryRoot</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Repository UUID</Label>
+                <PropertyName>RepositoryId</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Revision</Label>
+                <PropertyName>Revision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Node Kind</Label>
+                <PropertyName>NodeKind</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Schedule</Label>
+                <PropertyName>Schedule</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Author</Label>
+                <PropertyName>LastChangedAuthor</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Revision</Label>
+                <PropertyName>LastChangedRevision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Date</Label>
+                <ScriptBlock>$_.LastChangedDate.ToString("yyyy-mm-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+    <View>
+      <Name>Remote</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <Label>Path</Label>
+                <PropertyName>Path</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>URL</Label>
+                <PropertyName>Url</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Relative URL</Label>
+                <PropertyName>RelativeUrl</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Repository Root</Label>
+                <PropertyName>RepositoryRoot</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Repository UUID</Label>
+                <PropertyName>RepositoryId</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Revision</Label>
+                <PropertyName>Revision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Node Kind</Label>
+                <PropertyName>NodeKind</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Author</Label>
+                <PropertyName>LastChangedAuthor</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Revision</Label>
+                <PropertyName>LastChangedRevision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Date</Label>
+                <ScriptBlock>$_.LastChangedDate.ToString("yyyy-mm-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

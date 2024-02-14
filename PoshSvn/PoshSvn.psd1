@@ -32,6 +32,7 @@
         "SvnUpdate.format.ps1xml"
         "SvnCheckOut.format.ps1xml"
         "SvnCommit.format.ps1xml"
+        "SvnInfo.format.ps1xml"
         "SvnMkdir.format.ps1xml"
     )
 }
