@@ -4,13 +4,22 @@ using System.Management.Automation;
 
 namespace PoshSvn
 {
-    [Cmdlet("Invoke", "SvnInfo")]
+    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = ParameterSetNames.Path)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoLocalOutput), typeof(SvnInfoRemoteOutput))]
     public class SvnInfo : SvnCmdletBase
     {
-        [Parameter(Position = 0)]
+        public static class ParameterSetNames
+        {
+            public const string Path = "Path";
+            public const string Url = "Url";
+        }
+
+        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Path)]
         public string[] Path { get; set; } = new string[] { "" };
+
+        [Parameter(Position = 1, ParameterSetName = ParameterSetNames.Url)]
+        public Uri[] Url { get; set; }
 
         [Parameter()]
         [Alias("r", "rev")]
@@ -27,31 +36,50 @@ namespace PoshSvn
         {
             using (SvnClient client = new SvnClient())
             {
-                foreach (string path in GetPathTargets(Path, null))
+                try
                 {
-                    try
+                    if (ParameterSetName == ParameterSetNames.Path)
                     {
-                        SvnInfoArgs args = new SvnInfoArgs
+                        foreach (string path in GetPathTargets(Path, null))
                         {
-                            Revision = Revision,
-                            IncludeExternals = IncludeExternals,
-                            Depth = Depth.ConvertToSharpSvnDepth(),
-                        };
+                            SvnInfoArgs args = new SvnInfoArgs
+                            {
+                                Revision = Revision,
+                                IncludeExternals = IncludeExternals,
+                                Depth = Depth.ConvertToSharpSvnDepth(),
+                            };
 
-                        args.Progress += Progress;
-
-                        client.Info(SvnTarget.FromString(path), args, InfoHandler);
+                            client.Info(SvnTarget.FromString(path), args, InfoHandler);
+                        }
                     }
-                    catch (SvnException ex)
+                    else if (ParameterSetName == ParameterSetNames.Url)
                     {
-                        if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
+                        foreach (Uri url in Url)
                         {
-                            WriteWarning(ex.Message);
+                            SvnInfoArgs args = new SvnInfoArgs
+                            {
+                                Revision = Revision,
+                                IncludeExternals = IncludeExternals,
+                                Depth = Depth.ConvertToSharpSvnDepth(),
+                            };
+
+                            client.Info(SvnTarget.FromUri(url), args, InfoHandler);
                         }
-                        else
-                        {
-                            throw;
-                        }
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+                catch (SvnException ex)
+                {
+                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
+                    {
+                        WriteWarning(ex.Message);
+                    }
+                    else
+                    {
+                        throw;
                     }
                 }
             }
@@ -59,21 +87,34 @@ namespace PoshSvn
 
         private void InfoHandler(object sender, SvnInfoEventArgs e)
         {
-            WriteObject(new SvnInfoLocalOutput
+            if (e.HasLocalInfo)
             {
-                Path = e.Path,
-                WorkingCopyRoot = e.WorkingCopyRoot,
-                Url = e.Uri,
-                RelativeUrl = e.RepositoryRoot.MakeRelativeUri(e.Uri),
-                RepositoryRoot = e.RepositoryRoot,
-                RepositoryId = e.RepositoryId,
-                Revision = e.Revision,
-                NodeKind = e.NodeKind,
-                Schedule = e.Schedule,
-                LastChangedAuthor = e.LastChangeAuthor,
-                LastChangedRevision = e.LastChangeRevision,
-                LastChangedDate = e.LastChangeTime
-            });
+                SvnInfoLocalOutput svnInfo = new SvnInfoLocalOutput();
+                FillSvnInfoOutputProperties(svnInfo, e);
+                svnInfo.Schedule = e.Schedule;
+                svnInfo.WorkingCopyRoot = e.WorkingCopyRoot;
+                WriteObject(svnInfo);
+            }
+            else
+            {
+                SvnInfoRemoteOutput svnInfo = new SvnInfoRemoteOutput();
+                FillSvnInfoOutputProperties(svnInfo, e);
+                WriteObject(svnInfo);
+            }
+        }
+
+        private void FillSvnInfoOutputProperties(SvnInfoOutput svnInfo, SvnInfoEventArgs e)
+        {
+            svnInfo.Path = e.Path;
+            svnInfo.Url = e.Uri;
+            svnInfo.RelativeUrl = e.RepositoryRoot.MakeRelativeUri(e.Uri);
+            svnInfo.RepositoryRoot = e.RepositoryRoot;
+            svnInfo.RepositoryId = e.RepositoryId;
+            svnInfo.Revision = e.Revision;
+            svnInfo.NodeKind = e.NodeKind;
+            svnInfo.LastChangedAuthor = e.LastChangeAuthor;
+            svnInfo.LastChangedRevision = e.LastChangeRevision;
+            svnInfo.LastChangedDate = e.LastChangeTime;
         }
     }
 
