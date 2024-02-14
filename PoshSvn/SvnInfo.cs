@@ -4,21 +4,25 @@ using System.Management.Automation;
 
 namespace PoshSvn
 {
-    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = ParameterSetNames.Path)]
+    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = ParameterSetNames.Target)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoLocalOutput), typeof(SvnInfoRemoteOutput))]
     public class SvnInfo : SvnCmdletBase
     {
         public static class ParameterSetNames
         {
+            public const string Target = "Target";
             public const string Path = "Path";
             public const string Url = "Url";
         }
 
-        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Path)]
-        public string[] Path { get; set; } = new string[] { "" };
+        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Target, ValueFromRemainingArguments = true)]
+        public string[] Target { get; set; } = new string[] { "" };
 
-        [Parameter(Position = 1, ParameterSetName = ParameterSetNames.Url)]
+        [Parameter(ParameterSetName = ParameterSetNames.Path)]
+        public string[] Path { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public Uri[] Url { get; set; }
 
         [Parameter()]
@@ -38,17 +42,36 @@ namespace PoshSvn
             {
                 try
                 {
-                    if (ParameterSetName == ParameterSetNames.Path)
+                    SvnInfoArgs args = new SvnInfoArgs
+                    {
+                        Revision = Revision,
+                        IncludeExternals = IncludeExternals,
+                        Depth = Depth.ConvertToSharpSvnDepth(),
+                    };
+
+                    args.Progress += Progress;
+
+                    if (ParameterSetName == ParameterSetNames.Target)
+                    {
+                        foreach (string target in Target)
+                        {
+                            if (Uri.TryCreate(target, UriKind.Absolute, out Uri url))
+                            {
+                                client.Info(SvnTarget.FromUri(url), args, InfoHandler);
+                            }
+                            else
+                            {
+                                foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
+                                {
+                                    client.Info(SvnTarget.FromString(path), args, InfoHandler);
+                                }
+                            }
+                        }
+                    }
+                    else if (ParameterSetName == ParameterSetNames.Path)
                     {
                         foreach (string path in GetPathTargets(Path, null))
                         {
-                            SvnInfoArgs args = new SvnInfoArgs
-                            {
-                                Revision = Revision,
-                                IncludeExternals = IncludeExternals,
-                                Depth = Depth.ConvertToSharpSvnDepth(),
-                            };
-
                             client.Info(SvnTarget.FromString(path), args, InfoHandler);
                         }
                     }
@@ -56,15 +79,6 @@ namespace PoshSvn
                     {
                         foreach (Uri url in Url)
                         {
-                            SvnInfoArgs args = new SvnInfoArgs
-                            {
-                                Revision = Revision,
-                                IncludeExternals = IncludeExternals,
-                                Depth = Depth.ConvertToSharpSvnDepth(),
-                            };
-
-                            args.Progress += Progress;
-
                             client.Info(SvnTarget.FromUri(url), args, InfoHandler);
                         }
                     }
