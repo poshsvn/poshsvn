@@ -63,6 +63,8 @@ namespace PoshSvn
                                 Depth = Depth.ConvertToSharpSvnDepth(),
                             };
 
+                            args.Progress += Progress;
+
                             client.Info(SvnTarget.FromUri(url), args, InfoHandler);
                         }
                     }
