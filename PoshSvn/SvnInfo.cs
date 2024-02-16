@@ -104,10 +104,16 @@ namespace PoshSvn
             }
         }
 
+        protected override string GetActivityTitle(SvnNotifyEventArgs e)
+        {
+            return "svn-info";
+        }
+
         private void InfoHandler(object sender, SvnInfoEventArgs e)
         {
             if (e.HasLocalInfo)
             {
+                UpdateAction(e.Path);
                 SvnInfoLocalOutput svnInfo = new SvnInfoLocalOutput();
                 FillSvnInfoOutputProperties(svnInfo, e);
                 svnInfo.Schedule = e.Schedule;
@@ -116,6 +122,7 @@ namespace PoshSvn
             }
             else
             {
+                UpdateAction(e.Uri.ToString());
                 SvnInfoRemoteOutput svnInfo = new SvnInfoRemoteOutput();
                 FillSvnInfoOutputProperties(svnInfo, e);
                 WriteObject(svnInfo);
