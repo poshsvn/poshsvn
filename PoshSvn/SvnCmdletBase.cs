@@ -1,4 +1,5 @@
 ﻿using SharpSvn;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
@@ -93,6 +94,48 @@ namespace PoshSvn
             WriteVerbose(action);
             ProgressRecord.StatusDescription = action;
             WriteProgress(ProgressRecord);
+        }
+
+        protected List<SvnTarget> GetTargets(string[] Target, string[] Path, Uri[] Url)
+        {
+            List<SvnTarget> result = new List<SvnTarget>();
+
+            if (ParameterSetName == TargetParameterSetNames.Target)
+            {
+                foreach (string target in Target)
+                {
+                    if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
+                    {
+                        result.Add(uriTarget);
+                    }
+                    else
+                    {
+                        foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
+                        {
+                            if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
+                            {
+                                result.Add(pathTarget);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (ParameterSetName == TargetParameterSetNames.Path)
+            {
+                foreach (string path in GetPathTargets(Path, null))
+                {
+                    result.Add(SvnTarget.FromString(path));
+                }
+            }
+            else if (ParameterSetName == TargetParameterSetNames.Url)
+            {
+                foreach (Uri url in Url)
+                {
+                    result.Add(SvnTarget.FromUri(url));
+                }
+            }
+
+            return result;
         }
     }
 }

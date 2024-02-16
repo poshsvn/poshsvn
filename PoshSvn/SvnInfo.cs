@@ -1,29 +1,21 @@
 ﻿using SharpSvn;
 using System;
-using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace PoshSvn
 {
-    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = ParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoLocalOutput), typeof(SvnInfoRemoteOutput))]
     public class SvnInfo : SvnCmdletBase
     {
-        public static class ParameterSetNames
-        {
-            public const string Target = "Target";
-            public const string Path = "Path";
-            public const string Url = "Url";
-        }
-
-        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Target, ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; } = new string[] { "" };
 
-        [Parameter(ParameterSetName = ParameterSetNames.Path)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
         public string[] Path { get; set; }
 
-        [Parameter(ParameterSetName = ParameterSetNames.Url)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
         public Uri[] Url { get; set; }
 
         [Parameter()]
@@ -52,7 +44,7 @@ namespace PoshSvn
 
                     args.Progress += Progress;
 
-                    foreach (SvnTarget target in GetTargets())
+                    foreach (SvnTarget target in GetTargets(Target, Path, Url))
                     {
                         client.Info(target, args, InfoHandler);
                     }
@@ -69,48 +61,6 @@ namespace PoshSvn
                     }
                 }
             }
-        }
-
-        protected List<SvnTarget> GetTargets()
-        {
-            List<SvnTarget> result = new List<SvnTarget>();
-
-            if (ParameterSetName == ParameterSetNames.Target)
-            {
-                foreach (string target in Target)
-                {
-                    if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
-                    {
-                        result.Add(uriTarget);
-                    }
-                    else
-                    {
-                        foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
-                        {
-                            if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
-                            {
-                                result.Add(pathTarget);
-                            }
-                        }
-                    }
-                }
-            }
-            else if (ParameterSetName == ParameterSetNames.Path)
-            {
-                foreach (string path in GetPathTargets(Path, null))
-                {
-                    result.Add(SvnTarget.FromString(path));
-                }
-            }
-            else if (ParameterSetName == ParameterSetNames.Url)
-            {
-                foreach (Uri url in Url)
-                {
-                    result.Add(SvnTarget.FromUri(url));
-                }
-            }
-
-            return result;
         }
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
