@@ -55,15 +55,18 @@ namespace PoshSvn
                     {
                         foreach (string target in Target)
                         {
-                            if (Uri.TryCreate(target, UriKind.Absolute, out Uri url))
+                            if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
                             {
-                                client.Info(SvnTarget.FromUri(url), args, InfoHandler);
+                                client.Info(uriTarget, args, InfoHandler);
                             }
                             else
                             {
                                 foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
                                 {
-                                    client.Info(SvnTarget.FromString(path), args, InfoHandler);
+                                    if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
+                                    {
+                                        client.Info(pathTarget, args, InfoHandler);
+                                    }
                                 }
                             }
                         }
