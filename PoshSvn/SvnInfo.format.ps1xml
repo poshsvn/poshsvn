@@ -57,7 +57,7 @@
               <ListItem>
                 <Label>Last Changed Date</Label>
                 <PropertyName>LastChangedDate</PropertyName>
-                <FormatString>yyyy-mm-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)</FormatString>
+                <FormatString>yyyy-mm-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
               </ListItem>
             </ListItems>
           </ListEntry>
@@ -105,7 +105,7 @@
               <ListItem>
                 <Label>Last Changed Date</Label>
                 <PropertyName>LastChangedDate</PropertyName>
-                <FormatString>yyyy-mm-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)</FormatString>
+                <FormatString>yyyy-mm-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
               </ListItem>
             </ListItems>
           </ListEntry>
