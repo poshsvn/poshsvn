@@ -32,7 +32,8 @@ namespace PoshSvn
             {
                 foreach (string path in pathList)
                 {
-                    Collection<string> resolvedPath = GetResolvedProviderPathFromPSPath(path, out _);
+                    Collection<string> resolvedPath = GetResolvedProviderPathFromPSPath(path, out ProviderInfo providerInfo);
+                    // TODO: check providerInfo
                     result.AddRange(resolvedPath);
                 }
             }
@@ -110,8 +111,10 @@ namespace PoshSvn
                     }
                     else
                     {
-                        foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
+                        foreach (string path in GetResolvedProviderPathFromPSPath(target, out ProviderInfo providerInfo))
                         {
+                            // TODO: check providerInfo
+
                             if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
                             {
                                 result.Add(pathTarget);
