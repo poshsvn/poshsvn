@@ -11,8 +11,7 @@
             <ListItems>
               <ListItem>
                 <Label>Path</Label>
-                <!-- TODO: ? -->
-                <ScriptBlock>$_.Path|Resolve-Path -Relative</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
               </ListItem>
               <ListItem>
                 <Label>Working Copy Root Path</Label>
