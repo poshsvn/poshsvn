@@ -1,5 +1,6 @@
 ﻿using SharpSvn;
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace PoshSvn
@@ -51,43 +52,9 @@ namespace PoshSvn
 
                     args.Progress += Progress;
 
-                    if (ParameterSetName == ParameterSetNames.Target)
+                    foreach (SvnTarget target in GetTargets())
                     {
-                        foreach (string target in Target)
-                        {
-                            if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
-                            {
-                                client.Info(uriTarget, args, InfoHandler);
-                            }
-                            else
-                            {
-                                foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
-                                {
-                                    if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
-                                    {
-                                        client.Info(pathTarget, args, InfoHandler);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else if (ParameterSetName == ParameterSetNames.Path)
-                    {
-                        foreach (string path in GetPathTargets(Path, null))
-                        {
-                            client.Info(SvnTarget.FromString(path), args, InfoHandler);
-                        }
-                    }
-                    else if (ParameterSetName == ParameterSetNames.Url)
-                    {
-                        foreach (Uri url in Url)
-                        {
-                            client.Info(SvnTarget.FromUri(url), args, InfoHandler);
-                        }
-                    }
-                    else
-                    {
-                        throw new NotImplementedException();
+                        client.Info(target, args, InfoHandler);
                     }
                 }
                 catch (SvnException ex)
@@ -102,6 +69,48 @@ namespace PoshSvn
                     }
                 }
             }
+        }
+
+        protected List<SvnTarget> GetTargets()
+        {
+            List<SvnTarget> result = new List<SvnTarget>();
+
+            if (ParameterSetName == ParameterSetNames.Target)
+            {
+                foreach (string target in Target)
+                {
+                    if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
+                    {
+                        result.Add(uriTarget);
+                    }
+                    else
+                    {
+                        foreach (string path in GetResolvedProviderPathFromPSPath(target, out _))
+                        {
+                            if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
+                            {
+                                result.Add(pathTarget);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (ParameterSetName == ParameterSetNames.Path)
+            {
+                foreach (string path in GetPathTargets(Path, null))
+                {
+                    result.Add(SvnTarget.FromString(path));
+                }
+            }
+            else if (ParameterSetName == ParameterSetNames.Url)
+            {
+                foreach (Uri url in Url)
+                {
+                    result.Add(SvnTarget.FromUri(url));
+                }
+            }
+
+            return result;
         }
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
