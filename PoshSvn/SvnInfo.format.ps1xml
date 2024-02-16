@@ -1,9 +1,10 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>Local</Name>
+      <Name>default</Name>
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnInfoLocalOutput</TypeName>
+        <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
       </ViewSelectedBy>
       <ListControl>
         <ListEntries>
@@ -59,17 +60,10 @@
               </ListItem>
             </ListItems>
           </ListEntry>
-        </ListEntries>
-      </ListControl>
-    </View>
-    <View>
-      <Name>Remote</Name>
-      <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
-      </ViewSelectedBy>
-      <ListControl>
-        <ListEntries>
           <ListEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
+            </EntrySelectedBy>
             <ListItems>
               <ListItem>
                 <Label>Path</Label>
