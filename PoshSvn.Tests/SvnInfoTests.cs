@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using PoshSvn.Tests.TestUtils;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
+using NUnit.Framework;
+using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
 {
@@ -16,7 +16,7 @@ namespace PoshSvn.Tests
                 Collection<PSObject> actual = PowerShellUtils.RunScript($"svn-info '{sb.WcPath}'");
 
                 PSObjectAssert.AreEqual(
-                    new []
+                    new[]
                     {
                         new SvnInfoLocalOutput
                         {
