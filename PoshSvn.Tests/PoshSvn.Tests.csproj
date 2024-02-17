@@ -16,7 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PoshSvn\PoshSvn.csproj">
-      <Private>False</Private>
+      <!--Doesn't work..-->
+      <!--<Private>False</Private>-->
     </ProjectReference>
   </ItemGroup>
 

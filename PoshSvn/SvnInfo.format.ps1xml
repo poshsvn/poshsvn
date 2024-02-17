@@ -1,9 +1,10 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>Local</Name>
+      <Name>default</Name>
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnInfoLocalOutput</TypeName>
+        <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
       </ViewSelectedBy>
       <ListControl>
         <ListEntries>
@@ -11,8 +12,7 @@
             <ListItems>
               <ListItem>
                 <Label>Path</Label>
-                <!-- TODO: ? -->
-                <ScriptBlock>$_.Path|Resolve-Path -Relative</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
               </ListItem>
               <ListItem>
                 <Label>Working Copy Root Path</Label>
@@ -56,21 +56,15 @@
               </ListItem>
               <ListItem>
                 <Label>Last Changed Date</Label>
-                <ScriptBlock>$_.LastChangedDate.ToString("yyyy-mm-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+                <PropertyName>LastChangedDate</PropertyName>
+                <FormatString>yyyy-mm-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
               </ListItem>
             </ListItems>
           </ListEntry>
-        </ListEntries>
-      </ListControl>
-    </View>
-    <View>
-      <Name>Remote</Name>
-      <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
-      </ViewSelectedBy>
-      <ListControl>
-        <ListEntries>
           <ListEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
+            </EntrySelectedBy>
             <ListItems>
               <ListItem>
                 <Label>Path</Label>
@@ -110,7 +104,8 @@
               </ListItem>
               <ListItem>
                 <Label>Last Changed Date</Label>
-                <ScriptBlock>$_.LastChangedDate.ToString("yyyy-mm-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+                <PropertyName>LastChangedDate</PropertyName>
+                <FormatString>yyyy-mm-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
               </ListItem>
             </ListItems>
           </ListEntry>

@@ -4,21 +4,18 @@ using SharpSvn;
 
 namespace PoshSvn
 {
-    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = ParameterSetNames.Path)]
+    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoLocalOutput), typeof(SvnInfoRemoteOutput))]
     public class SvnInfo : SvnCmdletBase
     {
-        public static class ParameterSetNames
-        {
-            public const string Path = "Path";
-            public const string Url = "Url";
-        }
+        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
+        public string[] Target { get; set; } = new string[] { "" };
 
-        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Path)]
-        public string[] Path { get; set; } = new string[] { "" };
+        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
+        public string[] Path { get; set; }
 
-        [Parameter(Position = 1, ParameterSetName = ParameterSetNames.Url)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
         public Uri[] Url { get; set; }
 
         [Parameter()]
@@ -38,39 +35,18 @@ namespace PoshSvn
             {
                 try
                 {
-                    if (ParameterSetName == ParameterSetNames.Path)
+                    SvnInfoArgs args = new SvnInfoArgs
                     {
-                        foreach (string path in GetPathTargets(Path, null))
-                        {
-                            SvnInfoArgs args = new SvnInfoArgs
-                            {
-                                Revision = Revision,
-                                IncludeExternals = IncludeExternals,
-                                Depth = Depth.ConvertToSharpSvnDepth(),
-                            };
+                        Revision = Revision,
+                        IncludeExternals = IncludeExternals,
+                        Depth = Depth.ConvertToSharpSvnDepth(),
+                    };
 
-                            client.Info(SvnTarget.FromString(path), args, InfoHandler);
-                        }
-                    }
-                    else if (ParameterSetName == ParameterSetNames.Url)
+                    args.Progress += Progress;
+
+                    foreach (SvnTarget target in GetTargets(Target, Path, Url))
                     {
-                        foreach (Uri url in Url)
-                        {
-                            SvnInfoArgs args = new SvnInfoArgs
-                            {
-                                Revision = Revision,
-                                IncludeExternals = IncludeExternals,
-                                Depth = Depth.ConvertToSharpSvnDepth(),
-                            };
-
-                            args.Progress += Progress;
-
-                            client.Info(SvnTarget.FromUri(url), args, InfoHandler);
-                        }
-                    }
-                    else
-                    {
-                        throw new NotImplementedException();
+                        client.Info(target, args, InfoHandler);
                     }
                 }
                 catch (SvnException ex)
@@ -87,10 +63,16 @@ namespace PoshSvn
             }
         }
 
+        protected override string GetActivityTitle(SvnNotifyEventArgs e)
+        {
+            return "svn-info";
+        }
+
         private void InfoHandler(object sender, SvnInfoEventArgs e)
         {
             if (e.HasLocalInfo)
             {
+                UpdateAction(e.Path);
                 SvnInfoLocalOutput svnInfo = new SvnInfoLocalOutput();
                 FillSvnInfoOutputProperties(svnInfo, e);
                 svnInfo.Schedule = e.Schedule;
@@ -99,6 +81,7 @@ namespace PoshSvn
             }
             else
             {
+                UpdateAction(e.Uri.ToString());
                 SvnInfoRemoteOutput svnInfo = new SvnInfoRemoteOutput();
                 FillSvnInfoOutputProperties(svnInfo, e);
                 WriteObject(svnInfo);
