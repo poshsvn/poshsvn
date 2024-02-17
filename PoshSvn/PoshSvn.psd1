@@ -14,6 +14,7 @@
         "Invoke-SvnCommit"
         "Invoke-SvnMkdir"
         "Invoke-SvnInfo"
+        "Invoke-SvnAdd"
         "Invoke-SvnAdminCreate"
     )
     AliasesToExport = @(
@@ -24,6 +25,8 @@
         "svn-commit"
         "svn-mkdir"
         "svn-info"
+        "svn-add"
+        "Add-SvnItem"
         "svnadmin-create"
     )
     FunctionsToExport = @()
@@ -34,5 +37,6 @@
         "SvnCommit.format.ps1xml"
         "SvnInfo.format.ps1xml"
         "SvnMkdir.format.ps1xml"
+        "SvnAdd.format.ps1xml"
     )
 }
