@@ -1,6 +1,6 @@
-﻿using SharpSvn;
-using System;
+﻿using System;
 using System.Management.Automation;
+using SharpSvn;
 
 namespace PoshSvn
 {
@@ -63,7 +63,7 @@ namespace PoshSvn
 
                     args.Committing += new EventHandler<SvnCommittingEventArgs>((_, e) =>
                     {
-                         UpdateAction("Committing transaction...");
+                        UpdateAction("Committing transaction...");
                     });
 
                     args.Progress += Progress;
