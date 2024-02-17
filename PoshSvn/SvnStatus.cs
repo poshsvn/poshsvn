@@ -1,6 +1,6 @@
-﻿using SharpSvn;
-using System;
+﻿using System;
 using System.Management.Automation;
+using SharpSvn;
 
 namespace PoshSvn
 {
@@ -150,6 +150,6 @@ namespace PoshSvn
         public long RemoteUpdateRevision { get; set; }
         public DateTime RemoteUpdateCommitTime { get; set; }
         public string RemoteUpdateCommitAuthor { get; set; }
-        public SvnNodeKind RemoteUpdateNodeKind { get; set;  }
+        public SvnNodeKind RemoteUpdateNodeKind { get; set; }
     }
 }

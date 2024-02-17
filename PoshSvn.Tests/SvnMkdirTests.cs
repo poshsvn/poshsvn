@@ -1,10 +1,10 @@
-﻿using NUnit.Framework.Legacy;
-using NUnit.Framework;
-using PoshSvn.Tests.TestUtils;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Management.Automation;
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
+using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
 {

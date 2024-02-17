@@ -1,6 +1,6 @@
-﻿using SharpSvn;
-using System;
+﻿using System;
 using System.Management.Automation;
+using SharpSvn;
 
 namespace PoshSvn
 {
