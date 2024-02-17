@@ -2,7 +2,7 @@
 
 namespace PoshSvn.Tests.TestUtils
 {
-    public class WcSandbox : Sandbox
+    public class WcSandbox : PowerShellSandbox
     {
         public string ReposPath { get; }
         public string ReposUrl { get; }
@@ -16,8 +16,8 @@ namespace PoshSvn.Tests.TestUtils
 
             Directory.CreateDirectory(ReposPath);
 
-            PowerShellUtils.RunScript($"svnadmin-create '{ReposPath}'",
-                                      $"svn-checkout '{ReposUrl}' '{WcPath}'");
+            RunScript($@"svnadmin-create .\repos",
+                      $@"svn-checkout '{ReposUrl}' .\wc");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace PoshSvn.Tests
         {
             using (WcSandbox sb = new WcSandbox())
             {
-                Collection<PSObject> actual = PowerShellUtils.RunScript($"svn-info '{sb.WcPath}'");
+                Collection<PSObject> actual = sb.RunScript($"svn-info wc");
 
                 PSObjectAssert.AreEqual(
                     new[]

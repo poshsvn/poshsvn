@@ -15,9 +15,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                Collection<PSObject> actual = PowerShellUtils.RunScript(
-                    $"cd '{sb.WcPath}'",
-                    $"(svn-mkdir dir_1 | Out-String -stream).TrimEnd()");
+                Collection<PSObject> actual = sb.RunScript($"cd wc; (svn-mkdir dir_1 | Out-String -stream).TrimEnd()");
 
                 CollectionAssert.AreEqual(
                     new string[]
@@ -31,8 +29,7 @@ namespace PoshSvn.Tests
                     },
                     Array.ConvertAll(actual.ToArray(), a => (string)a.BaseObject));
 
-                actual = PowerShellUtils.RunScript(
-                    $"(svn-status '{sb.WcPath}' | Out-String -stream).TrimEnd()");
+                actual = sb.RunScript($"(svn-status wc | Out-String -stream).TrimEnd()");
 
                 CollectionAssert.AreEqual(
                     new string[]
@@ -46,9 +43,7 @@ namespace PoshSvn.Tests
                     },
                     Array.ConvertAll(actual.ToArray(), a => (string)a.BaseObject));
 
-                actual = PowerShellUtils.RunScript(
-                    $"cd '{sb.WcPath}'",
-                    $"svn-commit -m test");
+                actual = sb.RunScript($"cd wc; svn-commit -m test");
             }
         }
     }
