@@ -38,7 +38,7 @@ namespace PoshSvn.Tests.TestUtils
 
             foreach (var o in ps.Streams.Error)
             {
-                throw new Exception($"Error while excecuting command '{commands}'", o.Exception);
+                throw o.Exception;
             }
 
             return result;
