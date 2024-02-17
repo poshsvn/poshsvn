@@ -1,20 +1,28 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Management.Automation;
 using System.Reflection;
+using System;
 
 namespace PoshSvn.Tests.TestUtils
 {
-    public class PowerShellUtils
+    public class PowerShellSandbox : Sandbox
     {
-        public static Collection<PSObject> RunScript(params string[] commands)
+        public Collection<PSObject> RunScript(params string[] commands)
         {
             string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             PowerShell ps = PowerShell.Create();
 
-            ps.AddCommand("ipmo").AddArgument(Path.Combine(assemblyDirectory, @"..\PoshSvn\PoshSvn.psd1"));
+            ps.AddCommand($"ipmo")
+              .AddArgument(Path.Combine(assemblyDirectory, @"..\PoshSvn\PoshSvn.psd1"))
+              .Invoke();
+            ps.Commands.Clear();
+
+            ps.AddCommand("cd")
+              .AddArgument(RootPath)
+              .Invoke();
+            ps.Commands.Clear();
 
             foreach (string command in commands)
             {
@@ -30,7 +38,7 @@ namespace PoshSvn.Tests.TestUtils
 
             foreach (var o in ps.Streams.Error)
             {
-                throw new Exception($"Error while excecuting command '{commands}'", o.Exception);
+                throw o.Exception;
             }
 
             return result;
