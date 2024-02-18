@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Test
-        run: dotnet test
+        run: dotnet test --configuration ${{ env.Configuration }}
 
       - name: Publish
         run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }}
