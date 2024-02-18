@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Management.Automation;
+using System.Reflection;
 using NUnit.Framework;
 using PoshSvn.Tests.TestUtils;
 using DriveNotFoundException = System.Management.Automation.DriveNotFoundException;
@@ -13,6 +14,7 @@ namespace PoshSvn.Tests
         [Test]
         public void SimpleTest()
         {
+            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
             using (WcSandbox sb = new WcSandbox())
             {
                 PSObjectAssert.AreEqual(
