@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Publish
-        run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }}
-
       - name: Test
         run: dotnet test
+
+      - name: Publish
+        run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
