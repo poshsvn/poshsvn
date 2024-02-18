@@ -108,6 +108,7 @@ namespace PoshSvn.Tests
         [Test]
         public void CreateDirectoryTest()
         {
+            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
             using (WcSandbox sb = new WcSandbox())
             {
                 Collection<PSObject> actual = sb.RunScript(
