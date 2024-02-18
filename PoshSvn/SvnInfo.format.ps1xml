@@ -1,10 +1,10 @@
+<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PowerShell/PowerShell/master/src/Schemas/Format.xsd"?-->
 <Configuration>
   <ViewDefinitions>
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnInfoLocalOutput</TypeName>
-        <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
+        <TypeName>PoshSvn.SvnInfoOutput</TypeName>
       </ViewSelectedBy>
       <ListControl>
         <ListEntries>
@@ -15,6 +15,9 @@
                 <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
               </ListItem>
               <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.WorkingCopyRoot -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
                 <Label>Working Copy Root Path</Label>
                 <PropertyName>WorkingCopyRoot</PropertyName>
               </ListItem>
@@ -43,56 +46,11 @@
                 <PropertyName>NodeKind</PropertyName>
               </ListItem>
               <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.Schedule -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
                 <Label>Schedule</Label>
                 <PropertyName>Schedule</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Last Changed Author</Label>
-                <PropertyName>LastChangedAuthor</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Last Changed Revision</Label>
-                <PropertyName>LastChangedRevision</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Last Changed Date</Label>
-                <PropertyName>LastChangedDate</PropertyName>
-                <FormatString>yyyy-mm-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
-              </ListItem>
-            </ListItems>
-          </ListEntry>
-          <ListEntry>
-            <EntrySelectedBy>
-              <TypeName>PoshSvn.SvnInfoRemoteOutput</TypeName>
-            </EntrySelectedBy>
-            <ListItems>
-              <ListItem>
-                <Label>Path</Label>
-                <PropertyName>Path</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>URL</Label>
-                <PropertyName>Url</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Relative URL</Label>
-                <PropertyName>RelativeUrl</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Repository Root</Label>
-                <PropertyName>RepositoryRoot</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Repository UUID</Label>
-                <PropertyName>RepositoryId</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Revision</Label>
-                <PropertyName>Revision</PropertyName>
-              </ListItem>
-              <ListItem>
-                <Label>Node Kind</Label>
-                <PropertyName>NodeKind</PropertyName>
               </ListItem>
               <ListItem>
                 <Label>Last Changed Author</Label>

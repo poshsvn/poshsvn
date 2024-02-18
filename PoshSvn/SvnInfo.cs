@@ -6,7 +6,7 @@ namespace PoshSvn
 {
     [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-info")]
-    [OutputType(typeof(SvnInfoLocalOutput), typeof(SvnInfoRemoteOutput))]
+    [OutputType(typeof(SvnInfoOutput))]
     public class SvnInfo : SvnCmdletBase
     {
         [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
@@ -70,40 +70,37 @@ namespace PoshSvn
 
         private void InfoHandler(object sender, SvnInfoEventArgs e)
         {
+            SvnInfoOutput svnInfo = new SvnInfoOutput
+            {
+                Path = e.Path,
+                WorkingCopyRoot = e.WorkingCopyRoot,
+                Url = e.Uri,
+                RelativeUrl = e.RepositoryRoot.MakeRelativeUri(e.Uri),
+                RepositoryRoot = e.RepositoryRoot,
+                RepositoryId = e.RepositoryId,
+                Revision = e.Revision,
+                NodeKind = e.NodeKind,
+                LastChangedAuthor = e.LastChangeAuthor,
+                LastChangedRevision = e.LastChangeRevision,
+                LastChangedDate = e.LastChangeTime,
+            };
+
             if (e.HasLocalInfo)
             {
                 UpdateAction(e.Path);
-                SvnInfoLocalOutput svnInfo = new SvnInfoLocalOutput();
-                FillSvnInfoOutputProperties(svnInfo, e);
                 svnInfo.Schedule = e.Schedule;
                 svnInfo.WorkingCopyRoot = e.WorkingCopyRoot;
-                WriteObject(svnInfo);
             }
             else
             {
                 UpdateAction(e.Uri.ToString());
-                SvnInfoRemoteOutput svnInfo = new SvnInfoRemoteOutput();
-                FillSvnInfoOutputProperties(svnInfo, e);
-                WriteObject(svnInfo);
             }
-        }
 
-        private void FillSvnInfoOutputProperties(SvnInfoOutput svnInfo, SvnInfoEventArgs e)
-        {
-            svnInfo.Path = e.Path;
-            svnInfo.Url = e.Uri;
-            svnInfo.RelativeUrl = e.RepositoryRoot.MakeRelativeUri(e.Uri);
-            svnInfo.RepositoryRoot = e.RepositoryRoot;
-            svnInfo.RepositoryId = e.RepositoryId;
-            svnInfo.Revision = e.Revision;
-            svnInfo.NodeKind = e.NodeKind;
-            svnInfo.LastChangedAuthor = e.LastChangeAuthor;
-            svnInfo.LastChangedRevision = e.LastChangeRevision;
-            svnInfo.LastChangedDate = e.LastChangeTime;
+            WriteObject(svnInfo);
         }
     }
 
-    public abstract class SvnInfoOutput
+    public class SvnInfoOutput
     {
         public string Path { get; set; }
         public Uri Url { get; set; }
@@ -115,15 +112,8 @@ namespace PoshSvn
         public string LastChangedAuthor { get; set; }
         public long LastChangedRevision { get; set; }
         public DateTime LastChangedDate { get; set; }
-    }
 
-    public class SvnInfoLocalOutput : SvnInfoOutput
-    {
-        public SvnSchedule Schedule { get; set; }
-        public string WorkingCopyRoot { get; set; }
-    }
-
-    public class SvnInfoRemoteOutput : SvnInfoOutput
-    {
+        public SvnSchedule? Schedule { get; set; } = null;
+        public string WorkingCopyRoot { get; set; } = null;
     }
 }
