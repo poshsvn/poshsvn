@@ -15,10 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PoshSvn\PoshSvn.csproj">
-      <!--Doesn't work..-->
-      <!--<Private>False</Private>-->
-    </ProjectReference>
+    <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" Private="False"/>
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
     <PackageReference Include="SharpSvn.1.9-x64" Version="1.9007.3987.251" />
   </ItemGroup>
