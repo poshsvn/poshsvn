@@ -15,12 +15,10 @@ namespace PoshSvn.Tests
         {
             using (WcSandbox sb = new WcSandbox())
             {
-                Collection<PSObject> actual = sb.RunScript($"svn-info wc");
-
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        new SvnInfoLocalOutput
+                        new SvnInfoOutput
                         {
                             Schedule = SharpSvn.SvnSchedule.Normal,
                             WorkingCopyRoot = sb.WcPath,
@@ -32,7 +30,25 @@ namespace PoshSvn.Tests
                             LastChangedAuthor = null,
                         }
                     },
-                    actual,
+                    sb.RunScript($"svn-info wc"),
+                    nameof(SvnInfoOutput.RepositoryId),
+                    nameof(SvnInfoOutput.LastChangedDate),
+                    nameof(SvnInfoOutput.RepositoryId));
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnInfoOutput
+                        {
+                            Path = "repos",
+                            Url = new Uri(sb.ReposUrl + "/"),
+                            RelativeUrl = new Uri("", UriKind.Relative),
+                            RepositoryRoot = new Uri(sb.ReposUrl + "/"),
+                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            LastChangedAuthor = null,
+                        }
+                    },
+                    sb.RunScript($"svn-info '{sb.ReposUrl}'"),
                     nameof(SvnInfoOutput.RepositoryId),
                     nameof(SvnInfoOutput.LastChangedDate),
                     nameof(SvnInfoOutput.RepositoryId));
@@ -49,7 +65,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new SvnInfoOutput[]
                     {
-                        new SvnInfoLocalOutput
+                        new SvnInfoOutput
                         {
                             Schedule = SharpSvn.SvnSchedule.Normal,
                             WorkingCopyRoot = sb.WcPath,
@@ -60,7 +76,7 @@ namespace PoshSvn.Tests
                             NodeKind = SharpSvn.SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         },
-                        new SvnInfoRemoteOutput
+                        new SvnInfoOutput
                         {
                             Path = "repos",
                             Url = new Uri(sb.ReposUrl + "/"),
@@ -99,7 +115,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        new SvnInfoLocalOutput
+                        new SvnInfoOutput
                         {
                             Schedule = SharpSvn.SvnSchedule.Add,
                             WorkingCopyRoot = sb.WcPath,
@@ -126,7 +142,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                    new[]
                    {
-                        new SvnInfoLocalOutput
+                        new SvnInfoOutput
                         {
                             Schedule = SharpSvn.SvnSchedule.Normal,
                             WorkingCopyRoot = sb.WcPath,
@@ -141,6 +157,26 @@ namespace PoshSvn.Tests
                         }
                    },
                    actual,
+                   nameof(SvnInfoOutput.RepositoryId),
+                   nameof(SvnInfoOutput.LastChangedDate),
+                   nameof(SvnInfoOutput.RepositoryId),
+                   nameof(SvnInfoOutput.LastChangedAuthor));
+
+                PSObjectAssert.AreEqual(
+                   new[]
+                   {
+                        new SvnInfoOutput
+                        {
+                            Path = "repos",
+                            Url = new Uri(sb.ReposUrl + "/"),
+                            RelativeUrl = new Uri("", UriKind.Relative),
+                            RepositoryRoot = new Uri(sb.ReposUrl + "/"),
+                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            Revision = 1,
+                            LastChangedRevision = 1,
+                        }
+                   },
+                   sb.RunScript($"svn-info '{sb.ReposUrl}'"),
                    nameof(SvnInfoOutput.RepositoryId),
                    nameof(SvnInfoOutput.LastChangedDate),
                    nameof(SvnInfoOutput.RepositoryId),
