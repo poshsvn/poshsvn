@@ -22,4 +22,4 @@ jobs:
           path: .\bin\${{ env.Configuration }}\PoshSvn
 
       - name: Test
-        run: dotnet test
+        run: dotnet test --configuration ${{ env.Configuration }}
