@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <Platforms>x64;</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpSvn.1.9-x64" Version="1.9007.3987.251" />
+    <PackageReference Include="SharpSvn" Version="1.14003.272" />
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
   </ItemGroup>
 

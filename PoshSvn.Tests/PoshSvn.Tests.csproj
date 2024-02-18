@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <Platforms>x64;</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" Private="False"/>
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
-    <PackageReference Include="SharpSvn.1.9-x64" Version="1.9007.3987.251" />
+    <PackageReference Include="SharpSvn" Version="1.14003.272" />
   </ItemGroup>
 
 </Project>
