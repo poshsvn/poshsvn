@@ -15,7 +15,7 @@ namespace PoshSvn.Tests.TestUtils
             PowerShell ps = PowerShell.Create();
 
             ps.AddCommand($"ipmo")
-              .AddArgument(Path.Combine(assemblyDirectory, @"..\PoshSvn\PoshSvn.psd1"))
+              .AddArgument(Path.Combine(assemblyDirectory, @"PoshSvn.psd1"))
               .Invoke();
             ps.Commands.Clear();
 
