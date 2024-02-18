@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Test
-        run: dotnet test --configuration ${{ env.Configuration }} --settings Default.runsettings
+        run: dotnet test --configuration ${{ env.Configuration }} --settings Default.runsettings -v=normal
 
       - name: Publish
-        run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }}
+        run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }} -v=normal
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
