@@ -85,17 +85,6 @@ namespace PoshSvn
                 LastChangedDate = new DateTimeOffset(e.LastChangeTime),
             };
 
-            if (e.HasLocalInfo)
-            {
-                UpdateAction(e.Path);
-                svnInfo.Schedule = e.Schedule;
-                svnInfo.WorkingCopyRoot = e.WorkingCopyRoot;
-            }
-            else
-            {
-                UpdateAction(e.Uri.ToString());
-            }
-
             if (e.NodeKind == SvnNodeKind.File)
             {
                 svnInfo.Checksum = e.Checksum;
@@ -103,6 +92,8 @@ namespace PoshSvn
             }
 
             WriteObject(svnInfo);
+
+            UpdateAction(e.HasLocalInfo ? e.Path : e.Uri.ToString());
         }
     }
 
