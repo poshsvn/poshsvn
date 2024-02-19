@@ -91,5 +91,47 @@ namespace PoshSvn.Tests
                     @"svn-delete non_wc\dir"));
             }
         }
+
+        [Test]
+        public void SvnDeleteRemoteTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Collection<PSObject> actual = sb.RunScript(
+                    $"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'",
+                    $"svn-delete -url '{sb.ReposUrl}/dir' -m 'delete'");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnCommitOutput
+                        {
+                            Revision = 2,
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void SvnDeleteRemoteFormatTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Collection<PSObject> actual = sb.RunScript(
+                    $"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'",
+                    $"(svn-delete -url '{sb.ReposUrl}/dir' -m 'delete'| Out-String -Stream).TrimEnd()");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        $@"",
+                        $@"Committed revision 2.",
+                        $@"",
+                        $@"",
+                    },
+                    Array.ConvertAll(actual.ToArray(), a => a.BaseObject));
+            }
+        }
     }
 }

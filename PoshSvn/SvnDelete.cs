@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn
@@ -8,8 +9,16 @@ namespace PoshSvn
     [OutputType(typeof(SvnCommitOutput))]
     public class SvnDelete : SvnCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Path,
+                   ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; }
+
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        public Uri[] Url { get; set; }
+
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Alias("m")]
+        public string Message { get; set; }
 
         [Parameter()]
         [Alias("f")]
@@ -19,8 +28,6 @@ namespace PoshSvn
         [Alias("keep-local")]
         public SwitchParameter KeepLocal { get; set; }
 
-        // TODO: with log message (remote)
-
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
@@ -29,14 +36,25 @@ namespace PoshSvn
                 {
                     Force = Force,
                     KeepLocal = KeepLocal,
+                    LogMessage = Message,
                 };
 
                 args.Progress += Progress;
                 args.Notify += Notify;
 
-                string[] targets = GetPathTargets(Path, null);
+                if (ParameterSetName == TargetParameterSetNames.Path)
+                {
+                    client.Delete(GetPathTargets(Path, null), args);
+                }
+                else
+                {
+                    client.RemoteDelete(Url, args, out SvnCommitResult result);
 
-                client.Delete(targets, args);
+                    WriteObject(new SvnCommitOutput
+                    {
+                        Revision = result.Revision,
+                    });
+                }
             }
         }
 
