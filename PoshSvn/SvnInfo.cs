@@ -73,7 +73,6 @@ namespace PoshSvn
             SvnInfoOutput svnInfo = new SvnInfoOutput
             {
                 Path = e.Path,
-                WorkingCopyRoot = e.WorkingCopyRoot,
                 Url = e.Uri,
                 RelativeUrl = e.RepositoryRoot.MakeRelativeUri(e.Uri),
                 RepositoryRoot = e.RepositoryRoot,
