@@ -22,7 +22,7 @@ namespace PoshSvn
         public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
 
         [Parameter(ParameterSetName = "Remote")]
-        [Alias("r", "rev")]
+        [Alias("rev")]
         public SvnRevision Revision { get; set; }
 
         protected override void ProcessRecord()

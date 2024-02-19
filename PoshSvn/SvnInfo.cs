@@ -19,7 +19,7 @@ namespace PoshSvn
         public Uri[] Url { get; set; }
 
         [Parameter()]
-        [Alias("r", "rev")]
+        [Alias("rev")]
         public SvnRevision Revision { get; set; } = null;
 
         [Parameter()]
