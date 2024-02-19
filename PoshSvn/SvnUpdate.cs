@@ -12,7 +12,7 @@ namespace PoshSvn
         public string[] Path { get; set; } = new string[] { "" };
 
         [Parameter()]
-        [Alias("r", "rev")]
+        [Alias("rev")]
         public SvnRevision Revision { get; set; } = null;
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)

@@ -17,7 +17,7 @@ namespace PoshSvn
         public string Path { get; set; }
 
         [Parameter()]
-        [Alias("r", "rev")]
+        [Alias("rev")]
         public SvnRevision Revision { get; set; }
 
         [Parameter()]
