@@ -63,7 +63,7 @@
               <ListItem>
                 <Label>Last Changed Date</Label>
                 <PropertyName>LastChangedDate</PropertyName>
-                <FormatString>yyyy-mm-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
+                <FormatString>yyyy-MM-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
               </ListItem>
             </ListItems>
           </ListEntry>
