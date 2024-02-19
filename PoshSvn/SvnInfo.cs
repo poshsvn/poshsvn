@@ -88,7 +88,10 @@ namespace PoshSvn
             if (e.NodeKind == SvnNodeKind.File)
             {
                 svnInfo.Checksum = e.Checksum;
-                svnInfo.TextLastUpdated = new DateTimeOffset(e.ContentTime);
+                if (e.ContentTime != DateTime.MinValue)
+                {
+                    svnInfo.TextLastUpdated = new DateTimeOffset(e.ContentTime);
+                }
             }
 
             WriteObject(svnInfo);
