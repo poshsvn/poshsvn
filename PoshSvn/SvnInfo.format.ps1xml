@@ -62,8 +62,7 @@
               </ListItem>
               <ListItem>
                 <Label>Last Changed Date</Label>
-                <PropertyName>LastChangedDate</PropertyName>
-                <FormatString>yyyy-MM-dd hh:mm:ss (ddd, dd MMM yyyy)</FormatString>
+                <ScriptBlock>$_.LastChangedDate.ToLocalTime().ToString("yyyy-MM-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
               </ListItem>
             </ListItems>
           </ListEntry>
