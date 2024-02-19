@@ -82,7 +82,7 @@ namespace PoshSvn
                 NodeKind = e.NodeKind,
                 LastChangedAuthor = e.LastChangeAuthor,
                 LastChangedRevision = e.LastChangeRevision,
-                LastChangedDate = e.LastChangeTime,
+                LastChangedDate = new DateTimeOffset(e.LastChangeTime),
             };
 
             if (e.HasLocalInfo)
@@ -111,7 +111,7 @@ namespace PoshSvn
         public SvnNodeKind NodeKind { get; set; }
         public string LastChangedAuthor { get; set; }
         public long LastChangedRevision { get; set; }
-        public DateTime LastChangedDate { get; set; }
+        public DateTimeOffset LastChangedDate { get; set; }
 
         public SvnSchedule? Schedule { get; set; } = null;
         public string WorkingCopyRoot { get; set; } = null;
