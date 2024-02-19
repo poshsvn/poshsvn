@@ -82,8 +82,17 @@ namespace PoshSvn
                 NodeKind = e.NodeKind,
                 LastChangedAuthor = e.LastChangeAuthor,
                 LastChangedRevision = e.LastChangeRevision,
-                LastChangedDate = new DateTimeOffset(e.LastChangeTime),
             };
+
+            if (e.LastChangeTime != DateTime.MinValue)
+            {
+                svnInfo.LastChangedDate = new DateTimeOffset(e.LastChangeTime);
+            }
+
+            if (e.ContentTime != DateTime.MinValue)
+            {
+                svnInfo.TextLastUpdated = new DateTimeOffset(e.ContentTime);
+            }
 
             if (e.HasLocalInfo)
             {
@@ -94,10 +103,6 @@ namespace PoshSvn
             if (e.NodeKind == SvnNodeKind.File)
             {
                 svnInfo.Checksum = e.Checksum;
-                if (e.ContentTime != DateTime.MinValue)
-                {
-                    svnInfo.TextLastUpdated = new DateTimeOffset(e.ContentTime);
-                }
             }
 
             WriteObject(svnInfo);
