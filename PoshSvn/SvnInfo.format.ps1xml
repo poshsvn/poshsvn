@@ -64,6 +64,20 @@
                 <Label>Last Changed Date</Label>
                 <ScriptBlock>$_.LastChangedDate.ToLocalTime().ToString("yyyy-MM-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
               </ListItem>
+              <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.TextLastUpdated -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <Label>TextLastUpdated</Label>
+                <ScriptBlock>$_.TextLastUpdated.ToLocalTime().ToString("yyyy-MM-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.Checksum -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <Label>Checksum</Label>
+                <PropertyName>Checksum</PropertyName>
+              </ListItem>
             </ListItems>
           </ListEntry>
         </ListEntries>
