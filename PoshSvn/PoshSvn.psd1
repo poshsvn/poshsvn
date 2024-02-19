@@ -15,6 +15,7 @@
         "Invoke-SvnMkdir"
         "Invoke-SvnInfo"
         "Invoke-SvnAdd"
+        "Invoke-SvnDelete"
         "Invoke-SvnAdminCreate"
     )
     AliasesToExport = @(
@@ -27,6 +28,9 @@
         "svn-info"
         "svn-add"
         "Add-SvnItem"
+        "svn-delete"
+        "svn-remove"
+        "Remove-SvnItem"
         "svnadmin-create"
     )
     FunctionsToExport = @()
@@ -38,5 +42,6 @@
         "SvnInfo.format.ps1xml"
         "SvnMkdir.format.ps1xml"
         "SvnAdd.format.ps1xml"
+        "SvnDelete.format.ps1xml"
     )
 }

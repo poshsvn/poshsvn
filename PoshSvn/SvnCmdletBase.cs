@@ -53,7 +53,8 @@ namespace PoshSvn
                 UpdateAction(GetActivityTitle(e));
             }
             else if (e.Action == SvnNotifyAction.UpdateCompleted ||
-                     e.Action == SvnNotifyAction.Add)
+                     e.Action == SvnNotifyAction.Add ||
+                     e.Action == SvnNotifyAction.Delete)
             {
                 WriteObject(GetNotifyOutput(e));
             }
