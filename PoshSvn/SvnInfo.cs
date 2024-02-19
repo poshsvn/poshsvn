@@ -85,6 +85,12 @@ namespace PoshSvn
                 LastChangedDate = new DateTimeOffset(e.LastChangeTime),
             };
 
+            if (e.HasLocalInfo)
+            {
+                svnInfo.Schedule = e.Schedule;
+                svnInfo.WorkingCopyRoot = e.WorkingCopyRoot;
+            }
+
             if (e.NodeKind == SvnNodeKind.File)
             {
                 svnInfo.Checksum = e.Checksum;
