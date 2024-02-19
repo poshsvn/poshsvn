@@ -96,6 +96,12 @@ namespace PoshSvn
                 UpdateAction(e.Uri.ToString());
             }
 
+            if (e.NodeKind == SvnNodeKind.File)
+            {
+                svnInfo.Checksum = e.Checksum;
+                svnInfo.TextLastUpdated = new DateTimeOffset(e.ContentTime);
+            }
+
             WriteObject(svnInfo);
         }
     }
@@ -115,5 +121,8 @@ namespace PoshSvn
 
         public SvnSchedule? Schedule { get; set; } = null;
         public string WorkingCopyRoot { get; set; } = null;
+
+        public DateTimeOffset? TextLastUpdated { get; set; } = null;
+        public string Checksum { get; set; } = null;
     }
 }
