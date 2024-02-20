@@ -3,7 +3,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnMkdirLocalOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnMkdirLocalOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -32,7 +32,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnMkdirRemoteOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnMkdirRemoteOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>

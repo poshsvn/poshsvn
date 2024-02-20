@@ -4,6 +4,7 @@ using System.IO;
 using System.Management.Automation;
 using System.Reflection;
 using NUnit.Framework;
+using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 using DriveNotFoundException = System.Management.Automation.DriveNotFoundException;
 

@@ -2,7 +2,7 @@
 using System.Management.Automation;
 using SharpSvn;
 
-namespace PoshSvn
+namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
     [Alias("svn-mkdir")]

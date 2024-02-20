@@ -2,7 +2,7 @@
 using System.Management.Automation.Language;
 using SharpSvn;
 
-namespace PoshSvn
+namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnAdd")]
     [Alias("svn-add", "Add-SvnItem")]
@@ -33,7 +33,7 @@ namespace PoshSvn
         {
             using (SvnClient client = new SvnClient())
             {
-                SvnAddArgs args = new SvnAddArgs 
+                SvnAddArgs args = new SvnAddArgs
                 {
                     Depth = Depth.ConvertToSharpSvnDepth(),
                     Force = Force,

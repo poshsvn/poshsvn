@@ -3,7 +3,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnDeleteOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnDeleteOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
