@@ -102,6 +102,16 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void DirectoryAlreadyExists()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($@"svn-mkdir wc\test");
+                Assert.Throws<SvnSystemException>(() => sb.RunScript($@"svn-mkdir wc\test"));
+            }
+        }
+
+        [Test]
         public void RemoteMkdirTest()
         {
             using (var sb = new WcSandbox())
