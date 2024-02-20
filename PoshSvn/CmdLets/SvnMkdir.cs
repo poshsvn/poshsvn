@@ -9,7 +9,7 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(SvnMkdirOutput))]
     public class SvnMkDir : SvnCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Path")]
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Path", ValueFromRemainingArguments = true)]
         public string[] Path { get; set; }
 
         [Parameter(ParameterSetName = "Url", Mandatory = true)]
