@@ -81,17 +81,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnMkdirOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"a")
                         },
                         new SvnMkdirOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"a\b")
                         },
                         new SvnMkdirOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"a\b\c")
                         },
                     },
