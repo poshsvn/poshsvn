@@ -4,7 +4,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnInfoOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnInfoOutput</TypeName>
       </ViewSelectedBy>
       <ListControl>
         <ListEntries>

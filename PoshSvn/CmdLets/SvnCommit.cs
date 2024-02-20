@@ -2,7 +2,7 @@
 using System.Management.Automation;
 using SharpSvn;
 
-namespace PoshSvn
+namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnCommit")]
     [Alias("svn-commit")]

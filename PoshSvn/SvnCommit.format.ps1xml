@@ -3,7 +3,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnCommitOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>

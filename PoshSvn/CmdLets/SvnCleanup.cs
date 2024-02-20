@@ -1,7 +1,7 @@
 ﻿using System.Management.Automation;
 using SharpSvn;
 
-namespace PoshSvn
+namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnCleanup")]
     [Alias("svn-cleanup")]

@@ -3,7 +3,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.SvnAddOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnAddOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
