@@ -3,7 +3,7 @@
     <View>
       <Name>default</Name>
       <ViewSelectedBy>
-        <TypeName>PoshSvn.CmdLets.SvnMkdirLocalOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnMkdirOutput</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -28,25 +28,6 @@
           </TableRowEntry>
         </TableRowEntries>
       </TableControl>
-    </View>
-    <View>
-      <Name>default</Name>
-      <ViewSelectedBy>
-        <TypeName>PoshSvn.CmdLets.SvnMkdirRemoteOutput</TypeName>
-      </ViewSelectedBy>
-      <CustomControl>
-        <CustomEntries>
-          <CustomEntry>
-            <CustomItem>
-              <Text>Committed revision </Text>
-              <ExpressionBinding>
-                <ScriptBlock>$_.Revision</ScriptBlock>
-              </ExpressionBinding>
-              <Text>.</Text>
-            </CustomItem>
-          </CustomEntry>
-        </CustomEntries>
-      </CustomControl>
     </View>
   </ViewDefinitions>
 </Configuration>
