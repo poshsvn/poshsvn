@@ -23,7 +23,7 @@ namespace PoshSvn.Tests
                         $@"",
                         $@"Status  Path",
                         $@"------  ----",
-                        $@"        {sb.WcPath}",
+                        $@"        wc",
                         $@"",
                         $@"",
                     },
