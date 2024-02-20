@@ -26,7 +26,7 @@ namespace PoshSvn.Tests
                         $@"",
                         $@"Action  Path",
                         $@"------  ----",
-                        $@"A       {sb.WcPath}\dir_1",
+                        $@"A       dir_1",
                         $@"",
                         $@"",
                     },

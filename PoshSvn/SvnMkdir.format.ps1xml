@@ -12,6 +12,7 @@
             <Width>7</Width>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Path</Label>
             <Width>100</Width>
           </TableColumnHeader>
         </TableHeaders>
@@ -22,7 +23,7 @@
                 <PropertyName>ActionString</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Path</PropertyName>
+                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
