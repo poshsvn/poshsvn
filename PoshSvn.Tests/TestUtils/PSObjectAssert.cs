@@ -43,49 +43,63 @@ namespace PoshSvn.Tests.TestUtils
 
                 var type = expectedObj.GetType();
 
-                bool isEqual = true;
-
-                StringBuilder result = new StringBuilder();
-
-                foreach (var propertyInfo in type.GetProperties())
+                if (type == typeof(string))
                 {
-                    if (!excludeProperties.Contains(propertyInfo.Name))
-                    {
-                        object expectedVal = propertyInfo.GetValue(expectedObj);
-                        object actualVal = propertyInfo.GetValue(actualObj);
+                    ClassicAssert.AreEqual(expectedObj, actualObj);
+                }
+                else
+                {
+                    bool isEqual = true;
 
-                        if (Equals(expectedVal, actualVal))
+                    StringBuilder result = new StringBuilder();
+
+                    foreach (var propertyInfo in type.GetProperties())
+                    {
+                        if (!excludeProperties.Contains(propertyInfo.Name))
                         {
-                            result.AppendLine(string.Format("  {0,-24} = {1}", propertyInfo.Name, expectedVal));
-                        }
-                        else
-                        {
-                            isEqual = false;
-                            result.AppendLine(string.Format("- {0,-24} = {1}", propertyInfo.Name, expectedVal));
-                            result.AppendLine(string.Format("+ {0,-24} = {1}", propertyInfo.Name, actualVal));
+                            object expectedVal = propertyInfo.GetValue(expectedObj);
+                            object actualVal = propertyInfo.GetValue(actualObj);
+
+                            if (Equals(expectedVal, actualVal))
+                            {
+                                result.AppendLine(string.Format("  {0,-24} = {1}", propertyInfo.Name, expectedVal));
+                            }
+                            else
+                            {
+                                isEqual = false;
+                                result.AppendLine(string.Format("- {0,-24} = {1}", propertyInfo.Name, expectedVal));
+                                result.AppendLine(string.Format("+ {0,-24} = {1}", propertyInfo.Name, actualVal));
+                            }
                         }
                     }
-                }
 
-                if (!isEqual)
-                {
-                    Assert.Fail(string.Format("Values are different at index {0}\r\n{1}",
-                                              index, result.ToString()));
+                    if (!isEqual)
+                    {
+                        Assert.Fail(string.Format("Values are different at index {0}\r\n{1}",
+                                                  index, result.ToString()));
+                    }
                 }
             }
         }
 
         static string FormatObject(object obj)
         {
-            var result = new StringBuilder();
-
-            foreach (var propertyInfo in obj.GetType().GetProperties())
+            if (obj is string)
             {
-                object val = propertyInfo.GetValue(obj);
-                result.AppendLine(string.Format("{0,-24} = {1}", propertyInfo.Name, val));
+                return obj.ToString();
             }
+            else
+            {
+                var result = new StringBuilder();
 
-            return result.ToString();
+                foreach (var propertyInfo in obj.GetType().GetProperties())
+                {
+                    object val = propertyInfo.GetValue(obj);
+                    result.AppendLine(string.Format("{0,-24} = {1}", propertyInfo.Name, val));
+                }
+
+                return result.ToString();
+            }
         }
     }
 }
