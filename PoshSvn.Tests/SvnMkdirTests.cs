@@ -148,5 +148,94 @@ namespace PoshSvn.Tests
                     Array.ConvertAll(actual.ToArray(), a => (string)a.BaseObject));
             }
         }
+
+        [Test]
+        public void CreateManyDirectoriesViaArrayTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Collection<PSObject> actual = sb.RunScript(
+                    "cd wc",
+                    "$arr = @('a', 'b', 'c')",
+                    "$out = svn-mkdir $arr",
+                    "($out| Out-String -stream).TrimEnd()");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        $@"",
+                        $@"Action  Path",
+                        $@"------  ----",
+                        $@"A       a",
+                        $@"A       b",
+                        $@"A       c",
+                        $@"",
+                        $@"",
+                    },
+                    Array.ConvertAll(actual.ToArray(), a => (string)a.BaseObject));
+            }
+        }
+
+        [Test]
+        public void CreateManyDirectoriesViaForLoopTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Collection<PSObject> actual = sb.RunScript(
+                    "cd wc",
+                    "0..3 | svn-mkdir");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnMkdirOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, "0")
+                        },
+                        new SvnMkdirOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, "1")
+                        },
+                        new SvnMkdirOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, "2")
+                        },
+                        new SvnMkdirOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, "3")
+                        },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void CreateManyDirectoriesViaValueFromRemainingArgumentsTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Collection<PSObject> actual = sb.RunScript(
+                    "$out = svn-mkdir wc/a wc/b wc/c",
+                    "($out| Out-String -stream).TrimEnd()");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        $@"",
+                        $@"Action  Path",
+                        $@"------  ----",
+                        $@"A       wc\a",
+                        $@"A       wc\b",
+                        $@"A       wc\c",
+                        $@"",
+                        $@"",
+                    },
+                    Array.ConvertAll(actual.ToArray(), a => (string)a.BaseObject));
+            }
+        }
     }
 }
