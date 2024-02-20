@@ -12,7 +12,7 @@ namespace PoshSvn.Tests
     public class SvnMkdirTests
     {
         [Test]
-        public void CreateDirectoryInWorkingCopy()
+        public void BasicTest()
         {
             using (var sb = new WcSandbox())
             {
