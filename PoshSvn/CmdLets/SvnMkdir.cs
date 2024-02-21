@@ -6,7 +6,7 @@ namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
     [Alias("svn-mkdir")]
-    [OutputType(typeof(SvnMkdirOutput))]
+    [OutputType(typeof(SvnNotifyOutput))]
     public class SvnMkDir : SvnCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Path", ValueFromRemainingArguments = true)]
@@ -26,7 +26,7 @@ namespace PoshSvn.CmdLets
 
         protected override object GetNotifyOutput(SvnNotifyEventArgs e)
         {
-            return new SvnMkdirOutput
+            return new SvnNotifyOutput
             {
                 Action = e.Action,
                 Path = e.Path
@@ -81,12 +81,5 @@ namespace PoshSvn.CmdLets
                 }
             }
         }
-    }
-
-    public class SvnMkdirOutput
-    {
-        public SvnNotifyAction Action { get; set; }
-        public string ActionString => SvnUtils.GetActionStringShort(Action);
-        public string Path { get; set; }
     }
 }

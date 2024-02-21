@@ -60,18 +60,11 @@ namespace PoshSvn.CmdLets
 
         protected override object GetNotifyOutput(SvnNotifyEventArgs e)
         {
-            return new SvnDeleteOutput
+            return new SvnNotifyOutput
             {
                 Action = e.Action,
                 Path = e.Path,
             };
         }
-    }
-
-    public class SvnDeleteOutput
-    {
-        public SvnNotifyAction Action { get; set; }
-        public string ActionString => SvnUtils.GetActionStringShort(Action);
-        public string Path { get; set; }
     }
 }

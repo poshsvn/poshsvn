@@ -45,7 +45,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        new SvnDeleteOutput
+                        new SvnNotifyOutput
                         {
                             Path = Path.Combine(sb.WcPath, "dir"),
                             Action = SvnNotifyAction.Delete,
