@@ -1,12 +1,11 @@
 ﻿using System.Management.Automation;
-using System.Management.Automation.Language;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnAdd")]
     [Alias("svn-add", "Add-SvnItem")]
-    [OutputType(typeof(SvnCommitOutput))]
+    [OutputType(typeof(SvnNotifyOutput))]
     public class SvnAdd : SvnCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
@@ -54,18 +53,11 @@ namespace PoshSvn.CmdLets
 
         protected override object GetNotifyOutput(SvnNotifyEventArgs e)
         {
-            return new SvnAddOutput
+            return new SvnNotifyOutput
             {
                 Action = e.Action,
                 Path = e.Path,
             };
         }
-    }
-
-    public class SvnAddOutput
-    {
-        public SvnNotifyAction Action { get; set; }
-        public string ActionString => SvnUtils.GetActionStringShort(Action);
-        public string Path { get; set; }
     }
 }

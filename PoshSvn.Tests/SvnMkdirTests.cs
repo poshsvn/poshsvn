@@ -60,7 +60,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Path = Path.Combine(sb.WcPath, "test")
                         }
@@ -79,17 +79,17 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"a")
                         },
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"a\b")
                         },
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"a\b\c")
@@ -188,22 +188,22 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "0")
                         },
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "1")
                         },
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "2")
                         },
-                        new SvnMkdirOutput
+                        new SvnNotifyOutput
                         {
                             Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "3")

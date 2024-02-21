@@ -17,14 +17,14 @@ namespace PoshSvn.Tests
                     @"svn-move wc\src wc\dst");
 
                 PSObjectAssert.AreEqual(
-                    new SvnMoveOutput[]
+                    new SvnNotifyOutput[]
                     {
-                        new SvnMoveOutput
+                        new SvnNotifyOutput
                         {
                             Action = SharpSvn.SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "dst")
                         },
-                        new SvnMoveOutput
+                        new SvnNotifyOutput
                         {
                             Action = SharpSvn.SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, "src")
@@ -62,14 +62,14 @@ namespace PoshSvn.Tests
                     @"svn-move wc\src wc\dst");
 
                 PSObjectAssert.AreEqual(
-                    new SvnMoveOutput[]
+                    new SvnNotifyOutput[]
                     {
-                        new SvnMoveOutput
+                        new SvnNotifyOutput
                         {
                             Action = SharpSvn.SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "dst")
                         },
-                        new SvnMoveOutput
+                        new SvnNotifyOutput
                         {
                             Action = SharpSvn.SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, "src")

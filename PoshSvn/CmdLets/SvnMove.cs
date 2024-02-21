@@ -5,7 +5,7 @@ namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnMove")]
     [Alias("svn-move", "Move-SvnItem")]
-    [OutputType(typeof(SvnMoveOutput), typeof(SvnCommitOutput))]
+    [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnMove : SvnCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -43,18 +43,11 @@ namespace PoshSvn.CmdLets
 
         protected override object GetNotifyOutput(SvnNotifyEventArgs e)
         {
-            return new SvnMoveOutput
+            return new SvnNotifyOutput
             {
                 Action = e.Action,
                 Path = e.Path,
             };
         }
-    }
-
-    public class SvnMoveOutput
-    {
-        public SvnNotifyAction Action { get; set; }
-        public string ActionString => SvnUtils.GetActionStringShort(Action);
-        public string Path { get; set; }
     }
 }

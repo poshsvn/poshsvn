@@ -43,9 +43,6 @@
         "SvnCheckOut.format.ps1xml"
         "SvnCommit.format.ps1xml"
         "SvnInfo.format.ps1xml"
-        "SvnMkdir.format.ps1xml"
-        "SvnAdd.format.ps1xml"
-        "SvnDelete.format.ps1xml"
-        "SvnMove.format.ps1xml"
+        "SvnNotifyOutput.format.ps1xml"
     )
 }
