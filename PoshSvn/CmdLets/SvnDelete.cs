@@ -45,6 +45,7 @@ namespace PoshSvn.CmdLets
 
                 args.Progress += ProgressEventHandler;
                 args.Notify += NotifyEventHandler;
+                args.Committed += CommittedEventHandler;
 
                 TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url));
                 targets.ThrowIfHasPathsAndUris();
@@ -55,12 +56,7 @@ namespace PoshSvn.CmdLets
                 }
                 else
                 {
-                    client.RemoteDelete(targets.Uris, args, out SvnCommitResult result);
-
-                    WriteObject(new SvnCommitOutput
-                    {
-                        Revision = result.Revision,
-                    });
+                    client.RemoteDelete(targets.Uris, args);
                 }
             }
         }
