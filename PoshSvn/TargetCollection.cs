@@ -31,10 +31,12 @@ namespace PoshSvn
                 if (target is string path)
                 {
                     targetsList.Add(SvnPathTarget.FromString(path));
+                    pathsList.Add(path);
                 }
                 else if (target is Uri uri)
                 {
                     targetsList.Add(SvnUriTarget.FromUri(uri));
+                    urisList.Add(uri);
                 }
                 else
                 {

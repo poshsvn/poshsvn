@@ -8,6 +8,7 @@ using NUnit.Framework.Legacy;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 using SharpSvn;
+using DriveNotFoundException = System.Management.Automation.DriveNotFoundException;
 
 namespace PoshSvn.Tests
 {
@@ -100,7 +101,7 @@ namespace PoshSvn.Tests
             {
                 Collection<PSObject> actual = sb.RunScript(
                     $"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'",
-                    $"svn-delete -url '{sb.ReposUrl}/dir' -m 'delete'");
+                    $"svn-delete '{sb.ReposUrl}/dir' -m 'delete'");
 
                 PSObjectAssert.AreEqual(
                     new[]
@@ -132,6 +133,22 @@ namespace PoshSvn.Tests
                         $@"",
                     },
                     Array.ConvertAll(actual.ToArray(), a => a.BaseObject));
+            }
+        }
+
+        [Test]
+        public void IncorrectParameters()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Assert.Throws<ArgumentException>(() => sb.RunScript(
+                    $"svn-delete -url not_uri -m 'delete'"));
+
+                Assert.Throws<DriveNotFoundException>(() => sb.RunScript(
+                    $"svn-delete -path http://example.com"));
+
+                Assert.Throws<ArgumentException>(() => sb.RunScript(
+                    $"svn-delete wc http://example.com"));
             }
         }
     }
