@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Management.Automation;
 using PoshSvn.CmdLets;
 using SharpSvn;
@@ -40,6 +41,44 @@ namespace PoshSvn
             }
 
             return result.ToArray();
+        }
+
+        protected IEnumerable<string> GetPathTargets(string path, bool resolved)
+        {
+            if (resolved)
+            {
+                foreach (string resolvedPath in GetResolvedProviderPathFromPSPath(path, out ProviderInfo providerInfo))
+                {
+                    // TODO: check providerInfo
+                    yield return resolvedPath;
+                }
+            }
+            else
+            {
+                yield return GetUnresolvedProviderPathFromPSPath(path);
+            }
+        }
+
+        protected IEnumerable<string> GetPathTargets(string[] paths, bool resolved)
+        {
+            if (resolved)
+            {
+                foreach (string path in paths)
+                {
+                    foreach (string resolvedPath in GetResolvedProviderPathFromPSPath(path, out ProviderInfo providerInfo))
+                    {
+                        // TODO: check providerInfo
+                        yield return resolvedPath;
+                    }
+                }
+            }
+            else
+            {
+                foreach (string path in paths)
+                {
+                    yield return GetUnresolvedProviderPathFromPSPath(path);
+                }
+            }
         }
 
         protected string GetPathTarget(string path)
@@ -124,7 +163,7 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url)
+        protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url, bool resolved)
         {
             if (ParameterSetName == TargetParameterSetNames.Target)
             {
@@ -136,7 +175,7 @@ namespace PoshSvn
                     }
                     else
                     {
-                        foreach (string path in GetResolvedProviderPathFromPSPath(target, out ProviderInfo providerInfo))
+                        foreach (string path in GetPathTargets(target, resolved))
                         {
                             // TODO: check providerInfo
 

@@ -47,7 +47,7 @@ namespace PoshSvn.CmdLets
                 args.Notify += NotifyEventHandler;
                 args.Committed += CommittedEventHandler;
 
-                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url));
+                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
                 targets.ThrowIfHasPathsAndUris();
 
                 if (targets.HasPaths)

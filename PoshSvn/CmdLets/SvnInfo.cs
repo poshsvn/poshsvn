@@ -46,7 +46,7 @@ namespace PoshSvn.CmdLets
 
                     args.Progress += ProgressEventHandler;
 
-                    TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url));
+                    TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
 
                     foreach (SvnTarget target in targets.Targets)
                     {
