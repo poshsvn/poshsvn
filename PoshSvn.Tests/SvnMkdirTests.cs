@@ -116,7 +116,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                var actual = sb.RunScript($"svn-mkdir -url '{sb.ReposUrl}/test' -m 'test'");
+                var actual = sb.RunScript($"svn-mkdir '{sb.ReposUrl}/test' -m 'test'");
 
                 PSObjectAssert.AreEqual(
                     new[]
@@ -135,7 +135,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                var actual = sb.RunScript($"(svn-mkdir -url '{sb.ReposUrl}/test' -m 'test' | Out-String -stream).TrimEnd()");
+                var actual = sb.RunScript($"(svn-mkdir '{sb.ReposUrl}/test' -m 'test' | Out-String -stream).TrimEnd()");
 
                 CollectionAssert.AreEqual(
                     new string[]
