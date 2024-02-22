@@ -9,7 +9,7 @@
     CmdletsToExport= @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
-        "Invoke-SvnCheckOut"
+        "Invoke-SvnCheckout"
         "Invoke-SvnCleanup"
         "Invoke-SvnCommit"
         "Invoke-SvnMkdir"
@@ -40,7 +40,7 @@
     FormatsToProcess = @(
         "SvnStatus.format.ps1xml"
         "SvnUpdate.format.ps1xml"
-        "SvnCheckOut.format.ps1xml"
+        "SvnCheckout.format.ps1xml"
         "SvnCommit.format.ps1xml"
         "SvnInfo.format.ps1xml"
         "SvnNotifyOutput.format.ps1xml"
