@@ -64,7 +64,7 @@ namespace PoshSvn
                 }
                 else if (e.CommandType == SvnCommandType.CheckOut)
                 {
-                    WriteObject(new SvnCheckOutOutput
+                    WriteObject(new SvnCheckoutOutput
                     {
                         Revision = e.Revision
                     });

@@ -5,10 +5,10 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnCheckOut")]
+    [Cmdlet("Invoke", "SvnCheckout")]
     [Alias("svn-checkout")]
-    [OutputType(typeof(SvnCheckOutOutput))]
-    public class SvnCheckOut : SvnCmdletBase
+    [OutputType(typeof(SvnCheckoutOutput))]
+    public class SvnCheckout : SvnCmdletBase
     {
         [Parameter(Mandatory = true, Position = 0)]
         public Uri Url { get; set; }
@@ -62,7 +62,7 @@ namespace PoshSvn.CmdLets
         }
     }
 
-    public class SvnCheckOutOutput
+    public class SvnCheckoutOutput
     {
         public long Revision { get; set; }
     }
