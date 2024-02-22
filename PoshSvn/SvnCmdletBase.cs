@@ -98,17 +98,15 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected List<SvnTarget> GetTargets(string[] Target, string[] Path, Uri[] Url)
+        protected IEnumerable<SvnTarget> GetTargets(string[] Target, string[] Path, Uri[] Url)
         {
-            List<SvnTarget> result = new List<SvnTarget>();
-
             if (ParameterSetName == TargetParameterSetNames.Target)
             {
                 foreach (string target in Target)
                 {
                     if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
                     {
-                        result.Add(uriTarget);
+                        yield return uriTarget;
                     }
                     else
                     {
@@ -118,7 +116,7 @@ namespace PoshSvn
 
                             if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
                             {
-                                result.Add(pathTarget);
+                                yield return pathTarget;
                             }
                         }
                     }
@@ -128,18 +126,16 @@ namespace PoshSvn
             {
                 foreach (string path in GetPathTargets(Path, null))
                 {
-                    result.Add(SvnTarget.FromString(path));
+                    yield return SvnTarget.FromString(path);
                 }
             }
             else if (ParameterSetName == TargetParameterSetNames.Url)
             {
                 foreach (Uri url in Url)
                 {
-                    result.Add(SvnTarget.FromUri(url));
+                    yield return SvnTarget.FromUri(url);
                 }
             }
-
-            return result;
         }
     }
 }
