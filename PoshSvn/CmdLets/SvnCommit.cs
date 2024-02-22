@@ -23,9 +23,9 @@ namespace PoshSvn.CmdLets
                     LogMessage = Message,
                 };
 
-                args.Notify += Notify;
-                args.Progress += Progress;
-                args.Committed += Committed;
+                args.Notify += NotifyEventHandler;
+                args.Progress += ProgressEventHandler;
+                args.Committed += CommittedEventHandler;
 
                 try
                 {

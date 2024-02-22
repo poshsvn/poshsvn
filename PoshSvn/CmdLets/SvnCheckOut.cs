@@ -52,8 +52,8 @@ namespace PoshSvn.CmdLets
                     //TODO: AllowObstructions = Force
                 };
 
-                args.Notify += Notify;
-                args.Progress += Progress;
+                args.Notify += NotifyEventHandler;
+                args.Progress += ProgressEventHandler;
 
                 string resolvedPath;
                 if (Path == null)

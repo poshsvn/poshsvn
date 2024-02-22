@@ -47,7 +47,7 @@ namespace PoshSvn
             return GetUnresolvedProviderPathFromPSPath(path);
         }
 
-        protected void Notify(object sender, SvnNotifyEventArgs e)
+        protected void NotifyEventHandler(object sender, SvnNotifyEventArgs e)
         {
             if (e.Action == SvnNotifyAction.UpdateStarted)
             {
@@ -83,7 +83,7 @@ namespace PoshSvn
             }
         }
 
-        protected void Progress(object sender, SvnProgressEventArgs e)
+        protected void ProgressEventHandler(object sender, SvnProgressEventArgs e)
         {
             ProgressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
             WriteProgress(ProgressRecord);
@@ -136,7 +136,7 @@ namespace PoshSvn
             }
         }
 
-        protected void Committed(object sender, SvnCommittedEventArgs e)
+        protected void CommittedEventHandler(object sender, SvnCommittedEventArgs e)
         {
             WriteObject(new SvnCommitOutput
             {

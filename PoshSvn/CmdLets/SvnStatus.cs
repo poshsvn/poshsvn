@@ -42,7 +42,7 @@ namespace PoshSvn.CmdLets
                             RetrieveRemoteStatus = ShowUpdates
                         };
 
-                        args.Progress += Progress;
+                        args.Progress += ProgressEventHandler;
 
                         client.Status(resolvedPath, args, StatusHandler);
                     }

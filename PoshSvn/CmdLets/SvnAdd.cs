@@ -41,8 +41,8 @@ namespace PoshSvn.CmdLets
                     AddParents = Parents,
                 };
 
-                args.Progress += Progress;
-                args.Notify += Notify;
+                args.Progress += ProgressEventHandler;
+                args.Notify += NotifyEventHandler;
 
                 foreach (string path in GetPathTargets(Path, null))
                 {

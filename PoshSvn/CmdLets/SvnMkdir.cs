@@ -48,8 +48,8 @@ namespace PoshSvn.CmdLets
                     // TODO: maybe, I'll do it after
                     // int filesProcessedCount = 0;
 
-                    args.Notify += Notify;
-                    args.Progress += Progress;
+                    args.Notify += NotifyEventHandler;
+                    args.Progress += ProgressEventHandler;
 
                     client.CreateDirectories(resolvedPaths, args);
                 }
@@ -66,8 +66,8 @@ namespace PoshSvn.CmdLets
                         UpdateAction("Committing transaction...");
                     });
 
-                    args.Progress += Progress;
-                    args.Committed += Committed;
+                    args.Progress += ProgressEventHandler;
+                    args.Committed += CommittedEventHandler;
 
                     UpdateAction("Creating transaction...");
                     client.RemoteCreateDirectories(Url, args);

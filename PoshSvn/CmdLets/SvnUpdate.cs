@@ -41,8 +41,8 @@ namespace PoshSvn.CmdLets
                         Revision = Revision,
                     };
 
-                    args.Notify += Notify;
-                    args.Progress += Progress;
+                    args.Notify += NotifyEventHandler;
+                    args.Progress += ProgressEventHandler;
 
                     client.Update(resolvedPaths, args);
                 }

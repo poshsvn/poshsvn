@@ -34,8 +34,8 @@ namespace PoshSvn.CmdLets
                     AllowMixedRevisions = AllowMixedRevisions,
                 };
 
-                args.Progress += Progress;
-                args.Notify += Notify;
+                args.Progress += ProgressEventHandler;
+                args.Notify += NotifyEventHandler;
 
                 client.Move(GetPathTargets(Source, null), GetPathTarget(Destination), args);
             }
