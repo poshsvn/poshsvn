@@ -20,7 +20,7 @@ namespace PoshSvn
             Uris = uris;
         }
 
-        public static TargetCollection Create(IEnumerable targets)
+        public static TargetCollection Parse(IEnumerable targets)
         {
             List<SvnTarget> targetsList = new List<SvnTarget>();
             List<string> pathsList = new List<string>();
