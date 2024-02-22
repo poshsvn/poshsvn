@@ -43,8 +43,8 @@ namespace PoshSvn.CmdLets
                     LogMessage = Message,
                 };
 
-                args.Progress += Progress;
-                args.Notify += Notify;
+                args.Progress += ProgressEventHandler;
+                args.Notify += NotifyEventHandler;
 
                 TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url));
                 targets.ThrowIfHasPathsAndUris();
