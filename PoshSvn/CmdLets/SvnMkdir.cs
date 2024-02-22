@@ -37,34 +37,28 @@ namespace PoshSvn.CmdLets
         {
             using (SvnClient client = new SvnClient())
             {
+                SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
+                {
+                    CreateParents = Parents,
+                    LogMessage = Message
+                };
+
+                args.Notify += NotifyEventHandler;
+                args.Progress += ProgressEventHandler;
+                args.Committing += CommittingEventHandler;
+                args.Committed += CommittedEventHandler;
+
                 if (Path != null)
                 {
-                    SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
-                    {
-                        CreateParents = Parents,
-                    };
 
                     string[] resolvedPaths = GetPathTargets(null, Path);
                     // TODO: maybe, I'll do it after
                     // int filesProcessedCount = 0;
 
-                    args.Notify += NotifyEventHandler;
-                    args.Progress += ProgressEventHandler;
-
                     client.CreateDirectories(resolvedPaths, args);
                 }
                 else
                 {
-                    SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
-                    {
-                        CreateParents = Parents,
-                        LogMessage = Message
-                    };
-
-                    args.Progress += ProgressEventHandler;
-                    args.Committing += CommittingEventHandler;
-                    args.Committed += CommittedEventHandler;
-
                     UpdateAction("Creating transaction...");
                     client.RemoteCreateDirectories(Url, args);
                 }
