@@ -38,7 +38,7 @@ namespace PoshSvn
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    throw new ArgumentException("Target can only be 'string' or 'Uri'", "Target");
                 }
             }
 
