@@ -143,5 +143,10 @@ namespace PoshSvn
                 Revision = e.Revision
             });
         }
+
+        protected void CommittingEventHandler(object sender, SvnCommittingEventArgs e)
+        {
+            UpdateAction("Committing transaction...");
+        }
     }
 }

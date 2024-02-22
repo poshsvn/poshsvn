@@ -61,12 +61,8 @@ namespace PoshSvn.CmdLets
                         LogMessage = Message
                     };
 
-                    args.Committing += new EventHandler<SvnCommittingEventArgs>((_, e) =>
-                    {
-                        UpdateAction("Committing transaction...");
-                    });
-
                     args.Progress += ProgressEventHandler;
+                    args.Committing += CommittingEventHandler;
                     args.Committed += CommittedEventHandler;
 
                     UpdateAction("Creating transaction...");
