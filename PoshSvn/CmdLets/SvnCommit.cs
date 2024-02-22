@@ -1,5 +1,4 @@
-﻿using System;
-using System.Management.Automation;
+﻿using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
@@ -23,15 +22,10 @@ namespace PoshSvn.CmdLets
                 {
                     LogMessage = Message,
                 };
+
                 args.Notify += Notify;
                 args.Progress += Progress;
-                args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
-                {
-                    WriteObject(new SvnCommitOutput
-                    {
-                        Revision = e.Revision
-                    });
-                });
+                args.Committed += Committed;
 
                 try
                 {

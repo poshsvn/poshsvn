@@ -67,14 +67,7 @@ namespace PoshSvn.CmdLets
                     });
 
                     args.Progress += Progress;
-
-                    args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
-                    {
-                        WriteObject(new SvnCommitOutput
-                        {
-                            Revision = e.Revision
-                        });
-                    });
+                    args.Committed += Committed;
 
                     UpdateAction("Creating transaction...");
                     client.RemoteCreateDirectories(Url, args);
