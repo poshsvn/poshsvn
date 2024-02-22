@@ -9,13 +9,18 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(SvnNotifyOutput))]
     public class SvnMkDir : SvnCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Path", ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
+                   ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
+        public string[] Target { get; set; }
+
+        [Parameter(ParameterSetName = TargetParameterSetNames.Path, Mandatory = true)]
         public string[] Path { get; set; }
 
-        [Parameter(ParameterSetName = "Url", Mandatory = true)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
         public Uri[] Url { get; set; }
 
-        [Parameter(ParameterSetName = "Url", Mandatory = true)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -39,19 +44,17 @@ namespace PoshSvn.CmdLets
                 args.Committing += CommittingEventHandler;
                 args.Committed += CommittedEventHandler;
 
-                if (Path != null)
+                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
+                targets.ThrowIfHasPathsAndUris();
+
+                if (targets.HasPaths)
                 {
-
-                    string[] resolvedPaths = GetPathTargets(null, Path);
-                    // TODO: maybe, I'll do it after
-                    // int filesProcessedCount = 0;
-
-                    client.CreateDirectories(resolvedPaths, args);
+                    client.CreateDirectories(targets.Paths, args);
                 }
                 else
                 {
                     UpdateAction("Creating transaction...");
-                    client.RemoteCreateDirectories(Url, args);
+                    client.RemoteCreateDirectories(targets.Uris, args);
                 }
             }
         }
