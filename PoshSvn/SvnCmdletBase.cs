@@ -98,15 +98,15 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected IEnumerable<SvnTarget> GetTargets(string[] Target, string[] Path, Uri[] Url)
+        protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url)
         {
             if (ParameterSetName == TargetParameterSetNames.Target)
             {
                 foreach (string target in Target)
                 {
-                    if (target.Contains("://") && SvnUriTarget.TryParse(target, true, out var uriTarget))
+                    if (target.Contains("://") && SvnUriTarget.TryParse(target, false, out _))
                     {
-                        yield return uriTarget;
+                        yield return new Uri(target);
                     }
                     else
                     {
@@ -114,10 +114,7 @@ namespace PoshSvn
                         {
                             // TODO: check providerInfo
 
-                            if (SvnPathTarget.TryParse(path, true, out SvnPathTarget pathTarget))
-                            {
-                                yield return pathTarget;
-                            }
+                            yield return path;
                         }
                     }
                 }
@@ -126,14 +123,33 @@ namespace PoshSvn
             {
                 foreach (string path in GetPathTargets(Path, null))
                 {
-                    yield return SvnTarget.FromString(path);
+                    yield return path;
                 }
             }
             else if (ParameterSetName == TargetParameterSetNames.Url)
             {
                 foreach (Uri url in Url)
                 {
-                    yield return SvnTarget.FromUri(url);
+                    yield return url;
+                }
+            }
+        }
+
+        protected IEnumerable<SvnTarget> GetTargets(IEnumerable<object> targets)
+        {
+            foreach (object target in targets)
+            {
+                if (target is string path)
+                {
+                    yield return SvnPathTarget.FromString(path);
+                }
+                else if (target is Uri uri)
+                {
+                    yield return SvnUriTarget.FromUri(uri);
+                }
+                else
+                {
+                    throw new NotImplementedException();
                 }
             }
         }

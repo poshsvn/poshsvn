@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -44,7 +46,7 @@ namespace PoshSvn.CmdLets
 
                     args.Progress += Progress;
 
-                    foreach (SvnTarget target in GetTargets(Target, Path, Url))
+                    foreach (SvnTarget target in GetTargets(GetTargets(Target, Path, Url)))
                     {
                         client.Info(target, args, InfoHandler);
                     }
