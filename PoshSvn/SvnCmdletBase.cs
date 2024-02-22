@@ -134,24 +134,5 @@ namespace PoshSvn
                 }
             }
         }
-
-        protected IEnumerable<SvnTarget> GetTargets(IEnumerable<object> targets)
-        {
-            foreach (object target in targets)
-            {
-                if (target is string path)
-                {
-                    yield return SvnPathTarget.FromString(path);
-                }
-                else if (target is Uri uri)
-                {
-                    yield return SvnUriTarget.FromUri(uri);
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
-        }
     }
 }
