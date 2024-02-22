@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
+using PoshSvn.CmdLets;
 using SharpSvn;
 
 namespace PoshSvn
@@ -133,6 +134,14 @@ namespace PoshSvn
                     yield return url;
                 }
             }
+        }
+
+        protected void Committed(object sender, SvnCommittedEventArgs e)
+        {
+            WriteObject(new SvnCommitOutput
+            {
+                Revision = e.Revision
+            });
         }
     }
 }
