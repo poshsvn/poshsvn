@@ -24,15 +24,6 @@ namespace PoshSvn.CmdLets
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e) => "Creating directory";
 
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
-        {
-            return new SvnNotifyOutput
-            {
-                Action = e.Action,
-                Path = e.Path
-            };
-        }
-
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
