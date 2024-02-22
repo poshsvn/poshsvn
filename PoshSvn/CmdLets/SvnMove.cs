@@ -40,14 +40,5 @@ namespace PoshSvn.CmdLets
                 client.Move(GetPathTargets(Source, null), GetPathTarget(Destination), args);
             }
         }
-
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
-        {
-            return new SvnNotifyOutput
-            {
-                Action = e.Action,
-                Path = e.Path,
-            };
-        }
     }
 }

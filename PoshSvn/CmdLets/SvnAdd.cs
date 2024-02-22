@@ -50,14 +50,5 @@ namespace PoshSvn.CmdLets
                 }
             }
         }
-
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
-        {
-            return new SvnNotifyOutput
-            {
-                Action = e.Action,
-                Path = e.Path,
-            };
-        }
     }
 }

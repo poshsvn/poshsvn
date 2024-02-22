@@ -49,11 +49,6 @@ namespace PoshSvn.CmdLets
         {
             return "Committing";
         }
-
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
-        {
-            return null;
-        }
     }
 
     public class SvnCommitOutput

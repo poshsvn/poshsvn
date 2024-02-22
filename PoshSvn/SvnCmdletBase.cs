@@ -53,11 +53,36 @@ namespace PoshSvn
             {
                 UpdateAction(GetActivityTitle(e));
             }
-            else if (e.Action == SvnNotifyAction.UpdateCompleted ||
-                     e.Action == SvnNotifyAction.Add ||
+            else if (e.Action == SvnNotifyAction.UpdateCompleted)
+            {
+                if (e.CommandType == SvnCommandType.Update)
+                {
+                    WriteObject(new SvnUpdateOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+                else if (e.CommandType == SvnCommandType.CheckOut)
+                {
+                    WriteObject(new SvnCheckOutOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+                else if (e.CommandType == SvnCommandType.Switch)
+                {
+                    // TODO:
+                    throw new NotImplementedException();
+                }
+            }
+            else if (e.Action == SvnNotifyAction.Add ||
                      e.Action == SvnNotifyAction.Delete)
             {
-                WriteObject(GetNotifyOutput(e));
+                WriteObject(new SvnNotifyOutput
+                {
+                    Action = e.Action,
+                    Path = e.Path
+                });
             }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)
             {
