@@ -36,6 +36,28 @@
                 </ScriptBlock>
               </ExpressionBinding>
               <NewLine />
+              <ExpressionBinding>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.ChangedPaths -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <PropertyName>ChangedPaths</PropertyName>
+                <EnumerateCollection />
+                <CustomControl>
+                  <CustomEntries>
+                    <CustomEntry>
+                      <CustomItem>
+                        <ExpressionBinding>
+                          <ScriptBlock>"{0,4} " -f $_.ActionString</ScriptBlock>
+                        </ExpressionBinding>
+                        <ExpressionBinding>
+                          <PropertyName>Path</PropertyName>
+                        </ExpressionBinding>
+                        <NewLine />
+                      </CustomItem>
+                    </CustomEntry>
+                  </CustomEntries>
+                </CustomControl>
+              </ExpressionBinding>
               <NewLine />
               <ExpressionBinding>
                 <PropertyName>Message</PropertyName>
