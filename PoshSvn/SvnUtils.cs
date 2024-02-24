@@ -131,5 +131,18 @@ namespace PoshSvn
                 return string.Format("Transfered: {0} KB", progress / 1024);
             }
         }
+
+        public static string GetChangeActionString(CmdLets.SvnChangeAction action)
+        {
+            switch (action)
+            {
+                case CmdLets.SvnChangeAction.None: return " ";
+                case CmdLets.SvnChangeAction.Add: return "A";
+                case CmdLets.SvnChangeAction.Delete: return "D";
+                case CmdLets.SvnChangeAction.Modify: return "M";
+                case CmdLets.SvnChangeAction.Replace: return "R";
+                default: throw new NotImplementedException();
+            }
+        }
     }
 }

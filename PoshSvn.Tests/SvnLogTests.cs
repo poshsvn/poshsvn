@@ -181,6 +181,100 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void FormatCustomWithChangedPathsTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var input = new[]
+                    {
+                        new SvnLogOutput
+                        {
+                            Revision = 1232,
+                            Message = "Some fixes",
+                            Author = "user1",
+                            Date = new DateTimeOffset(2021, 11, 5, 12, 34, 56, TimeSpan.FromHours(3)),
+                            ChangedPaths = new[]
+                            {
+                                new SvnChangeItem
+                                {
+                                    Action = SvnChangeAction.Modify,
+                                    ContentModified = true,
+                                    PropertiesModified = false,
+                                    CopyFromPath = null,
+                                    CopyFromRevision = null,
+                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    Path = "/qqq/def",
+                                },
+                                new SvnChangeItem
+                                {
+                                    Action = SvnChangeAction.Modify,
+                                    ContentModified = true,
+                                    PropertiesModified = false,
+                                    CopyFromPath = null,
+                                    CopyFromRevision = null,
+                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    Path = "/qqq/xyz",
+                                }
+                            }
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 1230,
+                            Message = "Rename 'def' to 'xyz'",
+                            Author = "user1",
+                            Date = new DateTimeOffset(2021, 11, 6, 12, 34, 56, TimeSpan.FromHours(3)),
+                            ChangedPaths = new[]
+                            {
+                                new SvnChangeItem
+                                {
+                                    Action = SvnChangeAction.Delete,
+                                    ContentModified = false,
+                                    PropertiesModified = false,
+                                    CopyFromPath = null,
+                                    CopyFromRevision = null,
+                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    Path = "/abc/def",
+                                },
+                                new SvnChangeItem
+                                {
+                                    Action = SvnChangeAction.Add,
+                                    ContentModified = false,
+                                    PropertiesModified = false,
+                                    CopyFromPath = null,
+                                    CopyFromRevision = null,
+                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    Path = "/abc/xyz",
+                                }
+                            }
+                        },
+                    };
+
+                var actual = sb.FormatObject(input, "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        "",
+                        "------------------------------------------------------------------------",
+                        "r1232      user1               2021-11-05 12:34 +03:00",
+                        "   M /qqq/def",
+                        "   M /qqq/xyz",
+                        "",
+                        "Some fixes",
+                        "------------------------------------------------------------------------",
+                        "r1230      user1               2021-11-06 12:34 +03:00",
+                        "   D /abc/def",
+                        "   A /abc/xyz",
+                        "",
+                        "Rename 'def' to 'xyz'",
+                        "",
+                        "",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void FormatTableTest()
         {
             using (var sb = new WcSandbox())
@@ -243,6 +337,37 @@ namespace PoshSvn.Tests
                         "",
                     },
                     actual);
+            }
+        }
+
+        [Test]
+        public void WithChangedPaths()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(
+                   @"svn-mkdir wc\a wc\b",
+                   @"svn-commit wc -m 'test'");
+
+                var actual = sb.RunScript("svn-log wc -v");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnLogOutput
+                        {
+                            Revision = 1,
+                            Message = "test",
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 0,
+                        },
+                    },
+                    actual,
+                    nameof(SvnLogOutput.Author),
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.ChangedPaths)); // TODO: check ChangedPaths
             }
         }
     }
