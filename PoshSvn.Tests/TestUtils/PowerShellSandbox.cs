@@ -1,8 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.IO;
 using System.Management.Automation;
 using System.Reflection;
 using System;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Collections;
+using System.Management.Automation.Runspaces;
 
 namespace PoshSvn.Tests.TestUtils
 {
@@ -42,6 +45,36 @@ namespace PoshSvn.Tests.TestUtils
             }
 
             return result;
+        }
+
+        public List<string> FormatObject(IEnumerable input, string formatFunction)
+        {
+            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            InitialSessionState state = InitialSessionState.CreateDefault();
+
+            state.ImportPSModule(new string[]
+            {
+                Path.Combine(assemblyDirectory, @"PoshSvn.psd1")
+            });
+
+            PowerShell ps = PowerShell.Create(state);
+
+            ps.AddCommand(formatFunction);
+            ps.AddCommand("Out-String");
+            ps.AddParameter("Stream");
+            Collection<PSObject> result = ps.Invoke(input);
+
+            List<string> rv = new List<string>();
+
+            foreach (PSObject obj in result)
+            {
+                var str = obj.BaseObject.ToString().TrimEnd();
+                Console.WriteLine("\"{0}\"", str);
+                rv.Add(str);
+            }
+
+            return rv;
         }
     }
 }
