@@ -131,7 +131,7 @@ namespace PoshSvn.Tests
                             Revision = 2,
                             Message = "test 2",
                             Author = "user1",
-                            Date = new DateTime(2021, 11, 5)
+                            Date = new DateTimeOffset(2021, 11, 5, 12, 34, 56, TimeSpan.FromHours(3))
                         },
                         new SvnLogOutput
                         {
@@ -142,7 +142,7 @@ namespace PoshSvn.Tests
                                 "* BRANCH-README: Tweak the section about pristine checksum kinds.\n" +
                                 "  Add a section about using the dynamically salted SHA-1.",
                             Author = "user1",
-                            Date = new DateTime(2021, 11, 6)
+                            Date = new DateTimeOffset(2021, 11, 6, 12, 34, 56, TimeSpan.FromHours(3))
                         },
                         new SvnLogOutput
                         {
@@ -159,11 +159,11 @@ namespace PoshSvn.Tests
                     {
                         "",
                         "------------------------------------------------------------------------",
-                        "r2         user1               2021-11-05 12:00 +01:00",
+                        "r2         user1               2021-11-05 12:34 +03:00",
                         "",
                         "test 2",
                         "------------------------------------------------------------------------",
-                        "r1         user1               2021-11-06 12:00 +01:00",
+                        "r1         user1               2021-11-06 12:34 +03:00",
                         "",
                         "On the 'pristine-checksum-salt' branch: Update BRANCH-README.",
                         "",
@@ -192,7 +192,7 @@ namespace PoshSvn.Tests
                             Revision = 3,
                             Message = "test 2",
                             Author = "user1",
-                            Date = new DateTime(2021, 11, 5)
+                            Date = new DateTimeOffset (2021, 11, 7, 12, 34, 56, TimeSpan.FromHours(3))
                         },
                         new SvnLogOutput
                         {
@@ -203,7 +203,7 @@ namespace PoshSvn.Tests
                                 "* BRANCH-README: Tweak the section about pristine checksum kinds.\n" +
                                 "  Add a section about using the dynamically salted SHA-1.",
                             Author = "user2",
-                            Date = new DateTime(2021, 11, 6)
+                            Date = new DateTimeOffset (2021, 11, 8, 12, 34, 56, TimeSpan.FromHours(3))
                         },
                         new SvnLogOutput
                         {
@@ -235,8 +235,8 @@ namespace PoshSvn.Tests
                         "",
                         "  Revision Author           Date                   Message",
                         "  -------- ------           ----                   -------",
-                        "         3 user1            2021-11-05    12:00    test 2",
-                        "         2 user2            2021-11-06    12:00    On the 'pristine-checksum-salt' branch: Update BRANCH-README.  * B...",
+                        "         3 user1            2021-11-07    12:34    test 2",
+                        "         2 user2            2021-11-08    12:34    On the 'pristine-checksum-salt' branch: Update BRANCH-README.  * B...",
                         "         1 user2            2021-11-06    12:00    The long  and multiline log message",
                         "         0                  (no date)",
                         "",
