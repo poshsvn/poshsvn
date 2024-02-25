@@ -10,7 +10,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnLog", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-log", "Get-SvnLog")]
     [OutputType(typeof(SvnLogOutput))]
-    public class SvnLog : SvnCmdletBase
+    public class SvnLog : SvnClientCmdletBase
     {
         [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; } = new string[] { "" };
@@ -54,60 +54,57 @@ namespace PoshSvn.CmdLets
         [Alias("with-revprop")]
         public string[] WithRevisionProperties { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            try
             {
-                try
+                SvnLogArgs args = new SvnLogArgs
                 {
-                    SvnLogArgs args = new SvnLogArgs
+                    Limit = Limit,
+                    RetrieveChangedPaths = ChangedPaths,
+                    Start = Start,
+                    End = End,
+                    RetrieveAllProperties = WithAllRevisionProperties,
+                };
+
+                if (WithRevisionProperties != null)
+                {
+                    args.RetrieveProperties.Clear();
+                    foreach (var property in WithRevisionProperties)
                     {
-                        Limit = Limit,
-                        RetrieveChangedPaths = ChangedPaths,
-                        Start = Start,
-                        End = End,
-                        RetrieveAllProperties = WithAllRevisionProperties,
-                    };
-
-                    if (WithRevisionProperties != null)
-                    {
-                        args.RetrieveProperties.Clear();
-                        foreach (var property in WithRevisionProperties)
-                        {
-                            args.RetrieveProperties.Add(property);
-                        }
-                    }
-
-                    if (WithNoRevisionProperties)
-                    {
-                        args.RetrieveProperties.Clear();
-                    }
-
-                    args.Progress += ProgressEventHandler;
-
-                    TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
-
-                    targets.ThrowIfHasPathsAndUris();
-
-                    if (targets.HasPaths)
-                    {
-                        client.Log(targets.Paths, args, LogHandler);
-                    }
-                    else
-                    {
-                        client.Log(targets.Uris, args, LogHandler);
+                        args.RetrieveProperties.Add(property);
                     }
                 }
-                catch (SvnException ex)
+
+                if (WithNoRevisionProperties)
                 {
-                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                    {
-                        WriteWarning(ex.Message);
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    args.RetrieveProperties.Clear();
+                }
+
+                args.Progress += ProgressEventHandler;
+
+                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+
+                targets.ThrowIfHasPathsAndUris();
+
+                if (targets.HasPaths)
+                {
+                    client.Log(targets.Paths, args, LogHandler);
+                }
+                else
+                {
+                    client.Log(targets.Uris, args, LogHandler);
+                }
+            }
+            catch (SvnException ex)
+            {
+                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
+                {
+                    WriteWarning(ex.Message);
+                }
+                else
+                {
+                    throw;
                 }
             }
         }

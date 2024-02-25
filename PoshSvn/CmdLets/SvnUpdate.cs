@@ -6,7 +6,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnUpdate")]
     [Alias("svn-update")]
     [OutputType(typeof(SvnUpdateOutput))]
-    public class SvnUpdate : SvnCmdletBase
+    public class SvnUpdate : SvnClientCmdletBase
     {
         [Parameter(Position = 0)]
         public string[] Path { get; set; } = new string[] { "" };
@@ -20,35 +20,32 @@ namespace PoshSvn.CmdLets
             return e == null ? "Updating" : string.Format("Updating '{0}'", e.Path);
         }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            string[] resolvedPaths = GetPathTargets(Path, null);
+
+            try
             {
-                string[] resolvedPaths = GetPathTargets(Path, null);
-
-                try
+                SvnUpdateArgs args = new SvnUpdateArgs
                 {
-                    SvnUpdateArgs args = new SvnUpdateArgs
-                    {
-                        Revision = Revision,
-                    };
+                    Revision = Revision,
+                };
 
-                    args.Notify += NotifyEventHandler;
-                    args.Progress += ProgressEventHandler;
+                args.Notify += NotifyEventHandler;
+                args.Progress += ProgressEventHandler;
 
-                    client.Update(resolvedPaths, args);
+                client.Update(resolvedPaths, args);
+            }
+            catch (SvnException ex)
+            {
+                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY,
+                                     SvnErrorCode.SVN_ERR_WC_PATH_NOT_FOUND))
+                {
+                    WriteWarning(ex.Message);
                 }
-                catch (SvnException ex)
+                else
                 {
-                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY,
-                                         SvnErrorCode.SVN_ERR_WC_PATH_NOT_FOUND))
-                    {
-                        WriteWarning(ex.Message);
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
         }

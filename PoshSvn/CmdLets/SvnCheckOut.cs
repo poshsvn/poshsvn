@@ -8,7 +8,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnCheckout")]
     [Alias("svn-checkout")]
     [OutputType(typeof(SvnCheckoutOutput))]
-    public class SvnCheckout : SvnCmdletBase
+    public class SvnCheckout : SvnClientCmdletBase
     {
         [Parameter(Mandatory = true, Position = 0)]
         public Uri Url { get; set; }
@@ -33,32 +33,29 @@ namespace PoshSvn.CmdLets
             return e == null ? "Checking out" : string.Format("Checking out '{0}'", e.Path);
         }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            var args = new SvnCheckOutArgs
             {
-                var args = new SvnCheckOutArgs
-                {
-                    Revision = Revision,
-                    IgnoreExternals = IgnoreExternals,
-                    //TODO: AllowObstructions = Force
-                };
+                Revision = Revision,
+                IgnoreExternals = IgnoreExternals,
+                //TODO: AllowObstructions = Force
+            };
 
-                args.Notify += NotifyEventHandler;
-                args.Progress += ProgressEventHandler;
+            args.Notify += NotifyEventHandler;
+            args.Progress += ProgressEventHandler;
 
-                string resolvedPath;
-                if (Path == null)
-                {
-                    resolvedPath = GetPathTarget(Url.Segments.Last());
-                }
-                else
-                {
-                    resolvedPath = GetPathTarget(Path);
-                }
-
-                client.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
+            string resolvedPath;
+            if (Path == null)
+            {
+                resolvedPath = GetPathTarget(Url.Segments.Last());
             }
+            else
+            {
+                resolvedPath = GetPathTarget(Path);
+            }
+
+            client.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
         }
     }
 

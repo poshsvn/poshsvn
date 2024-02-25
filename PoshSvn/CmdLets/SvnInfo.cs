@@ -7,7 +7,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoOutput))]
-    public class SvnInfo : SvnCmdletBase
+    public class SvnInfo : SvnClientCmdletBase
     {
         [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; } = new string[] { "" };
@@ -29,38 +29,35 @@ namespace PoshSvn.CmdLets
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            try
             {
-                try
+                SvnInfoArgs args = new SvnInfoArgs
                 {
-                    SvnInfoArgs args = new SvnInfoArgs
-                    {
-                        Revision = Revision,
-                        IncludeExternals = IncludeExternals,
-                        Depth = Depth.ConvertToSharpSvnDepth(),
-                    };
+                    Revision = Revision,
+                    IncludeExternals = IncludeExternals,
+                    Depth = Depth.ConvertToSharpSvnDepth(),
+                };
 
-                    args.Progress += ProgressEventHandler;
+                args.Progress += ProgressEventHandler;
 
-                    TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
 
-                    foreach (SvnTarget target in targets.Targets)
-                    {
-                        client.Info(target, args, InfoHandler);
-                    }
+                foreach (SvnTarget target in targets.Targets)
+                {
+                    client.Info(target, args, InfoHandler);
                 }
-                catch (SvnException ex)
+            }
+            catch (SvnException ex)
+            {
+                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
                 {
-                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                    {
-                        WriteWarning(ex.Message);
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    WriteWarning(ex.Message);
+                }
+                else
+                {
+                    throw;
                 }
             }
         }
