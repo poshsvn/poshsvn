@@ -41,7 +41,8 @@ namespace PoshSvn.Tests
                     },
                     actual,
                     nameof(SvnLogOutput.Author),
-                    nameof(SvnLogOutput.Date));
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
             }
         }
 
@@ -78,7 +79,8 @@ namespace PoshSvn.Tests
                     },
                     actual,
                     nameof(SvnLogOutput.Author),
-                    nameof(SvnLogOutput.Date));
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
             }
         }
 
@@ -115,7 +117,8 @@ namespace PoshSvn.Tests
                     },
                     actual,
                     nameof(SvnLogOutput.Author),
-                    nameof(SvnLogOutput.Date));
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
             }
         }
 
@@ -367,7 +370,8 @@ namespace PoshSvn.Tests
                     actual,
                     nameof(SvnLogOutput.Author),
                     nameof(SvnLogOutput.Date),
-                    nameof(SvnLogOutput.ChangedPaths)); // TODO: check ChangedPaths
+                    nameof(SvnLogOutput.ChangedPaths),
+                    nameof(SvnLogOutput.RevisionProperties)); // TODO: check ChangedPaths
             }
         }
 
@@ -407,7 +411,8 @@ namespace PoshSvn.Tests
                     },
                     actual,
                     nameof(SvnLogOutput.Author),
-                    nameof(SvnLogOutput.Date));
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
             }
         }
     }

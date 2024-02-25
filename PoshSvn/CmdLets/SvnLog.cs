@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
@@ -41,6 +42,18 @@ namespace PoshSvn.CmdLets
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
 
+        [Parameter()]
+        [Alias("with-all-revprops", "WithAllRevprops")]
+        public SwitchParameter WithAllRevisionProperties { get; set; }
+
+        [Parameter()]
+        [Alias("with-no-revprops", "WithNoRevprops")]
+        public SwitchParameter WithNoRevisionProperties { get; set; }
+
+        [Parameter()]
+        [Alias("with-revprop")]
+        public string[] WithRevisionProperties { get; set; }
+
         protected override void ProcessRecord()
         {
             using (SvnClient client = new SvnClient())
@@ -53,7 +66,22 @@ namespace PoshSvn.CmdLets
                         RetrieveChangedPaths = ChangedPaths,
                         Start = Start,
                         End = End,
+                        RetrieveAllProperties = WithAllRevisionProperties,
                     };
+
+                    if (WithRevisionProperties != null)
+                    {
+                        args.RetrieveProperties.Clear();
+                        foreach (var property in WithRevisionProperties)
+                        {
+                            args.RetrieveProperties.Add(property);
+                        }
+                    }
+
+                    if (WithNoRevisionProperties)
+                    {
+                        args.RetrieveProperties.Clear();
+                    }
 
                     args.Progress += ProgressEventHandler;
 
@@ -91,7 +119,8 @@ namespace PoshSvn.CmdLets
                 Revision = e.Revision,
                 Author = e.Author,
                 Message = e.LogMessage,
-                ChangedPaths = ConvertSvnChangedPaths(e.ChangedPaths)
+                ChangedPaths = ConvertSvnChangedPaths(e.ChangedPaths),
+                RevisionProperties = e.RevisionProperties.ToArray(),
             };
 
             if (e.Time != DateTime.MinValue)
@@ -137,6 +166,7 @@ namespace PoshSvn.CmdLets
         public DateTimeOffset? Date { get; set; }
         public string Message { get; set; }
         public SvnChangeItem[] ChangedPaths { get; set; }
+        public SvnPropertyValue[] RevisionProperties { get; set; }
     }
 
     public class SvnChangeItem
