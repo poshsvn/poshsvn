@@ -21,8 +21,10 @@ namespace PoshSvn.CmdLets
         public Uri[] Url { get; set; }
 
         [Parameter()]
-        [Alias("rev")]
-        public SvnRevision Revision { get; set; } = null;
+        public SvnRevision Start { get; set; } = null;
+
+        [Parameter()]
+        public SvnRevision End { get; set; } = null;
 
         [Parameter()]
         [Alias("v")]
@@ -48,7 +50,9 @@ namespace PoshSvn.CmdLets
                     SvnLogArgs args = new SvnLogArgs
                     {
                         Limit = Limit,
-                        RetrieveChangedPaths = ChangedPaths
+                        RetrieveChangedPaths = ChangedPaths,
+                        Start = Start,
+                        End = End,
                     };
 
                     args.Progress += ProgressEventHandler;
