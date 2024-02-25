@@ -47,12 +47,12 @@ namespace PoshSvn.CmdLets
 
             if (targets.HasPaths)
             {
-                client.CreateDirectories(targets.Paths, args);
+                SvnClient.CreateDirectories(targets.Paths, args);
             }
             else
             {
                 UpdateAction("Creating transaction...");
-                client.RemoteCreateDirectories(targets.Uris, args);
+                SvnClient.RemoteCreateDirectories(targets.Uris, args);
             }
         }
     }

@@ -89,11 +89,11 @@ namespace PoshSvn.CmdLets
 
                 if (targets.HasPaths)
                 {
-                    client.Log(targets.Paths, args, LogHandler);
+                    SvnClient.Log(targets.Paths, args, LogHandler);
                 }
                 else
                 {
-                    client.Log(targets.Uris, args, LogHandler);
+                    SvnClient.Log(targets.Uris, args, LogHandler);
                 }
             }
             catch (SvnException ex)

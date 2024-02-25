@@ -35,7 +35,7 @@ namespace PoshSvn.CmdLets
             args.Progress += ProgressEventHandler;
             args.Notify += NotifyEventHandler;
 
-            client.Move(GetPathTargets(Source, null), GetPathTarget(Destination), args);
+            SvnClient.Move(GetPathTargets(Source, null), GetPathTarget(Destination), args);
         }
     }
 }

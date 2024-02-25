@@ -4,7 +4,7 @@ namespace PoshSvn
 {
     public abstract class SvnClientCmdletBase : SvnCmdletBase
     {
-        protected SvnClient client;
+        protected SvnClient SvnClient;
 
         public SvnClientCmdletBase()
         {
@@ -14,7 +14,7 @@ namespace PoshSvn
 
         protected override void BeginProcessing()
         {
-            client = new SvnClient();
+            SvnClient = new SvnClient();
         }
 
         protected override void ProcessRecord()
@@ -24,7 +24,7 @@ namespace PoshSvn
 
         protected override void EndProcessing()
         {
-            client.Dispose();
+            SvnClient.Dispose();
         }
     }
 }

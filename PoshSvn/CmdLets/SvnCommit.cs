@@ -27,7 +27,7 @@ namespace PoshSvn.CmdLets
 
             try
             {
-                client.Commit(GetPathTargets(Path, null), args);
+                SvnClient.Commit(GetPathTargets(Path, null), args);
             }
             catch (SvnException ex)
             {

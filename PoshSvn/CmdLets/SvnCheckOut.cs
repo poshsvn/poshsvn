@@ -55,7 +55,7 @@ namespace PoshSvn.CmdLets
                 resolvedPath = GetPathTarget(Path);
             }
 
-            client.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
+            SvnClient.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
         }
     }
 

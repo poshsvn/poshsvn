@@ -46,7 +46,7 @@ namespace PoshSvn.CmdLets
 
                 foreach (SvnTarget target in targets.Targets)
                 {
-                    client.Info(target, args, InfoHandler);
+                    SvnClient.Info(target, args, InfoHandler);
                 }
             }
             catch (SvnException ex)
