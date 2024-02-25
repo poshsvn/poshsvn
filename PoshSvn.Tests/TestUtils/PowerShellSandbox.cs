@@ -1,11 +1,11 @@
-﻿using System.IO;
-using System.Management.Automation;
-using System.Reflection;
-using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Management.Automation;
 using System.Management.Automation.Runspaces;
+using System.Reflection;
 
 namespace PoshSvn.Tests.TestUtils
 {
