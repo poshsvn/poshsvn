@@ -40,8 +40,6 @@ namespace PoshSvn.CmdLets
                     Depth = Depth.ConvertToSharpSvnDepth(),
                 };
 
-                args.Progress += ProgressEventHandler;
-
                 TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
 
                 foreach (SvnTarget target in targets.Targets)

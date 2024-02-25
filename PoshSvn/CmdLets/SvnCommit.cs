@@ -21,10 +21,6 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            args.Notify += NotifyEventHandler;
-            args.Progress += ProgressEventHandler;
-            args.Committed += CommittedEventHandler;
-
             try
             {
                 SvnClient.Commit(GetPathTargets(Path, null), args);

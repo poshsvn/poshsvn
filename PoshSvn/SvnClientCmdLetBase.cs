@@ -15,6 +15,10 @@ namespace PoshSvn
         protected override void BeginProcessing()
         {
             SvnClient = new SvnClient();
+            SvnClient.Notify += NotifyEventHandler;
+            SvnClient.Progress += ProgressEventHandler;
+            SvnClient.Committing += CommittingEventHandler;
+            SvnClient.Committed += CommittedEventHandler;
         }
 
         protected override void ProcessRecord()
