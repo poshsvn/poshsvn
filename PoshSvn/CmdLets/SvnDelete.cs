@@ -7,7 +7,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnDelete")]
     [Alias("svn-delete", "svn-remove", "Remove-SvnItem")]
     [OutputType(typeof(SvnCommitOutput))]
-    public class SvnDelete : SvnCmdletBase
+    public class SvnDelete : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
                    ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
@@ -32,33 +32,30 @@ namespace PoshSvn.CmdLets
         [Alias("keep-local")]
         public SwitchParameter KeepLocal { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            SvnDeleteArgs args = new SvnDeleteArgs
             {
-                SvnDeleteArgs args = new SvnDeleteArgs
-                {
-                    Force = Force,
-                    KeepLocal = KeepLocal,
-                    LogMessage = Message,
-                };
+                Force = Force,
+                KeepLocal = KeepLocal,
+                LogMessage = Message,
+            };
 
-                args.Progress += ProgressEventHandler;
-                args.Notify += NotifyEventHandler;
-                args.Committed += CommittedEventHandler;
-                args.Committing += CommittingEventHandler;
+            args.Progress += ProgressEventHandler;
+            args.Notify += NotifyEventHandler;
+            args.Committed += CommittedEventHandler;
+            args.Committing += CommittingEventHandler;
 
-                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
-                targets.ThrowIfHasPathsAndUris();
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            targets.ThrowIfHasPathsAndUris();
 
-                if (targets.HasPaths)
-                {
-                    client.Delete(targets.Paths, args);
-                }
-                else
-                {
-                    client.RemoteDelete(targets.Uris, args);
-                }
+            if (targets.HasPaths)
+            {
+                client.Delete(targets.Paths, args);
+            }
+            else
+            {
+                client.RemoteDelete(targets.Uris, args);
             }
         }
     }

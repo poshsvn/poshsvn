@@ -6,7 +6,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnCommit")]
     [Alias("svn-commit")]
     [OutputType(typeof(SvnCommitOutput))]
-    public class SvnCommit : SvnCmdletBase
+    public class SvnCommit : SvnClientCmdletBase
     {
         [Parameter(Position = 0)]
         public string[] Path { get; set; } = new string[] { "" };
@@ -14,33 +14,30 @@ namespace PoshSvn.CmdLets
         [Parameter(Mandatory = true)]
         public string Message { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            SvnCommitArgs args = new SvnCommitArgs
             {
-                SvnCommitArgs args = new SvnCommitArgs
-                {
-                    LogMessage = Message,
-                };
+                LogMessage = Message,
+            };
 
-                args.Notify += NotifyEventHandler;
-                args.Progress += ProgressEventHandler;
-                args.Committed += CommittedEventHandler;
+            args.Notify += NotifyEventHandler;
+            args.Progress += ProgressEventHandler;
+            args.Committed += CommittedEventHandler;
 
-                try
+            try
+            {
+                client.Commit(GetPathTargets(Path, null), args);
+            }
+            catch (SvnException ex)
+            {
+                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
                 {
-                    client.Commit(GetPathTargets(Path, null), args);
+                    WriteWarning(ex.Message);
                 }
-                catch (SvnException ex)
+                else
                 {
-                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                    {
-                        WriteWarning(ex.Message);
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
         }

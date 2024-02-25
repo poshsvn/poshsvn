@@ -6,7 +6,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnCleanup")]
     [Alias("svn-cleanup")]
     [OutputType(typeof(SvnCommitOutput))]
-    public class SvnCleanup : SvnCmdletBase
+    public class SvnCleanup : SvnClientCmdletBase
     {
         [Parameter(Position = 0)]
         public string[] Path { get; set; } = new string[] { "" };
@@ -27,46 +27,43 @@ namespace PoshSvn.CmdLets
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            foreach (var path in GetPathTargets(Path, null))
             {
-                foreach (var path in GetPathTargets(Path, null))
+                try
                 {
-                    try
+                    if (RemoveUnversioned || RemoveIgnored || VacuumPristines)
                     {
-                        if (RemoveUnversioned || RemoveIgnored || VacuumPristines)
+                        // SharpSvn doesn't implement all arguments
+                        // TODO: Add them ?
+                        // https://github.com/AmpScm/SharpSvn/blob/main/src/SharpSvn/Commands/Vacuum.cpp
+                        client.Vacuum(path, new SvnVacuumArgs
                         {
-                            // SharpSvn doesn't implement all arguments
-                            // TODO: Add them ?
-                            // https://github.com/AmpScm/SharpSvn/blob/main/src/SharpSvn/Commands/Vacuum.cpp
-                            client.Vacuum(path, new SvnVacuumArgs
-                            {
-                                IncludeExternals = IncludeExternals,
-                            });
-                        }
-                        else
-                        {
-                            client.CleanUp(path, new SvnCleanUpArgs
-                            {
-                                BreakLocks = true,
-                                FixTimestamps = true,
-                                ClearDavCache = true,
-                                VacuumPristines = VacuumPristines,
-                                IncludeExternals = IncludeExternals,
-                            });
-                        }
+                            IncludeExternals = IncludeExternals,
+                        });
                     }
-                    catch (SvnException ex)
+                    else
                     {
-                        if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
+                        client.CleanUp(path, new SvnCleanUpArgs
                         {
-                            WriteWarning(ex.Message);
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                            BreakLocks = true,
+                            FixTimestamps = true,
+                            ClearDavCache = true,
+                            VacuumPristines = VacuumPristines,
+                            IncludeExternals = IncludeExternals,
+                        });
+                    }
+                }
+                catch (SvnException ex)
+                {
+                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
+                    {
+                        WriteWarning(ex.Message);
+                    }
+                    else
+                    {
+                        throw;
                     }
                 }
             }

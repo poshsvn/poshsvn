@@ -7,7 +7,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
     [Alias("svn-mkdir")]
     [OutputType(typeof(SvnNotifyOutput))]
-    public class SvnMkDir : SvnCmdletBase
+    public class SvnMkDir : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
                    ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
@@ -29,33 +29,30 @@ namespace PoshSvn.CmdLets
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e) => "Creating directory";
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
             {
-                SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
-                {
-                    CreateParents = Parents,
-                    LogMessage = Message
-                };
+                CreateParents = Parents,
+                LogMessage = Message
+            };
 
-                args.Notify += NotifyEventHandler;
-                args.Progress += ProgressEventHandler;
-                args.Committing += CommittingEventHandler;
-                args.Committed += CommittedEventHandler;
+            args.Notify += NotifyEventHandler;
+            args.Progress += ProgressEventHandler;
+            args.Committing += CommittingEventHandler;
+            args.Committed += CommittedEventHandler;
 
-                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
-                targets.ThrowIfHasPathsAndUris();
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
+            targets.ThrowIfHasPathsAndUris();
 
-                if (targets.HasPaths)
-                {
-                    client.CreateDirectories(targets.Paths, args);
-                }
-                else
-                {
-                    UpdateAction("Creating transaction...");
-                    client.RemoteCreateDirectories(targets.Uris, args);
-                }
+            if (targets.HasPaths)
+            {
+                client.CreateDirectories(targets.Paths, args);
+            }
+            else
+            {
+                UpdateAction("Creating transaction...");
+                client.RemoteCreateDirectories(targets.Uris, args);
             }
         }
     }

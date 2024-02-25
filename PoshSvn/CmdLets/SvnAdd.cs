@@ -6,7 +6,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnAdd")]
     [Alias("svn-add", "Add-SvnItem")]
     [OutputType(typeof(SvnNotifyOutput))]
-    public class SvnAdd : SvnCmdletBase
+    public class SvnAdd : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; }
@@ -28,26 +28,23 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter Parents { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            SvnAddArgs args = new SvnAddArgs
             {
-                SvnAddArgs args = new SvnAddArgs
-                {
-                    Depth = Depth.ConvertToSharpSvnDepth(),
-                    Force = Force,
-                    NoIgnore = NoIgnore,
-                    NoAutoProps = NoAutoProps,
-                    AddParents = Parents,
-                };
+                Depth = Depth.ConvertToSharpSvnDepth(),
+                Force = Force,
+                NoIgnore = NoIgnore,
+                NoAutoProps = NoAutoProps,
+                AddParents = Parents,
+            };
 
-                args.Progress += ProgressEventHandler;
-                args.Notify += NotifyEventHandler;
+            args.Progress += ProgressEventHandler;
+            args.Notify += NotifyEventHandler;
 
-                foreach (string path in GetPathTargets(Path, null))
-                {
-                    client.Add(path, args);
-                }
+            foreach (string path in GetPathTargets(Path, null))
+            {
+                client.Add(path, args);
             }
         }
     }
