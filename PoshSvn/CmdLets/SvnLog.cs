@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
-using System.Security.Policy;
 using SharpSvn;
-using SharpSvn.Implementation;
 
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnLog", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-log", "Get-SvnLog")]
     [OutputType(typeof(SvnLogOutput))]
-    public class SvnLog: SvnCmdletBase
+    public class SvnLog : SvnCmdletBase
     {
         [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; } = new string[] { "" };
