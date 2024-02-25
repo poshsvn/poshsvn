@@ -38,14 +38,14 @@ namespace PoshSvn.CmdLets
                         // SharpSvn doesn't implement all arguments
                         // TODO: Add them ?
                         // https://github.com/AmpScm/SharpSvn/blob/main/src/SharpSvn/Commands/Vacuum.cpp
-                        client.Vacuum(path, new SvnVacuumArgs
+                        SvnClient.Vacuum(path, new SvnVacuumArgs
                         {
                             IncludeExternals = IncludeExternals,
                         });
                     }
                     else
                     {
-                        client.CleanUp(path, new SvnCleanUpArgs
+                        SvnClient.CleanUp(path, new SvnCleanUpArgs
                         {
                             BreakLocks = true,
                             FixTimestamps = true,

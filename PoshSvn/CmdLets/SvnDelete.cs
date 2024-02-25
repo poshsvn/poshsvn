@@ -51,11 +51,11 @@ namespace PoshSvn.CmdLets
 
             if (targets.HasPaths)
             {
-                client.Delete(targets.Paths, args);
+                SvnClient.Delete(targets.Paths, args);
             }
             else
             {
-                client.RemoteDelete(targets.Uris, args);
+                SvnClient.RemoteDelete(targets.Uris, args);
             }
         }
     }

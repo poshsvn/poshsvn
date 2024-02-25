@@ -42,7 +42,7 @@ namespace PoshSvn.CmdLets
 
                     args.Progress += ProgressEventHandler;
 
-                    client.Status(resolvedPath, args, StatusHandler);
+                    SvnClient.Status(resolvedPath, args, StatusHandler);
                 }
                 catch (SvnException ex)
                 {

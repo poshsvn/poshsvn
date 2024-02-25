@@ -44,7 +44,7 @@ namespace PoshSvn.CmdLets
 
             foreach (string path in GetPathTargets(Path, null))
             {
-                client.Add(path, args);
+                SvnClient.Add(path, args);
             }
         }
     }
