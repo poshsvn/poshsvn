@@ -40,8 +40,6 @@ namespace PoshSvn.CmdLets
                         RetrieveRemoteStatus = ShowUpdates
                     };
 
-                    args.Progress += ProgressEventHandler;
-
                     SvnClient.Status(resolvedPath, args, StatusHandler);
                 }
                 catch (SvnException ex)

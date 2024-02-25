@@ -37,11 +37,6 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message
             };
 
-            args.Notify += NotifyEventHandler;
-            args.Progress += ProgressEventHandler;
-            args.Committing += CommittingEventHandler;
-            args.Committed += CommittedEventHandler;
-
             TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
             targets.ThrowIfHasPathsAndUris();
 

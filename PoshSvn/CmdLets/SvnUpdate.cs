@@ -31,9 +31,6 @@ namespace PoshSvn.CmdLets
                     Revision = Revision,
                 };
 
-                args.Notify += NotifyEventHandler;
-                args.Progress += ProgressEventHandler;
-
                 SvnClient.Update(resolvedPaths, args);
             }
             catch (SvnException ex)
