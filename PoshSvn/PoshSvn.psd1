@@ -19,6 +19,7 @@
         "Invoke-SvnAdminCreate"
         "Invoke-SvnMove"
         "Invoke-SvnLog"
+        "Invoke-SvnList"
     )
     AliasesToExport = @(
         "svn-status"
@@ -35,6 +36,8 @@
         "Remove-SvnItem"
         "svn-move"
         "svn-log"
+        "svn-list"
+        "Get-SvnChildItem"
         "Get-SvnLog"
         "Move-SvnItem"
         "svnadmin-create"
@@ -48,5 +51,6 @@
         "SvnInfo.format.ps1xml"
         "SvnNotifyOutput.format.ps1xml"
         "SvnLog.format.ps1xml"
+        "SvnItem.format.ps1xml"
     )
 }

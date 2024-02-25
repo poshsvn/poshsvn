@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SvnItem.format.ps1xml" />
     <None Remove="SvnLog.format.ps1xml" />
   </ItemGroup>
 
@@ -17,6 +18,9 @@
 
   <ItemGroup>
     <Content Include="PoshSvn.psd1" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="SvnItem.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SvnLog.format.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
