@@ -114,7 +114,8 @@ namespace PoshSvn
                 }
             }
             else if (e.Action == SvnNotifyAction.Add ||
-                     e.Action == SvnNotifyAction.Delete)
+                     e.Action == SvnNotifyAction.Delete ||
+                     e.Action == SvnNotifyAction.Revert)
             {
                 WriteObject(new SvnNotifyOutput
                 {

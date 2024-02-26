@@ -83,6 +83,9 @@ namespace PoshSvn
                 case SvnNotifyAction.Delete:
                     return "D";
 
+                case SvnNotifyAction.Revert:
+                    return "Revert";
+
                 case SvnNotifyAction.UpdateUpdate: return "U";
                 // case SvnNotifyAction.Conflict: return "C";
                 // case SvnNotifyAction.UpdateMerge: return "G";

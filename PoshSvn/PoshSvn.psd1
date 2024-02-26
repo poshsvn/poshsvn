@@ -20,6 +20,7 @@
         "Invoke-SvnMove"
         "Invoke-SvnLog"
         "Invoke-SvnList"
+        "Invoke-SvnRevert"
     )
     AliasesToExport = @(
         "svn-status"
@@ -40,6 +41,7 @@
         "Get-SvnChildItem"
         "Get-SvnLog"
         "Move-SvnItem"
+        "svn-revert"
         "svnadmin-create"
     )
     FunctionsToExport = @()
