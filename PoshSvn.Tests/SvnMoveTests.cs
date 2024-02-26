@@ -50,6 +50,43 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+        
+        [Test]
+        public void ManyTargets()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var actual = sb.RunScript(
+                    @"svn-mkdir wc\src1 wc\src2 wc\dst",
+                    @"svn-move wc\src1,wc\src2 wc\dst");
+
+                PSObjectAssert.AreEqual(
+                    new SvnNotifyOutput[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, @"dst\src1")
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Path = Path.Combine(sb.WcPath, @"src1")
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, @"dst\src2")
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Path = Path.Combine(sb.WcPath, @"src2")
+                        },
+                    },
+                    actual);
+            }
+        }
 
         [Test]
         public void MoveCommittedNode()
