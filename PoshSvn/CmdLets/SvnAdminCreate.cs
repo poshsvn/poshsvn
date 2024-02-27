@@ -7,7 +7,7 @@ namespace PoshSvn.CmdLets
     [Alias("svnadmin-create")]
     public class SvnAdminCreate : SvnCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, ValueFromRemainingArguments = true, Mandatory = true)]
         public string[] Path { get; set; }
 
         [Parameter()]
