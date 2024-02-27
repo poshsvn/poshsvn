@@ -11,16 +11,15 @@ namespace PoshSvn.Tests.TestUtils
 {
     public class PowerShellSandbox : Sandbox
     {
+        static readonly InitialSessionState initialState = CreateInitialState();
+
+        public PowerShellSandbox()
+        {
+        }
+
         public Collection<PSObject> RunScript(params string[] commands)
         {
-            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            PowerShell ps = PowerShell.Create();
-
-            ps.AddCommand($"ipmo")
-              .AddArgument(Path.Combine(assemblyDirectory, @"PoshSvn.psd1"))
-              .Invoke();
-            ps.Commands.Clear();
+            PowerShell ps = CreatePowerShell();
 
             ps.AddCommand("cd")
               .AddArgument(RootPath)
@@ -49,16 +48,7 @@ namespace PoshSvn.Tests.TestUtils
 
         public List<string> FormatObject(IEnumerable input, string formatFunction)
         {
-            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            InitialSessionState state = InitialSessionState.CreateDefault();
-
-            state.ImportPSModule(new string[]
-            {
-                Path.Combine(assemblyDirectory, @"PoshSvn.psd1")
-            });
-
-            PowerShell ps = PowerShell.Create(state);
+            PowerShell ps = CreatePowerShell();
 
             ps.AddCommand("cd");
             ps.AddArgument(RootPath);
@@ -80,6 +70,25 @@ namespace PoshSvn.Tests.TestUtils
             }
 
             return rv;
+        }
+
+        private PowerShell CreatePowerShell()
+        {
+            return PowerShell.Create(initialState);
+        }
+
+        private static InitialSessionState CreateInitialState()
+        {
+            string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            var state = InitialSessionState.CreateDefault();
+
+            state.ImportPSModule(new string[]
+            {
+                Path.Combine(assemblyDirectory, @"PoshSvn.psd1")
+            });
+
+            return state;
         }
     }
 }
