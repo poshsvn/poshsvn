@@ -60,6 +60,11 @@ namespace PoshSvn.Tests.TestUtils
 
             PowerShell ps = PowerShell.Create(state);
 
+            ps.AddCommand("cd");
+            ps.AddArgument(RootPath);
+            ps.Invoke();
+            ps.Commands.Clear();
+
             ps.AddCommand(formatFunction);
             ps.AddCommand("Out-String");
             ps.AddParameter("Stream");
