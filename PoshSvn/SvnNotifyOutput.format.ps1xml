@@ -34,7 +34,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Path</Label>
-            <Width>100</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
