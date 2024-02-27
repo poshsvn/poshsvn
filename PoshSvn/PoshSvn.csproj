@@ -26,7 +26,6 @@
     </Content>
     <Content Include="SvnNotifyOutput.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="SvnInfo.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="SvnCommit.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="SvnStatus.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="SvnCheckout.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="SvnUpdate.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />

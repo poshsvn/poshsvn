@@ -91,6 +91,51 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void MixedWithCommitTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var actual = sb.FormatObject(
+                    new object[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Path = @"C:\path\to\wc\a"
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Path = @"C:\path\to\wc\b"
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Path = @"C:\path\to\wc\c"
+                        },
+                        new SvnCommitOutput
+                        {
+                            Revision = 78432
+                        }
+                    },
+                    "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        @"",
+                        @"A       C:\path\to\wc\a",
+                        @"A       C:\path\to\wc\b",
+                        @"D       C:\path\to\wc\c",
+                        @"Committed revision 78432.",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void RelativePathTest()
         {
             using (var sb = new WcSandbox())

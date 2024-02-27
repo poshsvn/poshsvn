@@ -4,6 +4,7 @@
       <Name>default</Name>
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -16,6 +17,18 @@
                   "{0,-7} {1}" -f $action, $path;
                 </ScriptBlock>
               </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Committed revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
             </CustomItem>
           </CustomEntry>
         </CustomEntries>
