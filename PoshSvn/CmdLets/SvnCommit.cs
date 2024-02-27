@@ -8,7 +8,7 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(SvnCommitOutput))]
     public class SvnCommit : SvnClientCmdletBase
     {
-        [Parameter(Position = 0)]
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; } = new string[] { "" };
 
         [Parameter(Mandatory = true)]

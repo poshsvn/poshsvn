@@ -9,7 +9,7 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(SvnLocalStatusOutput))]
     public class SvnStatus : SvnClientCmdletBase
     {
-        [Parameter(Position = 1)]
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; } = new string[] { "" };
 
         [Parameter(ParameterSetName = "Remote", Mandatory = true)]
