@@ -5,6 +5,27 @@
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
       </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  $action = $_.ActionString;
+                  $path = [PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path);
+                  "{0,-7} {1}" -f $action, $path;
+                </ScriptBlock>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
+      </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
