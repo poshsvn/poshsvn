@@ -24,8 +24,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       dir_1",
                         $@"",
                         $@"",
@@ -164,8 +162,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       a",
                         $@"A       b",
                         $@"A       c",
@@ -226,8 +222,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       wc\a",
                         $@"A       wc\b",
                         $@"A       wc\c",

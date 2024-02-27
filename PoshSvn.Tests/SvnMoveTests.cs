@@ -159,8 +159,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       wc\dst",
                         $@"D       wc\src",
                         "",

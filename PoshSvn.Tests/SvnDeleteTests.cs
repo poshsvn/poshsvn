@@ -61,7 +61,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                Collection<PSObject> actual = sb.RunScript(
+                var actual = sb.RunScript(
                     $"cd wc",
                     $"svn-mkdir dir",
                     $"(svn-delete dir | Out-String -Stream).TrimEnd()");
@@ -70,8 +70,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"D       dir",
                         "",
                         "",
