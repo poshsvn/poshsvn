@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
@@ -8,7 +9,7 @@ namespace PoshSvn.Tests
     public class NotifyOutputTests
     {
         [Test]
-        public void SimpleTest()
+        public void FormatTableTest()
         {
             using (var sb = new WcSandbox())
             {
@@ -39,6 +40,46 @@ namespace PoshSvn.Tests
                         @"",
                         @"Action  Path",
                         @"------  ----",
+                        @"A       C:\path\to\wc\a",
+                        @"A       C:\path\to\wc\b",
+                        @"D       C:\path\to\wc\c",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void FormatCustomTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var actual = sb.FormatObject(
+                    new[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Path = @"C:\path\to\wc\a"
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Path = @"C:\path\to\wc\b"
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Path = @"C:\path\to\wc\c"
+                        },
+                    },
+                    "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        @"",
                         @"A       C:\path\to\wc\a",
                         @"A       C:\path\to\wc\b",
                         @"D       C:\path\to\wc\c",
