@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 
@@ -30,6 +31,33 @@ namespace PoshSvn.Tests
                         },
                     },
                     sb.RunScript(@"svn-status wc\c"));
+            }
+        }
+
+        [Test]
+        public void OutputFormatterTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var actual = sb.FormatObject(
+                    new[]
+                    {
+                        new SvnCommitOutput
+                        {
+                            Revision = 123
+                        }
+                    },
+                    "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        "",
+                        "Committed revision 123.",
+                        "",
+                        "",
+                    },
+                    actual);
             }
         }
     }
