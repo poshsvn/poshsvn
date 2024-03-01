@@ -5,6 +5,8 @@
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
         <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -25,6 +27,30 @@
             </EntrySelectedBy>
             <CustomItem>
               <Text>Committed revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Checked out revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Updated to revision </Text>
               <ExpressionBinding>
                 <ScriptBlock>$_.Revision</ScriptBlock>
               </ExpressionBinding>
