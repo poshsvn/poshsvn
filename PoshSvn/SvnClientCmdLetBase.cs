@@ -180,6 +180,27 @@ namespace PoshSvn
             {
                 Execute();
             }
+            catch (SvnException ex)
+            {
+                StringBuilder errorDetails = new StringBuilder();
+
+                for (Exception innerException = ex; innerException != null; innerException = innerException.InnerException)
+                {
+                    if (errorDetails.Length > 0)
+                    {
+                        errorDetails.AppendLine();
+                    }
+
+                    errorDetails.Append(innerException.Message);
+                }
+
+                ErrorRecord errorRecord = new ErrorRecord(ex, "E" + (int)ex.SvnErrorCode, ErrorCategory.WriteError, this)
+                {
+                    ErrorDetails = new ErrorDetails(errorDetails.ToString()),
+                };
+
+                WriteError(errorRecord);
+            }
             catch (Exception ex)
             {
                 WriteError(new ErrorRecord(ex, "", ErrorCategory.WriteError, this)
