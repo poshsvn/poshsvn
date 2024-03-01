@@ -176,5 +176,85 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void CheckoutOutputFormatTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                        @"",
+                        @"A       wc\path\to\item\a",
+                        @"A       wc\path\to\item\b",
+                        @"A       wc\c",
+                        @"Checked out revision 36743216.",
+                        @"",
+                        @"",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput
+                            {
+                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Path = Path.Combine(sb.WcPath, @"path\to\item\a"),
+                            },
+                            new SvnNotifyOutput
+                            {
+                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Path = Path.Combine(sb.WcPath, @"path\to\item\b"),
+                            },
+                            new SvnNotifyOutput
+                            {
+                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Path = Path.Combine(sb.WcPath, @"c"),
+                            },
+                            new SvnCheckoutOutput { Revision = 36743216 },
+                        },
+                        "Format-Custom"));
+            }
+        }
+
+        [Test]
+        public void UpdateOutputFormatTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                        @"",
+                        @"A       wc\path\to\item\a",
+                        @"A       wc\path\to\item\b",
+                        @"D       wc\c",
+                        @"Updated to revision 6783213.",
+                        @"",
+                        @"",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput
+                            {
+                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Path = Path.Combine(sb.WcPath, @"path\to\item\a"),
+                            },
+                            new SvnNotifyOutput
+                            {
+                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Path = Path.Combine(sb.WcPath, @"path\to\item\b"),
+                            },
+                            new SvnNotifyOutput
+                            {
+                                Action = SharpSvn.SvnNotifyAction.Delete,
+                                Path = Path.Combine(sb.WcPath, @"c"),
+                            },
+                            new SvnUpdateOutput { Revision = 6783213 },
+                        },
+                        "Format-Custom"));
+            }
+        }
     }
 }

@@ -47,8 +47,6 @@
     FunctionsToExport = @()
     FormatsToProcess = @(
         "SvnStatus.format.ps1xml"
-        "SvnUpdate.format.ps1xml"
-        "SvnCheckout.format.ps1xml"
         "SvnInfo.format.ps1xml"
         "SvnNotifyOutput.format.ps1xml"
         "SvnLog.format.ps1xml"

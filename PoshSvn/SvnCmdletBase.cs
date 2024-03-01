@@ -113,16 +113,6 @@ namespace PoshSvn
                     throw new NotImplementedException();
                 }
             }
-            else if (e.Action == SvnNotifyAction.Add ||
-                     e.Action == SvnNotifyAction.Delete ||
-                     e.Action == SvnNotifyAction.Revert)
-            {
-                WriteObject(new SvnNotifyOutput
-                {
-                    Action = e.Action,
-                    Path = e.Path
-                });
-            }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)
             {
                 UpdateAction("Committing transaction...");
@@ -131,19 +121,13 @@ namespace PoshSvn
             {
                 UpdateAction("Transmitting file data...");
             }
-            else if (e.Action == SvnNotifyAction.CommitAdded ||
-                     e.Action == SvnNotifyAction.CommitAddCopy ||
-                     e.Action == SvnNotifyAction.CommitAddCopy ||
-                     e.Action == SvnNotifyAction.CommitDeleted ||
-                     e.Action == SvnNotifyAction.CommitModified ||
-                     e.Action == SvnNotifyAction.CommitReplaced ||
-                     e.Action == SvnNotifyAction.CommitReplacedWithCopy)
-            {
-                UpdateAction(string.Format("{0,-8} {1}", SvnUtils.GetCommitActionString(e.Action), e.Path));
-            }
             else
             {
-                UpdateAction(string.Format("{0,-5}{1}", SvnUtils.GetActionStringShort(e.Action), e.Path));
+                WriteObject(new SvnNotifyOutput
+                {
+                    Action = e.Action,
+                    Path = e.Path
+                });
             }
         }
 
