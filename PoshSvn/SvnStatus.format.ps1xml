@@ -22,7 +22,7 @@
                 <PropertyName>Status</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -82,7 +82,7 @@
                 <PropertyName>LastChangedAuthor</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -123,7 +123,7 @@
                 </ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
-                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

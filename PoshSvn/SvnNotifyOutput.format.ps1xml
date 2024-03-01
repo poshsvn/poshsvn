@@ -15,7 +15,7 @@
               <ExpressionBinding>
                 <ScriptBlock>
                   $action = $_.ActionString;
-                  $path = [PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path);
+                  $path = [PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path);
                   "{0,-7} {1}" -f $action, $path;
                 </ScriptBlock>
               </ExpressionBinding>
@@ -82,7 +82,7 @@
                 <PropertyName>ActionString</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

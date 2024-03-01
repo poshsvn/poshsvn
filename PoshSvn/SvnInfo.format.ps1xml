@@ -12,7 +12,7 @@
             <ListItems>
               <ListItem>
                 <Label>Path</Label>
-                <ScriptBlock>[PoshSvn.PathUtils]::GetRelativePath((Get-Location).Path, $_.Path)</ScriptBlock>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
               </ListItem>
               <ListItem>
                 <ItemSelectionCondition>
