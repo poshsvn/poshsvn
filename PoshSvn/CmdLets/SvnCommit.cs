@@ -21,21 +21,7 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            try
-            {
-                SvnClient.Commit(GetPathTargets(Path, null), args);
-            }
-            catch (SvnException ex)
-            {
-                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                {
-                    WriteSvnError(ex);
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            SvnClient.Commit(GetPathTargets(Path, null), args);
         }
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)

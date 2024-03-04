@@ -31,32 +31,18 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            try
+            SvnInfoArgs args = new SvnInfoArgs
             {
-                SvnInfoArgs args = new SvnInfoArgs
-                {
-                    Revision = Revision,
-                    IncludeExternals = IncludeExternals,
-                    Depth = Depth.ConvertToSharpSvnDepth(),
-                };
+                Revision = Revision,
+                IncludeExternals = IncludeExternals,
+                Depth = Depth.ConvertToSharpSvnDepth(),
+            };
 
-                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
 
-                foreach (SvnTarget target in targets.Targets)
-                {
-                    SvnClient.Info(target, args, InfoHandler);
-                }
-            }
-            catch (SvnException ex)
+            foreach (SvnTarget target in targets.Targets)
             {
-                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                {
-                    WriteSvnError(ex);
-                }
-                else
-                {
-                    throw;
-                }
+                SvnClient.Info(target, args, InfoHandler);
             }
         }
 
