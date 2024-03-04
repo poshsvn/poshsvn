@@ -24,26 +24,12 @@ namespace PoshSvn.CmdLets
         {
             string[] resolvedPaths = GetPathTargets(Path, null);
 
-            try
+            SvnUpdateArgs args = new SvnUpdateArgs
             {
-                SvnUpdateArgs args = new SvnUpdateArgs
-                {
-                    Revision = Revision,
-                };
+                Revision = Revision,
+            };
 
-                SvnClient.Update(resolvedPaths, args);
-            }
-            catch (SvnException ex)
-            {
-                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                {
-                    WriteSvnError(ex);
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            SvnClient.Update(resolvedPaths, args);
         }
     }
 

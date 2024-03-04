@@ -56,56 +56,42 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            try
+            SvnLogArgs args = new SvnLogArgs
             {
-                SvnLogArgs args = new SvnLogArgs
+                Limit = Limit,
+                RetrieveChangedPaths = ChangedPaths,
+                Start = Start,
+                End = End,
+                RetrieveAllProperties = WithAllRevisionProperties,
+            };
+
+            if (WithRevisionProperties != null)
+            {
+                args.RetrieveProperties.Clear();
+                foreach (var property in WithRevisionProperties)
                 {
-                    Limit = Limit,
-                    RetrieveChangedPaths = ChangedPaths,
-                    Start = Start,
-                    End = End,
-                    RetrieveAllProperties = WithAllRevisionProperties,
-                };
-
-                if (WithRevisionProperties != null)
-                {
-                    args.RetrieveProperties.Clear();
-                    foreach (var property in WithRevisionProperties)
-                    {
-                        args.RetrieveProperties.Add(property);
-                    }
-                }
-
-                if (WithNoRevisionProperties)
-                {
-                    args.RetrieveProperties.Clear();
-                }
-
-                args.Progress += ProgressEventHandler;
-
-                TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
-
-                targets.ThrowIfHasPathsAndUris();
-
-                if (targets.HasPaths)
-                {
-                    SvnClient.Log(targets.Paths, args, LogHandler);
-                }
-                else
-                {
-                    SvnClient.Log(targets.Uris, args, LogHandler);
+                    args.RetrieveProperties.Add(property);
                 }
             }
-            catch (SvnException ex)
+
+            if (WithNoRevisionProperties)
             {
-                if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                {
-                    WriteSvnError(ex);
-                }
-                else
-                {
-                    throw;
-                }
+                args.RetrieveProperties.Clear();
+            }
+
+            args.Progress += ProgressEventHandler;
+
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+
+            targets.ThrowIfHasPathsAndUris();
+
+            if (targets.HasPaths)
+            {
+                SvnClient.Log(targets.Paths, args, LogHandler);
+            }
+            else
+            {
+                SvnClient.Log(targets.Uris, args, LogHandler);
             }
         }
 
