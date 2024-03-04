@@ -182,24 +182,7 @@ namespace PoshSvn
             }
             catch (SvnException ex)
             {
-                StringBuilder errorDetails = new StringBuilder();
-
-                for (Exception innerException = ex; innerException != null; innerException = innerException.InnerException)
-                {
-                    if (errorDetails.Length > 0)
-                    {
-                        errorDetails.AppendLine();
-                    }
-
-                    errorDetails.Append(innerException.Message);
-                }
-
-                ErrorRecord errorRecord = new ErrorRecord(ex, "E" + (int)ex.SvnErrorCode, ErrorCategory.WriteError, this)
-                {
-                    ErrorDetails = new ErrorDetails(errorDetails.ToString()),
-                };
-
-                WriteError(errorRecord);
+                WriteSvnError(ex);
             }
             catch (Exception ex)
             {
@@ -208,6 +191,28 @@ namespace PoshSvn
                     ErrorDetails = new ErrorDetails(ex.ToString())
                 });
             }
+        }
+
+        protected void WriteSvnError(SvnException ex)
+        {
+            StringBuilder errorDetails = new StringBuilder();
+
+            for (Exception innerException = ex; innerException != null; innerException = innerException.InnerException)
+            {
+                if (errorDetails.Length > 0)
+                {
+                    errorDetails.AppendLine();
+                }
+
+                errorDetails.Append(innerException.Message);
+            }
+
+            ErrorRecord errorRecord = new ErrorRecord(ex, "E" + (int)ex.SvnErrorCode, ErrorCategory.WriteError, this)
+            {
+                ErrorDetails = new ErrorDetails(errorDetails.ToString()),
+            };
+
+            WriteError(errorRecord);
         }
 
         protected override void EndProcessing()
