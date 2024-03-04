@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
@@ -188,7 +189,7 @@ namespace PoshSvn
             {
                 WriteError(new ErrorRecord(ex, "", ErrorCategory.WriteError, this)
                 {
-                    ErrorDetails = new ErrorDetails(ex.ToString())
+                    ErrorDetails = new ErrorDetails(ex.Message)
                 });
             }
         }
