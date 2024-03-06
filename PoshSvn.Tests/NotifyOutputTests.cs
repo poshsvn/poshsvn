@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Management.Automation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using PoshSvn.CmdLets;
@@ -255,6 +256,42 @@ namespace PoshSvn.Tests
                         },
                         "Format-Custom"));
             }
+        }
+
+        [Test]
+        public void ToStringTest1()
+        {
+            var item = new SvnNotifyOutput()
+            {
+                Action = SharpSvn.SvnNotifyAction.Add,
+                Path = @"C:\path\to\item"
+            };
+
+            ClassicAssert.AreEqual(@"A       C:\path\to\item", item.ToString());
+        }
+
+        [Test]
+        public void ToStringTest2()
+        {
+            var item = new SvnNotifyOutput()
+            {
+                Action = SharpSvn.SvnNotifyAction.Delete,
+                Path = @"C:\path\to\item"
+            };
+
+            ClassicAssert.AreEqual(@"D       C:\path\to\item", item.ToString());
+        }
+
+        [Test]
+        public void ToStringTest3()
+        {
+            var item = new SvnNotifyOutput()
+            {
+                Action = SharpSvn.SvnNotifyAction.Revert,
+                Path = @"C:\path\to\item"
+            };
+
+            ClassicAssert.AreEqual(@"Revert  C:\path\to\item", item.ToString());
         }
     }
 }
