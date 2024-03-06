@@ -13,11 +13,7 @@
           <CustomEntry>
             <CustomItem>
               <ExpressionBinding>
-                <ScriptBlock>
-                  $action = $_.ActionString;
-                  $path = [PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path);
-                  "{0,-7} {1}" -f $action, $path;
-                </ScriptBlock>
+                <ScriptBlock>$_.ToString($ExecutionContext)</ScriptBlock>
               </ExpressionBinding>
             </CustomItem>
           </CustomEntry>
