@@ -5,7 +5,15 @@
     ModuleVersion="0.1.0.0"
     PowerShellVersion="3.0"
     CLRVersion="4.0"
+    Description = 'Subversion client for PowerShell'
+    ProcessorArchitecture = 'Amd64'
     RootModule = "PoshSvn.dll"
+    PrivateData = @{
+        PSData = @{
+            Tags = @("svn", "subversion")
+            Prerelease = 'alpha'
+        }
+    }
     CmdletsToExport= @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
