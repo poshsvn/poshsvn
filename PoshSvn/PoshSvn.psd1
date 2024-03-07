@@ -6,7 +6,7 @@
     ModuleVersion          = "0.1.0"
     PowerShellVersion      = "3.0"
     CLRVersion             = "4.0"
-    Description            = "Subversion client for PowerShell"
+    Description            = "Apache Subversion client for PowerShell"
     ProcessorArchitecture  = "Amd64"
     RootModule             = "PoshSvn.dll"
     DotNetFrameworkVersion = "4.7.2"
