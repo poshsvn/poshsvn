@@ -4,7 +4,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnAdd")]
-    [Alias("svn-add", "Add-SvnItem")]
+    [Alias("svn-add")]
     [OutputType(typeof(SvnNotifyOutput))]
     public class SvnAdd : SvnClientCmdletBase
     {

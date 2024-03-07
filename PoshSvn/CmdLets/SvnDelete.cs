@@ -5,7 +5,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnDelete")]
-    [Alias("svn-delete", "svn-remove", "Remove-SvnItem")]
+    [Alias("svn-delete", "svn-remove")]
     [OutputType(typeof(SvnCommitOutput))]
     public class SvnDelete : SvnClientCmdletBase
     {

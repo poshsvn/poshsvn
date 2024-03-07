@@ -5,7 +5,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnList", DefaultParameterSetName = TargetParameterSetNames.Target)]
-    [Alias("svn-list", "Get-SvnChildItem")]
+    [Alias("svn-list")]
     [OutputType(typeof(SvnItem), typeof(SvnItemDetailed))]
     public class SvnList : SvnClientCmdletBase
     {
