@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Test
-        run: .\Build.ps1; Test-PoshSvn
+        run: ipmo .\Build.ps1; Test-PoshSvn
 
       - name: Publish
-        run: .\Build.ps1; Build-PoshSvn
+        run: ipmo .\Build.ps1; Build-PoshSvn
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
