@@ -25,6 +25,7 @@ jobs:
 
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
+      release_id: ${{ steps.create_release.outputs.id }}
 
   build:
     needs: create_release
@@ -52,3 +53,17 @@ jobs:
 
     - name: Publish to PowerShell gallery
       run: ipmo .\Build.ps1; Publish-PoshSvn -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
+
+  publish_release:
+    needs: 
+      - create_release
+      - build
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ needs.create_release.outputs.release_id }}
