@@ -13,16 +13,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Test
-        run: |
-          Import-Module .\Build.ps1
-          Test-PoshSvn
+        run: .\Build.ps1; Test-PoshSvn
 
       - name: Publish
-        run: |
-          Import-Module .\Build.ps1
-          Build-PoshSvn
+        run: .\Build.ps1; Build-PoshSvn
 
-        
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
