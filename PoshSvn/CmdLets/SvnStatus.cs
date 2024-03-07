@@ -7,9 +7,9 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnStatus", DefaultParameterSetName = "Local")]
     [Alias("svn-status")]
     [OutputType(typeof(SvnLocalStatusOutput))]
-    public class SvnStatus : SvnCmdletBase
+    public class SvnStatus : SvnClientCmdletBase
     {
-        [Parameter(Position = 1)]
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; } = new string[] { "" };
 
         [Parameter(ParameterSetName = "Remote", Mandatory = true)]
@@ -25,38 +25,32 @@ namespace PoshSvn.CmdLets
         [Alias("rev")]
         public SvnRevision Revision { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            string[] resolvedPaths = GetPathTargets(Path, null);
+
+            foreach (string resolvedPath in resolvedPaths)
             {
-                string[] resolvedPaths = GetPathTargets(Path, null);
-
-                foreach (string resolvedPath in resolvedPaths)
+                try
                 {
-                    try
+                    SvnStatusArgs args = new SvnStatusArgs()
                     {
-                        SvnStatusArgs args = new SvnStatusArgs()
-                        {
-                            RetrieveAllEntries = All,
-                            Depth = Depth.ConvertToSharpSvnDepth(),
-                            RetrieveRemoteStatus = ShowUpdates
-                        };
+                        RetrieveAllEntries = All,
+                        Depth = Depth.ConvertToSharpSvnDepth(),
+                        RetrieveRemoteStatus = ShowUpdates
+                    };
 
-                        args.Progress += Progress;
-
-                        client.Status(resolvedPath, args, StatusHandler);
+                    SvnClient.Status(resolvedPath, args, StatusHandler);
+                }
+                catch (SvnException ex)
+                {
+                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
+                    {
+                        WriteSvnError(ex);
                     }
-                    catch (SvnException ex)
+                    else
                     {
-                        if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY,
-                                             SvnErrorCode.SVN_ERR_WC_PATH_NOT_FOUND))
-                        {
-                            WriteWarning(ex.Message);
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        throw;
                     }
                 }
             }

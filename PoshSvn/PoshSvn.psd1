@@ -1,15 +1,19 @@
 ﻿@{
-    GUID="{49B991B6-D257-4122-AEDA-0C317118596A}"
-    Author="Timofei Zhakov"
-    Copyright="(c) Timofei Zhakov. All rights reserved."
-    ModuleVersion="0.1.0.0"
-    PowerShellVersion="3.0"
-    CLRVersion="4.0"
-    RootModule = "PoshSvn.dll"
-    CmdletsToExport= @(
+    GUID                   = "{49B991B6-D257-4122-AEDA-0C317118596A}"
+    Author                 = "Timofei Zhakov"
+    CompanyName            = "Rinrab"
+    Copyright              = "(c) Timofei Zhakov. All rights reserved."
+    ModuleVersion          = "0.1.1"
+    PowerShellVersion      = "3.0"
+    CLRVersion             = "4.0"
+    Description            = "Apache Subversion client for PowerShell"
+    ProcessorArchitecture  = "Amd64"
+    RootModule             = "PoshSvn.dll"
+    DotNetFrameworkVersion = "4.7.2"
+    CmdletsToExport        = @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
-        "Invoke-SvnCheckOut"
+        "Invoke-SvnCheckout"
         "Invoke-SvnCleanup"
         "Invoke-SvnCommit"
         "Invoke-SvnMkdir"
@@ -18,8 +22,11 @@
         "Invoke-SvnDelete"
         "Invoke-SvnAdminCreate"
         "Invoke-SvnMove"
+        "Invoke-SvnLog"
+        "Invoke-SvnList"
+        "Invoke-SvnRevert"
     )
-    AliasesToExport = @(
+    AliasesToExport        = @(
         "svn-status"
         "svn-update"
         "svn-checkout"
@@ -28,21 +35,53 @@
         "svn-mkdir"
         "svn-info"
         "svn-add"
-        "Add-SvnItem"
         "svn-delete"
         "svn-remove"
-        "Remove-SvnItem"
         "svn-move"
-        "Move-SvnItem"
+        "svn-log"
+        "svn-list"
+        "svn-revert"
         "svnadmin-create"
     )
-    FunctionsToExport = @()
-    FormatsToProcess = @(
+    FunctionsToExport      = @()
+    FormatsToProcess       = @(
         "SvnStatus.format.ps1xml"
-        "SvnUpdate.format.ps1xml"
-        "SvnCheckOut.format.ps1xml"
-        "SvnCommit.format.ps1xml"
         "SvnInfo.format.ps1xml"
         "SvnNotifyOutput.format.ps1xml"
+        "SvnLog.format.ps1xml"
+        "SvnItem.format.ps1xml"
     )
+    FileList               = @(
+        # PoshSvn
+        "PoshSvn.dll"
+        "PoshSvn.psd1"
+
+        ## Formats
+        "SvnInfo.format.ps1xml"
+        "SvnItem.format.ps1xml"
+        "SvnLog.format.ps1xml"
+        "SvnNotifyOutput.format.ps1xml"
+        "SvnStatus.format.ps1xml"
+
+        # SharpSvn
+        "SharpSvn.dll"
+        "SharpSvn-DB44-20-win32.svnDll"
+        "SharpPlink-Win32.svnExe"
+
+        ## CRT
+        "vcruntime140.dll"
+        "vcruntime140_1.dll"
+    )
+    PrivateData            = @{
+        PSData = @{
+            Tags                     = @("svn", "subversion")
+            Prerelease               = "alpha"
+            ReleaseNotes             = "Changelog will be available soon."
+            # LicenseUri = "https://aka.ms/azps-license"
+            # ProjectUri = "https://github.com/Azure/azure-powershell"
+            # IconUri = ""
+            RequireLicenseAcceptance = $false
+            # ExternalModuleDependencies = @()
+        }
+    }
 }

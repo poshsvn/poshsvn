@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PoshSvn.CmdLets
+namespace PoshSvn
 {
     public enum SvnDepth
     {

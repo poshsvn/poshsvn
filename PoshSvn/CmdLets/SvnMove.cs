@@ -4,9 +4,9 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnMove")]
-    [Alias("svn-move", "Move-SvnItem")]
+    [Alias("svn-move")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
-    public class SvnMove : SvnCmdletBase
+    public class SvnMove : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
         public string[] Source { get; set; }
@@ -23,31 +23,16 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter AllowMixedRevisions { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            SvnMoveArgs args = new SvnMoveArgs
             {
-                SvnMoveArgs args = new SvnMoveArgs
-                {
-                    Force = Force,
-                    CreateParents = Parents,
-                    AllowMixedRevisions = AllowMixedRevisions,
-                };
-
-                args.Progress += Progress;
-                args.Notify += Notify;
-
-                client.Move(GetPathTargets(Source, null), GetPathTarget(Destination), args);
-            }
-        }
-
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
-        {
-            return new SvnNotifyOutput
-            {
-                Action = e.Action,
-                Path = e.Path,
+                Force = Force,
+                CreateParents = Parents,
+                AllowMixedRevisions = AllowMixedRevisions,
             };
+
+            SvnClient.Move(GetPathTargets(Source, null), GetPathTarget(Destination), args);
         }
     }
 }

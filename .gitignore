@@ -4,5 +4,6 @@ bin
 obj
 .vs
 publish
+publish.zip
 *.user
 www/files
