@@ -1,0 +1,30 @@
+.container {
+    max-width: 1000px;
+}
+
+body {
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.navbar-nav {
+    margin-top: 0.15rem;
+}
+
+p {
+    margin-bottom: 0.5rem;
+}
