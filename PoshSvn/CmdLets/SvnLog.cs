@@ -8,7 +8,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnLog", DefaultParameterSetName = TargetParameterSetNames.Target)]
-    [Alias("svn-log", "Get-SvnLog")]
+    [Alias("svn-log")]
     [OutputType(typeof(SvnLogOutput))]
     public class SvnLog : SvnClientCmdletBase
     {
