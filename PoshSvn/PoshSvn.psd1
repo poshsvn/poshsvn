@@ -51,7 +51,7 @@
         "SvnLog.format.ps1xml"
         "SvnItem.format.ps1xml"
     )
-    FileList = @(
+    FileList               = @(
         # PoshSvn
         "PoshSvn.dll"
         "PoshSvn.psd1"
