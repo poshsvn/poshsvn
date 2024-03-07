@@ -5,14 +5,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="bootstrap.min.css">
-  <title>PoshSVN - Subversion client for powershell</title>
+  <link rel="stylesheet" href="style.css">
+  <title>PoshSVN - Apache Subversion client for powershell</title>
 </head>
 
 <body>
-  <div class="container">
-    <h1>PoshSVN - Subversion client for powershell</h1>
-    <div>
-      <img class="w-100" src="./screenshots/screenshot1.png" alt="screenshot.png">
+  <nav class="navbar navbar-expand bg-body-tertiary mb-3">
+    <div class="container">
+      <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="/">PoshSvn</a>
+        <div>
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/docs">Docs</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container gap-4 d-flex flex-column">
+    <h1>Apache Subversion client for powershell</h1>
+    <div class="row">
+      <div class="col-4">
+        <h2>Features</h2>
+        <ul>
+          <li>Tab Completion</li>
+          <li>Typed and formated output</li>
+          <li>TODO: Add more.</li>
+        </ul>
+      </div>
+      <img class="col-8" src="./screenshots/screenshot1.png" alt="screenshot.png">
+    </div>
+    <div class="row">
+      <h2>Installation</h2>
+      <p>To install PoshSvn module, you can just enter the following command in your terminal:</p>
+      <p><code>Install-Module -Name PoshSvn -AllowPrerelease</code></p>
     </div>
   </div>
 </body>
