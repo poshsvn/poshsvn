@@ -1,6 +1,7 @@
 ﻿@{
     GUID="{49B991B6-D257-4122-AEDA-0C317118596A}"
     Author="Timofei Zhakov"
+    CompanyName = 'Rinrab'
     Copyright="(c) Timofei Zhakov. All rights reserved."
     ModuleVersion="0.1.0.0"
     PowerShellVersion="3.0"
@@ -8,10 +9,17 @@
     Description = 'Subversion client for PowerShell'
     ProcessorArchitecture = 'Amd64'
     RootModule = "PoshSvn.dll"
+    DotNetFrameworkVersion = '4.7.2'
     PrivateData = @{
         PSData = @{
             Tags = @("svn", "subversion")
             Prerelease = 'alpha'
+            ReleaseNotes = "Initial release."
+            # LicenseUri = 'https://aka.ms/azps-license'
+            # ProjectUri = 'https://github.com/Azure/azure-powershell'
+            # IconUri = ''
+            RequireLicenseAcceptance = $false
+            # ExternalModuleDependencies = @()
         }
     }
     CmdletsToExport= @(
