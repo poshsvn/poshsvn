@@ -10,18 +10,6 @@
     ProcessorArchitecture  = 'Amd64'
     RootModule             = "PoshSvn.dll"
     DotNetFrameworkVersion = '4.7.2'
-    PrivateData            = @{
-        PSData = @{
-            Tags                     = @("svn", "subversion")
-            Prerelease               = 'alpha'
-            ReleaseNotes             = "Initial release."
-            # LicenseUri = 'https://aka.ms/azps-license'
-            # ProjectUri = 'https://github.com/Azure/azure-powershell'
-            # IconUri = ''
-            RequireLicenseAcceptance = $false
-            # ExternalModuleDependencies = @()
-        }
-    }
     CmdletsToExport        = @(
         "Invoke-SvnStatus"
         "Invoke-SvnUpdate"
@@ -63,4 +51,16 @@
         "SvnLog.format.ps1xml"
         "SvnItem.format.ps1xml"
     )
+    PrivateData            = @{
+        PSData = @{
+            Tags                     = @("svn", "subversion")
+            Prerelease               = 'alpha'
+            ReleaseNotes             = "Initial release."
+            # LicenseUri = 'https://aka.ms/azps-license'
+            # ProjectUri = 'https://github.com/Azure/azure-powershell'
+            # IconUri = ''
+            RequireLicenseAcceptance = $false
+            # ExternalModuleDependencies = @()
+        }
+    }
 }
