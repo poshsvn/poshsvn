@@ -25,5 +25,5 @@ function Publish-PoshSvn {
         [string]$NuGetApiKey
     )
     
-    Publish-Module -Path "$PSScriptRoot\bin\poshsvn" -NuGetApiKey $NuGetApiKey -WhatIf
+    Publish-Module -Path "$PSScriptRoot\bin\poshsvn" -NuGetApiKey $NuGetApiKey
 }
