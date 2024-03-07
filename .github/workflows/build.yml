@@ -12,14 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Import build script
+        run: Import-Module .\Build.ps1
+
       - name: Test
-        run: dotnet test --configuration ${{ env.Configuration }} --settings Default.runsettings -v=normal
+        run: Test-PoshSvn
 
       - name: Publish
-        run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }} -v=normal
+        run: Build-PoshSvn
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: PoshSvn
-          path: .\publish
+          path: .\publish.zip

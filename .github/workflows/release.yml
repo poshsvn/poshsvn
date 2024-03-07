@@ -37,11 +37,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Build
-      run: dotnet build .\PoshSvn\PoshSvn.csproj --output .\publish --configuration ${{ env.Configuration }} -v=normal
+    - name: Import build script
+      run: Import-Module .\Build.ps1
 
-    - name: Compress package
-      run: Compress-Archive -Path .\publish\* -DestinationPath .\poshsvn.zip
+    - name: Build
+      run: Build-PoshSvn
 
     - name: Upload package to release
       uses: actions/upload-release-asset@v1
@@ -49,6 +49,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\poshsvn.zip
+        asset_path: .\publish.zip
         asset_name: poshsvn.zip
         asset_content_type: application/zip
