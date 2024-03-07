@@ -24,8 +24,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       dir_1",
                         $@"",
                         $@"",
@@ -116,7 +114,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                var actual = sb.RunScript($"svn-mkdir -url '{sb.ReposUrl}/test' -m 'test'");
+                var actual = sb.RunScript($"svn-mkdir '{sb.ReposUrl}/test' -m 'test'");
 
                 PSObjectAssert.AreEqual(
                     new[]
@@ -135,7 +133,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                var actual = sb.RunScript($"(svn-mkdir -url '{sb.ReposUrl}/test' -m 'test' | Out-String -stream).TrimEnd()");
+                var actual = sb.RunScript($"(svn-mkdir '{sb.ReposUrl}/test' -m 'test' | Out-String -stream).TrimEnd()");
 
                 CollectionAssert.AreEqual(
                     new string[]
@@ -164,8 +162,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       a",
                         $@"A       b",
                         $@"A       c",
@@ -226,8 +222,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Action  Path",
-                        $@"------  ----",
                         $@"A       wc\a",
                         $@"A       wc\b",
                         $@"A       wc\c",

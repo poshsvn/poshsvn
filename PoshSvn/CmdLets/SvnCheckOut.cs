@@ -5,10 +5,10 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnCheckOut")]
+    [Cmdlet("Invoke", "SvnCheckout")]
     [Alias("svn-checkout")]
-    [OutputType(typeof(SvnCheckOutOutput))]
-    public class SvnCheckOut : SvnCmdletBase
+    [OutputType(typeof(SvnCheckoutOutput))]
+    public class SvnCheckout : SvnClientCmdletBase
     {
         [Parameter(Mandatory = true, Position = 0)]
         public Uri Url { get; set; }
@@ -33,44 +33,30 @@ namespace PoshSvn.CmdLets
             return e == null ? "Checking out" : string.Format("Checking out '{0}'", e.Path);
         }
 
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
+        protected override void Execute()
         {
-            return new SvnCheckOutOutput
+            var args = new SvnCheckOutArgs
             {
-                Revision = e.Revision
+                Revision = Revision,
+                IgnoreExternals = IgnoreExternals,
+                //TODO: AllowObstructions = Force
             };
-        }
 
-        protected override void ProcessRecord()
-        {
-            using (SvnClient client = new SvnClient())
+            string resolvedPath;
+            if (Path == null)
             {
-                var args = new SvnCheckOutArgs
-                {
-                    Revision = Revision,
-                    IgnoreExternals = IgnoreExternals,
-                    //TODO: AllowObstructions = Force
-                };
-
-                args.Notify += Notify;
-                args.Progress += Progress;
-
-                string resolvedPath;
-                if (Path == null)
-                {
-                    resolvedPath = GetPathTarget(Url.Segments.Last());
-                }
-                else
-                {
-                    resolvedPath = GetPathTarget(Path);
-                }
-
-                client.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
+                resolvedPath = GetPathTarget(Url.Segments.Last());
             }
+            else
+            {
+                resolvedPath = GetPathTarget(Path);
+            }
+
+            SvnClient.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
         }
     }
 
-    public class SvnCheckOutOutput
+    public class SvnCheckoutOutput
     {
         public long Revision { get; set; }
     }

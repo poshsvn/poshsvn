@@ -7,7 +7,7 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoOutput))]
-    public class SvnInfo : SvnCmdletBase
+    public class SvnInfo : SvnClientCmdletBase
     {
         [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; } = new string[] { "" };
@@ -29,37 +29,20 @@ namespace PoshSvn.CmdLets
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
 
-        protected override void ProcessRecord()
+        protected override void Execute()
         {
-            using (SvnClient client = new SvnClient())
+            SvnInfoArgs args = new SvnInfoArgs
             {
-                try
-                {
-                    SvnInfoArgs args = new SvnInfoArgs
-                    {
-                        Revision = Revision,
-                        IncludeExternals = IncludeExternals,
-                        Depth = Depth.ConvertToSharpSvnDepth(),
-                    };
+                Revision = Revision,
+                IncludeExternals = IncludeExternals,
+                Depth = Depth.ConvertToSharpSvnDepth(),
+            };
 
-                    args.Progress += Progress;
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
 
-                    foreach (SvnTarget target in GetTargets(Target, Path, Url))
-                    {
-                        client.Info(target, args, InfoHandler);
-                    }
-                }
-                catch (SvnException ex)
-                {
-                    if (ex.ContainsError(SvnErrorCode.SVN_ERR_WC_NOT_WORKING_COPY))
-                    {
-                        WriteWarning(ex.Message);
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+            foreach (SvnTarget target in targets.Targets)
+            {
+                SvnClient.Info(target, args, InfoHandler);
             }
         }
 

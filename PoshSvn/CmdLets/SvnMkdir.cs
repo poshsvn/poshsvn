@@ -7,15 +7,20 @@ namespace PoshSvn.CmdLets
     [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
     [Alias("svn-mkdir")]
     [OutputType(typeof(SvnNotifyOutput))]
-    public class SvnMkDir : SvnCmdletBase
+    public class SvnMkDir : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = "Path", ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
+                   ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
+        public string[] Target { get; set; }
+
+        [Parameter(ParameterSetName = TargetParameterSetNames.Path, Mandatory = true)]
         public string[] Path { get; set; }
 
-        [Parameter(ParameterSetName = "Url", Mandatory = true)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
         public Uri[] Url { get; set; }
 
-        [Parameter(ParameterSetName = "Url", Mandatory = true)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
+        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -24,61 +29,25 @@ namespace PoshSvn.CmdLets
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e) => "Creating directory";
 
-        protected override object GetNotifyOutput(SvnNotifyEventArgs e)
+        protected override void Execute()
         {
-            return new SvnNotifyOutput
+            SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
             {
-                Action = e.Action,
-                Path = e.Path
+                CreateParents = Parents,
+                LogMessage = Message
             };
-        }
 
-        protected override void ProcessRecord()
-        {
-            using (SvnClient client = new SvnClient())
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
+            targets.ThrowIfHasPathsAndUris();
+
+            if (targets.HasPaths)
             {
-                if (Path != null)
-                {
-                    SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
-                    {
-                        CreateParents = Parents,
-                    };
-
-                    string[] resolvedPaths = GetPathTargets(null, Path);
-                    // TODO: maybe, I'll do it after
-                    // int filesProcessedCount = 0;
-
-                    args.Notify += Notify;
-                    args.Progress += Progress;
-
-                    client.CreateDirectories(resolvedPaths, args);
-                }
-                else
-                {
-                    SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs
-                    {
-                        CreateParents = Parents,
-                        LogMessage = Message
-                    };
-
-                    args.Committing += new EventHandler<SvnCommittingEventArgs>((_, e) =>
-                    {
-                        UpdateAction("Committing transaction...");
-                    });
-
-                    args.Progress += Progress;
-
-                    args.Committed += new EventHandler<SvnCommittedEventArgs>((_, e) =>
-                    {
-                        WriteObject(new SvnCommitOutput
-                        {
-                            Revision = e.Revision
-                        });
-                    });
-
-                    UpdateAction("Creating transaction...");
-                    client.RemoteCreateDirectories(Url, args);
-                }
+                SvnClient.CreateDirectories(targets.Paths, args);
+            }
+            else
+            {
+                UpdateAction("Creating transaction...");
+                SvnClient.RemoteCreateDirectories(targets.Uris, args);
             }
         }
     }

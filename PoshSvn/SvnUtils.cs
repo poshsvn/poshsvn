@@ -83,6 +83,9 @@ namespace PoshSvn
                 case SvnNotifyAction.Delete:
                     return "D";
 
+                case SvnNotifyAction.Revert:
+                    return "Revert";
+
                 case SvnNotifyAction.UpdateUpdate: return "U";
                 // case SvnNotifyAction.Conflict: return "C";
                 // case SvnNotifyAction.UpdateMerge: return "G";
@@ -129,6 +132,19 @@ namespace PoshSvn
             else
             {
                 return string.Format("Transfered: {0} KB", progress / 1024);
+            }
+        }
+
+        public static string GetChangeActionString(CmdLets.SvnChangeAction action)
+        {
+            switch (action)
+            {
+                case CmdLets.SvnChangeAction.None: return " ";
+                case CmdLets.SvnChangeAction.Add: return "A";
+                case CmdLets.SvnChangeAction.Delete: return "D";
+                case CmdLets.SvnChangeAction.Modify: return "M";
+                case CmdLets.SvnChangeAction.Replace: return "R";
+                default: throw new NotImplementedException();
             }
         }
     }

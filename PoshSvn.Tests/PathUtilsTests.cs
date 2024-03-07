@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System;
+﻿using System;
+using System.Reflection;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

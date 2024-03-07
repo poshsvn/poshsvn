@@ -1,0 +1,93 @@
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Path</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.NodeKind -eq "Directory") {
+                  $_.Path + "/"
+                  }
+                  else {
+                  $_.Path
+                  }
+                </ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnItemDetailed</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Revision</Label>
+            <Alignment>right</Alignment>
+            <Width>8</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Author</Label>
+            <Width>12</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>FileSize</Label>
+            <Alignment>right</Alignment>
+            <Width>8</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Date</Label>
+            <Width>11</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Path</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Revision</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Author</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>FileSize</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Date</PropertyName>
+                <FormatString>MMM dd yyyy</FormatString>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.NodeKind -eq "Directory") {
+                  $_.Path + "/"
+                  }
+                  else {
+                  $_.Path
+                  }
+                </ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>
