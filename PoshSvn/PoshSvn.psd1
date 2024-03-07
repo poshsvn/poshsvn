@@ -51,6 +51,27 @@
         "SvnLog.format.ps1xml"
         "SvnItem.format.ps1xml"
     )
+    FileList = @(
+        # PoshSvn
+        "PoshSvn.dll"
+        "PoshSvn.psd1"
+
+        ## Formats
+        "SvnInfo.format.ps1xml"
+        "SvnItem.format.ps1xml"
+        "SvnLog.format.ps1xml"
+        "SvnNotifyOutput.format.ps1xml"
+        "SvnStatus.format.ps1xml"
+
+        # SharpSvn
+        "SharpSvn.dll"
+        "SharpSvn-DB44-20-win32.svnDll"
+        "SharpPlink-Win32.svnExe"
+
+        ## CRT
+        "vcruntime140.dll"
+        "vcruntime140_1.dll"
+    )
     PrivateData            = @{
         PSData = @{
             Tags                     = @("svn", "subversion")
