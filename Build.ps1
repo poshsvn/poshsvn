@@ -6,7 +6,7 @@ function Build-PoshSvn {
     $Output = "$PSScriptRoot\publish"
     $ProjectPath = "$PSScriptRoot\PoshSvn\PoshSvn.csproj"
 
-    Remove-Item $Output -Recurse -Force
+    Remove-Item $Output -Recurse -Force -ErrorAction Ignore
 
     dotnet.exe build $ProjectPath --output $Output --configuration $Configuration -v=normal
 
