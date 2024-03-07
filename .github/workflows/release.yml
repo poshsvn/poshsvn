@@ -37,11 +37,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Import build script
-      run: Import-Module .\Build.ps1
-
     - name: Build
-      run: Build-PoshSvn
+      run: |
+        Import-Module .\Build.ps1
+        Build-PoshSvn
 
     - name: Upload package to release
       uses: actions/upload-release-asset@v1

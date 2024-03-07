@@ -12,15 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Import build script
-        run: Import-Module .\Build.ps1
-
       - name: Test
-        run: Test-PoshSvn
+        run: |
+          Import-Module .\Build.ps1
+          Test-PoshSvn
 
       - name: Publish
-        run: Build-PoshSvn
+        run: |
+          Import-Module .\Build.ps1
+          Build-PoshSvn
 
+        
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
