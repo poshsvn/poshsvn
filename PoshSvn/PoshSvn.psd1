@@ -76,7 +76,7 @@
         PSData = @{
             Tags                     = @("svn", "subversion")
             Prerelease               = "alpha"
-            ReleaseNotes             = "Initial release."
+            ReleaseNotes             = "Changelog will be available soon."
             # LicenseUri = "https://aka.ms/azps-license"
             # ProjectUri = "https://github.com/Azure/azure-powershell"
             # IconUri = ""
