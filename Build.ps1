@@ -50,11 +50,10 @@ function Build-PoshSvnWebsite {
     $outDir = "$PSScriptRoot\www\docs"
     Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
-    $paths = New-MarkdownHelp -Module PoshSvn -OutputFolder $outDir -Force -NoMetadata
-
-    foreach ($path in $paths) {
+    foreach ($path in Get-ChildItem "$PSScriptRoot\docs") {
         $null = $path -match "([a-zA-Z\-]*)\.md"
-        RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$($path -replace ".md")" -Title $Matches[1]
+        $cmdletName = $Matches[1]
+        RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$outDir\$cmdletName" -Title $cmdletName
     }
 }
 
