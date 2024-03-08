@@ -2,8 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    # TODO: Change branch to master
-    branches: ["website"]
+    branches: ["master"]
 
   workflow_dispatch:
 
