@@ -42,18 +42,21 @@ function Build-PoshSvnWebsite {
     $paths = New-MarkdownHelp -Module PoshSvn -OutputFolder $outDir -Force -NoMetadata
 
     foreach ($path in $paths) {
-        RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$($path -replace ".md")"
+        $null = $path -match "([a-zA-Z\-]*)\.md"
+        RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$($path -replace ".md")" -Title $Matches[1]
     }
 }
 
 function RenderPage {
     param (
         $Content,
-        $OutputPath
+        $OutputPath,
+        $Title
     )
 
     $template = Get-Content "$PSScriptRoot\www\template.html"
-    $Content = $template.Replace("{{content}}", $content)
+    $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title
+
     mkdir $OutputPath -Force
     Set-Content -Path "$OutputPath\index.html" -Value $Content -Force
 }
