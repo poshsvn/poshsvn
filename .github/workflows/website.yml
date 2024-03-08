@@ -28,10 +28,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build PoshSvn
-        run: ipmo .\Build.ps1; Build-PoshSvn
+        run: .\Scripts\Build-PoshSvn.ps1
 
       - name: Build website
-        run: ipmo .\Build.ps1; Build-PoshSvnWebsite
+        run: .\Scripts\Build-PoshSvnWebsite.ps1
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
