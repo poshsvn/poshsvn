@@ -33,7 +33,7 @@ Checks out the serf repository into 'serf-trunk' directory.
 ## PARAMETERS
 
 ### -Force
-Forces a particular command or operation to run. Subversion will prevent you from performing some operations in normal usage, but you can pass this option to tell Subversion “I know what I'm doing as well as the possible repercussions of doing it, so let me at 'em.” This option is the programmatic equivalent of doing your own electrical work with the power on—if you don't know what you're doing, you're likely to get a nasty shock.
+Forces a particular command or operation to run. Subversion will prevent you from performing some operations in normal usage, but you can pass this option to tell Subversion "I know what I'm doing as well as the possible repercussions of doing it, so let me at 'em." This option is the programmatic equivalent of doing your own electrical work with the power on-if you don't know what you're doing, you're likely to get a nasty shock.
 
 ```yaml
 Type: SwitchParameter
