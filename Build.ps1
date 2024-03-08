@@ -34,5 +34,5 @@ function Update-Docs {
 
     Build-PoshSvn
     Import-Module $PSScriptRoot\bin\poshsvn\PoshSvn.psd1 -Force
-    Update-MarkdownHelp -Path $PSScriptRoot\docs -ExcludeDontShow
+    Update-MarkdownHelp -Path $PSScriptRoot\docs -ExcludeDontShow -AlphabeticParamsOrder
 }
