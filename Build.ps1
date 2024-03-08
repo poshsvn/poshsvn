@@ -32,7 +32,9 @@ function Build-PoshSvnWebsite {
     param (
     )
 
-    Install-Module -Name platyPS -ErrorAction SilentlyContinue
+    if ($null -eq (Get-Module -ListAvailable -Name platyPS)){
+        Install-Module -Name platyPS -Force
+    }
 
     Import-Module $PSScriptRoot\bin\poshsvn\PoshSvn.psd1
 
