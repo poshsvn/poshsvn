@@ -14,8 +14,7 @@ Check out a working copy from a repository.
 
 ```
 Invoke-SvnCheckout [-Url] <Uri> [[-Path] <String>] [-Revision <SvnRevision>] [-IgnoreExternals] [-Force]
- [-NoAuthCache] [-Username <String>] [-Password <SecureString>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,36 +53,6 @@ Tells Subversion to ignore externals definitions and the external working copies
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: ignore-externals
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NoAuthCache
-Prevents caching of authentication information (e.g., username and password) in the Subversion runtime configuration directories.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Password
-Specifies the password to use when authenticating against a Subversion server. If not provided, or if incorrect, Subversion will prompt you for this information as needed.
-
-```yaml
-Type: SecureString
-Parameter Sets: (All)
-Aliases:
 
 Required: False
 Position: Named
@@ -132,21 +101,6 @@ Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Username
-Specifies the username to use when authenticating against a Subversion server. If not provided, or if incorrect, Subversion will prompt you for this information as needed.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
