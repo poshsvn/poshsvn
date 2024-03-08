@@ -80,7 +80,7 @@ Project website and documentation: https://www.poshsvn.com"
             Prerelease               = "alpha"
             ReleaseNotes             = "Changelog will be available soon."
             # LicenseUri = "https://aka.ms/azps-license"
-            # ProjectUri = "https://github.com/Azure/azure-powershell"
+            ProjectUri = "https://www.poshsvn.com"
             # IconUri = ""
             RequireLicenseAcceptance = $false
             # ExternalModuleDependencies = @()
