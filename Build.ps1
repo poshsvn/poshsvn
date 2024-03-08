@@ -27,3 +27,12 @@ function Publish-PoshSvn {
     
     Publish-Module -Path "$PSScriptRoot\bin\poshsvn" -NuGetApiKey $NuGetApiKey
 }
+
+function Update-Docs {
+    param (
+    )
+
+    Build-PoshSvn
+    Import-Module $PSScriptRoot\bin\poshsvn\PoshSvn.psd1 -Force
+    Update-MarkdownHelp -Path $PSScriptRoot\docs
+}
