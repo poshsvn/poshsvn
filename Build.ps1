@@ -27,3 +27,33 @@ function Publish-PoshSvn {
     
     Publish-Module -Path "$PSScriptRoot\bin\poshsvn" -NuGetApiKey $NuGetApiKey
 }
+
+function Build-PoshSvnWebsite {
+    param (
+    )
+
+    Install-Module -Name platyPS -ErrorAction SilentlyContinue
+
+    Import-Module $PSScriptRoot\bin\poshsvn\PoshSvn.psd1
+
+    $outDir = "$PSScriptRoot\www\docs"
+    Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
+
+    $paths = New-MarkdownHelp -Module PoshSvn -OutputFolder $outDir -Force -NoMetadata
+
+    foreach ($path in $paths) {
+        RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$($path -replace ".md")"
+    }
+}
+
+function RenderPage {
+    param (
+        $Content,
+        $OutputPath
+    )
+
+    $template = Get-Content "$PSScriptRoot\www\template.html"
+    $Content = $template.Replace("{{content}}", $content)
+    mkdir $OutputPath -Force
+    Set-Content -Path "$OutputPath\index.html" -Value $Content -Force
+}
