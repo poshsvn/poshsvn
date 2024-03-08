@@ -12,13 +12,13 @@ namespace PoshSvn
 {
     public abstract class SvnClientCmdletBase : SvnCmdletBase
     {
-        [Parameter()]
+        [Parameter(DontShow = true)]
         public SwitchParameter NoAuthCache { get; set; }
 
-        [Parameter()]
+        [Parameter(DontShow = true)]
         public string Username { get; set; }
 
-        [Parameter()]
+        [Parameter(DontShow = true)]
         public SecureString Password { get; set; }
 
         protected SvnClient SvnClient;
