@@ -1,10 +1,3 @@
----
-external help file: PoshSvn.dll-Help.xml
-Module Name: PoshSvn
-online version:
-schema: 2.0.0
----
-
 # Invoke-SvnCheckout
 
 ## SYNOPSIS
