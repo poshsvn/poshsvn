@@ -36,3 +36,38 @@ function Update-Docs {
     Import-Module $PSScriptRoot\bin\poshsvn\PoshSvn.psd1 -Force
     Update-MarkdownHelp -Path $PSScriptRoot\docs -ExcludeDontShow -AlphabeticParamsOrder
 }
+
+function Build-PoshSvnWebsite {
+    param (
+    )
+
+    if ($null -eq (Get-Module -ListAvailable -Name platyPS)){
+        Install-Module -Name platyPS -Force
+    }
+
+    Import-Module $PSScriptRoot\bin\poshsvn\PoshSvn.psd1
+
+    $outDir = "$PSScriptRoot\www\docs"
+    Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
+
+    $paths = New-MarkdownHelp -Module PoshSvn -OutputFolder $outDir -Force -NoMetadata
+
+    foreach ($path in $paths) {
+        $null = $path -match "([a-zA-Z\-]*)\.md"
+        RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$($path -replace ".md")" -Title $Matches[1]
+    }
+}
+
+function RenderPage {
+    param (
+        $Content,
+        $OutputPath,
+        $Title
+    )
+
+    $template = Get-Content "$PSScriptRoot\www\template.html"
+    $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title
+
+    mkdir $OutputPath -Force
+    Set-Content -Path "$OutputPath\index.html" -Value $Content -Force
+}
