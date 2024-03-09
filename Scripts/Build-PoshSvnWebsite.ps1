@@ -1,18 +1,21 @@
 param (
 )
 
+$siteRoot = "$PSScriptRoot\..\www"
+$outDir = "$siteRoot\build"
+
 function RenderPage {
     param (
         $Content,
-        $OutputPath,
+        $PageName,
         $Title
     )
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
     $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title
 
-    mkdir $OutputPath -Force
-    Set-Content -Path "$OutputPath\index.html" -Value $Content -Force
+    mkdir "$outDir\$PageName" -Force
+    Set-Content -Path "$outDir\$PageName\index.html" -Value $Content -Force
 }
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
@@ -21,11 +24,12 @@ if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
 
 Import-Module $PSScriptRoot\..\bin\poshsvn\PoshSvn.psd1
 
-$outDir = "$PSScriptRoot\..\www\docs"
 Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
 foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
     $null = $path -match "([a-zA-Z\-]*)\.md"
     $cmdletName = $Matches[1]
-    RenderPage -Content (ConvertFrom-Markdown $path).Html -OutputPath "$outDir\$cmdletName" -Title $cmdletName
+    RenderPage -Content (ConvertFrom-Markdown $path).Html -PageName "docs\$cmdletName" -Title $cmdletName
 }
+
+Copy-Item "$siteRoot\static\*" $outDir -Recurse
