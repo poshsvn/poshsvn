@@ -1,7 +1,7 @@
 # Invoke-SvnCommit
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Send changes from your working copy to the repository.
 
 ## SYNTAX
 
@@ -11,21 +11,36 @@ Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-ProgressAction <Action
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Send changes from your working copy to the repository.
+
+svn-commit will send any lock tokens that it finds and will release locks on all PATHs committed (recursively) unless -NoUnlock is passed (TODO:).
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> svn-commit -Message "added howto section."
+
+M        a.txt
+Committed revision 3.
 ```
 
-{{ Add example description here }}
+Commit a simple modification to a file with the commit message on the command line and an implicit target of your current directory ("`.`"):
+
+### Example 2
+```powershell
+PS C:\> svn-commit -Message "removed file 'c'."
+
+D        c.txt
+Committed revision 7.
+```
+
+This command will commit a file scheduled for deletion.
 
 ## PARAMETERS
 
 ### -Message
-{{ Fill Message Description }}
+Indicates that you will specify either a log message or a lock comment on the command line, following this option. For example: `svn-commit -Message "They don't make Sunday."`
 
 ```yaml
 Type: String
@@ -40,7 +55,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+Specifies a Path of a the item commit. By default is `.` (current directory).
 
 ```yaml
 Type: String[]
