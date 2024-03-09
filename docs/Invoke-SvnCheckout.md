@@ -128,3 +128,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[svnadmin-create](https://www.poshsvn.com/docs/Invoke-SvnAdminCreate/)

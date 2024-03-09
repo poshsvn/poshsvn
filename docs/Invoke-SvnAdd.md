@@ -171,3 +171,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[svn-commit](https://www.poshsvn.com/docs/Invoke-SvnCommit/)
+
+[svn-delete](https://www.poshsvn.com/docs/Invoke-SvnDelete/)
