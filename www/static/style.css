@@ -40,3 +40,8 @@ pre {
     border-radius: .2rem;
     position: relative;
 }
+
+.content>hr:first-of-type,
+.content>h2:first-of-type {
+    display: none;
+}
