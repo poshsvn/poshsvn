@@ -138,7 +138,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Specifies a Path of a the item to add.
+Specifies a Path of the item to add.
 
 ```yaml
 Type: String[]
