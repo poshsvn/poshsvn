@@ -1,7 +1,7 @@
 # Invoke-SvnAdminCreate
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Create a new, empty repository.
 
 ## SYNTAX
 
@@ -11,21 +11,34 @@ Invoke-SvnAdminCreate [-Path] <String[]> [-RepositoryType <RepositoryType>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Create a new, empty repository at the path provided. If the provided directory does not exist, it will be created for you. As of Subversion 1.2, svnadmin creates new repositories with the FSFS filesystem backend by default.
+
+While svnadmin create will create the base directory for a new repository, it will not create intermediate directories. For example, if you have an empty directory named `C:\svn`, creating `C:\svn\Repositories` will work, while attempting to create `C:\svn\subdirectory\Repositories` will fail with an error. Also, keep in mind that, depending on where on your system you are creating your repository, you might need to run svnadmin create as a user with elevated privileges (such as the administrator).
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> cd C:\Repositories
+PS C:\> svnadmin-create myrepo
+PS C:\>
 ```
 
-{{ Add example description here }}
+This command will create an empty repository at `C:\Repositories\myrepo`.
+
+### Example 2
+```powershell
+PS C:\> cd C:\Repositories
+PS C:\> svnadmin-create myrepo -RepositoryType FsFs 
+PS C:\>
+```
+
+In Subversion 1.0, a Berkeley DB repository is always created. In Subversion 1.1, a Berkeley DB repository is the default repository type, but an FSFS repository can be created using the `-RepositoryType` option.
 
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+Specifies the path of a repository to be created.
 
 ```yaml
 Type: String[]
@@ -55,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -RepositoryType
-{{ Fill RepositoryType Description }}
+When creating a repository, use ARG as the requested filesystem type. ARG may be either `BerkeleyDB` or `FsFs`.
 
 ```yaml
 Type: RepositoryType
@@ -65,7 +78,7 @@ Accepted values: FsFs
 
 Required: False
 Position: Named
-Default value: None
+Default value: FsFs
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
