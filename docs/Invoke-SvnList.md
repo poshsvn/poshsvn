@@ -31,7 +31,7 @@ Invoke-SvnList [-Url <Uri[]>] [-Detailed] [-Revision <SvnRevision>] [-Depth <Svn
 ```
 
 ## DESCRIPTION
-List each TARGET file and the contents of each TARGET directory as they exist in the repository. Target can be Url or Path.
+List each Target file and the contents of each TARGET directory as they exist in the repository. Target can be Url or Path.
 
 ## EXAMPLES
 
