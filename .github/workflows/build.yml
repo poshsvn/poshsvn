@@ -1,3 +1,5 @@
+name: Build and Test PoshSvn
+
 on:
   push:
     branches:
