@@ -23,6 +23,8 @@ For better clarity, Subversion CLI examples will be indicated with `$`, while Po
 
 ### Example 1
 
+The following command checks out the repository using Subverison CLI:
+
 ```shell
 $ svn checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
 A    serf-trunk\test
@@ -34,6 +36,8 @@ A    serf-trunk\test\certs\serfserver_san_nocn_cert.pem
  U   serf-trunk
 Checked out revision 1916201.
 ```
+
+While PoshSvn requires:
 
 ```powershell
 PS C:\> svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
@@ -48,8 +52,9 @@ U       serf-trunk
 Checked out revision 1916201.
 ```
 
+Also you can write the names of the parameters (better for scripting):
+
 ```powershell
-# Also you can write the names of the parameters (better for scripting):
 PS C:\> svn-checkout -Url https://svn.apache.org/repos/asf/serf/trunk -Path serf-trunk
 ```
 
