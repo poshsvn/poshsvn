@@ -25,7 +25,7 @@ if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
 Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
 foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
-    $null = $path -match "([a-zA-Z\-]*)\.md"
+    $null = $path -match "([a-zA-Z\-_]*)\.md"
     $cmdletName = $Matches[1]
     RenderPage -Content (ConvertFrom-Markdown $path).Html -PageName "docs\$cmdletName" -Title $cmdletName
 }
