@@ -11,7 +11,6 @@ schema: 2.0.0
 Update your working copy.
 
 ## SYNTAX
-usage: update [PATH...]
 
 ```
 Invoke-SvnUpdate [[-Path] <String[]>] [-Revision <SvnRevision>] [-ProgressAction <ActionPreference>]
