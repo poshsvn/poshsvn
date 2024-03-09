@@ -1,0 +1,59 @@
+# PoshSvn
+## about_PoshSvnTargets
+
+## Short description
+Describes how to specify cmdlet target.
+
+## Long description
+
+Some Subversion operations support specifying either a local Path to a working copy or a remote Url to a repository as a target.
+
+You can specify target of the operation by setting the `-Target` parameter to either Path or Url. However, if you prefer to directly indicate whether it's a URL or a Path, you may use the `-Url` or `-Path` parameters respectively.
+
+### Specifing the target via `-Target` Parameter
+
+This method of specifying the target is optimal for basic usage of Subversion. You can pass either a Path or Url to the `-Target` parameter, which PoshSvn will interpret accordingly.
+
+The following examples retrieve `svn-info` from the remote repository and the working copy:
+
+```powershell
+PS C:\> svn-info -Target https://svn.apache.org/repos/asf/serf/trunk
+PS C:\> svn-info -Target .\path\to\wc
+```
+
+However, you don't need to write `-Target` before specifing, as it accepts value from remaining arguments. That's why it almost repeat the Subversion CLI behaivior:
+
+```powershell
+PS C:\> svn-info https://svn.apache.org/repos/asf/serf/trunk
+PS C:\> svn-info .\path\to\wc
+```
+
+If no target is specified, PoshSvn will default to the current directory. This means that the following example will retrieve `svn-info` about the working copy located at `C:\path\to\wc`:
+
+```
+PS C:\path\to\wc> svn-info
+```
+
+### Specifing the target via directly indicating its type
+
+If you are writing a script, you can explicitly specify whether the target is a Url or a Path. This approach is optimal for scripts as it ensures readability, understandability, and helps prevent mistakes caused by incorrect detection of the target type.
+
+```powershell
+PS C:\> svn-info -Url https://svn.apache.org/repos/asf/serf/trunk
+PS C:\> svn-info -Path .\path\to\wc
+```
+
+If a target with a different type is specified, it will result in an error.
+
+```powershell
+PS C:\> svn-info -Path https://svn.apache.org/repos/asf/serf/trunk
+# Error
+PS C:\> svn-info -Url .\path\to\wc
+# Error
+```
+
+Also you may use a [`$PSScriptRoot`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.4#psscriptroot) variable to make it possible to run the script from any directory:
+
+```powershell
+PS C:\> svn-info -Path $PSScriptRoot\path\to\wc
+```
