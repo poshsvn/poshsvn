@@ -1,3 +1,9 @@
+---
+external help file: PoshSvn.dll-Help.xml
+Module Name: PoshSvn
+schema: 2.0.0
+---
+
 # Invoke-SvnAdd
 
 ## SYNOPSIS
@@ -46,13 +52,17 @@ A       otherdir
 
 You can add a directory without adding its contents.
 
-# Example 4
+### Example 4
+```powershell
+PS C:\>
+```
+
 TODO:
 
 ## PARAMETERS
 
 ### -Depth
-Instructs Subversion to limit the scope of an operation to a particular tree depth. ARG is one of empty (only the target itself), files (the target and any immediate file children thereof), immediates (the target and any immediate children thereof), or infinity (the target and all of its descendants—full recursion). By default is recursive.
+Instructs Subversion to limit the scope of an operation to a particular tree depth. ARG is one of empty (only the target itself), files (the target and any immediate file children thereof), immediates (the target and any immediate children thereof), or infinity (the target and all of its descendants-full recursion). By default is recursive.
 
 ```yaml
 Type: SvnDepth

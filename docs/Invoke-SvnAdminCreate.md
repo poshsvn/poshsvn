@@ -1,3 +1,9 @@
+---
+external help file: PoshSvn.dll-Help.xml
+Module Name: PoshSvn
+schema: 2.0.0
+---
+
 # Invoke-SvnAdminCreate
 
 ## SYNOPSIS
