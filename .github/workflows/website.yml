@@ -27,9 +27,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build PoshSvn
-        run: .\Scripts\Build-PoshSvn.ps1
-
       - name: Build website
         run: .\Scripts\Build-PoshSvnWebsite.ps1
 
