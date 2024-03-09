@@ -22,8 +22,6 @@ if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
     Install-Module -Name platyPS -Force
 }
 
-Import-Module $PSScriptRoot\..\bin\poshsvn\PoshSvn.psd1
-
 Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
 foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
