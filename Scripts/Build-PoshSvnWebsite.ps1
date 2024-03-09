@@ -33,3 +33,16 @@ foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
 }
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse
+
+foreach ($path in Get-ChildItem "$siteRoot\pages") {
+    $content = Get-Content $path
+    
+    if ($path.Name -eq "index.html") {
+        $pageName = ""
+    }
+    else {
+        $pageName = $path.BaseName
+    }
+
+    RenderPage -Content $content -PageName $pageName -Title $path.BaseName
+}
