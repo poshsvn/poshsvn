@@ -6,4 +6,4 @@ obj
 publish
 publish.zip
 *.user
-www/docs
+www/build
