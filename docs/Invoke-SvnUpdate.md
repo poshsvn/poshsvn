@@ -8,9 +8,10 @@ schema: 2.0.0
 # Invoke-SvnUpdate
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update your working copy.
 
 ## SYNTAX
+usage: update [PATH...]
 
 ```
 Invoke-SvnUpdate [[-Path] <String[]>] [-Revision <SvnRevision>] [-ProgressAction <ActionPreference>]
@@ -18,7 +19,7 @@ Invoke-SvnUpdate [[-Path] <String[]>] [-Revision <SvnRevision>] [-ProgressAction
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Bring changes from the repository into the working copy. If no revision is given, bring working copy up-to-date with HEAD rev. Else synchronize working copy to revision given by -Revision.
 
 ## EXAMPLES
 
@@ -32,7 +33,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+Specifies a Path of the item to update. By default is `.` (current directory).
 
 ```yaml
 Type: String[]
@@ -62,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-{{ Fill Revision Description }}
+Specifies the revision to update to.
 
 ```yaml
 Type: SvnRevision
