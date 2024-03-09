@@ -36,24 +36,7 @@ pre {
     color: var(--bs-body-color);
     line-height: 1.6;
     word-wrap: break-word;
-    padding: 0.7rem 0.3rem 0.1rem 0.3rem;
+    padding: 0.1rem 0.3rem 0.1rem 0.3rem;
     border-radius: .2rem;
     position: relative;
-}
-
-code::before{
-    /* content: 'code'; */
-    font-size: 12px;
-    font-family: monospace;
-    position: absolute;
-    top: -0.1rem;
-    left: 1rem;
-}
-
-.language-shell::before {
-    content: 'bash';
-}
-
-.language-powershell::before {
-    content: 'powershell';
 }
