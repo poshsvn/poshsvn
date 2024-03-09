@@ -7,7 +7,7 @@ schema: 2.0.0
 # Invoke-SvnLog
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Show the log messages for a set of revision(s) and/or path(s).
 
 ## SYNTAX
 
@@ -34,16 +34,90 @@ Invoke-SvnLog [-Url <Uri[]>] [-Start <SvnRevision>] [-End <SvnRevision>] [-Chang
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Show the log messages from the repository. If no target supplied, `svn-log` shows the log messages for all files and directories inside the current working directory of your working copy.
+
+You may supply string with Url or Path to the target parameter or specify them manualy to the `-Url` or `-Path` parameters.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> svn-log
+
+------------------------------------------------------------------------
+r20        harry               2003-01-17 22:56 -06:00
+
+Tweak.
+------------------------------------------------------------------------
+r17        sally               2003-01-16 23:21 -06:00
+...
 ```
 
-{{ Add example description here }}
+This command show the log messages the current directory and all items inside.
+
+### Example 2
+```powershell
+PS C:\> svn-log foo.c
+
+------------------------------------------------------------------------
+r32        sally               2003-01-13 00:43 -06:00
+
+Added defines.
+------------------------------------------------------------------------
+r28        sally               2003-01-07 21:48 -06:00
+...
+```
+
+This command show the log messages of the specific file, in this example `foo.c`.
+
+### Example 3
+```powershell
+PS C:\> svn-log https://svn.example.com/repos/foo.c
+
+------------------------------------------------------------------------
+r32        sally               2003-01-13 00:43 -06:00
+
+Added defines.
+------------------------------------------------------------------------
+r28        sally               2003-01-07 21:48 -06:00
+...
+```
+
+This command show the log messages of the remote item by Url.
+
+### Example 4
+```powershell
+PS C:\> svn-log https://svn.example.com/repos/foo.c https://svn.example.com/repos/bar.c
+
+------------------------------------------------------------------------
+r32        sally               2003-01-13 00:43 -06:00
+
+Added defines.
+------------------------------------------------------------------------
+r31        harry               2003-01-10 12:25 -06:00
+
+Added new file bar.c
+------------------------------------------------------------------------
+r28        sally               2003-01-07 21:48 -06:00
+...
+```
+
+This command show the log messages of `foo.c` and `bar.c` inside the repository `https://svn.example.com/repos`.
+
+Important: the items has to be in the same repository.
+
+### Example 5
+```powershell
+PS C:\> svn-log | Format-Table
+
+  Revision Author           Date                   Message                                                              
+  -------- ------           ----                   -------                                                              
+        32 sally            2003-01-13    00:43    Added defines.
+        31 harry            2003-01-10    12:25    Added new file bar.c
+        28 sally            2003-01-07    21:48    ...
+```
+
+This command show the log messages and formats them to table. You may use it to get more compact output.
 
 ## PARAMETERS
 
@@ -63,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -Depth
-{{ Fill Depth Description }}
+Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
 
 ```yaml
 Type: SvnDepth
@@ -79,7 +153,7 @@ Accept wildcard characters: False
 ```
 
 ### -End
-{{ Fill End Description }}
+Specifies the end revision to show log.
 
 ```yaml
 Type: SvnRevision
@@ -94,7 +168,7 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeExternals
-{{ Fill IncludeExternals Description }}
+Tells Subversion to include externals definitions and the external working copies managed by them.
 
 ```yaml
 Type: SwitchParameter
@@ -109,7 +183,7 @@ Accept wildcard characters: False
 ```
 
 ### -Limit
-{{ Fill Limit Description }}
+Specifies the maximum number of log entries.
 
 ```yaml
 Type: Int32
@@ -124,7 +198,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+Specifies a Path of an item to show log.
 
 ```yaml
 Type: String[]
@@ -154,7 +228,7 @@ Accept wildcard characters: False
 ```
 
 ### -Start
-{{ Fill Start Description }}
+Specifies the start revision to show log.
 
 ```yaml
 Type: SvnRevision
@@ -169,7 +243,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Target Description }}
+Specifies the Path or the Url of an item to show log. Path and Url targets cannot be combined in one invokation.
 
 ```yaml
 Type: String[]
@@ -178,13 +252,13 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: .
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Url
-{{ Fill Url Description }}
+Specifies the Url of an item to show log.
 
 ```yaml
 Type: Uri[]
@@ -199,7 +273,7 @@ Accept wildcard characters: False
 ```
 
 ### -WithAllRevisionProperties
-{{ Fill WithAllRevisionProperties Description }}
+Retrieve all revision properties.
 
 ```yaml
 Type: SwitchParameter
@@ -214,7 +288,7 @@ Accept wildcard characters: False
 ```
 
 ### -WithNoRevisionProperties
-{{ Fill WithNoRevisionProperties Description }}
+Retrieve no revision properties.
 
 ```yaml
 Type: SwitchParameter
@@ -229,7 +303,7 @@ Accept wildcard characters: False
 ```
 
 ### -WithRevisionProperties
-{{ Fill WithRevisionProperties Description }}
+Retrieve specified revision properties.
 
 ```yaml
 Type: String[]
