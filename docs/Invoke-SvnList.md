@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnList
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+List directory entries in the repository.
 
 ## SYNTAX
 
@@ -31,7 +31,7 @@ Invoke-SvnList [-Url <Uri[]>] [-Detailed] [-Revision <SvnRevision>] [-Depth <Svn
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+List each Target file and the contents of each TARGET directory as they exist in the repository. Target can be Url or Path.
 
 ## EXAMPLES
 
@@ -45,7 +45,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Depth
-{{ Fill Depth Description }}
+Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
 
 ```yaml
 Type: SvnDepth
@@ -76,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeExternals
-{{ Fill IncludeExternals Description }}
+Tells Subversion to include externals definitions and the external working copies managed by them.
 
 ```yaml
 Type: SwitchParameter
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+Specifies a Path to the repository to list.
 
 ```yaml
 Type: String[]
@@ -121,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-{{ Fill Revision Description }}
+Specifies a revision on with which to operate.
 
 ```yaml
 Type: SvnRevision
@@ -136,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Target Description }}
+Specifies the Path or the Url of repository to list.
 
 ```yaml
 Type: String[]
@@ -151,7 +151,7 @@ Accept wildcard characters: False
 ```
 
 ### -Url
-{{ Fill Url Description }}
+Specifies the Url of repository to list.
 
 ```yaml
 Type: Uri[]
