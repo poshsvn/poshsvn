@@ -1,11 +1,11 @@
 # PoshSvn
 ## about_PoshSvn
 
-# SHORT DESCRIPTION
+## Short description
 
 Apache Subversion for PowerShell.
 
-# LONG DESCRIPTION
+## Long description
 
 PoshSvn provides the following features:
 
@@ -13,7 +13,7 @@ PoshSvn provides the following features:
 - Typed cmdlet output.
 - Formatted to repeat the Subversion command line interface user experience.
 
-# Concept
+## Concept
 
 The PoshSvn concept was to repeat the Subversion command line interface user experience, including parameters, output, and other behavior.
 
