@@ -20,15 +20,25 @@
               <a class="nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/docs">Documentation</a>
+              <a class="nav-link" href="/docs/about_PoshSvn">Documentation</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
-  <div class="container gap-2 d-flex flex-column content">
-    {{content}}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="topics">
+          {{topics}}
+        </div>
+      </div>
+      <div class="container col-8 gap-2 content">
+        {{content}}
+      </div>
+      <div class="col"></div>
+    </div>
   </div>
 </body>
 
