@@ -32,7 +32,7 @@ The PoshSvn concept was to repeat the Subversion command line interface user exp
 The following command checks out the repository using Subverison CLI:
 
 ```shell
-$ svn checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
+svn checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
 A    serf-trunk\test
 A    serf-trunk\test\MockHTTPinC
 A    serf-trunk\test\certs
