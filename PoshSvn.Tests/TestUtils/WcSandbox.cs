@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+using System.IO;
 
 namespace PoshSvn.Tests.TestUtils
 {

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+using System.IO;
 using System.Management.Automation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

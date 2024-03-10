@@ -1,4 +1,6 @@
-﻿namespace PoshSvn
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+namespace PoshSvn
 {
     public static class TargetParameterSetNames
     {
