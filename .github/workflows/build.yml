@@ -2,8 +2,9 @@ name: Build and Test PoshSvn
 
 on:
   push:
-    branches:
-      - "*"
+    branches: ["*"]
+    paths-ignore:
+      - 'www/**'
 
 concurrency:
   group: build-${{ github.ref }}
