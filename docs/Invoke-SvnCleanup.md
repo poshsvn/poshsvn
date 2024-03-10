@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnCleanup
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Clean up a working copy.
 
 ## SYNTAX
 
@@ -18,21 +18,33 @@ Invoke-SvnCleanup [[-Path] <String[]>] [-RemoveUnversioned] [-RemoveIgnored] [-V
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+1. When none of the options `-RemoveUnversioned`, `-RemoveIgnored`, and
+`-VacuumPristines` is specified, Remove locks all write lock
+from the working copy.
+
+2. If the `-RemoveUnversioned` option or the `-RemoveIgnored` option
+is given, remove any unversioned or ignored items.
+
+3. If the -VacuumPristines option is given, remove pristine copies of
+files which are stored inside the `.svn` directory and which are no longer
+referenced by any file in the working copy.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+svn-cleanup path\to\wc
 ```
 
-{{ Add example description here }}
+Clean up the working copy located at `C:\path\to\wc`. Usually, this is only
+necessary if a Subversion client has crashed while using the working copy,
+leaving it in an unusable state.
 
 ## PARAMETERS
 
 ### -IncludeExternals
-{{ Fill IncludeExternals Description }}
+Also operate on externals defined by `svn:externals` properties.
 
 ```yaml
 Type: SwitchParameter
@@ -47,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+Path to a working copy to clean up.
 
 ```yaml
 Type: String[]
@@ -62,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveIgnored
-{{ Fill RemoveIgnored Description }}
+Remove ignored items.
 
 ```yaml
 Type: SwitchParameter
@@ -77,7 +89,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveUnversioned
-{{ Fill RemoveUnversioned Description }}
+Remove unversioned items.
 
 ```yaml
 Type: SwitchParameter
@@ -92,7 +104,7 @@ Accept wildcard characters: False
 ```
 
 ### -VacuumPristines
-{{ Fill VacuumPristines Description }}
+Remove unreferenced pristines from .svn directory.
 
 ```yaml
 Type: SwitchParameter
