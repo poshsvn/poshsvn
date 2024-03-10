@@ -44,7 +44,7 @@ foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse
 
-foreach ($path in Get-ChildItem "$siteRoot\pages") {
+foreach ($path in Get-ChildItem "$siteRoot\pages" -ErrorAction SilentlyContinue) {
     $content = Get-Content $path
     
     if ($path.Name -eq "index.html") {
