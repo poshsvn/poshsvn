@@ -45,7 +45,7 @@ svn-info
 
 ### Specifing the target via directly indicating its type
 
-If you are writing a script, you can explicitly specify whether the target is a Url or a Path. This approach is optimal for scripts as it ensures readability, understandability, and helps prevent mistakes caused by incorrect detection of the target type.
+If you write a script, you can explicitly specify whether the target is a Url or a Path. This approach is optimal for scripts as it ensures readability, understandability, and helps prevent mistakes caused by incorrect detection of the target type.
 
 ```powershell
 svn-info -Url https://svn.apache.org/repos/asf/serf/trunk
