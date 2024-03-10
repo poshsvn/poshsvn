@@ -48,9 +48,9 @@ While PoshSvn requires:
 ```powershell
 svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
 
-A       serf-trunk\test                                                                                             
-A       serf-trunk\test\MockHTTPinC                                                                                 
-A       serf-trunk\test\certs                                                                                       
+A       serf-trunk\test
+A       serf-trunk\test\MockHTTPinC
+A       serf-trunk\test\certs
 A       serf-trunk\test\certs\private
 A       serf-trunk\test\certs\serfserver_san_nocn_cert.pem
 ...
