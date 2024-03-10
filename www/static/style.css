@@ -32,6 +32,11 @@ pre {
     vertical-align: -.125em;
 }
 
+.navbar {
+    background-color: var(--bs-content-bg);
+    border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);
+}
+
 /* ? */
 /* .topics a {
     color: var(--bs-link-color)
