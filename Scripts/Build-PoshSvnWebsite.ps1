@@ -4,6 +4,11 @@ param (
 $siteRoot = "$PSScriptRoot\..\www"
 $outDir = "$siteRoot\build"
 
+$topics = ""
+foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
+    $topics += "<li><a href='/docs/$($path.BaseName)'>$($path.BaseName)</a></li>"
+}
+
 function RenderPage {
     param (
         $Content,
@@ -12,7 +17,7 @@ function RenderPage {
     )
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
-    $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title
+    $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title -replace "{{topics}}", $topics
 
     mkdir "$outDir\$PageName" -Force
     Set-Content -Path "$outDir\$PageName\index.html" -Value $Content -Force
