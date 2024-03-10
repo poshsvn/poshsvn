@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+using System.Linq;
 using System.Management.Automation;
 using SharpSvn;
 

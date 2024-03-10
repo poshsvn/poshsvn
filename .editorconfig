@@ -8,3 +8,6 @@ dotnet_sort_system_directives_first = true
 
 [*.{xml,ps1xml,html}]
 indent_size=2
+
+[*.cs]
+file_header_template = Copyright (c) Timofei Zhakov. All rights reserved.

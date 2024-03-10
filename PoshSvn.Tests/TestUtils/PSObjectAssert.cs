@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using System.Text;

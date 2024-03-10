@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;

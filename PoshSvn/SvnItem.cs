@@ -1,4 +1,6 @@
-﻿using SharpSvn;
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
+
+using SharpSvn;
 using System;
 
 namespace PoshSvn
