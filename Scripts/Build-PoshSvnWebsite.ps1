@@ -4,17 +4,24 @@ param (
 $siteRoot = "$PSScriptRoot\..\www"
 $outDir = "$siteRoot\build"
 
-$topics = ""
-foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
-    $topics += "<li><a href='/docs/$($path.BaseName)'>$($path.BaseName)</a></li>"
-}
-
 function RenderPage {
     param (
         $Content,
         $PageName,
         $Title
     )
+
+    $topics = ""
+    foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
+        if ($Title -eq $path.BaseName) {
+            $active = "active"
+        }
+        else {
+            $active = ""
+        }
+
+        $topics += "<li class=`"nav-item`"><a class=`"nav-link $active`" href='/docs/$($path.BaseName)'>$($path.BaseName)</a></li>"
+    }
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
     $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title -replace "{{topics}}", $topics
