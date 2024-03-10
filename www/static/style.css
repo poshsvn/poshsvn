@@ -41,7 +41,8 @@ pre {
 }
 
 .docs-content>hr:first-of-type,
-.docs-content>h2:first-of-type {
+.docs-content>h2:first-of-type,
+#synopsis {
     display: none;
 }
 
