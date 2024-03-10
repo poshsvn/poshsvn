@@ -52,7 +52,7 @@ PS C:\> svn-info -Url .\path\to\wc
 # Error
 ```
 
-Also you may use a [`$PSScriptRoot`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.4#psscriptroot) variable to make it possible to run the script from any directory:
+Additionally, you may utilize [`$PSScriptRoot`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.4#psscriptroot) variable, if your working copy is located near the script. This automatic variable provides the path to the directory containing the script.
 
 ```powershell
 PS C:\> svn-info -Path $PSScriptRoot\path\to\wc
