@@ -28,6 +28,10 @@ pre {
     margin-left: auto;
 }
 
+.bi {
+    vertical-align: -.125em;
+}
+
 /* ? */
 /* .topics a {
     color: var(--bs-link-color)
