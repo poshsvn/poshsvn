@@ -37,6 +37,11 @@ pre {
     border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);
 }
 
+.btn-collapse {
+    margin-top: -1rem;
+    margin-bottom: 0.5rem;
+}
+
 /* ? */
 /* .topics a {
     color: var(--bs-link-color)

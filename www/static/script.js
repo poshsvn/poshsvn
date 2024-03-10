@@ -12,3 +12,19 @@ function toggleDarkMode() {
     localStorage.setItem("theme", (localStorage.getItem("theme") == "dark") ? "light" : "dark")
     document.documentElement.setAttribute("data-bs-theme", localStorage.getItem("theme"));
 }
+
+addEventListener("DOMContentLoaded", () => {
+    var i = 0;
+    for (var item of document.querySelectorAll(".language-yaml")) {
+        item = item.parentElement;
+        item.id = "collapse-" + i;
+        item.classList.add("collapse");
+        var newItem = document.createElement("a");
+        newItem.href = "#" + "collapse-" + i;
+        newItem.classList.add("btn", "btn-link", "btn-collapse");
+        newItem.setAttribute("data-bs-toggle", "collapse")
+        newItem.innerText = "Show detailes";
+        item.parentElement.insertBefore(newItem, item);
+        i++;
+    };
+});
