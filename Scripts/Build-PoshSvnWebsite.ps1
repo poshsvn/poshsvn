@@ -39,7 +39,8 @@ Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
     $null = $path -match "([a-zA-Z\-_]*)\.md"
     $cmdletName = $Matches[1]
-    RenderPage -Content (ConvertFrom-Markdown $path).Html -PageName "docs\$cmdletName" -Title $cmdletName
+    $content = (ConvertFrom-Markdown $path).Html -replace '<h1 id="poshsvn">PoshSvn</h1>'
+    RenderPage -Content $content -PageName "docs\$cmdletName" -Title $cmdletName
 }
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse
