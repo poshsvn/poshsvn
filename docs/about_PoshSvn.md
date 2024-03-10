@@ -1,3 +1,11 @@
+---
+description: Describes basics of PoshSvn usage.
+Locale: en-US
+online version: https://www.poshsvn.com/docs/about_PoshSvn/
+schema: 2.0.0
+title: About PoshSvn
+---
+
 # PoshSvn
 ## about_PoshSvn
 

@@ -1,5 +1,13 @@
+---
+description: Describes how to specify cmdlet target.
+Locale: en-US
+online version: https://www.poshsvn.com/docs/about_PoshSvnTarget/
+schema: 2.0.0
+title: About PoshSvn Cmdlet Target
+---
+
 # PoshSvn
-## about_PoshSvnTargets
+## about_PoshSvnTarget
 
 ## Short description
 Describes how to specify cmdlet target.
