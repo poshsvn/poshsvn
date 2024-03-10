@@ -11,7 +11,7 @@ title: About PoshSvn
 
 ## Short description
 
-Apache Subversion for PowerShell.
+Describes basics of PoshSvn usage.
 
 ## Long description
 
