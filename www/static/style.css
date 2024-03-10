@@ -63,3 +63,7 @@ pre {
 .topics a:visited {
     color: #ac7ee1;
 } */
+
+h2 {
+    margin-top: 1rem;
+}
