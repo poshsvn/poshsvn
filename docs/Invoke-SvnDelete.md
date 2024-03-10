@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnDelete
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove files and directories from version control.
 
 ## SYNTAX
 
@@ -31,21 +31,37 @@ Invoke-SvnDelete -Url <Uri[]> -Message <String> [-Force] [-KeepLocal] [-Progress
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Removes local or remote items from version.
+
+Each item specified by a Path is scheduled for deletion upon the next commit.
+
+Each item specified by a Url is deleted from the repository via an immediate commit.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-{{ Add example code here }}
+svn-delete foo.c
+
+D       foo.c
 ```
 
-{{ Add example description here }}
+Removes and schedules the foo.c file for deletion.
+
+### Example 1
+```powershell
+svn-delete https://svn.example.com/repos/foo.c -Message "delete foo.c"
+
+Committed revision 57.
+```
+
+This command removes the file located at `https://svn.example.com/repos/foo.c`
+and commits the deletion with the log message "delete foo.c".
 
 ## PARAMETERS
 
 ### -Force
-{{ Fill Force Description }}
+Force operation to run
 
 ```yaml
 Type: SwitchParameter
@@ -60,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -KeepLocal
-{{ Fill KeepLocal Description }}
+Keep item in working copy.
 
 ```yaml
 Type: SwitchParameter
@@ -75,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -Message
-{{ Fill Message Description }}
+Specifies the log message.
 
 ```yaml
 Type: String
@@ -102,7 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+Specifies the Path of an item in a working copy to delete.
 
 ```yaml
 Type: String[]
@@ -117,7 +133,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Target Description }}
+Specifies the Path or the Url of an item to delete.
 
 ```yaml
 Type: String[]
@@ -132,7 +148,7 @@ Accept wildcard characters: False
 ```
 
 ### -Url
-{{ Fill Url Description }}
+Specifies the Url of an item in a repository to delete.
 
 ```yaml
 Type: Uri[]
