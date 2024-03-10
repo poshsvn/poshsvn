@@ -24,7 +24,7 @@ Schedule files, directories, or symbolic links in your working copy for addition
 
 ### Example 1
 ```powershell
-PS C:\> svn-add .\foo.c
+svn-add .\foo.c
 
 A       foo.c
 ```
@@ -33,7 +33,7 @@ Adds a file from your working copy.
 
 ### Example 2
 ```powershell
-PS C:\> svn-add testdir
+svn-add testdir
 
 A       testdir
 A       testdir\a
@@ -46,7 +46,7 @@ When adding a directory, the default behavior of svn-add is to recurse.
 
 ### Example 3
 ```powershell
-PS C:\> svn-add otherdir -Depth Empty
+svn-add otherdir -Depth Empty
 
 A       otherdir
 ```
@@ -55,7 +55,7 @@ You can add a directory without adding its contents.
 
 ### Example 4
 ```powershell
-PS C:\>
+{{ Add example code here }}
 ```
 
 TODO:

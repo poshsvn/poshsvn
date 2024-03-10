@@ -37,7 +37,7 @@ Invoke-SvnDelete -Url <Uri[]> -Message <String> [-Force] [-KeepLocal] [-Progress
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

@@ -36,7 +36,7 @@ Invoke-SvnMkdir -Url <Uri[]> -Message <String> [-Parents] [-ProgressAction <Acti
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

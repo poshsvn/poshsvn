@@ -24,7 +24,7 @@ Check out a working copy from a repository.
 
 ### Example 1
 ```powershell
-PS C:\> svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
+svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
 ```
 
 Checks out the serf repository into 'serf-trunk' directory.

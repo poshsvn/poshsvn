@@ -37,7 +37,7 @@ List each Target file and the contents of each TARGET directory as they exist in
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

@@ -26,18 +26,15 @@ While svnadmin create will create the base directory for a new repository, it wi
 
 ### Example 1
 ```powershell
-PS C:\> cd C:\Repositories
-PS C:\> svnadmin-create myrepo
-PS C:\>
+cd C:\Repositories
+svnadmin-create myrepo
 ```
 
 This command will create an empty repository at `C:\Repositories\myrepo`.
 
 ### Example 2
 ```powershell
-PS C:\> cd C:\Repositories
-PS C:\> svnadmin-create myrepo -RepositoryType FsFs 
-PS C:\>
+svnadmin-create C:\Repositories\myrepo -RepositoryType FsFs 
 ```
 
 In Subversion 1.0, a Berkeley DB repository is always created. In Subversion 1.1, a Berkeley DB repository is the default repository type, but an FSFS repository can be created using the `-RepositoryType` option.

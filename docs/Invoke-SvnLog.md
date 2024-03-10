@@ -43,7 +43,7 @@ You may supply string with Url or Path to the target parameter or specify them m
 
 ### Example 1
 ```powershell
-PS C:\> svn-log
+svn-log
 
 ------------------------------------------------------------------------
 r20        harry               2003-01-17 22:56 -06:00
@@ -58,7 +58,7 @@ This command show the log messages the current directory and all items inside.
 
 ### Example 2
 ```powershell
-PS C:\> svn-log foo.c
+svn-log foo.c
 
 ------------------------------------------------------------------------
 r32        sally               2003-01-13 00:43 -06:00
@@ -73,7 +73,7 @@ This command show the log messages of the specific file, in this example `foo.c`
 
 ### Example 3
 ```powershell
-PS C:\> svn-log https://svn.example.com/repos/foo.c
+svn-log https://svn.example.com/repos/foo.c
 
 ------------------------------------------------------------------------
 r32        sally               2003-01-13 00:43 -06:00
@@ -88,7 +88,7 @@ This command show the log messages of the remote item by Url.
 
 ### Example 4
 ```powershell
-PS C:\> svn-log https://svn.example.com/repos/foo.c https://svn.example.com/repos/bar.c
+svn-log https://svn.example.com/repos/foo.c https://svn.example.com/repos/bar.c
 
 ------------------------------------------------------------------------
 r32        sally               2003-01-13 00:43 -06:00
@@ -109,7 +109,7 @@ Important: the items has to be in the same repository.
 
 ### Example 5
 ```powershell
-PS C:\> svn-log | Format-Table
+svn-log | Format-Table
 
   Revision Author           Date                   Message                                                              
   -------- ------           ----                   -------                                                              
