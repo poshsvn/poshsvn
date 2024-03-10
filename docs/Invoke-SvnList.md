@@ -61,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -Detailed
-{{ Fill Detailed Description }}
+Print extra inforamtion.
 
 ```yaml
 Type: SwitchParameter
