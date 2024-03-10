@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnList
 
 ## SYNOPSIS
-List directory entries in the repository.
+List directory entries in the directory.
 
 ## SYNTAX
 
@@ -91,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Specifies a Path to the repository to list.
+Specifies a Path to the directory to list.
 
 ```yaml
 Type: String[]
@@ -121,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Specifies the Path or the Url of repository to list.
+Specifies the Path or the Url of the directory to list.
 
 ```yaml
 Type: String[]
@@ -136,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -Url
-Specifies the Url of repository to list.
+Specifies the Url of the directory to list.
 
 ```yaml
 Type: Uri[]
