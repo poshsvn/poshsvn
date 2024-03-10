@@ -18,7 +18,7 @@ Invoke-SvnAdd [-Path] <String[]> [-Depth <SvnDepth>] [-Force] [-NoIgnore] [-NoAu
 ```
 
 ## DESCRIPTION
-Schedule files, directories, or symbolic links in your working copy for addition to the repository. They will be uploaded and added to the repository on your next commit. If you add something and change your mind before committing, you can unschedule the addition using `svn-revert`.
+Schedule files, directories, or symbolic links in your working copy for addition to the repository. They will be uploaded and added to the repository on your next commit.
 
 ## EXAMPLES
 
@@ -63,7 +63,7 @@ TODO:
 ## PARAMETERS
 
 ### -Depth
-Instructs Subversion to limit the scope of an operation to a particular tree depth. ARG is one of empty (only the target itself), files (the target and any immediate file children thereof), immediates (the target and any immediate children thereof), or infinity (the target and all of its descendants-full recursion). By default is recursive.
+Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
 
 ```yaml
 Type: SvnDepth
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-Forces a particular command or operation to run. Subversion will prevent you from performing some operations in normal usage, but you can pass this option to tell Subversion "I know what I'm doing as well as the possible repercussions of doing it, so let me at 'em." This option is the programmatic equivalent of doing your own electrical work with the power on-if you don't know what you're doing, you're likely to get a nasty shock.
+Ignore already versioned paths.
 
 ```yaml
 Type: SwitchParameter
@@ -109,7 +109,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoIgnore
-Shows files in the status listing or adds/imports files that would normally be omitted since they match a pattern in the `global-ignores` configuration option or the `svn:ignore` or `svn:global-ignoresproperties`.
+Disregard default and svn:ignore and svn:global-ignores property ignores.
 
 ```yaml
 Type: SwitchParameter
@@ -124,7 +124,7 @@ Accept wildcard characters: False
 ```
 
 ### -Parents
-Creates and adds nonexistent or nonversioned parent directories to the working copy or repository as part of an operation. This is useful for automatically creating multiple subdirectories where none currently exist. If performed on a URL, all the directories will be created in a single commit.
+Add intermediate parents.
 
 ```yaml
 Type: SwitchParameter
