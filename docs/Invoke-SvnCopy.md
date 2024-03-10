@@ -32,10 +32,10 @@ Invoke-SvnCopy [-DestinationUrl <String>] -Message <String> [-Revision <SvnRevis
 
 ## DESCRIPTION
 Source and Destination can each be either a working copy (WC) path or Url:
-    WC  -> WC:   copy and schedule for addition (with history)
-    WC  -> Url:  immediately commit a copy of WC to Url
-    Url -> WC:   check out Url into WC, schedule for addition
-    Url -> Url:  complete server-side copy;  used to branch and tag
+- `WC` to `WC`: copy and schedule for addition (with history)
+- `WC` to `Url`: immediately commit a copy of WC to Url
+- `Url` to `WC`: check out Url into WC, schedule for addition
+- `Url` to `Url`: complete server-side copy;  used to branch and tag
   
 All the Sources must be of the same type. If Destination is an existing directory,
 the sources will be added as children of Destination. When copying multiple
