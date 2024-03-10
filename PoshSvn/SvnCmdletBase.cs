@@ -186,6 +186,33 @@ namespace PoshSvn
             }
         }
 
+        protected object GetTarget(string Target, string Path, Uri Url)
+        {
+            if (ParameterSetName == TargetParameterSetNames.Target)
+            {
+                if (Target.Contains("://") && SvnUriTarget.TryParse(Target, false, out _))
+                {
+                    return new Uri(Target);
+                }
+                else
+                {
+                    return GetPathTarget(Target);
+                }
+            }
+            else if (ParameterSetName == TargetParameterSetNames.Path)
+            {
+                return GetPathTarget(Path);
+            }
+            else if (ParameterSetName == TargetParameterSetNames.Url)
+            {
+                return Url;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         protected void CommittedEventHandler(object sender, SvnCommittedEventArgs e)
         {
             WriteObject(new SvnCommitOutput
