@@ -26,7 +26,7 @@ svn-commit will send any lock tokens that it finds and will release locks on all
 
 ### Example 1
 ```powershell
-PS C:\> svn-commit -Message "added howto section."
+svn-commit -Message "added howto section."
 
 M        a.txt
 Committed revision 3.
@@ -36,7 +36,7 @@ Commit a simple modification to a file with the commit message on the command li
 
 ### Example 2
 ```powershell
-PS C:\> svn-commit -Message "removed file 'c'."
+svn-commit -Message "removed file 'c'."
 
 D        c.txt
 Committed revision 7.

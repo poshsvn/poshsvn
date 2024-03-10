@@ -31,7 +31,7 @@ Invoke-SvnStatus [[-Path] <String[]>] [-ShowUpdates] [-All] [-Depth <SvnDepth>] 
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

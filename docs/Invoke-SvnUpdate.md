@@ -24,7 +24,7 @@ Bring changes from the repository into the working copy. If no revision is given
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

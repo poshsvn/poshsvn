@@ -24,7 +24,7 @@ Invoke-SvnRevert [-Path] <String[]> [-Depth <SvnDepth>] [-Recursive] [-RemoveAdd
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+{{ Add example code here }}
 ```
 
 {{ Add example description here }}

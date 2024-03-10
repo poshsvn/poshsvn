@@ -17,21 +17,22 @@ This method of specifying the target is optimal for basic usage of Subversion. Y
 The following examples retrieve `svn-info` from the remote repository and the working copy:
 
 ```powershell
-PS C:\> svn-info -Target https://svn.apache.org/repos/asf/serf/trunk
-PS C:\> svn-info -Target .\path\to\wc
+svn-info -Target https://svn.apache.org/repos/asf/serf/trunk
+svn-info -Target .\path\to\wc
 ```
 
 However, you don't need to write `-Target` before specifing, as it accepts value from remaining arguments. That's why it almost repeat the Subversion CLI behaivior:
 
 ```powershell
-PS C:\> svn-info https://svn.apache.org/repos/asf/serf/trunk
-PS C:\> svn-info .\path\to\wc
+svn-info https://svn.apache.org/repos/asf/serf/trunk
+svn-info .\path\to\wc
 ```
 
 If no target is specified, PoshSvn will default to the current directory. This means that the following example will retrieve `svn-info` about the working copy located at `C:\path\to\wc`:
 
 ```
-PS C:\path\to\wc> svn-info
+cd C:\path\to\wc
+svn-info
 ```
 
 ### Specifing the target via directly indicating its type
@@ -39,21 +40,21 @@ PS C:\path\to\wc> svn-info
 If you are writing a script, you can explicitly specify whether the target is a Url or a Path. This approach is optimal for scripts as it ensures readability, understandability, and helps prevent mistakes caused by incorrect detection of the target type.
 
 ```powershell
-PS C:\> svn-info -Url https://svn.apache.org/repos/asf/serf/trunk
-PS C:\> svn-info -Path .\path\to\wc
+svn-info -Url https://svn.apache.org/repos/asf/serf/trunk
+svn-info -Path .\path\to\wc
 ```
 
 If a target with a different type is specified, it will result in an error.
 
 ```powershell
-PS C:\> svn-info -Path https://svn.apache.org/repos/asf/serf/trunk
+svn-info -Path https://svn.apache.org/repos/asf/serf/trunk
 # Error
-PS C:\> svn-info -Url .\path\to\wc
+svn-info -Url .\path\to\wc
 # Error
 ```
 
 Additionally, you may utilize [`$PSScriptRoot`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.4#psscriptroot) variable, if your working copy is located near the script. This automatic variable provides the path to the directory containing the script.
 
 ```powershell
-PS C:\> svn-info -Path $PSScriptRoot\path\to\wc
+svn-info -Path $PSScriptRoot\path\to\wc
 ```
