@@ -45,3 +45,21 @@ pre {
 .content>h2:first-of-type {
     display: none;
 }
+
+.topics {
+    width: 13rem;
+    margin-left: auto;
+}
+
+.topics>li::marker {
+    content: none;
+}
+
+/* ? */
+/* .topics a {
+    color: var(--bs-link-color)
+}
+
+.topics a:visited {
+    color: #ac7ee1;
+} */
