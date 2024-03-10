@@ -11,18 +11,37 @@
 </head>
 
 <body class="position-relative ps-lg-sbwidth">
-  <button type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" class="btn btn-secondary btn-square d-lg-none">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layout-sidebar-inset" viewBox="0 0 16 16">
-      <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/>
-      <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>
-    </svg>
-  </button>
+  <nav class="navbar navbar-expand-lg"
+    style="background-color: var(--bs-content-bg); border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);">
+    <div class="container-sm px-3 px-sm-4 px-xl-5">
+      <button type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+        class="btn btn-secondary btn-square d-lg-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+          class="bi bi-layout-sidebar-inset" viewBox="0 0 16 16">
+          <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z" />
+          <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+        </svg>
+      </button>
+      <a class="navbar-brand" href="/">PoshSVN</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-1"
+        aria-controls="navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/docs/about_PoshSvn">Docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.powershellgallery.com/packages/PoshSvn">Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <nav class="sidebar offcanvas-start offcanvas-lg" id="sidebar">
-    <div class="offcanvas-header border-bottom border-secondary border-opacity-25">
-      <a class="sidebar-brand" href="/">
-        PoshSVN
-      </a>
-      <button type="button" class="btn-close d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#sidebar"></button>
+    <div class="offcanvas-header border-bottom border-secondary border-opacity-25 d-lg-none">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar"></button>
     </div>
     <div class="offcanvas-body">
       <ul class="sidebar-nav">
