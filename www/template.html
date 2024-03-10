@@ -4,40 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/bootstrap.min.css">
+  <link rel="stylesheet" href="/halfmoon.min.css">
   <link rel="stylesheet" href="/style.css">
   <title>PoshSVN | {{title}}</title>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand bg-body-tertiary mb-3">
-    <div class="container">
-      <div class="collapse navbar-collapse">
-        <a class="navbar-brand" href="/">PoshSvn</a>
-        <div>
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/docs/about_PoshSvn">Documentation</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+<body class="position-relative ps-lg-sbwidth">
+  <nav class="sidebar offcanvas-start offcanvas-lg" tabindex="-1" id="sidebar-example">
+    <div class="offcanvas-header border-bottom border-secondary border-opacity-25">
+      <a class="sidebar-brand" href="/">
+        PoshSVN
+      </a>
+      <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"
+        data-bs-target="#sidebar-example"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="sidebar-nav">
+        {{topics}}
+      </ul>
     </div>
   </nav>
-  <div class="container-fluid">
+  <div class="container-sm px-3 px-sm-4 px-xl-5 content">
     <div class="row">
-      <div class="col">
-        <div class="topics">
-          {{topics}}
-        </div>
-      </div>
-      <div class="container col-8 gap-2 content">
+      <main class="col-xl-9 py-3 py-sm-4 docs-content">
         {{content}}
-      </div>
-      <div class="col"></div>
+      </main>
     </div>
   </div>
 </body>
