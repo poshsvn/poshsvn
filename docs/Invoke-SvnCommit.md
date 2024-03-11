@@ -25,6 +25,9 @@ svn-commit will send any lock tokens that it finds and will release locks on all
 ## EXAMPLES
 
 ### Example 1
+
+Commit a simple modification to a file:
+
 ```powershell
 svn-commit -Message "added howto section."
 
@@ -32,9 +35,10 @@ M        a.txt
 Committed revision 3.
 ```
 
-Commit a simple modification to a file with the commit message on the command line and an implicit target of your current directory ("`.`"):
-
 ### Example 2
+
+Commit a file scheduled for deletion:
+
 ```powershell
 svn-commit -Message "removed file 'c'."
 
@@ -42,7 +46,17 @@ D        c.txt
 Committed revision 7.
 ```
 
-This command will commit a file scheduled for deletion.
+### Example 3
+
+By default, the target of the command refers to your current directory.
+Alternatively, you can specify it by setting the `-Path` parameter to a path of your choice:
+
+```powershell
+svn-commit -Path C:\path\to\wc -Message "added howto section."
+
+M        a.txt
+Committed revision 3.
+```
 
 ## PARAMETERS
 
