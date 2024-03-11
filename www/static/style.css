@@ -59,6 +59,10 @@ pre {
     transform: translateY(-2.5px);
 }
 
+p code {
+    white-space: nowrap;
+}
+
 /* ? */
 /* .topics a {
     color: var(--bs-link-color)
