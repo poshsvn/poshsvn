@@ -169,5 +169,56 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void RemoteMoveTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"Set-Content 'wc\a.txt' 'test'");
+                sb.RunScript(@"svn-add 'wc\a.txt'");
+                sb.RunScript(@"svn-commit wc -m 'test'");
+
+                var actual = sb.RunScript($@"svn-move '{sb.ReposUrl}\a.txt' '{sb.ReposUrl}\b.txt' -m 'test'");
+
+                PSObjectAssert.AreEqual(
+                   new object[]
+                   {
+                        new SvnCommitOutput
+                        {
+                            Revision = 2
+                        },
+                   },
+                   actual);
+            }
+        }
+
+        [Test]
+        public void RemoteMoveDirectoryTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($@"mkdir 'wc\a'");
+                sb.RunScript($@"Set-Content 'wc\a\a.txt' 'test'");
+                sb.RunScript($@"Set-Content 'wc\a\b.txt' 'test'");
+                sb.RunScript($@"Set-Content 'wc\a\c.txt' 'test'");
+                sb.RunScript($@"svn-add 'wc\a' -Depth Infinity");
+                sb.RunScript($@"svn-commit wc -m 'test'");
+
+                var actual = sb.RunScript($@"svn-move '{sb.ReposUrl}/a' '{sb.ReposUrl}/b' -m 'test'");
+
+                PSObjectAssert.AreEqual(
+                   new object[]
+                   {
+                        new SvnCommitOutput
+                        {
+                            Revision = 2
+                        },
+                   },
+                   actual);
+
+                // TODO: maybe test by list ?
+            }
+        }
     }
 }
