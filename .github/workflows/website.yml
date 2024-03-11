@@ -5,6 +5,7 @@ on:
     branches: ["master"]
     paths:
       - 'www/**'
+      - 'scripts/Build-PoshSvnWebsite.ps1'
       - 'docs/**'
       - '.github/workflows/website.yml'
 
