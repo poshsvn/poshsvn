@@ -24,7 +24,12 @@ function RenderPage {
     }
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
-    $Content = $template -replace "{{content}}", $content -replace "{{title}}", $Title -replace "{{topics}}", $topics
+    $Content = $template -replace "{{content}}", $Content
+    $Content = $Content -replace "{{title}}", $Title
+    $Content = $Content -replace "{{topics}}", $topics
+    $Content = $Content -replace "<h1", '<h1 class="h3"'
+    $Content = $Content -replace "<h2", '<h2 class="h4"'
+    $Content = $Content -replace "<h3", '<h2 class="h5"'
 
     mkdir "$outDir\$PageName" -Force
     Set-Content -Path "$outDir\$PageName\index.html" -Value $Content -Force
