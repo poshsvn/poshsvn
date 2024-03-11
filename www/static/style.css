@@ -42,6 +42,23 @@ pre {
     margin-bottom: 0.5rem;
 }
 
+.link {
+    color: hsla(var(--bs-emphasis-color-hsl), 0.75);
+    text-decoration: none;
+}
+
+.link:hover {
+    color: hsla(var(--bs-emphasis-color-hsl), 0.9);
+}
+
+.height-nav {
+    height: 60px;
+}
+
+.btn-close {
+    transform: translateY(-2.5px);
+}
+
 /* ? */
 /* .topics a {
     color: var(--bs-link-color)
