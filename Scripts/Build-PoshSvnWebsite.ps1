@@ -57,3 +57,13 @@ foreach ($path in Get-ChildItem "$siteRoot\pages" -ErrorAction SilentlyContinue)
 
     RenderPage -Content $content -PageName $pageName -Title $path.BaseName
 }
+
+New-Item "$outDir\sitemap.txt"
+
+foreach ($path in Get-ChildItem $outDir -Recurse -Filter "*.html" -Exclude "google*") {
+    $url = ($path | Resolve-Path -Relative -RelativeBasePath $outDir)
+    $url = $url -replace "\.\\"
+    $url = "https://www.poshsvn.com/$url"
+    $url = $url -replace "\\", "/" -replace "/index.html"
+    Add-Content -Path "$outDir\sitemap.txt" -Value $url
+}
