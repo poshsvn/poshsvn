@@ -99,7 +99,9 @@ namespace PoshSvn.CmdLets
                     LastChangedAuthor = e.LastChangeAuthor,
                     LastChangedRevision = SvnUtils.ConvertRevision(e.LastChangeRevision),
                     LastChangedTime = SvnUtils.ConvertTime(e.LastChangeTime),
-                    Revision = SvnUtils.ConvertRevision(e.Revision)
+                    Revision = SvnUtils.ConvertRevision(e.Revision),
+                    LocalPropertyStatus = e.LocalPropertyStatus,
+                    LocalLock = e.LocalLock,
                 });
             }
         }
@@ -119,8 +121,11 @@ namespace PoshSvn.CmdLets
                                                Conflicted);
 
                 char statusChar = SvnUtils.GetStatusCode(combinedStatus);
+                char propStatus = SvnUtils.GetPropetyStatusString(LocalPropertyStatus);
+                char locked = SvnUtils.GetLockedString(LocalLock);
+                char copied = SvnUtils.GetCopiedString(LocalCopied);
 
-                return new string(new char[] { statusChar });
+                return new string(new char[] { statusChar, propStatus, locked, copied });
             }
         }
 
@@ -134,6 +139,8 @@ namespace PoshSvn.CmdLets
         public long? LastChangedRevision { get; set; }
         public string LastChangedAuthor { get; set; }
         public DateTime? LastChangedTime { get; set; }
+        public SharpSvn.SvnStatus LocalPropertyStatus { get; set; } = SharpSvn.SvnStatus.None;
+        public SvnLockInfo LocalLock { get; set; }
     }
 
     public class SvnRemoteStatusOutput : SvnLocalStatusOutput
