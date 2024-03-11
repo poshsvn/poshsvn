@@ -11,8 +11,19 @@ function RenderPage {
         $Title
     )
 
+    $lastPrefix = ""
     $topics = ""
     foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
+        $null = $path.BaseName -match "(^.*)[-_]"
+        $prefix = $Matches[1]
+        $prefix = $prefix -replace "Invoke", "Cmdlets"
+        $prefix = $prefix -replace "about", "About"
+
+        if ($lastPrefix -ne $prefix) {
+            $lastPrefix = $prefix
+            $topics += "<li class='mt-4'><h6>$($prefix)</h6></li><li><hr class='sidebar-divider'></li>"
+        }
+
         if ($Title -eq $path.BaseName) {
             $active = "active"
         }
@@ -20,7 +31,7 @@ function RenderPage {
             $active = ""
         }
 
-        $topics += "<li class=`"nav-item`"><a class=`"nav-link $active`" href='/docs/$($path.BaseName)'>$($path.BaseName)</a></li>"
+        $topics += "<li class='nav-item'><a class='nav-link $active' href='/docs/$($path.BaseName)'>$($path.BaseName)</a></li>"
     }
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
