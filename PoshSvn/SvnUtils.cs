@@ -149,5 +149,45 @@ namespace PoshSvn
                 default: throw new NotImplementedException();
             }
         }
+
+        internal static char GetPropetyStatusString(SvnStatus localPropertyStatus)
+        {
+            if (localPropertyStatus == SvnStatus.Conflicted)
+            {
+                return 'C';
+            }
+            else if (localPropertyStatus == SvnStatus.Modified)
+            {
+                return 'M';
+            }
+            else
+            {
+                return ' ';
+            }
+        }
+
+        internal static char GetLockedString(SvnLockInfo lockInfo)
+        {
+            if (lockInfo == null)
+            {
+                return ' ';
+            }
+            else
+            {
+                return 'L';
+            }
+        }
+
+        internal static char GetCopiedString(bool localCopied)
+        {
+            if (localCopied)
+            {
+                return '+';
+            }
+            else
+            {
+                return ' ';
+            }
+        }
     }
 }
