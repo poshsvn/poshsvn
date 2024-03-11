@@ -32,14 +32,15 @@ referenced by any file in the working copy.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-svn-cleanup path\to\wc
-```
+### Example 1: Clean up a working copy
 
 Clean up the working copy located at `C:\path\to\wc`. Usually, this is only
 necessary if a Subversion client has crashed while using the working copy,
-leaving it in an unusable state.
+leaving it in an unusable state:
+
+```powershell
+svn-cleanup C:\path\to\wc
+```
 
 ## PARAMETERS
 

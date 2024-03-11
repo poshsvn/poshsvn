@@ -22,12 +22,13 @@ Check out a working copy from a repository.
 
 ## EXAMPLES
 
-### Example 1
+### Example 1: Check out a working copy
+
+Check out the serf repository into 'serf-trunk' directory:
+
 ```powershell
 svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
 ```
-
-Checks out the serf repository into 'serf-trunk' directory.
 
 ## PARAMETERS
 

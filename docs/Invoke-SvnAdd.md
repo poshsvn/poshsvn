@@ -22,16 +22,20 @@ Schedule files, directories, or symbolic links in your working copy for addition
 
 ## EXAMPLES
 
-### Example 1
+### Example 1: Add a file
+
+To add a file to your working copy:
+
 ```powershell
 svn-add .\foo.c
 
 A       foo.c
 ```
 
-Adds a file from your working copy.
+### Example 2: Add a directory with content
 
-### Example 2
+When adding a directory, the default behavior of `svn-add` is to recurse:
+
 ```powershell
 svn-add testdir
 
@@ -42,23 +46,30 @@ A       testdir\c
 A       testdir\d
 ```
 
-When adding a directory, the default behavior of svn-add is to recurse.
+### Example 3: Add a directory without content
 
-### Example 3
+You can add a directory without adding its contents:
+
 ```powershell
 svn-add otherdir -Depth Empty
 
 A       otherdir
 ```
 
-You can add a directory without adding its contents.
+### Example 4: Add versioned directory
 
-### Example 4
+Attempts to add an item which is already versioned will fail by default.
+To override the default behavior and force Subversion to recurse into
+already-versioned directories, pass the `-Force` option:
+
 ```powershell
-{{ Add example code here }}
+svn-add VersionedDirictory
+Invoke-SvnAdd: 'C:\Users\cmpilato\projects\subversion\site' is already under version control.
+svn-add VersionedDirictory -Force
+A        VersionedDirictory\foo.c
+A        VersionedDirictory\somedir\bar.c
+A        VersionedDirictory\otherdir\docs\baz.doc
 ```
-
-TODO:
 
 ## PARAMETERS
 
