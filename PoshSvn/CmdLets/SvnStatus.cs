@@ -121,7 +121,7 @@ namespace PoshSvn.CmdLets
                                                Conflicted);
 
                 char statusChar = SvnUtils.GetStatusCode(combinedStatus);
-                char propStatus = SvnUtils.GetPropetyStatusString(LocalPropertyStatus);
+                char propStatus = SvnUtils.GetPropetyStatusString(LocalPropertyStatus, LocalNodeStatus);
                 char locked = SvnUtils.GetLockedString(LocalLock);
                 char copied = SvnUtils.GetCopiedString(LocalCopied);
 

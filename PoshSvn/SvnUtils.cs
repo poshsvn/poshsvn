@@ -150,9 +150,13 @@ namespace PoshSvn
             }
         }
 
-        internal static char GetPropetyStatusString(SvnStatus localPropertyStatus)
+        internal static char GetPropetyStatusString(SvnStatus localPropertyStatus, SvnStatus localNodeStatus)
         {
-            if (localPropertyStatus == SvnStatus.Conflicted)
+            if (localNodeStatus == SvnStatus.Added)
+            {
+                return ' ';
+            }
+            else if (localPropertyStatus == SvnStatus.Conflicted)
             {
                 return 'C';
             }
