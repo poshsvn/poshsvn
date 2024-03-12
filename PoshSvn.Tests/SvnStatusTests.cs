@@ -133,5 +133,28 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void NewFileTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"'abc' > wc\a.txt");
+                sb.RunScript(@"svn-add wc\a.txt");
+                var actual = sb.RunScript(@"svn-status wc");
+
+                CollectionAssert.AreEqual(
+                       new[]
+                       {
+                            @"",
+                            @"Status  Path",
+                            @"------  ----",
+                            @"A       wc\a.txt",
+                            @"",
+                            @"",
+                       },
+                       sb.FormatObject(actual, "Format-Table"));
+            }
+        }
     }
 }
