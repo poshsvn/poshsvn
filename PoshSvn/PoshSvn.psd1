@@ -8,7 +8,7 @@
     CLRVersion             = "4.0"
     Description            = "Apache Subversion client for PowerShell
 
-Project website and documentation: https://www.poshsvn.com"
+Project website: https://www.poshsvn.com"
     ProcessorArchitecture  = "Amd64"
     RootModule             = "PoshSvn.dll"
     DotNetFrameworkVersion = "4.7.2"
