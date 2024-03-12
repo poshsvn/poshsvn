@@ -304,7 +304,7 @@ namespace PoshSvn.Tests
                 CollectionAssert.AreEqual(
                     new[]
                     {
-                         "",
+                        "",
                         "D       a",
                         "A       b",
                         "U       .",
