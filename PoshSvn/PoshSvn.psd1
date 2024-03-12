@@ -79,7 +79,6 @@ Project website and documentation: https://www.poshsvn.com"
     PrivateData            = @{
         PSData = @{
             Tags                     = @("svn", "subversion")
-            Prerelease               = "alpha"
             ReleaseNotes             = "Changelog will be available soon."
             # LicenseUri = "https://aka.ms/azps-license"
             ProjectUri = "https://www.poshsvn.com"
