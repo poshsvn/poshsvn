@@ -18,7 +18,7 @@ Describes basics of PoshSvn usage.
 PoshSvn provides the following features:
 
 - Tab tab-completion (tab-expansion) for commands and parameters.
-- Typed cmdlet output.
+- Typed output of cmdlets.
 - Formatted output to repeat the Subversion command line interface user experience.
 
 ## Concept
