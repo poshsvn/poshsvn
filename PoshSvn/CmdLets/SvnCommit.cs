@@ -28,10 +28,13 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            foreach (var item in RevisionProperties)
+            if (RevisionProperties != null)
             {
-                DictionaryEntry prop = (DictionaryEntry)item;
-                args.LogProperties.Add(prop.Key.ToString(), prop.Value.ToString());
+                foreach (var item in RevisionProperties)
+                {
+                    DictionaryEntry prop = (DictionaryEntry)item;
+                    args.LogProperties.Add(prop.Key.ToString(), prop.Value.ToString());
+                }
             }
 
             SvnClient.Commit(GetPathTargets(Path, null), args);
