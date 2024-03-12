@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.Collections;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -16,12 +17,22 @@ namespace PoshSvn.CmdLets
         [Parameter(Mandatory = true)]
         public string Message { get; set; }
 
+        [Parameter()]
+        [Alias("with-revprop", "rp", "revprop")]
+        public Hashtable RevisionProperties { get; set; }
+
         protected override void Execute()
         {
             SvnCommitArgs args = new SvnCommitArgs
             {
                 LogMessage = Message,
             };
+
+            foreach (var item in RevisionProperties)
+            {
+                DictionaryEntry prop = (DictionaryEntry)item;
+                args.LogProperties.Add(prop.Key.ToString(), prop.Value.ToString());
+            }
 
             SvnClient.Commit(GetPathTargets(Path, null), args);
         }
