@@ -103,7 +103,7 @@ All notable changes to this project will be documented in this file.
 - Initial release"
             # LicenseUri = "https://aka.ms/azps-license"
             ProjectUri = "https://www.poshsvn.com"
-            # IconUri = ""
+            IconUri = "https://www.poshsvn.com/icon.svg"
             RequireLicenseAcceptance = $false
             # ExternalModuleDependencies = @()
         }
