@@ -83,3 +83,5 @@ foreach ($path in Get-ChildItem $outDir -Recurse -Filter "*.html" -Exclude "goog
     $url = $url -replace "\\", "/" -replace "/index.html"
     Add-Content -Path "$outDir\sitemap.txt" -Value $url
 }
+
+Copy-Item "$PSScriptRoot\..\icon-minimal.svg" "$outDir\favicon.svg"
