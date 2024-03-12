@@ -62,5 +62,52 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void WithRevpropOutputTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\a");
+
+                var actual = sb.RunScript(@"svn-commit wc -m 'test' -revprop @{ prop = 'val' }");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.CommitAdded,
+                            Path = Path.Combine(sb.WcPath, "a")
+                        },
+                        new SvnCommitOutput
+                        {
+                            Revision = 1
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void WithRevpropLogTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\a");
+                sb.RunScript(@"svn-commit wc -m 'test' -revprop @{ prop = 'val' }");
+                var actual = sb.FormatObject(
+                    sb.RunScript($@"(svn-log -End 1 -WithRevisionProperties prop, svn:log {sb.ReposUrl}).RevisionProperties | foreach {{ ""$($_.Key) : $($_.StringValue)"" }}"),
+                    "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        "prop : val",
+                        "svn:log : test",
+                    },
+                    actual);
+            }
+        }
     }
 }
