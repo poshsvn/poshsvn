@@ -36,6 +36,70 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void CopyTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\a");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-copy wc\a wc\b");
+
+                var actual = sb.RunScript(@"svn-status wc");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnLocalStatusOutput
+                        {
+                            LocalNodeStatus = SharpSvn.SvnStatus.Added,
+                            Path = Path.Combine(sb.WcPath, "b"),
+                            LocalTextStatus = SharpSvn.SvnStatus.Normal,
+                            Versioned = true,
+                            Conflicted = false,
+                            LocalCopied = true,
+                            LastChangedRevision = 1
+                        },
+                    },
+                    actual,
+                    nameof(SvnLocalStatusOutput.LastChangedAuthor),
+                    nameof(SvnLocalStatusOutput.LastChangedTime));
+            }
+        }
+
+        [Test]
+        public void CopyOutputTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                CollectionAssert.AreEqual(
+                        new[]
+                        {
+                            "",
+                            "Status  Path",
+                            "------  ----",
+                            "A  +    b",
+                            "",
+                            "",
+                        },
+                        sb.FormatObject(
+                            new[]
+                            {
+                                new SvnLocalStatusOutput
+                                {
+                                    LocalNodeStatus = SharpSvn.SvnStatus.Added,
+                                    Path = Path.Combine(sb.RootPath, "b"),
+                                    LocalTextStatus = SharpSvn.SvnStatus.Normal,
+                                    Versioned = true,
+                                    Conflicted = false,
+                                    LocalCopied = true,
+                                    LastChangedRevision = 1
+                                },
+                            },
+                            "Format-Table"));
+            }
+        }
+
+        [Test]
         public void ManyTargets()
         {
             using (var sb = new WcSandbox())
