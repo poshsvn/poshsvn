@@ -295,5 +295,35 @@ namespace PoshSvn.Tests
 
             ClassicAssert.AreEqual(@"Revert  C:\path\to\item", item.ToString());
         }
+
+        [Test]
+        public void SwitchOutputTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                         "",
+                        "D       a",
+                        "A       b",
+                        "U       .",
+                        "",
+                        "Revision : 4",
+                        "",
+                        "",
+                        "",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.RootPath, "a") },
+                            new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateAdd, Path = Path.Combine(sb.RootPath, "b") },
+                            new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.RootPath) },
+                            new SvnSwitchOutput { Revision = 4 },
+                        },
+                        "Format-Custom"));
+            }
+        }
     }
 }
