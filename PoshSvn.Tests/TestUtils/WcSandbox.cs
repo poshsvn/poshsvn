@@ -16,8 +16,6 @@ namespace PoshSvn.Tests.TestUtils
             ReposUrl = "file:///" + ReposPath.Replace('\\', '/');
             WcPath = Path.Combine(RootPath, "wc");
 
-            Directory.CreateDirectory(ReposPath);
-
             RunScript($@"svnadmin-create .\repos",
                       $@"svn-checkout '{ReposUrl}' .\wc");
         }
