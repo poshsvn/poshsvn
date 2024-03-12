@@ -111,8 +111,10 @@ namespace PoshSvn
                 }
                 else if (e.CommandType == SvnCommandType.Switch)
                 {
-                    // TODO:
-                    throw new NotImplementedException();
+                    WriteObject(new SvnSwitchOutput
+                    {
+                        Revision = e.Revision
+                    });
                 }
             }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)

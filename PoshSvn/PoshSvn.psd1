@@ -28,6 +28,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnList"
         "Invoke-SvnRevert"
         "Invoke-SvnCopy"
+        "Invoke-SvnSwitch"
     )
     AliasesToExport        = @(
         "svn-status"
@@ -45,6 +46,7 @@ Project website: https://www.poshsvn.com"
         "svn-list"
         "svn-revert"
         "svn-copy"
+        "svn-switch"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
