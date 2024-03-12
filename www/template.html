@@ -9,6 +9,7 @@
   <title>PoshSVN | {{title}}</title>
   <script src="/bootstrap.bundle.min.js"></script>
   <script src="/script.js"></script>
+  <link rel="icon" href="/favicon.svg">
 </head>
 
 <body class="position-relative ps-lg-sbwidth">
@@ -25,7 +26,10 @@
           </svg>
         </button>
       </div>
-      <a class="navbar-brand d-lg-none ms-auto" href="/">PoshSVN</a>
+      <a class="navbar-brand d-lg-none ms-auto d-flex align-items-center" href="/">
+        <img src="/favicon.svg" alt="logo" style="height: 32px;" class="me-2">
+        PoshSVN
+      </a>
       <div class="d-none d-lg-block text-truncate"
         style="color: hsla(var(--bs-emphasis-color-hsl), 0.7); letter-spacing: 1px;">
         <a href="/docs/about_PoshSvn" class="link fw-bold">Docs</a>
@@ -41,7 +45,10 @@
   <nav class="sidebar offcanvas-start offcanvas-lg" id="sidebar">
     <div class="offcanvas-header border-bottom border-secondary border-opacity-25 py-0 height-nav">
       <div>
-        <a class="sidebar-brand" href="/">PoshSVN</a>
+        <a class="sidebar-brand d-flex align-items-center" href="/">
+          <img src="/favicon.svg" alt="logo" style="height: 32px;" class="me-2">
+          PoshSVN
+        </a>
       </div>
       <div>
         <button type="button" class="btn btn-secondary" onclick="toggleDarkMode()">
