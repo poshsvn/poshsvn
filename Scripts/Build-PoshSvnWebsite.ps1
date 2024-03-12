@@ -85,3 +85,4 @@ foreach ($path in Get-ChildItem $outDir -Recurse -Filter "*.html" -Exclude "goog
 }
 
 Copy-Item "$PSScriptRoot\..\icon-minimal.svg" "$outDir\favicon.svg"
+Copy-Item "$PSScriptRoot\..\icon.svg" "$outDir\icon.svg"
