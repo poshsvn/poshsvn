@@ -2,9 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.3]
+
+- Minor fixes and improvement.
+- Implement `svn-copy`.
+
 ## [0.1.2]
 
-- Add documentation to some of the commands.
+- Add documentation.
 - Some fixes in metadata.
 
 ## [0.1.1]
