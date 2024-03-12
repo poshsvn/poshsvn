@@ -20,14 +20,14 @@ namespace PoshSvn.CmdLets
         {
             using (SvnRepositoryClient client = new SvnRepositoryClient())
             {
-                string[] resolvedPaths = GetPathTargets(Path, null);
-
-                foreach (string resolvedPath in resolvedPaths)
+                foreach (string path in Path)
                 {
+                    string resolvedPath = GetPathTarget(path);
                     client.CreateRepository(resolvedPath, new SvnCreateRepositoryArgs
                     {
                         RepositoryType = RepositoryType.ConvertToSvnRepositoryFileSystem(),
                     });
+
                     WriteVerbose(string.Format("Repository '{0}' created.", resolvedPath));
                 }
             }
