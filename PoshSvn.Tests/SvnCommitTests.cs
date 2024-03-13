@@ -109,5 +109,42 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        [Ignore("Not Implemented")]
+        public void ComplexTest1()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($@"Set-Content wc\README abc");
+                sb.RunScript($@"svn-mkdir wc\src");
+                sb.RunScript($@"Set-Content wc\src\foo.c abc");
+                sb.RunScript($@"Set-Content wc\src\bar.c abc");
+                sb.RunScript($@"svn-add wc -Force -Depth Infinity");
+
+                sb.RunScript($@"svn-commit wc -m test");
+
+                sb.RunScript($@"svn-move wc\README wc\src\README");
+                sb.RunScript($@"Add-Content wc\src\foo.c abc");
+                sb.RunScript($@"Add-Content wc\src\bar.c abc");
+                sb.RunScript($@"svn-add wc -Force -Depth Infinity");
+
+                var actual = sb.FormatObject(sb.RunScript("svn-commit wc -m test"),
+                                             "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        @"",
+                        @"A       C:\path\to\wc\a",
+                        @"A       C:\path\to\wc\b",
+                        @"D       C:\path\to\wc\c",
+                        @"Committed revision 78432.",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
     }
 }
