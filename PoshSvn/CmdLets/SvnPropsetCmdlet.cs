@@ -7,7 +7,6 @@ namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnPropset")]
     [Alias("svn-propset")]
-    [OutputType(typeof(SvnCheckoutOutput))]
     public class SvnPropsetCmdlet : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
