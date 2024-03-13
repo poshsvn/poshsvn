@@ -5,6 +5,7 @@
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
         <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
+        <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
         <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
         <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
       </ViewSelectedBy>
@@ -27,6 +28,14 @@
                 <ScriptBlock>$_.Revision</ScriptBlock>
               </ExpressionBinding>
               <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Committing transaction...</Text>
             </CustomItem>
           </CustomEntry>
           <CustomEntry>

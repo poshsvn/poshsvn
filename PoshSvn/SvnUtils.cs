@@ -88,6 +88,23 @@ namespace PoshSvn
                 case SvnNotifyAction.Revert:
                     return "Revert";
 
+                case SvnNotifyAction.CommitAdded:
+                case SvnNotifyAction.CommitAddCopy:
+                    return "Added";
+
+                case SvnNotifyAction.CommitReplaced:
+                case SvnNotifyAction.CommitReplacedWithCopy:
+                    return "Replaced";
+
+                case SvnNotifyAction.CommitDeleted:
+                    return "Deleted";
+
+                case SvnNotifyAction.CommitModified:
+                    return "Modified";
+
+                case SvnNotifyAction.CommitSendData:
+                    return "Sending";
+
                 case SvnNotifyAction.UpdateUpdate: return "U";
                 // case SvnNotifyAction.Conflict: return "C";
                 // case SvnNotifyAction.UpdateMerge: return "G";

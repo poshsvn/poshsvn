@@ -26,4 +26,12 @@ namespace PoshSvn
             return string.Format("{0,-7} {1}", actionString, path);
         }
     }
+
+    public class SvnCommittingOutput : SvnNotifyOutput
+    {
+        public SvnCommittingOutput()
+        {
+            Action = SvnNotifyAction.CommitFinalizing;
+        }
+    }
 }

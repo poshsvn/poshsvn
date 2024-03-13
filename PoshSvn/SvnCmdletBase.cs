@@ -119,11 +119,8 @@ namespace PoshSvn
             }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)
             {
+                WriteObject(new SvnCommittingOutput());
                 UpdateAction("Committing transaction...");
-            }
-            else if (e.Action == SvnNotifyAction.CommitSendData)
-            {
-                UpdateAction("Transmitting file data...");
             }
             else
             {
@@ -221,11 +218,6 @@ namespace PoshSvn
             {
                 Revision = e.Revision
             });
-        }
-
-        protected void CommittingEventHandler(object sender, SvnCommittingEventArgs e)
-        {
-            UpdateAction("Committing transaction...");
         }
     }
 }

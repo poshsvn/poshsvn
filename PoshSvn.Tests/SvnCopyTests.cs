@@ -182,6 +182,12 @@ namespace PoshSvn.Tests
                             Action = SharpSvn.SvnNotifyAction.CommitAdded,
                             Path = Path.Combine(sb.WcPath, "a.txt")
                         },
+                        new SvnNotifyOutput
+                        {
+                            Action = SharpSvn.SvnNotifyAction.CommitSendData,
+                            Path = Path.Combine(sb.WcPath, "a.txt")
+                        },
+                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
@@ -210,6 +216,10 @@ namespace PoshSvn.Tests
                         new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.CommitAdded, Path = Path.Combine(sb.WcPath, @"a.txt") },
                         new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.CommitAdded, Path = Path.Combine(sb.WcPath, @"b.txt") },
                         new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.CommitAdded, Path = Path.Combine(sb.WcPath, @"c.txt") },
+                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.CommitSendData, Path = Path.Combine(sb.WcPath, @"a.txt") },
+                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.CommitSendData, Path = Path.Combine(sb.WcPath, @"b.txt") },
+                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.CommitSendData, Path = Path.Combine(sb.WcPath, @"c.txt") },
+                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
@@ -233,6 +243,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                    new object[]
                    {
+                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 2
@@ -260,6 +271,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                    new object[]
                    {
+                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 3

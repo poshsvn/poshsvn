@@ -80,6 +80,7 @@ namespace PoshSvn.Tests
                             Action = SharpSvn.SvnNotifyAction.CommitAdded,
                             Path = Path.Combine(sb.WcPath, "a")
                         },
+                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
@@ -111,7 +112,6 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        [Ignore("Not Implemented")]
         public void ComplexTest1()
         {
             using (var sb = new WcSandbox())
@@ -136,10 +136,14 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         @"",
-                        @"A       C:\path\to\wc\a",
-                        @"A       C:\path\to\wc\b",
-                        @"D       C:\path\to\wc\c",
-                        @"Committed revision 78432.",
+                        @"Deleted wc\README",
+                        @"Added   wc\src\README",
+                        @"Modified wc\src\bar.c",
+                        @"Modified wc\src\foo.c",
+                        @"Sending wc\src\foo.c",
+                        @"Sending wc\src\bar.c",
+                        @"Committing transaction...",
+                        @"Committed revision 2.",
                         @"",
                         @"",
                     },
