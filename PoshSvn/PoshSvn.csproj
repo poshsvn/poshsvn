@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <Platforms>x64;</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SvnItem.format.ps1xml" />
+    <None Remove="SvnLog.format.ps1xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpSvn" Version="1.14003.272" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PoshSvn.psd1" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="SvnItem.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SvnLog.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SvnNotifyOutput.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="SvnInfo.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="SvnStatus.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
