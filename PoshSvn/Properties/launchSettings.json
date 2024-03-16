@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PoshSvn": {
+      "commandName": "Executable",
+      "executablePath": "powershell.exe",
+      "commandLineArgs": "-NoExit -Command \"& ipmo .\\PoshSvn.psd1 -Verbose"
+    }
+  }
+}
