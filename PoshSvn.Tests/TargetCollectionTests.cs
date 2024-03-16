@@ -7,7 +7,7 @@ using SharpSvn;
 
 namespace PoshSvn.Tests
 {
-    public class TargetTests
+    public class TargetCollectionTests
     {
         [Test]
         public void BasicTest()
