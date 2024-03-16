@@ -1,0 +1,10 @@
+[*]
+indent_style=space
+
+# Default severity for analyzer diagnostics with category 'Assertion'
+dotnet_analyzer_diagnostic.category-Assertion.severity = silent
+
+dotnet_sort_system_directives_first = true
+
+[*.{xml,ps1xml,html}]
+indent_size=2
