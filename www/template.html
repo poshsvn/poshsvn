@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/halfmoon.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <title>PoshSVN | {{title}}</title>
+  <script src="/bootstrap.bundle.min.js"></script>
+  <script src="/script.js"></script>
+</head>
+
+<body class="position-relative ps-lg-sbwidth">
+  <nav class="navbar navbar-expand height-nav">
+    <div class="container-sm px-3 px-sm-4 px-xl-5 justify-content-start">
+      <div class="text-nowrap">
+        <button type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
+          class="btn btn-secondary btn-square d-lg-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-layout-sidebar-inset" viewBox="0 0 16 16">
+            <path
+              d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z" />
+            <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+          </svg>
+        </button>
+      </div>
+      <a class="navbar-brand d-lg-none ms-auto" href="/">PoshSVN</a>
+      <div class="d-none d-lg-block text-truncate"
+        style="color: hsla(var(--bs-emphasis-color-hsl), 0.7); letter-spacing: 1px;">
+        <a href="/docs/about_PoshSvn" class="link fw-bold">Docs</a>
+        <span class="mx-1">/</span>
+        <a href="/docs/{{title}}" class="link">{{title}}</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <a class="btn btn-primary" href="https://www.powershellgallery.com/packages/PoshSvn"
+          style="min-width: 75px">Install</a>
+      </div>
+    </div>
+  </nav>
+  <nav class="sidebar offcanvas-start offcanvas-lg" id="sidebar">
+    <div class="offcanvas-header border-bottom border-secondary border-opacity-25 py-0 height-nav">
+      <div>
+        <a class="sidebar-brand" href="/">PoshSVN</a>
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" onclick="toggleDarkMode()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-fill"
+            viewBox="0 0 16 16">
+            <path
+              d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+          </svg>
+        </button>
+        <button type="button" class="btn-close ms-1 d-lg-none" data-bs-dismiss="offcanvas"
+          data-bs-target="#sidebar"></button>
+      </div>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="sidebar-nav" style="margin-top: -1rem;">
+        {{topics}}
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm px-3 px-sm-4 px-xl-5 content">
+    <div class="row">
+      <main class="col-xl-9 py-3 py-sm-4 docs-content">
+        {{content}}
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>

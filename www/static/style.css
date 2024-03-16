@@ -1,0 +1,73 @@
+.container {
+    max-width: 1000px;
+}
+
+body {
+    min-height: 100vh;
+}
+
+pre {
+    background: var(--bs-secondary-bg);
+    border: var(--bs-border-width-1) solid var(--bs-content-border-color);
+    font-size: var(--bs-font-size-base);
+    color: var(--bs-body-color);
+    line-height: 1.6;
+    word-wrap: break-word;
+    padding: var(--bs-spacer-4) var(--bs-spacer-3);
+    border-radius: var(--bs-border-radius-lg);
+}
+
+.docs-content>hr:first-of-type,
+.docs-content>h2:first-of-type,
+#synopsis {
+    display: none;
+}
+
+.topics {
+    width: 13rem;
+    margin-left: auto;
+}
+
+.bi {
+    vertical-align: -.125em;
+}
+
+.navbar {
+    background-color: var(--bs-content-bg);
+    border-bottom: var(--bs-border-width) solid var(--bs-content-border-color);
+}
+
+.btn-collapse {
+    margin-top: -1rem;
+    margin-bottom: 0.5rem;
+}
+
+.link {
+    color: hsla(var(--bs-emphasis-color-hsl), 0.75);
+    text-decoration: none;
+}
+
+.link:hover {
+    color: hsla(var(--bs-emphasis-color-hsl), 0.9);
+}
+
+.height-nav {
+    height: 60px;
+}
+
+.btn-close {
+    transform: translateY(-2.5px);
+}
+
+p code {
+    white-space: nowrap;
+}
+
+/* ? */
+/* .topics a {
+    color: var(--bs-link-color)
+}
+
+.topics a:visited {
+    color: #ac7ee1;
+} */
