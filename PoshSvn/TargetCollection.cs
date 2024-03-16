@@ -42,7 +42,7 @@ namespace PoshSvn
                 }
                 else
                 {
-                    throw new ArgumentException("Target can only be 'string' or 'Uri'", "Target");
+                    throw new ArgumentException(string.Format("Target can only be 'string' or 'Uri', but was '{0}'", target.GetType()), "Target");
                 }
             }
 

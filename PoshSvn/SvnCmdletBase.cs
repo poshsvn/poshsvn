@@ -185,6 +185,54 @@ namespace PoshSvn
             }
         }
 
+        protected IEnumerable<object> GetTargets(PoshSvnTarget[] targets)
+        {
+            foreach (PoshSvnTarget target in targets)
+            {
+                if (target.Type == SvnTargetType.Path)
+                {
+                    foreach (string path in GetPathTargets(target.Value, true))
+                    {
+                        // TODO: check providerInfo
+
+                        yield return path;
+                    }
+                }
+                else if (target.Type == SvnTargetType.LiteralPath)
+                {
+                    yield return GetPathTarget(target.Value);
+                }
+                else if (target.Type == SvnTargetType.Url)
+                {
+                    yield return new Uri(target.Value);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
+
+        protected object GetTarget(PoshSvnTarget target)
+        {
+            if (target.Type == SvnTargetType.Path)
+            {
+                return GetPathTarget(target.Value);
+            }
+            else if (target.Type == SvnTargetType.LiteralPath)
+            {
+                return GetPathTarget(target.Value);
+            }
+            else if (target.Type == SvnTargetType.Url)
+            {
+                return new Uri(target.Value);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         protected object GetTarget(string Target, string Path, Uri Url)
         {
             if (ParameterSetName == TargetParameterSetNames.Target)
