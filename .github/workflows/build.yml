@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      Configuration: Release
+  
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Test
+        run: ipmo .\Build.ps1; Test-PoshSvn
+
+      - name: Publish
+        run: ipmo .\Build.ps1; Build-PoshSvn
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PoshSvn
+          path: .\bin\poshsvn
