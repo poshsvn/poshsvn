@@ -1,0 +1,27 @@
+name: Build and Test PoshSvn
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      Configuration: Release
+  
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Test
+        run: .\Scripts\Test-PoshSvn.ps1
+
+      - name: Publish
+        run: .\Scripts\Build-PoshSvn.ps1
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PoshSvn
+          path: .\bin\poshsvn

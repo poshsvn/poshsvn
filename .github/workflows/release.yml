@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions: write-all
+
+jobs:
+  create_release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        draft: true
+        prerelease: false
+
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      release_id: ${{ steps.create_release.outputs.id }}
+
+  build:
+    needs: create_release
+
+    env:
+      Configuration: Release
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build
+      run: .\Scripts\Build-PoshSvn.ps1
+
+    - name: Upload package to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: .\bin\poshsvn.zip
+        asset_name: poshsvn.zip
+        asset_content_type: application/zip
+
+    - name: Publish to PowerShell gallery
+      run: .\Scripts\Publish-PoshSvn.ps1 -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
+
+  publish_release:
+    needs: 
+      - create_release
+      - build
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ needs.create_release.outputs.release_id }}
