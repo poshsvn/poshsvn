@@ -1,0 +1,134 @@
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>SvnLocalStatus</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.CmdLets.SvnLocalStatusOutput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>7</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Path</Label>
+            <Width>100</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Status</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>Detailed</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.CmdLets.SvnLocalStatusOutput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>7</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Revision</Label>
+            <Width>9</Width>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Last Rev</Label>
+            <Width>9</Width>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Last Author</Label>
+            <Width>12</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Status</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if (-not $_.Versioned) {
+                  ""
+                  }
+                  elseif ($_.LocalCopied -or ($_.Revision -eq $null)) {
+                  "-"
+                  }
+                  else {
+                  $_.Revision
+                  }
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LastChangedRevision</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LastChangedAuthor</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>SvnRemoteStatus</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.CmdLets.SvnRemoteStatusOutput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>7</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Revision</Label>
+            <Width>8</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Status</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.RemoteUpdateRevision -eq -1) {
+                  "";
+                  }
+                  else {
+                  $_.RemoteUpdateRevision
+                  }
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>
