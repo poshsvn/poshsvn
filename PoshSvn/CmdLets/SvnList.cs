@@ -6,19 +6,13 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnList", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnList")]
     [Alias("svn-list")]
     [OutputType(typeof(SvnItem), typeof(SvnItemDetailed))]
     public class SvnList : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; } = new string[] { "" };
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public Uri[] Url { get; set; }
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         [Alias("v")]
@@ -29,11 +23,20 @@ namespace PoshSvn.CmdLets
         public SvnRevision Revision { get; set; }
 
         [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Immediates;
+        public SvnDepth Depth { get; set; }
 
         [Parameter()]
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
+
+        public SvnList()
+        {
+            Depth = SvnDepth.Immediates;
+            Target = new SvnTarget[]
+            {
+                SvnTarget.FromPath(".")
+            };
+        }
 
         protected override void Execute()
         {
@@ -49,9 +52,9 @@ namespace PoshSvn.CmdLets
                 args.RetrieveEntries = SvnDirEntryItems.AllFieldsV15;
             }
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
 
-            foreach (SvnTarget target in targets.Targets)
+            foreach (SharpSvn.SvnTarget target in targets.Targets)
             {
                 SvnClient.List(target, args, ListHandler);
             }
