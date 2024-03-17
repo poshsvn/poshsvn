@@ -85,7 +85,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                Assert.Throws<ItemNotFoundException>(() => sb.RunScript(
+                Assert.Throws<SharpSvn.SvnUnversionedNodeException>(() => sb.RunScript(
                     @"svn-delete wc\dir"));
 
                 Assert.Throws<SvnInvalidNodeKindException>(() => sb.RunScript(
@@ -162,8 +162,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($"svn-mkdir wc/a");
                 sb.RunScript($"svn-commit wc -m test");
                 sb.RunScript($"rm wc/a");
-                Assert.Throws<ItemNotFoundException>(() => sb.RunScript($"svn-delete wc/a"));
-                Assert.Warn("TODO: Implement deletion of non-existing items.");
+                sb.RunScript($"svn-delete wc/a");
             }
         }
 
