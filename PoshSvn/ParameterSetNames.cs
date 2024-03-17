@@ -4,7 +4,6 @@ namespace PoshSvn
 {
     public static class ParameterSetNames
     {
-        public const string Target = "Target";
         public const string Path = "Path";
         public const string Url = "Url";
         public const string PathOrUrl = "PathOrUrl";
