@@ -14,6 +14,9 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.Path)]
         public string Path { get; set; }
 
+        [Parameter(ParameterSetName = ParameterSetNames.LiteralPath)]
+        public string LiteralPath { get; set; }
+
         [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public string Url { get; set; }
 
@@ -27,6 +30,10 @@ namespace PoshSvn.CmdLets
             {
                 WriteObject(PoshSvnTarget.FromPath(Path));
             }
+            else if (ParameterSetName == ParameterSetNames.LiteralPath)
+            {
+                WriteObject(PoshSvnTarget.FromLiteralPath(LiteralPath));
+            }
             else if (ParameterSetName == ParameterSetNames.Url)
             {
                 WriteObject(PoshSvnTarget.FromUrl(Url));
@@ -37,6 +44,7 @@ namespace PoshSvn.CmdLets
         {
             public const string PathOrUrl = "PathOrUrl";
             public const string Path = "Path";
+            public const string LiteralPath = "LiteralPath";
             public const string Url = "Url";
         }
     }
