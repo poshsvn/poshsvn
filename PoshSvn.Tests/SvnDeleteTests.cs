@@ -163,7 +163,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($"svn-commit wc -m test");
                 sb.RunScript($"rm wc/a");
                 Assert.Throws<ItemNotFoundException>(() => sb.RunScript($"svn-delete wc/a"));
-                Assert.Warn("TODO");
+                Assert.Warn("TODO: Implement deletion of non-existing items.");
             }
         }
 
