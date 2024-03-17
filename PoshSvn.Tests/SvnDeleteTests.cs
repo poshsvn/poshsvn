@@ -100,7 +100,7 @@ namespace PoshSvn.Tests
             using (var sb = new WcSandbox())
             {
                 Collection<PSObject> actual = sb.RunScript(
-                    $"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'",
+                    $"svn-mkdir '{sb.ReposUrl}/dir' -m 'add'",
                     $"svn-delete '{sb.ReposUrl}/dir' -m 'delete'");
 
                 PSObjectAssert.AreEqual(
@@ -121,7 +121,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                sb.RunScript($"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'");
+                sb.RunScript($"svn-mkdir (New-SvnTarget -url '{sb.ReposUrl}/dir') -m 'add'");
 
                 var actual = sb.RunScript($"(svn-delete (New-SvnTarget -url '{sb.ReposUrl}/dir') -m 'delete'| Out-String -Stream).TrimEnd()");
 
