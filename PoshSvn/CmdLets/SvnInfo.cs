@@ -6,18 +6,18 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = ParameterSetNames.Target)]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoOutput))]
     public class SvnInfo : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Target, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; } = new string[] { "" };
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
+        [Parameter(ParameterSetName = ParameterSetNames.Path)]
         public string[] Path { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
+        [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public Uri[] Url { get; set; }
 
         [Parameter()]

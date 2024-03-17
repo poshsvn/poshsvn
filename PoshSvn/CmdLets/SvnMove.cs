@@ -14,17 +14,17 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 0, Mandatory = true)]
         public string[] Source { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target)]
+        [Parameter(Position = 1, Mandatory = true, ParameterSetName = ParameterSetNames.Target)]
         public string Destination { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
+        [Parameter(ParameterSetName = ParameterSetNames.Path)]
         public string DestinationPath { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
+        [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public Uri DestinationUrl { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Target)]
+        [Parameter(ParameterSetName = ParameterSetNames.Url, Mandatory = true)]
         [Alias("m")]
         public string Message { get; set; }
 
