@@ -29,6 +29,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnRevert"
         "Invoke-SvnCopy"
         "Invoke-SvnSwitch"
+        "New-SvnTarget"
     )
     AliasesToExport        = @(
         "svn-status"
