@@ -15,7 +15,7 @@ $tagName = $data.ModuleVersion
 if (($baseUrl.Segments | Select-Object -Last 1) -eq "trunk/") {
     $tagUrl = "$baseUrl/../tags/$tagName"
     try {
-        svn-copy $baseUrl $tagUrl -maa "Create tag '$tagName'"
+        svn-copy -Source $baseUrl -Destination $tagUrl -Message "Create tag '$tagName'"
     }
     catch {
         $choice = @(
