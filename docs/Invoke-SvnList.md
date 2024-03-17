@@ -12,22 +12,9 @@ List directory entries in the directory.
 
 ## SYNTAX
 
-### Target (Default)
 ```
-Invoke-SvnList [[-Target] <String[]>] [-Detailed] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
- [-IncludeExternals] [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Path
-```
-Invoke-SvnList [-Path <String[]>] [-Detailed] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Url
-```
-Invoke-SvnList [-Url <Uri[]>] [-Detailed] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnList [[-Target] <SvnTarget[]>] [-Detailed] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
+ [-IncludeExternals] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -90,21 +77,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-Specifies a Path to the directory to list.
-
-```yaml
-Type: String[]
-Parameter Sets: Path
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Revision
 Specifies a revision on with which to operate.
 
@@ -124,27 +96,12 @@ Accept wildcard characters: False
 Specifies the Path or the Url of the directory to list.
 
 ```yaml
-Type: String[]
-Parameter Sets: Target
+Type: SvnTarget[]
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Url
-Specifies the Url of the directory to list.
-
-```yaml
-Type: Uri[]
-Parameter Sets: Url
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

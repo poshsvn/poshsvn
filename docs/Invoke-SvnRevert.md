@@ -13,8 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-SvnRevert [-Path] <String[]> [-Depth <SvnDepth>] [-Recursive] [-RemoveAdded]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnRevert [-Path] <String[]> [-Depth <SvnDepth>] [-Recursive] [-RemoveAdded] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -12,21 +12,14 @@ schema: 2.0.0
 
 ## SYNTAX
 
-### Path (Default)
+### Local (Default)
 ```
-Invoke-SvnMkdir -Path <String[]> [-Parents] [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Target
-```
-Invoke-SvnMkdir [-Target] <String[]> [-Message <String>] [-Parents] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnMkdir [-Target] <SvnTarget[]> [-Parents] [<CommonParameters>]
 ```
 
-### Url
+### Remote
 ```
-Invoke-SvnMkdir -Url <Uri[]> -Message <String> [-Parents] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnMkdir [-Target] <SvnTarget[]> [-Message <String>] [-Parents] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,22 +41,10 @@ Invoke-SvnMkdir -Url <Uri[]> -Message <String> [-Parents] [-ProgressAction <Acti
 
 ```yaml
 Type: String
-Parameter Sets: Target
+Parameter Sets: Remote
 Aliases: m
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: Url
-Aliases: m
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -85,48 +66,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-{{ Fill Path Description }}
-
-```yaml
-Type: String[]
-Parameter Sets: Path
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Target
 {{ Fill Target Description }}
 
 ```yaml
-Type: String[]
-Parameter Sets: Target
+Type: SvnTarget[]
+Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -Url
-{{ Fill Url Description }}
-
-```yaml
-Type: Uri[]
-Parameter Sets: Url
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

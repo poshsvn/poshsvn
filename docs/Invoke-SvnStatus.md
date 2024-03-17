@@ -14,14 +14,13 @@ schema: 2.0.0
 
 ### Local (Default)
 ```
-Invoke-SvnStatus [[-Path] <String[]>] [-All] [-Depth <SvnDepth>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnStatus [[-Path] <String[]>] [-All] [-Depth <SvnDepth>] [<CommonParameters>]
 ```
 
 ### Remote
 ```
 Invoke-SvnStatus [[-Path] <String[]>] [-ShowUpdates] [-All] [-Depth <SvnDepth>] [-Revision <SvnRevision>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION

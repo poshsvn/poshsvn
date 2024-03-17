@@ -13,8 +13,7 @@ Create a new, empty repository.
 ## SYNTAX
 
 ```
-Invoke-SvnAdminCreate [-Path] <String[]> [-RepositoryType <RepositoryType>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnAdminCreate [-Path] <String[]> [-RepositoryType <RepositoryType>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,7 +39,7 @@ This command will create an empty repository at `C:\Repositories\myrepo`.
 In Subversion 1.0, a Berkeley DB repository is always created. In Subversion 1.1, a Berkeley DB repository is the default repository type, but an FSFS repository can be created using the `-RepositoryType` option:
 
 ```powershell
-svnadmin-create C:\Repositories\myrepo -RepositoryType FsFs 
+svnadmin-create C:\Repositories\myrepo -RepositoryType FsFs
 ```
 
 ## PARAMETERS

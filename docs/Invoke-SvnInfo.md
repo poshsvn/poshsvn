@@ -12,22 +12,9 @@ schema: 2.0.0
 
 ## SYNTAX
 
-### Target (Default)
 ```
-Invoke-SvnInfo [[-Target] <String[]>] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Path
-```
-Invoke-SvnInfo [-Path <String[]>] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Url
-```
-Invoke-SvnInfo [-Url <Uri[]>] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnInfo [[-Target] <SvnTarget[]>] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,21 +62,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-{{ Fill Path Description }}
-
-```yaml
-Type: String[]
-Parameter Sets: Path
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Revision
 {{ Fill Revision Description }}
 
@@ -109,27 +81,12 @@ Accept wildcard characters: False
 {{ Fill Target Description }}
 
 ```yaml
-Type: String[]
-Parameter Sets: Target
+Type: SvnTarget[]
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Url
-{{ Fill Url Description }}
-
-```yaml
-Type: Uri[]
-Parameter Sets: Url
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

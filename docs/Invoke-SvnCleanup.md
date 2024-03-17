@@ -14,7 +14,7 @@ Clean up a working copy.
 
 ```
 Invoke-SvnCleanup [[-Path] <String[]>] [-RemoveUnversioned] [-RemoveIgnored] [-VacuumPristines]
- [-IncludeExternals] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-IncludeExternals] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
