@@ -185,13 +185,25 @@ namespace PoshSvn
             }
         }
 
+        protected string[] GetPathTargets(string path)
+        {
+            try
+            {
+                return GetPathTargets(path, true).ToArray();
+            }
+            catch (ItemNotFoundException)
+            {
+                return GetPathTargets(path, false).ToArray();
+            }
+        }
+
         protected IEnumerable<object> GetTargets(PoshSvnTarget[] targets)
         {
             foreach (PoshSvnTarget target in targets)
             {
                 if (target.Type == SvnTargetType.Path)
                 {
-                    foreach (string path in GetPathTargets(target.Value, true))
+                    foreach (string path in GetPathTargets(target.Value))
                     {
                         yield return path;
                     }
