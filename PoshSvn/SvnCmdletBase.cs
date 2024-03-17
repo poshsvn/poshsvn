@@ -193,8 +193,6 @@ namespace PoshSvn
                 {
                     foreach (string path in GetPathTargets(target.Value, true))
                     {
-                        // TODO: check providerInfo
-
                         yield return path;
                     }
                 }
