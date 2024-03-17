@@ -13,7 +13,7 @@ $data = Import-PowerShellDataFile -Path $PSScriptRoot\..\PoshSvn\PoshSvn.psd1
 $tagName = $data.ModuleVersion
 
 if (($baseUrl.Segments | Select-Object -Last 1) -eq "trunk/") {
-    $tagUrl = "$baseUrl/../tags/$tagName"
+    $tagUrl = "$baseUrl../tags/$tagName"
     try {
         svn-copy -Source $baseUrl -Destination $tagUrl -Message "Create tag '$tagName'"
     }
