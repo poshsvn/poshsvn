@@ -12,7 +12,7 @@ namespace PoshSvn.CmdLets
     public class SvnDelete : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
-        public PoshSvnTarget[] Target { get; set; }
+        public SvnTarget[] Target { get; set; }
 
         [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]

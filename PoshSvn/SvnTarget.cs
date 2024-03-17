@@ -4,12 +4,12 @@ using SharpSvn;
 
 namespace PoshSvn
 {
-    public class PoshSvnTarget
+    public class SvnTarget
     {
         public string Value { get; }
         public SvnTargetType Type { get; }
 
-        public PoshSvnTarget(string pathOrUrl)
+        public SvnTarget(string pathOrUrl)
         {
             if (pathOrUrl.Contains("://") && SvnUriTarget.TryParse(pathOrUrl, true, out _))
             {
@@ -23,25 +23,25 @@ namespace PoshSvn
             Value = pathOrUrl;
         }
 
-        private PoshSvnTarget(string value, SvnTargetType type)
+        private SvnTarget(string value, SvnTargetType type)
         {
             Value = value;
             Type = type;
         }
 
-        public static PoshSvnTarget FromPath(string path)
+        public static SvnTarget FromPath(string path)
         {
-            return new PoshSvnTarget(path, SvnTargetType.Path);
+            return new SvnTarget(path, SvnTargetType.Path);
         }
 
-        public static PoshSvnTarget FromLiteralPath(string path)
+        public static SvnTarget FromLiteralPath(string path)
         {
-            return new PoshSvnTarget(path, SvnTargetType.LiteralPath);
+            return new SvnTarget(path, SvnTargetType.LiteralPath);
         }
 
-        public static PoshSvnTarget FromUrl(string url)
+        public static SvnTarget FromUrl(string url)
         {
-            return new PoshSvnTarget(url, SvnTargetType.Url);
+            return new SvnTarget(url, SvnTargetType.Url);
         }
     }
 

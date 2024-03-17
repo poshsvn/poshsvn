@@ -9,13 +9,13 @@ namespace PoshSvn
 {
     public class TargetCollection
     {
-        public List<SvnTarget> Targets;
+        public List<SharpSvn.SvnTarget> Targets;
         public List<string> Paths { get; }
         public List<Uri> Uris { get; }
         public bool HasUris => Uris.Count > 0;
         public bool HasPaths => Paths.Count > 0;
 
-        protected TargetCollection(List<SvnTarget> targets, List<string> paths, List<Uri> uris)
+        protected TargetCollection(List<SharpSvn.SvnTarget> targets, List<string> paths, List<Uri> uris)
         {
             Targets = targets;
             Paths = paths;
@@ -24,7 +24,7 @@ namespace PoshSvn
 
         public static TargetCollection Parse(IEnumerable targets)
         {
-            List<SvnTarget> targetsList = new List<SvnTarget>();
+            List<SharpSvn.SvnTarget> targetsList = new List<SharpSvn.SvnTarget>();
             List<string> pathsList = new List<string>();
             List<Uri> urisList = new List<Uri>();
 

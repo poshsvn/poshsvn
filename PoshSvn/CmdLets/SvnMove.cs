@@ -12,10 +12,10 @@ namespace PoshSvn.CmdLets
     public class SvnMove : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
-        public PoshSvnTarget[] Source { get; set; }
+        public SvnTarget[] Source { get; set; }
 
         [Parameter(Position = 1, Mandatory = true)]
-        public PoshSvnTarget Destination { get; set; }
+        public SvnTarget Destination { get; set; }
 
         [Parameter(ParameterSetName = ParameterSetNames.Remote, Mandatory = true)]
         [Alias("m")]

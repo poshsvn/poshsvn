@@ -172,9 +172,9 @@ namespace PoshSvn
             }
         }
 
-        protected IEnumerable<object> GetTargets(PoshSvnTarget[] targets)
+        protected IEnumerable<object> GetTargets(SvnTarget[] targets)
         {
-            foreach (PoshSvnTarget target in targets)
+            foreach (SvnTarget target in targets)
             {
                 if (target.Type == SvnTargetType.Path)
                 {
@@ -205,7 +205,7 @@ namespace PoshSvn
             }
         }
 
-        protected object GetTarget(PoshSvnTarget target)
+        protected object GetTarget(SvnTarget target)
         {
             if (target.Type == SvnTargetType.Path)
             {

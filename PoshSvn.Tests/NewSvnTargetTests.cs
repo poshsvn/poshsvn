@@ -16,7 +16,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        PoshSvnTarget.FromPath(sb.RootPath)
+                        SvnTarget.FromPath(sb.RootPath)
                     },
                     sb.RunScript($@"New-SvnTarget '{sb.RootPath}'"));
             }
@@ -52,7 +52,7 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new[]
                     {
-                        PoshSvnTarget.FromUrl("http://svn.example.com/repos/test/foo.c")
+                        SvnTarget.FromUrl("http://svn.example.com/repos/test/foo.c")
                     },
                     sb.RunScript($@"New-SvnTarget 'http://svn.example.com/repos/test/foo.c'"));
             }
