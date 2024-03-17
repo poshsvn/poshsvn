@@ -149,43 +149,6 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url, bool resolved)
-        {
-            if (ParameterSetName == ParameterSetNames.Target)
-            {
-                foreach (string target in Target)
-                {
-                    if (target.Contains("://") && SvnUriTarget.TryParse(target, false, out _))
-                    {
-                        yield return new Uri(target);
-                    }
-                    else
-                    {
-                        foreach (string path in GetPathTargets(target, resolved))
-                        {
-                            // TODO: check providerInfo
-
-                            yield return path;
-                        }
-                    }
-                }
-            }
-            else if (ParameterSetName == ParameterSetNames.Path)
-            {
-                foreach (string path in GetPathTargets(Path, null))
-                {
-                    yield return path;
-                }
-            }
-            else if (ParameterSetName == ParameterSetNames.Url)
-            {
-                foreach (Uri url in Url)
-                {
-                    yield return url;
-                }
-            }
-        }
-
         protected string[] GetPathTargets(string path)
         {
             try
@@ -244,33 +207,6 @@ namespace PoshSvn
             else if (target.Type == SvnTargetType.Url)
             {
                 return new Uri(target.Value);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        protected object GetTarget(string Target, string Path, Uri Url)
-        {
-            if (ParameterSetName == ParameterSetNames.Target)
-            {
-                if (Target.Contains("://") && SvnUriTarget.TryParse(Target, false, out _))
-                {
-                    return new Uri(Target);
-                }
-                else
-                {
-                    return GetPathTarget(Target);
-                }
-            }
-            else if (ParameterSetName == ParameterSetNames.Path)
-            {
-                return GetPathTarget(Path);
-            }
-            else if (ParameterSetName == ParameterSetNames.Url)
-            {
-                return Url;
             }
             else
             {
