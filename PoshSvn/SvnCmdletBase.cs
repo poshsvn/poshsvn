@@ -161,6 +161,17 @@ namespace PoshSvn
             }
         }
 
+        protected IEnumerable<string> GetPathTargets(string[] paths)
+        {
+            foreach (string path in paths)
+            {
+                foreach (string resolvedPath in GetPathTargets(path))
+                {
+                    yield return resolvedPath;
+                }
+            }
+        }
+
         protected IEnumerable<object> GetTargets(PoshSvnTarget[] targets)
         {
             foreach (PoshSvnTarget target in targets)
