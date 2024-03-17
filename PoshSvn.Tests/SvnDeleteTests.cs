@@ -153,5 +153,30 @@ namespace PoshSvn.Tests
                     $"svn-delete wc http://example.com"));
             }
         }
+
+        [Test]
+        public void DeleteNotExsistingItem()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($"svn-mkdir wc/a");
+                sb.RunScript($"svn-commit wc -m test");
+                sb.RunScript($"rm wc/a");
+                Assert.Throws<ItemNotFoundException>(() => sb.RunScript($"svn-delete wc/a"));
+                Assert.Warn("TODO");
+            }
+        }
+
+        [Test]
+        public void DeleteNotExsistingItemViaLiteralPath()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($"svn-mkdir wc/a");
+                sb.RunScript($"svn-commit wc -m test");
+                sb.RunScript($"rm wc/a");
+                sb.RunScript($"svn-delete (New-SvnTarget -LiteralPath wc/a)");
+            }
+        }
     }
 }
