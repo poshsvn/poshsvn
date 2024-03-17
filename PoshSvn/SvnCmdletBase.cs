@@ -174,7 +174,7 @@ namespace PoshSvn
                 }
                 else if (target.Type == SvnTargetType.LiteralPath)
                 {
-                    yield return GetPathTarget(target.Value);
+                    yield return GetUnresolvedProviderPathFromPSPath(target.Value);
                 }
                 else if (target.Type == SvnTargetType.Url)
                 {
@@ -198,11 +198,11 @@ namespace PoshSvn
         {
             if (target.Type == SvnTargetType.Path)
             {
-                return GetPathTarget(target.Value);
+                return  GetUnresolvedProviderPathFromPSPath(target.Value);
             }
             else if (target.Type == SvnTargetType.LiteralPath)
             {
-                return GetPathTarget(target.Value);
+                return GetUnresolvedProviderPathFromPSPath(target.Value);
             }
             else if (target.Type == SvnTargetType.Url)
             {

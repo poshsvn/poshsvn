@@ -47,11 +47,11 @@ namespace PoshSvn.CmdLets
             string resolvedPath;
             if (Path == null)
             {
-                resolvedPath = GetPathTarget(Url.Segments.Last());
+                resolvedPath = GetUnresolvedProviderPathFromPSPath(Url.Segments.Last());
             }
             else
             {
-                resolvedPath = GetPathTarget(Path);
+                resolvedPath = GetUnresolvedProviderPathFromPSPath(Path);
             }
 
             SvnClient.CheckOut(new SvnUriTarget(Url), resolvedPath, args);

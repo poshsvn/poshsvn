@@ -37,7 +37,7 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            string path = GetPathTarget(Path);
+            string path = GetUnresolvedProviderPathFromPSPath(Path);
             SvnUriTarget target = SvnUriTarget.FromUri(Url);
 
             var args = new SvnSwitchArgs

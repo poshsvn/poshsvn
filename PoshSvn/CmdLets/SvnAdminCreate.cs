@@ -22,7 +22,7 @@ namespace PoshSvn.CmdLets
             {
                 foreach (string path in Path)
                 {
-                    string resolvedPath = GetPathTarget(path);
+                    string resolvedPath = GetUnresolvedProviderPathFromPSPath(path);
                     client.CreateRepository(resolvedPath, new SvnCreateRepositoryArgs
                     {
                         RepositoryType = RepositoryType.ConvertToSvnRepositoryFileSystem(),
