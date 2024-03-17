@@ -32,7 +32,7 @@ namespace PoshSvn.Tests
                 new Uri("http://svn.example.com/repos/dir_4")
             });
 
-            CollectionAssert.AreEqual(targets.Targets, new SvnTarget[]
+            CollectionAssert.AreEqual(targets.Targets, new SharpSvn.SvnTarget[]
             {
                 SvnPathTarget.FromString(@"C:\wc\dir_1"),
                 SvnPathTarget.FromString(@"C:\wc\dir_2"),

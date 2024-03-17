@@ -14,7 +14,7 @@ namespace PoshSvn.CmdLets
     public class SvnLog : SvnClientCmdletBase
     {
         [Parameter(Position = 0, ValueFromRemainingArguments = true)]
-        public PoshSvnTarget[] Target { get; set; }
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         public SvnRevision Start { get; set; } = null;
@@ -52,9 +52,9 @@ namespace PoshSvn.CmdLets
         public SvnLog()
         {
             Depth = SvnDepth.Empty;
-            Target = new PoshSvnTarget[]
+            Target = new SvnTarget[]
             {
-                PoshSvnTarget.FromPath(".")
+                SvnTarget.FromPath(".")
             };
         }
 

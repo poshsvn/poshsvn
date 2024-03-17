@@ -5,7 +5,7 @@ using System.Management.Automation;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("New", "SvnTarget", DefaultParameterSetName = ParameterSetNames.PathOrUrl)]
-    [OutputType(typeof(PoshSvnTarget))]
+    [OutputType(typeof(SvnTarget))]
     public class NewSvnTargetCmdlet : PSCmdlet
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = ParameterSetNames.PathOrUrl)]
@@ -24,19 +24,19 @@ namespace PoshSvn.CmdLets
         {
             if (ParameterSetName == ParameterSetNames.PathOrUrl)
             {
-                WriteObject(new PoshSvnTarget(PathOrUrl));
+                WriteObject(new SvnTarget(PathOrUrl));
             }
             else if (ParameterSetName == ParameterSetNames.Path)
             {
-                WriteObject(PoshSvnTarget.FromPath(Path));
+                WriteObject(SvnTarget.FromPath(Path));
             }
             else if (ParameterSetName == ParameterSetNames.LiteralPath)
             {
-                WriteObject(PoshSvnTarget.FromLiteralPath(LiteralPath));
+                WriteObject(SvnTarget.FromLiteralPath(LiteralPath));
             }
             else if (ParameterSetName == ParameterSetNames.Url)
             {
-                WriteObject(PoshSvnTarget.FromUrl(Url));
+                WriteObject(SvnTarget.FromUrl(Url));
             }
         }
     }

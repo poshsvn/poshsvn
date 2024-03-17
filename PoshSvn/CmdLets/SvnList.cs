@@ -12,7 +12,7 @@ namespace PoshSvn.CmdLets
     public class SvnList : SvnClientCmdletBase
     {
         [Parameter(Position = 0, ValueFromRemainingArguments = true)]
-        public PoshSvnTarget[] Target { get; set; }
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         [Alias("v")]
@@ -32,9 +32,9 @@ namespace PoshSvn.CmdLets
         public SvnList()
         {
             Depth = SvnDepth.Immediates;
-            Target = new PoshSvnTarget[]
+            Target = new SvnTarget[]
             {
-                PoshSvnTarget.FromPath(".")
+                SvnTarget.FromPath(".")
             };
         }
 
@@ -54,7 +54,7 @@ namespace PoshSvn.CmdLets
 
             TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
 
-            foreach (SvnTarget target in targets.Targets)
+            foreach (SharpSvn.SvnTarget target in targets.Targets)
             {
                 SvnClient.List(target, args, ListHandler);
             }
