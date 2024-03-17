@@ -6,25 +6,18 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnMove")]
+    [Cmdlet("Invoke", "SvnMove", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-move")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnMove : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
-        public string[] Source { get; set; }
+        public PoshSvnTarget[] Source { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = ParameterSetNames.Target)]
-        public string Destination { get; set; }
+        [Parameter(Position = 1, Mandatory = true)]
+        public PoshSvnTarget Destination { get; set; }
 
-        [Parameter(ParameterSetName = ParameterSetNames.Path)]
-        public string DestinationPath { get; set; }
-
-        [Parameter(ParameterSetName = ParameterSetNames.Url)]
-        public Uri DestinationUrl { get; set; }
-
-        [Parameter(ParameterSetName = ParameterSetNames.Target)]
-        [Parameter(ParameterSetName = ParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote, Mandatory = true)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -47,9 +40,9 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            TargetCollection sources = TargetCollection.Parse(GetTargets(Source, null, null, true));
+            TargetCollection sources = TargetCollection.Parse(GetTargets(Source));
             sources.ThrowIfHasPathsAndUris();
-            object destination = GetTarget(Destination, DestinationPath, DestinationUrl);
+            object destination = GetTarget(Destination);
 
             if (destination is string destinationPath)
             {
