@@ -12,26 +12,10 @@ Show the log messages for a set of revision(s) and/or path(s).
 
 ## SYNTAX
 
-### Target (Default)
 ```
-Invoke-SvnLog [[-Target] <String[]>] [-Start <SvnRevision>] [-End <SvnRevision>] [-ChangedPaths]
+Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Start <SvnRevision>] [-End <SvnRevision>] [-ChangedPaths]
  [-Limit <Int32>] [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties]
- [-WithNoRevisionProperties] [-WithRevisionProperties <String[]>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
-```
-
-### Path
-```
-Invoke-SvnLog [-Path <String[]>] [-Start <SvnRevision>] [-End <SvnRevision>] [-ChangedPaths] [-Limit <Int32>]
- [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
- [-WithRevisionProperties <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Url
-```
-Invoke-SvnLog [-Url <Uri[]>] [-Start <SvnRevision>] [-End <SvnRevision>] [-ChangedPaths] [-Limit <Int32>]
- [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
- [-WithRevisionProperties <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-WithNoRevisionProperties] [-WithRevisionProperties <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -198,21 +182,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-Specifies a Path of an item to show log.
-
-```yaml
-Type: String[]
-Parameter Sets: Path
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Start
 Specifies the start revision to show log.
 
@@ -232,28 +201,13 @@ Accept wildcard characters: False
 Specifies the Path or the Url of an item to show log. Path and Url targets cannot be combined in one invokation.
 
 ```yaml
-Type: String[]
-Parameter Sets: Target
+Type: SvnTarget[]
+Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 0
 Default value: .
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Url
-Specifies the Url of an item to show log.
-
-```yaml
-Type: Uri[]
-Parameter Sets: Url
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

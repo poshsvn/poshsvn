@@ -14,7 +14,7 @@ Check out a working copy from a repository.
 
 ```
 Invoke-SvnCheckout [-Url] <Uri> [[-Path] <String>] [-Revision <SvnRevision>] [-IgnoreExternals] [-Force]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -13,8 +13,7 @@ Update your working copy.
 ## SYNTAX
 
 ```
-Invoke-SvnUpdate [[-Path] <String[]>] [-Revision <SvnRevision>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnUpdate [[-Path] <String[]>] [-Revision <SvnRevision>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -12,22 +12,14 @@ Remove files and directories from version control.
 
 ## SYNTAX
 
-### Target
+### Local (Default)
 ```
-Invoke-SvnDelete [-Target] <String[]> [-Message <String>] [-Force] [-KeepLocal]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Path
-```
-Invoke-SvnDelete -Path <String[]> [-Force] [-KeepLocal] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnDelete [-Target] <SvnTarget[]> [-Force] [-KeepLocal] [<CommonParameters>]
 ```
 
-### Url
+### Remote
 ```
-Invoke-SvnDelete -Url <Uri[]> -Message <String> [-Force] [-KeepLocal] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnDelete [-Target] <SvnTarget[]> [-Message <String>] [-Force] [-KeepLocal] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -95,37 +87,10 @@ Specifies the log message.
 
 ```yaml
 Type: String
-Parameter Sets: Target
+Parameter Sets: Remote
 Aliases: m
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: Url
-Aliases: m
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-Specifies the Path of an item in a working copy to delete.
-
-```yaml
-Type: String[]
-Parameter Sets: Path
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -136,29 +101,14 @@ Accept wildcard characters: False
 Specifies the Path or the Url of an item to delete.
 
 ```yaml
-Type: String[]
-Parameter Sets: Target
+Type: SvnTarget[]
+Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -Url
-Specifies the Url of an item in a repository to delete.
-
-```yaml
-Type: Uri[]
-Parameter Sets: Url
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

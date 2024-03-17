@@ -13,8 +13,7 @@ Send changes from your working copy to the repository.
 ## SYNTAX
 
 ```
-Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-RevisionProperties <Hashtable>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,6 +84,21 @@ Aliases:
 
 Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RevisionProperties
+{{ Fill RevisionProperties Description }}
+
+```yaml
+Type: Hashtable
+Parameter Sets: (All)
+Aliases: with-revprop, rp, revprop
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

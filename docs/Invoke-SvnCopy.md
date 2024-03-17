@@ -12,22 +12,16 @@ Copy files and directories in a working copy or repository.
 
 ## SYNTAX
 
-### Target (Default)
+### Local (Default)
 ```
-Invoke-SvnCopy [-Source] <String[]> [-Destination] <String> [-Message <String>] [-Revision <SvnRevision>]
- [-IgnoreExternals] [-Parents] [-ProgressAction <ActionPreference>] [<CommonParameters>]
-```
-
-### Path
-```
-Invoke-SvnCopy [-DestinationPath <String>] [-Revision <SvnRevision>] [-IgnoreExternals] [-Parents]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnCopy [-Source] <SvnTarget[]> [-Destination] <SvnTarget> [-Revision <SvnRevision>] [-IgnoreExternals]
+ [-Parents] [<CommonParameters>]
 ```
 
-### Url
+### Remote
 ```
-Invoke-SvnCopy [-DestinationUrl <String>] -Message <String> [-Revision <SvnRevision>] [-IgnoreExternals]
- [-Parents] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnCopy [-Source] <SvnTarget[]> [-Destination] <SvnTarget> -Message <String> [-Revision <SvnRevision>]
+ [-IgnoreExternals] [-Parents] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,7 +50,7 @@ Status  Path
 A  +    b.txt
 ```
 
-This command copies an item within your working copy (this schedules the copy—nothing goes into the repository until you commit).
+This command copies an item within your working copy (this schedules the copy-nothing goes into the repository until you commit).
 
 ### Example 2
 ```powershell
@@ -94,7 +88,7 @@ svn-copy https://svn.example.com/repos/far-away .\near-here -Revision 6
 A         near-here
 ```
 
-This command copies item from the repository to your working copy (this just schedules the copy—nothing goes into the repository until you commit).
+This command copies item from the repository to your working copy (this just schedules the copy-nothing goes into the repository until you commit).
 
 Tip: This is the recommended way to resurrect a dead file in your repository!
 
@@ -128,42 +122,12 @@ This command creates a tag of a repository. You may use `-DestinationUrl` parame
 {{ Fill Destination Description }}
 
 ```yaml
-Type: String
-Parameter Sets: Target
+Type: SvnTarget
+Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DestinationPath
-{{ Fill DestinationPath Description }}
-
-```yaml
-Type: String
-Parameter Sets: Path
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DestinationUrl
-{{ Fill DestinationUrl Description }}
-
-```yaml
-Type: String
-Parameter Sets: Url
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -189,19 +153,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: Target
-Aliases: m
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: Url
+Parameter Sets: Remote
 Aliases: m
 
 Required: True
@@ -218,21 +170,6 @@ Accept wildcard characters: False
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named
@@ -260,8 +197,8 @@ Accept wildcard characters: False
 {{ Fill Source Description }}
 
 ```yaml
-Type: String[]
-Parameter Sets: Target
+Type: SvnTarget[]
+Parameter Sets: (All)
 Aliases:
 
 Required: True

@@ -12,9 +12,16 @@ schema: 2.0.0
 
 ## SYNTAX
 
+### Local (Default)
 ```
-Invoke-SvnMove [-Source] <String[]> [-Destination] <String> [-Force] [-Parents] [-AllowMixedRevisions]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-SvnMove [-Source] <SvnTarget[]> [-Destination] <SvnTarget> [-Force] [-Parents] [-AllowMixedRevisions]
+ [<CommonParameters>]
+```
+
+### Remote
+```
+Invoke-SvnMove [-Source] <SvnTarget[]> [-Destination] <SvnTarget> -Message <String> [-Force] [-Parents]
+ [-AllowMixedRevisions] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,7 +57,7 @@ Accept wildcard characters: False
 {{ Fill Destination Description }}
 
 ```yaml
-Type: String
+Type: SvnTarget
 Parameter Sets: (All)
 Aliases:
 
@@ -76,6 +83,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Message
+{{ Fill Message Description }}
+
+```yaml
+Type: String
+Parameter Sets: Remote
+Aliases: m
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Parents
 {{ Fill Parents Description }}
 
@@ -95,7 +117,7 @@ Accept wildcard characters: False
 {{ Fill Source Description }}
 
 ```yaml
-Type: String[]
+Type: SvnTarget[]
 Parameter Sets: (All)
 Aliases:
 
