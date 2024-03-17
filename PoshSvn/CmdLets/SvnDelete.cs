@@ -6,7 +6,7 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnDelete")]
+    [Cmdlet("Invoke", "SvnDelete", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-delete", "svn-remove")]
     [OutputType(typeof(SvnCommitOutput))]
     public class SvnDelete : SvnClientCmdletBase
@@ -14,7 +14,7 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
         public PoshSvnTarget[] Target { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 

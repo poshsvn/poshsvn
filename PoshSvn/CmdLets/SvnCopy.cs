@@ -6,7 +6,7 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnCopy")]
+    [Cmdlet("Invoke", "SvnCopy", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-copy")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnCopy : SvnClientCmdletBase
@@ -17,7 +17,7 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 1, Mandatory = true)]
         public PoshSvnTarget Destination { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = true, ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 
