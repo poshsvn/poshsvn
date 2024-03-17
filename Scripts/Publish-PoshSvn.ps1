@@ -3,9 +3,9 @@ param (
     [string]$NuGetApiKey
 )
 
-# & "$PSScriptRoot\Build-PoshSvn"
+& "$PSScriptRoot\Build-PoshSvn"
 
-# & "$PSScriptRoot\Test-PoshSvn"
+& "$PSScriptRoot\Test-PoshSvn"
 
 $baseUrl = (svn-info "$PSScriptRoot\..").Url
 
