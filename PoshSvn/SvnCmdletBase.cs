@@ -150,7 +150,7 @@ namespace PoshSvn
 
         protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url, bool resolved)
         {
-            if (ParameterSetName == TargetParameterSetNames.Target)
+            if (ParameterSetName == ParameterSetNames.Target)
             {
                 foreach (string target in Target)
                 {
@@ -169,14 +169,14 @@ namespace PoshSvn
                     }
                 }
             }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+            else if (ParameterSetName == ParameterSetNames.Path)
             {
                 foreach (string path in GetPathTargets(Path, null))
                 {
                     yield return path;
                 }
             }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
+            else if (ParameterSetName == ParameterSetNames.Url)
             {
                 foreach (Uri url in Url)
                 {
@@ -240,7 +240,7 @@ namespace PoshSvn
 
         protected object GetTarget(string Target, string Path, Uri Url)
         {
-            if (ParameterSetName == TargetParameterSetNames.Target)
+            if (ParameterSetName == ParameterSetNames.Target)
             {
                 if (Target.Contains("://") && SvnUriTarget.TryParse(Target, false, out _))
                 {
@@ -251,11 +251,11 @@ namespace PoshSvn
                     return GetPathTarget(Target);
                 }
             }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+            else if (ParameterSetName == ParameterSetNames.Path)
             {
                 return GetPathTarget(Path);
             }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
+            else if (ParameterSetName == ParameterSetNames.Url)
             {
                 return Url;
             }

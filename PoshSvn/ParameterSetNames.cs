@@ -2,7 +2,7 @@
 
 namespace PoshSvn
 {
-    public static class TargetParameterSetNames
+    public static class ParameterSetNames
     {
         public const string Target = "Target";
         public const string Path = "Path";

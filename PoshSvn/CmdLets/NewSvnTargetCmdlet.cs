@@ -4,37 +4,37 @@ using System.Management.Automation;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("New", "SvnTarget", DefaultParameterSetName = TargetParameterSetNames.PathOrUrl)]
+    [Cmdlet("New", "SvnTarget", DefaultParameterSetName = ParameterSetNames.PathOrUrl)]
     [OutputType(typeof(PoshSvnTarget))]
     public class NewSvnTargetCmdlet : PSCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.PathOrUrl)]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = ParameterSetNames.PathOrUrl)]
         public string PathOrUrl { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
+        [Parameter(ParameterSetName = ParameterSetNames.Path)]
         public string Path { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.LiteralPath)]
+        [Parameter(ParameterSetName = ParameterSetNames.LiteralPath)]
         public string LiteralPath { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
+        [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public string Url { get; set; }
 
         protected override void ProcessRecord()
         {
-            if (ParameterSetName == TargetParameterSetNames.PathOrUrl)
+            if (ParameterSetName == ParameterSetNames.PathOrUrl)
             {
                 WriteObject(new PoshSvnTarget(PathOrUrl));
             }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+            else if (ParameterSetName == ParameterSetNames.Path)
             {
                 WriteObject(PoshSvnTarget.FromPath(Path));
             }
-            else if (ParameterSetName == TargetParameterSetNames.LiteralPath)
+            else if (ParameterSetName == ParameterSetNames.LiteralPath)
             {
                 WriteObject(PoshSvnTarget.FromLiteralPath(LiteralPath));
             }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
+            else if (ParameterSetName == ParameterSetNames.Url)
             {
                 WriteObject(PoshSvnTarget.FromUrl(Url));
             }

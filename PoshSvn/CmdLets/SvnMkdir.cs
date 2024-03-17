@@ -11,18 +11,18 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(SvnNotifyOutput))]
     public class SvnMkDir : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = ParameterSetNames.Target,
                    ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
         public string[] Target { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Path, Mandatory = true)]
         public string[] Path { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Url, Mandatory = true)]
         public Uri[] Url { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Target)]
+        [Parameter(ParameterSetName = ParameterSetNames.Url, Mandatory = true)]
         [Alias("m")]
         public string Message { get; set; }
 
