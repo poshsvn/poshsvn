@@ -3,7 +3,7 @@
     Author                 = "Timofei Zhakov"
     CompanyName            = "Rinrab"
     Copyright              = "(c) Timofei Zhakov. All rights reserved."
-    ModuleVersion          = "0.1.3"
+    ModuleVersion          = "0.2.0"
     PowerShellVersion      = "3.0"
     CLRVersion             = "4.0"
     Description            = "Apache Subversion client for PowerShell
@@ -85,6 +85,12 @@ Project website: https://www.poshsvn.com"
             ReleaseNotes             = "# Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.2.0]
+
+- Rework targets of cmdlets.
+- Implement `svn-switch`.
+- Minor fixes and improvement.
 
 ## [0.1.3]
 

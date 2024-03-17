@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0]
+
+- Rework targets of cmdlets.
+- Implement `svn-switch`.
+- Minor fixes and improvement.
+
 ## [0.1.3]
 
 - Minor fixes and improvement.
