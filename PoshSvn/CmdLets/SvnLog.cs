@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
@@ -9,19 +8,13 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnLog", DefaultParameterSetName = ParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnLog")]
     [Alias("svn-log")]
     [OutputType(typeof(SvnLogOutput))]
     public class SvnLog : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ParameterSetName = ParameterSetNames.Target, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; } = new string[] { "" };
-
-        [Parameter(ParameterSetName = ParameterSetNames.Path)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = ParameterSetNames.Url)]
-        public Uri[] Url { get; set; }
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
+        public PoshSvnTarget[] Target { get; set; }
 
         [Parameter()]
         public SvnRevision Start { get; set; } = null;
@@ -38,7 +31,7 @@ namespace PoshSvn.CmdLets
         public int Limit { get; set; } = -1;
 
         [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
+        public SvnDepth Depth { get; set; }
 
         [Parameter()]
         [Alias("include-externals")]
@@ -55,6 +48,15 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         [Alias("with-revprop")]
         public string[] WithRevisionProperties { get; set; }
+
+        public SvnLog()
+        {
+            Depth = SvnDepth.Empty;
+            Target = new PoshSvnTarget[]
+            {
+                PoshSvnTarget.FromPath(".")
+            };
+        }
 
         protected override void Execute()
         {
@@ -83,7 +85,7 @@ namespace PoshSvn.CmdLets
 
             args.Progress += ProgressEventHandler;
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
 
             targets.ThrowIfHasPathsAndUris();
 
