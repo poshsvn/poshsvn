@@ -1,28 +1,19 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
 using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
+    [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-mkdir")]
     [OutputType(typeof(SvnNotifyOutput))]
     public class SvnMkDir : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = ParameterSetNames.Target,
-                   ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; }
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
+        public PoshSvnTarget[] Target { get; set; }
 
-        [Parameter(ParameterSetName = ParameterSetNames.Path, Mandatory = true)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = ParameterSetNames.Url, Mandatory = true)]
-        public Uri[] Url { get; set; }
-
-        [Parameter(ParameterSetName = ParameterSetNames.Target)]
-        [Parameter(ParameterSetName = ParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -39,7 +30,7 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
+            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
             targets.ThrowIfHasPathsAndUris();
 
             if (targets.HasPaths)
