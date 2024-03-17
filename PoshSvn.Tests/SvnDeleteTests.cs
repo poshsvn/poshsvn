@@ -85,7 +85,7 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                Assert.Throws<ItemNotFoundException>(() => sb.RunScript(
+                Assert.Throws<SharpSvn.SvnUnversionedNodeException>(() => sb.RunScript(
                     @"svn-delete wc\dir"));
 
                 Assert.Throws<SvnInvalidNodeKindException>(() => sb.RunScript(
@@ -100,7 +100,7 @@ namespace PoshSvn.Tests
             using (var sb = new WcSandbox())
             {
                 Collection<PSObject> actual = sb.RunScript(
-                    $"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'",
+                    $"svn-mkdir '{sb.ReposUrl}/dir' -m 'add'",
                     $"svn-delete '{sb.ReposUrl}/dir' -m 'delete'");
 
                 PSObjectAssert.AreEqual(
@@ -121,9 +121,9 @@ namespace PoshSvn.Tests
         {
             using (var sb = new WcSandbox())
             {
-                Collection<PSObject> actual = sb.RunScript(
-                    $"svn-mkdir -url '{sb.ReposUrl}/dir' -m 'add'",
-                    $"(svn-delete -url '{sb.ReposUrl}/dir' -m 'delete'| Out-String -Stream).TrimEnd()");
+                sb.RunScript($"svn-mkdir (New-SvnTarget -url '{sb.ReposUrl}/dir') -m 'add'");
+
+                var actual = sb.RunScript($"(svn-delete (New-SvnTarget -url '{sb.ReposUrl}/dir') -m 'delete'| Out-String -Stream).TrimEnd()");
 
                 CollectionAssert.AreEqual(
                     new string[]
@@ -134,7 +134,7 @@ namespace PoshSvn.Tests
                         $@"",
                         $@"",
                     },
-                    Array.ConvertAll(actual.ToArray(), a => a.BaseObject));
+                    sb.FormatObject(actual, "Format-Custom"));
             }
         }
 
@@ -144,13 +144,37 @@ namespace PoshSvn.Tests
             using (var sb = new WcSandbox())
             {
                 Assert.Throws<ArgumentException>(() => sb.RunScript(
-                    $"svn-delete -url not_uri -m 'delete'"));
+                    $"svn-delete (New-SvnTarget -url not_uri) -m 'delete'"));
 
                 Assert.Throws<DriveNotFoundException>(() => sb.RunScript(
-                    $"svn-delete -path http://example.com"));
+                    $"svn-delete (New-SvnTarget -path http://example.com)"));
 
                 Assert.Throws<ArgumentException>(() => sb.RunScript(
                     $"svn-delete wc http://example.com"));
+            }
+        }
+
+        [Test]
+        public void DeleteNotExsistingItem()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($"svn-mkdir wc/a");
+                sb.RunScript($"svn-commit wc -m test");
+                sb.RunScript($"rm wc/a");
+                sb.RunScript($"svn-delete wc/a");
+            }
+        }
+
+        [Test]
+        public void DeleteNotExsistingItemViaLiteralPath()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript($"svn-mkdir wc/a");
+                sb.RunScript($"svn-commit wc -m test");
+                sb.RunScript($"rm wc/a");
+                sb.RunScript($"svn-delete (New-SvnTarget -LiteralPath wc/a)");
             }
         }
     }

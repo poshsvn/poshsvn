@@ -6,25 +6,18 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnCopy", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnCopy", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-copy")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnCopy : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target)]
-        public string[] Source { get; set; }
+        [Parameter(Position = 0, Mandatory = true)]
+        public SvnTarget[] Source { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target)]
-        public string Destination { get; set; }
+        [Parameter(Position = 1, Mandatory = true)]
+        public SvnTarget Destination { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string DestinationPath { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public string DestinationUrl { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(Mandatory = true, ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -49,8 +42,8 @@ namespace PoshSvn.CmdLets
                 IgnoreExternals = IgnoreExternals,
             };
 
-            TargetCollection sources = TargetCollection.Parse(GetTargets(Source, null, null, true));
-            object destination = GetTarget(Destination, null, null);
+            TargetCollection sources = TargetCollection.Parse(GetTargets(Source));
+            object destination = GetTarget(Destination);
 
             if (destination is string destinationPath)
             {

@@ -103,8 +103,8 @@ namespace PoshSvn.Tests
         {
             using (WcSandbox sb = new WcSandbox())
             {
-                Assert.Throws<DriveNotFoundException>(() => sb.RunScript($"svn-info -Path '{sb.ReposUrl}'"));
-                Assert.Throws<ArgumentException>(() => sb.RunScript($"svn-info -Url wc"));
+                Assert.Throws<DriveNotFoundException>(() => sb.RunScript($"svn-info (New-SvnTarget -Path '{sb.ReposUrl}')"));
+                Assert.Throws<ArgumentException>(() => sb.RunScript($"svn-info (New-SvnTarget -Url wc)"));
             }
         }
 

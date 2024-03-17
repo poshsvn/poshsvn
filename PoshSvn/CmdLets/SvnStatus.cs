@@ -6,7 +6,7 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnStatus", DefaultParameterSetName = "Local")]
+    [Cmdlet("Invoke", "SvnStatus", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-status")]
     [OutputType(typeof(SvnLocalStatusOutput))]
     public class SvnStatus : SvnClientCmdletBase
@@ -14,7 +14,7 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 0, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; } = new string[] { "" };
 
-        [Parameter(ParameterSetName = "Remote", Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote, Mandatory = true)]
         public SwitchParameter ShowUpdates { get; set; }
 
         [Parameter()]
@@ -23,7 +23,7 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
 
-        [Parameter(ParameterSetName = "Remote")]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("rev")]
         public SvnRevision Revision { get; set; }
 

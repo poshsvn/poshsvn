@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Management.Automation;
 using PoshSvn.CmdLets;
 using SharpSvn;
@@ -148,63 +149,75 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url, bool resolved)
+        protected string[] GetPathTargets(string path)
         {
-            if (ParameterSetName == TargetParameterSetNames.Target)
+            try
             {
-                foreach (string target in Target)
-                {
-                    if (target.Contains("://") && SvnUriTarget.TryParse(target, false, out _))
-                    {
-                        yield return new Uri(target);
-                    }
-                    else
-                    {
-                        foreach (string path in GetPathTargets(target, resolved))
-                        {
-                            // TODO: check providerInfo
+                return GetPathTargets(path, true).ToArray();
+            }
+            catch (ItemNotFoundException)
+            {
+                return GetPathTargets(path, false).ToArray();
+            }
+        }
 
-                            yield return path;
-                        }
-                    }
-                }
-            }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+        protected IEnumerable<string> GetPathTargets(string[] paths)
+        {
+            foreach (string path in paths)
             {
-                foreach (string path in GetPathTargets(Path, null))
+                foreach (string resolvedPath in GetPathTargets(path))
                 {
-                    yield return path;
-                }
-            }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
-            {
-                foreach (Uri url in Url)
-                {
-                    yield return url;
+                    yield return resolvedPath;
                 }
             }
         }
 
-        protected object GetTarget(string Target, string Path, Uri Url)
+        protected IEnumerable<object> GetTargets(SvnTarget[] targets)
         {
-            if (ParameterSetName == TargetParameterSetNames.Target)
+            foreach (SvnTarget target in targets)
             {
-                if (Target.Contains("://") && SvnUriTarget.TryParse(Target, false, out _))
+                if (target.Type == SvnTargetType.Path)
                 {
-                    return new Uri(Target);
+                    foreach (string path in GetPathTargets(target.Value))
+                    {
+                        yield return path;
+                    }
+                }
+                else if (target.Type == SvnTargetType.LiteralPath)
+                {
+                    yield return GetUnresolvedProviderPathFromPSPath(target.Value);
+                }
+                else if (target.Type == SvnTargetType.Url)
+                {
+                    if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri uri))
+                    {
+                        yield return uri;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Wrong Url format.", "Url");
+                    }
                 }
                 else
                 {
-                    return GetPathTarget(Target);
+                    throw new NotImplementedException();
                 }
             }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+        }
+
+        protected object GetTarget(SvnTarget target)
+        {
+            if (target.Type == SvnTargetType.Path)
             {
-                return GetPathTarget(Path);
+                return  GetUnresolvedProviderPathFromPSPath(target.Value);
             }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
+            else if (target.Type == SvnTargetType.LiteralPath)
             {
-                return Url;
+                return GetUnresolvedProviderPathFromPSPath(target.Value);
+            }
+            else if (target.Type == SvnTargetType.Url)
+            {
+                return new Uri(target.Value);
             }
             else
             {
