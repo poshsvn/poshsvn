@@ -204,7 +204,14 @@ namespace PoshSvn
                 }
                 else if (target.Type == SvnTargetType.Url)
                 {
-                    yield return new Uri(target.Value);
+                    if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri uri))
+                    {
+                        yield return uri;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Wrong Url format.", "Url");
+                    }
                 }
                 else
                 {
