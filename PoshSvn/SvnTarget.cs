@@ -36,7 +36,7 @@ namespace PoshSvn
 
         public static PoshSvnTarget FromLiteralPath(string path)
         {
-            return new PoshSvnTarget(path, SvnTargetType.Path);
+            return new PoshSvnTarget(path, SvnTargetType.LiteralPath);
         }
 
         public static PoshSvnTarget FromUrl(string url)
