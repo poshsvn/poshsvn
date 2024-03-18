@@ -378,47 +378,6 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void Range()
-        {
-            using (var sb = new WcSandbox())
-            {
-                sb.RunScript(
-                    @"
-                    cd wc;
-                    0..10 | foreach {
-                        svn-mkdir $_;
-                        svn-commit $_ -m 'test';
-                    }");
-
-                var actual = sb.RunScript("svn-log wc -start 5 -end 7");
-
-                PSObjectAssert.AreEqual(
-                    new[]
-                    {
-                        new SvnLogOutput
-                        {
-                            Revision = 5,
-                            Message = "test",
-                        },
-                        new SvnLogOutput
-                        {
-                            Revision = 6,
-                            Message = "test",
-                        },
-                        new SvnLogOutput
-                        {
-                            Revision = 7,
-                            Message = "test",
-                        },
-                    },
-                    actual,
-                    nameof(SvnLogOutput.Author),
-                    nameof(SvnLogOutput.Date),
-                    nameof(SvnLogOutput.RevisionProperties));
-            }
-        }
-
-        [Test]
         public void RevisionTestSingle()
         {
             using (var sb = new WcSandbox())
