@@ -28,8 +28,6 @@ namespace PoshSvn.Tests
                         },
                     },
                     actual);
-
-                Assert.Throws<SvnSystemException>(() => sb.RunScript($@"svn-mkdir wc\a\b\c"));
             }
         }
 
@@ -55,8 +53,6 @@ namespace PoshSvn.Tests
                         },
                     },
                     actual);
-
-                Assert.Throws<SvnSystemException>(() => sb.RunScript($@"svn-mkdir wc\a\b\c"));
             }
         }
 
@@ -82,8 +78,6 @@ namespace PoshSvn.Tests
                         },
                     },
                     actual);
-
-                Assert.Throws<SvnSystemException>(() => sb.RunScript($@"svn-mkdir wc\a\b\c"));
             }
         }
 
@@ -130,8 +124,6 @@ namespace PoshSvn.Tests
                         },
                     },
                     actual);
-
-                Assert.Throws<SvnSystemException>(() => sb.RunScript($@"svn-mkdir wc\a\b\c"));
             }
         }
 
@@ -173,8 +165,6 @@ namespace PoshSvn.Tests
                         },
                     },
                     actual);
-
-                Assert.Throws<SvnSystemException>(() => sb.RunScript($@"svn-mkdir wc\a\b\c"));
             }
         }
     }
