@@ -98,7 +98,7 @@ namespace PoshSvn.Tests
                 sb.RunScript(@"svn-mkdir wc\a");
                 sb.RunScript(@"svn-commit wc -m 'test' -revprop @{ prop = 'val' }");
                 var actual = sb.FormatObject(
-                    sb.RunScript($@"(svn-log -End 1 -WithRevisionProperties prop, svn:log {sb.ReposUrl}).RevisionProperties | foreach {{ ""$($_.Key) : $($_.StringValue)"" }}"),
+                    sb.RunScript($@"(svn-log -Revision 1 -WithRevisionProperties prop, svn:log {sb.ReposUrl}).RevisionProperties | foreach {{ ""$($_.Key) : $($_.StringValue)"" }}"),
                     "Format-Custom");
 
                 CollectionAssert.AreEqual(
