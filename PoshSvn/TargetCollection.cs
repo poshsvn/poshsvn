@@ -49,11 +49,11 @@ namespace PoshSvn
         {
             if (target is string path)
             {
-                return SvnPathTarget.FromString(path);
+                return SvnPathTarget.FromString(path, true);
             }
             else if (target is Uri uri)
             {
-                return SvnUriTarget.FromUri(uri);
+                return SvnUriTarget.FromString(uri.ToString(), true);
             }
             else
             {
