@@ -4,12 +4,12 @@ namespace PoshSvn
 {
     public class PoshSvnRevision
     {
-        public SvnRevisionType RevisionType { get; set; }
+        public PoshSvnRevisionType RevisionType { get; set; }
         public long Revision { get; set; }
 
         public PoshSvnRevision(long revision)
         {
-            RevisionType = SvnRevisionType.Number;
+            RevisionType = PoshSvnRevisionType.Number;
             Revision = revision;
         }
 
@@ -18,14 +18,14 @@ namespace PoshSvn
             // TODO:
         }
 
-        public PoshSvnRevision(SvnRevisionType type)
+        public PoshSvnRevision(PoshSvnRevisionType type)
         {
             RevisionType = type;
         }
 
         public SharpSvn.SvnRevision ToSharpSvnRevision()
         {
-            if (RevisionType == SvnRevisionType.Number)
+            if (RevisionType == PoshSvnRevisionType.Number)
             {
                 return new SharpSvn.SvnRevision(Revision);
             }
