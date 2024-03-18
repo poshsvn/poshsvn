@@ -73,9 +73,9 @@ namespace PoshSvn.CmdLets
 
             if (Revision != null)
             {
-                SvnRevisionRange parsedRevision = SvnRevisionParser.ParseSvnRevisionRange(Revision);
-                args.Start = parsedRevision.StartRevision;
-                args.End = parsedRevision.EndRevision;
+                PoshSvnRevisionRange parsedRevision = new PoshSvnRevisionRange(Revision);
+                args.Start = parsedRevision.StartRevision.ToSharpSvnRevision();
+                args.End = parsedRevision.EndRevision.ToSharpSvnRevision();
             }
 
             if (Start != null)
