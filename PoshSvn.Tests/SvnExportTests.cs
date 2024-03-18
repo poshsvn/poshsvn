@@ -34,7 +34,6 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        [Ignore("NotImplemented")]
         public void ExportOneItemAtPegRevision()
         {
             using (var sb = new WcSandbox())
