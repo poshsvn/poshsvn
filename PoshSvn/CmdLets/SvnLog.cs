@@ -21,12 +21,6 @@ namespace PoshSvn.CmdLets
         public PoshSvnRevisionRange Revision { get; set; } = null;
 
         [Parameter()]
-        public SvnRevision Start { get; set; } = null;
-
-        [Parameter()]
-        public SvnRevision End { get; set; } = null;
-
-        [Parameter()]
         [Alias("v")]
         public SwitchParameter ChangedPaths { get; set; }
 
@@ -75,16 +69,6 @@ namespace PoshSvn.CmdLets
             {
                 args.Start = Revision.StartRevision.ToSharpSvnRevision();
                 args.End = Revision.EndRevision.ToSharpSvnRevision();
-            }
-
-            if (Start != null)
-            {
-                args.Start = Start;
-            }
-
-            if (End != null)
-            {
-                args.End = End;
             }
 
             if (WithRevisionProperties != null)
