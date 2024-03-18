@@ -18,7 +18,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev", "r")]
-        public string Revision { get; set; } = null;
+        public PoshSvnRevisionRange Revision { get; set; } = null;
 
         [Parameter()]
         public SvnRevision Start { get; set; } = null;
@@ -73,9 +73,8 @@ namespace PoshSvn.CmdLets
 
             if (Revision != null)
             {
-                PoshSvnRevisionRange parsedRevision = new PoshSvnRevisionRange(Revision);
-                args.Start = parsedRevision.StartRevision.ToSharpSvnRevision();
-                args.End = parsedRevision.EndRevision.ToSharpSvnRevision();
+                args.Start = Revision.StartRevision.ToSharpSvnRevision();
+                args.End = Revision.EndRevision.ToSharpSvnRevision();
             }
 
             if (Start != null)
