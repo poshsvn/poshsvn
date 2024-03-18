@@ -417,5 +417,154 @@ namespace PoshSvn.Tests
                     nameof(SvnLogOutput.RevisionProperties));
             }
         }
+
+        [Test]
+        public void RevisionTestSingle()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(
+                    @"
+                    cd wc;
+                    0..10 | foreach {
+                        svn-mkdir $_;
+                        svn-commit $_ -m 'test';
+                    }");
+
+                var actual = sb.RunScript("svn-log wc -Revision 5");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnLogOutput
+                        {
+                            Revision = 5,
+                            Message = "test",
+                        },
+                    },
+                    actual,
+                    nameof(SvnLogOutput.Author),
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
+            }
+        }
+
+        [Test]
+        public void RevisionTestRange()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(
+                    @"
+                    cd wc;
+                    0..10 | foreach {
+                        svn-mkdir $_;
+                        svn-commit $_ -m 'test';
+                    }");
+
+                var actual = sb.RunScript("svn-log wc -Revision 5:7");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnLogOutput
+                        {
+                            Revision = 5,
+                            Message = "test",
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 6,
+                            Message = "test",
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 7,
+                            Message = "test",
+                        },
+                    },
+                    actual,
+                    nameof(SvnLogOutput.Author),
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
+            }
+        }
+
+        [Test]
+        public void RevisionTestHeadRange()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(
+                    @"
+                    cd wc;
+                    0..10 | foreach {
+                        svn-mkdir $_;
+                        svn-commit $_ -m 'test';
+                    }");
+
+                var actual = sb.RunScript("svn-log wc -Revision 8:HEAD");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnLogOutput
+                        {
+                            Revision = 8,
+                            Message = "test",
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 9,
+                            Message = "test",
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 10,
+                            Message = "test",
+                        },
+                        new SvnLogOutput
+                        {
+                            Revision = 11,
+                            Message = "test",
+                        },
+                    },
+                    actual,
+                    nameof(SvnLogOutput.Author),
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
+            }
+        }
+
+        [Test]
+        public void RevisionTestHead()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(
+                    @"
+                    cd wc;
+                    0..10 | foreach {
+                        svn-mkdir $_;
+                        svn-commit $_ -m 'test';
+                    }");
+
+                var actual = sb.RunScript("svn-log wc -Revision HEAD");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnLogOutput
+                        {
+                            Revision = 11,
+                            Message = "test",
+                        },
+                    },
+                    actual,
+                    nameof(SvnLogOutput.Author),
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.RevisionProperties));
+            }
+        }
     }
 }
