@@ -34,5 +34,12 @@ namespace PoshSvn
                 return new SharpSvn.SvnRevision(RevisionType.ToSharpSvnRevisionType());
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is PoshSvnRevision revision &&
+                   RevisionType == revision.RevisionType &&
+                   Revision == revision.Revision;
+        }
     }
 }
