@@ -30,7 +30,7 @@ Source and Destination can each be either a working copy (WC) path or Url:
 - `WC` to `Url`: immediately commit a copy of WC to Url
 - `Url` to `WC`: check out Url into WC, schedule for addition
 - `Url` to `Url`: complete server-side copy;  used to branch and tag
-  
+
 All the Sources must be of the same type. If Destination is an existing directory,
 the sources will be added as children of Destination. When copying multiple
 sources, Destination must be an existing directory.
