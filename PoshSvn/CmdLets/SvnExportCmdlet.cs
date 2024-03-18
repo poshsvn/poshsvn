@@ -16,12 +16,25 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 1)]
         public string Destination { get; set; } = ".";
 
+        [Parameter()]
+        [Alias("rev", "r")]
+        public PoshSvnRevision Revision { get; set; }
+
         protected override void Execute()
         {
+            SharpSvn.SvnExportArgs args = new SharpSvn.SvnExportArgs
+            {
+            };
+
+            if (Revision != null)
+            {
+                args.Revision = Revision.ToSharpSvnRevision();
+            }
+
             SharpSvn.SvnTarget source = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Source));
             string destination = GetUnresolvedProviderPathFromPSPath(Destination);
 
-            SvnClient.Export(source, destination);
+            SvnClient.Export(source, destination, args);
         }
     }
 }
