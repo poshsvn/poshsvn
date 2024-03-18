@@ -11,3 +11,6 @@ indent_size=2
 
 [*.cs]
 file_header_template = Copyright (c) Timofei Zhakov. All rights reserved.
+
+# CS0659: Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
+dotnet_diagnostic.CS0659.severity = silent
