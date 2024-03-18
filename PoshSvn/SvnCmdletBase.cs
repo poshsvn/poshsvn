@@ -209,7 +209,7 @@ namespace PoshSvn
         {
             if (target.Type == SvnTargetType.Path)
             {
-                return  GetUnresolvedProviderPathFromPSPath(target.Value);
+                return GetUnresolvedProviderPathFromPSPath(target.Value);
             }
             else if (target.Type == SvnTargetType.LiteralPath)
             {

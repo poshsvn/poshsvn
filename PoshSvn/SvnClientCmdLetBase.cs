@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
@@ -147,7 +146,7 @@ namespace PoshSvn
             {
                 e.Cancel = true;
             }
-            catch(PSInvalidOperationException)
+            catch (PSInvalidOperationException)
             {
                 e.Break = true;
             }
