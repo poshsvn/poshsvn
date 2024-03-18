@@ -18,7 +18,9 @@ Invoke-SvnAdd [-Path] <String[]> [-Depth <SvnDepth>] [-Force] [-NoIgnore] [-NoAu
 ```
 
 ## DESCRIPTION
-Schedule files, directories, or symbolic links in your working copy for addition to the repository. They will be uploaded and added to the repository on your next commit.
+Schedule files, directories, or symbolic links in your
+working copy for addition to the repository.
+They will be uploaded and added to the repository on your next commit.
 
 ## EXAMPLES
 
