@@ -12,7 +12,7 @@ namespace PoshSvn.CmdLets
     public class SvnInfo : SvnClientCmdletBase
     {
         [Parameter(Position = 0, ValueFromRemainingArguments = true)]
-        public SvnTarget[] Target { get; set; } 
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         [Alias("rev")]

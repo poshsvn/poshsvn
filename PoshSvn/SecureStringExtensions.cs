@@ -17,8 +17,8 @@ namespace PoshSvn
             {
                 return null;
             }
-           
-            if(secureString.Length == 0)
+
+            if (secureString.Length == 0)
             {
                 return "";
             }
