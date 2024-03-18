@@ -7,6 +7,7 @@ namespace PoshSvn
 {
     public static class SvnRevisionParser
     {
+        // Note: in subversion this function called 'parse_one_rev'
         public static SvnRevision ParseSvnRevision(string str)
         {
             int i = 0;
