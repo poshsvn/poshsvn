@@ -12,7 +12,7 @@ namespace PoshSvn
         {
             int i = 0;
 
-            while (i < str.Length && str[i] == 'r')
+            while (i < str.Length && (str[i] == 'r' || str[i] == ' '))
             {
                 i++;
             }
@@ -49,6 +49,26 @@ namespace PoshSvn
                 {
                     throw new ArgumentException("Cannot parse revision.");
                 }
+            }
+        }
+
+        // Note: in subversion this function called 'svn_opt_parse_revision'
+        public static SvnRevisionRange ParseSvnRevisionRange(string str)
+        {
+            string[] tokens = str.Split(new char[] { ':' });
+
+            if (tokens.Length == 1)
+            {
+                SvnRevision revision = ParseSvnRevision(tokens[0]);
+                return new SvnRevisionRange(revision, revision);
+            }
+            else if (tokens.Length == 2)
+            {
+                return new SvnRevisionRange(ParseSvnRevision(tokens[0]), ParseSvnRevision(tokens[1]));
+            }
+            else
+            {
+                throw new ArgumentException("Please specify correct revision range.", "Revision");
             }
         }
     }
