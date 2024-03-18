@@ -6,32 +6,32 @@ namespace PoshSvn
 {
     public static class SvnRevisionTypeExtensions
     {
-        public static SharpSvn.SvnRevisionType ToSharpSvnRevisionType(this SvnRevisionType revisionType)
+        public static SharpSvn.SvnRevisionType ToSharpSvnRevisionType(this PoshSvnRevisionType revisionType)
         {
             switch (revisionType)
             {
-                case SvnRevisionType.None:
+                case PoshSvnRevisionType.None:
                     return SharpSvn.SvnRevisionType.None;
 
-                case SvnRevisionType.Number:
+                case PoshSvnRevisionType.Number:
                     return SharpSvn.SvnRevisionType.Number;
 
-                case SvnRevisionType.Time:
+                case PoshSvnRevisionType.Time:
                     return SharpSvn.SvnRevisionType.Time;
 
-                case SvnRevisionType.Committed:
+                case PoshSvnRevisionType.Committed:
                     return SharpSvn.SvnRevisionType.Committed;
 
-                case SvnRevisionType.Previous:
+                case PoshSvnRevisionType.Previous:
                     return SharpSvn.SvnRevisionType.Previous;
 
-                case SvnRevisionType.Base:
+                case PoshSvnRevisionType.Base:
                     return SharpSvn.SvnRevisionType.Base;
 
-                case SvnRevisionType.Working:
+                case PoshSvnRevisionType.Working:
                     return SharpSvn.SvnRevisionType.Working;
 
-                case SvnRevisionType.Head:
+                case PoshSvnRevisionType.Head:
                     return SharpSvn.SvnRevisionType.Head;
 
                 default:
