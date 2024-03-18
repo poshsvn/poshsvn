@@ -49,5 +49,12 @@ namespace PoshSvn
                    EqualityComparer<PoshSvnRevision>.Default.Equals(EndRevision, range.EndRevision) &&
                    EqualityComparer<PoshSvnRevision>.Default.Equals(StartRevision, range.StartRevision);
         }
+
+        public SharpSvn.SvnRevisionRange ToSharpSvnRevisionRange()
+        {
+            return new SharpSvn.SvnRevisionRange(
+                StartRevision.ToSharpSvnRevision(),
+                EndRevision.ToSharpSvnRevision());
+        }
     }
 }
