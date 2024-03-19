@@ -30,23 +30,35 @@ namespace PoshSvn
 
             foreach (object target in targets)
             {
+                targetsList.Add(ConvertTargetToSvnTarget(target));
+
                 if (target is string path)
                 {
-                    targetsList.Add(SvnPathTarget.FromString(path));
                     pathsList.Add(path);
                 }
                 else if (target is Uri uri)
                 {
-                    targetsList.Add(SvnUriTarget.FromUri(uri));
                     urisList.Add(uri);
-                }
-                else
-                {
-                    throw new ArgumentException(string.Format("Target can only be 'string' or 'Uri', but was '{0}'", target.GetType()), "Target");
                 }
             }
 
             return new TargetCollection(targetsList, pathsList, urisList);
+        }
+
+        public static SharpSvn.SvnTarget ConvertTargetToSvnTarget(object target)
+        {
+            if (target is string path)
+            {
+                return SvnPathTarget.FromString(path, true);
+            }
+            else if (target is Uri uri)
+            {
+                return SvnUriTarget.FromString(uri.ToString(), true);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Target can only be 'string' or 'Uri', but was '{0}'", target.GetType()), "Target");
+            }
         }
 
         public void ThrowIfHasPathsAndUris()
