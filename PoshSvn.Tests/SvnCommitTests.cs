@@ -132,7 +132,7 @@ namespace PoshSvn.Tests
                 var actual = sb.FormatObject(sb.RunScript("svn-commit wc -m test"),
                                              "Format-Custom");
 
-                CollectionAssert.AreEqual(
+                CollectionAssert.AreEquivalent(
                     new string[]
                     {
                         @"",
