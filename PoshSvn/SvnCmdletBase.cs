@@ -125,11 +125,14 @@ namespace PoshSvn
             }
             else
             {
-                WriteObject(new SvnNotifyOutput
+                SvnNotifyOutput obj = new SvnNotifyOutput
                 {
                     Action = e.Action,
                     Path = e.Path
-                });
+                };
+
+                WriteObject(obj);
+                UpdateAction(obj.ToString());
             }
         }
 
