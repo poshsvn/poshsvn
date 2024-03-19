@@ -7,7 +7,9 @@ param (
 
 & "$PSScriptRoot\Test-PoshSvn"
 
-$baseUrl = (svn-info "$PSScriptRoot\..").Url
+$info = svn-info "$PSScriptRoot\.."
+$baseUrl = $info.Url
+$filesUrl = "https://svn.rinrab.com/files/poshsvn"
 
 $data = Import-PowerShellDataFile -Path $PSScriptRoot\..\PoshSvn\PoshSvn.psd1
 $tagName = $data.ModuleVersion
@@ -28,6 +30,8 @@ if (($baseUrl.Segments | Select-Object -Last 1) -eq "trunk/") {
             throw "Operation aborted."
         }
     }
+
+    svn-import .\bin\poshsvn.zip "$filesUrl/poshsvn $tagName.zip" -m "Import poshsvn release $tagName"
 }
 else {
     throw "Publishing is now supported only from 'trunk'"
