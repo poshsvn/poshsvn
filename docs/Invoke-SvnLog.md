@@ -13,9 +13,9 @@ Show the log messages for a set of revision(s) and/or path(s).
 ## SYNTAX
 
 ```
-Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Start <SvnRevision>] [-End <SvnRevision>] [-ChangedPaths]
- [-Limit <Int32>] [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties]
- [-WithNoRevisionProperties] [-WithRevisionProperties <String[]>] [<CommonParameters>]
+Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Revision <PoshSvnRevisionRange[]>] [-ChangedPaths] [-Limit <Int32>]
+ [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
+ [-WithRevisionProperties <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -137,21 +137,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -End
-Specifies the end revision to show log.
-
-```yaml
-Type: SvnRevision
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -IncludeExternals
 Tells Subversion to include externals definitions and the external working copies managed by them.
 
@@ -182,13 +167,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Start
-Specifies the start revision to show log.
+### -Revision
+{{ Fill Revision Description }}
 
 ```yaml
-Type: SvnRevision
+Type: PoshSvnRevisionRange[]
 Parameter Sets: (All)
-Aliases:
+Aliases: rev, r
 
 Required: False
 Position: Named

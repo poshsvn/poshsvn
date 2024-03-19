@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]
+
+- Add `-Revision` parameter to `svn-log` cmdlet.
+- Implement `svn-import` and `svn-export` cmdlets.
+- Minor fixes and improvement.
+
 ## [0.2.0]
 
 - Rework targets of cmdlets.
