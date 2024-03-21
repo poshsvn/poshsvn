@@ -14,10 +14,10 @@ function RenderPage {
     $lastPrefix = ""
     $topics = ""
     foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
-        $null = $path.BaseName -match "(^.*)[-_]"
+        $null = $path.BaseName -match "(^.*[-_])"
         $prefix = $Matches[1]
-        $prefix = $prefix -replace "Invoke", "Cmdlets"
-        $prefix = $prefix -replace "about", "About"
+        $prefix = $prefix -replace "[a-zA-Z]*-", "Cmdlets"
+        $prefix = $prefix -replace "about_", "About"
 
         if ($lastPrefix -ne $prefix) {
             $lastPrefix = $prefix
