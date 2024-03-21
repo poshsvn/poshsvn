@@ -1,7 +1,7 @@
 ---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
-online version: https://www.poshsvn.com/docs/Invoke-SvnStatus/
+online version: https://www.poshsvn.com/docs/Invoke-SvnSwitch/
 schema: 2.0.0
 ---
 
