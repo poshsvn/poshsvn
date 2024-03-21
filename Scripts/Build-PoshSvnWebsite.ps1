@@ -13,7 +13,7 @@ function RenderPage {
 
     $lastPrefix = ""
     $topics = ""
-    foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
+    foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs\*.md") {
         $null = $path.BaseName -match "(^.*[-_])"
         $prefix = $Matches[1]
         $prefix = $prefix -replace "[a-zA-Z]*-", "Cmdlets"
