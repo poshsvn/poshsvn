@@ -1,25 +1,22 @@
 import * as vscode from 'vscode';
 
+let terminalOptions: vscode.TerminalOptions = {
+    name: "PoshSvn terminal",
+    shellPath: "powershell",
+    shellArgs: `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"`,
+    // TODO: fill other parameters
+}
+
 function provideTerminalProfile(token: vscode.CancellationToken):
     vscode.ProviderResult<vscode.TerminalProfile> {
     return {
-        options: {
-            name: "PoshSvn terminal",
-            shellPath: "powershell",
-            shellArgs: `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"`,
-            // TODO: fill other parameters
-        }
+        options: terminalOptions
     };
 }
 
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.open.terminal', () => {
-        let terminal = vscode.window.createTerminal(
-            "PoshSvn terminal",
-            "powershell.exe",
-            `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"`
-        );
-
+        let terminal = vscode.window.createTerminal(terminalOptions);
         terminal.show();
     }))
 
