@@ -54,11 +54,47 @@ jobs:
 
     - name: Publish to PowerShell gallery
       run: .\Scripts\Publish-PoshSvn.ps1 -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
+  
+  build-vscode-extension:
+    runs-on: windows-latest
+
+    needs:
+      create_release
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: cd to vscode extension dir
+      run: cd .\PoshSvn.vscode
+
+    - name: Install vsce
+      run: npm install -g @vscode/vsce
+
+    - name: Login to vsce
+      run: |
+        "${{ secrets.VSCODE_STORE_TOKEN }}" | vsce login rinrab
+
+    - name: Build
+      run: vsce package --out .\PoshSvn.vscode.vsix
+
+    - name: Upload package to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: .\PoshSvn.vscode\PoshSvn.vscode.vsix
+        asset_name: poshsvn.vscode.vsix
+        asset_content_type: application/vsix
+
+    - name: Publish to vscode marketplace
+      run: vsce --packagePath .\PoshSvn.vscode.vsix
 
   publish_release:
     needs: 
       - create_release
       - build-poshsvn
+      - build-vscode-extension
 
     runs-on: windows-latest
 
