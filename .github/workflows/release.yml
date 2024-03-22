@@ -53,8 +53,8 @@ jobs:
         asset_content_type: application/zip
 
     - name: Publish to PowerShell gallery
-      run: .\Scripts\Publish-PoshSvn.ps1 -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
-  
+      run: Publish-Module -Path ".\bin\poshsvn" -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
+
   build-vscode-extension:
     runs-on: windows-latest
 
@@ -64,18 +64,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: cd to vscode extension dir
-      run: cd .\PoshSvn.vscode
-
-    - name: Install vsce
-      run: npm install -g @vscode/vsce
-
-    - name: Login to vsce
-      run: |
-        "${{ secrets.VSCODE_STORE_TOKEN }}" | vsce login rinrab
-
-    - name: Build
-      run: vsce package --out .\PoshSvn.vscode.vsix
+    - name: Publish
+      id: publish
+      uses: HaaLeo/publish-vscode-extension@v1
+      with:
+        dryRun: false
+        packagePath: ./PoshSvn.vscode
+        pat: ${{ secrets.VSCODE_STORE_TOKEN }}
 
     - name: Upload package to release
       uses: actions/upload-release-asset@v1
@@ -83,7 +78,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\PoshSvn.vscode\PoshSvn.vscode.vsix
+        asset_path: ${{ steps.publish.outputs.vsixPath }}
         asset_name: poshsvn.vscode.vsix
         asset_content_type: application/vsix
 
