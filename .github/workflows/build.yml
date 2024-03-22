@@ -41,11 +41,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Build
-      run: cd .\PoshSvn.vscode; npm run build
+    - name: Install vsce
+      run: npm install -g @vscode/vsce
+
+    - name: Build and package
+      run: cd .\PoshSvn.vscode; vsce package --out .\PoshSvn.vscode.vsix
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
         name: PoshSvn.vscode
-        path: .\out
+        path: .\PoshSvn.vscode.vsix
