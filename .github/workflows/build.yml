@@ -47,9 +47,9 @@ jobs:
         dryRun: true
         packagePath: ./PoshSvn.vscode
         pat: ${{ secrets.VSCODE_STORE_TOKEN }}
-        
+
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
         name: PoshSvn.vscode
-        path: .\PoshSvn.vscode\PoshSvn.vscode.vsix
+        path: *.vsix
