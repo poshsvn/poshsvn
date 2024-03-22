@@ -45,6 +45,7 @@ jobs:
       uses: HaaLeo/publish-vscode-extension@v1
       with:
         dryRun: true
+        packagePath: ./PoshSvn.vscode
         pat: ${{ secrets.VSCODE_STORE_TOKEN }}
         
     - name: Upload build artifact
