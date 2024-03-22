@@ -84,7 +84,6 @@ jobs:
 
   publish_release:
     needs: 
-      - create_release
       - build-poshsvn
       - build-vscode-extension
 
