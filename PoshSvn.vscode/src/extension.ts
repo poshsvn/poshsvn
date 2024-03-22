@@ -1,8 +1,15 @@
 import * as vscode from 'vscode';
 
+const helpMessage =
+    "   Welcome to PoshSvn Terminal!\r\n" +
+    "\r\n" +
+    "Type Get-Command -Module PoshSvn to list avalible commands.\r\n" +
+    "Type Get-Help <cmdlet-name> to get help of a specific command.\r\n";
+
 let terminalOptions: vscode.TerminalOptions = {
     name: "PoshSvn terminal",
     shellPath: "powershell",
+    message: helpMessage,
     shellArgs: `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"`,
     // TODO: fill other parameters
 }
