@@ -34,3 +34,16 @@ jobs:
         with:
           name: PoshSvn
           path: .\bin\poshsvn
+
+  build-vscode-extension:
+    runs-on: windows-latest
+
+    steps:
+    - name: Build
+      run: cd .\PoshSvn.vscode; npm run build
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PoshSvn.vscode
+        path: .\out
