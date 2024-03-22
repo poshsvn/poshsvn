@@ -13,8 +13,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "PoshSvn.helloWorld",
-        "title": "Hello World"
+        "command": "PoshSvn.svn-update",
+        "title": "svn-update"
       }
     ]
   },

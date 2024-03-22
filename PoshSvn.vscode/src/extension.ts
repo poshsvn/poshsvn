@@ -1,15 +1,15 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Congratulations, your extension "PoshSvn" is now active!');
+    context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.svn-update', () => {
+        let terminal = vscode.window.createTerminal(
+            "PoshSvn terminal",
+            "powershell.exe",
+            `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"; svn-update;`
+        );
 
-    let disposable = vscode.commands.registerCommand('PoshSvn.helloWorld', () => {
-        console.log("hello!!!!");
-
-        vscode.window.showInformationMessage('Hello World from !');
-    });
-
-    context.subscriptions.push(disposable);
+        terminal.show();
+    }))
 }
 
 export function deactivate() { }
