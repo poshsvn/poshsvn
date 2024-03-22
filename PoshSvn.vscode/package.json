@@ -8,6 +8,10 @@
   },
   "categories": [
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rinrab/poshsvn"
+  },
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
