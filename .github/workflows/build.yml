@@ -51,4 +51,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: PoshSvn.vscode
-        path: .\PoshSvn.vscode.vsix
+        path: .\PoshSvn.vscode\PoshSvn.vscode.vsix
