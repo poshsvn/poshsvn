@@ -28,7 +28,7 @@ jobs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
       release_id: ${{ steps.create_release.outputs.id }}
 
-  build:
+  build-poshsvn:
     needs: create_release
 
     env:
