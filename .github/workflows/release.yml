@@ -83,9 +83,6 @@ jobs:
         asset_name: poshsvn.vscode.vsix
         asset_content_type: application/vsix
 
-    - name: Publish to vscode marketplace
-      run: vsce --packagePath .\PoshSvn.vscode.vsix
-
   publish_release:
     needs: 
       - build-poshsvn
