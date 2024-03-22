@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
-    context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.svn-update', () => {
+    context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.open.terminal', () => {
         let terminal = vscode.window.createTerminal(
             "PoshSvn terminal",
             "powershell.exe",
-            `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"; svn-update;`
+            `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"`
         );
 
         terminal.show();
