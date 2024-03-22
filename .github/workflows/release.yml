@@ -31,9 +31,6 @@ jobs:
   build-poshsvn:
     needs: create_release
 
-    env:
-      Configuration: Release
-
     runs-on: windows-latest
 
     steps:
