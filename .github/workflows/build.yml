@@ -41,16 +41,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install vsce
-      run: npm install -g @vscode/vsce
-
-    - name: Login to vsce
-      run: |
-        .\Scripts\LoginToVsce.ps1 -Token ${{ secrets.VSCODE_STORE_TOKEN }}
-
-    - name: Build and package
-      run: cd .\PoshSvn.vscode; vsce package --out .\PoshSvn.vscode.vsix
-
+    - name: Publish
+      uses: HaaLeo/publish-vscode-extension@v1
+      with:
+        dryRun: true
+        pat: ${{ secrets.VSCODE_STORE_TOKEN }}
+        
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
