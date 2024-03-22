@@ -13,8 +13,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "PoshSvn.svn-update",
-        "title": "svn-update"
+        "command": "PoshSvn.open.terminal",
+        "title": "Open PoshSvn terminal"
       }
     ]
   },
