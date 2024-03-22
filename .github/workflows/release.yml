@@ -58,7 +58,7 @@ jobs:
   publish_release:
     needs: 
       - create_release
-      - build
+      - build-poshsvn
 
     runs-on: windows-latest
 
