@@ -1,12 +1,22 @@
 {
   "name": "poshsvn",
-  "displayName": "",
-  "description": "",
+  "displayName": "PoshSvn",
+  "description": "Apache Subversion client for PowerShell, integrated to vscode.",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.87.0"
   },
+  "homepage": "https://www.poshsvn.com",
+  "publisher": "Rinrab",
+  "icon": "./icon.png",
+  "author": "Timofei Zhakov",
+  "keywords": [
+    "Subversion",
+    "Svn",
+    "PowerShell"
+  ],
   "categories": [
+    "Other"
   ],
   "repository": {
     "type": "git",
