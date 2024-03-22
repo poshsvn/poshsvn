@@ -16,7 +16,15 @@
         "command": "PoshSvn.open.terminal",
         "title": "Open PoshSvn terminal"
       }
-    ]
+    ],
+    "terminal": {
+      "profiles": [
+        {
+          "title": "PoshSvn terminal",
+          "id": "PoshSvn.terminal.profile"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
