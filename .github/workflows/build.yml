@@ -20,7 +20,7 @@ jobs:
       - name: Test
         run: .\Scripts\Test-PoshSvn.ps1
     
-  publish:
+  build-poshvn:
     runs-on: windows-latest
   
     steps:
