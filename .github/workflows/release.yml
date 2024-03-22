@@ -64,11 +64,8 @@ jobs:
     - name: Install vsce
       run: npm install -g @vscode/vsce
 
-    - name: cd
-      run: cd .\PoshSvn.vscode
-
     - name: Package
-      run: vsce package --out .\poshsvn.vscode.vsix
+      run: cd .\PoshSvn.vscode; vsce package --out .\poshsvn.vscode.vsix
 
     - name: Publish
       run: vsce publish --packagePath .\poshsvn.vscode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
@@ -79,7 +76,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\PoshSvn.vscode\poshsvn.vscode.vsix
+        asset_path: .\poshsvn.vscode.vsix
         asset_name: poshsvn.vscode.vsix
         asset_content_type: application/vsix
 
