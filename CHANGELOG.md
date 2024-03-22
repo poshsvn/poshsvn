@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] [Unreleased]
+
+- Minor fixes and improvement.
+
 ## [0.3.0]
 
 - Add `-Revision` parameter to `svn-log` cmdlet.

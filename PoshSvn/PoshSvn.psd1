@@ -3,7 +3,7 @@
     Author                 = "Timofei Zhakov"
     CompanyName            = "Rinrab"
     Copyright              = "(c) Timofei Zhakov. All rights reserved."
-    ModuleVersion          = "0.3.0"
+    ModuleVersion          = "0.4.0"
     PowerShellVersion      = "3.0"
     CLRVersion             = "4.0"
     Description            = "Apache Subversion client for PowerShell
