@@ -20,7 +20,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
+    "compile": "powershell.exe ..\\Scripts\\Build-PoshSvn.ps1 && copy ..\\bin\\poshsvn .\\out && tsc -p ./",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
