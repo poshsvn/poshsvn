@@ -79,51 +79,32 @@ namespace PoshSvn
             {
                 case SvnNotifyAction.UpdateAdd:
                 case SvnNotifyAction.Add:
+                case SvnNotifyAction.CommitAdded:
+                case SvnNotifyAction.CommitAddCopy:
                     return "A";
 
                 case SvnNotifyAction.UpdateDelete:
                 case SvnNotifyAction.Delete:
+                case SvnNotifyAction.CommitDeleted:
                     return "D";
 
-                case SvnNotifyAction.Revert:
-                    return "Revert";
+                case SvnNotifyAction.CommitModified:
+                    return "M";
 
-                case SvnNotifyAction.CommitAdded:
-                case SvnNotifyAction.CommitAddCopy:
-                    return "Added";
+                case SvnNotifyAction.UpdateUpdate:
+                    return "U";
 
                 case SvnNotifyAction.CommitReplaced:
                 case SvnNotifyAction.CommitReplacedWithCopy:
-                    return "Replaced";
+                case SvnNotifyAction.UpdateReplace:
+                    return "R";
 
-                case SvnNotifyAction.CommitDeleted:
-                    return "Deleted";
-
-                case SvnNotifyAction.CommitModified:
-                    return "Modified";
-
-
-                case SvnNotifyAction.UpdateUpdate: return "U";
                 // case SvnNotifyAction.Conflict: return "C";
                 // case SvnNotifyAction.UpdateMerge: return "G";
                 // case SvnNotifyAction.UpdateExist: return "E";
-                case SvnNotifyAction.UpdateReplace: return "R";
-                default: return action.ToString();
-            }
-        }
 
-        public static string GetActionStringLong(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.UpdateAdd: return "Added";
-                case SvnNotifyAction.UpdateDelete: return "Deleted";
-                case SvnNotifyAction.UpdateUpdate: return "Updated";
-                // case SvnNotifyAction.Conflict: return "Conflict";
-                // case SvnNotifyAction.UpdateMerge: return "Merged";
-                // case SvnNotifyAction.UpdateExist: return "Existed";
-                case SvnNotifyAction.UpdateReplace: return "Replaced";
-                default: return action.ToString();
+                default:
+                    return action.ToString();
             }
         }
 
