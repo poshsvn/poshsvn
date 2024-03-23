@@ -68,7 +68,7 @@ jobs:
       run: cd .\PoshSvn.vscode; vsce package --out .\poshsvn.vscode.vsix
 
     - name: Publish
-      run: vsce publish --packagePath .\poshsvn.vscode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
+      run: vsce publish --packagePath .\PoshSvn.vscode\poshsvn.vscode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
 
     - name: Upload package to release
       uses: actions/upload-release-asset@v1
@@ -76,7 +76,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\poshsvn.vscode.vsix
+        asset_path: .\PoshSvn.vscode\poshsvn.vscode.vsix
         asset_name: poshsvn.vscode.vsix
         asset_content_type: application/vsix
 
