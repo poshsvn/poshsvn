@@ -2,8 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.4.0] [Unreleased]
+## [0.4.0]
 
+- Added vscode extension.
 - Minor fixes and improvement.
 
 ## [0.3.0]
