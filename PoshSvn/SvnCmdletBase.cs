@@ -124,7 +124,7 @@ namespace PoshSvn
             }
             else if (e.Action == SvnNotifyAction.CommitSendData)
             {
-                UpdateAction(string.Format("Sending '{0}'...", e.Path));
+                UpdateAction(string.Format("Sending '{0}'", e.Path));
             }
             else
             {
