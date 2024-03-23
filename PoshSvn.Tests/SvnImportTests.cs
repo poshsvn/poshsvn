@@ -26,7 +26,6 @@ namespace PoshSvn.Tests
                             Action = SvnNotifyAction.CommitAdded,
                             Path = Path.Combine(sb.RootPath, @"tmp\a.txt")
                         },
-                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
@@ -71,7 +70,6 @@ namespace PoshSvn.Tests
                             Action = SvnNotifyAction.CommitAdded,
                             Path = Path.Combine(sb.RootPath, @"tmp\x\c.txt")
                         },
-                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
