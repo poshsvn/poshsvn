@@ -135,10 +135,10 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         @"",
-                        @"Deleted wc\README",
-                        @"Added   wc\src\README",
-                        @"Modified wc\src\bar.c",
-                        @"Modified wc\src\foo.c",
+                        @"D       wc\README",
+                        @"A       wc\src\README",
+                        @"M       wc\src\bar.c",
+                        @"M       wc\src\foo.c",
                         @"Committed revision 2.",
                         @"",
                         @"",
