@@ -127,19 +127,6 @@ namespace PoshSvn
             }
         }
 
-        public static string GetCommitActionString(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.CommitAdded: return "Added";
-                case SvnNotifyAction.CommitDeleted: return "Deleted";
-                case SvnNotifyAction.CommitModified: return "Modified";
-                case SvnNotifyAction.CommitReplaced: return "Replaced";
-                case SvnNotifyAction.CommitSendData: return "Transmitting file data";
-                default: return action.ToString();
-            }
-        }
-
         public static string FormatProgress(long progress)
         {
             if (progress == -1)
