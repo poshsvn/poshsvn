@@ -39,7 +39,7 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                UpdateAction("Creating transaction...");
+                UpdateProgressAction("Creating transaction...");
                 SvnClient.RemoteCreateDirectories(targets.Uris, args);
             }
         }

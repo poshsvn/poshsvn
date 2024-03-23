@@ -94,7 +94,7 @@ namespace PoshSvn.CmdLets
 
             WriteObject(svnInfo);
 
-            UpdateAction(e.HasLocalInfo ? e.Path : e.Uri.ToString());
+            UpdateProgressAction(e.HasLocalInfo ? e.Path : e.Uri.ToString());
         }
     }
 
