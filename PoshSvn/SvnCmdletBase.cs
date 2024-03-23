@@ -92,7 +92,7 @@ namespace PoshSvn
         {
             if (e.Action == SvnNotifyAction.UpdateStarted)
             {
-                UpdateAction(GetActivityTitle(e));
+                UpdateProgressAction(GetActivityTitle(e));
             }
             else if (e.Action == SvnNotifyAction.UpdateCompleted)
             {
@@ -120,11 +120,11 @@ namespace PoshSvn
             }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)
             {
-                UpdateAction("Committing transaction...");
+                UpdateProgressAction("Committing transaction...");
             }
             else if (e.Action == SvnNotifyAction.CommitSendData)
             {
-                UpdateAction(string.Format("Sending '{0}'", e.Path));
+                UpdateProgressAction(string.Format("Sending '{0}'", e.Path));
             }
             else
             {
@@ -135,7 +135,7 @@ namespace PoshSvn
                 };
 
                 WriteObject(obj);
-                UpdateAction(obj.ToString());
+                UpdateProgressAction(obj.ToString());
             }
         }
 
@@ -148,7 +148,7 @@ namespace PoshSvn
         protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
         protected virtual object GetNotifyOutput(SvnNotifyEventArgs e) => null;
 
-        protected void UpdateAction(string action)
+        protected void UpdateProgressAction(string action)
         {
             WriteVerbose(action);
             ProgressRecord.StatusDescription = action;

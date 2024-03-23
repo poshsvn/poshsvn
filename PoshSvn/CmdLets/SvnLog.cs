@@ -122,7 +122,7 @@ namespace PoshSvn.CmdLets
 
             WriteObject(obj);
 
-            UpdateAction(string.Format("r{0}", e.Revision));
+            UpdateProgressAction(string.Format("r{0}", e.Revision));
         }
 
         private SvnChangeItem[] ConvertSvnChangedPaths(KeyedCollection<string, SharpSvn.SvnChangeItem> source)
