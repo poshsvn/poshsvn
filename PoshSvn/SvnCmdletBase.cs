@@ -120,8 +120,11 @@ namespace PoshSvn
             }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)
             {
-                WriteObject(new SvnCommittingOutput());
                 UpdateAction("Committing transaction...");
+            }
+            else if (e.Action == SvnNotifyAction.CommitSendData)
+            {
+                UpdateAction(string.Format("Sending '{0}'...", e.Path));
             }
             else
             {

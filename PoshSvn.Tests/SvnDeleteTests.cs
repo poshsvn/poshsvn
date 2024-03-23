@@ -106,7 +106,6 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 2,
@@ -129,7 +128,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Committing transaction...",
                         $@"Committed revision 2.",
                         $@"",
                         $@"",
