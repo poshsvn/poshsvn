@@ -102,8 +102,6 @@ namespace PoshSvn
                 case SvnNotifyAction.CommitModified:
                     return "Modified";
 
-                case SvnNotifyAction.CommitSendData:
-                    return "Sending";
 
                 case SvnNotifyAction.UpdateUpdate: return "U";
                 // case SvnNotifyAction.Conflict: return "C";
