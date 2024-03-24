@@ -4,11 +4,6 @@ using System.Text;
 
 namespace PoshSvn
 {
-    public interface ITextLineStream
-    {
-        void WriteLine(string line);
-    }
-
     public class LineDecoderTextStream : ITextStream
     {
         readonly StringBuilder line;
