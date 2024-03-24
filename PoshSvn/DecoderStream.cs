@@ -6,17 +6,17 @@ using System.Text;
 
 namespace PoshSvn
 {
-    public interface IDecoderStreamOutput : IDisposable
+    public interface ITextStream : IDisposable
     {
         void Write(char[] chars, int startIndex, int charCount);
     }
 
     public class DecoderStream : Stream
     {
-        private readonly IDecoderStreamOutput output;
+        private readonly ITextStream output;
         private readonly Decoder decoder;
 
-        public DecoderStream(IDecoderStreamOutput output, 
+        public DecoderStream(ITextStream output, 
                              Encoding encoding)
         {
             this.output = output;

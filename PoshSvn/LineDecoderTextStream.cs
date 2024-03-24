@@ -9,7 +9,7 @@ namespace PoshSvn
         void WriteLine(string line);
     }
 
-    public class LineDecoderTextStream : IDecoderStreamOutput
+    public class LineDecoderTextStream : ITextStream
     {
         readonly StringBuilder line;
         private readonly ITextLineStream output;
