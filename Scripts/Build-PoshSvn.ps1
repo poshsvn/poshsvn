@@ -10,6 +10,7 @@ Remove-Item $Output -Recurse -Force -ErrorAction Ignore
 dotnet.exe build $ProjectPath --output $Output --configuration $Configuration -v=normal
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
+    Import-Module -Name PowerShellGet
     Install-Module -Name platyPS -Force
 }
 
