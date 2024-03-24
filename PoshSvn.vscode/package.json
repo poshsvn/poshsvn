@@ -42,7 +42,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
-    "build": "",
+    "build": "powershell.exe ../Scripts/Build-PoshSvnVSCodeExtension.ps1",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
