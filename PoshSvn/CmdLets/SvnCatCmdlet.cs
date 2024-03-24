@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
 using System.IO;
 using System.Management.Automation;
 using System.Text;
@@ -18,6 +17,9 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter AsByteStream { get; set; }
 
+        [Parameter()]
+        public SwitchParameter Raw { get; set; }
+
         protected override void Execute()
         {
             SharpSvn.SvnTarget target = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Target));
@@ -33,6 +35,12 @@ namespace PoshSvn.CmdLets
             if (AsByteStream)
             {
                 return new ByteStream(this);
+            }
+            else if (Raw)
+            {
+                TextStream textStream = new TextStream(this);
+
+                return new DecoderStream(textStream, Encoding.UTF8);
             }
             else
             {
@@ -55,6 +63,28 @@ namespace PoshSvn.CmdLets
             public void WriteLine(string line)
             {
                 owner.WriteObject(line);
+            }
+        }
+
+        private class TextStream : ITextStream
+        {
+            private readonly SvnCatCmdlet owner;
+            private readonly StringBuilder sb;
+
+            public TextStream(SvnCatCmdlet owner)
+            {
+                this.owner = owner;
+                sb = new StringBuilder();
+            }
+
+            public void Dispose()
+            {
+                owner.WriteObject(sb.ToString());
+            }
+
+            public void Write(char[] chars, int startIndex, int charCount)
+            {
+                sb.Append(chars, startIndex, charCount);
             }
         }
 
