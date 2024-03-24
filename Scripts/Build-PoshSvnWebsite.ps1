@@ -52,7 +52,7 @@ if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
 
 Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
-foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs") {
+foreach ($path in Get-ChildItem "$PSScriptRoot\..\docs\*" -Include "*.md") {
     $null = $path -match "([a-zA-Z\-_]*)\.md"
     $cmdletName = $Matches[1]
     $content = (ConvertFrom-Markdown $path).Html -replace '<h1 id="poshsvn">PoshSvn</h1>'
