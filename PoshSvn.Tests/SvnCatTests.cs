@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.Text;
 using NUnit.Framework;
 using PoshSvn.Tests.TestUtils;
 
@@ -83,6 +84,47 @@ namespace PoshSvn.Tests
                         (byte)'b',
                         (byte)'c',
                     },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RawTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value a,b,c");
+                sb.RunScript(@"svn-add wc\a.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+                var actual = sb.RunScript(@"svn-cat wc\a.txt -Raw");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        "a\r\n" +
+                        "b\r\n" +
+                        "c\r\n" +
+                        ""
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RawWithAsByteStreamTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value a,b,c");
+                sb.RunScript(@"svn-add wc\a.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+                var actual = sb.RunScript(@"svn-cat wc\a.txt -Raw -AsByteStream");
+
+                PSObjectAssert.AreEqual(
+                    Encoding.UTF8.GetBytes("a\r\n" +
+                                           "b\r\n" +
+                                           "c\r\n" +
+                                           ""),
                     actual);
             }
         }
