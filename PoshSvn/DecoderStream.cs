@@ -6,11 +6,6 @@ using System.Text;
 
 namespace PoshSvn
 {
-    public interface ITextStream : IDisposable
-    {
-        void Write(char[] chars, int startIndex, int charCount);
-    }
-
     public class DecoderStream : Stream
     {
         private readonly ITextStream output;
