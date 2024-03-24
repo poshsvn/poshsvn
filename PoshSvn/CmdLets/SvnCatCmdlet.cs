@@ -38,14 +38,14 @@ namespace PoshSvn.CmdLets
             }
             else if (Raw)
             {
-                TextStream textStream = new TextStream(this);
+                ITextStream textStream = new TextStream(this);
 
                 return new DecoderStream(textStream, Encoding.UTF8);
             }
             else
             {
-                TextLineStream textStream = new TextLineStream(this);
-                LineDecoderTextStream lineStream = new LineDecoderTextStream(textStream);
+                ITextLineStream textStream = new TextLineStream(this);
+                ITextStream lineStream = new LineDecoderTextStream(textStream);
 
                 return new DecoderStream(lineStream, Encoding.UTF8);
             }
