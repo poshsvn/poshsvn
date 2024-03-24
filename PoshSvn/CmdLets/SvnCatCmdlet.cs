@@ -71,8 +71,7 @@ namespace PoshSvn.CmdLets
             {
                 for (int i = offset; i < buffer.Length; i++)
                 {
-                    byte b = buffer[i];
-                    owner.WriteObject(b);
+                    owner.WriteObject(buffer[i]);
                 }
             }
         }
