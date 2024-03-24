@@ -9,7 +9,7 @@ namespace PoshSvn.Tests
     [TestFixture]
     public class DecoderStreamTests
     {
-        private class TestDecoderStreamOutput : IDecoderStreamOutput
+        private class TestTextStream : ITextStream
         {
             private readonly StringBuilder sb = new StringBuilder();
 
@@ -28,7 +28,7 @@ namespace PoshSvn.Tests
         [Test]
         public void EmptyTest()
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF8))
             {
             }
@@ -39,7 +39,7 @@ namespace PoshSvn.Tests
         [Test]
         public void SimpleTest()
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF8))
             {
                 stream.WriteByte((byte)'a');
@@ -52,7 +52,7 @@ namespace PoshSvn.Tests
         [Test]
         public void UTF8SequenceTest1()
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF8))
             {
                 stream.WriteByte(0xE2);
@@ -66,7 +66,7 @@ namespace PoshSvn.Tests
         [Test]
         public void UTF8BOMTest()
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF8))
             {
                 // UTF-8 BOM
@@ -85,7 +85,7 @@ namespace PoshSvn.Tests
         [Test]
         public void UTF8SequenceFlushTest()
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF8))
             {
                 stream.WriteByte(0xE2);
@@ -101,7 +101,7 @@ namespace PoshSvn.Tests
         [Test]
         public void IncompleteUTF8SequenceTest()
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF8))
             {
                 stream.WriteByte(0xE2);
@@ -115,7 +115,7 @@ namespace PoshSvn.Tests
         [TestCase("abdefedfdsfdsfsdfds")]
         public void RoundTripUTF32Test(string text)
         {
-            var writer = new TestDecoderStreamOutput();
+            var writer = new TestTextStream();
             using (var stream = new DecoderStream(writer, Encoding.UTF32))
             {
                 var bytes = Encoding.UTF32.GetBytes(text);
