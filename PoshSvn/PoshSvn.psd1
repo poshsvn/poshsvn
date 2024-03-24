@@ -31,6 +31,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnSwitch"
         "Invoke-SvnExport"
         "Invoke-SvnImport"
+        "Invoke-SvnCat"
         "New-SvnTarget"
     )
     AliasesToExport        = @(
@@ -52,6 +53,7 @@ Project website: https://www.poshsvn.com"
         "svn-switch"
         "svn-export"
         "svn-import"
+        "svn-cat"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
