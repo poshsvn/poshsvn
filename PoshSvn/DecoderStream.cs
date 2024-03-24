@@ -11,7 +11,7 @@ namespace PoshSvn
         private readonly ITextStream output;
         private readonly Decoder decoder;
 
-        public DecoderStream(ITextStream output, 
+        public DecoderStream(ITextStream output,
                              Encoding encoding)
         {
             this.output = output;
