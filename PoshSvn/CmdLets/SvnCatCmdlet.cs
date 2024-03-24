@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.IO;
 using System.Management.Automation;
 using System.Text;
 
@@ -17,13 +18,18 @@ namespace PoshSvn.CmdLets
         {
             SharpSvn.SvnTarget target = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Target));
 
-            TextLineStream textStream = new TextLineStream(this);
-            LineDecoderTextStream lineStream = new LineDecoderTextStream(textStream);
-
-            using (DecoderStream stream = new DecoderStream(lineStream, Encoding.UTF8))
+            using (Stream stream = GetStream())
             {
                 SvnClient.Write(target, stream);
             }
+        }
+
+        protected Stream GetStream()
+        {
+            TextLineStream textStream = new TextLineStream(this);
+            LineDecoderTextStream lineStream = new LineDecoderTextStream(textStream);
+
+            return new DecoderStream(lineStream, Encoding.UTF8);
         }
 
         private class TextLineStream : ITextLineStream
