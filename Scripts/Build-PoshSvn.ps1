@@ -11,7 +11,7 @@ dotnet.exe build $ProjectPath --output $Output --configuration $Configuration -v
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
     Import-Module -Name PowerShellGet
-    Install-Module -Name platyPS -Force
+    Install-Module -Name platyPS -Force -Scope CurrentUser
 }
 
 New-ExternalHelp -Path $PSScriptRoot\..\docs -OutputPath $Output\en-US -Force
