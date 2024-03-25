@@ -3,11 +3,12 @@ param (
 )
 
 $Output = "$PSScriptRoot\..\bin\poshsvn"
-$ProjectPath = "$PSScriptRoot\..\PoshSvn\PoshSvn.csproj"
+$rootPath = "$PSScriptRoot\.."
+$SolutionPath = "$rootPath\PoshSvn.sln"
 
 Remove-Item $Output -Recurse -Force -ErrorAction Ignore
 
-dotnet.exe build $ProjectPath --output $Output --configuration $Configuration -v=normal
+dotnet.exe msbuild $SolutionPath /t:PoshSvn /p:Configuration=$Configuration /p:OutputPath=$Output /v:normal
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
     Import-Module -Name PowerShellGet
