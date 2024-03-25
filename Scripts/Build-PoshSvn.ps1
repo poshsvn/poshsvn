@@ -7,11 +7,11 @@ $ProjectPath = "$PSScriptRoot\..\PoshSvn\PoshSvn.csproj"
 
 Remove-Item $Output -Recurse -Force -ErrorAction Ignore
 
-dotnet.exe msbuild $ProjectPath --output $Output --configuration $Configuration -v=normal
+dotnet.exe build $ProjectPath --output $Output --configuration $Configuration -v=normal
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
     Import-Module -Name PowerShellGet
-    Install-Module -Name platyPS -Force -Scope CurrentUser
+    Install-Module -Name platyPS -Force
 }
 
 New-ExternalHelp -Path $PSScriptRoot\..\docs -OutputPath $Output\en-US -Force
