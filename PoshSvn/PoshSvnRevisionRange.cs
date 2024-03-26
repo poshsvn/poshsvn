@@ -43,6 +43,12 @@ namespace PoshSvn
             EndRevision = new PoshSvnRevision(endRevision);
         }
 
+        public PoshSvnRevisionRange(PoshSvnRevisionType start, PoshSvnRevisionType end)
+        {
+            StartRevision = new PoshSvnRevision(start);
+            EndRevision = new PoshSvnRevision(end);
+        }
+
         public override bool Equals(object obj)
         {
             return obj is PoshSvnRevisionRange range &&
