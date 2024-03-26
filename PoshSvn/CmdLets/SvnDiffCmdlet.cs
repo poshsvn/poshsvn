@@ -55,7 +55,7 @@ namespace PoshSvn.CmdLets
                         {
                             try
                             {
-                                SvnClient.Diff(target, rangeRevision, stream);
+                                SvnClient.Diff(target, rangeRevision, args, stream);
                             }
                             finally
                             {
