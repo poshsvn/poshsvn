@@ -118,6 +118,10 @@ namespace PoshSvn
                     });
                 }
             }
+            else if (e.Action == SvnNotifyAction.BlameRevision)
+            {
+                UpdateProgressAction($"Processing revision {e.Revision}...");
+            }
             else if (e.Action == SvnNotifyAction.CommitFinalizing)
             {
                 UpdateProgressAction("Committing transaction...");

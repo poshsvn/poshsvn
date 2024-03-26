@@ -33,6 +33,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnImport"
         "Invoke-SvnCat"
         "Invoke-SvnDiff"
+        "Invoke-SvnBlame"
         "New-SvnTarget"
     )
     AliasesToExport        = @(
@@ -56,6 +57,7 @@ Project website: https://www.poshsvn.com"
         "svn-import"
         "svn-cat"
         "svn-diff"
+        "svn-blame"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
