@@ -71,7 +71,7 @@ namespace PoshSvn.Tests
                     new PoshSvnRevision("40"),
                     new PoshSvnRevision("head")),
                 new PoshSvnRevisionRange("r40 : head"));
-            
+
             ClassicAssert.AreEqual(
                 new PoshSvnRevisionRange(
                     new PoshSvnRevision("PREV"),

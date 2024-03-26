@@ -52,7 +52,7 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
-        
+
         [Test]
         public void ManyTargets()
         {

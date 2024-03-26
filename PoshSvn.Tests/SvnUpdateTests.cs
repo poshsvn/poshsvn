@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.IO;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
-using System.IO;
 
 namespace PoshSvn.Tests
 {
