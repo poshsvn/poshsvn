@@ -1,6 +1,7 @@
 [*]
 indent_style=space
-indent_size=4
+indent_size= 4
+end_of_line = crlf
 
 # Default severity for analyzer diagnostics with category 'Assertion'
 dotnet_analyzer_diagnostic.category-Assertion.severity = silent
