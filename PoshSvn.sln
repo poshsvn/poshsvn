@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Tests", "PoshSvn.Tests\PoshSvn.Tests.csproj", "{A1B1668F-130B-4254-9143-4ABD20CF12D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "docs", "docs\docs.csproj", "{A13EF230-D9BB-4EB0-954E-087218D9C00A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Docs", "PoshSvn.Docs\PoshSvn.Docs.csproj", "{A13EF230-D9BB-4EB0-954E-087218D9C00A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshSvn.Package", "PoshSvn.Package\PoshSvn.Package.csproj", "{24B7B9AD-468F-4B36-975A-97284854A376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Package", "PoshSvn.Package\PoshSvn.Package.csproj", "{24B7B9AD-468F-4B36-975A-97284854A376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshSvn.Static", "PoshSvn.Static\PoshSvn.Static.csproj", "{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Static", "PoshSvn.Static\PoshSvn.Static.csproj", "{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
