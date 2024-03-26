@@ -6,7 +6,7 @@ if (Get-Module -ListAvailable -Name platyPS) {
 }
 else {
     "Importing PowerShellGet."
-    Import-Module -Name PowerShellGet
+    Import-Module -Name PowerShellGet -Force -Function Install-Module -Scope Local
 
     "Installing platyPS."
     Install-Module -Name platyPS -Force -Scope CurrentUser -ErrorAction Stop
