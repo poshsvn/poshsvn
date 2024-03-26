@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <PackagePath>$(SolutionDir)\bin\poshsvn\</PackagePath>
+    <DefaultProperties>OutDir=</DefaultProperties>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\docs\docs.csproj" />
+    <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FilesToCopy Include="$(OutDir)\**" />
+  </ItemGroup>
+
+  <Target Name="CopyFiles" BeforeTargets="PrepareForRun">
+    <Delete Files="$(OutDir)" />
+  </Target>
+
+  <Target Name="CopyFiles" BeforeTargets="AfterBuild">
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PackagePath)%(RecursiveDir)" />
+  </Target>
+
+</Project>
