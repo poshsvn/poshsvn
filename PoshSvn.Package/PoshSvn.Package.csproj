@@ -5,7 +5,6 @@
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <PackagePath>$(SolutionDir)\bin\poshsvn\</PackagePath>
-    <DefaultProperties>OutDir=</DefaultProperties>
   </PropertyGroup>
 
   <ItemGroup>
