@@ -83,6 +83,7 @@ namespace PoshSvn.CmdLets
 
                 obj.Date = e.Entry.Time;
                 obj.NodeKind = e.Entry.NodeKind;
+                obj.NodeKind = e.Entry.NodeKind;
                 obj.Path = e.Path;
                 obj.Uri = e.Uri;
                 obj.ExternalTarget = e.ExternalTarget;
