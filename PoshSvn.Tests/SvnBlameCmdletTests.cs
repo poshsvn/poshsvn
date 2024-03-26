@@ -102,7 +102,14 @@ namespace PoshSvn.Tests
                 CollectionAssert.AreEqual(
                     new string[]
                     {
-                        @"",
+                        "",
+                        "       r1 sally            line1",
+                        "       r3 harry            modified line2",
+                        "       r2 sally            line3",
+                        "       r5 John.Doe         line4",
+                        "       r5 John.Doe         line5",
+                        "",
+                        "",
                     },
                     actual);
             }
