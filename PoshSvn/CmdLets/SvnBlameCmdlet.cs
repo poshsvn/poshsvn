@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
+using System.Linq;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -32,6 +34,15 @@ namespace PoshSvn.CmdLets
                 Author = e.Author,
                 LineNumber = e.LineNumber,
                 Line = e.Line,
+
+                EndRevision = e.EndRevision,
+                LocalChange = e.LocalChange,
+                Time = e.Time,
+                MergedTime = e.MergedTime,
+                MergedAuthor = e.MergedAuthor,
+                MergedPath = e.MergedPath,
+                MergedRevision = e.MergedRevision,
+                MergedRevisionProperties = e.MergedRevisionProperties?.ToArray(),
             });
         }
     }
