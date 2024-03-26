@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.IO;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
@@ -48,6 +50,61 @@ namespace PoshSvn.Tests
                     },
                     actual,
                     nameof(SvnBlameLine.Author));
+            }
+        }
+
+        [Test]
+        public void FormatTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                var actual = sb.FormatObject(
+                    new[]
+                    {
+                        new SvnBlameLine
+                        {
+                            Revision = 1,
+                            LineNumber = 0,
+                            Line = "line1",
+                            Author = "sally",
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 3,
+                            LineNumber = 1,
+                            Line = "modified line2",
+                            Author = "harry"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 2,
+                            LineNumber = 2,
+                            Line = "line3",
+                            Author = "sally"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 5,
+                            LineNumber = 3,
+                            Line = "line4",
+                            Author = "John.Doe"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 5,
+                            LineNumber = 4,
+                            Line = "line5",
+                            Author = "John.Doe"
+                        },
+                    },
+                    "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        @"",
+                    },
+                    actual);
             }
         }
     }

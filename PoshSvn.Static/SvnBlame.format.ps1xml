@@ -1,0 +1,26 @@
+﻿<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnBlameLine</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>"{0,9} {1,-16}" -f ("r" + $_.Revision), $_.Author</ScriptBlock>
+              </ExpressionBinding>
+              <Text> </Text>
+              <ExpressionBinding>
+                <PropertyName>Line</PropertyName>
+              </ExpressionBinding>
+              <Text> </Text>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>
