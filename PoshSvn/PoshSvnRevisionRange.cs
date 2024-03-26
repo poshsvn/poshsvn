@@ -10,7 +10,7 @@ namespace PoshSvn
         public PoshSvnRevision EndRevision { get; set; }
         public PoshSvnRevision StartRevision { get; set; }
 
-        public PoshSvnRevisionRange(string str) 
+        public PoshSvnRevisionRange(string str)
         {
             string[] tokens = str.Split(new char[] { ':' });
 

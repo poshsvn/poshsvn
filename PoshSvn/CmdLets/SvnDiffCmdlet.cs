@@ -27,22 +27,22 @@ namespace PoshSvn.CmdLets
         public SvnDepth Depth { get; set; }
 
         [Parameter()]
-        public SwitchParameter NoDiffAdded {  get; set; }
+        public SwitchParameter NoDiffAdded { get; set; }
 
         [Parameter()]
-        public SwitchParameter NoDiffDeleted {  get; set; }
+        public SwitchParameter NoDiffDeleted { get; set; }
 
         [Parameter()]
         public SwitchParameter IgnoreProperties { get; set; }
 
         [Parameter()]
-        public SwitchParameter PropertiesOnly { get;  set; }
+        public SwitchParameter PropertiesOnly { get; set; }
 
         [Parameter()]
         public SwitchParameter ShowCopiesAsAdds { get; set; }
 
         [Parameter()]
-        public SwitchParameter NoticeAncestry {  get; set; }
+        public SwitchParameter NoticeAncestry { get; set; }
 
         [Parameter()]
         [Alias("cl")]
@@ -52,7 +52,7 @@ namespace PoshSvn.CmdLets
         public SwitchParameter Git { get; set; }
 
         [Parameter()]
-        public SwitchParameter PatchCompatible {  get; set; }
+        public SwitchParameter PatchCompatible { get; set; }
 
         public SvnDiffCmdlet()
         {

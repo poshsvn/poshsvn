@@ -38,7 +38,7 @@ namespace PoshSvn
             charsCount = decoder.GetChars(buffer, offset, count, chars, 0, flush);
 
             if (charsCount > 0)
-            { 
+            {
                 output.Write(chars, 0, charsCount);
             }
         }
