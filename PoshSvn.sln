@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Tests", "PoshSvn.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "docs", "docs\docs.csproj", "{A13EF230-D9BB-4EB0-954E-087218D9C00A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshSvn.Package", "PoshSvn.Package\PoshSvn.Package.csproj", "{24B7B9AD-468F-4B36-975A-97284854A376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshSvn.Static", "PoshSvn.Static\PoshSvn.Static.csproj", "{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,22 @@ Global
 		{A13EF230-D9BB-4EB0-954E-087218D9C00A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A13EF230-D9BB-4EB0-954E-087218D9C00A}.Release|x64.ActiveCfg = Release|Any CPU
 		{A13EF230-D9BB-4EB0-954E-087218D9C00A}.Release|x64.Build.0 = Release|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Debug|x64.Build.0 = Debug|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Release|x64.ActiveCfg = Release|Any CPU
+		{24B7B9AD-468F-4B36-975A-97284854A376}.Release|x64.Build.0 = Release|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B9894BD-1127-42B0-AC6B-3FE2E20526D3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
