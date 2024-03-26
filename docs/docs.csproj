@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <Target Name="InstallPlatyPS" BeforeTargets="PrepareForRun">
-    <Exec Command="$(PowerShell) $(ScriptsPath)\Install-PlatyPS.ps1 -Verbose" />
+    <Exec Command="$(PowerShell) $(ScriptsPath)\Install-PlatyPS.ps1" />
   </Target>
 
   <Target Name="BuildDocs" AfterTargets="InstallPlatyPS">
