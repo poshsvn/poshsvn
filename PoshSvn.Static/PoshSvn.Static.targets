@@ -1,11 +1,11 @@
 <Project>
   <ItemGroup>
-    <StaticFiles Include="PoshSvn.psd1" />
-    <StaticFiles Include="SvnNotifyOutput.format.ps1xml" />
-    <StaticFiles Include="SvnInfo.format.ps1xml" />
-    <StaticFiles Include="SvnStatus.format.ps1xml" />
-    <StaticFiles Include="SvnItem.format.ps1xml" />
-    <StaticFiles Include="SvnLog.format.ps1xml" />
+    <StaticFiles Include="..\PoshSvn.Static\PoshSvn.psd1" />
+    <StaticFiles Include="..\PoshSvn.Static\SvnNotifyOutput.format.ps1xml" />
+    <StaticFiles Include="..\PoshSvn.Static\SvnInfo.format.ps1xml" />
+    <StaticFiles Include="..\PoshSvn.Static\SvnStatus.format.ps1xml" />
+    <StaticFiles Include="..\PoshSvn.Static\SvnItem.format.ps1xml" />
+    <StaticFiles Include="..\PoshSvn.Static\SvnLog.format.ps1xml" />
 
     <StaticFiles Include="..\Externals\CRT\x64\**">
       <Visible>false</Visible>
