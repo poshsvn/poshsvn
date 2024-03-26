@@ -15,10 +15,6 @@
     <FilesToCopy Include="$(OutDir)\**" />
   </ItemGroup>
 
-  <Target Name="CopyFiles" BeforeTargets="PrepareForRun">
-    <Delete Files="$(OutDir)" />
-  </Target>
-
   <Target Name="CopyFiles" BeforeTargets="AfterBuild">
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PackagePath)%(RecursiveDir)" />
   </Target>
