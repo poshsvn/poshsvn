@@ -15,10 +15,31 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 0)]
         public SvnTarget Target { get; set; }
 
+        [Parameter()]
+        [Alias("rev", "r")]
+        public PoshSvnRevisionRange Revision { get; set; }
+
+        [Parameter()]
+        public SwitchParameter RetrieveMergedRevisions { get; set; }
+
+        [Parameter()]
+        public SwitchParameter IgnoreMimeType { get; set; }
+
+        [Parameter()]
+        public SwitchParameter IgnoreLineEndings { get; set; }
+
+        [Parameter()]
+        public SvnIgnoreSpacing IgnoreSpacing { get; set; } = SvnIgnoreSpacing.None;
+
         protected override void Execute()
         {
             SvnBlameArgs args = new SvnBlameArgs
             {
+                Range = Revision?.ToSharpSvnRevisionRange(),
+                RetrieveMergedRevisions = RetrieveMergedRevisions,
+                IgnoreMimeType = IgnoreMimeType,
+                IgnoreLineEndings = IgnoreLineEndings,
+                IgnoreSpacing = IgnoreSpacing.ToSharpSvnIgnoreSpacing(),
             };
 
             SharpSvn.SvnTarget target = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Target));
