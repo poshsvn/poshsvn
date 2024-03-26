@@ -13,13 +13,6 @@ Write-Verbose "Restoring nuget packages..."
 dotnet.exe msbuild $SolutionPath /t:PoshSvn -restore
 
 Write-Verbose "Building project..."
-dotnet.exe msbuild $SolutionPath /t:PoshSvn /p:Configuration=$Configuration /p:OutputPath=$Output /v:normal
-
-if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
-    Import-Module -Name PowerShellGet
-    Install-Module -Name platyPS -Force -Scope CurrentUser
-}
-
-New-ExternalHelp -Path $PSScriptRoot\..\docs -OutputPath $Output\en-US -Force
+dotnet.exe msbuild $SolutionPath /t:PoshSvn,docs /p:Configuration=$Configuration /p:OutputPath=$Output /v:normal
 
 Compress-Archive -Path $Output\* -DestinationPath "$Output.zip" -Force -CompressionLevel Optimal
