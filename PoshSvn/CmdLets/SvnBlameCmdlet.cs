@@ -32,9 +32,9 @@ namespace PoshSvn.CmdLets
             {
                 Revision = e.Revision,
                 Author = e.Author,
-                LineNumber = e.LineNumber,
                 Line = e.Line,
 
+                LineNumber = e.LineNumber,
                 EndRevision = e.EndRevision,
                 LocalChange = e.LocalChange,
                 Time = e.Time,
