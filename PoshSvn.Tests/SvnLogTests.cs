@@ -207,7 +207,7 @@ namespace PoshSvn.Tests
                                     PropertiesModified = false,
                                     CopyFromPath = null,
                                     CopyFromRevision = null,
-                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    NodeKind = SvnNodeKind.File,
                                     Path = "/qqq/def",
                                 },
                                 new SvnChangeItem
@@ -217,7 +217,7 @@ namespace PoshSvn.Tests
                                     PropertiesModified = false,
                                     CopyFromPath = null,
                                     CopyFromRevision = null,
-                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    NodeKind = SvnNodeKind.File,
                                     Path = "/qqq/xyz",
                                 }
                             }
@@ -237,7 +237,7 @@ namespace PoshSvn.Tests
                                     PropertiesModified = false,
                                     CopyFromPath = null,
                                     CopyFromRevision = null,
-                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    NodeKind = SvnNodeKind.File,
                                     Path = "/abc/def",
                                 },
                                 new SvnChangeItem
@@ -247,7 +247,7 @@ namespace PoshSvn.Tests
                                     PropertiesModified = false,
                                     CopyFromPath = null,
                                     CopyFromRevision = null,
-                                    NodeKind = SharpSvn.SvnNodeKind.File,
+                                    NodeKind = SvnNodeKind.File,
                                     Path = "/abc/xyz",
                                 }
                             }
