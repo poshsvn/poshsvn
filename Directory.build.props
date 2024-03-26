@@ -3,6 +3,7 @@
    <IntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
    <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
    <OutDir>$(OutputPath)</OutDir>
+   <ScriptsPath>$(SolutionDir)\Scripts</ScriptsPath>
    <!--<UseCommonOutputDirectory>True</UseCommonOutputDirectory>-->
  </PropertyGroup>
 </Project>
