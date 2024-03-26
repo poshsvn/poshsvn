@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 
+  <Import Project="..\PoshSvn.Static\PoshSvn.Static.targets" />
+
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <PackagePath>$(SolutionDir)\bin\poshsvn\</PackagePath>
@@ -12,11 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <FilesToCopy Include="$(OutDir)\**" />
+    <FilesToCopy Include="@(StaticFiles)" />
+    <FilesToCopy Include="$(OutDir)\en-US\**\*" Destination="en-US" />
+
+    <FilesToCopy Include="$(OutDir)\PoshSvn.dll" />
+    <FilesToCopy Include="$(OutDir)\SharpPlink-x64.svnExe" />
+    <FilesToCopy Include="$(OutDir)\SharpSvn.dll" />
+    <FilesToCopy Include="$(OutDir)\SharpSvn-DB44-20-x64.svnDll" />
   </ItemGroup>
 
   <Target Name="CopyFiles" BeforeTargets="AfterBuild">
-    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PackagePath)%(RecursiveDir)" />
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PackagePath)%(FilesToCopy.Destination)%(RecursiveDir)" />
   </Target>
 
 </Project>
