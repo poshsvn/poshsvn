@@ -6,8 +6,9 @@ dotnet_analyzer_diagnostic.category-Assertion.severity = silent
 
 dotnet_sort_system_directives_first = true
 
-[*.{xml,ps1xml,html}]
+[*.{xml,ps1xml,html,csproj}]
 indent_size=2
+indent_style=space
 
 [*.cs]
 file_header_template = Copyright (c) Timofei Zhakov. All rights reserved.
