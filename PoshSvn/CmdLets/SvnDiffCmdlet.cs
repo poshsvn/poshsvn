@@ -14,8 +14,14 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(string))]
     public class SvnDiffCmdlet : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
+        [Parameter(Position = 0, ValueFromRemainingArguments = true, ParameterSetName = ParameterSetNames.Target)]
         public SvnTarget[] Target { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.TwoFiles)]
+        public SvnTarget Old { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.TwoFiles)]
+        public SvnTarget New { get; set; }
 
         public SvnDiffCmdlet()
         {
@@ -27,23 +33,67 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
+            SharpSvn.SvnRevision startRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Base);
+            SharpSvn.SvnRevision endRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
+            SharpSvn.SvnRevisionRange rangeRevision = new SharpSvn.SvnRevisionRange(startRevision, endRevision);
 
-            foreach (SharpSvn.SvnTarget target in targets.Targets)
+            BlockingCollection<string> output = new BlockingCollection<string>(100);
+
+            SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
             {
-                SharpSvn.SvnRevision start = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Base);
-                SharpSvn.SvnRevision end = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
-                SharpSvn.SvnRevisionRange range = new SharpSvn.SvnRevisionRange(start, end);
+            };
 
-                BlockingCollection<string> output = new BlockingCollection<string>(100);
+            if (ParameterSetName == ParameterSetNames.Target)
+            {
+                TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
 
+                foreach (SharpSvn.SvnTarget target in targets.Targets)
+                {
+                    using (Stream stream = GetStream(output))
+                    {
+                        Task task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                SvnClient.Diff(target, rangeRevision, stream);
+                            }
+                            finally
+                            {
+                                output.CompleteAdding();
+                            }
+                        });
+
+                        while (!output.IsCompleted)
+                        {
+                            if (output.TryTake(out string line))
+                            {
+                                WriteObject(line);
+                            }
+                        }
+
+                        try
+                        {
+                            task.Wait();
+                        }
+                        catch (AggregateException ex)
+                        {
+                            throw ex.InnerException;
+                        }
+                    }
+                }
+            }
+            else
+            {
                 using (Stream stream = GetStream(output))
                 {
                     Task task = Task.Run(() =>
                     {
                         try
                         {
-                            SvnClient.Diff(target, range, stream);
+                            SvnClient.Diff(
+                                TargetCollection.ConvertTargetToSvnTarget(GetTarget(Old)),
+                                TargetCollection.ConvertTargetToSvnTarget(GetTarget(New)),
+                                args, stream);
                         }
                         finally
                         {

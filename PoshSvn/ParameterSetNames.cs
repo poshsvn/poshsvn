@@ -11,5 +11,8 @@ namespace PoshSvn
 
         public const string Local = "Local";
         public const string Remote = "Remote";
+
+        public const string Target = "Target";
+        public const string TwoFiles = "TwoFiles";
     }
 }
