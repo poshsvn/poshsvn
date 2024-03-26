@@ -5,6 +5,7 @@
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <PackagePath>$(SolutionDir)\bin\poshsvn\</PackagePath>
+    <ZipPackagePath>$(SolutionDir)\bin\poshsvn.zip</ZipPackagePath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,10 @@
 
   <Target Name="CopyFiles" BeforeTargets="AfterBuild">
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PackagePath)%(FilesToCopy.Destination)%(RecursiveDir)" />
+  </Target>
+
+  <Target Name="ZipPackage" BeforeTargets="CopyFiles">
+    <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ZipPackagePath)" />
   </Target>
 
 </Project>
