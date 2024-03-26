@@ -28,7 +28,9 @@
   </Target>
 
   <Target Name="ZipPackage" BeforeTargets="CopyFiles">
-    <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ZipPackagePath)" />
+    <ZipDirectory SourceDirectory="$(PackagePath)"
+                  DestinationFile="$(ZipPackagePath)"
+                  Overwrite="true" />
   </Target>
 
 </Project>
