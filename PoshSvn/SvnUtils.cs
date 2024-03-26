@@ -120,15 +120,15 @@ namespace PoshSvn
             }
         }
 
-        public static string GetChangeActionString(CmdLets.SvnChangeAction action)
+        public static string GetChangeActionString(SvnChangeAction action)
         {
             switch (action)
             {
-                case CmdLets.SvnChangeAction.None: return " ";
-                case CmdLets.SvnChangeAction.Add: return "A";
-                case CmdLets.SvnChangeAction.Delete: return "D";
-                case CmdLets.SvnChangeAction.Modify: return "M";
-                case CmdLets.SvnChangeAction.Replace: return "R";
+                case SvnChangeAction.None: return " ";
+                case SvnChangeAction.Add: return "A";
+                case SvnChangeAction.Delete: return "D";
+                case SvnChangeAction.Modify: return "M";
+                case SvnChangeAction.Replace: return "R";
                 default: throw new NotImplementedException();
             }
         }
