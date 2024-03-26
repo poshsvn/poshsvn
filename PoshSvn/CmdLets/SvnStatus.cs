@@ -82,7 +82,7 @@ namespace PoshSvn.CmdLets
                     RemotePropertyStatus = e.RemotePropertyStatus,
                     RemoteUpdateCommitAuthor = e.RemoteUpdateCommitAuthor,
                     RemoteUpdateCommitTime = e.RemoteUpdateCommitTime,
-                    RemoteUpdateNodeKind = e.RemoteUpdateNodeKind,
+                    RemoteUpdateNodeKind = e.RemoteUpdateNodeKind.ToSharpSvnNodeKind(),
                     RemoteUpdateRevision = e.RemoteUpdateRevision
                 });
             }

@@ -14,7 +14,7 @@ namespace PoshSvn
         {
             PropertiesModified = source.PropertiesModified;
             ContentModified = source.ContentModified;
-            NodeKind = source.NodeKind;
+            NodeKind = source.NodeKind.ToSharpSvnNodeKind();
             CopyFromRevision = source.CopyFromRevision;
             CopyFromPath = source.CopyFromPath;
             Action = source.Action.ToPoshSvnChangeAction();
@@ -23,7 +23,7 @@ namespace PoshSvn
 
         public bool? PropertiesModified { get; set; }
         public bool? ContentModified { get; set; }
-        public SvnNodeKind NodeKind { get; set; } // TODO:
+        public SvnNodeKind NodeKind { get; set; }
         public long? CopyFromRevision { get; set; }
         public string CopyFromPath { get; set; }
         public SvnChangeAction Action { get; set; }

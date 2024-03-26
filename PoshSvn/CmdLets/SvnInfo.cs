@@ -66,7 +66,7 @@ namespace PoshSvn.CmdLets
                 RepositoryRoot = e.RepositoryRoot,
                 RepositoryId = e.RepositoryId,
                 Revision = e.Revision,
-                NodeKind = e.NodeKind,
+                NodeKind = e.NodeKind.ToSharpSvnNodeKind(),
                 LastChangedAuthor = e.LastChangeAuthor,
                 LastChangedRevision = e.LastChangeRevision,
             };
@@ -87,7 +87,7 @@ namespace PoshSvn.CmdLets
                 svnInfo.WorkingCopyRoot = e.WorkingCopyRoot;
             }
 
-            if (e.NodeKind == SvnNodeKind.File)
+            if (e.NodeKind == SharpSvn.SvnNodeKind.File)
             {
                 svnInfo.Checksum = e.Checksum;
             }

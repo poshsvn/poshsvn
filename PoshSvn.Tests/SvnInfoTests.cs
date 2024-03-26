@@ -31,7 +31,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         }
                     },
@@ -49,7 +49,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         }
                     },
@@ -78,7 +78,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         },
                         new SvnInfoOutput
@@ -87,7 +87,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         }
                     },
@@ -129,7 +129,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/test/"),
                             RelativeUrl = new Uri("test/", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                             Revision = -1,
                             LastChangedRevision = -1,
@@ -156,7 +156,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/test/"),
                             RelativeUrl = new Uri("test/", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                             Revision = 1,
                             LastChangedRevision = 1,
@@ -177,7 +177,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             Revision = 1,
                             LastChangedRevision = 1,
                         }
