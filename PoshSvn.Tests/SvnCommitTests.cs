@@ -77,7 +77,7 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.CommitAdded,
+                            Action = SvnNotifyAction.CommitAdded,
                             Path = Path.Combine(sb.WcPath, "a")
                         },
                         new SvnCommitOutput

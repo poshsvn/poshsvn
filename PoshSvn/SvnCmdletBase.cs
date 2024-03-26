@@ -90,11 +90,11 @@ namespace PoshSvn
 
         protected void NotifyEventHandler(object sender, SvnNotifyEventArgs e)
         {
-            if (e.Action == SvnNotifyAction.UpdateStarted)
+            if (e.Action == SharpSvn.SvnNotifyAction.UpdateStarted)
             {
                 UpdateProgressAction(GetActivityTitle(e));
             }
-            else if (e.Action == SvnNotifyAction.UpdateCompleted)
+            else if (e.Action == SharpSvn.SvnNotifyAction.UpdateCompleted)
             {
                 if (e.CommandType == SvnCommandType.Update)
                 {
@@ -118,15 +118,15 @@ namespace PoshSvn
                     });
                 }
             }
-            else if (e.Action == SvnNotifyAction.BlameRevision)
+            else if (e.Action == SharpSvn.SvnNotifyAction.BlameRevision)
             {
                 UpdateProgressAction($"Processing revision {e.Revision}...");
             }
-            else if (e.Action == SvnNotifyAction.CommitFinalizing)
+            else if (e.Action == SharpSvn.SvnNotifyAction.CommitFinalizing)
             {
                 UpdateProgressAction("Committing transaction...");
             }
-            else if (e.Action == SvnNotifyAction.CommitSendData)
+            else if (e.Action == SharpSvn.SvnNotifyAction.CommitSendData)
             {
                 UpdateProgressAction(string.Format("Sending '{0}'", e.Path));
             }
@@ -134,7 +134,7 @@ namespace PoshSvn
             {
                 SvnNotifyOutput obj = new SvnNotifyOutput
                 {
-                    Action = e.Action,
+                    Action = (SvnNotifyAction)e.Action,
                     Path = e.Path
                 };
 

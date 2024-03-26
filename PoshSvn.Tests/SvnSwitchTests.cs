@@ -24,9 +24,9 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.TrunkPath, "a") },
-                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateAdd, Path = Path.Combine(sb.TrunkPath, "b") },
-                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.TrunkPath) },
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.TrunkPath, "a") },
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateAdd, Path = Path.Combine(sb.TrunkPath, "b") },
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.TrunkPath) },
                         new SvnSwitchOutput { Revision = 4 },
                     },
                     actual);
@@ -48,8 +48,8 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.TrunkPath, "a") },
-                        new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.TrunkPath) },
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.TrunkPath, "a") },
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.TrunkPath) },
                         new SvnSwitchOutput { Revision = 3 },
                     },
                     actual);
