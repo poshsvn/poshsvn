@@ -2,13 +2,14 @@
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <ScriptsPath>$(SolutionDir)\Scripts</ScriptsPath>
+    <PowerShell>powershell.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
   </PropertyGroup>
 
   <Target Name="InstallPlatyPS" BeforeTargets="PrepareForRun">
-    <Exec Command="powershell.exe $(ScriptsPath)\Install-PlatyPS.ps1 -Verbose" />
+    <Exec Command="$(PowerShell) $(ScriptsPath)\Install-PlatyPS.ps1 -Verbose" />
   </Target>
 
   <Target Name="BuildDocs" AfterTargets="InstallPlatyPS">
-    <Exec Command="powershell.exe -Command New-ExternalHelp -Path $(MSBuildProjectDirectory) -OutputPath $(OutDir)\en-US -Force" />
+    <Exec Command="$(PowerShell) -Command New-ExternalHelp -Path $(MSBuildProjectDirectory) -OutputPath $(OutDir)\en-US -Force" />
   </Target>
 </Project>
