@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <StaticFiles Include="..\Externals\CRT\x64\**">
+      <Visible>false</Visible>
+    </StaticFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <StaticFiles Include="PoshSvn.psd1" />
+    <StaticFiles Include="SvnNotifyOutput.format.ps1xml" />
+    <StaticFiles Include="SvnInfo.format.ps1xml" />
+    <StaticFiles Include="SvnStatus.format.ps1xml" />
+    <StaticFiles Include="SvnItem.format.ps1xml" />
+    <StaticFiles Include="SvnLog.format.ps1xml" />
+
+    <StaticFiles Include="..\Externals\CRT\x64\**">
+      <Visible>false</Visible>
+    </StaticFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="@(StaticFiles)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

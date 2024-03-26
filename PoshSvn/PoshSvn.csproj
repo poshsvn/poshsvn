@@ -17,19 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <StaticFiles Include="PoshSvn.psd1" />
-    <StaticFiles Include="SvnItem.format.ps1xml" />
-    <StaticFiles Include="SvnLog.format.ps1xml" />
-    <StaticFiles Include="SvnNotifyOutput.format.ps1xml" />
-    <StaticFiles Include="SvnInfo.format.ps1xml" />
-    <StaticFiles Include="SvnStatus.format.ps1xml" />
-    <StaticFiles Include="..\Externals\CRT\x64\**">
-      <Visible>false</Visible>
-    </StaticFiles>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="@(StaticFiles)" CopyToOutputDirectory="PreserveNewest" />
+    <ProjectReference Include="..\PoshSvn.Static\PoshSvn.Static.csproj" />
   </ItemGroup>
 
 </Project>
