@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <ScriptsPath>$(SolutionDir)\Scripts</ScriptsPath>
-    <PowerShell>powershell.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
+    <PowerShell>pwsh.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
   </PropertyGroup>
 
   <Target Name="InstallPlatyPS" BeforeTargets="PrepareForRun">
