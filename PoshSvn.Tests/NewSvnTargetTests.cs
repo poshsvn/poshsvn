@@ -36,7 +36,7 @@ namespace PoshSvn.Tests
                    {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "b.txt")
                         },
                    },

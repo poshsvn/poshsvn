@@ -23,12 +23,12 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "dst")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, "src")
                         },
                     },
@@ -67,22 +67,22 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"dst\src1")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, @"src1")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"dst\src2")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, @"src2")
                         },
                     },
@@ -105,12 +105,12 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, "dst")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, "src")
                         },
                     },
