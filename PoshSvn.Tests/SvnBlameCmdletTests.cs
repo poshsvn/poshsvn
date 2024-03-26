@@ -58,6 +58,54 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void RevisionRangeTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value line1,line2");
+                sb.RunScript(@"svn-add wc\a.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value line1,line2,line3");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value line1,'modified line2',line3");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript(@"svn-blame wc\a.txt -r 1:2");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        new SvnBlameLine
+                        {
+                            Revision = 1,
+                            EndRevision = 2,
+                            LineNumber = 0,
+                            Line = "line1",
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 1,
+                            EndRevision = 2,
+                            LineNumber = 1,
+                            Line = "line2"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 2,
+                            EndRevision = 2,
+                            LineNumber = 2,
+                            Line = "line3"
+                        },
+                    },
+                    actual,
+                    nameof(SvnBlameLine.Author),
+                    nameof(SvnBlameLine.Time));
+            }
+        }
+
+        [Test]
         public void FormatTest()
         {
             using (var sb = new PowerShellSandbox())
