@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnDiff")]
+    [Cmdlet("Invoke", "SvnDiff", DefaultParameterSetName = ParameterSetNames.Target)]
     [Alias("svn-diff")]
     [OutputType(typeof(string))]
     public class SvnDiffCmdlet : SvnClientCmdletBase
