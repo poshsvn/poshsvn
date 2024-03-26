@@ -32,24 +32,28 @@ namespace PoshSvn.Tests
                         new SvnBlameLine
                         {
                             Revision = 1,
+                            EndRevision = 3,
                             LineNumber = 0,
-                            Line = "line1"
+                            Line = "line1",
                         },
                         new SvnBlameLine
                         {
                             Revision = 3,
+                            EndRevision = 3,
                             LineNumber = 1,
                             Line = "modified line2"
                         },
                         new SvnBlameLine
                         {
                             Revision = 2,
+                            EndRevision = 3,
                             LineNumber = 2,
                             Line = "line3"
                         },
                     },
                     actual,
-                    nameof(SvnBlameLine.Author));
+                    nameof(SvnBlameLine.Author),
+                    nameof(SvnBlameLine.Time));
             }
         }
 
