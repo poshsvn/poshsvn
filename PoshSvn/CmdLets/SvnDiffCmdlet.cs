@@ -23,8 +23,40 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.TwoFiles)]
         public SvnTarget New { get; set; }
 
+        [Parameter()]
+        public SvnDepth Depth { get; set; }
+
+        [Parameter()]
+        public SwitchParameter NoDiffAdded {  get; set; }
+
+        [Parameter()]
+        public SwitchParameter NoDiffDeleted {  get; set; }
+
+        [Parameter()]
+        public SwitchParameter IgnoreProperties { get; set; }
+
+        [Parameter()]
+        public SwitchParameter PropertiesOnly { get;  set; }
+
+        [Parameter()]
+        public SwitchParameter ShowCopiesAsAdds { get; set; }
+
+        [Parameter()]
+        public SwitchParameter NoticeAncestry {  get; set; }
+
+        [Parameter()]
+        [Alias("cl")]
+        public string Changelist { get; set; }
+
+        [Parameter()]
+        public SwitchParameter Git { get; set; }
+
+        [Parameter()]
+        public SwitchParameter PatchCompatible {  get; set; }
+
         public SvnDiffCmdlet()
         {
+            Depth = SvnDepth.Infinity;
             Target = new[]
             {
                 SvnTarget.FromPath(".")
@@ -41,7 +73,20 @@ namespace PoshSvn.CmdLets
 
             SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
             {
+                Depth = Depth.ConvertToSharpSvnDepth(),
+                NoAdded = NoDiffAdded,
+                NoDeleted = NoDiffDeleted,
+                NoProperties = IgnoreProperties || PatchCompatible,
+                PropertiesOnly = PropertiesOnly,
+                CopiesAsAdds = ShowCopiesAsAdds || PatchCompatible,
+                IgnoreAncestry = NoticeAncestry,
+                UseGitFormat = Git,
             };
+
+            if (Changelist != null)
+            {
+                args.ChangeLists.Add(Changelist);
+            }
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
