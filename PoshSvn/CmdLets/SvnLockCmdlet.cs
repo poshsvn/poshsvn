@@ -15,13 +15,14 @@ namespace PoshSvn.CmdLets
         public SvnTarget[] Target { get; set; }
 
         [Parameter()]
-        public string Comment { get; set; }
+        [Alias("Comment")]
+        public string Message { get; set; }
 
         protected override void Execute()
         {
             SvnLockArgs args = new SvnLockArgs
             {
-                Comment = Comment,
+                Comment = Message,
             };
 
             TargetCollection target = TargetCollection.Parse(GetTargets(Target));
