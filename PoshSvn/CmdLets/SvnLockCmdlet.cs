@@ -18,11 +18,16 @@ namespace PoshSvn.CmdLets
         [Alias("Comment")]
         public string Message { get; set; }
 
+        [Parameter()]
+        [Alias("StealLock")]
+        public SwitchParameter Force { get; set; }
+
         protected override void Execute()
         {
             SvnLockArgs args = new SvnLockArgs
             {
                 Comment = Message,
+                StealLock = Force,
             };
 
             TargetCollection target = TargetCollection.Parse(GetTargets(Target));
