@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0]
+
+- Implement `svn-cat` cmdlet.
+- Implement `svn-diff` cmdlet.
+- Implement `svn-blame` cmdlet.
+- Some fixes in commit output.
+- Minor fixes and improvement.
+
 ## [0.4.0]
 
 - Added vscode extension.
