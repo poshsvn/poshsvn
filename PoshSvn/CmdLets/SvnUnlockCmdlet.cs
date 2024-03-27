@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -30,6 +31,14 @@ namespace PoshSvn.CmdLets
             if (target.HasPaths)
             {
                 SvnClient.Unlock(target.Paths, args);
+            }
+            else if (target.HasUris)
+            {
+                SvnClient.RemoteUnlock(target.Uris, args);
+            }
+            else
+            {
+                throw new ArgumentException("No targets are specified.", "Target");
             }
         }
     }
