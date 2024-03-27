@@ -30,7 +30,7 @@ a collection of objects, each representing a line of content.
 
 If you want to view README.md in your repository without checking it out:
 
-````powershell
+```powershell
 svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md
 
 # Apache Subversion client for PowerShell
@@ -45,11 +45,11 @@ svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md
 
 Install PoshSvn module from the PowerShell Gallery:
 
-```powershell
+``powershell
 Install-Module -Name PoshSvn
-```
+``
 
-````
+```
 
 ### Example 2
 
