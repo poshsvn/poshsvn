@@ -8,7 +8,8 @@ schema: 2.0.0
 # Invoke-SvnCat
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Gets the content of the item at the specified path, Url, and revision.
 
 ## SYNTAX
 
@@ -17,21 +18,61 @@ Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [<CommonParameters>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `svn-cat` cmdlet gets the content of the item at
+the specific path, Url, and revision. For files, 
+the content is read one line at a time and returns
+a collection of objects, each representing a line of content.
 
 ## EXAMPLES
 
 ### Example 1
+
+If you want to view README.md in your repository without checking it out:
+
+````powershell
+svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md
+
+# Apache Subversion client for PowerShell
+
+## Features
+
+- Tab tab-completion (tab-expansion) for commands and parameters.
+- Typed output of cmdlets.
+- Formatted output to repeat the Subversion command line interface user experience.
+
+## Installation
+
+Install PoshSvn module from the PowerShell Gallery:
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Install-Module -Name PoshSvn
 ```
 
-{{ Add example description here }}
+````
+
+### Example 2
+
+You can view specific versions of files, too.
+
+````powershell
+svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
+
+# Apache Subversion client for PowerShell
+
+## Feuaptursubes
+
+- Tab tab-completion (tab-expansion) for commands and parameters.
+- Typed output of cmdlets.
+...
+
+````
 
 ## PARAMETERS
 
 ### -AsByteStream
-{{ Fill AsByteStream Description }}
+
+Specifies that the content should be read as a stream of bytes.
 
 ```yaml
 Type: SwitchParameter
@@ -46,7 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### -Raw
-{{ Fill Raw Description }}
+Ignores newline characters and returns the entire contents of a file in one string with the newlines preserved. By default, newline characters in a file are used as delimiters to separate the input into an array of strings.
 
 ```yaml
 Type: SwitchParameter
@@ -61,7 +102,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Target Description }}
+Specifies target to operate.
 
 ```yaml
 Type: SvnTarget
@@ -91,3 +132,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Invoke-SvnList](https://www.poshsvn.com/docs/Invoke-SvnList/)
+
+[Get-Content](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content)
