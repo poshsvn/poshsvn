@@ -8,6 +8,7 @@
         <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
         <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
         <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnSwitchOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -53,6 +54,7 @@
           <CustomEntry>
             <EntrySelectedBy>
               <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
+              <TypeName>PoshSvn.CmdLets.SvnSwitchOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Updated to revision </Text>
