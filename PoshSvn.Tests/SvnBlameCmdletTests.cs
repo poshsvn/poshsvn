@@ -166,5 +166,69 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void FormatTableTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                var actual = sb.FormatObject(
+                    new[]
+                    {
+                        new SvnBlameLine
+                        {
+                            Revision = 1,
+                            LineNumber = 0,
+                            Line = "line1",
+                            Author = "sally",
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 3,
+                            LineNumber = 1,
+                            Line = "modified line2",
+                            Author = "harry"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 2,
+                            LineNumber = 2,
+                            Line = "line3",
+                            Author = "sally"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 5,
+                            LineNumber = 3,
+                            Line = "line4",
+                            Author = "John.Doe"
+                        },
+                        new SvnBlameLine
+                        {
+                            Revision = 5,
+                            LineNumber = 4,
+                            Line = "line5",
+                            Author = "John.Doe"
+                        },
+                    },
+                    "Format-Table");
+
+                CollectionAssert.AreEqual(
+                    new string[]
+                    {
+                        "",
+                        "Revision Author           Line",
+                        "-------- ------           ----",
+                        "       1 sally            line1",
+                        "       3 harry            modified line2",
+                        "       2 sally            line3",
+                        "       5 John.Doe         line4",
+                        "       5 John.Doe         line5",
+                        "",
+                        "",
+                    },
+                    actual);
+            }
+        }
     }
 }
