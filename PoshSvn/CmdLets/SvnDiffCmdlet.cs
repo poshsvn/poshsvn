@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Management.Automation;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,12 +66,6 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            SharpSvn.SvnRevision startRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Base);
-            SharpSvn.SvnRevision endRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
-            SharpSvn.SvnRevisionRange rangeRevision = new SharpSvn.SvnRevisionRange(startRevision, endRevision);
-
-            BlockingCollection<string> output = new BlockingCollection<string>(100);
-
             SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
             {
                 Depth = Depth.ConvertToSharpSvnDepth(),
@@ -90,78 +85,62 @@ namespace PoshSvn.CmdLets
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
+                SharpSvn.SvnRevision startRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Base);
+                SharpSvn.SvnRevision endRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
+                SharpSvn.SvnRevisionRange rangeRevision = new SharpSvn.SvnRevisionRange(startRevision, endRevision);
+
                 TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
 
                 foreach (SharpSvn.SvnTarget target in targets.Targets)
                 {
-                    using (Stream stream = GetStream(output))
-                    {
-                        Task task = Task.Run(() =>
-                        {
-                            try
-                            {
-                                SvnClient.Diff(target, rangeRevision, args, stream);
-                            }
-                            finally
-                            {
-                                output.CompleteAdding();
-                            }
-                        });
-
-                        while (!output.IsCompleted)
-                        {
-                            if (output.TryTake(out string line))
-                            {
-                                WriteObject(line);
-                            }
-                        }
-
-                        try
-                        {
-                            task.Wait();
-                        }
-                        catch (AggregateException ex)
-                        {
-                            throw ex.InnerException;
-                        }
-                    }
+                    DoDiff((stream) => SvnClient.Diff(target, rangeRevision, args, stream));
                 }
             }
             else
             {
-                using (Stream stream = GetStream(output))
+                DoDiff((stream) =>
                 {
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            SvnClient.Diff(
-                                TargetCollection.ConvertTargetToSvnTarget(GetTarget(Old)),
-                                TargetCollection.ConvertTargetToSvnTarget(GetTarget(New)),
-                                args, stream);
-                        }
-                        finally
-                        {
-                            output.CompleteAdding();
-                        }
-                    });
+                    SharpSvn.SvnTarget oldTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Old));
+                    SharpSvn.SvnTarget newTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(New));
 
-                    while (!output.IsCompleted)
-                    {
-                        if (output.TryTake(out string line))
-                        {
-                            WriteObject(line);
-                        }
-                    }
+                    SvnClient.Diff(oldTarget, newTarget, args, stream);
+                });
+            }
+        }
 
+        private void DoDiff(Action<Stream> work)
+        {
+            BlockingCollection<string> output = new BlockingCollection<string>(100);
+
+            using (Stream stream = GetStream(output))
+            {
+                Task task = Task.Run(() =>
+                {
                     try
                     {
-                        task.Wait();
+                        work(stream);
                     }
-                    catch (AggregateException ex)
+                    finally
                     {
-                        throw ex.InnerException;
+                        output.CompleteAdding();
                     }
+                });
+
+                while (!output.IsCompleted)
+                {
+                    if (output.TryTake(out string line))
+                    {
+                        WriteObject(line);
+                    }
+                }
+
+                try
+                {
+                    task.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    throw ex.InnerException;
                 }
             }
         }
