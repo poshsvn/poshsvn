@@ -34,9 +34,4 @@ namespace PoshSvn.CmdLets
             SvnClient.Update(resolvedPaths, args);
         }
     }
-
-    public class SvnUpdateOutput
-    {
-        public long Revision { get; set; }
-    }
 }
