@@ -50,9 +50,4 @@ namespace PoshSvn.CmdLets
             SvnClient.Switch(path, target, args);
         }
     }
-
-    public class SvnSwitchOutput
-    {
-        public long Revision { get; set; }
-    }
 }
