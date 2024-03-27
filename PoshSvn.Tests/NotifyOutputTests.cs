@@ -324,5 +324,57 @@ namespace PoshSvn.Tests
                         "Format-Custom"));
             }
         }
+
+        [Test]
+        public void LockOutputTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                        "",
+                        "+L      tree.jpg",
+                        "+L      house.jpg",
+                        "+L      foo.c",
+                        "",
+                        "",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockLocked, Path = Path.Combine(sb.RootPath, "tree.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockLocked, Path = Path.Combine(sb.RootPath, "house.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockLocked, Path = Path.Combine(sb.RootPath, "foo.c") },
+                        },
+                        "Format-Custom"));
+            }
+        }
+
+        [Test]
+        public void UnlockOutputTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                        "",
+                        "-L      tree.jpg",
+                        "-L      house.jpg",
+                        "-L      foo.c",
+                        "",
+                        "",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockUnlocked, Path = Path.Combine(sb.RootPath, "tree.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockUnlocked, Path = Path.Combine(sb.RootPath, "house.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockUnlocked, Path = Path.Combine(sb.RootPath, "foo.c") },
+                        },
+                        "Format-Custom"));
+            }
+        }
     }
 }
