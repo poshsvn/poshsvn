@@ -45,4 +45,9 @@ namespace PoshSvn.CmdLets
             return "Committing";
         }
     }
+
+    public class SvnCommitOutput
+    {
+        public long Revision { get; set; }
+    }
 }

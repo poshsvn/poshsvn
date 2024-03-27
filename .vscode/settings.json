@@ -2,10 +2,5 @@
     "search.exclude": {
         "**/bin": true,
         "**/obj": true,
-    },
-    "files.exclude": {
-        "**/.svn": true,
-        "**/.vs": true,
-        "**/obj": true,
     }
 }

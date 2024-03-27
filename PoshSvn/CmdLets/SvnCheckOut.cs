@@ -57,4 +57,9 @@ namespace PoshSvn.CmdLets
             SvnClient.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
         }
     }
+
+    public class SvnCheckoutOutput
+    {
+        public long Revision { get; set; }
+    }
 }
