@@ -16,7 +16,7 @@ namespace PoshSvn.CmdLets
         public SvnTarget[] Target { get; set; }
 
         [Parameter()]
-        [Alias("Comment")]
+        [Alias("Comment", "m")]
         public string Message { get; set; }
 
         [Parameter()]

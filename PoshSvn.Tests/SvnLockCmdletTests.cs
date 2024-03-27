@@ -54,7 +54,7 @@ namespace PoshSvn.Tests
                 sb.RunScript("Set-Content wc/test.txt abc");
                 sb.RunScript("svn-add wc/test.txt");
                 sb.RunScript("svn-commit wc -m test");
-                var actual = sb.RunScript($"svn-lock {sb.ReposUrl}/test.txt");
+                var actual = sb.RunScript($"svn-lock {sb.ReposUrl}/test.txt -m 'the lock'");
 
                 PSObjectAssert.AreEqual(
                     new object[]
