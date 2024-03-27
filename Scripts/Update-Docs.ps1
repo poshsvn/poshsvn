@@ -1,7 +1,7 @@
 param (
 )
 
-$docsPath = "$PSScriptRoot\..\docs"
+$docsPath = "$PSScriptRoot\..\PoshSvn.Docs"
 
 & $PSScriptRoot\Build-PoshSvn.ps1
 Import-Module $PSScriptRoot\..\bin\poshsvn\PoshSvn.psd1 -Force
