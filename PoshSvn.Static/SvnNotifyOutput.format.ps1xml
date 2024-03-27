@@ -4,7 +4,7 @@
       <Name>default</Name>
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
-        <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
+        <TypeName>PoshSvn.SvnCommitOutput</TypeName>
         <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
         <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
         <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
@@ -21,7 +21,7 @@
           </CustomEntry>
           <CustomEntry>
             <EntrySelectedBy>
-              <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
+              <TypeName>PoshSvn.SvnCommitOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Committed revision </Text>
