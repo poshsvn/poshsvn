@@ -41,7 +41,7 @@
           </CustomEntry>
           <CustomEntry>
             <EntrySelectedBy>
-              <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
+              <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Checked out revision </Text>
@@ -53,8 +53,8 @@
           </CustomEntry>
           <CustomEntry>
             <EntrySelectedBy>
-              <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
-              <TypeName>PoshSvn.CmdLets.SvnSwitchOutput</TypeName>
+              <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
+              <TypeName>PoshSvn.SvnSwitchOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Updated to revision </Text>
