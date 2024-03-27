@@ -8,7 +8,8 @@ schema: 2.0.0
 # Invoke-SvnBlame
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Show author and revision information inline for the specified files or URLs.
 
 ## SYNTAX
 
@@ -18,21 +19,56 @@ Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <PoshSvnRevisionRange>] [-Ret
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Annotate each line of a file with the revision number and author
+of the last change (or optionally the next change) to that line.
 
 ## EXAMPLES
 
 ### Example 1
+
+If you want to see blame-annotated source for README file in your repository:
+
 ```powershell
-PS C:\> {{ Add example code here }}
+svn-blame https://svn.example.com/repos/README
+
+       r3 sally            This is a README file.
+       r1 harry            Don't bother reading it.  The boss is a knucklehead.
+       r3 sally            
+
 ```
 
-{{ Add example description here }}
+### Example 2
+
+If you format output as list, you can get more detalized blame annotations:
+
+```powershell
+svn-blame https://svn.example.com/repos/README | Format-List
+
+Revision                 : 3
+Author                   : sally
+Line                     : This is a README file.
+MergedRevisionProperties :
+RevisionProperties       :
+LocalChange              : False
+MergedRevision           :
+MergedTime               :
+MergedPath               :
+MergedAuthor             :
+Time                     : 3/25/2024 9:34:15 PM
+LineNumber               : 0
+EndRevision              : 7
+StartRevision            : 0
+
+...
+
+```
 
 ## PARAMETERS
 
 ### -IgnoreLineEndings
-{{ Fill IgnoreLineEndings Description }}
+
+Ignore line endings.
 
 ```yaml
 Type: SwitchParameter
@@ -47,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreMimeType
-{{ Fill IgnoreMimeType Description }}
+Ignore mime type.
 
 ```yaml
 Type: SwitchParameter
@@ -62,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreSpacing
-{{ Fill IgnoreSpacing Description }}
+Ignore spacing.
 
 ```yaml
 Type: SvnIgnoreSpacing
@@ -78,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -RetrieveMergedRevisions
-{{ Fill RetrieveMergedRevisions Description }}
+Retrives merged revisions and revision properties.
 
 ```yaml
 Type: SwitchParameter
@@ -93,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-{{ Fill Revision Description }}
+Specifies revision to operate.
 
 ```yaml
 Type: PoshSvnRevisionRange
@@ -108,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Target Description }}
+Specifies target to operate.
 
 ```yaml
 Type: SvnTarget
