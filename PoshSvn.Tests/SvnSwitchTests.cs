@@ -2,7 +2,6 @@
 
 using System.IO;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 
@@ -54,31 +53,6 @@ namespace PoshSvn.Tests
                         new SvnSwitchOutput { Revision = 3 },
                     },
                     actual);
-            }
-        }
-
-        [Test]
-        public void FormatTest()
-        {
-            using (var sb = new PowerShellSandbox())
-            {
-                CollectionAssert.AreEqual(
-                       new[]
-                       {
-                            @"",
-                            @"Updated to revision 31.",
-                            @"",
-                            @"",
-                       },
-                       sb.FormatObject(
-                           new[]
-                           {
-                               new SvnSwitchOutput
-                               {
-                                   Revision = 31
-                               }
-                           },
-                           "Format-Custom"));
             }
         }
     }

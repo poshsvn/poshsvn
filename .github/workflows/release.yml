@@ -84,7 +84,6 @@ jobs:
     needs: 
       - build-poshsvn
       - build-vscode-extension
-      - create_release
 
     runs-on: windows-latest
 

@@ -4,11 +4,10 @@
       <Name>default</Name>
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
-        <TypeName>PoshSvn.SvnCommitOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
         <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
-        <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
-        <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
-        <TypeName>PoshSvn.SvnSwitchOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
+        <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -21,7 +20,7 @@
           </CustomEntry>
           <CustomEntry>
             <EntrySelectedBy>
-              <TypeName>PoshSvn.SvnCommitOutput</TypeName>
+              <TypeName>PoshSvn.CmdLets.SvnCommitOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Committed revision </Text>
@@ -41,7 +40,7 @@
           </CustomEntry>
           <CustomEntry>
             <EntrySelectedBy>
-              <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
+              <TypeName>PoshSvn.CmdLets.SvnCheckoutOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Checked out revision </Text>
@@ -53,8 +52,7 @@
           </CustomEntry>
           <CustomEntry>
             <EntrySelectedBy>
-              <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
-              <TypeName>PoshSvn.SvnSwitchOutput</TypeName>
+              <TypeName>PoshSvn.CmdLets.SvnUpdateOutput</TypeName>
             </EntrySelectedBy>
             <CustomItem>
               <Text>Updated to revision </Text>
