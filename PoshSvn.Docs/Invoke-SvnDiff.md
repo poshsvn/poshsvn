@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnDiff
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+This displays the differences between two revisions or paths.
 
 ## SYNTAX
 
@@ -27,21 +27,64 @@ Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-NoDif
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Display the differences between two Targets. You can use svn-diff in the following ways:
+
+- Use just svn diff to display local modifications in a working copy.
+- Display the differences between two Targets,
+  specified by `-Old` and `-New` parameters.
+  The targets may be differ by Path, Url, and Revision.
+  You may find more information about PoshSvn Targets system here: [about_PoshSvnTarget](https://www.poshsvn.com/docs/about_PoshSvnTarget/).
 
 ## EXAMPLES
 
 ### Example 1
+
+Compare `BASE` and your working copy (one of the most popular uses of `svn-diff`):
+
 ```powershell
-PS C:\> {{ Add example code here }}
+svn-diff COMMITTERS.md
+Index: COMMITTERS.md
+===================================================================
+--- COMMITTERS.md	(revision 4404)
++++ COMMITTERS.md	(working copy)
+...
 ```
 
-{{ Add example description here }}
+### Example 2
+
+Compare `BASE` and your working copy (one of the most popular uses of `svn-diff`):
+
+```powershell
+svn-diff -Old https://svn.example.com/repos/trunk/COMMITTERS@3000 `
+         -New https://svn.example.com/repos/trunk/COMMITTERS@3000
+
+Index: COMMITTERS
+===================================================================
+--- COMMITTERS	(revision 3000)
++++ COMMITTERS	(revision 3500)
+```
+
+### Example 3
+
+Or you may use a dictionary with parameters.
+
+```powershell
+$parameters = @{
+    Old = "https://svn.example.com/repos/trunk/COMMITTERS@3000"
+    New = "https://svn.example.com/repos/trunk/COMMITTERS@3500"
+}
+svn-diff $parameters
+
+Index: COMMITTERS
+===================================================================
+--- COMMITTERS	(revision 3000)
++++ COMMITTERS	(revision 3500)
+```
 
 ## PARAMETERS
 
 ### -Changelist
-{{ Fill Changelist Description }}
+Specifies a changlist to operate.
 
 ```yaml
 Type: String
@@ -56,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -Depth
-{{ Fill Depth Description }}
+Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
 
 ```yaml
 Type: SvnDepth
@@ -72,7 +115,7 @@ Accept wildcard characters: False
 ```
 
 ### -Git
-{{ Fill Git Description }}
+Use git's extended diff format.
 
 ```yaml
 Type: SwitchParameter
@@ -87,7 +130,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreProperties
-{{ Fill IgnoreProperties Description }}
+Ignore properties during the operation
 
 ```yaml
 Type: SwitchParameter
@@ -102,7 +145,7 @@ Accept wildcard characters: False
 ```
 
 ### -New
-{{ Fill New Description }}
+Specifies the newer target.
 
 ```yaml
 Type: SvnTarget
@@ -117,7 +160,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoDiffAdded
-{{ Fill NoDiffAdded Description }}
+Do not print differences for added files.
 
 ```yaml
 Type: SwitchParameter
@@ -132,7 +175,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoDiffDeleted
-{{ Fill NoDiffDeleted Description }}
+Do not print differences for deleted files.
 
 ```yaml
 Type: SwitchParameter
@@ -147,7 +190,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoticeAncestry
-{{ Fill NoticeAncestry Description }}
+Diff unrelated nodes as delete and add.
 
 ```yaml
 Type: SwitchParameter
@@ -162,7 +205,7 @@ Accept wildcard characters: False
 ```
 
 ### -Old
-{{ Fill Old Description }}
+Specifies the newer target.
 
 ```yaml
 Type: SvnTarget
@@ -177,7 +220,8 @@ Accept wildcard characters: False
 ```
 
 ### -PatchCompatible
-{{ Fill PatchCompatible Description }}
+Generate diff suitable for generic third-party patch tools.
+Currently the same as `-ShowCopiesAsAdds` `-IgnoreProperties`.
 
 ```yaml
 Type: SwitchParameter
@@ -192,7 +236,7 @@ Accept wildcard characters: False
 ```
 
 ### -PropertiesOnly
-{{ Fill PropertiesOnly Description }}
+Show only properties during the operation.
 
 ```yaml
 Type: SwitchParameter
@@ -207,7 +251,7 @@ Accept wildcard characters: False
 ```
 
 ### -ShowCopiesAsAdds
-{{ Fill ShowCopiesAsAdds Description }}
+Don't diff copied or moved files with their source.
 
 ```yaml
 Type: SwitchParameter
@@ -222,7 +266,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Target Description }}
+Specifies target to operate.
 
 ```yaml
 Type: SvnTarget[]
