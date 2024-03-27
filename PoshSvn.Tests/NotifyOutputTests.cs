@@ -308,7 +308,7 @@ namespace PoshSvn.Tests
                         "A       b",
                         "U       .",
                         "",
-                        "Updated to revision 4.",
+                        "Revision : 4",
                         "",
                         "",
                         "",
