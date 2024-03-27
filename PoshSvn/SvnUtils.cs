@@ -99,6 +99,12 @@ namespace PoshSvn
                 case SvnNotifyAction.UpdateReplace:
                     return "R";
 
+                case SvnNotifyAction.LockLocked:
+                    return "+L";
+
+                case SvnNotifyAction.LockUnlocked:
+                    return "-L";
+
                 // case SvnNotifyAction.Conflict: return "C";
                 // case SvnNotifyAction.UpdateMerge: return "G";
                 // case SvnNotifyAction.UpdateExist: return "E";
