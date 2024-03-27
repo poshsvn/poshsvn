@@ -3,7 +3,7 @@
     Author                 = "Timofei Zhakov"
     CompanyName            = "Rinrab"
     Copyright              = "(c) Timofei Zhakov. All rights reserved."
-    ModuleVersion          = "0.4.1"
+    ModuleVersion          = "0.5.0"
     PowerShellVersion      = "3.0"
     CLRVersion             = "4.0"
     Description            = "Apache Subversion client for PowerShell
@@ -97,6 +97,25 @@ Project website: https://www.poshsvn.com"
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0]
+
+- Implement `svn-cat` cmdlet.
+- Implement `svn-diff` cmdlet.
+- Implement `svn-blame` cmdlet.
+- Some fixes in commit output.
+- Minor fixes and improvement.
+
+## [0.4.0]
+
+- Added vscode extension.
+- Minor fixes and improvement.
+
+## [0.3.0]
+
+- Add `-Revision` parameter to `svn-log` cmdlet.
+- Implement `svn-import` and `svn-export` cmdlets.
+- Minor fixes and improvement.
+
 ## [0.2.0]
 
 - Rework targets of cmdlets.
@@ -120,7 +139,8 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.0]
 
-- Initial release"
+- Initial release
+"
             # LicenseUri = "https://aka.ms/azps-license"
             ProjectUri = "https://www.poshsvn.com"
             IconUri = "https://www.poshsvn.com/icon.svg"
