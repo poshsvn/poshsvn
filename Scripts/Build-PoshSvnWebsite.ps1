@@ -13,7 +13,7 @@ function RenderPage {
 
     $lastPrefix = ""
     $topics = ""
-    foreach ($path in Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\*.md") {
+    foreach ($path in Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US\*.md") {
         $null = $path.BaseName -match "(^.*[-_])"
         $prefix = $Matches[1]
         $prefix = $prefix -replace "[a-zA-Z]*-", "Cmdlets"
@@ -52,7 +52,7 @@ if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
 
 Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
-foreach ($path in Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\*" -Include "*.md") {
+foreach ($path in Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US\*" -Include "*.md") {
     $null = $path -match "([a-zA-Z\-_]*)\.md"
     $cmdletName = $Matches[1]
     $content = (ConvertFrom-Markdown $path).Html -replace '<h1 id="poshsvn">PoshSvn</h1>'

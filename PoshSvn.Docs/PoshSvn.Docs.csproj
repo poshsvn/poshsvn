@@ -10,6 +10,6 @@
   </Target>
 
   <Target Name="BuildDocs" AfterTargets="InstallPlatyPS">
-    <Exec Command="$(PowerShell) -Command New-ExternalHelp -Path $(MSBuildProjectDirectory) -OutputPath $(OutDir)\en-US -Force" />
+    <Exec Command="$(PowerShell) -Command New-ExternalHelp -Path (ls $(MSBuildProjectDirectory) *.md -Recurse) -OutputPath $(OutDir)\en-US -Force" />
   </Target>
 </Project>
