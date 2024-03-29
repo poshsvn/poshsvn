@@ -23,7 +23,8 @@ PoshSvn provides the following features:
 
 ## Concept
 
-The PoshSvn concept was to repeat the Subversion command line interface user experience, including parameters, output, and other behavior.
+The PoshSvn concept was to repeat the Subversion command line interface
+user experience, including parameters, output, and other behavior.
 
 ## Examples
 
@@ -64,4 +65,6 @@ Also you can write the names of the parameters (better for scripting):
 svn-checkout -Url https://svn.apache.org/repos/asf/serf/trunk -Path serf-trunk
 ```
 
-As you can see, there are very little differences between Subversion CLI and PoshSvn cmdlets, but PoshSvn also adds some PowerShell features such as progress, typed output, and other. 
+As you can see, there are very little differences between Subversion
+CLI and PoshSvn cmdlets, but PoshSvn also adds some PowerShell 
+features such as progress, typed output, and other. 
