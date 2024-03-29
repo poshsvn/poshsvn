@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <Target Name="InstallPlatyPS" BeforeTargets="PrepareForRun">
-    <Exec Command="$(PowerShell) $(ScriptsPath)\Install-PlatyPS.ps1" />
-  </Target>
-
-  <Target Name="BuildDocs" AfterTargets="InstallPlatyPS">
-    <Exec Command="$(PowerShell) -Command New-ExternalHelp -Path (ls $(MSBuildProjectDirectory) -Include *.md -Recurse) -OutputPath $(OutDir)\en-US -Force" />
+    <Exec Command="$(PowerShell) $(ScriptsPath)\Build-PoshSvnDocs.ps1 -InputDir $(MSBuildProjectDirectory) -OutputDir $(OutDir)" />
   </Target>
 </Project>
