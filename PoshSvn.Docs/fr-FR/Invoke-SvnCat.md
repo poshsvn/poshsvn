@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Obtient le contenu de l'élément au chemin, à l'URL et à la révision spécifiés.
+Obtient le contenu de l'Ã©lÃ©ment au chemin, Ã  l'URL et Ã  la rÃ©vision spÃ©cifiÃ©s.
 
 ## SYNTAX
 
@@ -19,24 +19,24 @@ Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [<CommonParameters>
 
 ## DESCRIPTION
 
-Le cmdlet `svn-cat` récupère le contenu de l'élément au chemin, à l'URL et à la révision spécifiés. Pour les fichiers, le contenu est lu ligne par ligne et renvoie une collection d'objets, chacun représentant une ligne de contenu.
+Le cmdlet `svn-cat` rÃ©cupÃ¨re le contenu de l'Ã©lÃ©ment au chemin, Ã  l'URL et Ã  la rÃ©vision spÃ©cifiÃ©s. Pour les fichiers, le contenu est lu ligne par ligne et renvoie une collection d'objets, chacun reprÃ©sentant une ligne de contenu.
 
 ## EXAMPLES
 
 ### Exemple 1
 
-Si vous souhaitez visualiser le fichier README.md dans votre dépôt sans le vérifier :
+Si vous souhaitez visualiser le fichier README.md dans votre dÃ©pÃ´t sans le vÃ©rifier :
 
 ```powershell
 svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md
 
 # Client Apache Subversion pour PowerShell
 
-## Fonctionnalités
+## FonctionnalitÃ©s
 
-- Complétion automatique (expansion de tabulation) des commandes et des paramètres.
-- Sortie typée des cmdlets.
-- Sortie formatée pour reproduire l'expérience utilisateur de l'interface de ligne de commande Subversion.
+- ComplÃ©tion automatique (expansion de tabulation) des commandes et des paramÃ¨tres.
+- Sortie typÃ©e des cmdlets.
+- Sortie formatÃ©e pour reproduire l'expÃ©rience utilisateur de l'interface de ligne de commande Subversion.
 
 ## Installation
 
@@ -49,17 +49,17 @@ Install-Module -Name PoshSvn
 
 ### Exemple 2
 
-Vous pouvez également visualiser des versions spécifiques de fichiers.
+Vous pouvez Ã©galement visualiser des versions spÃ©cifiques de fichiers.
 
 ````powershell
 svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
 
 # Client Apache Subversion pour PowerShell
 
-## Fonctionnalités
+## FonctionnalitÃ©s
 
-- Complétion automatique (expansion de tabulation) des commandes et des paramètres.
-- Sortie typée des cmdlets.
+- ComplÃ©tion automatique (expansion de tabulation) des commandes et des paramÃ¨tres.
+- Sortie typÃ©e des cmdlets.
 ...
 
 ````
@@ -67,7 +67,7 @@ svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
 ## PARAMETERS
 
 ### -AsByteStream
-Spécifie que le contenu doit être lu comme un flux d'octets.
+SpÃ©cifie que le contenu doit Ãªtre lu comme un flux d'octets.
 
 ```yaml
 Type: SwitchParameter
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Raw
-Ignore les caractères de saut de ligne et renvoie l'intégralité du contenu d'un fichier dans une seule chaîne avec les sauts de ligne préservés. Par défaut, les caractères de saut de ligne dans un fichier sont utilisés comme délimiteurs pour séparer l'entrée en un tableau de chaînes.
+Ignore les caractÃ¨res de saut de ligne et renvoie l'intÃ©gralitÃ© du contenu d'un fichier dans une seule chaÃ®ne avec les sauts de ligne prÃ©servÃ©s. Par dÃ©faut, les caractÃ¨res de saut de ligne dans un fichier sont utilisÃ©s comme dÃ©limiteurs pour sÃ©parer l'entrÃ©e en un tableau de chaÃ®nes.
 
 ```yaml
 Type: SwitchParameter
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Spécifie la cible sur laquelle opérer.
+SpÃ©cifie la cible sur laquelle opÃ©rer.
 
 ```yaml
 Type: SvnTarget

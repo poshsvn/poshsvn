@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Affiche les informations sur l'auteur et la révision en ligne pour les fichiers ou les URL spécifiés.
+Affiche les informations sur l'auteur et la rÃ©vision en ligne pour les fichiers ou les URL spÃ©cifiÃ©s.
 
 ## SYNTAX
 
@@ -24,37 +24,37 @@ Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <PoshSvnRevisionRange>] [-Ret
 
 ### Exemple 1
 
-Si vous voulez voir le code source annoté pour le fichier README dans votre dépôt :
+Si vous voulez voir le code source annotÃ© pour le fichier README dans votre dÃ©pÃ´t :
 
 ```powershell
 svn-blame https://svn.example.com/repos/README
 
        r3 sally            Ceci est un fichier README.
-       r1 harry            Ne vous embêtez pas à le lire. Le patron est un crétin.
+       r1 harry            Ne vous embÃªtez pas Ã  le lire. Le patron est un crÃ©tin.
        r3 sally
 ```
 
 ### Exemple 2
 
-Si vous formatez la sortie sous forme de liste, vous pouvez obtenir des annotations d'attribution plus détaillées :
+Si vous formatez la sortie sous forme de liste, vous pouvez obtenir des annotations d'attribution plus dÃ©taillÃ©es :
 
 ```powershell
 svn-blame https://svn.example.com/repos/README | Format-List
 
-Révision                 : 3
+RÃ©vision                 : 3
 Auteur                   : sally
 Ligne                    : Ceci est un fichier README.
-PropriétésRévisionMerge : 
-PropriétésRévision       : 
+PropriÃ©tÃ©sRÃ©visionMerge : 
+PropriÃ©tÃ©sRÃ©vision       : 
 ChangementLocal          : False
-RévisionFusionnée        : 
+RÃ©visionFusionnÃ©e        : 
 HeureFusion              : 
 CheminFusion             : 
 AuteurFusion             : 
 Heure                    : 25/03/2024 21:34:15
-NuméroLigne              : 0
-RévisionFin              : 7
-RévisionDébut            : 0
+NumÃ©roLigne              : 0
+RÃ©visionFin              : 7
+RÃ©visionDÃ©but            : 0
 
 ...
 ```
@@ -108,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -RetrieveMergedRevisions
-Récupère les révisions fusionnées et les propriétés de révision.
+RÃ©cupÃ¨re les rÃ©visions fusionnÃ©es et les propriÃ©tÃ©s de rÃ©vision.
 
 ```yaml
 Type: SwitchParameter
@@ -123,7 +123,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-Spécifie la révision sur laquelle opérer.
+SpÃ©cifie la rÃ©vision sur laquelle opÃ©rer.
 
 ```yaml
 Type: PoshSvnRevisionRange
@@ -138,7 +138,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Spécifie la cible sur laquelle opérer.
+SpÃ©cifie la cible sur laquelle opÃ©rer.
 
 ```yaml
 Type: SvnTarget

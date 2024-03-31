@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnList
 
 ## SYNOPSIS
-Liste les entrées de répertoire dans le répertoire spécifié.
+Liste les entrÃ©es de rÃ©pertoire dans le rÃ©pertoire spÃ©cifiÃ©.
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Invoke-SvnList [[-Target] <SvnTarget[]>] [-Detailed] [-Revision <SvnRevision>] [
 ```
 
 ## DESCRIPTION
-Liste chaque fichier de la cible et le contenu de chaque répertoire de la cible tels qu'ils existent dans le référentiel. La cible peut être une URL ou un chemin.
+Liste chaque fichier de la cible et le contenu de chaque rÃ©pertoire de la cible tels qu'ils existent dans le rÃ©fÃ©rentiel. La cible peut Ãªtre une URL ou un chemin.
 
 ## EXAMPLES
 
@@ -32,7 +32,7 @@ Liste chaque fichier de la cible et le contenu de chaque répertoire de la cible 
 ## PARAMETERS
 
 ### -Depth
-Limitez la portée de l'opération en spécifiant la profondeur (Vide, Fichiers, Immédiats ou Infini).
+Limitez la portÃ©e de l'opÃ©ration en spÃ©cifiant la profondeur (Vide, Fichiers, ImmÃ©diats ou Infini).
 
 ```yaml
 Type: SvnDepth
@@ -48,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -Detailed
-Affiche des informations supplémentaires.
+Affiche des informations supplÃ©mentaires.
 
 ```yaml
 Type: SwitchParameter
@@ -63,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeExternals
-Indique à Subversion d'inclure les définitions externes et les copies de travail externes gérées par elles.
+Indique Ã  Subversion d'inclure les dÃ©finitions externes et les copies de travail externes gÃ©rÃ©es par elles.
 
 ```yaml
 Type: SwitchParameter
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-Spécifie une révision avec laquelle opérer.
+SpÃ©cifie une rÃ©vision avec laquelle opÃ©rer.
 
 ```yaml
 Type: SvnRevision
@@ -93,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Spécifie le chemin ou l'URL du répertoire à répertorier.
+SpÃ©cifie le chemin ou l'URL du rÃ©pertoire Ã  rÃ©pertorier.
 
 ```yaml
 Type: SvnTarget[]

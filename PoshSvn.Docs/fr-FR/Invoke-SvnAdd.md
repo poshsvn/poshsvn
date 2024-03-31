@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Ajoute des fichiers, des rÈpertoires ou des liens symboliques.
+Ajoute des fichiers, des r√©pertoires ou des liens symboliques.
 
 ## SYNTAX
 
@@ -20,13 +20,13 @@ Invoke-SvnAdd [-Path] <String[]> [-Depth <SvnDepth>] [-Force] [-NoIgnore] [-NoAu
 
 ## DESCRIPTION
 
-Planifie l'ajout de fichiers, de rÈpertoires ou de liens symboliques dans votre copie de travail pour les ajouter au dÈpÙt. Ils seront tÈlÈchargÈs et ajoutÈs au dÈpÙt lors de votre prochain commit.
+Planifie l'ajout de fichiers, de r√©pertoires ou de liens symboliques dans votre copie de travail pour les ajouter au d√©p√¥t. Ils seront t√©l√©charg√©s et ajout√©s au d√©p√¥t lors de votre prochain commit.
 
 ## EXAMPLES
 
 ### Exemple 1 : Ajouter un fichier
 
-Pour ajouter un fichier ‡ votre copie de travail :
+Pour ajouter un fichier √† votre copie de travail :
 
 ```powershell
 svn-add .\foo.c
@@ -34,9 +34,9 @@ svn-add .\foo.c
 A       foo.c
 ```
 
-### Exemple 2 : Ajouter un rÈpertoire avec du contenu
+### Exemple 2 : Ajouter un r√©pertoire avec du contenu
 
-Lors de l'ajout d'un rÈpertoire, le comportement par dÈfaut de `svn-add` est de rÈcursivitÈ :
+Lors de l'ajout d'un r√©pertoire, le comportement par d√©faut de `svn-add` est de r√©cursivit√© :
 
 ```powershell
 svn-add testdir
@@ -48,9 +48,9 @@ A       testdir\c
 A       testdir\d
 ```
 
-### Exemple 3 : Ajouter un rÈpertoire sans contenu
+### Exemple 3 : Ajouter un r√©pertoire sans contenu
 
-Vous pouvez ajouter un rÈpertoire sans ajouter son contenu :
+Vous pouvez ajouter un r√©pertoire sans ajouter son contenu :
 
 ```powershell
 svn-add otherdir -Depth Empty
@@ -58,13 +58,13 @@ svn-add otherdir -Depth Empty
 A       otherdir
 ```
 
-### Exemple 4 : Ajouter un rÈpertoire versionnÈ
+### Exemple 4 : Ajouter un r√©pertoire versionn√©
 
-Les tentatives d'ajouter un ÈlÈment qui est dÈj‡ versionnÈ Èchoueront par dÈfaut. Pour outrepasser le comportement par dÈfaut et forcer Subversion ‡ parcourir les rÈpertoires dÈj‡ versionnÈs, passez l'option `-Force` :
+Les tentatives d'ajouter un √©l√©ment qui est d√©j√† versionn√© √©choueront par d√©faut. Pour outrepasser le comportement par d√©faut et forcer Subversion √† parcourir les r√©pertoires d√©j√† versionn√©s, passez l'option `-Force` :
 
 ```powershell
 svn-add VersionedDirictory
-Invoke-SvnAdd: 'C:\Users\cmpilato\projects\subversion\site' est dÈj‡ sous contrÙle de version.
+Invoke-SvnAdd: 'C:\Users\cmpilato\projects\subversion\site' est d√©j√† sous contr√¥le de version.
 svn-add VersionedDirictory -Force
 A        VersionedDirictory\foo.c
 A        VersionedDirictory\somedir\bar.c
@@ -74,7 +74,7 @@ A        VersionedDirictory\otherdir\docs\baz.doc
 ## PARAMETERS
 
 ### -Depth
-Limitez la portÈe de l'opÈration en spÈcifiant la profondeur (Vide, Fichiers, ImmÈdiats ou Infini).
+Limitez la port√©e de l'op√©ration en sp√©cifiant la profondeur (Vide, Fichiers, Imm√©diats ou Infini).
 
 ```yaml
 Type: SvnDepth
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-Ignore les chemins dÈj‡ versionnÈs.
+Ignore les chemins d√©j√† versionn√©s.
 
 ```yaml
 Type: SwitchParameter
@@ -105,7 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoAutoProps
-DÈsactive le paramÈtrage automatique des propriÈtÈs, outrepassant la directive de configuration runtime enable-auto-props.
+D√©sactive le param√©trage automatique des propri√©t√©s, outrepassant la directive de configuration runtime enable-auto-props.
 
 ```yaml
 Type: SwitchParameter
@@ -120,7 +120,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoIgnore
-Ignore les exclusions par dÈfaut et les exclusions des propriÈtÈs svn:ignore et svn:global-ignores.
+Ignore les exclusions par d√©faut et les exclusions des propri√©t√©s svn:ignore et svn:global-ignores.
 
 ```yaml
 Type: SwitchParameter
@@ -135,7 +135,7 @@ Accept wildcard characters: False
 ```
 
 ### -Parents
-Ajoute les rÈpertoires parents intermÈdiaires.
+Ajoute les r√©pertoires parents interm√©diaires.
 
 ```yaml
 Type: SwitchParameter
@@ -150,7 +150,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-SpÈcifie le chemin de l'ÈlÈment ‡ ajouter.
+Sp√©cifie le chemin de l'√©l√©ment √† ajouter.
 
 ```yaml
 Type: String[]
@@ -165,7 +165,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-Ce cmdlet prend en charge les paramËtres courants : -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction et -WarningVariable. Pour plus d'informations, consultez [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+Ce cmdlet prend en charge les param√®tres courants : -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction et -WarningVariable. Pour plus d'informations, consultez [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
