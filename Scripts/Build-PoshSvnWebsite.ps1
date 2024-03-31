@@ -32,7 +32,7 @@ function RenderPage {
             $active = ""
         }
 
-        $topics += "<li class='nav-item'><a class='nav-link $active' href='./$($path.BaseName)'>$($path.BaseName)</a></li>"
+        $topics += "<li class='nav-item'><a class='nav-link $active' href='../$($path.BaseName)'>$($path.BaseName)</a></li>"
     }
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
