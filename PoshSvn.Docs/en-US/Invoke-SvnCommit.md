@@ -19,7 +19,7 @@ Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-RevisionProperties <Ha
 ## DESCRIPTION
 Send changes from your working copy to the repository.
 
-svn-commit will send any lock tokens that it finds and will release locks on all PATHs committed (recursively) unless -NoUnlock is passed (TODO:).
+svn-commit will send any lock tokens that it finds and will release locks on all PATHs committed (recursively) unless -NoUnlock is passed.
 
 ## EXAMPLES
 
