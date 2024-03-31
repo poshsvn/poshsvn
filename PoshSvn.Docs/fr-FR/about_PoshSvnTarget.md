@@ -10,90 +10,73 @@ title: About PoshSvn Cmdlet Target
 ## about_PoshSvnTarget
 
 ## Short description
-Describes how to specify cmdlet target.
+
+Description de la façon de spécifier la cible d'une cmdlet.
 
 ## Long description
 
-Some Subversion operations support specifying either a local Path to a working copy or a remote Url to a repository as a target.
+Certaines opérations Subversion prennent en charge la spécification d'un chemin local vers une copie de travail ou d'une URL distante vers un dépôt en tant que cible.
 
-You can specify target of the operation by setting the
-`-Target` parameter to either Path or Url. However,
-if you prefer to directly indicate whether it's a URL
-or a Path, the New-SvnTarget cmdlet and specify target 
-via `-Url` or `-Path` parameters respectively.
+Vous pouvez spécifier la cible de l'opération en définissant le paramètre `-Target` sur soit un chemin ou une URL. Cependant, si vous préférez indiquer directement s'il s'agit d'une URL ou d'un chemin, utilisez la cmdlet New-SvnTarget et spécifiez la cible via les paramètres `-Url` ou `-Path` respectivement.
 
-### Specifing the target via `-Target` Parameter
+### Spécification de la cible via le paramètre `-Target`
 
-This method of specifying the target is optimal for basic
-usage of Subversion. You can pass either a Path or Url to
-the `-Target` parameter, which PoshSvn will interpret accordingly.
+Cette méthode de spécification de la cible est optimale pour une utilisation de base de Subversion. Vous pouvez passer soit un chemin ou une URL au paramètre `-Target`, que PoshSvn interprétera en conséquence.
 
-The following examples retrieve `svn-info` from the remote repository and the working copy:
+Les exemples suivants récupèrent `svn-info` depuis le dépôt distant et la copie de travail :
 
 ```powershell
 svn-info -Target https://svn.apache.org/repos/asf/serf/trunk
-svn-info -Target .\path\to\wc
+svn-info -Target .\chemin\vers\wc
 ```
 
-However, you don't need to write `-Target` before specifing,
-as it accepts value from remaining arguments. That's why it
-almost repeat the Subversion CLI behaivior:
+Cependant, vous n'avez pas besoin d'écrire `-Target` avant de spécifier la cible, car il accepte la valeur des arguments restants. C'est pourquoi cela répète presque le comportement de l'interface en ligne de commande de Subversion :
 
 ```powershell
 svn-info https://svn.apache.org/repos/asf/serf/trunk
-svn-info .\path\to\wc
+svn-info .\chemin\vers\wc
 ```
 
-In some cmdlets, if no target is specified, PoshSvn will
-default to the current directory. This means that the
-following example will retrieve `svn-info` about the
-working copy located at `C:\path\to\wc`:
+Dans certaines cmdlets, si aucune cible n'est spécifiée, PoshSvn utilisera par défaut le répertoire actuel. Cela signifie que l'exemple suivant récupérera `svn-info` à propos de la copie de travail située à `C:\chemin\vers\wc` :
 
 ```
-cd C:\path\to\wc
+cd C:\chemin\vers\wc
 svn-info
 ```
 
-### Specifing the target via directly indicating its type
+### Spécification de la cible en indiquant directement son type
 
-If you write a script, you can explicitly specify whether
-the target is a Url or a Path. This approach is optimal
-for scripts as it ensures readability, understandability,
-and helps prevent mistakes caused by incorrect detection of the target type:
+Si vous écrivez un script, vous pouvez spécifier explicitement si la cible est une URL ou un chemin. Cette approche est optimale pour les scripts car elle garantit la lisibilité, la compréhension et aide à éviter les erreurs causées par une détection incorrecte du type de cible :
 
 ```powershell
 svn-info (New-SvnTarget -Url https://svn.apache.org/repos/asf/serf/trunk)
-svn-info (New-SvnTarget -Path .\path\to\wc)
+svn-info (New-SvnTarget -Path .\chemin\vers\wc)
 ```
 
-If you prefer, you may use a variable for the cmdlet target. For exmaple:
+Si vous préférez, vous pouvez utiliser une variable pour la cible de la cmdlet. Par exemple :
 
 ```powershell
-# Create target
-$target = (New-SvnTarget -Url https://svn.apache.org/repos/asf/serf/trunk)
+# Créer la cible
+$cible = (New-SvnTarget -Url https://svn.apache.org/repos/asf/serf/trunk)
 
-# Print target
-Write-Output $target
+# Afficher la cible
+Write-Output $cible
 
-# Invoke svn-info
-svn-info -Target $target
+# Appeler svn-info
+svn-info -Target $cible
 ```
 
-If a target with a different type is specified, it will result in an error:
+Si une cible avec un type différent est spécifiée, cela entraînera une erreur :
 
 ```powershell
 svn-info (New-SvnTarget -Path https://svn.apache.org/repos/asf/serf/trunk)
-# Error
-svn-info (New-SvnTarget -Url .\path\to\wc)
-# Error
+# Erreur
+svn-info (New-SvnTarget -Url .\chemin\vers\wc)
+# Erreur
 ```
 
-Additionally, you may utilize the
-[`$PSScriptRoot`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.4#psscriptroot)
-variable, if your working copy is located near the script.
-This automatic variable provides the path to the directory
-containing the script.
+De plus, vous pouvez utiliser la variable [`$PSScriptRoot`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.4#psscriptroot) si votre copie de travail est située près du script. Cette variable automatique fournit le chemin vers le répertoire contenant le script.
 
 ```powershell
-svn-info (New-SvnTarget -Path $PSScriptRoot\path\to\wc)
+svn-info (New-SvnTarget -Path $PSScriptRoot\chemin\vers\wc)
 ```
