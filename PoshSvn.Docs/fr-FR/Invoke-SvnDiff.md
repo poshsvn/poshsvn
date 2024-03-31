@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnDiff
 
 ## SYNOPSIS
-This displays the differences between two revisions or paths.
+Cela affiche les différences entre deux révisions ou chemins.
 
 ## SYNTAX
 
@@ -27,32 +27,31 @@ Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-NoDif
 ```
 
 ## DESCRIPTION
-Display the differences between two Targets. You can use svn-diff in the following ways:
+Affiche les différences entre deux cibles. Vous pouvez utiliser svn-diff de la manière suivante :
 
-- Use just svn diff to display local modifications in a working copy.
-- Display the differences between two Targets,
-  specified by `-Old` and `-New` parameters.
-  The targets may be differ by Path, Url, and Revision.
-  You may find more information about PoshSvn Targets system here: [about_PoshSvnTarget](https://www.poshsvn.com/docs/about_PoshSvnTarget/).
+- Utilisez simplement svn diff pour afficher les modifications locales dans une copie de travail.
+- Affichez les différences entre deux cibles, spécifiées par les paramètres `-Old` et `-New`.
+  Les cibles peuvent différer par le chemin, l'URL et la révision.
+  Vous pouvez trouver plus d'informations sur le système de cibles PoshSvn ici : [about_PoshSvnTarget](https://www.poshsvn.com/docs/about_PoshSvnTarget/).
 
 ## EXAMPLES
 
-### Example 1
+### Exemple 1
 
-Compare `BASE` and your working copy (one of the most popular uses of `svn-diff`):
+Comparer `BASE` et votre copie de travail (l'une des utilisations les plus courantes de `svn-diff`):
 
 ```powershell
 svn-diff COMMITTERS.md
 Index: COMMITTERS.md
 ===================================================================
---- COMMITTERS.md	(revision 4404)
-+++ COMMITTERS.md	(working copy)
+--- COMMITTERS.md	(révision 4404)
++++ COMMITTERS.md	(copie de travail)
 ...
 ```
 
-### Example 2
+### Exemple 2
 
-Compare `BASE` and your working copy (one of the most popular uses of `svn-diff`):
+Comparer `BASE` et votre copie de travail (l'une des utilisations les plus courantes de `svn-diff`):
 
 ```powershell
 svn-diff -Old https://svn.example.com/repos/trunk/COMMITTERS@3000 `
@@ -60,13 +59,13 @@ svn-diff -Old https://svn.example.com/repos/trunk/COMMITTERS@3000 `
 
 Index: COMMITTERS
 ===================================================================
---- COMMITTERS	(revision 3000)
-+++ COMMITTERS	(revision 3500)
+--- COMMITTERS	(révision 3000)
++++ COMMITTERS	(révision 3500)
 ```
 
-### Example 3
+### Exemple 3
 
-Or you may use a dictionary with parameters.
+Ou vous pouvez utiliser un dictionnaire avec des paramètres.
 
 ```powershell
 $parameters = @{
@@ -77,14 +76,14 @@ svn-diff $parameters
 
 Index: COMMITTERS
 ===================================================================
---- COMMITTERS	(revision 3000)
-+++ COMMITTERS	(revision 3500)
+--- COMMITTERS	(révision 3000)
++++ COMMITTERS	(révision 3500)
 ```
 
 ## PARAMETERS
 
 ### -Changelist
-Specifies a changlist to operate.
+Specifies a changelist to operate.
 
 ```yaml
 Type: String
@@ -115,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -Git
-Use git's extended diff format.
+Utilisez le format de diff étendu de Git.
 
 ```yaml
 Type: SwitchParameter
@@ -130,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreProperties
-Ignore properties during the operation
+Ignore les propriétés pendant l'opération.
 
 ```yaml
 Type: SwitchParameter
@@ -145,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -New
-Specifies the newer target.
+Spécifie la cible la plus récente.
 
 ```yaml
 Type: SvnTarget
@@ -160,7 +159,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoDiffAdded
-Do not print differences for added files.
+Ne pas afficher les différences pour les fichiers ajoutés.
 
 ```yaml
 Type: SwitchParameter
@@ -175,7 +174,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoDiffDeleted
-Do not print differences for deleted files.
+Ne pas afficher les différences pour les fichiers supprimés.
 
 ```yaml
 Type: SwitchParameter
@@ -190,7 +189,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoticeAncestry
-Diff unrelated nodes as delete and add.
+Différenciez les nœuds non liés comme une suppression et un ajout.
 
 ```yaml
 Type: SwitchParameter
@@ -205,7 +204,7 @@ Accept wildcard characters: False
 ```
 
 ### -Old
-Specifies the newer target.
+Spécifie la cible la plus récente.
 
 ```yaml
 Type: SvnTarget
@@ -220,7 +219,7 @@ Accept wildcard characters: False
 ```
 
 ### -PatchCompatible
-Generate diff suitable for generic third-party patch tools.
+Génère un diff adapté aux outils de correctifs tiers génériques.
 Currently the same as `-ShowCopiesAsAdds` `-IgnoreProperties`.
 
 ```yaml
@@ -236,7 +235,7 @@ Accept wildcard characters: False
 ```
 
 ### -PropertiesOnly
-Show only properties during the operation.
+Affiche uniquement les propriétés pendant l'opération.
 
 ```yaml
 Type: SwitchParameter
@@ -251,7 +250,7 @@ Accept wildcard characters: False
 ```
 
 ### -ShowCopiesAsAdds
-Don't diff copied or moved files with their source.
+Ne pas différencier les fichiers copiés ou déplacés avec leur source.
 
 ```yaml
 Type: SwitchParameter
@@ -266,7 +265,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Specifies target to operate.
+Spécifie la cible pour l'opération.
 
 ```yaml
 Type: SvnTarget[]

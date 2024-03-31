@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnLog
 
 ## SYNOPSIS
-Show the log messages for a set of revision(s) and/or path(s).
+Affiche les messages de journal pour un ensemble de révision(s) et/ou de chemin(s).
 
 ## SYNTAX
 
@@ -19,9 +19,9 @@ Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Revision <PoshSvnRevisionRange[]>] [-C
 ```
 
 ## DESCRIPTION
-Show the log messages from the repository. If no target supplied, `svn-log` shows the log messages for all files and directories inside the current working directory of your working copy.
+Affiche les messages de journal du dépôt. Si aucune cible n'est fournie, `svn-log` affiche les messages de journal pour tous les fichiers et répertoires à l'intérieur du répertoire de travail actuel de votre copie de travail.
 
-You may supply string with Url or Path to the target parameter or specify them manualy to the `-Url` or `-Path` parameters.
+Vous pouvez fournir une chaîne avec une URL ou un chemin au paramètre de cible ou les spécifier manuellement aux paramètres `-Url` ou `-Path`.
 
 ## EXAMPLES
 
@@ -32,13 +32,13 @@ svn-log
 ------------------------------------------------------------------------
 r20        harry               2003-01-17 22:56 -06:00
 
-Tweak.
+Ajustement.
 ------------------------------------------------------------------------
 r17        sally               2003-01-16 23:21 -06:00
 ...
 ```
 
-This command show the log messages the current directory and all items inside.
+Cette commande affiche les messages de journal du répertoire actuel et de tous les éléments à l'intérieur.
 
 ### Example 2
 ```powershell
@@ -47,13 +47,13 @@ svn-log foo.c
 ------------------------------------------------------------------------
 r32        sally               2003-01-13 00:43 -06:00
 
-Added defines.
+Ajout des définitions.
 ------------------------------------------------------------------------
 r28        sally               2003-01-07 21:48 -06:00
 ...
 ```
 
-This command show the log messages of the specific file, in this example `foo.c`.
+Cette commande affiche les messages de journal du fichier spécifique, dans cet exemple `foo.c`.
 
 ### Example 3
 ```powershell
@@ -62,13 +62,13 @@ svn-log https://svn.example.com/repos/foo.c
 ------------------------------------------------------------------------
 r32        sally               2003-01-13 00:43 -06:00
 
-Added defines.
+Ajout des définitions.
 ------------------------------------------------------------------------
 r28        sally               2003-01-07 21:48 -06:00
 ...
 ```
 
-This command show the log messages of the remote item by Url.
+Cette commande affiche les messages de journal de l'élément distant par URL.
 
 ### Example 4
 ```powershell
@@ -77,32 +77,32 @@ svn-log https://svn.example.com/repos/foo.c https://svn.example.com/repos/bar.c
 ------------------------------------------------------------------------
 r32        sally               2003-01-13 00:43 -06:00
 
-Added defines.
+Ajout des définitions.
 ------------------------------------------------------------------------
 r31        harry               2003-01-10 12:25 -06:00
 
-Added new file bar.c
+Ajout du nouveau fichier bar.c
 ------------------------------------------------------------------------
 r28        sally               2003-01-07 21:48 -06:00
 ...
 ```
 
-This command show the log messages of `foo.c` and `bar.c` inside the repository `https://svn.example.com/repos`.
+Cette commande affiche les messages de journal de `foo.c` et `bar.c` à l'intérieur du référentiel `https://svn.example.com/repos`.
 
-Important: the items has to be in the same repository.
+Important : les éléments doivent être dans le même référentiel.
 
 ### Example 5
 ```powershell
 svn-log | Format-Table
 
-  Revision Author           Date                   Message                                                              
+  Révision Auteur           Date                   Message                                                              
   -------- ------           ----                   -------                                                              
-        32 sally            2003-01-13    00:43    Added defines.
-        31 harry            2003-01-10    12:25    Added new file bar.c
+        32 sally            2003-01-13    00:43    Ajout des définitions.
+        31 harry            2003-01-10    12:25    Ajout du nouveau fichier bar.c
         28 sally            2003-01-07    21:48    ...
 ```
 
-This command show the log messages and formats them to table. You may use it to get more compact output.
+Cette commande affiche les messages de journal et les formate en tableau. Vous pouvez l'utiliser pour obtenir une sortie plus compacte.
 
 ## PARAMETERS
 

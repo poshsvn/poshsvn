@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnCommit
 
 ## SYNOPSIS
-Send changes from your working copy to the repository.
+Envoyer les modifications de votre copie de travail vers le dépôt.
 
 ## SYNTAX
 
@@ -17,50 +17,50 @@ Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-RevisionProperties <Ha
 ```
 
 ## DESCRIPTION
-Send changes from your working copy to the repository.
+Envoyez les modifications de votre copie de travail vers le dépôt.
 
-svn-commit will send any lock tokens that it finds and will release locks on all PATHs committed (recursively) unless -NoUnlock is passed.
+svn-commit enverra tout jeton de verrouillage qu'il trouve et libérera les verrous sur tous les CHEMINS commis (de manière récursive) sauf si -NoUnlock est passé.
 
 ## EXAMPLES
 
-### Example 1
+### Exemple 1
 
-Commit a simple modification to a file:
+Valider une simple modification d'un fichier :
 
 ```powershell
-svn-commit -Message "added howto section."
+svn-commit -Message "ajout de la section howto."
 
 M        a.txt
-Committed revision 3.
+Révision confirmée 3.
 ```
 
-### Example 2
+### Exemple 2
 
-Commit a file scheduled for deletion:
+Valider un fichier programmé pour la suppression :
 
 ```powershell
-svn-commit -Message "removed file 'c'."
+svn-commit -Message "suppression du fichier 'c'."
 
 D        c.txt
-Committed revision 7.
+Révision confirmée 7.
 ```
 
-### Example 3
+### Exemple 3
 
-By default, the target of the command refers to your current directory.
-Alternatively, you can specify it by setting the `-Path` parameter to a path of your choice:
+Par défaut, la cible de la commande fait référence à votre répertoire actuel.
+Vous pouvez également la spécifier en définissant le paramètre `-Path` sur un chemin de votre choix :
 
 ```powershell
-svn-commit -Path C:\path\to\wc -Message "added howto section."
+svn-commit -Path C:\chemin\vers\wc -Message "ajout de la section howto."
 
 M        a.txt
-Committed revision 3.
+Révision confirmée 3.
 ```
 
 ## PARAMETERS
 
 ### -Message
-Indicates that you will specify either a log message or a lock comment on the command line, following this option. For example: `svn-commit -Message "They don't make Sunday."`
+Indique que vous spécifierez soit un message de journal, soit un commentaire de verrouillage sur la ligne de commande, en suivant cette option. Par exemple : `svn-commit -Message "Ils ne font pas le dimanche."`
 
 ```yaml
 Type: String
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Specifies a Path of a the item commit. By default is `.` (current directory).
+Spécifie le chemin de l'élément à valider. Par défaut, c'est `.` (répertoire actuel).
 
 ```yaml
 Type: String[]
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -RevisionProperties
-Specifies revision property in new revision
+Spécifie la propriété de révision dans la nouvelle révision.
 
 ```yaml
 Type: Hashtable
