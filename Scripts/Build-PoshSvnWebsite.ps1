@@ -32,7 +32,7 @@ function RenderPage {
             $active = ""
         }
 
-        $topics += "<li class='nav-item'><a class='nav-link $active' href='/docs/$($path.BaseName)'>$($path.BaseName)</a></li>"
+        $topics += "<li class='nav-item'><a class='nav-link $active' href='./$($path.BaseName)'>$($path.BaseName)</a></li>"
     }
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
@@ -63,11 +63,13 @@ function RenderDocsLanguage {
         $null = $path -match "([a-zA-Z\-_]*)\.md"
         $cmdletName = $Matches[1]
         $content = (ConvertFrom-Markdown $path).Html -replace '<h1 id="poshsvn">PoshSvn</h1>'
-        RenderPage -Content $content -PageName "docs\$DestinationPrefix\$cmdletName" -Title $cmdletName
+        RenderPage -Content $content -PageName "$DestinationPrefix\docs\$cmdletName" -Title $cmdletName
     }
 }
 
 RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\en-US" -DestinationPrefix ""
+RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\en-US" -DestinationPrefix "en"
+RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\fr-FR" -DestinationPrefix "fr"
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse
 
