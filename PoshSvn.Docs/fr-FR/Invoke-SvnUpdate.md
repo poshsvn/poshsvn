@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnUpdate
 
 ## SYNOPSIS
-Actualiser votre copie de travail avec les dernières modifications du référentiel.
+Actualiser votre copie de travail avec les derniÃ¨res modifications du rÃ©fÃ©rentiel.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Invoke-SvnUpdate [[-Path] <String[]>] [-Revision <SvnRevision>] [<CommonParamete
 ```
 
 ## DESCRIPTION
-Récupérer les modifications du référentiel dans la copie de travail. Si aucune révision n'est donnée, mettre à jour la copie de travail avec la révision HEAD. Sinon, synchroniser la copie de travail avec la révision spécifiée par -Revision.
+RÃ©cupÃ©rer les modifications du rÃ©fÃ©rentiel dans la copie de travail. Si aucune rÃ©vision n'est donnÃ©e, mettre Ã  jour la copie de travail avec la rÃ©vision HEAD. Sinon, synchroniser la copie de travail avec la rÃ©vision spÃ©cifiÃ©e par -Revision.
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ Récupérer les modifications du référentiel dans la copie de travail. Si aucune r
 ## PARAMETERS
 
 ### -Path
-Spécifie le chemin de l'élément à mettre à jour. Par défaut, c'est `.` (le répertoire actuel).
+SpÃ©cifie le chemin de l'Ã©lÃ©ment Ã  mettre Ã  jour. Par dÃ©faut, c'est `.` (le rÃ©pertoire actuel).
 
 ```yaml
 Type: String[]
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-Spécifie la révision à laquelle effectuer la mise à jour.
+SpÃ©cifie la rÃ©vision Ã  laquelle effectuer la mise Ã  jour.
 
 ```yaml
 Type: SvnRevision

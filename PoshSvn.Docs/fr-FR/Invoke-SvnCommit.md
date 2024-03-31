@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnCommit
 
 ## SYNOPSIS
-Envoyer les modifications de votre copie de travail vers le dépôt.
+Envoyer les modifications de votre copie de travail vers le dÃ©pÃ´t.
 
 ## SYNTAX
 
@@ -17,9 +17,9 @@ Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-RevisionProperties <Ha
 ```
 
 ## DESCRIPTION
-Envoyez les modifications de votre copie de travail vers le dépôt.
+Envoyez les modifications de votre copie de travail vers le dÃ©pÃ´t.
 
-svn-commit enverra tout jeton de verrouillage qu'il trouve et libérera les verrous sur tous les CHEMINS commis (de manière récursive) sauf si -NoUnlock est passé.
+svn-commit enverra tout jeton de verrouillage qu'il trouve et libÃ©rera les verrous sur tous les CHEMINS commis (de maniÃ¨re rÃ©cursive) sauf si -NoUnlock est passÃ©.
 
 ## EXAMPLES
 
@@ -31,36 +31,36 @@ Valider une simple modification d'un fichier :
 svn-commit -Message "ajout de la section howto."
 
 M        a.txt
-Révision confirmée 3.
+RÃ©vision confirmÃ©e 3.
 ```
 
 ### Exemple 2
 
-Valider un fichier programmé pour la suppression :
+Valider un fichier programmÃ© pour la suppression :
 
 ```powershell
 svn-commit -Message "suppression du fichier 'c'."
 
 D        c.txt
-Révision confirmée 7.
+RÃ©vision confirmÃ©e 7.
 ```
 
 ### Exemple 3
 
-Par défaut, la cible de la commande fait référence à votre répertoire actuel.
-Vous pouvez également la spécifier en définissant le paramètre `-Path` sur un chemin de votre choix :
+Par dÃ©faut, la cible de la commande fait rÃ©fÃ©rence Ã  votre rÃ©pertoire actuel.
+Vous pouvez Ã©galement la spÃ©cifier en dÃ©finissant le paramÃ¨tre `-Path` sur un chemin de votre choix :
 
 ```powershell
 svn-commit -Path C:\chemin\vers\wc -Message "ajout de la section howto."
 
 M        a.txt
-Révision confirmée 3.
+RÃ©vision confirmÃ©e 3.
 ```
 
 ## PARAMETERS
 
 ### -Message
-Indique que vous spécifierez soit un message de journal, soit un commentaire de verrouillage sur la ligne de commande, en suivant cette option. Par exemple : `svn-commit -Message "Ils ne font pas le dimanche."`
+Indique que vous spÃ©cifierez soit un message de journal, soit un commentaire de verrouillage sur la ligne de commande, en suivant cette option. Par exemple : `svn-commit -Message "Ils ne font pas le dimanche."`
 
 ```yaml
 Type: String
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Spécifie le chemin de l'élément à valider. Par défaut, c'est `.` (répertoire actuel).
+SpÃ©cifie le chemin de l'Ã©lÃ©ment Ã  valider. Par dÃ©faut, c'est `.` (rÃ©pertoire actuel).
 
 ```yaml
 Type: String[]
@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -RevisionProperties
-Spécifie la propriété de révision dans la nouvelle révision.
+SpÃ©cifie la propriÃ©tÃ© de rÃ©vision dans la nouvelle rÃ©vision.
 
 ```yaml
 Type: Hashtable

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnDelete
 
 ## SYNOPSIS
-Supprimer des fichiers et des répertoires du contrôle de version.
+Supprimer des fichiers et des rÃ©pertoires du contrÃ´le de version.
 
 ## SYNTAX
 
@@ -23,11 +23,11 @@ Invoke-SvnDelete [-Target] <SvnTarget[]> [-Message <String>] [-Force] [-KeepLoca
 ```
 
 ## DESCRIPTION
-Supprime des éléments locaux ou distants de la version.
+Supprime des Ã©lÃ©ments locaux ou distants de la version.
 
-Chaque élément spécifié par un chemin est planifié pour la suppression lors de la prochaine validation.
+Chaque Ã©lÃ©ment spÃ©cifiÃ© par un chemin est planifiÃ© pour la suppression lors de la prochaine validation.
 
-Chaque élément spécifié par une URL est supprimé du dépôt via une validation immédiate.
+Chaque Ã©lÃ©ment spÃ©cifiÃ© par une URL est supprimÃ© du dÃ©pÃ´t via une validation immÃ©diate.
 
 ## EXAMPLES
 
@@ -44,15 +44,15 @@ Supprime et planifie la suppression du fichier foo.c.
 ```powershell
 svn-delete https://svn.example.com/repos/foo.c -Message "supprimer foo.c"
 
-Révision validée 57.
+RÃ©vision validÃ©e 57.
 ```
 
-Cette commande supprime le fichier situé à `https://svn.example.com/repos/foo.c` et valide la suppression avec le message de journal "supprimer foo.c".
+Cette commande supprime le fichier situÃ© Ã  `https://svn.example.com/repos/foo.c` et valide la suppression avec le message de journal "supprimer foo.c".
 
 ## PARAMETERS
 
 ### -Force
-Force l'opération à s'exécuter.
+Force l'opÃ©ration Ã  s'exÃ©cuter.
 
 ```yaml
 Type: SwitchParameter
@@ -67,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -KeepLocal
-Conserve l'élément dans la copie de travail.
+Conserve l'Ã©lÃ©ment dans la copie de travail.
 
 ```yaml
 Type: SwitchParameter
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Message
-Spécifie le message de journal.
+SpÃ©cifie le message de journal.
 
 ```yaml
 Type: String
@@ -97,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Spécifie le chemin ou l'URL de l'élément à supprimer.
+SpÃ©cifie le chemin ou l'URL de l'Ã©lÃ©ment Ã  supprimer.
 
 ```yaml
 Type: SvnTarget[]
