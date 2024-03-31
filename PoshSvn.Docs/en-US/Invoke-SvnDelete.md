@@ -53,7 +53,7 @@ and commits the deletion with the log message "delete foo.c".
 ## PARAMETERS
 
 ### -Force
-Force operation to run
+Force operation to run.
 
 ```yaml
 Type: SwitchParameter
