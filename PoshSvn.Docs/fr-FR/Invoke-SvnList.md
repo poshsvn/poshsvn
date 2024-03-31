@@ -32,7 +32,7 @@ List each Target file and the contents of each TARGET directory as they exist in
 ## PARAMETERS
 
 ### -Depth
-Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
+Limitez la portée de l'opération en spécifiant la profondeur (Vide, Fichiers, Immédiats ou Infini).
 
 ```yaml
 Type: SvnDepth
