@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnList
 
 ## SYNOPSIS
-List directory entries in the directory.
+Liste les entrées de répertoire dans le répertoire spécifié.
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Invoke-SvnList [[-Target] <SvnTarget[]>] [-Detailed] [-Revision <SvnRevision>] [
 ```
 
 ## DESCRIPTION
-List each Target file and the contents of each TARGET directory as they exist in the repository. Target can be Url or Path.
+Liste chaque fichier de la cible et le contenu de chaque répertoire de la cible tels qu'ils existent dans le référentiel. La cible peut être une URL ou un chemin.
 
 ## EXAMPLES
 
@@ -48,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -Detailed
-Print extra inforamtion.
+Affiche des informations supplémentaires.
 
 ```yaml
 Type: SwitchParameter
@@ -63,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeExternals
-Tells Subversion to include externals definitions and the external working copies managed by them.
+Indique à Subversion d'inclure les définitions externes et les copies de travail externes gérées par elles.
 
 ```yaml
 Type: SwitchParameter
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-Specifies a revision on with which to operate.
+Spécifie une révision avec laquelle opérer.
 
 ```yaml
 Type: SvnRevision
@@ -93,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Specifies the Path or the Url of the directory to list.
+Spécifie le chemin ou l'URL du répertoire à répertorier.
 
 ```yaml
 Type: SvnTarget[]
