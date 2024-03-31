@@ -90,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -RevisionProperties
-{{ Fill RevisionProperties Description }}
+Specifies revision property in new revision
 
 ```yaml
 Type: Hashtable
