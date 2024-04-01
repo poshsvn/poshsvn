@@ -92,6 +92,7 @@ namespace PoshSvn
                     return "M";
 
                 case SvnNotifyAction.UpdateUpdate:
+                case SvnNotifyAction.RecordMergeInfo:
                     return "U";
 
                 case SvnNotifyAction.CommitReplaced:

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Management.Automation;
 using PoshSvn.CmdLets;
 using SharpSvn;
+using static System.Collections.Specialized.BitVector32;
 
 namespace PoshSvn
 {
@@ -130,6 +131,20 @@ namespace PoshSvn
             {
                 UpdateProgressAction(string.Format("Sending '{0}'", e.Path));
             }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeBegin)
+            {
+                string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
+                UpdateProgressTitile(string.Format("Merging {0} into '{1}'", e.MergeRange, resolvedPath));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.RecordMergeInfoStarted)
+            {
+                string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
+                UpdateProgressTitile(string.Format("Recording mergeinfo for merge of {0} into '{1}'", e.MergeRange, resolvedPath));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeCompleted)
+            {
+                // Do nothing.
+            }
             else
             {
                 SvnNotifyOutput obj = new SvnNotifyOutput
@@ -156,6 +171,12 @@ namespace PoshSvn
         {
             WriteVerbose(action);
             ProgressRecord.StatusDescription = action;
+            WriteProgress(ProgressRecord);
+        }
+
+        protected void UpdateProgressTitile(string title)
+        {
+            ProgressRecord.Activity = title;
             WriteProgress(ProgressRecord);
         }
 
