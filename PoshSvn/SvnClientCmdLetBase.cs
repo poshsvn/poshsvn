@@ -34,6 +34,7 @@ namespace PoshSvn
             SvnClient.Notify += NotifyEventHandler;
             SvnClient.Progress += ProgressEventHandler;
             SvnClient.Committed += CommittedEventHandler;
+            SvnClient.Conflict += Conflict_Handler;
 
             if (Username != null || Password != null)
             {
@@ -43,6 +44,36 @@ namespace PoshSvn
             SvnClient.Authentication.UserNameHandlers += Authentication_UserNameHandlers;
             SvnClient.Authentication.UserNamePasswordHandlers += Authentication_UserNamePasswordHandlers;
             SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
+            SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
+        }
+
+        private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
+        {
+            Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+            {
+                new ChoiceDescription("&Postpone", "Skip this conflict and leave it unresolved."),
+                new ChoiceDescription("Accept &base", "Accept incoming version of entire."),
+                new ChoiceDescription("Accept &incoming", "Accept incoming version of entire."),
+            };
+
+            int selectedChoice = Host.UI.PromptForChoice(null, string.Format("Merge conflict discovered in file '{0}'", e.Path), choices, 0);
+
+            if (selectedChoice == 0)
+            {
+                e.Choice = SharpSvn.SvnAccept.Postpone;
+            }
+            else if (selectedChoice == 1)
+            {
+                e.Choice = SharpSvn.SvnAccept.Base;
+            }
+            else if (selectedChoice == 2)
+            {
+                e.Choice = SharpSvn.SvnAccept.Theirs;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private void Authentication_SslServerTrustHandlers(object sender, SharpSvn.Security.SvnSslServerTrustEventArgs e)
