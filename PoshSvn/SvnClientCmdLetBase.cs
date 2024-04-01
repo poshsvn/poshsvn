@@ -6,8 +6,6 @@ using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
 using System.Text;
-using SharpSvn;
-using SharpSvn.Security;
 
 namespace PoshSvn
 {
@@ -22,7 +20,7 @@ namespace PoshSvn
         [Parameter(DontShow = true)]
         public SecureString Password { get; set; }
 
-        protected SvnClient SvnClient;
+        protected SharpSvn.SvnClient SvnClient;
 
         public SvnClientCmdletBase()
         {
@@ -32,7 +30,7 @@ namespace PoshSvn
 
         protected override void BeginProcessing()
         {
-            SvnClient = new SvnClient();
+            SvnClient = new SharpSvn.SvnClient();
             SvnClient.Notify += NotifyEventHandler;
             SvnClient.Progress += ProgressEventHandler;
             SvnClient.Committed += CommittedEventHandler;
@@ -47,7 +45,7 @@ namespace PoshSvn
             SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
         }
 
-        private void Authentication_SslServerTrustHandlers(object sender, SvnSslServerTrustEventArgs e)
+        private void Authentication_SslServerTrustHandlers(object sender, SharpSvn.Security.SvnSslServerTrustEventArgs e)
         {
             Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
             {
@@ -181,7 +179,7 @@ namespace PoshSvn
             {
                 Execute();
             }
-            catch (SvnException ex)
+            catch (SharpSvn.SvnException ex)
             {
                 WriteSvnError(ex);
             }
@@ -194,7 +192,7 @@ namespace PoshSvn
             }
         }
 
-        protected void WriteSvnError(SvnException ex)
+        protected void WriteSvnError(SharpSvn.SvnException ex)
         {
             StringBuilder errorDetails = new StringBuilder();
 
@@ -221,7 +219,7 @@ namespace PoshSvn
             SvnClient.Dispose();
         }
 
-        private void ApplyAuthPolicy(SvnAuthenticationEventArgs args)
+        private void ApplyAuthPolicy(SharpSvn.Security.SvnAuthenticationEventArgs args)
         {
             args.Save = !NoAuthCache;
         }
