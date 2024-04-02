@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnCleanup
 
 ## SYNOPSIS
-Nettoyer une copie de travail.
+Clean up a working copy.
 
 ## SYNTAX
 
@@ -19,26 +19,33 @@ Invoke-SvnCleanup [[-Path] <String[]>] [-RemoveUnversioned] [-RemoveIgnored] [-V
 
 ## DESCRIPTION
 
-1. Lorsqu'aucune des options `-RemoveUnversioned`, `-RemoveIgnored`, et `-VacuumPristines` n'est spécifiée, la suppression des verrous supprime tous les verrous d'écriture de la copie de travail.
+1. When none of the options `-RemoveUnversioned`, `-RemoveIgnored`, and
+`-VacuumPristines` is specified, Remove locks all write lock
+from the working copy.
 
-2. Si l'option `-RemoveUnversioned` ou l'option `-RemoveIgnored` est spécifiée, supprimez tous les éléments non versionnés ou ignorés.
+2. If the `-RemoveUnversioned` option or the `-RemoveIgnored` option
+is given, remove any unversioned or ignored items.
 
-3. Si l'option `-VacuumPristines` est spécifiée, supprimez les copies originales des fichiers qui sont stockées à l'intérieur du répertoire `.svn` et qui ne sont plus référencées par aucun fichier dans la copie de travail.
+3. If the -VacuumPristines option is given, remove pristine copies of
+files which are stored inside the `.svn` directory and which are no longer
+referenced by any file in the working copy.
 
 ## EXAMPLES
 
-### Exemple 1 : Nettoyer une copie de travail
+### Example 1: Clean up a working copy
 
-Nettoyez la copie de travail située à `C:\chemin\vers\wc`. En général, cela n'est nécessaire que si un client Subversion a planté lors de l'utilisation de la copie de travail, la laissant dans un état inutilisable :
+Clean up the working copy located at `C:\path\to\wc`. Usually, this is only
+necessary if a Subversion client has crashed while using the working copy,
+leaving it in an unusable state:
 
 ```powershell
-svn-cleanup C:\chemin\vers\wc
+svn-cleanup C:\path\to\wc
 ```
 
 ## PARAMETERS
 
 ### -IncludeExternals
-Opérer également sur les externes définis par les propriétés `svn:externals`.
+Also operate on externals defined by `svn:externals` properties.
 
 ```yaml
 Type: SwitchParameter
@@ -53,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Chemin d'une copie de travail à nettoyer.
+Path to a working copy to clean up.
 
 ```yaml
 Type: String[]
@@ -68,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveIgnored
-Supprimer les éléments ignorés.
+Remove ignored items.
 
 ```yaml
 Type: SwitchParameter
@@ -83,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveUnversioned
-Supprimer les éléments non versionnés.
+Remove unversioned items.
 
 ```yaml
 Type: SwitchParameter
@@ -98,7 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -VacuumPristines
-Supprimer les copies originales non référencées du répertoire `.svn`.
+Remove unreferenced pristines from .svn directory.
 
 ```yaml
 Type: SwitchParameter

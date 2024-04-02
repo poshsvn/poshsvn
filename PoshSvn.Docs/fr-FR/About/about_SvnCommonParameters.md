@@ -11,57 +11,60 @@ title: about CommonParameters
 
 ## Short description
 
-Description des paramètres pouvant être utilisés avec n'importe quelle cmdlet client PoshSvn.
+Describes the parameters that can be used with any PoshSvn client cmdlet.
 
 ## Long description
 
-Les paramètres communs du client PoshSvn sont des paramètres qui peuvent être utilisés avec toutes les cmdlets client Subversion.
+The common PoshSvn client parameters are parameters that may be used with all
+subversion client cmdlets.
 
-## Descriptions des paramètres communs
+## Common parameter descriptions
 
 ### -NoAuthCache
-Ne pas mettre en cache les jetons d'authentification.
+Do not cache authentication tokens.
 
 ```yaml
 Type: SwitchParameter
-Ensembles de paramètres: (Tous)
-Alias:
+Parameter Sets: (All)
+Aliases:
 
-Requis: Faux
-Position: Nommé
-Valeur par défaut: Aucune
-Accepter l'entrée du pipeline: Faux
-Accepter les caractères génériques: Faux
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Password
-Spécifie un mot de passe.
+Specifies a password.
 
-Remarque : pour convertir un mot de passe d'une chaîne en SecureString, vous pouvez utiliser la cmdlet [Read-Host](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/read-host?view=powershell-7.4) avec l'option `-AsSecureString` activée.
+Note: to convert a password from a string to a SecureString, you may use the
+[Read-Host](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/read-host?view=powershell-7.4)
+cmdlet with `-AsSecureString` option enabled.
 
 ```yaml
 Type: SecureString
-Ensembles de paramètres: (Tous)
-Alias:
+Parameter Sets: (All)
+Aliases:
 
-Requis: Faux
-Position: Nommé
-Valeur par défaut: Aucune
-Accepter l'entrée du pipeline: Faux
-Accepter les caractères génériques: Faux
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
 ### -Username
-Spécifie un nom d'utilisateur.
+Specifies a username.
 
 ```yaml
 Type: String
-Ensembles de paramètres: (Tous)
-Alias:
+Parameter Sets: (All)
+Aliases:
 
-Requis: Faux
-Position: Nommé
-Valeur par défaut: Aucune
-Accepter l'entrée du pipeline: Faux
-Accepter les caractères génériques: Faux
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```

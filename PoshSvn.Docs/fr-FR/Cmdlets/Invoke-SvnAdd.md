@@ -8,8 +8,7 @@ schema: 2.0.0
 # Invoke-SvnAdd
 
 ## SYNOPSIS
-
-Ajoute des fichiers, des répertoires ou des liens symboliques.
+Add files, directories, or symbolic links.
 
 ## SYNTAX
 
@@ -19,14 +18,15 @@ Invoke-SvnAdd [-Path] <String[]> [-Depth <SvnDepth>] [-Force] [-NoIgnore] [-NoAu
 ```
 
 ## DESCRIPTION
-
-Planifie l'ajout de fichiers, de répertoires ou de liens symboliques dans votre copie de travail pour les ajouter au dépôt. Ils seront téléchargés et ajoutés au dépôt lors de votre prochain commit.
+Schedule files, directories, or symbolic links in your
+working copy for addition to the repository.
+They will be uploaded and added to the repository on your next commit.
 
 ## EXAMPLES
 
-### Exemple 1 : Ajouter un fichier
+### Example 1: Add a file
 
-Pour ajouter un fichier à votre copie de travail :
+To add a file to your working copy:
 
 ```powershell
 svn-add .\foo.c
@@ -34,9 +34,9 @@ svn-add .\foo.c
 A       foo.c
 ```
 
-### Exemple 2 : Ajouter un répertoire avec du contenu
+### Example 2: Add a directory with content
 
-Lors de l'ajout d'un répertoire, le comportement par défaut de `svn-add` est de récursivité :
+When adding a directory, the default behavior of `svn-add` is to recurse:
 
 ```powershell
 svn-add testdir
@@ -48,9 +48,9 @@ A       testdir\c
 A       testdir\d
 ```
 
-### Exemple 3 : Ajouter un répertoire sans contenu
+### Example 3: Add a directory without content
 
-Vous pouvez ajouter un répertoire sans ajouter son contenu :
+You can add a directory without adding its contents:
 
 ```powershell
 svn-add otherdir -Depth Empty
@@ -58,13 +58,15 @@ svn-add otherdir -Depth Empty
 A       otherdir
 ```
 
-### Exemple 4 : Ajouter un répertoire versionné
+### Example 4: Add versioned directory
 
-Les tentatives d'ajouter un élément qui est déjà versionné échoueront par défaut. Pour outrepasser le comportement par défaut et forcer Subversion à parcourir les répertoires déjà versionnés, passez l'option `-Force` :
+Attempts to add an item which is already versioned will fail by default.
+To override the default behavior and force Subversion to recurse into
+already-versioned directories, pass the `-Force` option:
 
 ```powershell
 svn-add VersionedDirictory
-Invoke-SvnAdd: 'C:\Users\cmpilato\projects\subversion\site' est déjà sous contrôle de version.
+Invoke-SvnAdd: 'C:\Users\cmpilato\projects\subversion\site' is already under version control.
 svn-add VersionedDirictory -Force
 A        VersionedDirictory\foo.c
 A        VersionedDirictory\somedir\bar.c
@@ -74,7 +76,7 @@ A        VersionedDirictory\otherdir\docs\baz.doc
 ## PARAMETERS
 
 ### -Depth
-Limitez la portée de l'opération en spécifiant la profondeur (Vide, Fichiers, Immédiats ou Infini).
+Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
 
 ```yaml
 Type: SvnDepth
@@ -90,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-Ignore les chemins déjà versionnés.
+Ignore already versioned paths.
 
 ```yaml
 Type: SwitchParameter
@@ -105,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoAutoProps
-Désactive le paramétrage automatique des propriétés, outrepassant la directive de configuration runtime enable-auto-props.
+Disables automatic property setting, overriding the enable-auto-props runtime configuration directive.
 
 ```yaml
 Type: SwitchParameter
@@ -120,7 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoIgnore
-Ignore les exclusions par défaut et les exclusions des propriétés svn:ignore et svn:global-ignores.
+Disregard default and svn:ignore and svn:global-ignores property ignores.
 
 ```yaml
 Type: SwitchParameter
@@ -135,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -Parents
-Ajoute les répertoires parents intermédiaires.
+Add intermediate parents.
 
 ```yaml
 Type: SwitchParameter
@@ -150,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Spécifie le chemin de l'élément à ajouter.
+Specifies a Path of the item to add.
 
 ```yaml
 Type: String[]
@@ -165,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-Ce cmdlet prend en charge les paramètres courants : -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction et -WarningVariable. Pour plus d'informations, consultez [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

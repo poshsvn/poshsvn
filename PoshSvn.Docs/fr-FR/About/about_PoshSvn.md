@@ -11,25 +11,26 @@ title: About PoshSvn
 
 ## Short description
 
-Décrit les bases de l'utilisation de PoshSvn.
+Describes basics of PoshSvn usage.
 
 ## Long description
 
-PoshSvn offre les fonctionnalités suivantes :
+PoshSvn provides the following features:
 
-- Complétion automatique des onglets (expansion des onglets) pour les commandes et les paramètres.
-- Sortie typée des cmdlets.
-- Sortie formatée pour reproduire l'expérience utilisateur de l'interface en ligne de commande de Subversion.
+- Tab tab-completion (tab-expansion) for commands and parameters.
+- Typed output of cmdlets.
+- Formatted output to repeat the Subversion command line interface user experience.
 
 ## Concept
 
-Le concept de PoshSvn était de reproduire l'expérience utilisateur de l'interface en ligne de commande de Subversion, y compris les paramètres, la sortie et d'autres comportements.
+The PoshSvn concept was to repeat the Subversion command line interface
+user experience, including parameters, output, and other behavior.
 
 ## Examples
 
-### Exemple 1
+### Example 1
 
-La commande suivante vérifie le dépôt en utilisant l'interface en ligne de commande de Subverison :
+The following command checks out the repository using Subverison CLI:
 
 ```shell
 svn checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
@@ -43,7 +44,7 @@ A    serf-trunk\test\certs\serfserver_san_nocn_cert.pem
 Checked out revision 1916201.
 ```
 
-Alors que PoshSvn nécessite :
+While PoshSvn requires:
 
 ```powershell
 svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
@@ -58,10 +59,12 @@ U       serf-trunk
 Checked out revision 1916201.
 ```
 
-Vous pouvez également écrire les noms des paramètres (meilleur pour le scripting) :
+Also you can write the names of the parameters (better for scripting):
 
 ```powershell
 svn-checkout -Url https://svn.apache.org/repos/asf/serf/trunk -Path serf-trunk
 ```
 
-Comme vous pouvez le voir, il y a très peu de différences entre l'interface en ligne de commande de Subversion et les cmdlets de PoshSvn, mais PoshSvn ajoute également certaines fonctionnalités de PowerShell telles que la progression, la sortie typée, et autres.
+As you can see, there are very little differences between Subversion
+CLI and PoshSvn cmdlets, but PoshSvn also adds some PowerShell
+features such as progress, typed output, and other.

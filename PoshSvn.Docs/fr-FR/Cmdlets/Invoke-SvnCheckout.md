@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnCheckout
 
 ## SYNOPSIS
-Extraire une copie de travail à partir d'un dépôt.
+Check out a working copy from a repository.
 
 ## SYNTAX
 
@@ -18,13 +18,13 @@ Invoke-SvnCheckout [-Url] <Uri> [[-Path] <String>] [-Revision <SvnRevision>] [-I
 ```
 
 ## DESCRIPTION
-Extraire une copie de travail à partir d'un dépôt.
+Check out a working copy from a repository.
 
 ## EXAMPLES
 
-### Exemple 1 : Extraire une copie de travail
+### Example 1: Check out a working copy
 
-Extraire le dépôt serf dans le répertoire 'serf-trunk' :
+Check out the serf repository into 'serf-trunk' directory:
 
 ```powershell
 svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
@@ -33,7 +33,7 @@ svn-checkout https://svn.apache.org/repos/asf/serf/trunk serf-trunk
 ## PARAMETERS
 
 ### -Force
-Forcer l'exécution de l'opération.
+Force operation to run.
 
 ```yaml
 Type: SwitchParameter
@@ -48,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreExternals
-Indique à Subversion d'ignorer les définitions externes et les copies de travail externes gérées par elles.
+Tells Subversion to ignore externals definitions and the external working copies managed by them.
 
 ```yaml
 Type: SwitchParameter
@@ -63,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Spécifie un chemin d'une copie de travail. Si le CHEMIN est omis, le nom de base de l'URL sera utilisé comme destination.
+Specifies a Path of a working copy. If PATH is omitted, the basename of the URL will be used as the destination.
 
 ```yaml
 Type: String
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-Spécifie une révision avec laquelle opérer. Vous pouvez fournir des numéros de révision, des mots-clés ou des dates (entre accolades) comme arguments à l'option de révision. Si vous souhaitez offrir une plage de révisions, vous pouvez fournir deux révisions séparées par un deux-points.
+Specifies a revision on with which to operate. You can provide revision numbers, keywords, or dates (in curly braces) as arguments to the revision option. If you wish to offer a range of revisions, you can provide two revisions separated by a colon.
 
 ```yaml
 Type: SvnRevision
@@ -93,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -Url
-Spécifie une URL d'un dépôt. Si plusieurs URL sont fournies, chacune sera extraite dans un sous-répertoire de CHEMIN, le nom du sous-répertoire étant le nom de base de l'URL.
+Specifies an URL of a repository. If multiple URLs are given, each will be checked out into a subdirectory of PATH, with the name of the subdirectory being the basename of the URL.
 
 ```yaml
 Type: Uri
