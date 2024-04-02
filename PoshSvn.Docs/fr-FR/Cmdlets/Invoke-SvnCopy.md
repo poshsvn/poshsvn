@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnCopy
 
 ## SYNOPSIS
-Copy files and directories in a working copy or repository.
+Copier des fichiers et des répertoires dans une copie de travail ou un dépôt.
 
 ## SYNTAX
 
@@ -25,19 +25,17 @@ Invoke-SvnCopy [-Source] <SvnTarget[]> [-Destination] <SvnTarget> -Message <Stri
 ```
 
 ## DESCRIPTION
-Source and Destination can each be either a working copy (WC) path or Url:
-- `WC` to `WC`: copy and schedule for addition (with history)
-- `WC` to `Url`: immediately commit a copy of WC to Url
-- `Url` to `WC`: check out Url into WC, schedule for addition
-- `Url` to `Url`: complete server-side copy;  used to branch and tag
+La source et la destination peuvent chacune être soit un chemin de copie de travail (WC) soit une URL :
+- De `WC` à `WC` : copier et planifier l'ajout (avec historique)
+- De `WC` à `Url` : envoyer immédiatement une copie de WC vers Url
+- De `Url` à `WC` : vérifier Url dans WC, planifier l'ajout
+- De `Url` à `Url` : copie complète côté serveur ; utilisée pour créer des branches et des tags
 
-All the Sources must be of the same type. If Destination is an existing directory,
-the sources will be added as children of Destination. When copying multiple
-sources, Destination must be an existing directory.
+Toutes les sources doivent être du même type. Si la destination est un répertoire existant, les sources seront ajoutées comme enfants de la destination. Lors de la copie de plusieurs sources, la destination doit être un répertoire existant.
 
 ## EXAMPLES
 
-### Example 1
+### Exemple 1
 ```powershell
 svn-copy foo.txt bar.txt
 
@@ -45,14 +43,14 @@ A       bar.txt
 
 svn-status
 
-Status  Path
-------  ----
+Statut  Chemin
+------  ------
 A  +    b.txt
 ```
 
-This command copies an item within your working copy (this schedules the copy-nothing goes into the repository until you commit).
+Cette commande copie un élément dans votre copie de travail (cela planifie la copie - rien n'est envoyé dans le dépôt avant que vous ne validiez).
 
-### Example 2
+### Exemple 2
 ```powershell
 svn-copy -Source bat.c, baz.c, qux.c -Destination src
 
@@ -61,60 +59,60 @@ A        src/baz.c
 A        src/qux.c
 ```
 
-This command copies several files in a working copy into a directory.
+Cette commande copie plusieurs fichiers dans une copie de travail dans un répertoire.
 
-### Example 3
+### Exemple 3
 ```powershell
 svn-copy -Revision 8 bat.c ya-old-bat.c
 
 A        ya-old-bat.c
 ```
 
-This command copies revision 8 of `bat.c` into your working copy under a different name.
+Cette commande copie la révision 8 de `bat.c` dans votre copie de travail sous un nom différent.
 
-### Example 4
+### Exemple 4
 ```powershell
-svn-copy -Source near.txt -Destination https://svn.example.com/repos/far-away.txt -Message "Remote copy."
+svn-copy -Source near.txt -Destination https://svn.example.com/repos/far-away.txt -Message "Copie distante."
 
-Committed revision 8.
+Révision validée 8.
 ```
 
-This command copies an item in your working copy to a URL in the repository (this is an immediate commit, so you must supply a commit message).
+Cette commande copie un élément de votre copie de travail vers une URL dans le dépôt (c'est une validation immédiate, donc vous devez fournir un message de validation).
 
-### Example 5
+### Exemple 5
 ```powershell
 svn-copy https://svn.example.com/repos/far-away .\near-here -Revision 6
 
 A         near-here
 ```
 
-This command copies item from the repository to your working copy (this just schedules the copy-nothing goes into the repository until you commit).
+Cette commande copie un élément du dépôt vers votre copie de travail (cela planifie simplement la copie - rien n'est envoyé dans le dépôt avant que vous ne validiez).
 
-Tip: This is the recommended way to resurrect a dead file in your repository!
+Astuce : C'est la manière recommandée de ressusciter un fichier perdu dans votre dépôt !
 
-### Example 6
+### Exemple 6
 
 ```powershell
 $src = https://svn.example.com/repos/far-away
 $dst = https://svn.example.com/repos/over-there
 
-svn-copy -Source $src -Destination $dst -Message "remote copy."
+svn-copy -Source $src -Destination $dst -Message "Copie distante."
 
-Committed revision 9.
+Révision validée 9.
 ```
 
-This command does copy between two remote Urls. You may use variables to simplify your command.
+Cette commande effectue une copie entre deux URL distantes. Vous pouvez utiliser des variables pour simplifier votre commande.
 
-### Example 7
+### Exemple 7
 
 ```powershell
 $root = "https://svn.example.com/repos/test"
-svn-copy -Source "$root/trunk" -DestinationUrl "$root/tags/0.6.32-prerelease" -Message "tag tree"
+svn-copy -Source "$root/trunk" -DestinationUrl "$root/tags/0.6.32-prerelease" -Message "Création de la branche"
 
-Committed revision 12.
+Révision validée 12.
 ```
 
-This command creates a tag of a repository. You may use `-DestinationUrl` parameter, to specify that this is remote operation.
+Cette commande crée une étiquette dans un dépôt. Vous pouvez utiliser le paramètre `-DestinationUrl` pour spécifier qu'il s'agit d'une opération distante.
 
 ## PARAMETERS
 

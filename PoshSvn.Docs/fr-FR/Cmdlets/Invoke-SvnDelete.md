@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnDelete
 
 ## SYNOPSIS
-Remove files and directories from version control.
+Supprimer des fichiers et des répertoires du contrôle de version.
 
 ## SYNTAX
 
@@ -23,37 +23,36 @@ Invoke-SvnDelete [-Target] <SvnTarget[]> [-Message <String>] [-Force] [-KeepLoca
 ```
 
 ## DESCRIPTION
-Removes local or remote items from version.
+Supprime des éléments locaux ou distants de la version.
 
-Each item specified by a Path is scheduled for deletion upon the next commit.
+Chaque élément spécifié par un chemin est planifié pour la suppression lors de la prochaine validation.
 
-Each item specified by a Url is deleted from the repository via an immediate commit.
+Chaque élément spécifié par une URL est supprimé du dépôt via une validation immédiate.
 
 ## EXAMPLES
 
-### Example 1
+### Exemple 1
 ```powershell
 svn-delete foo.c
 
 D       foo.c
 ```
 
-Removes and schedules the foo.c file for deletion.
+Supprime et planifie la suppression du fichier foo.c.
 
-### Example 1
+### Exemple 2
 ```powershell
-svn-delete https://svn.example.com/repos/foo.c -Message "delete foo.c"
+svn-delete https://svn.example.com/repos/foo.c -Message "supprimer foo.c"
 
-Committed revision 57.
+Révision validée 57.
 ```
 
-This command removes the file located at `https://svn.example.com/repos/foo.c`
-and commits the deletion with the log message "delete foo.c".
+Cette commande supprime le fichier situé à `https://svn.example.com/repos/foo.c` et valide la suppression avec le message de journal "supprimer foo.c".
 
 ## PARAMETERS
 
 ### -Force
-Force operation to run.
+Force l'opération à s'exécuter.
 
 ```yaml
 Type: SwitchParameter
@@ -68,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -KeepLocal
-Keep item in working copy.
+Conserve l'élément dans la copie de travail.
 
 ```yaml
 Type: SwitchParameter
@@ -83,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Message
-Specifies the log message.
+Spécifie le message de journal.
 
 ```yaml
 Type: String
@@ -98,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Specifies the Path or the Url of an item to delete.
+Spécifie le chemin ou l'URL de l'élément à supprimer.
 
 ```yaml
 Type: SvnTarget[]
