@@ -128,24 +128,5 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
-
-        [Test]
-        public void EncodingTest()
-        {
-            using (var sb = new WcSandbox())
-            {
-                sb.RunScript(@"Set-Content -Path wc\a.txt -Value abc -Encoding utf32");
-                sb.RunScript(@"svn-add wc\a.txt");
-                sb.RunScript(@"svn-commit wc -m test");
-                var actual = sb.RunScript(@"svn-cat wc\a.txt -Encoding utf32");
-
-                PSObjectAssert.AreEqual(
-                    new[]
-                    {
-                        "﻿﻿﻿﻿﻿\uFEFF﻿﻿﻿﻿﻿abc"
-                    },
-                    actual);
-            }
-        }
     }
 }

@@ -68,6 +68,7 @@ function RenderDocsLanguage {
 }
 
 RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\en-US" -DestinationPrefix ""
+RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\en-US" -DestinationPrefix "en"
 RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\fr-FR" -DestinationPrefix "fr"
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse

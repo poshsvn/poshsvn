@@ -20,11 +20,6 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter Raw { get; set; }
 
-        [Parameter()]
-        [ArgumentToEncodingTransformation]
-        [ArgumentEncodingCompletions]
-        public Encoding Encoding { get; set; } = Encoding.UTF8;
-
         protected override void Execute()
         {
             SharpSvn.SvnTarget target = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Target));
@@ -41,20 +36,18 @@ namespace PoshSvn.CmdLets
             {
                 return new ByteStream(this);
             }
+            else if (Raw)
+            {
+                ITextStream textStream = new TextStream(this);
+
+                return new DecoderStream(textStream, Encoding.UTF8);
+            }
             else
             {
-                ITextStream textStream;
-                if (Raw)
-                {
-                    textStream = new TextStream(this);
-                }
-                else
-                {
-                    ITextLineStream lineStream = new TextLineStream(this);
-                    textStream  = new LineDecoderTextStream(lineStream);
-                }
+                ITextLineStream textStream = new TextLineStream(this);
+                ITextStream lineStream = new LineDecoderTextStream(textStream);
 
-                return new DecoderStream(textStream, Encoding);
+                return new DecoderStream(lineStream, Encoding.UTF8);
             }
         }
 
