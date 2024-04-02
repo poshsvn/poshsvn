@@ -20,7 +20,7 @@ Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [<CommonParameters>
 ## DESCRIPTION
 
 The `svn-cat` cmdlet gets the content of the item at
-the specific path, Url, and revision. For files, 
+the specific path, Url, and revision. For files,
 the content is read one line at a time and returns
 a collection of objects, each representing a line of content.
 
