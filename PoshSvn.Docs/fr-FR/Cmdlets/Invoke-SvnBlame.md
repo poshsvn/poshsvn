@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Affiche les informations sur l'auteur et la révision en ligne pour les fichiers ou les URL spécifiés.
+Show author and revision information inline for the specified files or URLs.
 
 ## SYNTAX
 
@@ -20,49 +20,55 @@ Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <PoshSvnRevisionRange>] [-Ret
 
 ## DESCRIPTION
 
+Annotate each line of a file with the revision number and author
+of the last change (or optionally the next change) to that line.
+
 ## EXAMPLES
 
-### Exemple 1
+### Example 1
 
-Si vous voulez voir le code source annoté pour le fichier README dans votre dépôt :
+If you want to see blame-annotated source for README file in your repository:
 
 ```powershell
 svn-blame https://svn.example.com/repos/README
 
-       r3 sally            Ceci est un fichier README.
-       r1 harry            Ne vous embêtez pas à le lire. Le patron est un crétin.
+       r3 sally            This is a README file.
+       r1 harry            Don't bother reading it.  The boss is a knucklehead.
        r3 sally
+
 ```
 
-### Exemple 2
+### Example 2
 
-Si vous formatez la sortie sous forme de liste, vous pouvez obtenir des annotations d'attribution plus détaillées :
+If you format output as list, you can get more detalized blame annotations:
 
 ```powershell
 svn-blame https://svn.example.com/repos/README | Format-List
 
-Révision                 : 3
-Auteur                   : sally
-Ligne                    : Ceci est un fichier README.
-PropriétésRévisionMerge : 
-PropriétésRévision       : 
-ChangementLocal          : False
-RévisionFusionnée        : 
-HeureFusion              : 
-CheminFusion             : 
-AuteurFusion             : 
-Heure                    : 25/03/2024 21:34:15
-NuméroLigne              : 0
-RévisionFin              : 7
-RévisionDébut            : 0
+Revision                 : 3
+Author                   : sally
+Line                     : This is a README file.
+MergedRevisionProperties :
+RevisionProperties       :
+LocalChange              : False
+MergedRevision           :
+MergedTime               :
+MergedPath               :
+MergedAuthor             :
+Time                     : 3/25/2024 9:34:15 PM
+LineNumber               : 0
+EndRevision              : 7
+StartRevision            : 0
 
 ...
+
 ```
 
 ## PARAMETERS
 
 ### -IgnoreLineEndings
-Ignore les fins de ligne.
+
+Ignore line endings.
 
 ```yaml
 Type: SwitchParameter
@@ -77,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreMimeType
-Ignore le type MIME.
+Ignore mime type.
 
 ```yaml
 Type: SwitchParameter
@@ -92,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreSpacing
-Ignore les espaces.
+Ignore spacing.
 
 ```yaml
 Type: SvnIgnoreSpacing
@@ -108,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -RetrieveMergedRevisions
-Récupère les révisions fusionnées et les propriétés de révision.
+Retrives merged revisions and revision properties.
 
 ```yaml
 Type: SwitchParameter
@@ -123,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-Spécifie la révision sur laquelle opérer.
+Specifies revision to operate.
 
 ```yaml
 Type: PoshSvnRevisionRange
@@ -138,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Spécifie la cible sur laquelle opérer.
+Specifies target to operate.
 
 ```yaml
 Type: SvnTarget

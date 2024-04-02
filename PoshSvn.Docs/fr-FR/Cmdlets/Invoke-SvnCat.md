@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Obtient le contenu de l'élément au chemin, à l'URL et à la révision spécifiés.
+Gets the content of the item at the specified path, Url, and revision.
 
 ## SYNTAX
 
@@ -19,47 +19,51 @@ Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [<CommonParameters>
 
 ## DESCRIPTION
 
-Le cmdlet `svn-cat` récupère le contenu de l'élément au chemin, à l'URL et à la révision spécifiés. Pour les fichiers, le contenu est lu ligne par ligne et renvoie une collection d'objets, chacun représentant une ligne de contenu.
+The `svn-cat` cmdlet gets the content of the item at
+the specific path, Url, and revision. For files,
+the content is read one line at a time and returns
+a collection of objects, each representing a line of content.
 
 ## EXAMPLES
 
-### Exemple 1
+### Example 1
 
-Si vous souhaitez visualiser le fichier README.md dans votre dépôt sans le vérifier :
+If you want to view README.md in your repository without checking it out:
 
 ```powershell
 svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md
 
-# Client Apache Subversion pour PowerShell
+# Apache Subversion client for PowerShell
 
-## Fonctionnalités
+## Features
 
-- Complétion automatique (expansion de tabulation) des commandes et des paramètres.
-- Sortie typée des cmdlets.
-- Sortie formatée pour reproduire l'expérience utilisateur de l'interface de ligne de commande Subversion.
+- Tab tab-completion (tab-expansion) for commands and parameters.
+- Typed output of cmdlets.
+- Formatted output to repeat the Subversion command line interface user experience.
 
 ## Installation
 
-Installez le module PoshSvn depuis la galerie PowerShell :
+Install PoshSvn module from the PowerShell Gallery:
 
 ``powershell
 Install-Module -Name PoshSvn
 ``
+
 ```
 
-### Exemple 2
+### Example 2
 
-Vous pouvez également visualiser des versions spécifiques de fichiers.
+You can view specific versions of files, too.
 
 ````powershell
 svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
 
-# Client Apache Subversion pour PowerShell
+# Apache Subversion client for PowerShell
 
-## Fonctionnalités
+## Feuaptursubes
 
-- Complétion automatique (expansion de tabulation) des commandes et des paramètres.
-- Sortie typée des cmdlets.
+- Tab tab-completion (tab-expansion) for commands and parameters.
+- Typed output of cmdlets.
 ...
 
 ````
@@ -67,7 +71,8 @@ svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
 ## PARAMETERS
 
 ### -AsByteStream
-Spécifie que le contenu doit être lu comme un flux d'octets.
+
+Specifies that the content should be read as a stream of bytes.
 
 ```yaml
 Type: SwitchParameter
@@ -82,7 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### -Raw
-Ignore les caractères de saut de ligne et renvoie l'intégralité du contenu d'un fichier dans une seule chaîne avec les sauts de ligne préservés. Par défaut, les caractères de saut de ligne dans un fichier sont utilisés comme délimiteurs pour séparer l'entrée en un tableau de chaînes.
+Ignores newline characters and returns the entire contents of a file in one string with the newlines preserved. By default, newline characters in a file are used as delimiters to separate the input into an array of strings.
 
 ```yaml
 Type: SwitchParameter
@@ -97,7 +102,7 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-Spécifie la cible sur laquelle opérer.
+Specifies target to operate.
 
 ```yaml
 Type: SvnTarget
