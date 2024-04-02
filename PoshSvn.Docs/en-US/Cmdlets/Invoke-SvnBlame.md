@@ -34,7 +34,7 @@ svn-blame https://svn.example.com/repos/README
 
        r3 sally            This is a README file.
        r1 harry            Don't bother reading it.  The boss is a knucklehead.
-       r3 sally            
+       r3 sally
 
 ```
 

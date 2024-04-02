@@ -66,5 +66,5 @@ svn-checkout -Url https://svn.apache.org/repos/asf/serf/trunk -Path serf-trunk
 ```
 
 As you can see, there are very little differences between Subversion
-CLI and PoshSvn cmdlets, but PoshSvn also adds some PowerShell 
-features such as progress, typed output, and other. 
+CLI and PoshSvn cmdlets, but PoshSvn also adds some PowerShell
+features such as progress, typed output, and other.

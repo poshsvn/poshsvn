@@ -19,7 +19,7 @@ Some Subversion operations support specifying either a local Path to a working c
 You can specify target of the operation by setting the
 `-Target` parameter to either Path or Url. However,
 if you prefer to directly indicate whether it's a URL
-or a Path, the New-SvnTarget cmdlet and specify target 
+or a Path, the New-SvnTarget cmdlet and specify target
 via `-Url` or `-Path` parameters respectively.
 
 ### Specifing the target via `-Target` Parameter

@@ -95,8 +95,8 @@ Important: the items has to be in the same repository.
 ```powershell
 svn-log | Format-Table
 
-  Revision Author           Date                   Message                                                              
-  -------- ------           ----                   -------                                                              
+  Revision Author           Date                   Message
+  -------- ------           ----                   -------
         32 sally            2003-01-13    00:43    Added defines.
         31 harry            2003-01-10    12:25    Added new file bar.c
         28 sally            2003-01-07    21:48    ...
