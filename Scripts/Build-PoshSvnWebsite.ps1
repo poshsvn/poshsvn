@@ -5,6 +5,19 @@ $siteRoot = "$PSScriptRoot\..\www"
 $outDir = "$siteRoot\build"
 $docsPages = Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US\*" -Include "*.md"
 
+function Add-PageToSiteMap {
+    param (
+        [string]
+        $PagePath
+    )
+
+    $url = ($PagePath | Resolve-Path -Relative -RelativeBasePath $outDir)
+    $url = $url -replace "\.\\"
+    $url = "https://www.poshsvn.com/$url"
+    $url = $url -replace "\\", "/" -replace "/index.html"
+    Add-Content -Path "$outDir\sitemap.txt" -Value $url
+}
+
 function RenderPage {
     param (
         $Content,
@@ -39,6 +52,8 @@ function RenderPage {
 
     mkdir "$outDir\$PageName" -Force
     Set-Content -Path "$outDir\$PageName\index.html" -Value $Content -Force
+
+    Add-PageToSiteMap -PagePath "$outDir\$PageName"
 }
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
@@ -77,15 +92,7 @@ foreach ($path in Get-ChildItem "$siteRoot\pages" -ErrorAction SilentlyContinue)
     RenderPage -Content $content -PageName $pageName -Title $path.BaseName
 }
 
-New-Item "$outDir\sitemap.txt"
-
-foreach ($path in Get-ChildItem $outDir -Recurse -Filter "*.html" -Exclude "google*") {
-    $url = ($path | Resolve-Path -Relative -RelativeBasePath $outDir)
-    $url = $url -replace "\.\\"
-    $url = "https://www.poshsvn.com/$url"
-    $url = $url -replace "\\", "/" -replace "/index.html"
-    Add-Content -Path "$outDir\sitemap.txt" -Value $url
-}
-
 Copy-Item "$PSScriptRoot\..\icon-minimal.svg" "$outDir\favicon.svg"
 Copy-Item "$PSScriptRoot\..\icon.svg" "$outDir\icon.svg"
+
+Add-PageToSiteMap -PagePath "$outDir\index.html"
