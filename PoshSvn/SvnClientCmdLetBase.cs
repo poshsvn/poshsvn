@@ -52,8 +52,10 @@ namespace PoshSvn
             Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
             {
                 new ChoiceDescription("&Postpone", "Skip this conflict and leave it unresolved."),
-                new ChoiceDescription("Accept &base", "Accept incoming version of entire."),
-                new ChoiceDescription("Accept &incoming", "Accept incoming version of entire."),
+                new ChoiceDescription("Accept &Base", "Accept incoming version of entire."),
+                new ChoiceDescription("&Merge", "Accept the result file of the automatic merging."),
+                new ChoiceDescription("Accept &Theirs", "Accept incoming version of entire."),
+                new ChoiceDescription("Accept &Mine", "Accept local version of entire."),
             };
 
             int selectedChoice = Host.UI.PromptForChoice(null, string.Format("Merge conflict discovered in file '{0}'", e.Path), choices, 0);
@@ -68,7 +70,15 @@ namespace PoshSvn
             }
             else if (selectedChoice == 2)
             {
+                e.Choice = SharpSvn.SvnAccept.Working;
+            }
+            else if (selectedChoice == 3)
+            {
                 e.Choice = SharpSvn.SvnAccept.Theirs;
+            }
+            else if (selectedChoice == 4)
+            {
+                e.Choice = SharpSvn.SvnAccept.Mine;
             }
             else
             {
