@@ -141,7 +141,12 @@ namespace PoshSvn
                 string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
                 UpdateProgressTitile(string.Format("Recording mergeinfo for merge of {0} into '{1}'", e.MergeRange, resolvedPath));
             }
-            else if (e.Action == SharpSvn.SvnNotifyAction.MergeCompleted)
+            else if (e.Action == SharpSvn.SvnNotifyAction.ConflictResolverStarting)
+            {
+                UpdateProgressAction("Resolving conflicts...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeCompleted ||
+                     e.Action == SharpSvn.SvnNotifyAction.ConflictResolverDone)
             {
                 // Do nothing.
             }
