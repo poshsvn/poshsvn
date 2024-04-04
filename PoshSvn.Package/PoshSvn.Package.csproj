@@ -18,9 +18,7 @@
     <FilesToCopy Include="$(OutDir)\en-US\**\*" Destination="en-US" />
 
     <FilesToCopy Include="$(OutDir)\PoshSvn.dll" />
-    <FilesToCopy Include="$(OutDir)\SharpPlink-x64.svnExe" />
     <FilesToCopy Include="$(OutDir)\SharpSvn.dll" />
-    <FilesToCopy Include="$(OutDir)\SharpSvn-DB44-20-x64.svnDll" />
   </ItemGroup>
 
   <Target Name="CopyFiles" BeforeTargets="AfterBuild">
