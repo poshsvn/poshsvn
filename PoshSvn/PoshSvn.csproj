@@ -12,12 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpSvn" Version="1.14003.272" />
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PoshSvn.Static\PoshSvn.Static.csproj" />
+    <ProjectReference Include="..\SharpSvn\SharpSvn.vcxproj" />
   </ItemGroup>
 
 </Project>
