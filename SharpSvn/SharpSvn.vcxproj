@@ -82,9 +82,6 @@
     <VcpkgAutoLink>true</VcpkgAutoLink>
     <VcpkgApplocalDeps>true</VcpkgApplocalDeps>
   </PropertyGroup>
-  <Target Name="GenerateErrorEnums" AfterTargets="VcpkgInstallManifestDependencies">
-    <Exec Command="$(ToolsDir)Errors2Enum.exe &quot;$(VCInstallDir).&quot; &quot;$(WindowsSdkDir).&quot; &quot;$(UniversalCRT_IncludePath)&quot; &quot;$(PackagesPath)\include\apr_errno.h&quot; &quot;$(PackagesPath)\include\serf.h&quot; &quot;$(ProjectDir)\SvnWindowsError.h&quot;" />
-  </Target>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -466,6 +463,7 @@
     <ClCompile Include="WorkingCopyCommands\WorkingCopyRestore.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Errors2Enum.targets" />
     <None Include="packages.config" />
     <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.vcproj" />
@@ -481,4 +479,5 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <Import Project="vcpkg.targets" />
+  <Import Project="Errors2Enum.targets" />
 </Project>
