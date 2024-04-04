@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
+    <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
+    <PackagesPath>$(VcpkgManifestRoot)\vcpkg_installed\$(PlatformTarget)-windows\$(PlatformTarget)-windows\</PackagesPath>
+  </PropertyGroup>
+
+  <Import Project="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets" />
+</Project>
