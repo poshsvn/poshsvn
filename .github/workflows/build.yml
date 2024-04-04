@@ -26,8 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
       - name: Build
-        run: .\Scripts\Build-PoshSvn.ps1
+        run: MSBuild.exe .\PoshSvn.sln -restore -property:Configuration=Release
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
