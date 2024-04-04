@@ -16,6 +16,7 @@
   <ItemGroup>
     <FilesToCopy Include="@(StaticFiles)" />
     <FilesToCopy Include="$(OutDir)\en-US\**\*" Destination="en-US" />
+    <FilesToCopy Include="$(OutDir)\fr-FR\**\*" Destination="fr-FR" />
 
     <FilesToCopy Include="$(OutDir)\PoshSvn.dll" />
     <FilesToCopy Include="$(OutDir)\SharpSvn.dll" />
