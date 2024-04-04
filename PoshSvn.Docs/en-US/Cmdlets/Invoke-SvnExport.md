@@ -8,7 +8,8 @@ schema: 2.0.0
 # Invoke-SvnExport
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Create an unversioned copy of a tree.
 
 ## SYNTAX
 
@@ -18,16 +19,17 @@ Invoke-SvnExport [-Source] <SvnTarget> [[-Destination] <String>] [-Revision <Pos
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Exports file or directory from repository or working copy as unversioned.
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
 
-{{ Add example description here }}
+
+```powershell
+
+```
 
 ## PARAMETERS
 
