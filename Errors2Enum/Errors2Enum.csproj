@@ -1,17 +1,3 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <Platforms>AnyCpu;</Platforms>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <OutDir>$(ToolsDir)</OutDir>
-    <GenerateSupportedRuntime>False</GenerateSupportedRuntime>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <DebugType>none</DebugType>
-  </PropertyGroup>
-
+  <Import Project="$(SolutionDir)ToolPresets.props" />
 </Project>
