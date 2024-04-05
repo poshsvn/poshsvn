@@ -26,7 +26,6 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="$(MSBuildThisFileDirectory)SvnLibraries.targets" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -476,12 +475,9 @@
     <ClCompile Include="WorkingCopyCommands\WorkingCopyRestore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Errors2Enum.targets" />
-    <None Include="Po2Resx.targets" />
     <None Include="SharpSvn.snk" />
+    <None Include="SharpSvn.targets" />
     <None Include="SharpSvn.vcproj" />
-    <None Include="SvnLibraries.targets" />
-    <None Include="vcpkg.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Errors2Enum\Errors2Enum.csproj">
@@ -511,7 +507,5 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Import Project="vcpkg.targets" />
-  <Import Project="Errors2Enum.targets" />
-  <Import Project="Po2Resx.targets" />
+  <Import Project="SharpSvn.targets" />
 </Project>
