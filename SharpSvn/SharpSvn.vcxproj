@@ -476,7 +476,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Errors2Enum.targets" />
-    <None Include="packages.config" />
     <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.vcproj" />
     <None Include="SvnLibraries.targets" />
