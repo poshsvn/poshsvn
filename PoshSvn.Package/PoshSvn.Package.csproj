@@ -20,6 +20,28 @@
 
     <FilesToCopy Include="$(OutDir)\PoshSvn.dll" />
     <FilesToCopy Include="$(OutDir)\SharpSvn.dll" />
+
+    <FilesToCopy Include="$(OutDir)vcruntime140.dll" />
+    <FilesToCopy Include="$(OutDir)vcruntime140_1.dll" />
+
+    <FilesToCopy Include="$(OutDir)libsvn_wc-1.dll" />
+    <FilesToCopy Include="$(OutDir)sqlite3.dll" />
+    <FilesToCopy Include="$(OutDir)zlib1.dll" />
+    <FilesToCopy Include="$(OutDir)libapr-1.dll" />
+    <FilesToCopy Include="$(OutDir)libaprutil-1.dll" />
+    <FilesToCopy Include="$(OutDir)libcrypto-3-x64.dll" />
+    <FilesToCopy Include="$(OutDir)libexpat.dll" />
+    <FilesToCopy Include="$(OutDir)libssl-3-x64.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_client-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_delta-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_diff-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_fs_fs-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_fs_util-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_fs_x-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_fs-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_ra-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_repos-1.dll" />
+    <FilesToCopy Include="$(OutDir)libsvn_subr-1.dll" />
   </ItemGroup>
 
   <Target Name="CopyFiles" BeforeTargets="AfterBuild">
