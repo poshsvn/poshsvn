@@ -608,6 +608,9 @@
     <ClInclude Include="ReposArgs\SetRepositoryId.h">
       <Filter>SvnRepositoryClient\Args</Filter>
     </ClInclude>
+    <ClInclude Include="SharpSvnStrings.h">
+      <Filter>Common\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AprArray.cpp">
@@ -1069,6 +1072,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.zh-tw.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SharpSvnStrings.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
