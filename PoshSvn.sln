@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Default.runsettings = Default.runsettings
 		Directory.build.props = Directory.build.props
 		README.md = README.md
+		vcpkg-configuration.json = vcpkg-configuration.json
+		vcpkg.json = vcpkg.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Tests", "PoshSvn.Tests\PoshSvn.Tests.csproj", "{A1B1668F-130B-4254-9143-4ABD20CF12D7}"
