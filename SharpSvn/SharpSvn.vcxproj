@@ -487,6 +487,20 @@
       <Project>{8ba9e178-864c-4cda-8d8b-45141b8ee861}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SvnText\SvnText.de.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.es.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.fr.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.it.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.ja.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.ko.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.nb.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.pl.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.pt-br.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.sv.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.zh-cn.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.zh-tw.resx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
