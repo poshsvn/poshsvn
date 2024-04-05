@@ -65,7 +65,8 @@ jobs:
       run: npm install -g @vscode/vsce
 
     - name: Package
-      run: cd .\PoshSvn.vscode; vsce package --out ..\poshsvn.vscode.vsix
+      run: vsce package --out ..\poshsvn.vscode.vsix
+      working-directory: .\PoshSvn.vscode
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
