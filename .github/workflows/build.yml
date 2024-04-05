@@ -42,6 +42,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Download build artifact
         id: download-build-artifact
         uses: actions/download-artifact@v4
