@@ -10,7 +10,7 @@ dotnet_analyzer_diagnostic.category-Assertion.severity = silent
 
 dotnet_sort_system_directives_first = true
 
-[*.{xml,ps1xml,html,csproj,props,targets}]
+[*.{xml,ps1xml,html,csproj,vcxproj,props,targets}]
 indent_size=2
 indent_style=space
 
