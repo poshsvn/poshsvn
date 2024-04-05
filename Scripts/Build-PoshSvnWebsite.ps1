@@ -5,6 +5,19 @@ $siteRoot = "$PSScriptRoot\..\www"
 $outDir = "$siteRoot\build"
 $docsPages = Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US\*" -Include "*.md"
 
+function Add-PageToSiteMap {
+    param (
+        [string]
+        $PagePath
+    )
+
+    $url = ($PagePath | Resolve-Path -Relative -RelativeBasePath $outDir)
+    $url = $url -replace "\.\\"
+    $url = "https://www.poshsvn.com/$url"
+    $url = $url -replace "\\", "/" -replace "/index.html"
+    Add-Content -Path "$outDir\sitemap.txt" -Value $url
+}
+
 function RenderPage {
     param (
         $Content,
@@ -12,27 +25,21 @@ function RenderPage {
         $Title
     )
 
-    $lastPrefix = ""
     $topics = ""
-    foreach ($path in $docsPages) {
-        $null = $path.BaseName -match "(^.*[-_])"
-        $prefix = $Matches[1]
-        $prefix = $prefix -replace "[a-zA-Z]*-", "Cmdlets"
-        $prefix = $prefix -replace "about_", "About"
 
-        if ($lastPrefix -ne $prefix) {
-            $lastPrefix = $prefix
-            $topics += "<li class='mt-4'><h6>$($prefix)</h6></li><li><hr class='sidebar-divider'></li>"
-        }
+    foreach ($folder in Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US" -Directory -Exclude "obj") {
+        $topics += "<li class='mt-4'><h6>$($folder.Name)</h6></li><li><hr class='sidebar-divider'></li>"
 
-        if ($Title -eq $path.BaseName) {
-            $active = "active"
+        foreach ($path in $folder | Get-ChildItem -Filter "*.md" -File -Recurse) {
+            if ($Title -eq $path.BaseName) {
+                $active = "active"
+            }
+            else {
+                $active = ""
+            }
+    
+            $topics += "<li class='nav-item'><a class='nav-link $active' href='../$($path.BaseName)'>$($path.BaseName)</a></li>"
         }
-        else {
-            $active = ""
-        }
-
-        $topics += "<li class='nav-item'><a class='nav-link $active' href='../$($path.BaseName)'>$($path.BaseName)</a></li>"
     }
 
     $template = Get-Content "$PSScriptRoot\..\www\template.html"
@@ -45,6 +52,8 @@ function RenderPage {
 
     mkdir "$outDir\$PageName" -Force
     Set-Content -Path "$outDir\$PageName\index.html" -Value $Content -Force
+
+    Add-PageToSiteMap -PagePath "$outDir\$PageName"
 }
 
 if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
@@ -59,16 +68,13 @@ function RenderDocsLanguage {
         $DestinationPrefix
     )
 
-    foreach ($path in Get-ChildItem -Path "$SourceDir\*.md") {
-        $null = $path -match "([a-zA-Z\-_]*)\.md"
-        $cmdletName = $Matches[1]
+    foreach ($path in Get-ChildItem -Path "$SourceDir" -Filter "*.md" -File -Recurse) {
         $content = (ConvertFrom-Markdown $path).Html -replace '<h1 id="poshsvn">PoshSvn</h1>'
-        RenderPage -Content $content -PageName "$DestinationPrefix\docs\$cmdletName" -Title $cmdletName
+        RenderPage -Content $content -PageName "$DestinationPrefix\docs\$($path.BaseName)" -Title $path.BaseName
     }
 }
 
 RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\en-US" -DestinationPrefix ""
-RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\en-US" -DestinationPrefix "en"
 RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\fr-FR" -DestinationPrefix "fr"
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse
@@ -86,15 +92,7 @@ foreach ($path in Get-ChildItem "$siteRoot\pages" -ErrorAction SilentlyContinue)
     RenderPage -Content $content -PageName $pageName -Title $path.BaseName
 }
 
-New-Item "$outDir\sitemap.txt"
-
-foreach ($path in Get-ChildItem $outDir -Recurse -Filter "*.html" -Exclude "google*") {
-    $url = ($path | Resolve-Path -Relative -RelativeBasePath $outDir)
-    $url = $url -replace "\.\\"
-    $url = "https://www.poshsvn.com/$url"
-    $url = $url -replace "\\", "/" -replace "/index.html"
-    Add-Content -Path "$outDir\sitemap.txt" -Value $url
-}
-
 Copy-Item "$PSScriptRoot\..\icon-minimal.svg" "$outDir\favicon.svg"
 Copy-Item "$PSScriptRoot\..\icon.svg" "$outDir\icon.svg"
+
+Add-PageToSiteMap -PagePath "$outDir\index.html"
