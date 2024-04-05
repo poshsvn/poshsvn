@@ -26,7 +26,6 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="$(MSBuildThisFileDirectory)SvnLibraries.targets" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -168,9 +167,24 @@
     <ClInclude Include="AprArray.h" />
     <ClInclude Include="AprBaton.h" />
     <ClInclude Include="AprPool.h" />
+    <ClInclude Include="Args\InheritedPropertyList.h" />
+    <ClInclude Include="Args\SvnRepositoryOperationArgs.h" />
+    <ClInclude Include="Args\Vacuum.h" />
+    <ClInclude Include="Args\Youngest.h" />
+    <ClInclude Include="EventArgs\SvnEventArgs.h" />
+    <ClInclude Include="EventArgs\SvnInheritedPropertyListEventArgs.h" />
+    <ClInclude Include="EventArgs\SvnLookInheritedPropertyListEventArgs.h" />
+    <ClInclude Include="LookArgs\SvnLookInheritedPropertyListArgs.h" />
+    <ClInclude Include="LookArgs\SvnLookLockArgs.h" />
+    <ClInclude Include="RemoteArgs\SvnRemoteWriteArgs.h" />
+    <ClInclude Include="ReposArgs\PackRepository.h" />
+    <ClInclude Include="ReposArgs\VerifyRepository.h" />
+    <ClInclude Include="ReposEventArgs\SvnRepositoryNotifyEventArgs.h" />
+    <ClInclude Include="SharpSvnStrings.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="SvnBase.h" />
     <ClInclude Include="SvnLibraryAttribute.h" />
+    <ClInclude Include="SvnMultiCommandClient.h" />
     <ClInclude Include="SvnStatusCacheBlocker.h" />
     <ClInclude Include="SvnAll.h" />
     <ClInclude Include="SvnAuthentication.h" />
@@ -181,6 +195,7 @@
     <ClInclude Include="SvnClientEventArgs.h" />
     <ClInclude Include="SvnClientNotifier.h" />
     <ClInclude Include="SvnNames.h" />
+    <ClInclude Include="SvnStreamWrapper.h" />
     <ClInclude Include="UnmanagedStructs.h" />
     <ClInclude Include="SvnCommandLineArgumentCollection.h" />
     <ClInclude Include="SvnCommitItem.h" />
@@ -475,21 +490,72 @@
     <ClCompile Include="WorkingCopyCommands\WorkingCopyRestore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Errors2Enum.targets" />
-    <None Include="packages.config" />
     <None Include="SharpSvn.snk" />
-    <None Include="SharpSvn.vcproj" />
-    <None Include="SvnLibraries.targets" />
-    <None Include="vcpkg.targets" />
+    <None Include="SharpSvn.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Errors2Enum\Errors2Enum.csproj">
       <Project>{8ba9e178-864c-4cda-8d8b-45141b8ee861}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Po2Resx\Po2Resx.csproj">
+      <Project>{d38d2985-65cf-479b-be84-dba1c754aa2f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SharpSvnStrings.resx">
+      <LogicalName>SharpSvn.SharpSvnStrings.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.de.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.es.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.fr.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.it.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.ja.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.ko.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.nb.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.pl.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.pt-BR.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.sv.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.zh-CN.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Import Project="vcpkg.targets" />
-  <Import Project="Errors2Enum.targets" />
+  <Import Project="SharpSvn.targets" />
 </Project>

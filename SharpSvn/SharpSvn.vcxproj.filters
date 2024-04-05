@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Subversion">
-      <UniqueIdentifier>{9302676f-b2cd-4c12-aef0-7ccd9f3fdb54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -138,9 +135,6 @@
       <Filter>Common\Headers</Filter>
     </ClInclude>
     <ClInclude Include="SvnBase.h">
-      <Filter>Common\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="SvnFsOperationRetryOverride.h">
       <Filter>Common\Headers</Filter>
     </ClInclude>
     <ClInclude Include="SvnLibraryAttribute.h">
@@ -647,9 +641,6 @@
     <ClInclude Include="RemoteArgs\SvnRemoteWriteArgs.h">
       <Filter>SvnRemoteSession\Args</Filter>
     </ClInclude>
-    <ClInclude Include="SvnSshContext.h">
-      <Filter>Svn\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Args\Youngest.h">
       <Filter>SvnClient\Args</Filter>
     </ClInclude>
@@ -671,40 +662,40 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.de.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.es.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.fr.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.it.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.ja.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.ko.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.nb.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.pl.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.pt-BR.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.sv.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.zh-CN.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.zh-TW.resx">
-      <Filter>Resource Files\Subversion</Filter>
+      <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -717,16 +708,7 @@
     <ClCompile Include="Stdafx.cpp">
       <Filter>Common\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="SvnAbortHandler.cpp">
-      <Filter>Common\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="SvnBase.cpp">
-      <Filter>Common\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SvnFsOperationRetryOverride.cpp">
-      <Filter>Common\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SvnLocalization.cpp">
       <Filter>Common\Sources</Filter>
     </ClCompile>
     <ClCompile Include="SvnStatusCacheBlocker.cpp">
@@ -1117,9 +1099,6 @@
     <ClCompile Include="RemoteCommands\RemoteWrite.cpp">
       <Filter>SvnRemoteSession\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="SvnSshContext.cpp">
-      <Filter>Svn\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Commands\Youngest.cpp">
       <Filter>SvnClient\Sources</Filter>
     </ClCompile>
@@ -1138,12 +1117,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SharpSvn.snk" />
-    <None Include="SharpSvn.vcproj" />
-    <None Include="packages.config" />
-    <None Include="SvnLibraries.targets" />
-    <None Include="vcpkg.targets" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="SharpSvnStrings.txt" />
+    <None Include="SharpSvn.targets" />
   </ItemGroup>
 </Project>

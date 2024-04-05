@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Default.runsettings = Default.runsettings
 		Directory.build.props = Directory.build.props
 		README.md = README.md
+		ToolPresets.props = ToolPresets.props
 		vcpkg-configuration.json = vcpkg-configuration.json
 		vcpkg.json = vcpkg.json
 	EndProjectSection
@@ -26,6 +27,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Errors2Enum", "Errors2Enum\Errors2Enum.csproj", "{E51D89F4-171E-4FA6-9E71-62F337A3FE5C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharpSvn", "SharpSvn\SharpSvn.vcxproj", "{6DD8A600-5A7E-4B7A-91EE-86AB78F58AAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Po2Resx", "Po2Resx\Po2Resx.csproj", "{D38D2985-65CF-479B-BE84-DBA1C754AA2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +124,18 @@ Global
 		{6DD8A600-5A7E-4B7A-91EE-86AB78F58AAC}.Release|x64.Build.0 = Release|x64
 		{6DD8A600-5A7E-4B7A-91EE-86AB78F58AAC}.Release|x86.ActiveCfg = Release|Win32
 		{6DD8A600-5A7E-4B7A-91EE-86AB78F58AAC}.Release|x86.Build.0 = Release|Win32
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Debug|x64.Build.0 = Debug|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Release|x64.ActiveCfg = Release|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Release|x64.Build.0 = Release|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{D38D2985-65CF-479B-BE84-DBA1C754AA2F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,0 @@
-<Project>
-  <Target Name="GenerateErrorEnums" AfterTargets="VcpkgInstallManifestDependencies">
-    <Message Text="Building error enum..." Importance="high" />
-    <Exec Command="$(ToolsDir)Errors2Enum.exe &quot;$(VCInstallDir).&quot; &quot;$(WindowsSdkDir).&quot; &quot;$(UniversalCRT_IncludePath)&quot; &quot;$(PackagesPath)\include\apr_errno.h&quot; &quot;$(PackagesPath)\include\serf.h&quot; &quot;$(ProjectDir)\SvnWindowsError.h&quot;" />
-  </Target>
-</Project>
