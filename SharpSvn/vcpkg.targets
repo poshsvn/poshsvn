@@ -2,7 +2,7 @@
   <PropertyGroup>
     <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
     <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
-    <VcpkgTriplet>$(PlatformTarget)-windows</VcpkgTriplet>
+    <VcpkgTriplet>$(PlatformTarget)-windows-release</VcpkgTriplet>
     <PackagesPath>$(VcpkgManifestRoot)\vcpkg_installed\$(VcpkgTriplet)\$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
 
