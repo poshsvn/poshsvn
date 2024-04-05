@@ -5,6 +5,7 @@ on:
     branches: ["*"]
     paths-ignore:
       - 'www/**'
+  workflow_dispatch:
 
 concurrency:
   group: build-${{ github.ref }}
