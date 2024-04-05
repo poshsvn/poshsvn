@@ -25,13 +25,13 @@ jobs:
         run: MSBuild.exe .\PoshSvn.sln -restore -property:Configuration=Release
 
       - name: Upload package artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PoshSvn
           path: .\bin\poshsvn
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Release
           path: .\bin\Release
@@ -79,7 +79,7 @@ jobs:
       working-directory: .\PoshSvn.vscode
 
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: PoshSvn.vscode
         path: .\poshsvn.vscode.vsix
