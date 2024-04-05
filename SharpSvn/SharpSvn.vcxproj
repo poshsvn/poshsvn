@@ -477,7 +477,6 @@
   <ItemGroup>
     <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.targets" />
-    <None Include="SharpSvn.vcproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Errors2Enum\Errors2Enum.csproj">

@@ -1031,7 +1031,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SharpSvn.snk" />
-    <None Include="SharpSvn.vcproj" />
     <None Include="SharpSvn.targets" />
   </ItemGroup>
   <ItemGroup>
