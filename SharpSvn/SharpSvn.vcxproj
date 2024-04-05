@@ -490,18 +490,54 @@
     <EmbeddedResource Include="SharpSvnStrings.resx">
       <LogicalName>SharpSvn.SharpSvnStrings.resources</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.de.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.es.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.fr.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.it.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.ja.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.ko.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.nb.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.pl.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.pt-br.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.sv.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.zh-cn.resx" />
-    <EmbeddedResource Include="SvnText\SvnText.zh-tw.resx" />
+    <EmbeddedResource Include="SvnText\SvnText.de.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.es.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.fr.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.it.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.ja.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.ko.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.nb.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.pl.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.pt-BR.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.sv.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.zh-CN.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.zh-TW.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>SharpSvn.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
