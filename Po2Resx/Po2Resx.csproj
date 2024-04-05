@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <Platforms>AnyCPU</Platforms>
     <TargetFramework>net472</TargetFramework>
