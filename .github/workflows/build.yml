@@ -11,15 +11,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  test:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Test
-        run: .\Scripts\Test-PoshSvn.ps1
-    
   build-poshvn:
     runs-on: windows-latest
   
@@ -32,12 +23,36 @@ jobs:
       - name: Build
         run: MSBuild.exe .\PoshSvn.sln -restore -property:Configuration=Release
 
-      - name: Upload build artifact
+      - name: Upload package artifact
         uses: actions/upload-artifact@v3
         with:
           name: PoshSvn
           path: .\bin\poshsvn
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PoshSvn-Release
+          path: .\bin\Release
+
+  test:
+    needs: build-poshvn
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Download build artifact
+        id: download-build-artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PoshSvn-Release
+
+      - name: Setup VSTest Path
+        uses: darenm/Setup-VSTest@v1.2
+
+      - name: Test
+        run: vstest.console.exe ${{ steps.download-build-artifact.outputs.download-path }}\PoshSvn.Tests.dll
+    
   build-vscode-extension:
     runs-on: windows-latest
 
