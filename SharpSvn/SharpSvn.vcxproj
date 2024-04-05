@@ -476,6 +476,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Errors2Enum.targets" />
+    <None Include="Po2Resx.targets" />
     <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.vcproj" />
     <None Include="SvnLibraries.targets" />
@@ -491,4 +492,5 @@
   </ImportGroup>
   <Import Project="vcpkg.targets" />
   <Import Project="Errors2Enum.targets" />
+  <Import Project="Po2Resx.targets" />
 </Project>
