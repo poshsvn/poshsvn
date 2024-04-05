@@ -32,7 +32,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
-          name: PoshSvn-Release
+          name: Release
           path: .\bin\Release
 
   test:
@@ -45,7 +45,7 @@ jobs:
         id: download-build-artifact
         uses: actions/download-artifact@v4
         with:
-          name: PoshSvn-Release
+          name: Release
 
       - name: Setup VSTest Path
         uses: darenm/Setup-VSTest@v1.2
