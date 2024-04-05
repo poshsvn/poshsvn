@@ -58,10 +58,18 @@ jobs:
         run: vstest.console.exe ${{ steps.download-build-artifact.outputs.download-path }}\PoshSvn.Tests.dll
     
   build-vscode-extension:
+    needs: build-poshvn
+
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Download package artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: PoshSvn
+        path: .\bin\poshsvn
 
     - name: Install vsce
       run: npm install -g @vscode/vsce
