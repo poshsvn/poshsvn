@@ -554,8 +554,9 @@ namespace SharpSvn {
     
     inline ::System::Resources::ResourceManager^  SharpSvnStrings::ResourceManager::get() {
         if (System::Object::ReferenceEquals(resourceMan, nullptr)) {
-            ::System::Reflection::Assembly^ assembly = SharpSvn::SharpSvnStrings::typeid->Assembly;
-            resourceMan = gcnew ::System::Resources::ResourceManager(L"SharpSvn.SharpSvnStrings", assembly);
+            ::System::Resources::ResourceManager^  temp = (gcnew ::System::Resources::ResourceManager(L"SharpSvn.SharpSvnStrings", 
+                SharpSvn::SharpSvnStrings::typeid->Assembly));
+            resourceMan = temp;
         }
         return resourceMan;
     }
