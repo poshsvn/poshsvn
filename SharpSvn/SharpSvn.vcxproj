@@ -492,7 +492,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SharpSvnStrings.resx" />
+    <EmbeddedResource Include="SharpSvnStrings.resx">
+      <LogicalName>SharpSvn.SharpSvnStrings.resources</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="SvnText\SvnText.de.resx" />
     <EmbeddedResource Include="SvnText\SvnText.es.resx" />
     <EmbeddedResource Include="SvnText\SvnText.fr.resx" />
