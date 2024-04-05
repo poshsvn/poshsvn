@@ -7,7 +7,6 @@ Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
 & npm install
 & tsc
-& "$PSScriptRoot\Build-PoshSvn.ps1"
 Copy-Item "$PSScriptRoot\..\bin\poshsvn\*" $outDir -Recurse -Force
 
 Pop-Location

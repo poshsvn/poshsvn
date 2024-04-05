@@ -5,50 +5,81 @@ on:
     branches: ["*"]
     paths-ignore:
       - 'www/**'
+  workflow_dispatch:
 
 concurrency:
   group: build-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  test:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Test
-        run: .\Scripts\Test-PoshSvn.ps1
-    
   build-poshvn:
     runs-on: windows-latest
   
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build
-        run: .\Scripts\Build-PoshSvn.ps1
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+      - name: Build
+        run: MSBuild.exe .\PoshSvn.sln -restore -property:Configuration=Release
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
         with:
           name: PoshSvn
           path: .\bin\poshsvn
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release
+          path: .\bin\Release
+
+  test:
+    needs: build-poshvn
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download build artifact
+        id: download-build-artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Release
+          path: .\bin\Release
+
+      - name: Setup VSTest Path
+        uses: darenm/Setup-VSTest@v1.2
+
+      - name: Test
+        run: vstest.console.exe ${{ steps.download-build-artifact.outputs.download-path }}\PoshSvn.Tests.dll
+    
   build-vscode-extension:
+    needs: build-poshvn
+
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
 
+    - name: Download package artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: PoshSvn
+        path: .\bin\poshsvn
+
     - name: Install vsce
       run: npm install -g @vscode/vsce
 
     - name: Package
-      run: cd .\PoshSvn.vscode; vsce package --out ..\poshsvn.vscode.vsix
+      run: vsce package --out ..\poshsvn.vscode.vsix
+      working-directory: .\PoshSvn.vscode
 
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: PoshSvn.vscode
         path: .\poshsvn.vscode.vsix
