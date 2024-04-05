@@ -2,7 +2,8 @@
   <PropertyGroup>
     <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
     <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
-    <PackagesPath>$(VcpkgManifestRoot)\vcpkg_installed\$(PlatformTarget)-windows\$(PlatformTarget)-windows\</PackagesPath>
+    <VcpkgTriplet>$(PlatformTarget)-windows</VcpkgTriplet>
+    <PackagesPath>$(VcpkgManifestRoot)\vcpkg_installed\$(VcpkgTriplet)\$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
 
   <Import Project="$(VCInstallDir)\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets" />
