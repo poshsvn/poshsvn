@@ -113,6 +113,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SharpSvnStrings.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventArgs\SvnEventArgs.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SvnStreamWrapper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
     <ClInclude Include="AprArray.h">
       <Filter>Common\Headers</Filter>
     </ClInclude>
@@ -608,9 +617,86 @@
     <ClInclude Include="ReposArgs\SetRepositoryId.h">
       <Filter>SvnRepositoryClient\Args</Filter>
     </ClInclude>
-    <ClInclude Include="SharpSvnStrings.h">
-      <Filter>Common\Headers</Filter>
+    <ClInclude Include="ReposEventArgs\SvnRepositoryNotifyEventArgs.h">
+      <Filter>SvnRepositoryClient\EventArgs</Filter>
     </ClInclude>
+    <ClInclude Include="ReposArgs\PackRepository.h">
+      <Filter>SvnRepositoryClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="ReposArgs\VerifyRepository.h">
+      <Filter>SvnRepositoryClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="Args\InheritedPropertyList.h">
+      <Filter>SvnClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="EventArgs\SvnInheritedPropertyListEventArgs.h">
+      <Filter>SvnClient\EventArgs</Filter>
+    </ClInclude>
+    <ClInclude Include="Args\SvnRepositoryOperationArgs.h">
+      <Filter>SvnMultiCommandClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="SvnMultiCommandClient.h">
+      <Filter>SvnMultiCommandClient</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoteArgs\SvnRemoteWriteArgs.h">
+      <Filter>SvnRemoteSession\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="Args\Youngest.h">
+      <Filter>SvnClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="Args\Vacuum.h">
+      <Filter>SvnClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="LookArgs\SvnLookInheritedPropertyListArgs.h">
+      <Filter>SvnLookClient\Args</Filter>
+    </ClInclude>
+    <ClInclude Include="EventArgs\SvnLookInheritedPropertyListEventArgs.h">
+      <Filter>SvnLookClient\EventArgs</Filter>
+    </ClInclude>
+    <ClInclude Include="LookArgs\SvnLookLockArgs.h">
+      <Filter>SvnLookClient\Args</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SharpSvnStrings.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.de.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.es.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.fr.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.it.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.ja.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.ko.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.nb.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.pl.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.pt-BR.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.sv.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.zh-CN.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvnText\SvnText.zh-TW.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AprArray.cpp">
@@ -1032,46 +1118,5 @@
   <ItemGroup>
     <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.targets" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SvnText\SvnText.de.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.es.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.fr.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.it.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.ja.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.ko.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.nb.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.pl.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.pt-br.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.sv.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.zh-cn.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvnText\SvnText.zh-tw.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SharpSvnStrings.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>
