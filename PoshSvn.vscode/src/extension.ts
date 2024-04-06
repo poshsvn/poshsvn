@@ -41,7 +41,7 @@ let terminalOptions: vscode.TerminalOptions = {
     env: {
         "PSModulePath": __dirname
     },
-    shellArgs: `-NoExit -NoLogo`,
+    shellArgs: `-NoExit -NoLogo -ExecutionPolicy Bypass`,
     // TODO: fill other parameters
 }
 
