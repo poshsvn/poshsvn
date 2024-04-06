@@ -20,6 +20,9 @@ namespace PoshSvn
         [Parameter(DontShow = true)]
         public SecureString Password { get; set; }
 
+        [Parameter(DontShow = true)]
+        public SvnAccept Accept { get; set; }
+
         protected SharpSvn.SvnClient SvnClient;
 
         public SvnClientCmdletBase()
@@ -49,40 +52,47 @@ namespace PoshSvn
 
         private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
         {
-            Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+            if (Accept == SvnAccept.Prompt)
             {
-                new ChoiceDescription("&Postpone", "(Postpone) Skip this conflict and leave it unresolved."),
-                new ChoiceDescription("Accept &Base", "(Accept Base) Accept incoming version of entire."),
-                new ChoiceDescription("&Merge", "(Merge) Accept the result file of the automatic merging."),
-                new ChoiceDescription("Accept &Theirs", "(Accept Theirs) Accept incoming version of entire."),
-                new ChoiceDescription("Accept &Mine", "(Accept Mine) Accept local version of entire."),
-            };
+                Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+                {
+                    new ChoiceDescription("&Postpone", "(Postpone) Skip this conflict and leave it unresolved."),
+                    new ChoiceDescription("Accept &Base", "(Accept Base) Accept incoming version of entire."),
+                    new ChoiceDescription("&Merge", "(Merge) Accept the result file of the automatic merging."),
+                    new ChoiceDescription("Accept &Theirs", "(Accept Theirs) Accept incoming version of entire."),
+                    new ChoiceDescription("Accept &Mine", "(Accept Mine) Accept local version of entire."),
+                };
 
-            int selectedChoice = Host.UI.PromptForChoice(null, string.Format("Merge conflict discovered in file '{0}'", e.Path), choices, 0);
+                int selectedChoice = Host.UI.PromptForChoice(null, string.Format("Merge conflict discovered in file '{0}'", e.Path), choices, 0);
 
-            if (selectedChoice == 0)
-            {
-                e.Choice = SharpSvn.SvnAccept.Postpone;
-            }
-            else if (selectedChoice == 1)
-            {
-                e.Choice = SharpSvn.SvnAccept.Base;
-            }
-            else if (selectedChoice == 2)
-            {
-                e.Choice = SharpSvn.SvnAccept.Working;
-            }
-            else if (selectedChoice == 3)
-            {
-                e.Choice = SharpSvn.SvnAccept.Theirs;
-            }
-            else if (selectedChoice == 4)
-            {
-                e.Choice = SharpSvn.SvnAccept.Mine;
+                if (selectedChoice == 0)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Postpone;
+                }
+                else if (selectedChoice == 1)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Base;
+                }
+                else if (selectedChoice == 2)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Working;
+                }
+                else if (selectedChoice == 3)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Theirs;
+                }
+                else if (selectedChoice == 4)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Mine;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
             }
             else
             {
-                throw new NotImplementedException();
+                e.Choice = Accept.ToSharpSvnAccept();
             }
         }
 
