@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using SharpSvn;
 
 namespace PoshSvn
 {
@@ -139,17 +138,17 @@ namespace PoshSvn
             }
         }
 
-        internal static char GetPropetyStatusString(SvnStatus localPropertyStatus, SvnStatus localNodeStatus)
+        internal static char GetPropetyStatusString(SharpSvn.SvnStatus localPropertyStatus, SharpSvn.SvnStatus localNodeStatus)
         {
-            if (localNodeStatus == SvnStatus.Added)
+            if (localNodeStatus == SharpSvn.SvnStatus.Added)
             {
                 return ' ';
             }
-            else if (localPropertyStatus == SvnStatus.Conflicted)
+            else if (localPropertyStatus == SharpSvn.SvnStatus.Conflicted)
             {
                 return 'C';
             }
-            else if (localPropertyStatus == SvnStatus.Modified)
+            else if (localPropertyStatus == SharpSvn.SvnStatus.Modified)
             {
                 return 'M';
             }
@@ -159,7 +158,7 @@ namespace PoshSvn
             }
         }
 
-        internal static char GetLockedString(SvnLockInfo lockInfo)
+        internal static char GetLockedString(SharpSvn.SvnLockInfo lockInfo)
         {
             if (lockInfo == null)
             {
