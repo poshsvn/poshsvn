@@ -10,7 +10,10 @@ let terminalOptions: vscode.TerminalOptions = {
     name: "PoshSvn terminal",
     shellPath: "powershell",
     message: helpMessage,
-    shellArgs: `-NoExit -Command ipmo "${__dirname}\\PoshSvn.psd1"`,
+    env: {
+        "PSModulePath": __dirname
+    },
+    shellArgs: `-NoExit`,
     // TODO: fill other parameters
 }
 

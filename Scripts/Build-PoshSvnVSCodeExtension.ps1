@@ -7,6 +7,6 @@ Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
 & npm install
 & tsc
-Copy-Item "$PSScriptRoot\..\bin\poshsvn\*" $outDir -Recurse -Force
+Copy-Item "$PSScriptRoot\..\bin\poshsvn\" $outDir -Recurse -Force
 
 Pop-Location
