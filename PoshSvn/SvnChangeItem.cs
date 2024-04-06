@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using SharpSvn;
-
 namespace PoshSvn
 {
     public class SvnChangeItem
