@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="SvnItem.format.ps1xml" />
-    <None Remove="SvnLog.format.ps1xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
   </ItemGroup>
 
