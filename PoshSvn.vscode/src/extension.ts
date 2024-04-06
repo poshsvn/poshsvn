@@ -13,7 +13,7 @@ let terminalOptions: vscode.TerminalOptions = {
     env: {
         "PSModulePath": __dirname
     },
-    shellArgs: `-NoExit`,
+    shellArgs: `-NoExit -NoLogo`,
     // TODO: fill other parameters
 }
 
