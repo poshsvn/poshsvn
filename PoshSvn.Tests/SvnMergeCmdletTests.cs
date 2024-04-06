@@ -43,7 +43,7 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void ResolveConflictByAcceptParameter()
+        public void ResolveConflictByAcceptParameterTest()
         {
             using (var sb = new ProjectStructureSandbox())
             {
