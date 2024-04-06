@@ -72,55 +72,6 @@ namespace PoshSvn
             }
         }
 
-        // TODO: Move this function to the SvnNotifyOutput class.
-        // TODO: Add more logic.
-        // TODO: Add some spaces before action like in svn.exe
-        // - Reference: https://svn.rinrab.com/!/#rinrab/view/r884/subversion/1.14.3/subversion/svn/notify.c?line=751
-        // - Reference: https://svn.rinrab.com/!/#rinrab/view/r884/subversion/1.14.3/subversion/svn/notify.c?line=1096
-        public static string GetActionStringShort(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.UpdateAdd:
-                case SvnNotifyAction.Add:
-                case SvnNotifyAction.CommitAdded:
-                case SvnNotifyAction.CommitAddCopy:
-                    return "A";
-
-                case SvnNotifyAction.UpdateDelete:
-                case SvnNotifyAction.Delete:
-                case SvnNotifyAction.CommitDeleted:
-                    return "D";
-
-                case SvnNotifyAction.CommitModified:
-                    return "M";
-
-                case SvnNotifyAction.UpdateUpdate:
-                case SvnNotifyAction.RecordMergeInfo:
-                    return "U";
-
-                case SvnNotifyAction.CommitReplaced:
-                case SvnNotifyAction.CommitReplacedWithCopy:
-                case SvnNotifyAction.UpdateReplace:
-                    return "R";
-
-                case SvnNotifyAction.LockLocked:
-                    return "+L";
-
-                case SvnNotifyAction.LockUnlocked:
-                    return "-L";
-
-                case SvnNotifyAction.TreeConflict:
-                    return "C";
-
-                // case SvnNotifyAction.UpdateMerge: return "G";
-                // case SvnNotifyAction.UpdateExist: return "E";
-
-                default:
-                    return action.ToString();
-            }
-        }
-
         public static string FormatProgress(long progress)
         {
             if (progress == -1)
