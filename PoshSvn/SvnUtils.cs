@@ -73,6 +73,11 @@ namespace PoshSvn
             }
         }
 
+        // TODO: Move this function to the SvnNotifyOutput class.
+        // TODO: Add more logic.
+        // TODO: Add some spaces before action like in svn.exe
+        // - Reference: https://svn.rinrab.com/!/#rinrab/view/r884/subversion/1.14.3/subversion/svn/notify.c?line=751
+        // - Reference: https://svn.rinrab.com/!/#rinrab/view/r884/subversion/1.14.3/subversion/svn/notify.c?line=1096
         public static string GetActionStringShort(SvnNotifyAction action)
         {
             switch (action)
