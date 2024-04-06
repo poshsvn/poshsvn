@@ -7,7 +7,7 @@ namespace PoshSvn
     public class SvnNotifyOutput
     {
         public SvnNotifyAction Action { get; set; }
-        public string ActionString => GetActionStringShort(Action);
+        public string ActionString => GetActionString(Action);
         public string Path { get; set; }
 
         public override string ToString()
@@ -29,7 +29,7 @@ namespace PoshSvn
         // TODO: Add some spaces before action like in svn.exe
         // - Reference: https://svn.rinrab.com/!/#rinrab/view/r884/subversion/1.14.3/subversion/svn/notify.c?line=751
         // - Reference: https://svn.rinrab.com/!/#rinrab/view/r884/subversion/1.14.3/subversion/svn/notify.c?line=1096
-        public static string GetActionStringShort(SvnNotifyAction action)
+        public static string GetActionString(SvnNotifyAction action)
         {
             switch (action)
             {
