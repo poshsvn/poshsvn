@@ -6,7 +6,7 @@ using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
 {
-    public class NewSvnTargetTests
+    public class SvnTargetTests
     {
         [Test]
         public void ParseFromAbsolutePath()
