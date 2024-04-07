@@ -5,7 +5,7 @@
     <PowerShell>pwsh.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
   </PropertyGroup>
 
-  <Target Name="InstallPlatyPS" BeforeTargets="PrepareForRun">
+  <Target Name="BuildDocs" BeforeTargets="PrepareForRun">
     <Exec Command="$(PowerShell) $(ScriptsPath)\Build-PoshSvnDocs.ps1 -InputDir $(MSBuildProjectDirectory) -OutputDir $(OutDir)" />
   </Target>
 </Project>
