@@ -1,15 +1,16 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.IO;
 using System.Management.Automation;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("New", "SvnTarget", DefaultParameterSetName = ParameterSetNames.PathOrUrl)]
+    [Cmdlet("New", "SvnTarget", DefaultParameterSetName = ParameterSetNames.InputObject)]
     [OutputType(typeof(SvnTarget))]
     public class NewSvnTargetCmdlet : PSCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = ParameterSetNames.PathOrUrl)]
-        public string PathOrUrl { get; set; }
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = ParameterSetNames.InputObject, ValueFromPipeline = true)]
+        public PSObject InputObject { get; set; }
 
         [Parameter(ParameterSetName = ParameterSetNames.Path)]
         public string Path { get; set; }
@@ -22,9 +23,18 @@ namespace PoshSvn.CmdLets
 
         protected override void ProcessRecord()
         {
-            if (ParameterSetName == ParameterSetNames.PathOrUrl)
+            if (ParameterSetName == ParameterSetNames.InputObject)
             {
-                WriteObject(new SvnTarget(PathOrUrl));
+                object baseObject = InputObject.BaseObject;
+
+                if (baseObject is FileSystemInfo fileSystemInfo)
+                {
+                    WriteObject(new SvnTarget(fileSystemInfo));
+                }
+                else
+                {
+                    WriteObject(new SvnTarget(InputObject.ToString()));
+                }
             }
             else if (ParameterSetName == ParameterSetNames.Path)
             {
