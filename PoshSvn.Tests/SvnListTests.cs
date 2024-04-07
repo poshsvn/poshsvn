@@ -4,7 +4,6 @@ using System;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using PoshSvn.Tests.TestUtils;
-using SharpSvn;
 
 namespace PoshSvn.Tests
 {
