@@ -103,8 +103,8 @@ namespace Errors2Enum
             {
                 bool same = false;
 
-                using(StreamReader orig = File.OpenText(to))
-                using(StreamReader nw = File.OpenText(to_tmp))
+                using (StreamReader orig = File.OpenText(to))
+                using (StreamReader nw = File.OpenText(to_tmp))
                 {
                     string id_orig = orig.ReadLine();
                     string id_new = nw.ReadLine();
@@ -113,7 +113,7 @@ namespace Errors2Enum
                     {
                         string l1, l2;
 
-                        while(true)
+                        while (true)
                         {
                             l1 = orig.ReadLine();
                             l2 = nw.ReadLine();

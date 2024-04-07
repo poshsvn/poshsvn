@@ -7,7 +7,6 @@ using System.Linq;
 using System.Management.Automation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 using SharpSvn;
 

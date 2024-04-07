@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using PoshSvn.Tests.TestUtils;
