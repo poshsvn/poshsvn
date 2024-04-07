@@ -21,7 +21,7 @@ namespace PoshSvn.CmdLets
         [Alias("f")]
         public SwitchParameter Force { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("keep-local")]
         public SwitchParameter KeepLocal { get; set; }
 
