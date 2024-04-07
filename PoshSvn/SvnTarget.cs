@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.IO;
 using SharpSvn;
 
 namespace PoshSvn
@@ -23,6 +24,17 @@ namespace PoshSvn
             Value = pathOrUrl;
         }
 
+        public SvnTarget(FileSystemInfo fileInfo)
+        {
+            Type = SvnTargetType.LiteralPath;
+            Value = fileInfo.FullName;
+        }
+
+        public static explicit operator SvnTarget(FileSystemInfo fileInfo)
+        {
+            return new SvnTarget(fileInfo);
+        }
+
         private SvnTarget(string value, SvnTargetType type)
         {
             Value = value;
@@ -34,9 +46,9 @@ namespace PoshSvn
             return new SvnTarget(path, SvnTargetType.Path);
         }
 
-        public static SvnTarget FromLiteralPath(string path)
+        public static SvnTarget FromLiteralPath(string literalPath)
         {
-            return new SvnTarget(path, SvnTargetType.LiteralPath);
+            return new SvnTarget(literalPath, SvnTargetType.LiteralPath);
         }
 
         public static SvnTarget FromUrl(string url)
