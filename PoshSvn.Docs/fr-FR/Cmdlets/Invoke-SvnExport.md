@@ -26,9 +26,6 @@ Exports file or directory from repository or working copy as unversioned.
 
 ### Example 1
 
-
-### Example 1
-
 Download serf release of version 1.3.10 into the `serf-1.3.10` directory:
 
 ```powershell
