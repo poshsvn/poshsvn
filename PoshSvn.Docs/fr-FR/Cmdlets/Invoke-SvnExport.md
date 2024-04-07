@@ -40,6 +40,8 @@ A       serf-1.3.10\CHANGES
 ...
 ```
 
+### Example 2
+
 Additionaly, you may export, create ZIP, and compute the hash value for of the downloaded sources:
 
 ```powershell
