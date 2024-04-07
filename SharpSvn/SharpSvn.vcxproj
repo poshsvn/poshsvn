@@ -497,10 +497,14 @@
     <ProjectReference Include="..\Errors2Enum\Errors2Enum.csproj">
       <Project>{8ba9e178-864c-4cda-8d8b-45141b8ee861}</Project>
       <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <ProjectReference Include="..\Po2Resx\Po2Resx.csproj">
       <Project>{d38d2985-65cf-479b-be84-dba1c754aa2f}</Project>
       <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
