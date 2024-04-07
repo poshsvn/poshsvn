@@ -48,7 +48,7 @@
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PackagePath)%(FilesToCopy.Destination)%(RecursiveDir)" />
   </Target>
 
-  <Target Name="ZipPackage" AfterTargets="CopyFiles">
+  <Target Name="ZipPackage" AfterTargets="CopyFiles" Inputs="@(FilesToCopy)" Outputs="$(ZipPackagePath)">
     <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ZipPackagePath)" Overwrite="true" />
   </Target>
 

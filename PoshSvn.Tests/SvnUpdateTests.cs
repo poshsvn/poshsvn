@@ -2,7 +2,6 @@
 
 using System.IO;
 using NUnit.Framework;
-using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
