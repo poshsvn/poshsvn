@@ -5,7 +5,20 @@
     <PowerShell>pwsh.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
   </PropertyGroup>
 
-  <Target Name="BuildDocs" BeforeTargets="PrepareForRun">
+  <ItemGroup>
+    <Languages Include="$(MSBuildProjectDirectory)\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Inputs Include="$(MSBuildProjectDirectory)\**\*.md" />
+    <Outputs Include="$(OutDir)\en-US\PoshSvn.dll-Help.xml" />
+    <Outputs Include="$(OutDir)\fr-FR\PoshSvn.dll-Help.xml" />
+    <Outputs Include="$(OutDir)\en-US\*" />
+    <Outputs Include="$(OutDir)\fr-FR\*" />
+  </ItemGroup>
+
+  <Target Name="BuildDocs" BeforeTargets="PrepareForRun" Inputs="@(Inputs)" Outputs="@(Outputs)">
+    <Message Importance="high" Text="Building help." />
     <Exec Command="$(PowerShell) $(ScriptsPath)\Build-PoshSvnDocs.ps1 -InputDir $(MSBuildProjectDirectory) -OutputDir $(OutDir)" />
   </Target>
 </Project>
