@@ -27,14 +27,37 @@ Exports file or directory from repository or working copy as unversioned.
 ### Example 1
 
 
-```powershell
+### Example 1
 
+Download serf release of version 1.3.10 into the `serf-1.3.10` directory:
+
+```powershell
+svn-export https://svn.apache.org/repos/asf/serf/tags/1.3.10/ serf-1.3.10
+
+A       serf-1.3.10
+A       serf-1.3.10\buckets
+A       serf-1.3.10\test
+A       serf-1.3.10\test\server
+A       serf-1.3.10\test\testcases
+A       serf-1.3.10\CHANGES
+...
+```
+
+Additionaly, you may export, create ZIP, and compute the hash value for of the downloaded sources:
+
+```powershell
+svn-export https://svn.apache.org/repos/asf/serf/tags/1.3.10/ serf-1.3.10
+Compress-Archive -Path .\serf-1.3.10\ -DestinationPath .\serf-1.3.10.zip
+Get-FileHash .\serf-1.3.10.zip -Algorithm SHA1 | Select-Object Hash, Algorithm # We need only Hash and Algoritm
+# Hash                                     Algorithm
+# ----                                     ---------
+# 87B1A5983AEFB11E382335F08AE6F408159D94B3 SHA1
 ```
 
 ## PARAMETERS
 
 ### -Depth
-{{ Fill Depth Description }}
+Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
 
 ```yaml
 Type: SvnDepth
@@ -50,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Destination
-{{ Fill Destination Description }}
+Specifies the destination path of an item.
 
 ```yaml
 Type: String
@@ -59,13 +82,13 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
+Default value: .
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Force
-{{ Fill Force Description }}
+Force operation to run.
 
 ```yaml
 Type: SwitchParameter
@@ -80,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreExternals
-{{ Fill IgnoreExternals Description }}
+Tells Subversion to ignore externals definitions and the external working copies managed by them.
 
 ```yaml
 Type: SwitchParameter
@@ -95,7 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -IgnoreKeywords
-{{ Fill IgnoreKeywords Description }}
+Tells Subversion to ignore keywords.
 
 ```yaml
 Type: SwitchParameter
@@ -110,7 +133,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-{{ Fill Revision Description }}
+Specifies revision to operate.
 
 ```yaml
 Type: PoshSvnRevision
@@ -125,7 +148,7 @@ Accept wildcard characters: False
 ```
 
 ### -Source
-{{ Fill Source Description }}
+Specifies the source path or url of an item.
 
 ```yaml
 Type: SvnTarget
