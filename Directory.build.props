@@ -4,7 +4,7 @@
    <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
    <OutDir>$(OutputPath)</OutDir>
    <IntDir>$(BaseIntermediateOutputPath)</IntDir>
-   <ToolsDir>$(SolutionDir)bin\</ToolsDir>
+   <ToolsDir>$(SolutionDir)bin\tools\</ToolsDir>
    <!--<UseCommonOutputDirectory>True</UseCommonOutputDirectory>-->
  </PropertyGroup>
 </Project>
