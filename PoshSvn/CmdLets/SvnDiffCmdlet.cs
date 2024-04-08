@@ -70,7 +70,7 @@ namespace PoshSvn.CmdLets
                 NoProperties = IgnoreProperties || PatchCompatible,
                 PropertiesOnly = PropertiesOnly,
                 CopiesAsAdds = ShowCopiesAsAdds || PatchCompatible,
-                IgnoreAncestry = NoticeAncestry,
+                IgnoreAncestry = !NoticeAncestry,
                 UseGitFormat = Git,
             };
 
