@@ -66,7 +66,7 @@ namespace PoshSvn.CmdLets
                 RepositoryRoot = e.RepositoryRoot,
                 RepositoryId = e.RepositoryId,
                 Revision = e.Revision,
-                NodeKind = e.NodeKind.ToSharpSvnNodeKind(),
+                NodeKind = e.NodeKind.ToPoshSvnNodeKind(),
                 LastChangedAuthor = e.LastChangeAuthor,
                 LastChangedRevision = e.LastChangeRevision,
             };

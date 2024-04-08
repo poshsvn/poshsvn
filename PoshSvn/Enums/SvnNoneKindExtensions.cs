@@ -6,7 +6,7 @@ namespace PoshSvn
 {
     public static class SvnNoneKindExtensions
     {
-        public static SvnNodeKind ToSharpSvnNodeKind(this SharpSvn.SvnNodeKind nodeKind)
+        public static SvnNodeKind ToPoshSvnNodeKind(this SharpSvn.SvnNodeKind nodeKind)
         {
             switch (nodeKind)
             {
