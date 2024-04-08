@@ -152,7 +152,7 @@ namespace PoshSvn
             {
                 SvnNotifyOutput obj = new SvnNotifyOutput
                 {
-                    Action = (SvnNotifyAction)e.Action,
+                    Action = e.Action.ToPoshSvnNotifyAction(),
                     Path = e.Path
                 };
 

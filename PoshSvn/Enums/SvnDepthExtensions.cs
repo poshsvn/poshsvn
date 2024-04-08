@@ -4,14 +4,6 @@ using System;
 
 namespace PoshSvn
 {
-    public enum SvnDepth
-    {
-        Empty,
-        Files,
-        Immediates,
-        Infinity
-    }
-
     public static class SvnDepthExtensions
     {
         public static SharpSvn.SvnDepth ConvertToSharpSvnDepth(this SvnDepth depth)
