@@ -4,7 +4,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Management.Automation;
-using System.Reflection;
 using NUnit.Framework;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
@@ -17,7 +16,6 @@ namespace PoshSvn.Tests
         [Test]
         public void SimpleTest()
         {
-            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
             using (WcSandbox sb = new WcSandbox())
             {
                 PSObjectAssert.AreEqual(
@@ -111,7 +109,6 @@ namespace PoshSvn.Tests
         [Test]
         public void CreateDirectoryTest()
         {
-            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
             using (WcSandbox sb = new WcSandbox())
             {
                 Collection<PSObject> actual = sb.RunScript(

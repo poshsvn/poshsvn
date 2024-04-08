@@ -4,18 +4,9 @@ using System;
 
 namespace PoshSvn
 {
-    public enum SvnNodeKind
-    {
-        None = 0,
-        File = 1,
-        Directory = 2,
-        Unknown = 3,
-        SymbolicLink = 4
-    }
-
     public static class SvnNoneKindExtensions
     {
-        public static SvnNodeKind ToSharpSvnNodeKind(this SharpSvn.SvnNodeKind nodeKind)
+        public static SvnNodeKind ToPoshSvnNodeKind(this SharpSvn.SvnNodeKind nodeKind)
         {
             switch (nodeKind)
             {

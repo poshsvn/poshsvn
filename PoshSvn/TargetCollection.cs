@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SharpSvn;
 
 namespace PoshSvn
 {
@@ -49,11 +48,11 @@ namespace PoshSvn
         {
             if (target is string path)
             {
-                return SvnPathTarget.FromString(path, true);
+                return SharpSvn.SvnPathTarget.FromString(path, true);
             }
             else if (target is Uri uri)
             {
-                return SvnUriTarget.FromString(uri.ToString(), true);
+                return SharpSvn.SvnUriTarget.FromString(uri.ToString(), true);
             }
             else
             {
