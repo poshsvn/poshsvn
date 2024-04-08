@@ -2,24 +2,20 @@
 
 using System;
 using System.IO;
+using NUnit.Framework;
 
 namespace PoshSvn.Tests.TestUtils
 {
     public class Sandbox : IDisposable
     {
+        public static string SandboxRootPath = Path.Combine(Path.GetTempPath(), "PoshSvnTests");
+
         public string RootPath { get; }
 
         public Sandbox()
         {
-            var rootPath = Path.Combine(Path.GetTempPath(), "PoshSvnTests");
-            if (Directory.Exists(rootPath))
-            {
-                IOUtils.DeleteDir(rootPath);
-            }
-
-            Directory.CreateDirectory(rootPath);
-
-            RootPath = rootPath;
+            RootPath = Path.Combine(SandboxRootPath, TestContext.CurrentContext.Test.ID);
+            Directory.CreateDirectory(RootPath);
         }
 
         public void Dispose()
