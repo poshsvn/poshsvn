@@ -1,11 +1,8 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
-using System.Collections.Concurrent;
 using System.IO;
 using System.Management.Automation;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PoshSvn.CmdLets
 {
@@ -92,61 +89,27 @@ namespace PoshSvn.CmdLets
 
                 foreach (SharpSvn.SvnTarget target in targets.Targets)
                 {
-                    DoDiff((stream) => SvnClient.Diff(target, rangeRevision, args, stream));
+                    using (Stream stream = GetStream())
+                    {
+                        SvnClient.Diff(target, rangeRevision, args, stream);
+                    }
                 }
             }
             else
             {
-                DoDiff((stream) =>
+                using (Stream stream = GetStream())
                 {
                     SharpSvn.SvnTarget oldTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Old));
                     SharpSvn.SvnTarget newTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(New));
 
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
-                });
+                };
             }
         }
 
-        private void DoDiff(Action<Stream> work)
+        protected Stream GetStream()
         {
-            BlockingCollection<string> output = new BlockingCollection<string>(100);
-
-            using (Stream stream = GetStream(output))
-            {
-                Task task = Task.Run(() =>
-                {
-                    try
-                    {
-                        work(stream);
-                    }
-                    finally
-                    {
-                        output.CompleteAdding();
-                    }
-                });
-
-                while (!output.IsCompleted)
-                {
-                    if (output.TryTake(out string line))
-                    {
-                        WriteObject(line);
-                    }
-                }
-
-                try
-                {
-                    task.Wait();
-                }
-                catch (AggregateException ex)
-                {
-                    throw ex.InnerException;
-                }
-            }
-        }
-
-        protected Stream GetStream(BlockingCollection<string> output)
-        {
-            ITextLineStream textStream = new TextLineStream(output);
+            ITextLineStream textStream = new TextLineStream(this);
             ITextStream lineStream = new LineDecoderTextStream(textStream);
 
             return new DecoderStream(lineStream, Encoding.UTF8);
@@ -154,16 +117,16 @@ namespace PoshSvn.CmdLets
 
         private class TextLineStream : ITextLineStream
         {
-            private readonly BlockingCollection<string> output;
+            private readonly SvnDiffCmdlet owner;
 
-            public TextLineStream(BlockingCollection<string> output)
+            public TextLineStream(SvnDiffCmdlet owner)
             {
-                this.output = output;
+                this.owner = owner;
             }
 
             public void WriteLine(string line)
             {
-                output.Add(line);
+                owner.WriteObject(line);
             }
         }
     }
