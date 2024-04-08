@@ -88,7 +88,7 @@ namespace PoshSvn.CmdLets
             }
         }
 
-        private class ByteStream : CatStreamBase
+        private class ByteStream : WritableStreamBase
         {
             private readonly SvnCatCmdlet owner;
 

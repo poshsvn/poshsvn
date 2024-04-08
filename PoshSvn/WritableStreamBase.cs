@@ -5,7 +5,7 @@ using System.IO;
 
 namespace PoshSvn
 {
-    public abstract class CatStreamBase : Stream
+    public abstract class WritableStreamBase : Stream
     {
         public override bool CanRead => false;
 
