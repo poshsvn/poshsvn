@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PoshSvn
 {
-    public class DecoderStream : CatStreamBase
+    public class DecoderStream : WritableStreamBase
     {
         private readonly ITextStream output;
         private readonly Decoder decoder;
