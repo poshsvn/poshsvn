@@ -12,7 +12,7 @@ namespace PoshSvn
         {
             PropertiesModified = source.PropertiesModified;
             ContentModified = source.ContentModified;
-            NodeKind = source.NodeKind.ToSharpSvnNodeKind();
+            NodeKind = source.NodeKind.ToPoshSvnNodeKind();
             CopyFromRevision = source.CopyFromRevision;
             CopyFromPath = source.CopyFromPath;
             Action = source.Action.ToPoshSvnChangeAction();
