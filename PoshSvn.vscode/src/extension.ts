@@ -41,7 +41,7 @@ let terminalOptions: vscode.TerminalOptions = {
     env: {
         "PSModulePath": __dirname
     },
-    shellArgs: `-NoExit -NoLogo -ExecutionPolicy Bypass`,
+    shellArgs: `-NoExit -NoLogo -ExecutionPolicy RemoteSigned`,
     // TODO: fill other parameters
 }
 
