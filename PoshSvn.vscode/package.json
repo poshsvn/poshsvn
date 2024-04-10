@@ -4,7 +4,7 @@
   "description": "Apache Subversion client for PowerShell, integrated to vscode.",
   "version": "0.5.2",
   "engines": {
-    "vscode": "^1.87.0"
+    "vscode": "^1.53.0"
   },
   "homepage": "https://www.poshsvn.com",
   "publisher": "rinrab",
