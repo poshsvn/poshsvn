@@ -9,6 +9,10 @@
         <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
         <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
         <TypeName>PoshSvn.SvnSwitchOutput</TypeName>
+
+        <TypeName>PoshSvn.SvnTreeConflictSummary</TypeName>
+        <TypeName>PoshSvn.SvnTextConflictSummary</TypeName>
+        <TypeName>PoshSvn.SvnPropertyConflictSummary</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -62,6 +66,58 @@
                 <ScriptBlock>$_.Revision</ScriptBlock>
               </ExpressionBinding>
               <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnTreeConflictSummary</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Text conflict discovered in file </Text>
+              <Text>'</Text>
+              <ExpressionBinding>
+                <PropertyName>FileName</PropertyName>
+              </ExpressionBinding>
+              <Text>'.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnTextConflictSummary</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Text conflict discovered in file </Text>
+              <Text>'</Text>
+              <ExpressionBinding>
+                <PropertyName>FileName</PropertyName>
+              </ExpressionBinding>
+              <Text>'.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnTreeConflictSummary</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Tree conflict discovered in file </Text>
+              <Text>'</Text>
+              <ExpressionBinding>
+                <PropertyName>FileName</PropertyName>
+              </ExpressionBinding>
+              <Text>'.</Text>
+              <NewLine />
+              <Text>It was </Text>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  $action = $_.Action;
+                  if ($action -eq [PoshSvn.SvnConflictAction]::Add) { "added" }
+                  elseif ($_.action -eq [PoshSvn.SvnConflictAction]::Edit) { "edited" }
+                  elseif ($_.action -eq [PoshSvn.SvnConflictAction]::Delete) { "deleted" }
+                  elseif ($_.action -eq [PoshSvn.SvnConflictAction]::Replace) { "replaced" }
+                  else { $action }
+                </ScriptBlock>
+              </ExpressionBinding>
+              <Text> by sally in r36.</Text>
             </CustomItem>
           </CustomEntry>
         </CustomEntries>

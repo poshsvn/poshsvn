@@ -85,6 +85,47 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput { Action = SvnNotifyAction.TreeConflict, Path = Path.Combine(sb.TrunkPath, "a.txt") },
                         new SvnNotifyOutput { Action = SvnNotifyAction.RecordMergeInfo, Path = Path.Combine(sb.TrunkPath) },
+                        new SvnTreeConflictSummary { Action = SvnConflictAction.Add, FileName = "a.txt" },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void ManyConflictsTest()
+        {
+            using (var sb = new ProjectStructureSandbox())
+            {
+                sb.RunScript($@"svn-copy '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -m branch");
+                sb.RunScript($@"cd wc-trunk; 'abc' > a.txt; svn-add a.txt; svn-commit -m 'add a.txt'");
+                sb.RunScript($@"cd wc-trunk; 'abc' > b.txt; svn-add b.txt; svn-commit -m 'add b.txt'");
+                sb.RunScript($@"cd wc-trunk; 'abc' > c.txt; svn-add c.txt; svn-commit -m 'add c.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
+                sb.RunScript($@"svn-switch '{sb.ReposUrl}/branches/test' wc-trunk");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > a.txt; svn-add a.txt; svn-commit -m 'add a.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > b.txt; svn-add b.txt; svn-commit -m 'add b.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > c.txt; svn-add c.txt; svn-commit -m 'add c.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > z.txt; svn-add z.txt; svn-commit -m 'add z.txt'");
+                sb.RunScript($@"svn-update wc-trunk");
+
+                var actual = sb.FormatObject(sb.RunScript($@"svn-merge '{sb.ReposUrl}/trunk' wc-trunk -Accept Postpone"), "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new object[]
+                    {
+                        @"",
+                        @"C       wc-trunk\a.txt",
+                        @"C       wc-trunk\b.txt",
+                        @"C       wc-trunk\c.txt",
+                        @"A       wc-trunk\x.txt",
+                        @"A       wc-trunk\y.txt",
+                        @"U       wc-trunk",
+                        @"Text conflict discovered in file 'a.txt'.",
+                        @"Text conflict discovered in file 'b.txt'.",
+                        @"Text conflict discovered in file 'c.txt'.",
+                        @"",
+                        @"",
                     },
                     actual);
             }
@@ -117,6 +158,7 @@ namespace PoshSvn.Tests
                         @"",
                         @"C       wc-trunk\a.txt",
                         @"U       wc-trunk",
+                        @"Text conflict discovered in file 'a.txt'.",
                         @"",
                         @"",
                     },
@@ -144,6 +186,7 @@ namespace PoshSvn.Tests
                         @"",
                         @"U       wc-trunk\a.txt",
                         @"U       wc-trunk",
+                        @"Text conflict discovered in file 'a.txt'.",
                         @"",
                         @"",
                     },
