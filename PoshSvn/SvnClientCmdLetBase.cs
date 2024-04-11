@@ -52,6 +52,13 @@ namespace PoshSvn
 
         private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
         {
+            SvnConflictSummary conflict = CreateConflict(e);
+
+            conflict.FileName = e.Conflict.Name;
+            conflict.Action = e.Conflict.ConflictAction.ToPoshSvnConflictActions();
+
+            WriteObject(conflict);
+
             if (Accept == SvnAccept.Prompt)
             {
                 Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
@@ -93,6 +100,26 @@ namespace PoshSvn
             else
             {
                 e.Choice = Accept.ToSharpSvnAccept();
+            }
+        }
+
+        private static SvnConflictSummary CreateConflict(SharpSvn.SvnConflictEventArgs e)
+        {
+            if (e.ConflictType == SharpSvn.SvnConflictType.Tree)
+            {
+                return new SvnTreeConflictSummary();
+            }
+            else if (e.ConflictType == SharpSvn.SvnConflictType.Content)
+            {
+                return new SvnTextConflictSummary();
+            }
+            else if (e.ConflictType == SharpSvn.SvnConflictType.Property)
+            {
+                return new SvnPropertyConflictSummary();
+            }
+            else
+            {
+                throw new NotImplementedException();
             }
         }
 
