@@ -137,14 +137,6 @@ namespace PoshSvn.Tests
 
                 var actual = sb.FormatObject(sb.RunScript($@"svn-merge '{sb.ReposUrl}/trunk' wc-trunk -Accept Postpone"), "Format-Custom");
 
-                //svn.exe does the following:
-                //---Merging r2 through r4 into '.':
-                //   C a.txt
-                //--- Recording mergeinfo for merge of r2 through r4 into '.':
-                // U   .
-                //Summary of conflicts:
-                //  Tree conflicts: 1
-
                 CollectionAssert.AreEqual(
                     new object[]
                     {
