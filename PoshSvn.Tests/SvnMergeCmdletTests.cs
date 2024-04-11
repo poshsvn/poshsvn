@@ -125,6 +125,32 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void ResolveTextConflictByAcceptParameterFormatTest()
+        {
+            using (var sb = new ProjectStructureSandbox())
+            {
+                sb.RunScript($@"cd wc-trunk; 'abc' > a.txt; svn-add a.txt; svn-commit -m 'add a.txt'");
+                sb.RunScript($@"svn-copy '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -m branch");
+                sb.RunScript($@"svn-switch '{sb.ReposUrl}/branches/test' wc-trunk");
+                sb.RunScript($@"'xyz' > wc-trunk/a.txt");
+                sb.RunScript($@"svn-update wc-trunk");
+
+                var actual = sb.FormatObject(sb.RunScript($@"svn-merge '{sb.ReposUrl}/trunk' wc-trunk -Accept Postpone"), "Format-Custom");
+
+                CollectionAssert.AreEqual(
+                    new object[]
+                    {
+                        @"",
+                        @"C       wc-trunk\a.txt",
+                        @"U       wc-trunk",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void MergeMoveTest()
         {
             using (var sb = new ProjectStructureSandbox())
