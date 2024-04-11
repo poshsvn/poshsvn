@@ -131,8 +131,9 @@ namespace PoshSvn.Tests
             {
                 sb.RunScript($@"cd wc-trunk; 'abc' > a.txt; svn-add a.txt; svn-commit -m 'add a.txt'");
                 sb.RunScript($@"svn-copy '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -m branch");
+                sb.RunScript($@"Set-Content wc-trunk/a.txt xyz; svn-commit wc-trunk -m test");
                 sb.RunScript($@"svn-switch '{sb.ReposUrl}/branches/test' wc-trunk");
-                sb.RunScript($@"'xyz' > wc-trunk/a.txt");
+                sb.RunScript($@"Set-Content wc-trunk/a.txt qq");
                 sb.RunScript($@"svn-update wc-trunk");
 
                 var actual = sb.FormatObject(sb.RunScript($@"svn-merge '{sb.ReposUrl}/trunk' wc-trunk -Accept Postpone"), "Format-Custom");
@@ -141,7 +142,7 @@ namespace PoshSvn.Tests
                     new object[]
                     {
                         @"",
-                        @"C       wc-trunk\a.txt",
+                        @"U       wc-trunk\a.txt",
                         @"U       wc-trunk",
                         @"",
                         @"",
