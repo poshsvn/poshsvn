@@ -52,7 +52,7 @@ namespace PoshSvn.CmdLets
                 DryRun = DryRun,
                 RecordOnly = RecordOnly,
                 IgnoreAncestry = IgnoreAncestry,
-                // CheckForMixedRevisions = !AllowMixedRevisions, TODO:
+                CheckForMixedRevisions = !AllowMixedRevisions,
             };
 
             SvnClient.Merge(path, source, GetRange(), args);
