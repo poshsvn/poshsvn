@@ -22,6 +22,24 @@ namespace PoshSvn.CmdLets
         [PSDefaultValue(Value = null)]
         public PoshSvnRevisionRange[] Revision { get; set; } = null;
 
+        [Parameter()]
+        public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
+
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
+
+        [Parameter()]
+        public SwitchParameter DryRun { get; set; }
+
+        [Parameter()]
+        public SwitchParameter RecordOnly { get; set; }
+
+        [Parameter()]
+        public SwitchParameter IgnoreAncestry { get; set; }
+
+        [Parameter()]
+        public SwitchParameter AllowMixedRevisions { get; set; }
+
         protected override void Execute()
         {
             SharpSvn.SvnTarget source = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Source));
@@ -29,6 +47,12 @@ namespace PoshSvn.CmdLets
 
             SharpSvn.SvnMergeArgs args = new SharpSvn.SvnMergeArgs
             {
+                Depth = Depth.ConvertToSharpSvnDepth(),
+                Force = Force,
+                DryRun = DryRun,
+                RecordOnly = RecordOnly,
+                IgnoreAncestry = IgnoreAncestry,
+                // CheckForMixedRevisions = !AllowMixedRevisions, TODO:
             };
 
             SvnClient.Merge(path, source, GetRange(), args);
