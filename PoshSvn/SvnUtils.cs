@@ -72,47 +72,6 @@ namespace PoshSvn
             }
         }
 
-        public static string GetActionStringShort(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.UpdateAdd:
-                case SvnNotifyAction.Add:
-                case SvnNotifyAction.CommitAdded:
-                case SvnNotifyAction.CommitAddCopy:
-                    return "A";
-
-                case SvnNotifyAction.UpdateDelete:
-                case SvnNotifyAction.Delete:
-                case SvnNotifyAction.CommitDeleted:
-                    return "D";
-
-                case SvnNotifyAction.CommitModified:
-                    return "M";
-
-                case SvnNotifyAction.UpdateUpdate:
-                    return "U";
-
-                case SvnNotifyAction.CommitReplaced:
-                case SvnNotifyAction.CommitReplacedWithCopy:
-                case SvnNotifyAction.UpdateReplace:
-                    return "R";
-
-                case SvnNotifyAction.LockLocked:
-                    return "+L";
-
-                case SvnNotifyAction.LockUnlocked:
-                    return "-L";
-
-                // case SvnNotifyAction.Conflict: return "C";
-                // case SvnNotifyAction.UpdateMerge: return "G";
-                // case SvnNotifyAction.UpdateExist: return "E";
-
-                default:
-                    return action.ToString();
-            }
-        }
-
         public static string FormatProgress(long progress)
         {
             if (progress == -1)
