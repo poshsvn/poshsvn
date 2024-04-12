@@ -20,6 +20,9 @@ namespace PoshSvn
         [Parameter(DontShow = true)]
         public SecureString Password { get; set; }
 
+        [Parameter(DontShow = true)]
+        public SvnAccept Accept { get; set; }
+
         protected SharpSvn.SvnClient SvnClient;
 
         public SvnClientCmdletBase()
@@ -34,6 +37,7 @@ namespace PoshSvn
             SvnClient.Notify += NotifyEventHandler;
             SvnClient.Progress += ProgressEventHandler;
             SvnClient.Committed += CommittedEventHandler;
+            SvnClient.Conflict += Conflict_Handler;
 
             if (Username != null || Password != null)
             {
@@ -43,6 +47,80 @@ namespace PoshSvn
             SvnClient.Authentication.UserNameHandlers += Authentication_UserNameHandlers;
             SvnClient.Authentication.UserNamePasswordHandlers += Authentication_UserNamePasswordHandlers;
             SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
+            SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
+        }
+
+        private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
+        {
+            SvnConflictSummary conflict = CreateConflict(e);
+
+            conflict.FileName = e.Conflict.Name;
+            conflict.Action = e.Conflict.ConflictAction.ToPoshSvnConflictActions();
+
+            WriteObject(conflict);
+
+            if (Accept == SvnAccept.Prompt)
+            {
+                Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+                {
+                    new ChoiceDescription("&Postpone", "(Postpone) Skip this conflict and leave it unresolved."),
+                    new ChoiceDescription("Accept &Base", "(Accept Base) Accept incoming version of entire."),
+                    new ChoiceDescription("&Merge", "(Merge) Accept the result file of the automatic merging."),
+                    new ChoiceDescription("Accept &Theirs", "(Accept Theirs) Accept incoming version of entire."),
+                    new ChoiceDescription("Accept &Mine", "(Accept Mine) Accept local version of entire."),
+                };
+
+                int selectedChoice = Host.UI.PromptForChoice(null, string.Format("Merge conflict discovered in file '{0}'", e.Path), choices, 0);
+
+                if (selectedChoice == 0)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Postpone;
+                }
+                else if (selectedChoice == 1)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Base;
+                }
+                else if (selectedChoice == 2)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Working;
+                }
+                else if (selectedChoice == 3)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Theirs;
+                }
+                else if (selectedChoice == 4)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Mine;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                e.Choice = Accept.ToSharpSvnAccept();
+            }
+        }
+
+        private static SvnConflictSummary CreateConflict(SharpSvn.SvnConflictEventArgs e)
+        {
+            if (e.ConflictType == SharpSvn.SvnConflictType.Tree)
+            {
+                return new SvnTreeConflictSummary();
+            }
+            else if (e.ConflictType == SharpSvn.SvnConflictType.Content)
+            {
+                return new SvnTextConflictSummary();
+            }
+            else if (e.ConflictType == SharpSvn.SvnConflictType.Property)
+            {
+                return new SvnPropertyConflictSummary();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private void Authentication_SslServerTrustHandlers(object sender, SharpSvn.Security.SvnSslServerTrustEventArgs e)
