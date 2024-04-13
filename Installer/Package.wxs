@@ -30,7 +30,10 @@
       <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
     </DirectoryRef>
 
-    <Feature Id="PowerShellModule">
+    <Feature Id="PowerShellModule"
+             Title="!(loc.PoshSvnFeatureTitle)"
+             Description="!(loc.PoshSvnFeatureDescription)">
+
       <ComponentGroupRef Id="PowerShellModuleFiles" />
 
       <Component Id="SystemPSModulePath"
