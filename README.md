@@ -44,7 +44,7 @@ the guest user with username `guest` and empty password.
 
 ```powershell
 svn checkout https://svn.rinrab.com/rinrab/poshsvn/trunk poshsvn
-# or if magicaly installed poshsvn without installing it...
+# or if you magicaly installed poshsvn without installing it...
 svn-checkout https://svn.rinrab.com/rinrab/poshsvn/trunk poshsvn
 
 cd .\poshsvn
