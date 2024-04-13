@@ -7,6 +7,9 @@
     <FinalOutDir>$(OutDir)</FinalOutDir>
     <OutDir>$(IntDir)</OutDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SuppressSpecificWarnings>1076</SuppressSpecificWarnings>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.Heat" Version="5.0.0" />
     <PackageReference Include="WixToolset.UI.wixext" Version="5.0.0" />
