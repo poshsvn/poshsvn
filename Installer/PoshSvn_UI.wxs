@@ -22,12 +22,12 @@ Todo:
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?foreach WIXUIARCH in X86;X64;A64 ?>
     <Fragment>
-        <UI Id="WixUI_Advanced_$(WIXUIARCH)">
+        <UI Id="PoshSvn_UI_$(WIXUIARCH)">
             <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath_$(WIXUIARCH)" Order="1" Condition="NOT WIXUI_DONTVALIDATEPATH" />
             <Publish Dialog="InstallDirDlg" Control="Next" Event="DoAction" Value="WixUIValidatePath_$(WIXUIARCH)" Order="2" Condition="NOT WIXUI_DONTVALIDATEPATH" />
         </UI>
 
-        <UIRef Id="WixUI_Advanced" />
+        <UIRef Id="PoshSvn_UI" />
     </Fragment>
     <?endforeach?>
 
@@ -55,7 +55,7 @@ Todo:
             <Custom Action="WixSetPerMachineFolder" After="WixSetPerUserFolder" Condition="ACTION=&quot;INSTALL&quot; AND APPLICATIONFOLDER=&quot;&quot; AND (ALLUSERS=1 OR (ALLUSERS=2 AND Privileged))" />
         </InstallUISequence>
 
-        <UI Id="WixUI_Advanced">
+        <UI Id="PoshSvn_UI">
             <TextStyle Id="WixUI_Font_Normal" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Normal_Size)" />
             <TextStyle Id="WixUI_Font_Bigger" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Bigger_Size)" />
             <TextStyle Id="WixUI_Font_Title" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Title_Size)" Bold="yes" />
@@ -78,11 +78,11 @@ Todo:
             <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999" />
             <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="2" Condition="WIXUI_INSTALLDIR_VALID&lt;&gt;&quot;1&quot;" />
 
-            <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="InstallScopeDlg" Order="1" Condition="!(wix.WixUISupportPerMachine) AND !(wix.WixUISupportPerUser)" />
-            <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="FeaturesDlg" Order="2" Condition="NOT !(wix.WixUISupportPerMachine)" />
-            <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="InstallDirDlg" Order="3" Condition="!(wix.WixUISupportPerMachine) AND NOT !(wix.WixUISupportPerUser)" />
+            <Publish Dialog="PoshSvnWelcomeDlg" Control="Advanced" Event="NewDialog" Value="InstallScopeDlg" Order="1" Condition="!(wix.WixUISupportPerMachine) AND !(wix.WixUISupportPerUser)" />
+            <Publish Dialog="PoshSvnWelcomeDlg" Control="Advanced" Event="NewDialog" Value="FeaturesDlg" Order="2" Condition="NOT !(wix.WixUISupportPerMachine)" />
+            <Publish Dialog="PoshSvnWelcomeDlg" Control="Advanced" Event="NewDialog" Value="InstallDirDlg" Order="3" Condition="!(wix.WixUISupportPerMachine) AND NOT !(wix.WixUISupportPerUser)" />
 
-            <Publish Dialog="InstallScopeDlg" Control="Back" Event="NewDialog" Value="AdvancedWelcomeEulaDlg" />
+            <Publish Dialog="InstallScopeDlg" Control="Back" Event="NewDialog" Value="PoshSvnWelcomeDlg" />
             <!-- override default WixAppFolder of WixPerMachineFolder as standard user won't be shown the radio group to set WixAppFolder -->
             <Publish Dialog="InstallScopeDlg" Control="Next" Property="WixAppFolder" Value="WixPerUserFolder" Order="1" Condition="!(wix.WixUISupportPerUser) AND NOT Privileged" />
             <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="{}" Order="2" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
@@ -93,7 +93,7 @@ Todo:
             <Publish Dialog="InstallScopeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg" Order="7" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
 
             <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="InstallScopeDlg" Condition="!(wix.WixUISupportPerUser)" />
-            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="AdvancedWelcomeEulaDlg" Condition="NOT !(wix.WixUISupportPerUser)" />
+            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="PoshSvnWelcomeDlg" Condition="NOT !(wix.WixUISupportPerUser)" />
             <Publish Dialog="InstallDirDlg" Control="Next" Event="SetTargetPath" Value="[WIXUI_INSTALLDIR]" Order="1" />
             <Publish Dialog="InstallDirDlg" Control="Next" Event="SpawnDialog" Value="InvalidDirDlg" Order="3" Condition="NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID&lt;&gt;&quot;1&quot;" />
             <Publish Dialog="InstallDirDlg" Control="Next" Event="NewDialog" Value="FeaturesDlg" Order="4" Condition="WIXUI_DONTVALIDATEPATH OR WIXUI_INSTALLDIR_VALID=&quot;1&quot;" />
@@ -118,7 +118,7 @@ Todo:
         </UI>
 
         <InstallUISequence>
-            <Show Dialog="override WelcomeDlg" Before="AdvancedWelcomeEulaDlg" Condition="Installed AND PATCH" />
+            <Show Dialog="override WelcomeDlg" Before="PoshSvnWelcomeDlg" Condition="Installed AND PATCH" />
         </InstallUISequence>
 
         <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />

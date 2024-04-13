@@ -12,7 +12,7 @@
     <Property Id="ApplicationFolderName" Value="PoshSvn" />
     <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
 
-    <UIRef Id="WixUI_Advanced" />
+    <UIRef Id="PoshSvn_UI" />
 
     <MajorUpgrade AllowDowngrades="yes" />
 
