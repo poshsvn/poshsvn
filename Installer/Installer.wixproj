@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputName>PoshSvn</OutputName>
     <FinalOutDir>$(OutDir)</FinalOutDir>
-    <OutDir>$(IntDir)\</OutDir>
+    <OutDir>$(IntDir)</OutDir>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.UI.wixext" Version="5.0.0" />
