@@ -29,6 +29,30 @@
 
     <Feature Id="PowerShellModule">
       <ComponentGroupRef Id="PowerShellModuleFiles" />
+
+      <Component Id="SystemPSModulePath"
+                 Guid="{284B5941-7A10-475E-B321-356D25A80045}"
+                 Condition="ALLUSERS=1">
+
+        <Environment Name="PSModulePath"
+                     Value="[ModulesFolder]"
+                     Part="last"
+                     Permanent="no"
+                     Action="set"
+                     System="yes"/>
+      </Component>
+
+      <Component Id="UserPSModulePath"
+                 Guid="{10D679D7-0047-4AED-8BE4-C09A42D37106}"
+                 Condition="NOT ALLUSERS=1">
+
+        <Environment Name="PSModulePath"
+                     Value="[ModulesFolder]"
+                     Part="last"
+                     Permanent="no"
+                     Action="set"
+                     System="no"/>
+      </Component>
     </Feature>
 
   </Package>
