@@ -1,6 +1,16 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.0">
   <PropertyGroup>
-    <DefineConstants>PackageDir=$(OutDir)</DefineConstants>
+    <DefineConstants>
+      PackageDir=$(OutDir);
+      $(DefineConstants);
+      bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
+      dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
+      exclamationIco=$(MSBuildProjectDirectory)\Bitmaps\exclamic.ico;
+      infoIco=$(MSBuildProjectDirectory)\Bitmaps\info.ico;
+      licenseRtf=$(MSBuildProjectDirectory)\license.rtf;
+      newIco=$(MSBuildProjectDirectory)\Bitmaps\new.ico;
+      upIco=$(MSBuildProjectDirectory)\Bitmaps\up.ico;
+    </DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <OutputName>PoshSvn</OutputName>
@@ -12,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.Heat" Version="5.0.0" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <InstallerFiles Include="$(OutDir)\**\*.msi" />
@@ -35,4 +44,15 @@
   <Target Name="MoveInstaller" BeforeTargets="Build">
     <Copy SourceFiles="@(InstallerFiles)" DestinationFolder="$(FinalOutDir)" />
   </Target>
+  <ItemGroup>
+    <Compile Remove="Common.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bitmaps\bannrbmp.bmp" />
+    <Content Include="Bitmaps\dlgbmp.bmp" />
+    <Content Include="Bitmaps\exclamic.ico" />
+    <Content Include="Bitmaps\info.ico" />
+    <Content Include="Bitmaps\New.ico" />
+    <Content Include="Bitmaps\Up.ico" />
+  </ItemGroup>
 </Project>
