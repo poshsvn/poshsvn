@@ -9,7 +9,10 @@
     <WixVariable Id="WixUILicenseRtf"
                  Value="LICENSE.rtf" />
 
-    <ui:WixUI Id="WixUI_Minimal" />
+    <Property Id="ApplicationFolderName" Value="PoshSvn" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+
+    <ui:WixUI Id="WixUI_Advanced" />
 
     <MajorUpgrade AllowDowngrades="yes" />
 
