@@ -1,0 +1,27 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <Package Name="PoshSvn"
+           Manufacturer="Rinrab"
+           Version="1.0.0.0"
+           UpgradeCode="2223213a-2458-4706-b606-54a455bcae05">
+
+    <WixVariable Id="WixUILicenseRtf"
+                 Value="LICENSE.rtf" />
+
+    <ui:WixUI Id="WixUI_Minimal" />
+
+    <MajorUpgrade AllowDowngrades="yes" />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="PoshSvn" />
+    </StandardDirectory>
+
+    <Feature Id="PowerShellModule">
+    </Feature>
+
+  </Package>
+  
+</Wix>
