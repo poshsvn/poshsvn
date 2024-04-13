@@ -19,6 +19,14 @@
       <Directory Id="INSTALLFOLDER" Name="PoshSvn" />
     </StandardDirectory>
 
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="ModulesFolder" Name="Modules" />
+    </DirectoryRef>
+
+    <DirectoryRef Id="ModulesFolder">
+      <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
+    </DirectoryRef>
+
     <Feature Id="PowerShellModule">
       <ComponentGroupRef Id="PowerShellModuleFiles" />
     </Feature>
