@@ -17,7 +17,7 @@
     <FinalOutDir>$(OutDir)</FinalOutDir>
     <OutDir>$(IntDir)</OutDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup>
     <SuppressSpecificWarnings>1076</SuppressSpecificWarnings>
   </PropertyGroup>
   <ItemGroup>
