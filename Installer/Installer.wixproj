@@ -22,7 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <HarvestDirectory Include="..\bin\poshsvn">
-      <ComponentGroupName>PowerShellModuleFiles</ComponentGroupName>
+      <ComponentGroupName>PoshSvnModuleFiles</ComponentGroupName>
       <DirectoryRefId>PoshSvnModuleFolder</DirectoryRefId>
       <SuppressRootDirectory>true</SuppressRootDirectory>
       <SuppressRegistry>true</SuppressRegistry>
