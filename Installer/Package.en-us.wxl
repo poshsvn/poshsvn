@@ -1,2 +1,4 @@
 ﻿<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="en-US">
+  <String Id="PoshSvnFeatureDescription" Value="The PoshSvn module for PowerShell." />
+  <String Id="PoshSvnFeatureTitle" Value="PoshSvn PowerShell Module" />
 </WixLocalization>
