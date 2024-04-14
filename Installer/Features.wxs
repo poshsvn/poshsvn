@@ -50,6 +50,7 @@
       <Feature Id="SubversionCLI"
                Title="!(loc.SubversionCLIFeatureTitle)"
                Description="!(loc.SubversionCLIFeatureDescription)">
+        <ComponentGroupRef Id="SubversionFiles" />
       </Feature>
     </Feature>
   </Fragment>

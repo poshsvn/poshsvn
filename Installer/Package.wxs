@@ -29,7 +29,7 @@
       <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
     </DirectoryRef>
 
-    <DirectoryRef Id="ModulesFolder">
+    <DirectoryRef Id="INSTALLFOLDER">
       <Directory Id="SubversionDirectory" Name="Subversion" />
     </DirectoryRef>
 
