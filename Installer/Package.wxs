@@ -31,36 +31,48 @@
       <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
     </DirectoryRef>
 
-    <Feature Id="PoshSvnModule"
+    <Feature Id="PoshSvn"
              Title="!(loc.PoshSvnFeatureTitle)"
              Description="!(loc.PoshSvnFeatureDescription)"
-             ConfigurableDirectory="INSTALLFOLDER">
+             ConfigurableDirectory="INSTALLFOLDER"
+             Display="expand"
+             AllowAbsent="no"
+             Level="1"
+             AllowAdvertise="no">
 
-      <ComponentGroupRef Id="PoshSvnModuleFiles" />
+      <Feature Id="PoshSvnModule"
+               Title="!(loc.PoshSvnModuleFeatureTitle)"
+               Description="!(loc.PoshSvnModuleFeatureDescription)"
+               ConfigurableDirectory="INSTALLFOLDER"
+               Display="expand"
+               Level="1">
 
-      <Component Id="SystemPSModulePath"
-                 Guid="{284B5941-7A10-475E-B321-356D25A80045}"
-                 Condition="ALLUSERS=1">
+        <ComponentGroupRef Id="PoshSvnModuleFiles" />
 
-        <Environment Name="PSModulePath"
-                     Value="[ModulesFolder]"
-                     Part="last"
-                     Permanent="no"
-                     Action="set"
-                     System="yes"/>
-      </Component>
+        <Component Id="SystemPSModulePath"
+                   Guid="{284B5941-7A10-475E-B321-356D25A80045}"
+                   Condition="ALLUSERS=1">
 
-      <Component Id="UserPSModulePath"
-                 Guid="{10D679D7-0047-4AED-8BE4-C09A42D37106}"
-                 Condition="NOT ALLUSERS=1">
+          <Environment Name="PSModulePath"
+                       Value="[ModulesFolder]"
+                       Part="last"
+                       Permanent="no"
+                       Action="set"
+                       System="yes"/>
+        </Component>
 
-        <Environment Name="PSModulePath"
-                     Value="[ModulesFolder]"
-                     Part="last"
-                     Permanent="no"
-                     Action="set"
-                     System="no"/>
-      </Component>
+        <Component Id="UserPSModulePath"
+                   Guid="{10D679D7-0047-4AED-8BE4-C09A42D37106}"
+                   Condition="NOT ALLUSERS=1">
+
+          <Environment Name="PSModulePath"
+                       Value="[ModulesFolder]"
+                       Part="last"
+                       Permanent="no"
+                       Action="set"
+                       System="no"/>
+        </Component>
+      </Feature>
     </Feature>
 
   </Package>
