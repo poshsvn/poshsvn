@@ -21,7 +21,7 @@
                        Part="last"
                        Permanent="no"
                        Action="set"
-                       System="yes"/>
+                       System="yes" />
         </Component>
 
         <Component Id="UserPSModulePath"
@@ -33,7 +33,7 @@
                        Part="last"
                        Permanent="no"
                        Action="set"
-                       System="no"/>
+                       System="no" />
         </Component>
       </Feature>
 
