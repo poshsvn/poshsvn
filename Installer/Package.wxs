@@ -22,10 +22,6 @@
     </StandardDirectory>
 
     <DirectoryRef Id="INSTALLFOLDER">
-      <Directory Id="ModulesFolder" Name="Modules" />
-    </DirectoryRef>
-
-    <DirectoryRef Id="ModulesFolder">
       <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
     </DirectoryRef>
 
