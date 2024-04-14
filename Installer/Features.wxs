@@ -51,6 +51,30 @@
                Title="!(loc.SubversionCLIFeatureTitle)"
                Description="!(loc.SubversionCLIFeatureDescription)">
         <ComponentGroupRef Id="SubversionFiles" />
+
+        <Component Id="SystemPath"
+                   Guid="{1EF81F9C-2259-4805-9DCA-EB7161F54DCA}"
+                   Condition="ALLUSERS=1">
+
+          <Environment Name="PATH"
+                       Value="[SubversionDirectory]"
+                       Part="last"
+                       Permanent="no"
+                       Action="set"
+                       System="yes" />
+        </Component>
+
+        <Component Id="UserPath"
+                   Guid="{CB324084-717B-4558-B39F-5A588CDCA878}"
+                   Condition="NOT ALLUSERS=1">
+
+          <Environment Name="PATH"
+                       Value="[SubversionDirectory]"
+                       Part="last"
+                       Permanent="no"
+                       Action="set"
+                       System="no" />
+        </Component>
       </Feature>
     </Feature>
   </Fragment>
