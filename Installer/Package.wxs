@@ -9,11 +9,6 @@
     <WixVariable Id="WixUILicenseRtf"
                  Value="LICENSE.rtf" />
 
-    <Property Id="ApplicationFolderName" Value="PoshSvn" />
-    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
-
-    <UIRef Id="PoshSvn_UI" />
-
     <MajorUpgrade AllowDowngrades="yes" />
 
     <MediaTemplate EmbedCab="yes" />
@@ -21,6 +16,12 @@
     <StandardDirectory Id="ProgramFiles6432Folder">
       <Directory Id="INSTALLFOLDER" Name="PoshSvn" />
     </StandardDirectory>
+
+    <Property Id="ApplicationFolderName" Value="PoshSvn" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+
+    <UIRef Id="PoshSvn_UI" />
 
     <DirectoryRef Id="INSTALLFOLDER">
       <Directory Id="ModulesFolder" Name="Modules" />
