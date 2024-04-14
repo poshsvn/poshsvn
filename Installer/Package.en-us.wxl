@@ -1,9 +1,9 @@
 ﻿<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="en-US">
-  <String Id="PoshSvnFeatureDescription" Value="" />
   <String Id="PoshSvnFeatureTitle" Value="PoshSvn" />
+  <String Id="PoshSvnFeatureDescription" Value="" />
 
-  <String Id="PoshSvnModuleFeatureDescription" Value="The PoshSvn module for PowerShell." />
   <String Id="PoshSvnModuleFeatureTitle" Value="PoshSvn PowerShell Module" />
+  <String Id="PoshSvnModuleFeatureDescription" Value="The PoshSvn module for PowerShell." />
 
 
   <String Id="AdvancedWelcomeEulaDlg_Title" Overridable="yes" Value="[ProductName] Setup" />
