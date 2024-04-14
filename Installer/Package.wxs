@@ -31,14 +31,16 @@
       <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
     </DirectoryRef>
 
+    <DirectoryRef Id="ModulesFolder">
+      <Directory Id="SubversionDirectory" Name="Subversion" />
+    </DirectoryRef>
+
     <Feature Id="PoshSvn"
              Title="!(loc.PoshSvnFeatureTitle)"
              Description="!(loc.PoshSvnFeatureDescription)"
              ConfigurableDirectory="INSTALLFOLDER"
              Display="expand"
-             AllowAbsent="no"
-             Level="1"
-             AllowAdvertise="no">
+             Level="1">
 
       <Feature Id="PoshSvnModule"
                Title="!(loc.PoshSvnModuleFeatureTitle)"
@@ -72,6 +74,22 @@
                        Action="set"
                        System="no"/>
         </Component>
+      </Feature>
+
+      <Feature Id="PoshSvnOfflineDocs"
+               Title="!(loc.PoshSvnOfflineDocsFeatureTitle)"
+               Description="!(loc.PoshSvnOfflineDocsFeatureDescription)">
+      </Feature>
+
+      <Feature Id="PoshSvnVSCode"
+               Title="!(loc.PoshSvnVSCodeFeatureTitle)"
+               Description="!(loc.PoshSvnVSCodeFeatureDescription)">
+      </Feature>
+
+      <Feature Id="SubversionCLI"
+               Title="!(loc.SubversionCLIFeatureTitle)"
+               Description="!(loc.SubversionCLIFeatureDescription)"
+               Display="expand">
       </Feature>
     </Feature>
 
