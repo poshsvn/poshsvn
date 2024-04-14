@@ -33,7 +33,8 @@
 
     <Feature Id="PoshSvnModule"
              Title="!(loc.PoshSvnFeatureTitle)"
-             Description="!(loc.PoshSvnFeatureDescription)">
+             Description="!(loc.PoshSvnFeatureDescription)"
+             ConfigurableDirectory="INSTALLFOLDER">
 
       <ComponentGroupRef Id="PoshSvnModuleFiles" />
 
