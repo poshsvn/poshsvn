@@ -19,7 +19,6 @@
 
     <Property Id="ApplicationFolderName" Value="PoshSvn" />
     <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
-    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 
     <UIRef Id="PoshSvn_UI" />
 
