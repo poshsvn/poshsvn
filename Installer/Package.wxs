@@ -39,15 +39,11 @@
              Title="!(loc.PoshSvnFeatureTitle)"
              Description="!(loc.PoshSvnFeatureDescription)"
              ConfigurableDirectory="INSTALLFOLDER"
-             Display="expand"
-             Level="1">
+             Display="expand">
 
       <Feature Id="PoshSvnModule"
                Title="!(loc.PoshSvnModuleFeatureTitle)"
-               Description="!(loc.PoshSvnModuleFeatureDescription)"
-               ConfigurableDirectory="INSTALLFOLDER"
-               Display="expand"
-               Level="1">
+               Description="!(loc.PoshSvnModuleFeatureDescription)">
 
         <ComponentGroupRef Id="PoshSvnModuleFiles" />
 
@@ -88,8 +84,7 @@
 
       <Feature Id="SubversionCLI"
                Title="!(loc.SubversionCLIFeatureTitle)"
-               Description="!(loc.SubversionCLIFeatureDescription)"
-               Display="expand">
+               Description="!(loc.SubversionCLIFeatureDescription)">
       </Feature>
     </Feature>
 
