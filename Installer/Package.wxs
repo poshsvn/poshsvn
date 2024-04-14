@@ -35,59 +35,6 @@
       <Directory Id="SubversionDirectory" Name="Subversion" />
     </DirectoryRef>
 
-    <Feature Id="PoshSvn"
-             Title="!(loc.PoshSvnFeatureTitle)"
-             Description="!(loc.PoshSvnFeatureDescription)"
-             ConfigurableDirectory="INSTALLFOLDER"
-             Display="expand">
-
-      <Feature Id="PoshSvnModule"
-               Title="!(loc.PoshSvnModuleFeatureTitle)"
-               Description="!(loc.PoshSvnModuleFeatureDescription)">
-
-        <ComponentGroupRef Id="PoshSvnModuleFiles" />
-
-        <Component Id="SystemPSModulePath"
-                   Guid="{284B5941-7A10-475E-B321-356D25A80045}"
-                   Condition="ALLUSERS=1">
-
-          <Environment Name="PSModulePath"
-                       Value="[ModulesFolder]"
-                       Part="last"
-                       Permanent="no"
-                       Action="set"
-                       System="yes"/>
-        </Component>
-
-        <Component Id="UserPSModulePath"
-                   Guid="{10D679D7-0047-4AED-8BE4-C09A42D37106}"
-                   Condition="NOT ALLUSERS=1">
-
-          <Environment Name="PSModulePath"
-                       Value="[ModulesFolder]"
-                       Part="last"
-                       Permanent="no"
-                       Action="set"
-                       System="no"/>
-        </Component>
-      </Feature>
-
-      <Feature Id="PoshSvnOfflineDocs"
-               Title="!(loc.PoshSvnOfflineDocsFeatureTitle)"
-               Description="!(loc.PoshSvnOfflineDocsFeatureDescription)">
-      </Feature>
-
-      <Feature Id="PoshSvnVSCode"
-               Title="!(loc.PoshSvnVSCodeFeatureTitle)"
-               Description="!(loc.PoshSvnVSCodeFeatureDescription)">
-      </Feature>
-
-      <Feature Id="SubversionCLI"
-               Title="!(loc.SubversionCLIFeatureTitle)"
-               Description="!(loc.SubversionCLIFeatureDescription)">
-      </Feature>
-    </Feature>
-
   </Package>
 
 </Wix>
