@@ -4,7 +4,8 @@
   <Package Name="PoshSvn"
            Manufacturer="Rinrab"
            Version="1.0.0.0"
-           UpgradeCode="2223213a-2458-4706-b606-54a455bcae05">
+           UpgradeCode="2223213a-2458-4706-b606-54a455bcae05"
+           Scope="perUserOrMachine">
 
     <WixVariable Id="WixUILicenseRtf"
                  Value="LICENSE.rtf" />
