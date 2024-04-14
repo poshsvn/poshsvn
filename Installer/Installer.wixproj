@@ -1,9 +1,9 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.0">
   <PropertyGroup>
-    <SubversionBinariesPath>$(PackagesPath)tools\subversion</SubversionBinariesPath>
+    <SubversionPath>$(PackagesPath)tools\subversion</SubversionPath>
     <DefineConstants>
       PackageDir=$(OutDir);
-      SubversionBinariesPath=$(SubversionBinariesPath);
+      SubversionPath=$(SubversionPath);
       $(DefineConstants);
       bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
       dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
