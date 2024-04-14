@@ -10,7 +10,6 @@
 
     <MediaTemplate EmbedCab="yes" />
 
-    <Property Id="ApplicationFolderName" Value="PoshSvn" />
     <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
 
     <WixVariable Id="WixUILicenseRtf"

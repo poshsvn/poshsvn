@@ -31,8 +31,8 @@
 
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="{}" Order="2" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="1" Order="3" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
-      <Publish Dialog="InstallScopeDlg" Control="Next" Property="INSTALLFOLDER" Value="[LocalAppDataFolder][ApplicationFolderName]" Order="4" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
-      <Publish Dialog="InstallScopeDlg" Control="Next" Property="INSTALLFOLDER" Value="[ProgramFiles6432Folder][ApplicationFolderName]" Order="5" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="INSTALLFOLDER" Value="[LocalAppDataFolder]PoshSvn" Order="4" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="INSTALLFOLDER" Value="[ProgramFiles6432Folder]PoshSvn" Order="5" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
       <Publish Dialog="InstallScopeDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg" />
 
       <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="1" Condition="Installed" />
