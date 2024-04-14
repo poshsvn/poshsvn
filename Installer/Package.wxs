@@ -33,6 +33,8 @@
       <Directory Id="SubversionDirectory" Name="Subversion" />
     </DirectoryRef>
 
+    <FeatureRef Id="PoshSvn" />
+
   </Package>
 
 </Wix>
