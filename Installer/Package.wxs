@@ -6,21 +6,21 @@
            UpgradeCode="2223213a-2458-4706-b606-54a455bcae05"
            Scope="perUserOrMachine">
 
-    <WixVariable Id="WixUILicenseRtf"
-                 Value="LICENSE.rtf" />
-
     <MajorUpgrade AllowDowngrades="yes" />
 
     <MediaTemplate EmbedCab="yes" />
 
-    <StandardDirectory Id="ProgramFiles6432Folder">
-      <Directory Id="INSTALLFOLDER" Name="PoshSvn" />
-    </StandardDirectory>
-
     <Property Id="ApplicationFolderName" Value="PoshSvn" />
     <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
 
+    <WixVariable Id="WixUILicenseRtf"
+                 Value="LICENSE.rtf" />
+
     <UIRef Id="PoshSvn_UI" />
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="PoshSvn" />
+    </StandardDirectory>
 
     <DirectoryRef Id="INSTALLFOLDER">
       <Directory Id="ModulesFolder" Name="Modules" />
