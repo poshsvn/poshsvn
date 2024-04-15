@@ -11,15 +11,15 @@
     <SvnDistZip>$(OutDir)svn-dist.zip</SvnDistZip>
   </PropertyGroup>
 
-  <Target Name="CopySvnDist" BeforeTargets="AfterBuild">
+  <Target Name="CopySvnDist" AfterTargets="FinalizeBuildStatus">
     <Copy SourceFiles="@(SubversionFiles)" DestinationFolder="$(SvnDistDir)" />
   </Target>
 
-  <Target Name="CopyCRT" BeforeTargets="AfterBuild">
+  <Target Name="CopyCRT" AfterTargets="FinalizeBuildStatus">
     <Copy SourceFiles="$(OutDir)vcruntime140.dll;$(OutDir)vcruntime140_1.dll" DestinationFolder="$(SvnDistDir)" />
   </Target>
 
-  <Target Name="CreateZip" BeforeTargets="CopySvnDist;CopyCRT">
+  <Target Name="CreateZip" AfterTargets="CopySvnDist;CopyCRT">
     <ZipDirectory SourceDirectory="$(SvnDistDir)" DestinationFile="$(SvnDistZip)" Overwrite="true" />
   </Target>
 </Project>
