@@ -1,8 +1,8 @@
 <Project>
-  <Import Project="..\PoshSvn.Static\PoshSvn.Static.targets" />
-
   <ItemGroup>
-    <PackageItems Include="@(StaticFiles)" />
+    <FilesToCopy Include="$(OutDir)*.ps1xml" />
+    <FilesToCopy Include="$(OutDir)PoshSvn.psd1" />
+
     <PackageItems Include="$(OutDir)\en-US\**\*" Destination="en-US" />
     <PackageItems Include="$(OutDir)\fr-FR\**\*" Destination="fr-FR" />
 

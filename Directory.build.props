@@ -15,4 +15,6 @@
     <VcpkgInstalledDir>$(VcpkgManifestRoot)\vcpkg_installed\$(PlatformTarget)\</VcpkgInstalledDir>
     <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(PlatformTarget)$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
+
+  <Import Project="Version.props" />
 </Project>

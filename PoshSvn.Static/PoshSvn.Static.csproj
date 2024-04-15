@@ -1,13 +1,18 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 
-  <Import Project="PoshSvn.Static.targets" />
-
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="@(StaticFiles)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(MSBuildProjectDirectory)\*.ps1xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
+  <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\PoshSvn.psd1" DestinationFiles="$(OutDir)PoshSvn.psd1" />
+    <ConfigureFile FileName="$(OutDir)PoshSvn.psd1" MatchExpression="@Version@" ReplacementText="$(Version)" />
+    <ConfigureFile FileName="$(OutDir)PoshSvn.psd1" MatchExpression="@ReleaseNotes@"
+                   ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
+  </Target>
 
 </Project>
