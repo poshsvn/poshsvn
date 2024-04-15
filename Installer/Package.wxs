@@ -22,11 +22,15 @@
     </StandardDirectory>
 
     <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="PowerShellModulesFolder" Name="PowerShellModules" />
+    </DirectoryRef>
+
+    <DirectoryRef Id="PowerShellModulesFolder">
       <Directory Id="PoshSvnModuleFolder" Name="PoshSvn" />
     </DirectoryRef>
 
     <DirectoryRef Id="INSTALLFOLDER">
-      <Directory Id="SubversionDirectory" Name="Subversion" />
+      <Directory Id="BinDirectory" Name="bin" />
     </DirectoryRef>
 
     <FeatureRef Id="PoshSvn" />

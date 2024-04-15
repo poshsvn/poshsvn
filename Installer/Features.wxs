@@ -17,7 +17,7 @@
                    Condition="ALLUSERS=1">
 
           <Environment Name="PSModulePath"
-                       Value="[INSTALLFOLDER]"
+                       Value="[PowerShellModulesFolder]"
                        Part="last"
                        Permanent="no"
                        Action="set"
@@ -29,7 +29,7 @@
                    Condition="NOT ALLUSERS=1">
 
           <Environment Name="PSModulePath"
-                       Value="[INSTALLFOLDER]"
+                       Value="[PowerShellModulesFolder]"
                        Part="last"
                        Permanent="no"
                        Action="set"
@@ -57,7 +57,7 @@
                    Condition="ALLUSERS=1">
 
           <Environment Name="PATH"
-                       Value="[SubversionDirectory]"
+                       Value="[BinDirectory]"
                        Part="last"
                        Permanent="no"
                        Action="set"
@@ -69,7 +69,7 @@
                    Condition="NOT ALLUSERS=1">
 
           <Environment Name="PATH"
-                       Value="[SubversionDirectory]"
+                       Value="[BinDirectory]"
                        Part="last"
                        Permanent="no"
                        Action="set"
