@@ -486,7 +486,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Directory.Build.props" />
-    <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.targets" />
   </ItemGroup>
   <ItemGroup>
