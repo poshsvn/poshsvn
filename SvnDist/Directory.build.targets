@@ -20,6 +20,6 @@
   </Target>
 
   <Target Name="CreateZip" BeforeTargets="CopySvnDist;CopyCRT">
-    <ZipDirectory SourceDirectory="$(SvnDistDir)" DestinationFile="$(SvnDistZip)" />
+    <ZipDirectory SourceDirectory="$(SvnDistDir)" DestinationFile="$(SvnDistZip)" Overwrite="true" />
   </Target>
 </Project>
