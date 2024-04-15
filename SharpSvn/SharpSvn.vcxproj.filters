@@ -1118,5 +1118,6 @@
   <ItemGroup>
     <None Include="SharpSvn.snk" />
     <None Include="SharpSvn.targets" />
+    <None Include="Directory.Build.props" />
   </ItemGroup>
 </Project>
