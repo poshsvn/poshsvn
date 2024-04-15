@@ -1,0 +1,25 @@
+<Project>
+  <Import Project="..\Directory.build.targets" />
+  <Import Project="..\vcpkg.targets" />
+
+  <ItemGroup>
+    <SubversionFiles Include="$(PackagesPath)tools\subversion\*" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <SvnDistDir>$(OutDir)svn-dist</SvnDistDir>
+    <SvnDistZip>$(OutDir)svn-dist.zip</SvnDistZip>
+  </PropertyGroup>
+
+  <Target Name="CopySvnDist" BeforeTargets="AfterBuild">
+    <Copy SourceFiles="@(SubversionFiles)" DestinationFolder="$(SvnDistDir)" />
+  </Target>
+
+  <Target Name="CopyCRT" BeforeTargets="AfterBuild">
+    <Copy SourceFiles="$(OutDir)vcruntime140.dll;$(OutDir)vcruntime140_1.dll" DestinationFolder="$(SvnDistDir)" />
+  </Target>
+
+  <Target Name="CreateZip" BeforeTargets="CopySvnDist;CopyCRT">
+    <ZipDirectory SourceDirectory="$(SvnDistDir)" DestinationFile="$(SvnDistZip)" />
+  </Target>
+</Project>
