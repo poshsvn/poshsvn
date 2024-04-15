@@ -21,7 +21,7 @@
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(OutDir)" />
   </Target>
 
-  <Import Project="$(VCInstallDir)\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets" />
+  <Import Project="..\vcpkg.targets" />
 
   <Target Name="GenerateResourceFiles" AfterTargets="VcpkgInstallManifestDependencies">
     <Message Text="Building resource files..." Importance="high" />
