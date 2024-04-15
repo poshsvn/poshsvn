@@ -1,0 +1,4 @@
+<Project>
+  <Import Project="..\Directory.build.props" />
+  <Import Project="..\vcpkg.props"/>
+</Project>
