@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Po2Resx", "Po2Resx\Po2Resx.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SvnDist", "SvnDist\SvnDist.vcxproj", "{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuild", "MSBuild\MSBuild.csproj", "{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -117,6 +119,14 @@ Global
 		{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}.Release|x64.Build.0 = Release|x64
 		{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}.Release|x86.ActiveCfg = Release|Win32
 		{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}.Release|x86.Build.0 = Release|Win32
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x64.Build.0 = Debug|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x86.Build.0 = Debug|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x64.ActiveCfg = Release|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x64.Build.0 = Release|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x86.ActiveCfg = Release|Any CPU
+		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
