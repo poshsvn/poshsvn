@@ -10,4 +10,9 @@
     <Content Include="@(StaticFiles)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\PoshSvn.psd1" DestinationFiles="$(OutDir)PoshSvn.psd1" />
+    <ConfigureFile FileName="$(OutDir)PoshSvn.psd1" MatchExpression="@Version@" ReplacementText="$(Version)" />
+  </Target>
+
 </Project>
