@@ -180,7 +180,6 @@
     <ClInclude Include="SvnBase.h" />
     <ClInclude Include="SvnLibraryAttribute.h" />
     <ClInclude Include="SvnMultiCommandClient.h" />
-    <ClInclude Include="SvnStatusCacheBlocker.h" />
     <ClInclude Include="SvnAll.h" />
     <ClInclude Include="SvnAuthentication.h" />
     <ClInclude Include="SvnChangeList.h" />
@@ -366,7 +365,6 @@
     </ClCompile>
     <ClCompile Include="SvnBase.cpp" />
     <ClCompile Include="SvnMultiCommandClient.cpp" />
-    <ClCompile Include="SvnStatusCacheBlocker.cpp" />
     <ClCompile Include="SvnStreamWrapper.cpp" />
     <ClCompile Include="SvnAuthentication.Cache.cpp" />
     <ClCompile Include="SvnAuthentication.cpp" />
