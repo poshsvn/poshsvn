@@ -8,11 +8,16 @@
     <Content Include="$(MSBuildProjectDirectory)\*.ps1xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MSBuild\MSBuild.csproj" />
+  </ItemGroup>
+
+  <UsingTask TaskName="ConfigureFile" AssemblyFile="$(ToolsDir)MSBuild.dll" />
+
   <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild">
     <Copy SourceFiles="$(MSBuildProjectDirectory)\PoshSvn.psd1" DestinationFiles="$(OutDir)PoshSvn.psd1" />
     <ConfigureFile FileName="$(OutDir)PoshSvn.psd1" MatchExpression="@Version@" ReplacementText="$(Version)" />
-    <ConfigureFile FileName="$(OutDir)PoshSvn.psd1" MatchExpression="@ReleaseNotes@"
-                   ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
+    <ConfigureFile FileName="$(OutDir)PoshSvn.psd1" MatchExpression="@ReleaseNotes@" ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
   </Target>
 
 </Project>
