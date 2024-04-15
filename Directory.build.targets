@@ -1,6 +1,6 @@
 <Project>
 
-  <UsingTask TaskName="ConfigureFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)Microsoft.Build.Tasks.v4.0.dll">
+  <UsingTask TaskName="ConfigureFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
     <ParameterGroup>
       <FileName ParameterType="System.String" Required="true" />
       <MatchExpression ParameterType="System.String" Required="true" />
