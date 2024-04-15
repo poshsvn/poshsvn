@@ -1,6 +1,0 @@
-<Project>
-  <ItemGroup>
-    <StaticFiles Include="..\PoshSvn.Static\*.ps1xml" />
-    <StaticFiles Include="..\PoshSvn.Static\PoshSvn.psd1" />
-  </ItemGroup>
-</Project>
