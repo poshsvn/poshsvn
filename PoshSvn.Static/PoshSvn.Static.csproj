@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 
-  <Import Project="PoshSvn.Static.targets" />
-
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
   </PropertyGroup>
