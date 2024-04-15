@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 
-  <Import Project="..\PoshSvn.Static\PoshSvn.Static.targets" />
-
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
     <PackagePath>$(SolutionDir)\bin\poshsvn\</PackagePath>
@@ -14,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <FilesToCopy Include="@(StaticFiles)" />
+    <FilesToCopy Include="$(OutDir)*.ps1xml" />
+    <FilesToCopy Include="$(OutDir)PoshSvn.psd1" />
+
     <FilesToCopy Include="$(OutDir)\en-US\**\*" Destination="en-US" />
     <FilesToCopy Include="$(OutDir)\fr-FR\**\*" Destination="fr-FR" />
 
