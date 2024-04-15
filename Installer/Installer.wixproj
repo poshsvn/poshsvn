@@ -43,7 +43,7 @@
   <ItemGroup>
     <HarvestDirectory Include="$(SubversionPath)">
       <ComponentGroupName>SubversionFiles</ComponentGroupName>
-      <DirectoryRefId>SubversionDirectory</DirectoryRefId>
+      <DirectoryRefId>BinDirectory</DirectoryRefId>
       <SuppressRootDirectory>true</SuppressRootDirectory>
       <SuppressRegistry>true</SuppressRegistry>
       <PreprocessorVariable>var.SubversionPath</PreprocessorVariable>
