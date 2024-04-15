@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="$(OutDir)*.ps1xml" />
+    <Content Include="$(MSBuildProjectDirectory)\*.ps1xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild">
