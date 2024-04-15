@@ -129,12 +129,12 @@ bool SvnStatusCacheBlocker::SendCommand(Byte cmd, String^ value)
         memcpy(&buffer[1], pValue, sizeof(wchar_t) * value->Length);
 
         DWORD dwWritten = 0;
-        if (!WriteFile(hPipe, buffer, buflen, &dwWritten, NULL))
+        if (!WriteFile(hPipe, buffer, (DWORD)buflen, &dwWritten, NULL))
             return false;
 
         memset(buffer, 0, buflen);
 
-        if (!WriteFile(hPipe, buffer, buflen, &dwWritten, NULL))
+        if (!WriteFile(hPipe, buffer, (DWORD)buflen, &dwWritten, NULL))
             return false;
 
         return true;

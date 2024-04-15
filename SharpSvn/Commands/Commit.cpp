@@ -194,7 +194,7 @@ bool SvnClient::Commit(ICollection<String^>^ paths, SvnCommitArgs^ args, [Out] S
         SVN_HANDLE(svn_stream_close(f));
 
         // Overwrite the previous log message with the (possibly) adjusted one from the hook script
-        args->LogMessage = SvnBase::Utf8_PtrToString(msg->data, msg->len);
+        args->LogMessage = SvnBase::Utf8_PtrToString(msg->data, (int)msg->len);
     }
 
     svn_error_t *r = svn_client_commit6(

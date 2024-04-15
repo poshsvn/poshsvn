@@ -51,7 +51,7 @@ bool SvnRemoteSession::List(String^ relPath, SvnRemoteListArgs^ args, EventHandl
             const svn_dirent_t *dirent;
 
             apr_hash_this(hi, (const void**)&pKey, &keyLen, (void**)&dirent);
-            SvnRemoteListEventArgs^ ea = gcnew SvnRemoteListEventArgs(Utf8_PtrToString(pKey, keyLen), dirent, gotRev, SessionUri, relPath);
+            SvnRemoteListEventArgs^ ea = gcnew SvnRemoteListEventArgs(Utf8_PtrToString(pKey, (int)keyLen), dirent, gotRev, SessionUri, relPath);
             try
             {
                 args->OnList(ea);
