@@ -39,7 +39,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SvnDist", "SvnDist\SvnDist.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuild", "MSBuild\MSBuild.csproj", "{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoshSvn.vscode", "PoshSvn.vscode\PoshSvn.vscode.csproj", "{6B308516-D9CF-472A-AF97-03809AB6CC43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.VSCode", "PoshSvn.vscode\PoshSvn.VSCode.csproj", "{6B308516-D9CF-472A-AF97-03809AB6CC43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
