@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TsCompiler Include="*\*.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TsCompilerInputs Include="@(TsCompiler)" />
+    <TsCompilerOutputs Include="out\*.js" />
+  </ItemGroup>
+
+  <Target Name="NpmInstall" AfterTargets="Restore" Inputs="package.json" Outputs="node_modules\.package-lock.json">
+    <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall" Inputs="@(TsCompilerInputs)" Outputs="out\%(TsCompilerInputs.Filename).js">
+    <Exec Command="tsc" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="CopyPoshSvnPackage">
+    <Copy SourceFiles="$(OutDir)" />
+  </Target>
+
+  <Target Name="TsClean" AfterTargets="Clean">
+    <RemoveDir Directories="out;node_modules" />
+  </Target>
+
+  <ItemGroup>
+    <None Remove="node_modules\**\*" />
+    <None Remove="out\**\*" />
+  </ItemGroup>
+</Project>
