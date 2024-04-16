@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <TsCompilerInputs Include="@(TsCompiler)" />
+    <TsCompilerInputs Include="package.json" />
+    <TsCompilerInputs Include="tsconfig.json" />
     <TsCompilerOutputs Include="out\*.js" />
   </ItemGroup>
 
