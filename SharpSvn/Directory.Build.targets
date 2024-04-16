@@ -1,4 +1,6 @@
 <Project>
+  <Import Project="..\Directory.build.targets" />
+
   <ItemGroup>
     <FilesToCopy Include="$(PackagesPath)bin\libsvn_diff-1.dll" />
     <FilesToCopy Include="$(PackagesPath)bin\libsvn_fs_fs-1.dll" />
