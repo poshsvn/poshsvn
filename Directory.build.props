@@ -1,10 +1,11 @@
 <Project>
  <PropertyGroup>
    <BaseIntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-   <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
+   <OutDirBase>$(SolutionDir)\bin\</OutDirBase>
+   <OutputPath>$(OutDirBase)$(Configuration)\</OutputPath>
    <OutDir>$(OutputPath)</OutDir>
    <IntDir>$(BaseIntermediateOutputPath)</IntDir>
-   <ToolsDir>$(SolutionDir)bin\tools\</ToolsDir>
+   <ToolsDir>$(OutDirBase)tools\</ToolsDir>
    <!--<UseCommonOutputDirectory>True</UseCommonOutputDirectory>-->
   </PropertyGroup>
 
