@@ -484,7 +484,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Directory.Build.props" />
-    <None Include="SharpSvn.targets" />
+    <None Include="Directory.Build.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Errors2Enum\Errors2Enum.csproj">
@@ -556,5 +556,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Import Project="SharpSvn.targets" />
 </Project>

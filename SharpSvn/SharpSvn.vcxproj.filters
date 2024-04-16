@@ -1110,7 +1110,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SharpSvn.targets" />
+    <None Include="Directory.Build.targets" />
     <None Include="Directory.Build.props" />
   </ItemGroup>
 </Project>
