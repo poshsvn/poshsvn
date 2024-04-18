@@ -19,7 +19,7 @@
   </Target>
 
   <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall" Inputs="@(TsCompilerInputs)" Outputs="out\%(TsCompilerInputs.Filename).js">
-    <Exec Command="tsc" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    <Exec Command="npx tsc" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
   <Target Name="CopyPoshSvnPackage">
