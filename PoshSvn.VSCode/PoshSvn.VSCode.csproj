@@ -28,13 +28,6 @@
     <Exec Command="npx tsc --outDir $(VSCodeOutDir)\extension" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
-  <ItemGroup>
-    <PackageItems Include="$(PackagePath)**\*.*" />
-  </ItemGroup>
-  <Target Name="CopyPoshSvnPackage" BeforeTargets="Build">
-    <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(VSCodeOutDir)\extension\poshsvn\%(RecursiveDir)" />
-  </Target>
-
   <ItemDefinitionGroup>
     <VSCodeExtensionItems>
       <Destination>extension</Destination>
@@ -48,14 +41,16 @@
     <VSCodeExtensionItems Include="icon.svg" />
     <VSCodeExtensionItems Destination="" Include="extension.vsixmanifest" />
     <VSCodeExtensionItems Destination="" Include="[Content_Types].xml" />
+    <VSCodeExtensionItems Destination="extension\poshsvn" Include="$(PackagePath)\**\*.*" />
   </ItemGroup>
   <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)"
           Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
+    <Message Importance="high" Text="@(VSCodeExtensionItems)" />
     <Copy SourceFiles="@(VSCodeExtensionItems)"
-          DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
+          DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
   </Target>
 
-  <Target Name="PackageExtension" DependsOnTargets="CopyAssets;CopyPoshSvnPackage;TsCompiler" BeforeTargets="AfterBuild">
+  <Target Name="PackageExtension" DependsOnTargets="CopyAssets;TsCompiler" BeforeTargets="AfterBuild">
     <ZipDirectory SourceDirectory="$(VSCodeOutDir)" DestinationFile="$(VSCodePackagePath)" Overwrite="true" />
   </Target>
 
