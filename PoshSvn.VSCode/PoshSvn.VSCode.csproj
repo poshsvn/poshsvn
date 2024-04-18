@@ -30,6 +30,19 @@
     <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(VSCodeOutDir)\poshsvn\%(RecursiveDir)" />
   </Target>
 
+  <ItemGroup>
+    <VSCodeExtensionItems Include="README.md" />
+    <VSCodeExtensionItems Include="..\LICENSE" />
+    <VSCodeExtensionItems Include="package.json" />
+    <VSCodeExtensionItems Include="icon.png" />
+    <VSCodeExtensionItems Include="icon.svg" />
+    <VSCodeExtensionItems Include="extension.vsixmanifest" />
+    <VSCodeExtensionItems Include="[Content_Types].xml" />
+  </ItemGroup>
+  <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)" Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
+    <Copy SourceFiles="@(VSCodeExtensionItems)" DestinationFolder="$(VSCodeOutDir)" />
+  </Target>
+
   <Target Name="TsClean" AfterTargets="Clean">
     <RemoveDir Directories="$(VSCodeOutDir);node_modules" />
   </Target>
