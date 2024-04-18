@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
-    <VSCodeOutDir>$(MSBuildProjectDirectory)\out</VSCodeOutDir>
+    <VSCodeOutDir>$(OutDir)PoshSvn.VSCode</VSCodeOutDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +20,7 @@
   </Target>
 
   <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
-    <Exec Command="npx tsc" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    <Exec Command="npx tsc --outDir $(VSCodeOutDir)" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
   <ItemGroup>
