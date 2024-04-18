@@ -17,5 +17,10 @@
     <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(PlatformTarget)$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackagePath>$(OutDirBase)poshsvn\</PackagePath>
+    <ZipPackagePath>$(OutDirBase)poshsvn.zip</ZipPackagePath>
+  </PropertyGroup>
+
   <Import Project="Version.props" />
 </Project>
