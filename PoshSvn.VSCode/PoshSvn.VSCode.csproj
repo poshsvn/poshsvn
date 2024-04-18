@@ -22,8 +22,11 @@
     <Exec Command="npx tsc" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
-  <Target Name="CopyPoshSvnPackage">
-    <Copy SourceFiles="$(OutDir)" />
+  <ItemGroup>
+    <PackageItems Include="$(PackagePath)**\*.*" />
+  </ItemGroup>
+  <Target Name="CopyPoshSvnPackage" BeforeTargets="Build">
+    <Copy SourceFiles="@(PackageItems)" DestinationFolder="out\poshsvn\%(RecursiveDir)" />
   </Target>
 
   <Target Name="TsClean" AfterTargets="Clean">
@@ -33,5 +36,9 @@
   <ItemGroup>
     <None Remove="node_modules\**\*" />
     <None Remove="out\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PoshSvn.Package\PoshSvn.Package.csproj" />
   </ItemGroup>
 </Project>
