@@ -14,7 +14,7 @@ dotnet_sort_system_directives_first = true
 [SharpSvn/**]
 end_of_line = lf
 
-[*.{xml,ps1xml,html,csproj,vcxproj,props,targets,json}]
+[*.{xml,ps1xml,html,csproj,vcxproj,props,targets,json,tasks}]
 indent_size=2
 indent_style=space
 
