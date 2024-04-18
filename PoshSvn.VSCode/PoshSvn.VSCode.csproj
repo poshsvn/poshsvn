@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
+    <VSCodeOutDir>$(MSBuildProjectDirectory)\out</VSCodeOutDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,14 +12,14 @@
     <TsCompilerInputs Include="@(TsCompiler)" />
     <TsCompilerInputs Include="package.json" />
     <TsCompilerInputs Include="tsconfig.json" />
-    <TsCompilerOutputs Include="out\*.js" />
+    <TsCompilerOutputs Include="$(VSCodeOutDir)\*.js" />
   </ItemGroup>
 
   <Target Name="NpmInstall" AfterTargets="Restore" Inputs="package.json" Outputs="node_modules\.package-lock.json">
     <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
-  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall" Inputs="@(TsCompilerInputs)" Outputs="out\%(TsCompilerInputs.Filename).js">
+  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
     <Exec Command="npx tsc" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
@@ -26,16 +27,16 @@
     <PackageItems Include="$(PackagePath)**\*.*" />
   </ItemGroup>
   <Target Name="CopyPoshSvnPackage" BeforeTargets="Build">
-    <Copy SourceFiles="@(PackageItems)" DestinationFolder="out\poshsvn\%(RecursiveDir)" />
+    <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(VSCodeOutDir)\poshsvn\%(RecursiveDir)" />
   </Target>
 
   <Target Name="TsClean" AfterTargets="Clean">
-    <RemoveDir Directories="out;node_modules" />
+    <RemoveDir Directories="$(VSCodeOutDir);node_modules" />
   </Target>
 
   <ItemGroup>
     <None Remove="node_modules\**\*" />
-    <None Remove="out\**\*" />
+    <None Remove="$(VSCodeOutDir)\**\*" />
   </ItemGroup>
 
   <ItemGroup>
