@@ -39,7 +39,7 @@ jobs:
         run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
 
       - name: Build
-        run: MSBuild.exe /target:build ${{ env.MSBuildCommonParameters }}
+        run: MSBuild.exe /target:build /restore ${{ env.MSBuildCommonParameters }}
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
