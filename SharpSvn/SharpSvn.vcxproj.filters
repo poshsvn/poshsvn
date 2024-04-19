@@ -140,9 +140,6 @@
     <ClInclude Include="SvnLibraryAttribute.h">
       <Filter>Common\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SvnStatusCacheBlocker.h">
-      <Filter>Common\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="SvnAll.h">
       <Filter>Svn\Headers</Filter>
     </ClInclude>
@@ -711,9 +708,6 @@
     <ClCompile Include="SvnBase.cpp">
       <Filter>Common\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="SvnStatusCacheBlocker.cpp">
-      <Filter>Common\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="SvnStreamWrapper.cpp">
       <Filter>Common\Sources</Filter>
     </ClCompile>
@@ -1116,7 +1110,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SharpSvn.targets" />
-    <None Include="Directory.Build.props" />
+    <None Include="Directory.Build.targets" />
   </ItemGroup>
 </Project>

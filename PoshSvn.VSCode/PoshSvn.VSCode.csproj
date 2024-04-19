@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <VSCodeOutDir>$(OutDir)PoshSvn.VSCode</VSCodeOutDir>
+    <VSCodePackagePath>$(OutDir)PoshSvn.VSCode.vsix</VSCodePackagePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TsCompiler Include="*.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TsCompilerInputs Include="@(TsCompiler)" />
+    <TsCompilerInputs Include="package.json" />
+    <TsCompilerInputs Include="tsconfig.json" />
+    <TsCompilerOutputs Include="$(VSCodeOutDir)\*.js" />
+  </ItemGroup>
+
+  <Target Name="CreateOutDir" AfterTargets="BeforeBuild">
+    <MakeDir Directories="$(VSCodeOutDir)" />
+  </Target>
+
+  <Target Name="NpmInstall" AfterTargets="Restore" Inputs="package.json" Outputs="node_modules\.package-lock.json">
+    <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\extension\%(TsCompilerInputs.Filename).js">
+    <Exec Command="npx tsc --outDir $(VSCodeOutDir)\extension" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <ItemDefinitionGroup>
+    <VSCodeExtensionItems>
+      <Destination>extension</Destination>
+    </VSCodeExtensionItems>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <VSCodeExtensionItems Include="README.md" />
+    <VSCodeExtensionItems Include="..\LICENSE" />
+    <VSCodeExtensionItems Include="package.json" />
+    <VSCodeExtensionItems Include="icon.png" />
+    <VSCodeExtensionItems Include="icon.svg" />
+    <VSCodeExtensionItems Destination="" Include="extension.vsixmanifest" />
+    <VSCodeExtensionItems Destination="" Include="[Content_Types].xml" />
+    <VSCodeExtensionItems Destination="extension\poshsvn" Include="$(PackagePath)\**\*.*" />
+  </ItemGroup>
+  <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)"
+          Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
+    <Message Importance="high" Text="@(VSCodeExtensionItems)" />
+    <Copy SourceFiles="@(VSCodeExtensionItems)"
+          DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
+  </Target>
+
+  <Target Name="PackageExtension" DependsOnTargets="CopyAssets;TsCompiler" BeforeTargets="AfterBuild">
+    <ZipDirectory SourceDirectory="$(VSCodeOutDir)" DestinationFile="$(VSCodePackagePath)" Overwrite="true" />
+  </Target>
+
+  <Target Name="TsClean" AfterTargets="Clean">
+    <RemoveDir Directories="$(VSCodeOutDir);node_modules" />
+  </Target>
+
+  <ItemGroup>
+    <None Remove="node_modules\**\*" />
+    <None Remove="$(VSCodeOutDir)\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PoshSvn.Package\PoshSvn.Package.csproj" />
+  </ItemGroup>
+</Project>

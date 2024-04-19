@@ -1,4 +1,6 @@
 <Project>
+  <Import Project="..\Directory.build.targets" />
+
   <ItemGroup>
     <FilesToCopy Include="$(PackagesPath)bin\libsvn_diff-1.dll" />
     <FilesToCopy Include="$(PackagesPath)bin\libsvn_fs_fs-1.dll" />
@@ -16,19 +18,19 @@
     <FilesToCopy Include="$(PackagesPath)bin\libexpat.dll" />
     <FilesToCopy Include="$(PackagesPath)bin\sqlite3.dll" />
     <FilesToCopy Include="$(PackagesPath)bin\zlib1.dll" />
+    <FilesToCopy Include="$(PackagesPath)bin\libcrypto-3-x64.dll" />
+    <FilesToCopy Include="$(PackagesPath)bin\libssl-3-x64.dll" />
   </ItemGroup>
   <Target Name="CopySvnLibraries" BeforeTargets="AfterBuild">
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(OutDir)" />
   </Target>
 
-  <Import Project="..\vcpkg.targets" />
-
-  <Target Name="GenerateResourceFiles" AfterTargets="VcpkgInstallManifestDependencies">
+  <Target Name="GenerateResourceFiles" BeforeTargets="ClCompile">
     <Message Text="Building resource files..." Importance="high" />
     <Exec Command="$(ToolsDir)\Po2Resx.exe SvnText -to $(ProjectDir)SvnText $(SolutionDir)svn-po\*.po" />
   </Target>
 
-  <Target Name="GenerateErrorEnums" AfterTargets="VcpkgInstallManifestDependencies">
+  <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile">
     <Message Text="Building error enum..." Importance="high" />
     <Exec Command="$(ToolsDir)Errors2Enum.exe &quot;$(VCInstallDir).&quot; &quot;$(WindowsSdkDir).&quot; &quot;$(UniversalCRT_IncludePath)&quot; &quot;$(PackagesPath)\include\apr_errno.h&quot; &quot;$(PackagesPath)\include\serf.h&quot; &quot;$(ProjectDir)\SvnWindowsError.h&quot;" />
   </Target>

@@ -15,14 +15,24 @@ jobs:
   build-poshvn:
     runs-on: windows-latest
   
+    env:
+      VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: Export GitHub Actions cache environment variables
+        uses: actions/github-script@v6
+        with:
+          script: |
+              core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+              core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
 
       - name: Build
-        run: MSBuild.exe .\PoshSvn.sln -restore -property:Configuration=Release
+        run: MSBuild.exe /restore /property:Configuration=Release /property:Platform=x64
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
@@ -56,30 +66,3 @@ jobs:
 
       - name: Test
         run: vstest.console.exe ${{ steps.download-build-artifact.outputs.download-path }}\PoshSvn.Tests.dll
-    
-  build-vscode-extension:
-    needs: build-poshvn
-
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Download package artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: PoshSvn
-        path: .\bin\poshsvn
-
-    - name: Install vsce
-      run: npm install -g @vscode/vsce
-
-    - name: Package
-      run: vsce package --out ..\poshsvn.vscode.vsix
-      working-directory: .\PoshSvn.vscode
-
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: PoshSvn.vscode
-        path: .\poshsvn.vscode.vsix

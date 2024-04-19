@@ -6,4 +6,6 @@
     <VcpkgAutoLink>true</VcpkgAutoLink>
     <VcpkgApplocalDeps>true</VcpkgApplocalDeps>
   </PropertyGroup>
+
+  <Import Project="$(VCInstallDir)\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets" />
 </Project>

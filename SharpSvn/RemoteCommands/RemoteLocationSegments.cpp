@@ -72,7 +72,7 @@ bool SvnRemoteSession::LocationSegments(String^ relPath, SvnRemoteLocationSegmen
     SVN_HANDLE(svn_ra_get_session_url(_session, &session_root, pool.Handle));
     SVN_HANDLE(svn_ra_get_repos_root2(_session, &repos_root, pool.Handle));
 
-    args->_nOffset = strlen(session_root) - strlen(repos_root);
+    args->_nOffset = (int)strlen(session_root) - (int)strlen(repos_root);
 
     if (!_reposRoot)
         _reposRoot = Utf8_PtrToUri(repos_root, SvnNodeKind::Directory);

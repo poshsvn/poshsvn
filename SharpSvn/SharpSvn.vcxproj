@@ -88,6 +88,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgAutoLink>false</VcpkgAutoLink>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -101,6 +104,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
     </PreBuildEvent>
@@ -122,6 +126,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -137,6 +142,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -156,6 +162,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -180,7 +187,6 @@
     <ClInclude Include="SvnBase.h" />
     <ClInclude Include="SvnLibraryAttribute.h" />
     <ClInclude Include="SvnMultiCommandClient.h" />
-    <ClInclude Include="SvnStatusCacheBlocker.h" />
     <ClInclude Include="SvnAll.h" />
     <ClInclude Include="SvnAuthentication.h" />
     <ClInclude Include="SvnChangeList.h" />
@@ -366,7 +372,6 @@
     </ClCompile>
     <ClCompile Include="SvnBase.cpp" />
     <ClCompile Include="SvnMultiCommandClient.cpp" />
-    <ClCompile Include="SvnStatusCacheBlocker.cpp" />
     <ClCompile Include="SvnStreamWrapper.cpp" />
     <ClCompile Include="SvnAuthentication.Cache.cpp" />
     <ClCompile Include="SvnAuthentication.cpp" />
@@ -485,8 +490,7 @@
     <ClCompile Include="WorkingCopyCommands\WorkingCopyRestore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Directory.Build.props" />
-    <None Include="SharpSvn.targets" />
+    <None Include="Directory.Build.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Errors2Enum\Errors2Enum.csproj">
@@ -500,6 +504,9 @@
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference Include="..\vcpkg\vcpkg.vcxproj">
+      <Project>{0a2698fd-ff14-499a-a817-09ea18808552}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -558,5 +565,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Import Project="SharpSvn.targets" />
 </Project>
