@@ -32,7 +32,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Build
-        run: MSBuild.exe .\PoshSvn.sln /restore /property:Configuration=Release /properties:Platform=x64
+        run: MSBuild.exe .\PoshSvn.sln /restore /property:Configuration=Release /property:Platform=x64
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
