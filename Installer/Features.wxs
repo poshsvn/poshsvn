@@ -40,6 +40,7 @@
       <Feature Id="PoshSvnOfflineDocs"
                Title="!(loc.PoshSvnOfflineDocsFeatureTitle)"
                Description="!(loc.PoshSvnOfflineDocsFeatureDescription)">
+        <!--TODO:-->
       </Feature>
 
       <Feature Id="SubversionCLI"
