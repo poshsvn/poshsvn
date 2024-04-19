@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ToolPresets.props = ToolPresets.props
 		vcpkg-configuration.json = vcpkg-configuration.json
 		vcpkg.json = vcpkg.json
-		vcpkg.props = vcpkg.props
-		vcpkg.targets = vcpkg.targets
 		Version.props = Version.props
 	EndProjectSection
 EndProject
