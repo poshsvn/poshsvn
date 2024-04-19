@@ -88,6 +88,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgAutoLink>false</VcpkgAutoLink>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -101,6 +104,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
     </PreBuildEvent>
@@ -137,6 +141,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
