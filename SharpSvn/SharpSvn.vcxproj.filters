@@ -1111,6 +1111,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Directory.Build.targets" />
-    <None Include="Directory.Build.props" />
   </ItemGroup>
 </Project>

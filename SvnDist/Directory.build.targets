@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\Directory.build.targets" />
-  <Import Project="..\vcpkg.targets" />
 
   <ItemGroup>
     <SubversionFiles Include="$(PackagesPath)tools\subversion\*" />
