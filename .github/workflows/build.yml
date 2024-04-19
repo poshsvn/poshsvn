@@ -14,9 +14,10 @@ concurrency:
 jobs:
   build-poshvn:
     runs-on: windows-latest
-  
+
     env:
       VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+      MSBuildCommonParameters: /property:Configuration=Release /property:Platform=x64
 
     steps:
       - uses: actions/checkout@v3
@@ -31,8 +32,14 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
 
+      - name: Restore
+        run: MSBuild.exe /target:restore
+
+      - name: vcpkg
+        run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
+
       - name: Build
-        run: MSBuild.exe /restore /property:Configuration=Release /property:Platform=x64
+        run: MSBuild.exe /target:build /restore ${{ env.MSBuildCommonParameters }}
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
