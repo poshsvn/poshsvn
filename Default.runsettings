@@ -1,8 +1,0 @@
-<RunSettings>
-  <RunConfiguration>
-  </RunConfiguration>
-
-  <NUnit>
-    <ShadowCopyFiles>false</ShadowCopyFiles>
-  </NUnit>
-</RunSettings>
