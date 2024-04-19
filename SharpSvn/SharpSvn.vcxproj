@@ -126,6 +126,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -161,6 +162,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PackagesPath)\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libapr-1.lib;libsvn_client-1.lib;libsvn_repos-1.lib;libsvn_subr-1.lib;libsvn_ra-1.lib;libsvn_fs-1.lib;libsvn_wc-1.lib;libsvn_diff-1.lib;libsvn_delta-1.lib;Advapi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
