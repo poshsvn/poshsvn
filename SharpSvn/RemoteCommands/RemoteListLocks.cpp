@@ -43,7 +43,7 @@ bool SvnRemoteSession::ListLocks(String^ relPath, SvnRemoteListLocksArgs^ args, 
     SVN_HANDLE(svn_ra_get_session_url(_session, &session_root, pool.Handle));
     SVN_HANDLE(svn_ra_get_repos_root2(_session, &repos_root, pool.Handle));
 
-    nOffset = strlen(session_root) - strlen(repos_root);
+    nOffset = (int)strlen(session_root) - (int)strlen(repos_root);
 
     SVN_HANDLE(svn_ra_get_locks2(_session, &locks,
                                  pool.AllocRelpath(relPath),
@@ -57,7 +57,7 @@ bool SvnRemoteSession::ListLocks(String^ relPath, SvnRemoteListLocksArgs^ args, 
             const svn_lock_t *lock;
 
             apr_hash_this(hi, (const void**)&pKey, &keyLen, (void**)&lock);
-            SvnRemoteListLockEventArgs^ ea = gcnew SvnRemoteListLockEventArgs(Utf8_PtrToString(pKey+1, keyLen-1), lock, SessionUri, nOffset);
+            SvnRemoteListLockEventArgs^ ea = gcnew SvnRemoteListLockEventArgs(Utf8_PtrToString(pKey+1, (int)keyLen-1), lock, SessionUri, nOffset);
             try
             {
                 args->OnList(ea);

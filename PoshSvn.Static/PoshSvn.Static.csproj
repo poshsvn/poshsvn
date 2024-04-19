@@ -12,7 +12,7 @@
     <ProjectReference Include="..\MSBuild\MSBuild.csproj" />
   </ItemGroup>
 
-  <UsingTask TaskName="ConfigureFile" AssemblyFile="$(ToolsDir)MSBuild.dll" />
+  <Import Project="..\MSBuild\ConfigureFile.tasks" />
 
   <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild">
     <Copy SourceFiles="$(MSBuildProjectDirectory)\PoshSvn.psd1" DestinationFiles="$(OutDir)PoshSvn.psd1" />
