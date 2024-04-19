@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build-poshvn:
     runs-on: windows-latest
-  
+
     env:
       VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
       MSBuildCommonParameters: /property:Configuration=Release /property:Platform=x64
