@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Workflows", "GitHub 
 		.github\workflows\website.yml = .github\workflows\website.yml
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vcpkg", "vcpkg\vcpkg.vcxproj", "{0A2698FD-FF14-499A-A817-09EA18808552}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -190,6 +192,18 @@ Global
 		{6B308516-D9CF-472A-AF97-03809AB6CC43}.Release|x64.Build.0 = Release|Any CPU
 		{6B308516-D9CF-472A-AF97-03809AB6CC43}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B308516-D9CF-472A-AF97-03809AB6CC43}.Release|x86.Build.0 = Release|Any CPU
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Debug|Any CPU.Build.0 = Debug|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Debug|x64.ActiveCfg = Debug|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Debug|x64.Build.0 = Debug|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Debug|x86.ActiveCfg = Debug|Win32
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Debug|x86.Build.0 = Debug|Win32
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Release|Any CPU.ActiveCfg = Release|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Release|Any CPU.Build.0 = Release|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Release|x64.ActiveCfg = Release|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Release|x64.Build.0 = Release|x64
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Release|x86.ActiveCfg = Release|Win32
+		{0A2698FD-FF14-499A-A817-09EA18808552}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

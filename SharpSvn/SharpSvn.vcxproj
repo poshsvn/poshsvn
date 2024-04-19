@@ -488,7 +488,6 @@
     <ClCompile Include="WorkingCopyCommands\WorkingCopyRestore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Directory.Build.props" />
     <None Include="Directory.Build.targets" />
   </ItemGroup>
   <ItemGroup>
@@ -503,6 +502,9 @@
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference Include="..\vcpkg\vcpkg.vcxproj">
+      <Project>{0a2698fd-ff14-499a-a817-09ea18808552}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
