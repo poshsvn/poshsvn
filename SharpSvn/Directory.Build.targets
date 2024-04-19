@@ -23,12 +23,12 @@
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(OutDir)" />
   </Target>
 
-  <Target Name="GenerateResourceFiles" AfterTargets="VcpkgInstallManifestDependencies">
+  <Target Name="GenerateResourceFiles" BeforeTargets="ClCompile">
     <Message Text="Building resource files..." Importance="high" />
     <Exec Command="$(ToolsDir)\Po2Resx.exe SvnText -to $(ProjectDir)SvnText $(SolutionDir)svn-po\*.po" />
   </Target>
 
-  <Target Name="GenerateErrorEnums" AfterTargets="VcpkgInstallManifestDependencies">
+  <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile">
     <Message Text="Building error enum..." Importance="high" />
     <Exec Command="$(ToolsDir)Errors2Enum.exe &quot;$(VCInstallDir).&quot; &quot;$(WindowsSdkDir).&quot; &quot;$(UniversalCRT_IncludePath)&quot; &quot;$(PackagesPath)\include\apr_errno.h&quot; &quot;$(PackagesPath)\include\serf.h&quot; &quot;$(ProjectDir)\SvnWindowsError.h&quot;" />
   </Target>
