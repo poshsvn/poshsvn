@@ -6,6 +6,7 @@
    <OutDir>$(OutputPath)</OutDir>
    <IntDir>$(BaseIntermediateOutputPath)</IntDir>
    <ToolsDir>$(OutDirBase)tools\</ToolsDir>
+   <MultiProcessorCompilation>true</MultiProcessorCompilation>
    <!--<UseCommonOutputDirectory>True</UseCommonOutputDirectory>-->
   </PropertyGroup>
 
