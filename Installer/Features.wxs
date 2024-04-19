@@ -42,11 +42,6 @@
                Description="!(loc.PoshSvnOfflineDocsFeatureDescription)">
       </Feature>
 
-      <Feature Id="PoshSvnVSCode"
-               Title="!(loc.PoshSvnVSCodeFeatureTitle)"
-               Description="!(loc.PoshSvnVSCodeFeatureDescription)">
-      </Feature>
-
       <Feature Id="SubversionCLI"
                Title="!(loc.SubversionCLIFeatureTitle)"
                Description="!(loc.SubversionCLIFeatureDescription)">
