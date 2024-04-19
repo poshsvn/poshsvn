@@ -41,6 +41,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuild", "MSBuild\MSBuild.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.VSCode", "PoshSvn.vscode\PoshSvn.VSCode.csproj", "{6B308516-D9CF-472A-AF97-03809AB6CC43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Workflows", "GitHub Workflows", "{E35BCAD3-8D77-45F0-B923-CDA192F1512A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+		.github\workflows\website.yml = .github\workflows\website.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
