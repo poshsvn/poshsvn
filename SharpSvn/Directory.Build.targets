@@ -32,11 +32,26 @@
 
   <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
 
-  <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile">
-    <GenerateErrorEnums WinErrorHeaderPath="$(KIT_SHARED_IncludePath)\winerror.h"
-                        ErrnoHeaderPath="$(KIT_SHARED_IncludePath)\..\ucrt\errno.h"
-                        AprErrnoHeaderPath="$(PackagesPath)\include\apr_errno.h"
-                        SerfHeaderPath="$(PackagesPath)\include\serf.h"
-                        OutputFilePath="$(ProjectDir)\SvnWindowsError.h" />
+  <PropertyGroup>
+    <WinErrorHeaderPath>$(KIT_SHARED_IncludePath)\winerror.h</WinErrorHeaderPath>
+    <ErrnoHeaderPath>$(KIT_SHARED_IncludePath)\..\ucrt\errno.h</ErrnoHeaderPath>
+    <AprErrnoHeaderPath>$(PackagesPath)\include\apr_errno.h</AprErrnoHeaderPath>
+    <SerfHeaderPath>$(PackagesPath)\include\serf.h</SerfHeaderPath>
+    <OutputFilePath>$(ProjectDir)\SvnWindowsError.h</OutputFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GenerateErrorEnumsInputs Include="$(WinErrorHeaderPath)" />
+    <GenerateErrorEnumsInputs Include="$(ErrnoHeaderPath)" />
+    <GenerateErrorEnumsInputs Include="$(AprErrnoHeaderPath)" />
+    <GenerateErrorEnumsInputs Include="$(SerfHeaderPath)" />
+  </ItemGroup>
+
+  <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile" Inputs="@(GenerateErrorEnumsInputs)" Outputs="$(OutputFilePath)">
+    <GenerateErrorEnums WinErrorHeaderPath="$(WinErrorHeaderPath)"
+                        ErrnoHeaderPath="$(ErrnoHeaderPath)"
+                        AprErrnoHeaderPath="$(AprErrnoHeaderPath)"
+                        SerfHeaderPath="$(SerfHeaderPath)"
+                        OutputFilePath="$(OutputFilePath)" />
   </Target>
 </Project>
