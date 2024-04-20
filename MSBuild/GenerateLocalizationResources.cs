@@ -123,8 +123,6 @@ namespace MSBuild
             xw.WriteElementString("value", value);
             xw.WriteEndElement();
         }
-
-
     }
 
     class Msg
