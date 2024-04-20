@@ -31,7 +31,10 @@
     <SvnPoFiles Include="$(SolutionDir)svn-po\*.po" />
   </ItemGroup>
 
-  <Target Name="GenerateLocalizationResources" BeforeTargets="ClCompile">
+  <Target Name="GenerateLocalizationResources"
+          BeforeTargets="ClCompile"
+          Inputs="@(SvnPoFiles)"
+          Outputs="$(ProjectDir)SvnText\SvnText.$([System.String]::Copy(%(SvnPoFiles.Filename)).Replace('_','-')).resx">
     <MakeDir Directories="$(ProjectDir)SvnText" />
     <GenerateLocalizationResources Prefix="SvnText"
                                    OutputDirectory="$(ProjectDir)SvnText"
