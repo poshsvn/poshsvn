@@ -18,84 +18,37 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
-namespace Po2Resx
+namespace MSBuild
 {
-    class Program
+    public class GenerateLocalizationResources : Task
     {
-        static void Main(string[] args)
+        [Required]
+        public string Prefix { get; set; }
+
+        [Required]
+        public string OutputDirectory { get; set; }
+
+        [Required]
+        public string[] InputFiles { get; set; }
+
+        public override bool Execute()
         {
-            List<string> argList = new List<string>(args);
+            Log.LogMessage("Generating localization resources...");
 
-            bool force = false;
-            if (argList.Count > 1 && argList[0].Equals("-f", StringComparison.OrdinalIgnoreCase))
-            {
-                force = true;
-                argList.RemoveAt(0);
-            }
-            if (argList.Count <= 3 || !string.Equals(argList[1], "-to", StringComparison.OrdinalIgnoreCase))
-            {
-                Console.Error.WriteLine("Usage: SharpSvn-Po2Resx [-f] <prefix> -to <directory> [<files>...]");
-                Environment.ExitCode = 1;
-                return;
-            }
+            GenerateResxFiles(Prefix, OutputDirectory, InputFiles, true);
 
-            string prefix = argList[0];
-            string toDir = argList[2];
-            argList.RemoveRange(0, 3);
-
-            List<FileInfo> files = new List<FileInfo>();
-            foreach (string f in argList)
-            {
-                int star = f.IndexOfAny(new char[] { '?', '*' });
-
-                if (star >= 0)
-                {
-                    star = f.LastIndexOfAny(new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar });
-                    DirectoryInfo dir;
-
-                    if (star > 0)
-                        dir = new DirectoryInfo(f.Substring(0, star));
-                    else
-                        dir = new DirectoryInfo(Environment.CurrentDirectory);
-
-                    if (dir.Exists)
-                        foreach (FileInfo file in dir.GetFiles(f.Substring(star + 1)))
-                            files.Add(file);
-                    else
-                    {
-                        Console.Error.WriteLine("Directory '{0}' does not exist", dir.FullName);
-                        Environment.ExitCode = 1;
-                    }
-                }
-                else
-                {
-                    FileInfo file = new FileInfo(f);
-                    if (file.Exists)
-                        files.Add(file);
-                    else
-                    {
-                        Console.Error.WriteLine("'{0}' does not exist", f);
-                        Environment.ExitCode = 1;
-                    }
-                }
-            }
-
-            toDir = Path.GetFullPath(toDir);
-            if (!Directory.Exists(toDir))
-                Directory.CreateDirectory(toDir);
-
-            GenerateResxFiles(prefix, toDir, files, force);
+            return true;
         }
 
-        private static void GenerateResxFiles(string prefix, string toDir, List<FileInfo> files, bool force)
+        private static void GenerateResxFiles(string prefix, string toDir, string[] files, bool force)
         {
-            foreach (FileInfo file in files)
+            foreach (string file in files)
             {
-                FileInfo toFile = new FileInfo(Path.Combine(toDir, prefix + "." + Path.GetFileNameWithoutExtension(file.Name).Replace('_', '-').ToLowerInvariant() + ".resx"));
-
-                if (!force && toFile.Exists && toFile.LastWriteTime > file.LastWriteTime)
-                    continue; // File up2date
+                FileInfo fileInfo = new FileInfo(file);
+                FileInfo toFile = new FileInfo(Path.Combine(toDir, prefix + "." + Path.GetFileNameWithoutExtension(fileInfo.Name).Replace('_', '-').ToLowerInvariant() + ".resx"));
 
                 XmlWriterSettings xws = new XmlWriterSettings();
                 xws.Indent = true;
@@ -112,7 +65,7 @@ namespace Po2Resx
 
                     try
                     {
-                        foreach (Msg msg in PoParser.ReadMessages(file))
+                        foreach (Msg msg in PoParser.ReadMessages(fileInfo))
                         {
                             Msg alt;
 
@@ -123,7 +76,7 @@ namespace Po2Resx
                             {
                                 if (!string.Equals(msg.Value, alt.Value, StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    Console.Error.WriteLine("{0}({1}): Warning: Duplicate key found with different translation", file.FullName, msg.Line);
+                                    Console.Error.WriteLine("{0}({1}): Warning: Duplicate key found with different translation", fileInfo.FullName, msg.Line);
                                     Console.Error.WriteLine(" 1st key:   {0}", alt.Key);
                                     Console.Error.WriteLine(" 1st value: {0}", alt.Value);
                                     Console.Error.WriteLine(" 2nd key:   {0}", msg.Key);
@@ -145,7 +98,7 @@ namespace Po2Resx
                     }
                     catch (Exception e)
                     {
-                        throw new InvalidOperationException(string.Format("While reading {0}", file.FullName), e);
+                        throw new InvalidOperationException(string.Format("While reading {0}", fileInfo.FullName), e);
                     }
 
                     xw.WriteEndElement();
