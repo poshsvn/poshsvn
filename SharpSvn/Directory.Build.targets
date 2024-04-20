@@ -25,9 +25,16 @@
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(OutDir)" />
   </Target>
 
-  <Target Name="GenerateResourceFiles" BeforeTargets="ClCompile">
-    <Message Text="Building resource files..." Importance="high" />
-    <Exec Command="$(ToolsDir)\Po2Resx.exe SvnText -to $(ProjectDir)SvnText $(SolutionDir)svn-po\*.po" />
+  <Import Project="..\MSBuild\GenerateLocalizationResources.tasks" />
+
+  <ItemGroup>
+    <GenerateLocalizationResourcesInputFiles Include="$(SolutionDir)svn-po\*.po" />
+  </ItemGroup>
+
+  <Target Name="GenerateLocalizationResources" BeforeTargets="ClCompile">
+    <GenerateLocalizationResources Prefix="SvnText"
+                                   OutputDirectory="$(ProjectDir)SvnText"
+                                   InputFiles="@(GenerateLocalizationResourcesInputFiles)" />
   </Target>
 
   <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
