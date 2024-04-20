@@ -10,9 +10,9 @@
       <OutputFilePath />
     </ParameterGroup>
     <Task>
-      <Using Namespace="System"/>
-      <Using Namespace="System.IO"/>
-      <Using Namespace="Microsoft.Build.Tasks"/>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="Microsoft.Build.Tasks" />
       <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)\GenerateErrorEnums.cs" />
     </Task>
   </UsingTask>
