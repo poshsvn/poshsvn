@@ -1,15 +1,13 @@
 ﻿using Microsoft.Build.Framework;
-using System.Threading.Tasks;
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System;
-using System.Linq;
 
 namespace MSBuild
 {
-    public class GenerateErrorEnums : Microsoft.Build.Utilities.Task
+    public class GenerateErrorEnums : Task
     {
         [Required]
         public string WinErrorHeaderPath { get; set; }
