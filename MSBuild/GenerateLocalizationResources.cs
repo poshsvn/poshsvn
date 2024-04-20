@@ -48,7 +48,7 @@ namespace MSBuild
             foreach (string file in files)
             {
                 FileInfo fileInfo = new FileInfo(file);
-                FileInfo toFile = new FileInfo(Path.Combine(toDir, prefix + "." + Path.GetFileNameWithoutExtension(fileInfo.Name).Replace('_', '-').ToLowerInvariant() + ".resx"));
+                FileInfo toFile = new FileInfo(Path.Combine(toDir, prefix + "." + Path.GetFileNameWithoutExtension(fileInfo.Name).Replace('_', '-') + ".resx"));
 
                 XmlWriterSettings xws = new XmlWriterSettings();
                 xws.Indent = true;
