@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <Target Name="GenerateLocalizationResources" BeforeTargets="ClCompile">
+    <MakeDir Directories="$(ProjectDir)SvnText" />
     <GenerateLocalizationResources Prefix="SvnText"
                                    OutputDirectory="$(ProjectDir)SvnText"
                                    InputFiles="@(GenerateLocalizationResourcesInputFiles)" />
