@@ -38,12 +38,12 @@ namespace MSBuild
         {
             Log.LogMessage("Generating localization resources...");
 
-            GenerateResxFiles(Prefix, OutputDirectory, InputFiles, true);
+            GenerateResxFiles(Prefix, OutputDirectory, InputFiles);
 
             return true;
         }
 
-        private static void GenerateResxFiles(string prefix, string toDir, string[] files, bool force)
+        private static void GenerateResxFiles(string prefix, string toDir, string[] files)
         {
             foreach (string file in files)
             {
