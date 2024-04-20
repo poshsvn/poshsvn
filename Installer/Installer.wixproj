@@ -1,0 +1,69 @@
+﻿<Project Sdk="WixToolset.Sdk/5.0.0">
+  <PropertyGroup>
+    <SubversionPath>$(PackagesPath)tools\subversion</SubversionPath>
+    <DefineConstants>
+      PackageDir=$(OutDir);
+      SubversionPath=$(SubversionPath);
+      $(DefineConstants);
+      bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
+      dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
+      exclamationIco=$(MSBuildProjectDirectory)\Bitmaps\exclamic.ico;
+      infoIco=$(MSBuildProjectDirectory)\Bitmaps\info.ico;
+      licenseRtf=$(MSBuildProjectDirectory)\license.rtf;
+      newIco=$(MSBuildProjectDirectory)\Bitmaps\new.ico;
+      upIco=$(MSBuildProjectDirectory)\Bitmaps\up.ico;
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputName>PoshSvn</OutputName>
+    <FinalOutDir>$(OutDir)</FinalOutDir>
+    <OutDir>$(IntDir)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SuppressSpecificWarnings>1076</SuppressSpecificWarnings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Heat" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <InstallerFiles Include="$(OutDir)\**\*.msi" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <HarvestDirectory Include="..\bin\poshsvn">
+      <ComponentGroupName>PoshSvnModuleFiles</ComponentGroupName>
+      <DirectoryRefId>PoshSvnModuleFolder</DirectoryRefId>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <SuppressRegistry>true</SuppressRegistry>
+      <PreprocessorVariable>var.PackageDir</PreprocessorVariable>
+    </HarvestDirectory>
+  </ItemGroup>
+  <ItemGroup>
+    <HarvestDirectory Include="$(SubversionPath)">
+      <ComponentGroupName>SubversionFiles</ComponentGroupName>
+      <DirectoryRefId>BinDirectory</DirectoryRefId>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <SuppressRegistry>true</SuppressRegistry>
+      <PreprocessorVariable>var.SubversionPath</PreprocessorVariable>
+    </HarvestDirectory>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PoshSvn.Package\PoshSvn.Package.csproj" />
+  </ItemGroup>
+  <Target Name="MoveInstaller" BeforeTargets="Build">
+    <Copy SourceFiles="@(InstallerFiles)" DestinationFolder="$(FinalOutDir)" />
+  </Target>
+  <ItemGroup>
+    <Compile Remove="Common.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bitmaps\bannrbmp.bmp" />
+    <Content Include="Bitmaps\dlgbmp.bmp" />
+    <Content Include="Bitmaps\exclamic.ico" />
+    <Content Include="Bitmaps\info.ico" />
+    <Content Include="Bitmaps\New.ico" />
+    <Content Include="Bitmaps\Up.ico" />
+  </ItemGroup>
+</Project>

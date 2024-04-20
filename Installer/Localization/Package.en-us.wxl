@@ -1,0 +1,16 @@
+﻿<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="en-US">
+  <String Id="PoshSvnFeatureTitle" Value="PoshSvn" />
+  <String Id="PoshSvnFeatureDescription" Value="" />
+
+  <String Id="PoshSvnModuleFeatureTitle" Value="PoshSvn PowerShell Module" />
+  <String Id="PoshSvnModuleFeatureDescription" Value="The PoshSvn module for PowerShell." />
+
+  <String Id="PoshSvnOfflineDocsFeatureTitle" Value="PoshSvn Offline docs" />
+  <String Id="PoshSvnOfflineDocsFeatureDescription" Value="Intall offline HTML documentation." />
+
+  <String Id="SubversionCLIFeatureTitle" Value="Subversion command-line tools" />
+  <String Id="SubversionCLIFeatureDescription" Value="Install svn.exe, svnadmin.exe and other Subversion command-line tools and add them to the PATH." />
+
+  <String Id="PoshSvnVSCodeFeatureTitle" Value="PoshSvn VSCode extension" />
+  <String Id="PoshSvnVSCodeFeatureDescription" Value="VSCode plugin to access PoshSvn directly from VSCode." />
+</WixLocalization>
