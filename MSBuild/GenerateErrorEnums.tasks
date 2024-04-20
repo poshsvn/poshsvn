@@ -1,0 +1,20 @@
+<Project>
+  <UsingTask TaskName="GenerateErrorEnums"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
+    <ParameterGroup>
+      <VCPath />
+      <SDKPath />
+      <UniversalSDKDir />
+      <AprErrnoHeaderPath />
+      <SerfHeaderPath />
+      <OutputFilePath />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+      <Using Namespace="Microsoft.Build.Tasks"/>
+      <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)\GenerateErrorEnums.cs" />
+    </Task>
+  </UsingTask>
+</Project>

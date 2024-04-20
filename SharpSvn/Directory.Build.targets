@@ -30,8 +30,14 @@
     <Exec Command="$(ToolsDir)\Po2Resx.exe SvnText -to $(ProjectDir)SvnText $(SolutionDir)svn-po\*.po" />
   </Target>
 
+  <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
+
   <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile">
-    <Message Text="Building error enum..." Importance="high" />
-    <Exec Command="$(ToolsDir)Errors2Enum.exe &quot;$(VCInstallDir).&quot; &quot;$(WindowsSdkDir).&quot; &quot;$(UniversalCRT_IncludePath)&quot; &quot;$(PackagesPath)\include\apr_errno.h&quot; &quot;$(PackagesPath)\include\serf.h&quot; &quot;$(ProjectDir)\SvnWindowsError.h&quot;" />
+    <GenerateErrorEnums VCPath="$(VCInstallDir)."
+                        SDKPath="$(WindowsSdkDir)"
+                        UniversalSDKDir="$(UniversalCRT_IncludePath)"
+                        AprErrnoHeaderPath="$(PackagesPath)\include\apr_errno.h"
+                        SerfHeaderPath="$(PackagesPath)\include\serf.h"
+                        OutputFilePath="$(ProjectDir)\SvnWindowsError.h" />
   </Target>
 </Project>
