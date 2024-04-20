@@ -33,9 +33,8 @@
   <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
 
   <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile">
-    <GenerateErrorEnums VCPath="$(VCInstallDir)."
-                        SDKPath="$(WindowsSdkDir)"
-                        UniversalSDKDir="$(UniversalCRT_IncludePath)"
+    <GenerateErrorEnums WinErrorHeaderPath="$(KIT_SHARED_IncludePath)\winerror.h"
+                        ErrnoHeaderPath="$(KIT_SHARED_IncludePath)\..\ucrt\errno.h"
                         AprErrnoHeaderPath="$(PackagesPath)\include\apr_errno.h"
                         SerfHeaderPath="$(PackagesPath)\include\serf.h"
                         OutputFilePath="$(ProjectDir)\SvnWindowsError.h" />

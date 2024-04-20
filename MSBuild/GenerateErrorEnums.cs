@@ -12,13 +12,10 @@ namespace MSBuild
     public class GenerateErrorEnums : Microsoft.Build.Utilities.Task
     {
         [Required]
-        public string VCPath { get; set; }
+        public string WinErrorHeaderPath { get; set; }
 
         [Required]
-        public string SDKPath { get; set; }
-
-        [Required]
-        public string UniversalSDKDir { get; set; }
+        public string ErrnoHeaderPath { get; set; }
 
         [Required]
         public string AprErrnoHeaderPath { get; set; }
@@ -33,36 +30,11 @@ namespace MSBuild
         {
             Log.LogMessage("Generating error enums...");
 
-            string vcPath = Path.GetFullPath(VCPath);
-            string sdkPath = Path.GetFullPath(SDKPath);
-            string usdkPath = Path.GetFullPath(UniversalSDKDir.Split(';').First());
-            string winerror = Path.Combine(sdkPath, "include\\winerror.h");
-            string errno = Path.Combine(vcPath, "include\\errno.h");
-            string altErrNo = Path.Combine(usdkPath, "errno.h");
-            string aprerrno = Path.GetFullPath(AprErrnoHeaderPath);
-            string serfh = Path.GetFullPath(SerfHeaderPath);
-            string to = Path.GetFullPath(OutputFilePath);
-
-            if (!File.Exists(errno) && File.Exists(altErrNo))
-            {
-                errno = altErrNo;
-            }
-
-            if (!File.Exists(winerror))
-            {
-                winerror = Path.Combine(Path.Combine(Path.GetDirectoryName(winerror), "shared"), "winerror.h");
-            }
-
-            if (!File.Exists(winerror))
-            {
-                winerror = Path.Combine(usdkPath, "..", "shared", "winerror.h");
-            }
-
-            using (StreamWriter r = File.CreateText(to))
-            using (StreamReader header = File.OpenText(winerror))
-            using (StreamReader aprheader = File.OpenText(aprerrno))
-            using (StreamReader serfheader = File.OpenText(serfh))
-            using (StreamReader syserrs = File.OpenText(errno))
+            using (StreamWriter r = File.CreateText(OutputFilePath))
+            using (StreamReader header = File.OpenText(WinErrorHeaderPath))
+            using (StreamReader aprheader = File.OpenText(AprErrnoHeaderPath))
+            using (StreamReader serfheader = File.OpenText(SerfHeaderPath))
+            using (StreamReader syserrs = File.OpenText(ErrnoHeaderPath))
             {
                 r.WriteLine("/* GENERATED CODE - Don't edit this file */");
                 r.WriteLine("#pragma once");
