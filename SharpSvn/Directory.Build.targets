@@ -27,17 +27,22 @@
 
   <Import Project="..\MSBuild\GenerateLocalizationResources.tasks" />
 
+  <PropertyGroup>
+    <SvnTextDir>$(ProjectDir)SvnText</SvnTextDir>
+    <SvnPoDir>$(SolutionDir)svn-po\</SvnPoDir>
+  </PropertyGroup>
+
   <ItemGroup>
-    <SvnPoFiles Include="$(SolutionDir)svn-po\*.po" />
+    <SvnPoFiles Include="$(SvnPoDir)*.po" />
   </ItemGroup>
 
   <Target Name="GenerateLocalizationResources"
           BeforeTargets="ClCompile"
           Inputs="@(SvnPoFiles)"
-          Outputs="$(ProjectDir)SvnText\SvnText.$([System.String]::Copy(%(SvnPoFiles.Filename)).Replace('_','-')).resx">
-    <MakeDir Directories="$(ProjectDir)SvnText" />
+          Outputs="$(SvnTextDir)\SvnText.$([System.String]::Copy(%(SvnPoFiles.Filename)).Replace('_','-')).resx">
+    <MakeDir Directories="$(SvnTextDir)" />
     <GenerateLocalizationResources Prefix="SvnText"
-                                   OutputDirectory="$(ProjectDir)SvnText"
+                                   OutputDirectory="$(SvnTextDir)"
                                    InputFiles="@(SvnPoFiles)" />
   </Target>
 
