@@ -46,6 +46,11 @@
                                    InputFiles="@(SvnPoFiles)" />
   </Target>
 
+  <Target Name="CleanLocalizationResources"
+          BeforeTargets="CoreClean">
+    <RemoveDir Directories="$(SvnTextDir)" />
+  </Target>
+
   <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
 
   <PropertyGroup>
@@ -69,5 +74,10 @@
                         AprErrnoHeaderPath="$(AprErrnoHeaderPath)"
                         SerfHeaderPath="$(SerfHeaderPath)"
                         OutputFilePath="$(OutputFilePath)" />
+  </Target>
+
+  <Target Name="CleanErrorEnums"
+          BeforeTargets="CoreClean">
+    <Delete Files="$(OutputFilePath)" />
   </Target>
 </Project>
