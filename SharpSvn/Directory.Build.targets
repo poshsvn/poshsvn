@@ -28,14 +28,14 @@
   <Import Project="..\MSBuild\GenerateLocalizationResources.tasks" />
 
   <ItemGroup>
-    <GenerateLocalizationResourcesInputFiles Include="$(SolutionDir)svn-po\*.po" />
+    <SvnPoFiles Include="$(SolutionDir)svn-po\*.po" />
   </ItemGroup>
 
   <Target Name="GenerateLocalizationResources" BeforeTargets="ClCompile">
     <MakeDir Directories="$(ProjectDir)SvnText" />
     <GenerateLocalizationResources Prefix="SvnText"
                                    OutputDirectory="$(ProjectDir)SvnText"
-                                   InputFiles="@(GenerateLocalizationResourcesInputFiles)" />
+                                   InputFiles="@(SvnPoFiles)" />
   </Target>
 
   <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
