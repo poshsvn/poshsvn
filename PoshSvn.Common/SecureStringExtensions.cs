@@ -4,7 +4,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace PoshSvn
+namespace PoshSvn.Common
 {
     public static class SecureStringExtensions
     {
