@@ -7,6 +7,7 @@
     <PackageItems Include="$(OutDir)\fr-FR\**\*" Destination="fr-FR" />
 
     <PackageItems Include="$(OutDir)\PoshSvn.dll" />
+    <PackageItems Include="$(OutDir)\PoshSvn.Common.dll" />
     <PackageItems Include="$(OutDir)\SharpSvn.dll" />
 
     <PackageItems Include="$(OutDir)vcruntime140.dll" />
