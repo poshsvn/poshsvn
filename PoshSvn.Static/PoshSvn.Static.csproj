@@ -16,7 +16,7 @@
 
   <PropertyGroup>
     <ModuleManifestSource>$(MSBuildProjectDirectory)\PoshSvn.psd1</ModuleManifestSource>
-    <ModuleManifestDestination>$(MSBuildProjectDirectory)\PoshSvn.psd1</ModuleManifestDestination>
+    <ModuleManifestDestination>$(OutDir)\PoshSvn.psd1</ModuleManifestDestination>
   </PropertyGroup>
 
   <Target Name="BuildModuleManifest"
