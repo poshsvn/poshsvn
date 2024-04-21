@@ -53,7 +53,7 @@
           DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
   </Target>
 
-  <Target Name="ConfigureVersion" BeforeTargets="CopyAssets">
+  <Target Name="ConfigureVersion" AfterTargets="CopyAssets">
     <ConfigureFile FileName="$(VSCodeOutDir)\extension\package.json" MatchExpression="@Version@" ReplacementText="$(Version)" />
   </Target>
 
