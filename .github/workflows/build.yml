@@ -33,13 +33,13 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Restore
-        run: MSBuild.exe /target:restore
+        run: MSBuild.exe /target:restore ${{ env.MSBuildCommonParameters }}
 
       - name: vcpkg
         run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
 
       - name: Build
-        run: MSBuild.exe /target:build /restore ${{ env.MSBuildCommonParameters }}
+        run: MSBuild.exe /target:build ${{ env.MSBuildCommonParameters }}
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
