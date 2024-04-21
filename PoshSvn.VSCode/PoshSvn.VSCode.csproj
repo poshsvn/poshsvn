@@ -33,6 +33,7 @@
       <Destination>extension</Destination>
     </VSCodeExtensionItems>
   </ItemDefinitionGroup>
+
   <ItemGroup>
     <VSCodeExtensionItems Include="README.md" />
     <VSCodeExtensionItems Include="..\LICENSE" />
@@ -43,6 +44,7 @@
     <VSCodeExtensionItems Destination="" Include="[Content_Types].xml" />
     <VSCodeExtensionItems Destination="extension\poshsvn" Include="$(PackagePath)\**\*.*" />
   </ItemGroup>
+
   <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)"
           Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
     <Message Importance="high" Text="@(VSCodeExtensionItems)" />
