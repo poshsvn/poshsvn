@@ -47,7 +47,6 @@
 
   <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)"
           Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
-    <Message Importance="high" Text="@(VSCodeExtensionItems)" />
     <Copy SourceFiles="@(VSCodeExtensionItems)"
           DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
   </Target>
