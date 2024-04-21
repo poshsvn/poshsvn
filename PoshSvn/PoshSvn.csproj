@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PoshSvn.Common\PoshSvn.Common.csproj" />
     <ProjectReference Include="..\PoshSvn.Static\PoshSvn.Static.csproj">
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
     </ProjectReference>
