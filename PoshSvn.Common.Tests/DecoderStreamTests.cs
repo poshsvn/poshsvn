@@ -3,9 +3,8 @@
 using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using PoshSvn.Common;
 
-namespace PoshSvn.Tests
+namespace PoshSvn.Common.Tests
 {
     [TestFixture]
     public class DecoderStreamTests
