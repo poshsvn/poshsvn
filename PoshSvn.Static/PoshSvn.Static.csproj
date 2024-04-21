@@ -8,10 +8,6 @@
     <Content Include="$(MSBuildProjectDirectory)\*.ps1xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MSBuild\MSBuild.csproj" />
-  </ItemGroup>
-
   <Import Project="..\MSBuild\ConfigureFile.tasks" />
 
   <PropertyGroup>
