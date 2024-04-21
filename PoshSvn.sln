@@ -28,8 +28,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharpSvn", "SharpSvn\SharpS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SvnDist", "SvnDist\SvnDist.vcxproj", "{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuild", "MSBuild\MSBuild.csproj", "{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}"
-EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Installer", "Installer\Installer.wixproj", "{E64EC448-3CB1-4F13-B876-47A48ED0D28C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.VSCode", "PoshSvn.vscode\PoshSvn.VSCode.csproj", "{6B308516-D9CF-472A-AF97-03809AB6CC43}"
@@ -48,6 +46,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Common", "PoshSvn.Common\PoshSvn.Common.csproj", "{294E9DAB-00CD-4410-AE8C-0AC3B30E60C4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoshSvn.Tests", "PoshSvn.Tests\PoshSvn.Tests.csproj", "{412A1EE2-A6E4-46F7-A58E-10B33BBFC9DE}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MSBuild", "MSBuild\MSBuild.shproj", "{D613EBB3-1341-4FD8-B8B2-1BDB461033CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,14 +105,6 @@ Global
 		{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}.Release|x64.Build.0 = Release|x64
 		{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}.Release|x86.ActiveCfg = Release|Win32
 		{A2E0BF22-EDCF-4FF4-AA6B-837794AFC581}.Release|x86.Build.0 = Release|Win32
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x64.Build.0 = Debug|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Debug|x86.Build.0 = Debug|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x64.ActiveCfg = Release|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x64.Build.0 = Release|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x86.ActiveCfg = Release|Any CPU
-		{96EAF085-1A08-4AFE-8CA9-AF137E240FD0}.Release|x86.Build.0 = Release|Any CPU
 		{E64EC448-3CB1-4F13-B876-47A48ED0D28C}.Debug|x64.ActiveCfg = Debug|x64
 		{E64EC448-3CB1-4F13-B876-47A48ED0D28C}.Debug|x64.Build.0 = Debug|x64
 		{E64EC448-3CB1-4F13-B876-47A48ED0D28C}.Debug|x86.ActiveCfg = Debug|x86
