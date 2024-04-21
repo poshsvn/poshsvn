@@ -2,7 +2,7 @@
 
 using System;
 
-namespace PoshSvn
+namespace PoshSvn.Common
 {
     public interface ITextStream : IDisposable
     {
