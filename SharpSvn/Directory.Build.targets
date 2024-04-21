@@ -21,6 +21,7 @@
     <FilesToCopy Include="$(PackagesPath)bin\libcrypto-3-x64.dll" />
     <FilesToCopy Include="$(PackagesPath)bin\libssl-3-x64.dll" />
   </ItemGroup>
+
   <Target Name="CopySvnLibraries" BeforeTargets="AfterBuild">
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(OutDir)" />
   </Target>
