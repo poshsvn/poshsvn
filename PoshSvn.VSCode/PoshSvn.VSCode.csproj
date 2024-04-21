@@ -45,10 +45,16 @@
     <VSCodeExtensionItems Destination="extension\poshsvn" Include="$(PackagePath)\**\*.*" />
   </ItemGroup>
 
+  <Import Project="..\MSBuild\ConfigureFile.tasks" />
+
   <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)"
           Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
     <Copy SourceFiles="@(VSCodeExtensionItems)"
           DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
+  </Target>
+
+  <Target Name="ConfigureVersion" BeforeTargets="CopyAssets">
+    <ConfigureFile FileName="$(VSCodeOutDir)\extension\package.json" MatchExpression="@Version@" ReplacementText="$(Version)" />
   </Target>
 
   <Target Name="PackageExtension" DependsOnTargets="CopyAssets;TsCompiler" BeforeTargets="AfterBuild">
