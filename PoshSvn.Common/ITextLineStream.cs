@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-namespace PoshSvn
+namespace PoshSvn.Common
 {
     public interface ITextLineStream
     {

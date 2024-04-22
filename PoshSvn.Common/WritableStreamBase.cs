@@ -3,7 +3,7 @@
 using System;
 using System.IO;
 
-namespace PoshSvn
+namespace PoshSvn.Common
 {
     public abstract class WritableStreamBase : Stream
     {

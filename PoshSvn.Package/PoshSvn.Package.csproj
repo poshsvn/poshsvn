@@ -11,8 +11,9 @@
 
   <Import Project="PackageItems.targets" />
 
-  <Target Name="CopyFiles" BeforeTargets="AfterBuild">
-    <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(PackagePath)%(PackageItems.Destination)%(RecursiveDir)" />
+  <Target Name="CopyFiles" BeforeTargets="AfterBuild" Inputs="@(PackageItems)"
+          Outputs="$(PackagePath)\%(PackageItems.Destination)\%(PackageItems.FileName)%(PackageItems.Extension)">
+    <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(PackagePath)%(PackageItems.Destination)" />
   </Target>
 
   <Target Name="ZipPackage" AfterTargets="CopyFiles" Inputs="@(FilesToCopy)" Outputs="$(ZipPackagePath)">

@@ -2,7 +2,7 @@
 
 using System.Text;
 
-namespace PoshSvn
+namespace PoshSvn.Common
 {
     public class LineDecoderTextStream : ITextStream
     {
