@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace PoshSvn.Tests
+namespace PoshSvn.Common.Tests
 {
     [TestFixture]
     public class LineDecoderTextStreamTests

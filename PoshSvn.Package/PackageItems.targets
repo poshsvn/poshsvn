@@ -1,12 +1,13 @@
 <Project>
   <ItemGroup>
-    <FilesToCopy Include="$(OutDir)*.ps1xml" />
-    <FilesToCopy Include="$(OutDir)PoshSvn.psd1" />
+    <PackageItems Include="$(OutDir)*.ps1xml" />
+    <PackageItems Include="$(OutDir)PoshSvn.psd1" />
 
     <PackageItems Include="$(OutDir)\en-US\**\*" Destination="en-US" />
     <PackageItems Include="$(OutDir)\fr-FR\**\*" Destination="fr-FR" />
 
     <PackageItems Include="$(OutDir)\PoshSvn.dll" />
+    <PackageItems Include="$(OutDir)\PoshSvn.Common.dll" />
     <PackageItems Include="$(OutDir)\SharpSvn.dll" />
 
     <PackageItems Include="$(OutDir)vcruntime140.dll" />

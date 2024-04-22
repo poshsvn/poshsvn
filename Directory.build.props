@@ -6,7 +6,6 @@
    <OutDir>$(OutputPath)</OutDir>
    <IntDir>$(BaseIntermediateOutputPath)</IntDir>
    <ToolsDir>$(OutDirBase)tools\</ToolsDir>
-   <MultiProcessorCompilation>true</MultiProcessorCompilation>
    <!--<UseCommonOutputDirectory>True</UseCommonOutputDirectory>-->
   </PropertyGroup>
 
@@ -22,6 +21,12 @@
     <PackagePath>$(OutDirBase)poshsvn\</PackagePath>
     <ZipPackagePath>$(OutDirBase)poshsvn.zip</ZipPackagePath>
   </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+  </ItemDefinitionGroup>
 
   <Import Project="Version.props" />
 </Project>
