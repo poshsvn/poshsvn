@@ -10,11 +10,23 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <DisplayPlatform>$(Platform)</DisplayPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='Win32'">
+    <DisplayPlatform>x86</DisplayPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <DisplayPlatform>x64</DisplayPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
     <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
-    <VcpkgTriplet>$(Platform)-windows-release</VcpkgTriplet>
-    <VcpkgInstalledDir>$(VcpkgManifestRoot)\vcpkg_installed\$(PlatformTarget)\</VcpkgInstalledDir>
-    <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(PlatformTarget)$(VcpkgTriplet)\</PackagesPath>
+    <VcpkgTriplet>$(DisplayPlatform)-windows</VcpkgTriplet>
+    <VcpkgInstalledDir>$(VcpkgManifestRoot)\vcpkg_installed\$(DisplayPlatform)\</VcpkgInstalledDir>
+    <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(DisplayPlatform)\$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
 
   <PropertyGroup>
