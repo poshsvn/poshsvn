@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Platforms>x64;</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <DisplayPlatform>$(Platform)</DisplayPlatform>
   </PropertyGroup>
 
