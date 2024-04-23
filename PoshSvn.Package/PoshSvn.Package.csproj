@@ -16,7 +16,7 @@
     <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(PackagePath)%(PackageItems.Destination)" />
   </Target>
 
-  <Target Name="ZipPackage" AfterTargets="CopyFiles" Inputs="@(FilesToCopy)" Outputs="$(ZipPackagePath)">
+  <Target Name="ZipPackage" AfterTargets="CopyFiles" Inputs="@(PackageItems)" Outputs="$(ZipPackagePath)">
     <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ZipPackagePath)" Overwrite="true" />
   </Target>
 

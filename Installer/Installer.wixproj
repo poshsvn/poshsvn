@@ -16,17 +16,13 @@
   </PropertyGroup>
   <PropertyGroup>
     <OutputName>PoshSvn</OutputName>
-    <FinalOutDir>$(OutDir)</FinalOutDir>
-    <OutDir>$(IntDir)</OutDir>
+    <OutDir>$(OutDir)Installer</OutDir>
   </PropertyGroup>
   <PropertyGroup>
     <SuppressSpecificWarnings>1076</SuppressSpecificWarnings>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.Heat" Version="5.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <InstallerFiles Include="$(OutDir)\**\*.msi" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.rtf" />
@@ -52,9 +48,6 @@
   <ItemGroup>
     <ProjectReference Include="..\PoshSvn.Package\PoshSvn.Package.csproj" />
   </ItemGroup>
-  <Target Name="MoveInstaller" BeforeTargets="Build">
-    <Copy SourceFiles="@(InstallerFiles)" DestinationFolder="$(FinalOutDir)" />
-  </Target>
   <ItemGroup>
     <Compile Remove="Common.wxs" />
   </ItemGroup>
