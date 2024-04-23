@@ -57,7 +57,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\bin\Release\PoshSvn.msi
+        asset_path: .\bin\Release\Installer\en-US\PoshSvn.msi
         asset_name: PoshSvn.msi
         asset_content_type: application/msi
 
