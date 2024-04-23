@@ -17,10 +17,6 @@
     <DisplayPlatform>x86</DisplayPlatform>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Platform)'=='x64'">
-    <DisplayPlatform>x64</DisplayPlatform>
-  </PropertyGroup>
-
   <PropertyGroup>
     <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
     <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
