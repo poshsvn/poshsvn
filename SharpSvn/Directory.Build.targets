@@ -25,7 +25,7 @@
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libssl-3-x64.dll" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Platform)'=='x86'">
+  <ItemGroup Condition="'$(Platform)'=='Win32'">
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libcrypto-3.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libssl-3.dll" />
   </ItemGroup>

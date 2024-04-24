@@ -11,9 +11,6 @@
     <PackageItems Include="$(OutDir)\PoshSvn.Common.dll" />
     <PackageItems Include="$(OutDir)\SharpSvn.dll" />
 
-    <PackageItems Include="$(OutDir)vcruntime140.dll" />
-    <PackageItems Include="$(OutDir)vcruntime140_1.dll" />
-
     <PackageItems Include="$(OutDir)libsvn_wc-1.dll" />
     <PackageItems Include="$(OutDir)sqlite3.dll" />
     <PackageItems Include="$(OutDir)zlib1.dll" />
@@ -33,11 +30,16 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Platform)'=='x64'">
+    <PackageItems Include="$(OutDir)vcruntime140.dll" />
+    <PackageItems Include="$(OutDir)vcruntime140_1.dll" />
+
     <PackageItems Include="$(OutDir)libcrypto-3-x64.dll" />
     <PackageItems Include="$(OutDir)libssl-3-x64.dll" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Platform)'=='x86'">
+    <PackageItems Include="$(OutDir)vcruntime140.dll" />
+
     <PackageItems Include="$(OutDir)libcrypto-3.dll" />
     <PackageItems Include="$(OutDir)libssl-3.dll" />
   </ItemGroup>
