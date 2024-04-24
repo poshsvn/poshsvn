@@ -1,5 +1,39 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 
+  <ItemGroup>
+    <PackageItems Include="$(OutDir)*.ps1xml" />
+    <PackageItems Include="$(OutDir)PoshSvn.psd1" />
+
+    <PackageItems Include="$(OutDir)\en-US\**\*" Destination="en-US" />
+    <PackageItems Include="$(OutDir)\fr-FR\**\*" Destination="fr-FR" />
+
+    <PackageItems Include="$(OutDir)\PoshSvn.dll" />
+    <PackageItems Include="$(OutDir)\PoshSvn.Common.dll" />
+    <PackageItems Include="$(OutDir)\SharpSvn.dll" />
+
+    <PackageItems Include="$(OutDir)vcruntime140.dll" />
+    <PackageItems Include="$(OutDir)vcruntime140_1.dll" />
+
+    <PackageItems Include="$(OutDir)libsvn_wc-1.dll" />
+    <PackageItems Include="$(OutDir)sqlite3.dll" />
+    <PackageItems Include="$(OutDir)zlib1.dll" />
+    <PackageItems Include="$(OutDir)libapr-1.dll" />
+    <PackageItems Include="$(OutDir)libaprutil-1.dll" />
+    <PackageItems Include="$(OutDir)libcrypto-3-x64.dll" />
+    <PackageItems Include="$(OutDir)libexpat.dll" />
+    <PackageItems Include="$(OutDir)libssl-3-x64.dll" />
+    <PackageItems Include="$(OutDir)libsvn_client-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_delta-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_diff-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_fs_fs-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_fs_util-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_fs_x-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_fs-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_ra-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_repos-1.dll" />
+    <PackageItems Include="$(OutDir)libsvn_subr-1.dll" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
   </PropertyGroup>
@@ -8,8 +42,6 @@
     <ProjectReference Include="..\PoshSvn.Docs\PoshSvn.Docs.csproj" />
     <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" />
   </ItemGroup>
-
-  <Import Project="PackageItems.targets" />
 
   <Target Name="CopyFiles" BeforeTargets="AfterBuild" Inputs="@(PackageItems)"
           Outputs="$(PackagePath)\%(PackageItems.Destination)\%(PackageItems.FileName)%(PackageItems.Extension)">
