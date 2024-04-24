@@ -43,8 +43,6 @@
     <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" />
   </ItemGroup>
 
-  <Import Project="PackageItems.targets" />
-
   <Target Name="CopyFiles" BeforeTargets="AfterBuild" Inputs="@(PackageItems)"
           Outputs="$(PackagePath)\%(PackageItems.Destination)\%(PackageItems.FileName)%(PackageItems.Extension)">
     <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(PackagePath)%(PackageItems.Destination)" />
