@@ -50,13 +50,13 @@ jobs:
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PoshSvn
+          name: PoshSvn-${{ matrix.platform }}
           path: .\bin\poshsvn
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Release
+          name: Release-${{ matrix.platform }}
           path: .\bin\Release
 
       - name: Setup VSTest Path
