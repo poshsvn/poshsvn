@@ -15,10 +15,16 @@ jobs:
   build-poshvn:
     runs-on: windows-latest
 
+    strategy:
+      matrix:
+        platform:
+        - x64
+        - x86
+
     env:
       VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
-      MSBuildCommonParameters: /property:Configuration=Release /property:Platform=x64
-
+      MSBuildCommonParameters: /property:Configuration=Release /property:Platform=${{ matrix.platform }}
+    
     steps:
       - uses: actions/checkout@v3
 
