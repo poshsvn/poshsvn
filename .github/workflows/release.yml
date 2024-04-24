@@ -57,7 +57,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\bin\Release\Installer\en-US\PoshSvn.msi
+        asset_path: .\bin\Release-x64\Installer\en-US\PoshSvn.msi
         asset_name: PoshSvn.msi
         asset_content_type: application/msi
 
@@ -65,7 +65,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\bin\Release\PoshSvn.VSCode.vsix
+        asset_path: .\bin\Release-x64\PoshSvn.VSCode.vsix
         asset_name: PoshSvn.VSCode.vsix
         asset_content_type: application/vsix
 
@@ -73,7 +73,7 @@ jobs:
       run: Publish-Module -Path ".\bin\poshsvn" -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
 
     - name: Publish VSCode extension
-      run: vsce publish --packagePath .\bin\Release\PoshSvn.VSCode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
+      run: vsce publish --packagePath .\bin\Release-x64\PoshSvn.VSCode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
 
   publish_release:
     needs: 

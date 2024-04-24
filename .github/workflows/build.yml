@@ -57,10 +57,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Release-${{ matrix.platform }}
-          path: .\bin\Release
+          path: .\bin\Release-${{ matrix.platform }}
 
       - name: Setup VSTest Path
         uses: darenm/Setup-VSTest@v1.2
 
       - name: Test
-        run: vstest.console.exe .\bin\Release\PoshSvn.Tests.dll
+        run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Tests.dll
