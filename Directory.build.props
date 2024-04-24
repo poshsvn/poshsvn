@@ -11,6 +11,7 @@
 
   <PropertyGroup>
     <Platforms>x64;x86</Platforms>
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
   </PropertyGroup>
 
   <PropertyGroup>

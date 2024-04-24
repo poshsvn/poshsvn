@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
