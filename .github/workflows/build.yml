@@ -24,7 +24,7 @@ jobs:
     env:
       VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
       MSBuildCommonParameters: /property:Configuration=Release /property:Platform=${{ matrix.platform }}
-    
+
     steps:
       - uses: actions/checkout@v3
 
