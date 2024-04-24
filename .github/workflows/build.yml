@@ -53,23 +53,8 @@ jobs:
           name: Release
           path: .\bin\Release
 
-  test:
-    needs: build-poshvn
-
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download build artifact
-        id: download-build-artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: Release
-          path: .\bin\Release
-
       - name: Setup VSTest Path
         uses: darenm/Setup-VSTest@v1.2
 
       - name: Test
-        run: vstest.console.exe ${{ steps.download-build-artifact.outputs.download-path }}\PoshSvn.Tests.dll
+        run: vstest.console.exe .\bin\Release\PoshSvn.Tests.dll
