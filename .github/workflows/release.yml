@@ -41,6 +41,15 @@ jobs:
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v2
+      
+    # Doesn't work at GitHub actions
+    # Throws the following error:
+    # > Import-Module : The specified module 'C:\program 
+    # > files\powershell\7\Modules\PackageManagement\fullclr\Microsoft.PackageManagement.dll' was not loaded because no valid 
+    # > module file was found in any module directory.
+    - uses: actions/checkout@v4
+    - name: Install platyPS
+      run: Install-Module platyPS -Force
 
     - name: Build
       run: MSBuild.exe /restore /target:build /property:Configuration=Release /property:Platform=x64
