@@ -18,8 +18,16 @@
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libexpat.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\sqlite3.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\zlib1.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)'=='x64'">
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libcrypto-3-x64.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libssl-3-x64.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)'=='Win32'">
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libcrypto-3.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libssl-3.dll" />
   </ItemGroup>
 
   <Import Project="..\MSBuild\GenerateLocalizationResources.tasks" />
