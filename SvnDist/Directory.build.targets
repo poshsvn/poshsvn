@@ -14,8 +14,17 @@
     <Copy SourceFiles="@(SubversionFiles)" DestinationFolder="$(SvnDistDir)" />
   </Target>
 
+  <ItemGroup Condition="'$(Platform)'=='x64'">
+    <VcRuntime Include="$(OutDir)vcruntime140.dll"></VcRuntime>
+    <VcRuntime Include="$(OutDir)vcruntime140_1.dll"></VcRuntime>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)'=='Win32'">
+    <VcRuntime Include="$(OutDir)vcruntime140.dll"></VcRuntime>
+  </ItemGroup>
+
   <Target Name="CopyCRT">
-    <Copy SourceFiles="$(OutDir)vcruntime140.dll;$(OutDir)vcruntime140_1.dll" DestinationFolder="$(SvnDistDir)" />
+    <Copy SourceFiles="@(VcRuntime)" DestinationFolder="$(SvnDistDir)" />
   </Target>
 
   <Target Name="CreateZip" DependsOnTargets="CopySvnDist;CopyCRT" AfterTargets="FinalizeBuildStatus">
