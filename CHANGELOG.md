@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [0.6.1]
 
 - Add build for x86 platform.
+- Build and publish improvements.
 
 ## [0.6.0]
 
