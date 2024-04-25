@@ -146,7 +146,7 @@ jobs:
           asset_name: PoshSvn.VSCode.vsix
           asset_content_type: application/vsix
 
-  publish_release:
+  publish-release:
     needs:
       - build-poshsvn
       - create-release
