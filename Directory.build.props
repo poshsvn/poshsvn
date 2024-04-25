@@ -1,8 +1,16 @@
 <Project>
+  <PropertyGroup>
+    <DisplayPlatform>$(Platform)</DisplayPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='Win32'">
+    <DisplayPlatform>x86</DisplayPlatform>
+  </PropertyGroup>
+
  <PropertyGroup>
-   <BaseIntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+   <BaseIntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)-$(DisplayPlatform)\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
    <OutDirBase>$(SolutionDir)\bin\</OutDirBase>
-   <OutputPath>$(OutDirBase)$(Configuration)\</OutputPath>
+   <OutputPath>$(OutDirBase)$(Configuration)-$(DisplayPlatform)\</OutputPath>
    <OutDir>$(OutputPath)</OutDir>
    <IntDir>$(BaseIntermediateOutputPath)</IntDir>
    <ToolsDir>$(OutDirBase)tools\</ToolsDir>
@@ -10,11 +18,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Platforms>x64;x86</Platforms>
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
     <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
-    <VcpkgTriplet>$(Platform)-windows-release</VcpkgTriplet>
-    <VcpkgInstalledDir>$(VcpkgManifestRoot)\vcpkg_installed\$(PlatformTarget)\</VcpkgInstalledDir>
-    <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(PlatformTarget)$(VcpkgTriplet)\</PackagesPath>
+    <VcpkgTriplet>$(DisplayPlatform)-windows</VcpkgTriplet>
+    <VcpkgInstalledDir>$(VcpkgManifestRoot)\vcpkg_installed\$(DisplayPlatform)\</VcpkgInstalledDir>
+    <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(DisplayPlatform)\$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
 
   <PropertyGroup>
