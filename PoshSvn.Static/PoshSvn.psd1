@@ -9,7 +9,7 @@
     Description            = "Apache Subversion client for PowerShell
 
 Project website: https://www.poshsvn.com"
-    ProcessorArchitecture  = "Amd64"
+    ProcessorArchitecture  = "@ProcessorArchitecture@"
     RootModule             = "PoshSvn.dll"
     DotNetFrameworkVersion = "4.7.2"
     CmdletsToExport        = @(
