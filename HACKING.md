@@ -29,3 +29,9 @@ This document describes PoshSvn project structure and hacking instructions.
 ## Code style
 
 https://github.com/rinrab/poshsvn/blob/trunk/.editorconfig
+
+## Hacking resources
+
+- [Formatting File Overview](https://learn.microsoft.com/en-us/powershell/scripting/developer/format/formatting-file-overview?view=powershell-7.4)
+- [How to Write a PowerShell Binary Module](https://learn.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-binary-module?view=powershell-7.4)
+- [SVN Book](https://svnbook.red-bean.com/en/1.7/svn.ref.html)
