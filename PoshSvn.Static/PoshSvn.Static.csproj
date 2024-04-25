@@ -15,6 +15,14 @@
     <ModuleManifestDestination>$(OutDir)\PoshSvn.psd1</ModuleManifestDestination>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <ProcessorArchitecture>Amd64</ProcessorArchitecture>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+    <ProcessorArchitecture>X86</ProcessorArchitecture>
+  </PropertyGroup>
+
   <Target Name="BuildModuleManifest"
           BeforeTargets="BeforeBuild"
           Inputs="$(ModuleManifestSource)"
@@ -30,6 +38,10 @@
     <ConfigureFile FileName="$(ModuleManifestDestination)"
                    MatchExpression="@ReleaseNotes@"
                    ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
+
+    <ConfigureFile FileName="$(ModuleManifestDestination)"
+                   MatchExpression="@ProcessorArchitecture@"
+                   ReplacementText="$(ProcessorArchitecture)" />
   </Target>
 
 </Project>
