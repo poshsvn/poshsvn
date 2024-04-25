@@ -55,6 +55,7 @@
 
   <Target Name="ConfigureVersion" AfterTargets="CopyAssets">
     <ConfigureFile FileName="$(VSCodeOutDir)\extension\package.json" MatchExpression="@Version@" ReplacementText="$(Version)" />
+    <ConfigureFile FileName="$(VSCodeOutDir)\extension.vsixmanifest" MatchExpression="@Version@" ReplacementText="$(Version)" />
   </Target>
 
   <Target Name="PackageExtension" DependsOnTargets="CopyAssets;TsCompiler" BeforeTargets="AfterBuild">
