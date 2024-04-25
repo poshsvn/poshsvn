@@ -9,12 +9,12 @@ on:
 permissions: write-all
 
 jobs:
-  create_release:
+  create-release:
     runs-on: windows-latest
 
     steps:
       - name: Create Release
-        id: create_release
+        id: create-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,12 +25,12 @@ jobs:
           prerelease: false
 
     outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      release_id: ${{ steps.create_release.outputs.id }}
+      upload_url: ${{ steps.create-release.outputs.upload_url }}
+      release_id: ${{ steps.create-release.outputs.id }}
 
   build-poshsvn:
     needs: 
-      - create_release
+      - create-release
 
     runs-on: windows-latest
 
@@ -74,7 +74,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: .\bin\poshsvn
           asset_name: PoshSvn-${{ matrix.platform }}.zip
           asset_content_type: application/zip
@@ -84,7 +84,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn.msi
           asset_name: PoshSvn-${{ matrix.platform }}.msi
           asset_content_type: application/msi
@@ -125,7 +125,7 @@ jobs:
     runs-on: windows-latest
     needs:
       - build-poshsvn
-      - create_release
+      - create-release
     steps:
       - name: Download Release artifact
         uses: actions/download-artifact@v4
@@ -141,7 +141,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: .\bin\Release-x64\PoshSvn.VSCode.vsix
           asset_name: PoshSvn.VSCode.vsix
           asset_content_type: application/vsix
@@ -155,4 +155,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_id: ${{ needs.create_release.outputs.release_id }}
+          release_id: ${{ needs.create-release.outputs.release_id }}
