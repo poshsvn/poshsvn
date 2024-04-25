@@ -46,7 +46,6 @@
 
   <PropertyGroup>
     <TargetFramework>net4.7.2</TargetFramework>
-    <AssemblyName>$(Platform)</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
