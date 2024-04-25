@@ -8,7 +8,7 @@
     {
       "kind": "git",
       "repository": "https://github.com/rinrab/vcpkg.git",
-      "baseline": "5c3f9caa4c519cc70402a1c922020a94144f67bf",
+      "baseline": "c7e4a0fba169b1101d81f1ff5abf57351a642386",
       "packages": [
         "serf",
         "subversion"
