@@ -110,7 +110,8 @@ jobs:
 
   publish-powershellgallery:
     runs-on: windows-latest
-    needs: build-poshsvn
+    needs:
+      - build-poshsvn
     steps:
       - name: Download package artifact
         uses: actions/download-artifact@v4
