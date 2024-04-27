@@ -41,9 +41,10 @@ namespace PoshSvn.CmdLets
                 IgnoreSpacing = IgnoreSpacing.ToSharpSvnIgnoreSpacing(),
             };
 
-            SharpSvn.SvnTarget target = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Target));
+            SvnResolvedTarget resolvedTarget = ResolveTarget(Target);
+            SharpSvn.SvnTarget sharpSvnTarget = resolvedTarget.ConvertToSharpSvnTarget();
 
-            SvnClient.Blame(target, args, Blamer);
+            SvnClient.Blame(sharpSvnTarget, args, Blamer);
         }
 
         private void Blamer(object sender, SvnBlameEventArgs e)

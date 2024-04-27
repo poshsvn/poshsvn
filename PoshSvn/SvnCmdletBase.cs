@@ -199,6 +199,35 @@ namespace PoshSvn
             }
         }
 
+        protected SvnResolvedTarget ResolveTarget(SvnTarget target)
+        {
+            if (target.Type == SvnTargetType.Path)
+            {
+                string path = GetUnresolvedProviderPathFromPSPath(target.Value);
+                return new SvnResolvedTarget(path, null, false);
+            }
+            else if (target.Type == SvnTargetType.LiteralPath)
+            {
+                string path = GetUnresolvedProviderPathFromPSPath(target.Value);
+                return new SvnResolvedTarget(path, null, false);
+            }
+            else if (target.Type == SvnTargetType.Url)
+            {
+                if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
+                {
+                    return new SvnResolvedTarget(null, url, true);
+                }
+                else
+                {
+                    throw new ArgumentException("Wrong Url format.", "Url");
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         protected object GetTarget(SvnTarget target)
         {
             if (target.Type == SvnTargetType.Path)
