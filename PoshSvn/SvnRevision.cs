@@ -4,18 +4,18 @@ using System;
 
 namespace PoshSvn
 {
-    public class PoshSvnRevision
+    public class SvnRevision
     {
         public PoshSvnRevisionType RevisionType { get; set; }
         public long Revision { get; set; }
 
-        public PoshSvnRevision(long revision)
+        public SvnRevision(long revision)
         {
             RevisionType = PoshSvnRevisionType.Number;
             Revision = revision;
         }
 
-        public PoshSvnRevision(string str)
+        public SvnRevision(string str)
         {
             int i = 0;
 
@@ -60,7 +60,7 @@ namespace PoshSvn
             }
         }
 
-        public PoshSvnRevision(PoshSvnRevisionType type)
+        public SvnRevision(PoshSvnRevisionType type)
         {
             RevisionType = type;
         }
@@ -79,7 +79,7 @@ namespace PoshSvn
 
         public override bool Equals(object obj)
         {
-            return obj is PoshSvnRevision revision &&
+            return obj is SvnRevision revision &&
                    RevisionType == revision.RevisionType &&
                    Revision == revision.Revision;
         }

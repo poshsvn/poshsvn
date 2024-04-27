@@ -18,7 +18,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev", "r")]
-        public PoshSvnRevision Revision { get; set; }
+        public SvnRevision Revision { get; set; }
 
         [Parameter()]
         public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
