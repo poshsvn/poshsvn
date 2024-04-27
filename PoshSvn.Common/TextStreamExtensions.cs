@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-namespace PoshSvn.Common
+namespace PoshSvn
 {
     public static class TextStreamExtensions
     {
