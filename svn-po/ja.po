@@ -1,4 +1,4 @@
-# Japanese translations for Subversion
+﻿# Japanese translations for Subversion
 # Subversion の日本語訳
 #
 #    Licensed to the Apache Software Foundation (ASF) under one

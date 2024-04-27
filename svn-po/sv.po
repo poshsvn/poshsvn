@@ -1,4 +1,4 @@
-# Svensk översättning av Subversion
+﻿# Svensk översättning av Subversion
 # Swedish translation of Subversion
 #
 #    Licensed to the Apache Software Foundation (ASF) under one

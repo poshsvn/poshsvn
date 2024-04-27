@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 #include "Args/CropWorkingCopy.h"
 #include <private/svn_wc_private.h>

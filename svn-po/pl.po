@@ -1,4 +1,4 @@
-# Polish translations for Subversion
+﻿# Polish translations for Subversion
 # Polskie tłumaczenie komunikatów Subversion.
 #
 #    Licensed to the Apache Software Foundation (ASF) under one

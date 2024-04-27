@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <UsingTask TaskName="ConfigureFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
     <ParameterGroup>
       <FileName  />

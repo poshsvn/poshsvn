@@ -1,4 +1,4 @@
-# Spanish translations for Subversion
+﻿# Spanish translations for Subversion
 # Traducciones al español para Subversion.
 #
 #    Licensed to the Apache Software Foundation (ASF) under one
