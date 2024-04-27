@@ -43,9 +43,8 @@ namespace PoshSvn.CmdLets
                 IgnoreExternals = IgnoreExternals,
             };
 
-            IEnumerable<SvnResolvedTarget> resolvedSources = ResolveTargets(Source);
-            ResolvedTargetCollection sourcesCollection = new ResolvedTargetCollection(resolvedSources);
-            ICollection<SharpSvn.SvnTarget> sources = sourcesCollection.ConvertToSharpSvnTargets();
+            ResolvedTargetCollection resolvedSources = ResolveTargets(Source);
+            ICollection<SharpSvn.SvnTarget> sources = resolvedSources.ConvertToSharpSvnTargets();
 
             SvnResolvedTarget resolvedDestination = ResolveTarget(Destination);
             resolvedDestination.ThrowIfHasOperationalRevision(nameof(Destination));
