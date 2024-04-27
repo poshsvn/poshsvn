@@ -48,7 +48,7 @@ namespace PoshSvn.CmdLets
             ICollection<SharpSvn.SvnTarget> sources = sourcesCollection.ConvertToSharpSvnTargets();
 
             SvnResolvedTarget resolvedDestination = ResolveTarget(Destination);
-            resolvedDestination.ThrowIfHasOperationalRevision("Destination");
+            resolvedDestination.ThrowIfHasOperationalRevision(nameof(Destination));
 
             if (resolvedDestination.TryGetPath(out string destinationPath))
             {
