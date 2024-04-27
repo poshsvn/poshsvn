@@ -88,7 +88,6 @@ namespace PoshSvn
         }
 
         protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
-        protected virtual object GetNotifyOutput(SvnNotifyEventArgs e) => null;
 
         protected void UpdateProgressAction(string action)
         {
