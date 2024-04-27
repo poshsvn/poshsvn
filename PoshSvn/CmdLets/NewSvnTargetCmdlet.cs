@@ -23,30 +23,40 @@ namespace PoshSvn.CmdLets
 
         protected override void ProcessRecord()
         {
+            SvnTarget target = CreateInitialSvnTarget();
+            WriteObject(target);
+        }
+
+        private SvnTarget CreateInitialSvnTarget()
+        {
             if (ParameterSetName == ParameterSetNames.InputObject)
             {
                 object baseObject = InputObject.BaseObject;
 
                 if (baseObject is FileSystemInfo fileSystemInfo)
                 {
-                    WriteObject(new SvnTarget(fileSystemInfo));
+                    return new SvnTarget(fileSystemInfo);
                 }
                 else
                 {
-                    WriteObject(new SvnTarget(InputObject.ToString()));
+                    return new SvnTarget(InputObject.ToString());
                 }
             }
             else if (ParameterSetName == ParameterSetNames.Path)
             {
-                WriteObject(SvnTarget.FromPath(Path));
+                return SvnTarget.FromPath(Path);
             }
             else if (ParameterSetName == ParameterSetNames.LiteralPath)
             {
-                WriteObject(SvnTarget.FromLiteralPath(LiteralPath));
+                return SvnTarget.FromLiteralPath(LiteralPath);
             }
             else if (ParameterSetName == ParameterSetNames.Url)
             {
-                WriteObject(SvnTarget.FromUrl(Url));
+                return SvnTarget.FromUrl(Url);
+            }
+            else
+            {
+                throw new PSNotImplementedException();
             }
         }
     }
