@@ -36,6 +36,7 @@ namespace PoshSvn.CmdLets
 
             ResolvedTargetCollection targets = ResolveTargets(Target);
             targets.ThrowIfHasPathsAndUris(nameof(Target));
+            targets.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (targets.HasPaths)
             {
