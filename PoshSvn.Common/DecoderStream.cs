@@ -3,7 +3,7 @@
 using System;
 using System.Text;
 
-namespace PoshSvn.Common
+namespace PoshSvn
 {
     public class DecoderStream : WritableStreamBase
     {
