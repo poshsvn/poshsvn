@@ -87,12 +87,6 @@ namespace PoshSvn
             return GetUnresolvedProviderPathFromPSPath(path);
         }
 
-        protected void ProgressEventHandler(object sender, SvnProgressEventArgs e)
-        {
-            ProgressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
-            WriteProgress(ProgressRecord);
-        }
-
         protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
         protected virtual object GetNotifyOutput(SvnNotifyEventArgs e) => null;
 
