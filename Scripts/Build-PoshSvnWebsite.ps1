@@ -92,7 +92,7 @@ foreach ($path in Get-ChildItem "$siteRoot\pages" -ErrorAction SilentlyContinue)
     RenderPage -Content $content -PageName $pageName -Title $path.BaseName
 }
 
-Copy-Item "$PSScriptRoot\..\icon-minimal.svg" "$outDir\favicon.svg"
-Copy-Item "$PSScriptRoot\..\icon.svg" "$outDir\icon.svg"
+Copy-Item "$PSScriptRoot\..\Assets\icon-minimal.svg" "$outDir\favicon.svg"
+Copy-Item "$PSScriptRoot\..\Assets\icon.svg" "$outDir\icon.svg"
 
 Add-PageToSiteMap -PagePath "$outDir\index.html"
