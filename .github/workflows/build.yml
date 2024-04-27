@@ -71,5 +71,5 @@ jobs:
       - name: Setup VSTest Path
         uses: darenm/Setup-VSTest@v1.2
 
-      - name: Test
+      - name: Test PoshSvn
         run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Tests.dll
