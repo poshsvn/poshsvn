@@ -51,6 +51,80 @@ namespace PoshSvn
             SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
         }
 
+        protected void NotifyEventHandler(object sender, SharpSvn.SvnNotifyEventArgs e)
+        {
+            if (e.Action == SharpSvn.SvnNotifyAction.UpdateStarted)
+            {
+                UpdateProgressAction(GetActivityTitle(e));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.UpdateCompleted)
+            {
+                if (e.CommandType == SharpSvn.SvnCommandType.Update)
+                {
+                    WriteObject(new SvnUpdateOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+                else if (e.CommandType == SharpSvn.SvnCommandType.CheckOut)
+                {
+                    WriteObject(new SvnCheckoutOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+                else if (e.CommandType == SharpSvn.SvnCommandType.Switch)
+                {
+                    WriteObject(new SvnSwitchOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.BlameRevision)
+            {
+                UpdateProgressAction($"Processing revision {e.Revision}...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.CommitFinalizing)
+            {
+                UpdateProgressAction("Committing transaction...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.CommitSendData)
+            {
+                UpdateProgressAction(string.Format("Sending '{0}'", e.Path));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeBegin)
+            {
+                string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
+                UpdateProgressTitile(string.Format("Merging {0} into '{1}'", e.MergeRange, resolvedPath));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.RecordMergeInfoStarted)
+            {
+                string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
+                UpdateProgressTitile(string.Format("Recording mergeinfo for merge of {0} into '{1}'", e.MergeRange, resolvedPath));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.ConflictResolverStarting)
+            {
+                UpdateProgressAction("Resolving conflicts...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeCompleted ||
+                     e.Action == SharpSvn.SvnNotifyAction.ConflictResolverDone)
+            {
+                // Do nothing.
+            }
+            else
+            {
+                SvnNotifyOutput obj = new SvnNotifyOutput
+                {
+                    Action = e.Action.ToPoshSvnNotifyAction(),
+                    Path = e.Path
+                };
+
+                WriteObject(obj);
+                UpdateProgressAction(obj.ToString());
+            }
+        }
+
         private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
         {
             SvnConflictSummary conflict = CreateConflict(e);
