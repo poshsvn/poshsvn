@@ -51,9 +51,9 @@ namespace PoshSvn.CmdLets
                 args.RetrieveEntries = SvnDirEntryItems.AllFieldsV15;
             }
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
+            ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            foreach (SharpSvn.SvnTarget target in targets.Targets)
+            foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
             {
                 SvnClient.List(target, args, ListHandler);
             }
