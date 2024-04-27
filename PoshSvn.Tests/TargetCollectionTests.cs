@@ -12,12 +12,12 @@ namespace PoshSvn.Tests
         [Test]
         public void BasicTest()
         {
-            TargetCollection targets = TargetCollection.Parse(new object[]
+            ResolvedTargetCollection targets = new ResolvedTargetCollection(new SvnResolvedTarget[]
             {
-                @"C:\wc\dir_1",
-                @"C:\wc\dir_2",
-                @"C:\wc\dir_3",
-                new Uri("http://svn.example.com/repos/dir_4")
+                new SvnResolvedTarget(@"C:\wc\dir_1", null, false, null),
+                new SvnResolvedTarget(@"C:\wc\dir_2", null, false, null),
+                new SvnResolvedTarget(@"C:\wc\dir_3", null, false, null),
+                new SvnResolvedTarget(null, new Uri("http://svn.example.com/repos/dir_4"), true, null)
             });
 
             CollectionAssert.AreEqual(targets.Paths, new[]
@@ -27,12 +27,20 @@ namespace PoshSvn.Tests
                 @"C:\wc\dir_3",
             });
 
-            CollectionAssert.AreEqual(targets.Uris, new[]
+            CollectionAssert.AreEqual(targets.Urls, new[]
             {
                 new Uri("http://svn.example.com/repos/dir_4")
             });
 
-            CollectionAssert.AreEqual(targets.Targets, new SharpSvn.SvnTarget[]
+            CollectionAssert.AreEqual(targets.EnumerateSharpSvnTargets(), new SharpSvn.SvnTarget[]
+            {
+                SvnPathTarget.FromString(@"C:\wc\dir_1"),
+                SvnPathTarget.FromString(@"C:\wc\dir_2"),
+                SvnPathTarget.FromString(@"C:\wc\dir_3"),
+                SvnUriTarget.FromString("http://svn.example.com/repos/dir_4")
+            });
+
+            CollectionAssert.AreEqual(targets.ConvertToSharpSvnTargets(), new SharpSvn.SvnTarget[]
             {
                 SvnPathTarget.FromString(@"C:\wc\dir_1"),
                 SvnPathTarget.FromString(@"C:\wc\dir_2"),
@@ -44,49 +52,41 @@ namespace PoshSvn.Tests
         [Test]
         public void HasPathAndUriThrow()
         {
-            TargetCollection targets = TargetCollection.Parse(new object[]
+            ResolvedTargetCollection targets = new ResolvedTargetCollection(new SvnResolvedTarget[]
             {
-                @"C:\wc\dir_1",
-                new Uri("http://svn.example.com/repos/dir_4")
+                new SvnResolvedTarget(@"C:\wc\dir_1", null, false, null),
+                new SvnResolvedTarget(@"C:\wc\dir_2", null, false, null),
+                new SvnResolvedTarget(@"C:\wc\dir_3", null, false, null),
+                new SvnResolvedTarget(null, new Uri("http://svn.example.com/repos/dir_4"), true, null)
             });
 
-            Assert.Throws<ArgumentException>(() => targets.ThrowIfHasPathsAndUris());
+            Assert.Throws<ArgumentException>(() => targets.ThrowIfHasPathsAndUris("Target"));
         }
 
         [Test]
         public void HasOnlyPathDoNotThrow()
         {
-            TargetCollection targets = TargetCollection.Parse(new object[]
+            ResolvedTargetCollection targets = new ResolvedTargetCollection(new SvnResolvedTarget[]
             {
-                @"C:\wc\dir_1",
-                @"C:\wc\dir_2",
+                new SvnResolvedTarget(@"C:\wc\dir_1", null, false, null),
+                new SvnResolvedTarget(@"C:\wc\dir_2", null, false, null),
+                new SvnResolvedTarget(@"C:\wc\dir_3", null, false, null),
             });
 
-            Assert.DoesNotThrow(() => targets.ThrowIfHasPathsAndUris());
+            targets.ThrowIfHasPathsAndUris("Target");
         }
 
         [Test]
         public void HasOnlyUriDoNotThrow()
         {
-            TargetCollection targets = TargetCollection.Parse(new object[]
+            ResolvedTargetCollection targets = new ResolvedTargetCollection(new SvnResolvedTarget[]
             {
-                new Uri("http://svn.example.com/repos/dir_1"),
-                new Uri("http://svn.example.com/repos/dir_2"),
-                new Uri("http://svn.example.com/repos/dir_3"),
+                new SvnResolvedTarget(null, new Uri("http://svn.example.com/repos/dir_4"), true, null),
+                new SvnResolvedTarget(null, new Uri("http://svn.example.com/repos/dir_4"), true, null),
+                new SvnResolvedTarget(null, new Uri("http://svn.example.com/repos/dir_4"), true, null),
             });
 
-            Assert.DoesNotThrow(() => targets.ThrowIfHasPathsAndUris());
-        }
-
-        [Test]
-        public void BadPath()
-        {
-            Assert.Throws<ArgumentException>(() => TargetCollection.Parse(new object[]
-            {
-                @"C:\wc\dir_1",
-                @"C:\wc\dir_2",
-                "http://svn.example.com/repos/dir_1"
-            }));
+            Assert.DoesNotThrow(() => targets.ThrowIfHasPathsAndUris("Target"));
         }
     }
 }
