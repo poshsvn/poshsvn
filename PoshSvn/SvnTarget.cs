@@ -24,10 +24,9 @@ namespace PoshSvn
             Value = pathOrUrl;
         }
 
-        public SvnTarget(FileSystemInfo fileInfo)
+        public SvnTarget(FileSystemInfo fileInfo) :
+            this(fileInfo.FullName, SvnTargetType.LiteralPath)
         {
-            Type = SvnTargetType.LiteralPath;
-            Value = fileInfo.FullName;
         }
 
         public static explicit operator SvnTarget(FileSystemInfo fileInfo)
