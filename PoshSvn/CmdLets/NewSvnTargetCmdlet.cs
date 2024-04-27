@@ -21,9 +21,19 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public string Url { get; set; }
 
+        [Parameter()]
+        [Alias("r", "rev")]
+        public SvnRevision Revision { get; set; }
+
         protected override void ProcessRecord()
         {
             SvnTarget target = CreateInitialSvnTarget();
+
+            if (Revision != null)
+            {
+                target.Revision = Revision;
+            }
+
             WriteObject(target);
         }
 

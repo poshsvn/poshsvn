@@ -142,6 +142,28 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void NewSvnTargetWithRevisionParameter()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(
+                    @"svn-mkdir wc\a wc\b",
+                    @"svn-commit wc\a -m 'test 1'",
+                    @"svn-commit wc\b -m 'test 2'");
+
+                var actual = sb.RunScript("New-SvnTarget 'http://svn.example.com/svn/repo/trunk/test.txt' -Revision 123");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        SvnTarget.FromUrl("http://svn.example.com/svn/repo/trunk/test.txt", new SvnRevision("123"))
+                    },
+                    actual);
+
+            }
+        }
+
+        [Test]
         public void ParsePegRevisionTargetTest1()
         {
             SvnTarget.ParsePegRevisionTarget(@"C:\path\to\file", out var remainingTarget, out var revision);
