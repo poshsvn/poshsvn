@@ -177,6 +177,12 @@ namespace PoshSvn
             }
         }
 
+        protected SvnResolvedTarget ResolveLiteralTarget(SvnTarget target)
+        {
+            string path = GetUnresolvedProviderPathFromPSPath(target.Value);
+            return new SvnResolvedTarget(path, null, false);
+        }
+
         protected IEnumerable<SvnResolvedTarget> ResolveTargets(IEnumerable<SvnTarget> targets)
         {
             foreach (SvnTarget target in targets)
@@ -190,8 +196,7 @@ namespace PoshSvn
                 }
                 else if (target.Type == SvnTargetType.LiteralPath)
                 {
-                    string path = GetUnresolvedProviderPathFromPSPath(target.Value);
-                    yield return new SvnResolvedTarget(path, null, false);
+                    yield return ResolveLiteralTarget(target);
                 }
                 else if (target.Type == SvnTargetType.Url)
                 {
@@ -208,13 +213,11 @@ namespace PoshSvn
         {
             if (target.Type == SvnTargetType.Path)
             {
-                string path = GetUnresolvedProviderPathFromPSPath(target.Value);
-                return new SvnResolvedTarget(path, null, false);
+                return ResolveLiteralTarget(target);
             }
             else if (target.Type == SvnTargetType.LiteralPath)
             {
-                string path = GetUnresolvedProviderPathFromPSPath(target.Value);
-                return new SvnResolvedTarget(path, null, false);
+                return ResolveLiteralTarget(target);
             }
             else if (target.Type == SvnTargetType.Url)
             {
