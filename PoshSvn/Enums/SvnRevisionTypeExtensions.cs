@@ -38,5 +38,38 @@ namespace PoshSvn
                     throw new NotImplementedException();
             }
         }
+
+        public static PoshSvnRevisionType ToPoshSvnRevisionType(this SharpSvn.SvnRevisionType revisionType)
+        {
+            switch (revisionType)
+            {
+                case SharpSvn.SvnRevisionType.None:
+                    return PoshSvnRevisionType.None;
+
+                case SharpSvn.SvnRevisionType.Number:
+                    return PoshSvnRevisionType.Number;
+
+                case SharpSvn.SvnRevisionType.Time:
+                    return PoshSvnRevisionType.Time;
+
+                case SharpSvn.SvnRevisionType.Committed:
+                    return PoshSvnRevisionType.Committed;
+
+                case SharpSvn.SvnRevisionType.Previous:
+                    return PoshSvnRevisionType.Previous;
+
+                case SharpSvn.SvnRevisionType.Base:
+                    return PoshSvnRevisionType.Base;
+
+                case SharpSvn.SvnRevisionType.Working:
+                    return PoshSvnRevisionType.Working;
+
+                case SharpSvn.SvnRevisionType.Head:
+                    return PoshSvnRevisionType.Head;
+
+                default:
+                    throw new NotImplementedException();
+            }
+        }
     }
 }
