@@ -2,6 +2,7 @@
 
 using System.IO;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
@@ -137,6 +138,30 @@ namespace PoshSvn.Tests
                     },
                     sb.RunScript("ls wc | New-SvnTarget"));
             }
+        }
+
+        [Test]
+        public void ParsePegRevisionTargetTest1()
+        {
+            SvnTarget.ParsePegRevisionTarget(@"C:\path\to\file", out var remainingTarget, out var revision);
+            ClassicAssert.AreEqual(@"C:\path\to\file", remainingTarget);
+            ClassicAssert.AreEqual(null, revision);
+        }
+
+        [Test]
+        public void ParsePegRevisionTargetTest2()
+        {
+            SvnTarget.ParsePegRevisionTarget(@"C:\path\to\file@123", out var remainingTarget, out var revision);
+            ClassicAssert.AreEqual(@"C:\path\to\file", remainingTarget);
+            ClassicAssert.AreEqual(new SvnRevision("123"), revision);
+        }
+
+        [Test]
+        public void ParsePegRevisionTargetTest3()
+        {
+            SvnTarget.ParsePegRevisionTarget(@"http://svn.example.com/svn/repo/trunk/test.txt@HEAD", out var remainingTarget, out var revision);
+            ClassicAssert.AreEqual(@"http://svn.example.com/svn/repo/trunk/test.txt", remainingTarget);
+            ClassicAssert.AreEqual(new SvnRevision("HEAD"), revision);
         }
     }
 }
