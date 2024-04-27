@@ -11,6 +11,9 @@ namespace PoshSvn
         public List<string> Paths { get; }
         public List<Uri> Urls { get; }
 
+        public bool HasUris => Urls.Count > 0;
+        public bool HasPaths => Paths.Count > 0;
+
         public ResolvedTargetCollection(IEnumerable<SvnResolvedTarget> targets)
         {
             Targets = new List<SvnResolvedTarget>();
