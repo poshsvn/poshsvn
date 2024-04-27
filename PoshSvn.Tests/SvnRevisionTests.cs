@@ -11,24 +11,24 @@ namespace PoshSvn.Tests
         [Test]
         public void NumberRevisionTests()
         {
-            ClassicAssert.AreEqual(new PoshSvnRevision(123), new PoshSvnRevision("123"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(123), new PoshSvnRevision(" 123"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(123), new PoshSvnRevision(" 123  "));
-            ClassicAssert.AreEqual(new PoshSvnRevision(123), new PoshSvnRevision("r123"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(123), new PoshSvnRevision("rrrrr 123"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(123), new PoshSvnRevision("rrrrr 123   "));
+            ClassicAssert.AreEqual(new SvnRevision(123), new SvnRevision("123"));
+            ClassicAssert.AreEqual(new SvnRevision(123), new SvnRevision(" 123"));
+            ClassicAssert.AreEqual(new SvnRevision(123), new SvnRevision(" 123  "));
+            ClassicAssert.AreEqual(new SvnRevision(123), new SvnRevision("r123"));
+            ClassicAssert.AreEqual(new SvnRevision(123), new SvnRevision("rrrrr 123"));
+            ClassicAssert.AreEqual(new SvnRevision(123), new SvnRevision("rrrrr 123   "));
         }
 
         [Test]
         public void WordRevisionTests()
         {
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Head), new PoshSvnRevision("head"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Head), new PoshSvnRevision("Head"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Head), new PoshSvnRevision("HEAD"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Head), new PoshSvnRevision("  HEAD  "));
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Previous), new PoshSvnRevision("  PREV  "));
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Base), new PoshSvnRevision("rBase"));
-            ClassicAssert.AreEqual(new PoshSvnRevision(PoshSvnRevisionType.Committed), new PoshSvnRevision("Committed"));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("head"));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("Head"));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("HEAD"));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("  HEAD  "));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Previous), new SvnRevision("  PREV  "));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Base), new SvnRevision("rBase"));
+            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Committed), new SvnRevision("Committed"));
         }
 
         [Test]
@@ -40,66 +40,66 @@ namespace PoshSvn.Tests
         [Test]
         public void ExceptionTests()
         {
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevision("no_revison"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevision(""));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevision("r"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevision("HEADS"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevision("12 3"));
+            Assert.Throws<ArgumentException>(() => new SvnRevision("no_revison"));
+            Assert.Throws<ArgumentException>(() => new SvnRevision(""));
+            Assert.Throws<ArgumentException>(() => new SvnRevision("r"));
+            Assert.Throws<ArgumentException>(() => new SvnRevision("HEADS"));
+            Assert.Throws<ArgumentException>(() => new SvnRevision("12 3"));
         }
 
         [Test]
         public void NumberRangeTests()
         {
-            ClassicAssert.AreEqual(new PoshSvnRevisionRange(10, 20), new PoshSvnRevisionRange("10:20"));
-            ClassicAssert.AreEqual(new PoshSvnRevisionRange(10, 20), new PoshSvnRevisionRange("10: 20"));
-            ClassicAssert.AreEqual(new PoshSvnRevisionRange(10, 20), new PoshSvnRevisionRange("10       : 20"));
-            ClassicAssert.AreEqual(new PoshSvnRevisionRange(10, 20), new PoshSvnRevisionRange("r10 : r20"));
-            ClassicAssert.AreEqual(new PoshSvnRevisionRange(10, 20), new PoshSvnRevisionRange("r10:r20"));
+            ClassicAssert.AreEqual(new SvnRevisionRange(10, 20), new SvnRevisionRange("10:20"));
+            ClassicAssert.AreEqual(new SvnRevisionRange(10, 20), new SvnRevisionRange("10: 20"));
+            ClassicAssert.AreEqual(new SvnRevisionRange(10, 20), new SvnRevisionRange("10       : 20"));
+            ClassicAssert.AreEqual(new SvnRevisionRange(10, 20), new SvnRevisionRange("r10 : r20"));
+            ClassicAssert.AreEqual(new SvnRevisionRange(10, 20), new SvnRevisionRange("r10:r20"));
         }
 
         [Test]
         public void WordRangeTests()
         {
             ClassicAssert.AreEqual(
-                new PoshSvnRevisionRange(
-                    new PoshSvnRevision("40"),
-                    new PoshSvnRevision("head")),
-                new PoshSvnRevisionRange("40:head"));
+                new SvnRevisionRange(
+                    new SvnRevision("40"),
+                    new SvnRevision("head")),
+                new SvnRevisionRange("40:head"));
 
             ClassicAssert.AreEqual(
-                new PoshSvnRevisionRange(
-                    new PoshSvnRevision("40"),
-                    new PoshSvnRevision("head")),
-                new PoshSvnRevisionRange("r40 : head"));
+                new SvnRevisionRange(
+                    new SvnRevision("40"),
+                    new SvnRevision("head")),
+                new SvnRevisionRange("r40 : head"));
 
             ClassicAssert.AreEqual(
-                new PoshSvnRevisionRange(
-                    new PoshSvnRevision("PREV"),
-                    new PoshSvnRevision("HEAD")),
-                new PoshSvnRevisionRange("PREV:HEAD"));
+                new SvnRevisionRange(
+                    new SvnRevision("PREV"),
+                    new SvnRevision("HEAD")),
+                new SvnRevisionRange("PREV:HEAD"));
         }
 
         [Test]
         public void SingleRevisionRangeTests()
         {
             ClassicAssert.AreEqual(
-                new PoshSvnRevisionRange(15, 15),
-                new PoshSvnRevisionRange("15"));
+                new SvnRevisionRange(15, 15),
+                new SvnRevisionRange("15"));
 
             ClassicAssert.AreEqual(
-                new PoshSvnRevisionRange(15, 15),
-                new PoshSvnRevisionRange(" r15"));
+                new SvnRevisionRange(15, 15),
+                new SvnRevisionRange(" r15"));
         }
 
         [Test]
         public void RangeExceptionTests()
         {
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevisionRange("no_revison:123"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevisionRange(""));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevisionRange(":"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevisionRange("1:2:3"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevisionRange("HEADS:10"));
-            Assert.Throws<ArgumentException>(() => new PoshSvnRevisionRange("12 3"));
+            Assert.Throws<ArgumentException>(() => new SvnRevisionRange("no_revison:123"));
+            Assert.Throws<ArgumentException>(() => new SvnRevisionRange(""));
+            Assert.Throws<ArgumentException>(() => new SvnRevisionRange(":"));
+            Assert.Throws<ArgumentException>(() => new SvnRevisionRange("1:2:3"));
+            Assert.Throws<ArgumentException>(() => new SvnRevisionRange("HEADS:10"));
+            Assert.Throws<ArgumentException>(() => new SvnRevisionRange("12 3"));
         }
     }
 }
