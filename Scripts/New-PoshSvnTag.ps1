@@ -1,4 +1,4 @@
-$location = Get-Location
+﻿$location = Get-Location
 Set-Location $PSScriptRoot\..
 
 $data = Import-PowerShellDataFile -Path $PSScriptRoot\..\PoshSvn\PoshSvn.psd1

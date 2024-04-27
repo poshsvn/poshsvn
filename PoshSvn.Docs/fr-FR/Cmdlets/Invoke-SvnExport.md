@@ -1,4 +1,4 @@
----
+﻿---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnExport/

@@ -1,4 +1,4 @@
-# Writing PoshSvn code
+﻿# Writing PoshSvn code
 
 This document describes PoshSvn project structure and hacking instructions.
 
