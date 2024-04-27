@@ -20,7 +20,7 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 2)]
         [Alias("rev")]
         [PSDefaultValue(Value = null)]
-        public PoshSvnRevisionRange[] Revision { get; set; } = null;
+        public SvnRevisionRange[] Revision { get; set; } = null;
 
         [Parameter()]
         public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
@@ -68,7 +68,7 @@ namespace PoshSvn.CmdLets
             {
                 List<SharpSvn.SvnRevisionRange> ranges = new List<SharpSvn.SvnRevisionRange>();
 
-                foreach (PoshSvnRevisionRange revision in Revision)
+                foreach (SvnRevisionRange revision in Revision)
                 {
                     ranges.Add(revision?.ToSharpSvnRevisionRange());
                 }

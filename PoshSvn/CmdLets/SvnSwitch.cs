@@ -20,7 +20,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; } = null;
+        public SharpSvn.SvnRevision Revision { get; set; } = null;
 
         [Parameter()]
         [PSDefaultValue(Value = "Infinity")]
