@@ -100,8 +100,8 @@ namespace PoshSvn.CmdLets
             {
                 using (Stream stream = GetStream())
                 {
-                    SharpSvn.SvnTarget oldTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Old));
-                    SharpSvn.SvnTarget newTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(New));
+                    SharpSvn.SvnTarget oldTarget = ResolveTarget(Old).ConvertToSharpSvnTarget();
+                    SharpSvn.SvnTarget newTarget = ResolveTarget(New).ConvertToSharpSvnTarget();
 
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
                 };
