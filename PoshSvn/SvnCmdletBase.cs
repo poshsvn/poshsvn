@@ -184,13 +184,5 @@ namespace PoshSvn
                 throw new NotImplementedException();
             }
         }
-
-        protected void CommittedEventHandler(object sender, SvnCommittedEventArgs e)
-        {
-            WriteObject(new SvnCommitOutput
-            {
-                Revision = e.Revision
-            });
-        }
     }
 }
