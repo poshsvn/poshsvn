@@ -2,7 +2,7 @@
 
 namespace PoshSvn
 {
-    public enum PoshSvnRevisionType
+    public enum SvnRevisionType
     {
         None,
         Number,
