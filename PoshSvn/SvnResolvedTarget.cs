@@ -11,12 +11,14 @@ namespace PoshSvn
         private string path;
         private Uri url;
         private bool isUrl;
+        private SvnRevision revision;
 
-        public SvnResolvedTarget(string path, Uri url, bool isUrl)
+        public SvnResolvedTarget(string path, Uri url, bool isUrl, SvnRevision revision)
         {
             this.path = path;
             this.url = url;
             this.isUrl = isUrl;
+            this.revision = revision;
         }
 
         public bool TryGetUrl(out Uri url)
@@ -37,11 +39,11 @@ namespace PoshSvn
         {
             if (isUrl)
             {
-                return new SharpSvn.SvnUriTarget(url);
+                return new SharpSvn.SvnUriTarget(url, GetSharpSvnRevision());
             }
             else
             {
-                return new SharpSvn.SvnPathTarget(path);
+                return new SharpSvn.SvnPathTarget(path, GetSharpSvnRevision());
             }
         }
 
