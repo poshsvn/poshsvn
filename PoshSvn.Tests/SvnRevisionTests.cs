@@ -22,13 +22,13 @@ namespace PoshSvn.Tests
         [Test]
         public void WordRevisionTests()
         {
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("head"));
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("Head"));
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("HEAD"));
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Head), new SvnRevision("  HEAD  "));
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Previous), new SvnRevision("  PREV  "));
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Base), new SvnRevision("rBase"));
-            ClassicAssert.AreEqual(new SvnRevision(PoshSvnRevisionType.Committed), new SvnRevision("Committed"));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Head), new SvnRevision("head"));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Head), new SvnRevision("Head"));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Head), new SvnRevision("HEAD"));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Head), new SvnRevision("  HEAD  "));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Previous), new SvnRevision("  PREV  "));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Base), new SvnRevision("rBase"));
+            ClassicAssert.AreEqual(new SvnRevision(SvnRevisionType.Committed), new SvnRevision("Committed"));
         }
 
         [Test]

@@ -43,7 +43,7 @@ namespace PoshSvn
             EndRevision = new SvnRevision(endRevision);
         }
 
-        public SvnRevisionRange(PoshSvnRevisionType start, PoshSvnRevisionType end)
+        public SvnRevisionRange(SvnRevisionType start, SvnRevisionType end)
         {
             StartRevision = new SvnRevision(start);
             EndRevision = new SvnRevision(end);
