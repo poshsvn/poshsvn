@@ -8,9 +8,9 @@ namespace PoshSvn
 {
     public class SvnTarget
     {
-        public string Value { get; }
-        public SvnTargetType Type { get; }
-        public SvnRevision Revision { get; }
+        public string Value { get; set; }
+        public SvnTargetType Type { get; set; }
+        public SvnRevision Revision { get; set; }
 
         public SvnTarget(string pathOrUrl)
         {
