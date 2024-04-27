@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -162,6 +163,15 @@ namespace PoshSvn.Tests
             SvnTarget.ParsePegRevisionTarget(@"http://svn.example.com/svn/repo/trunk/test.txt@HEAD", out var remainingTarget, out var revision);
             ClassicAssert.AreEqual(@"http://svn.example.com/svn/repo/trunk/test.txt", remainingTarget);
             ClassicAssert.AreEqual(new SvnRevision("HEAD"), revision);
+        }
+
+        [Test]
+        public void ParsePegRevisionTargetTest4()
+        {
+            Assert.Throws<ArgumentException>(() => SvnTarget.ParsePegRevisionTarget(
+                @"http://svn.example.com/svn/repo/trunk/test.txt@the_incorrect_revision",
+                out var remainingTarget,
+                out var revision));
         }
     }
 }
