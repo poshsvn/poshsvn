@@ -56,22 +56,5 @@ namespace PoshSvn
                 return revision.ToSharpSvnRevision();
             }
         }
-
-        //public bool TryConvertToUriTarget(bool allowOperationalRevision, out SvnUriTarget svnUriTarget)
-        //{
-        //    return SvnUriTarget.TryParse(Value, allowOperationalRevision, out svnUriTarget);
-        //}
-
-        //public bool TryConvertToSharpSvnTarget()
-        //{
-        //    if (Type == SvnTargetType.Url)
-        //    {
-        //        return TryConvertToUriTarget();
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
     }
 }
