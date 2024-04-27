@@ -55,11 +55,11 @@ namespace PoshSvn
             return rv;
         }
 
-        public void ThrowIfHasPathsAndUris()
+        public void ThrowIfHasPathsAndUris(string paramName)
         {
             if (HasPaths && HasUris)
             {
-                throw new ArgumentException("Cannot mix repository and working copy targets", "Target");
+                throw new ArgumentException("Cannot mix repository and working copy targets", paramName);
             }
         }
     }
