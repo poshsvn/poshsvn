@@ -165,6 +165,18 @@ namespace PoshSvn
             }
         }
 
+        protected SvnResolvedTarget ResolveUriTarget(SvnTarget target)
+        {
+            if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
+            {
+                return new SvnResolvedTarget(null, url, true);
+            }
+            else
+            {
+                throw new ArgumentException("Wrong Url format.", "Url");
+            }
+        }
+
         protected IEnumerable<SvnResolvedTarget> ResolveTargets(IEnumerable<SvnTarget> targets)
         {
             foreach (SvnTarget target in targets)
@@ -183,14 +195,7 @@ namespace PoshSvn
                 }
                 else if (target.Type == SvnTargetType.Url)
                 {
-                    if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
-                    {
-                        yield return new SvnResolvedTarget(null, url, true);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Wrong Url format.", "Url");
-                    }
+                    yield return ResolveUriTarget(target);
                 }
                 else
                 {
@@ -213,14 +218,7 @@ namespace PoshSvn
             }
             else if (target.Type == SvnTargetType.Url)
             {
-                if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
-                {
-                    return new SvnResolvedTarget(null, url, true);
-                }
-                else
-                {
-                    throw new ArgumentException("Wrong Url format.", "Url");
-                }
+                return ResolveUriTarget(target);
             }
             else
             {
