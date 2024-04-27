@@ -165,6 +165,8 @@ namespace PoshSvn.Tests
                    nameof(SvnInfoOutput.RepositoryId),
                    nameof(SvnInfoOutput.LastChangedAuthor));
 
+                actual = sb.RunScript($"svn-info '{sb.ReposUrl}'");
+
                 PSObjectAssert.AreEqual(
                    new[]
                    {
@@ -179,7 +181,7 @@ namespace PoshSvn.Tests
                             LastChangedRevision = 1,
                         }
                    },
-                   sb.RunScript($"svn-info '{sb.ReposUrl}'"),
+                   actual,
                    nameof(SvnInfoOutput.RepositoryId),
                    nameof(SvnInfoOutput.LastChangedDate),
                    nameof(SvnInfoOutput.RepositoryId),
