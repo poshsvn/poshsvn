@@ -73,3 +73,6 @@ jobs:
 
       - name: Test PoshSvn
         run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Tests.dll
+
+      - name: Test PoshSvn.Common
+        run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Common.Tests.dll
