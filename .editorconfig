@@ -1,4 +1,4 @@
-root=true
+ï»¿root=true
 
 [*]
 indent_style=space
@@ -21,7 +21,7 @@ indent_style=space
 [*.cs]
 file_header_template = Copyright (c) Timofei Zhakov. All rights reserved.
 
-# CS0659: Le type se substitue à Object.Equals(object o) mais pas à Object.GetHashCode()
+# CS0659: Le type se substitue ï¿½ Object.Equals(object o) mais pas ï¿½ Object.GetHashCode()
 dotnet_diagnostic.CS0659.severity = silent
 csharp_using_directive_placement = outside_namespace:silent
 csharp_prefer_simple_using_statement = true:suggestion

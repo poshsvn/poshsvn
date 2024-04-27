@@ -1,4 +1,4 @@
-# German translation of Subversion
+﻿# German translation of Subversion
 # Deutsche Übersetzung von Subversion
 #
 #    Licensed to the Apache Software Foundation (ASF) under one

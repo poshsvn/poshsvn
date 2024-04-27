@@ -1,4 +1,4 @@
-param (
+﻿param (
 )
 
 $docsPath = "$PSScriptRoot\..\PoshSvn.Docs"

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "LookArgs/SvnLookInheritedPropertyListArgs.h"
 
 using namespace SharpSvn;

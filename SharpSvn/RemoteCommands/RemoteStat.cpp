@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 #include "RemoteArgs/SvnRemoteStatArgs.h"
 #include "EventArgs/SvnRemoteStatEventArgs.h"
