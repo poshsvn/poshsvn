@@ -6,10 +6,10 @@ namespace PoshSvn
 {
     public class SvnResolvedTarget
     {
-        private string path;
-        private Uri url;
-        private bool isUrl;
-        private SvnRevision revision;
+        private readonly string path;
+        private readonly Uri url;
+        private readonly bool isUrl;
+        private readonly SvnRevision revision;
 
         public SvnResolvedTarget(string path, Uri url, bool isUrl, SvnRevision revision)
         {
