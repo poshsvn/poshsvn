@@ -125,6 +125,20 @@ namespace PoshSvn
             }
         }
 
+        protected void CommittedEventHandler(object sender, SharpSvn.SvnCommittedEventArgs e)
+        {
+            WriteObject(new SvnCommitOutput
+            {
+                Revision = e.Revision
+            });
+        }
+
+        protected void ProgressEventHandler(object sender, SharpSvn.SvnProgressEventArgs e)
+        {
+            ProgressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+            WriteProgress(ProgressRecord);
+        }
+
         private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
         {
             SvnConflictSummary conflict = CreateConflict(e);
