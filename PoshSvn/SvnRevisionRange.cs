@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace PoshSvn
 {
-    public class PoshSvnRevisionRange
+    public class SvnRevisionRange
     {
         public SvnRevision EndRevision { get; set; }
         public SvnRevision StartRevision { get; set; }
 
-        public PoshSvnRevisionRange(string str)
+        public SvnRevisionRange(string str)
         {
             string[] tokens = str.Split(new char[] { ':' });
 
@@ -31,19 +31,19 @@ namespace PoshSvn
             }
         }
 
-        public PoshSvnRevisionRange(SvnRevision startRevision, SvnRevision endRevision)
+        public SvnRevisionRange(SvnRevision startRevision, SvnRevision endRevision)
         {
             StartRevision = startRevision;
             EndRevision = endRevision;
         }
 
-        public PoshSvnRevisionRange(long startRevision, long endRevision)
+        public SvnRevisionRange(long startRevision, long endRevision)
         {
             StartRevision = new SvnRevision(startRevision);
             EndRevision = new SvnRevision(endRevision);
         }
 
-        public PoshSvnRevisionRange(PoshSvnRevisionType start, PoshSvnRevisionType end)
+        public SvnRevisionRange(PoshSvnRevisionType start, PoshSvnRevisionType end)
         {
             StartRevision = new SvnRevision(start);
             EndRevision = new SvnRevision(end);
@@ -51,7 +51,7 @@ namespace PoshSvn
 
         public override bool Equals(object obj)
         {
-            return obj is PoshSvnRevisionRange range &&
+            return obj is SvnRevisionRange range &&
                    EqualityComparer<SvnRevision>.Default.Equals(EndRevision, range.EndRevision) &&
                    EqualityComparer<SvnRevision>.Default.Equals(StartRevision, range.StartRevision);
         }

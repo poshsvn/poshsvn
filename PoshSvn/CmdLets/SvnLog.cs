@@ -18,7 +18,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev", "r")]
-        public PoshSvnRevisionRange[] Revision { get; set; }
+        public SvnRevisionRange[] Revision { get; set; }
 
         [Parameter()]
         [Alias("v")]
@@ -54,9 +54,9 @@ namespace PoshSvn.CmdLets
             {
                 SvnTarget.FromPath(".")
             };
-            Revision = new PoshSvnRevisionRange[]
+            Revision = new SvnRevisionRange[]
             {
-                new PoshSvnRevisionRange("HEAD:0")
+                new SvnRevisionRange("HEAD:0")
             };
         }
 
@@ -69,7 +69,7 @@ namespace PoshSvn.CmdLets
                 RetrieveAllProperties = WithAllRevisionProperties,
             };
 
-            foreach (PoshSvnRevisionRange range in Revision)
+            foreach (SvnRevisionRange range in Revision)
             {
                 args.Ranges.Add(range.ToSharpSvnRevisionRange());
             }
