@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System.IO;
+using PoshSvn.Enums;
 using SharpSvn;
 
 namespace PoshSvn
@@ -54,12 +55,5 @@ namespace PoshSvn
         {
             return new SvnTarget(url, SvnTargetType.Url);
         }
-    }
-
-    public enum SvnTargetType
-    {
-        Path,
-        LiteralPath,
-        Url
     }
 }
