@@ -14,17 +14,19 @@ namespace PoshSvn
 
         public SvnTarget(string pathOrUrl)
         {
-            if (pathOrUrl.Contains("://"))
+            ParsePegRevisionTarget(pathOrUrl, out string remainingTarget, out SvnRevision revision);
+
+            if (remainingTarget.Contains("://"))
             {
                 Type = SvnTargetType.Url;
-                Value = pathOrUrl;
-                Revision = null;
+                Value = remainingTarget;
+                Revision = revision;
             }
             else
             {
                 Type = SvnTargetType.Path;
-                Value = pathOrUrl;
-                Revision = null;
+                Value = remainingTarget;
+                Revision = revision;
             }
         }
 

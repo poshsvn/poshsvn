@@ -163,7 +163,7 @@ namespace PoshSvn
         {
             if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
             {
-                return new SvnResolvedTarget(null, url, true);
+                return new SvnResolvedTarget(null, url, true, target.Revision);
             }
             else
             {
@@ -174,7 +174,7 @@ namespace PoshSvn
         protected SvnResolvedTarget ResolveLiteralTarget(SvnTarget target)
         {
             string path = GetUnresolvedProviderPathFromPSPath(target.Value);
-            return new SvnResolvedTarget(path, null, false);
+            return new SvnResolvedTarget(path, null, false, target.Revision);
         }
 
         protected IEnumerable<SvnResolvedTarget> ResolveTargets(IEnumerable<SvnTarget> targets)
@@ -185,7 +185,7 @@ namespace PoshSvn
                 {
                     foreach (string path in GetPathTargets(target.Value))
                     {
-                        yield return new SvnResolvedTarget(path, null, false);
+                        yield return new SvnResolvedTarget(path, null, false, target.Revision);
                     }
                 }
                 else if (target.Type == SvnTargetType.LiteralPath)
