@@ -62,5 +62,13 @@ namespace PoshSvn
                 throw new ArgumentException("Cannot mix repository and working copy targets", paramName);
             }
         }
+
+        public void ThrowIfHasAnyOperationalRevisions(string paramName)
+        {
+            foreach (SvnResolvedTarget target in Targets)
+            {
+                target.ThrowIfHasOperationalRevision(paramName);
+            }
+        }
     }
 }
