@@ -7,8 +7,8 @@ namespace PoshSvn
 {
     public class PoshSvnRevisionRange
     {
-        public PoshSvnRevision EndRevision { get; set; }
-        public PoshSvnRevision StartRevision { get; set; }
+        public SvnRevision EndRevision { get; set; }
+        public SvnRevision StartRevision { get; set; }
 
         public PoshSvnRevisionRange(string str)
         {
@@ -16,14 +16,14 @@ namespace PoshSvn
 
             if (tokens.Length == 1)
             {
-                PoshSvnRevision revision = new PoshSvnRevision(tokens[0]);
+                SvnRevision revision = new SvnRevision(tokens[0]);
                 StartRevision = revision;
                 EndRevision = revision;
             }
             else if (tokens.Length == 2)
             {
-                StartRevision = new PoshSvnRevision(tokens[0]);
-                EndRevision = new PoshSvnRevision(tokens[1]);
+                StartRevision = new SvnRevision(tokens[0]);
+                EndRevision = new SvnRevision(tokens[1]);
             }
             else
             {
@@ -31,7 +31,7 @@ namespace PoshSvn
             }
         }
 
-        public PoshSvnRevisionRange(PoshSvnRevision startRevision, PoshSvnRevision endRevision)
+        public PoshSvnRevisionRange(SvnRevision startRevision, SvnRevision endRevision)
         {
             StartRevision = startRevision;
             EndRevision = endRevision;
@@ -39,21 +39,21 @@ namespace PoshSvn
 
         public PoshSvnRevisionRange(long startRevision, long endRevision)
         {
-            StartRevision = new PoshSvnRevision(startRevision);
-            EndRevision = new PoshSvnRevision(endRevision);
+            StartRevision = new SvnRevision(startRevision);
+            EndRevision = new SvnRevision(endRevision);
         }
 
         public PoshSvnRevisionRange(PoshSvnRevisionType start, PoshSvnRevisionType end)
         {
-            StartRevision = new PoshSvnRevision(start);
-            EndRevision = new PoshSvnRevision(end);
+            StartRevision = new SvnRevision(start);
+            EndRevision = new SvnRevision(end);
         }
 
         public override bool Equals(object obj)
         {
             return obj is PoshSvnRevisionRange range &&
-                   EqualityComparer<PoshSvnRevision>.Default.Equals(EndRevision, range.EndRevision) &&
-                   EqualityComparer<PoshSvnRevision>.Default.Equals(StartRevision, range.StartRevision);
+                   EqualityComparer<SvnRevision>.Default.Equals(EndRevision, range.EndRevision) &&
+                   EqualityComparer<SvnRevision>.Default.Equals(StartRevision, range.StartRevision);
         }
 
         public SharpSvn.SvnRevisionRange ToSharpSvnRevisionRange()

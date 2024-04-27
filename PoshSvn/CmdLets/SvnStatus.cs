@@ -25,7 +25,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; }
+        public SharpSvn.SvnRevision Revision { get; set; }
 
         protected override void Execute()
         {

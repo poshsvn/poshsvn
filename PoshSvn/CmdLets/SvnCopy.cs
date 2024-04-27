@@ -23,7 +23,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; }
+        public SharpSvn.SvnRevision Revision { get; set; }
 
         [Parameter()]
         [Alias("ignore-externals")]
