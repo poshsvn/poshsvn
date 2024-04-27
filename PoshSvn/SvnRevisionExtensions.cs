@@ -21,5 +21,17 @@ namespace PoshSvn
                 return new SvnRevision(revision.RevisionType.ToPoshSvnRevisionType());
             }
         }
+
+        public static SharpSvn.SvnRevision ToSharpSvnRevision(this SvnRevision revision)
+        {
+            if (revision.RevisionType == SvnRevisionType.Number)
+            {
+                return new SharpSvn.SvnRevision(revision.Revision);
+            }
+            else
+            {
+                return new SharpSvn.SvnRevision(revision.RevisionType.ToSharpSvnRevisionType());
+            }
+        }
     }
 }
