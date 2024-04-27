@@ -133,6 +133,12 @@ namespace PoshSvn
             });
         }
 
+        protected void ProgressEventHandler(object sender, SharpSvn.SvnProgressEventArgs e)
+        {
+            ProgressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+            WriteProgress(ProgressRecord);
+        }
+
         private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
         {
             SvnConflictSummary conflict = CreateConflict(e);
