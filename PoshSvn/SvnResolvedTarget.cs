@@ -33,6 +33,20 @@ namespace PoshSvn
             }
         }
 
+        public bool TryGetPath(out string path)
+        {
+            if (isUrl)
+            {
+                path = null;
+                return false;
+            }
+            else
+            {
+                path = this.path;
+                return true;
+            }
+        }
+
         public SharpSvn.SvnTarget ConvertToSharpSvnTarget()
         {
             if (isUrl)
@@ -54,6 +68,14 @@ namespace PoshSvn
             else
             {
                 return revision.ToSharpSvnRevision();
+            }
+        }
+
+        public void ThrowIfHasOperationalRevision(string paramName)
+        {
+            if (revision != null)
+            {
+                throw new ArgumentException("A peg revision is not allowed here", paramName);
             }
         }
     }
