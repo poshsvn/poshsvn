@@ -16,7 +16,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev", "r")]
-        public PoshSvnRevisionRange Revision { get; set; }
+        public SvnRevisionRange Revision { get; set; }
 
         [Parameter()]
         public SwitchParameter RetrieveMergedRevisions { get; set; }
