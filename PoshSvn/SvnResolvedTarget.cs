@@ -37,11 +37,11 @@ namespace PoshSvn
         {
             if (isUrl)
             {
-                return SharpSvn.SvnTarget.FromUri(url);
+                return new SharpSvn.SvnUriTarget(url);
             }
             else
             {
-                return SharpSvn.SvnTarget.FromString(path);
+                return new SharpSvn.SvnPathTarget(path);
             }
         }
 
