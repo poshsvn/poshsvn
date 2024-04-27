@@ -44,11 +44,11 @@ namespace PoshSvn.CmdLets
                 Depth = Depth.ConvertToSharpSvnDepth(),
             };
 
-            IEnumerable<SvnResolvedTarget> resolvedTargets = ResolveTargets(Target);
+            ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            foreach (var target in resolvedTargets)
+            foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
             {
-                SvnClient.Info(target.ConvertToSharpSvnTarget(), args, InfoHandler);
+                SvnClient.Info(target, args, InfoHandler);
             }
         }
 

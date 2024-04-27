@@ -8,11 +8,6 @@ namespace PoshSvn
     {
         private readonly ICollection<SvnResolvedTarget> targets;
 
-        public ResolvedTargetCollection(IEnumerable<SvnResolvedTarget> targets)
-        {
-            this.targets = new List<SvnResolvedTarget>(targets);
-        }
-
         public ResolvedTargetCollection(ICollection<SvnResolvedTarget> targets)
         {
             this.targets = targets;
