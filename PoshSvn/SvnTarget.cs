@@ -47,19 +47,19 @@ namespace PoshSvn
             Revision = revision;
         }
 
-        public static SvnTarget FromPath(string path)
+        public static SvnTarget FromPath(string path, SvnRevision revision = null)
         {
-            return new SvnTarget(path, SvnTargetType.Path, null);
+            return new SvnTarget(path, SvnTargetType.Path, revision);
         }
 
-        public static SvnTarget FromLiteralPath(string literalPath)
+        public static SvnTarget FromLiteralPath(string literalPath, SvnRevision revision = null)
         {
-            return new SvnTarget(literalPath, SvnTargetType.LiteralPath, null);
+            return new SvnTarget(literalPath, SvnTargetType.LiteralPath, revision);
         }
 
-        public static SvnTarget FromUrl(string url)
+        public static SvnTarget FromUrl(string url, SvnRevision revision = null)
         {
-            return new SvnTarget(url, SvnTargetType.Url, null);
+            return new SvnTarget(url, SvnTargetType.Url, revision);
         }
 
         public static void ParsePegRevisionTarget(string target, out string remainingTarget, out SvnRevision revision)
