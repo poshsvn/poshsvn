@@ -6,12 +6,12 @@ namespace PoshSvn
 {
     public class SvnRevision
     {
-        public PoshSvnRevisionType RevisionType { get; set; }
+        public SvnRevisionType RevisionType { get; set; }
         public long Revision { get; set; }
 
         public SvnRevision(long revision)
         {
-            RevisionType = PoshSvnRevisionType.Number;
+            RevisionType = SvnRevisionType.Number;
             Revision = revision;
         }
 
@@ -31,7 +31,7 @@ namespace PoshSvn
             else if (long.TryParse(str.Substring(i), out long revisionNumber))
             {
                 Revision = revisionNumber;
-                RevisionType = PoshSvnRevisionType.Number;
+                RevisionType = SvnRevisionType.Number;
             }
             else
             {
@@ -39,19 +39,19 @@ namespace PoshSvn
 
                 if (word.Equals("head", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    RevisionType = PoshSvnRevisionType.Head;
+                    RevisionType = SvnRevisionType.Head;
                 }
                 else if (word.Equals("prev", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    RevisionType = PoshSvnRevisionType.Previous;
+                    RevisionType = SvnRevisionType.Previous;
                 }
                 else if (word.Equals("base", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    RevisionType = PoshSvnRevisionType.Base;
+                    RevisionType = SvnRevisionType.Base;
                 }
                 else if (word.Equals("committed", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    RevisionType = PoshSvnRevisionType.Committed;
+                    RevisionType = SvnRevisionType.Committed;
                 }
                 else
                 {
@@ -60,14 +60,14 @@ namespace PoshSvn
             }
         }
 
-        public SvnRevision(PoshSvnRevisionType type)
+        public SvnRevision(SvnRevisionType type)
         {
             RevisionType = type;
         }
 
         public SharpSvn.SvnRevision ToSharpSvnRevision()
         {
-            if (RevisionType == PoshSvnRevisionType.Number)
+            if (RevisionType == SvnRevisionType.Number)
             {
                 return new SharpSvn.SvnRevision(Revision);
             }
