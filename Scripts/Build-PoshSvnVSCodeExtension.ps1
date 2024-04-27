@@ -1,4 +1,4 @@
-$extensionRoot = "$PSScriptRoot\..\PoshSvn.vscode"
+﻿$extensionRoot = "$PSScriptRoot\..\PoshSvn.vscode"
 $outDir = "$extensionRoot\out"
 
 Push-Location $extensionRoot

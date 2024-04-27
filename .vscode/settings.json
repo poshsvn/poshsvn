@@ -1,4 +1,4 @@
-{
+﻿{
     "search.exclude": {
         "**/bin": true,
         "**/obj": true,

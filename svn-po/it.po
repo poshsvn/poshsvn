@@ -1,4 +1,4 @@
-#
+﻿#
 # Italian translations for Subversion
 # Traduzione italiana per Subversion
 #

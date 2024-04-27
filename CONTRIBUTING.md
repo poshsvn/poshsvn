@@ -1,4 +1,4 @@
-# Contributing to PoshSvn
+﻿# Contributing to PoshSvn
 
 ## I Want To Contribute
 

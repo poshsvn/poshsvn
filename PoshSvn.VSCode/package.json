@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "poshsvn",
   "displayName": "PoshSvn",
   "description": "Apache Subversion client for PowerShell, integrated to vscode.",

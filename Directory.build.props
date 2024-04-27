@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <DisplayPlatform>$(Platform)</DisplayPlatform>
   </PropertyGroup>

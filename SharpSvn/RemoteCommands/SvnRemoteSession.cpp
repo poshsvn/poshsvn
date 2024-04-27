@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 #include "UnmanagedStructs.h" // Resolves linker warnings for opaque types
 
