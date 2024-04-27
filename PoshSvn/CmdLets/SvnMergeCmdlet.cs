@@ -42,7 +42,8 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            SharpSvn.SvnTarget source = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Source));
+            SvnResolvedTarget source = ResolveTarget(Source);
+
             string path = GetUnresolvedProviderPathFromPSPath(Path);
 
             SharpSvn.SvnMergeArgs args = new SharpSvn.SvnMergeArgs
@@ -55,7 +56,7 @@ namespace PoshSvn.CmdLets
                 CheckForMixedRevisions = !AllowMixedRevisions,
             };
 
-            SvnClient.Merge(path, source, GetRange(), args);
+            SvnClient.Merge(path, source.ConvertToSharpSvnTarget(), GetRange(), args);
         }
 
         private ICollection<SharpSvn.SvnRevisionRange> GetRange()
