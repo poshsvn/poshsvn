@@ -79,6 +79,7 @@ namespace SharpSvn {
     ref class SvnPatchArgs;
     ref class SvnYoungestArgs;
     ref class SvnRepositoryOperationArgs;
+    ref class SvnMergingSummaryArgs;
 
     ref class SvnCropWorkingCopyArgs;
     ref class SvnGetCapabilitiesArgs;
@@ -1162,6 +1163,9 @@ namespace SharpSvn {
         bool GetMergesEligible(SvnTarget ^target, SvnTarget^ source, [Out] Collection<SvnMergesEligibleEventArgs^>^% list);
         /// <summary>Retrieves a list of revisions of source that are available for merging</summary>
         bool GetMergesEligible(SvnTarget ^target, SvnTarget^ source, SvnMergesEligibleArgs^ args, [Out] Collection<SvnMergesEligibleEventArgs^>^% list);
+
+    public:
+        bool GetMergingSummary(SvnTarget ^target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^% mergingSummary);
 
     public:
         /// <overloads>Retrieves a list of previously merged revisions from the specified source</overloads>

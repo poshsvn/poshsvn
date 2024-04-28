@@ -37,6 +37,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnLock"
         "Invoke-SvnUnlock"
         "Invoke-SvnMerge"
+        "Invoke-SvnMergeInfo"
         "New-SvnTarget"
     )
     AliasesToExport        = @(
@@ -64,6 +65,7 @@ Project website: https://www.poshsvn.com"
         "svn-lock"
         "svn-unlock"
         "svn-merge"
+        "svn-mergeinfo"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
@@ -74,6 +76,7 @@ Project website: https://www.poshsvn.com"
         "SvnLog.format.ps1xml"
         "SvnItem.format.ps1xml"
         "SvnBlame.format.ps1xml"
+        "SvnMergeInfo.format.ps1xml"
     )
     PrivateData            = @{
         PSData = @{

@@ -170,12 +170,14 @@
     <ClInclude Include="AprBaton.h" />
     <ClInclude Include="AprPool.h" />
     <ClInclude Include="Args\InheritedPropertyList.h" />
+    <ClInclude Include="Args\SvnMergingSummaryArgs.h" />
     <ClInclude Include="Args\SvnRepositoryOperationArgs.h" />
     <ClInclude Include="Args\Vacuum.h" />
     <ClInclude Include="Args\Youngest.h" />
     <ClInclude Include="EventArgs\SvnEventArgs.h" />
     <ClInclude Include="EventArgs\SvnInheritedPropertyListEventArgs.h" />
     <ClInclude Include="EventArgs\SvnLookInheritedPropertyListEventArgs.h" />
+    <ClInclude Include="EventArgs\SvnMergingSummaryEventArgs.h" />
     <ClInclude Include="LookArgs\SvnLookInheritedPropertyListArgs.h" />
     <ClInclude Include="LookArgs\SvnLookLockArgs.h" />
     <ClInclude Include="RemoteArgs\SvnRemoteWriteArgs.h" />
@@ -362,6 +364,7 @@
     <ClCompile Include="Commands\RepositorySetProperty.cpp" />
     <ClCompile Include="Commands\RepositoryUpdateFile.cpp" />
     <ClCompile Include="Commands\Youngest.cpp" />
+    <ClCompile Include="GetMergingSummary.cpp" />
     <ClCompile Include="LookCommands\LookInheritedPropertyList.cpp" />
     <ClCompile Include="LookCommands\LookLock.cpp" />
     <ClCompile Include="RemoteCommands\RemoteWrite.cpp" />
