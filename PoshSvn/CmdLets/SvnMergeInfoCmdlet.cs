@@ -7,7 +7,7 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnMergeInfo")]
+    [Cmdlet("Invoke", "SvnMergeInfo", DefaultParameterSetName = ParameterAttribute.AllParameterSets)]
     [Alias("svn-mergeinfo")]
     [OutputType(typeof(SvnMergeInfoRevision))]
     public class SvnMergeInfoCmdlet : SvnClientCmdletBase
@@ -18,11 +18,11 @@ namespace PoshSvn.CmdLets
         [Parameter(Mandatory = true, Position = 1)]
         public SvnTarget Source { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = "ShowRevisions")]
         [Alias("ShowRevs")]
         public ShowRevisions? ShowRevisions { get; set; } = null;
 
-        [Parameter()]
+        [Parameter(ParameterSetName = "ShowRevisions")]
         public SwitchParameter Log { get; set; }
 
         protected override void Execute()
