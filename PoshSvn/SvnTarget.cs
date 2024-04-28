@@ -13,7 +13,7 @@ namespace PoshSvn
 
         public SvnTarget(string pathOrUrl)
         {
-            PegRevision.ParsePegRevisionTarget(pathOrUrl, out string remainingTarget, out SvnRevision revision);
+            PegRevision.Parse(pathOrUrl, out string remainingTarget, out SvnRevision revision);
 
             if (remainingTarget.Contains("://"))
             {

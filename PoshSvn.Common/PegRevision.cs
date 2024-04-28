@@ -6,7 +6,7 @@ namespace PoshSvn
 {
     public static class PegRevision
     {
-        public static void ParsePegRevisionTarget(string target, out string remainingTarget, out SvnRevision revision)
+        public static void Parse(string target, out string remainingTarget, out SvnRevision revision)
         {
             int i = 0;
 
