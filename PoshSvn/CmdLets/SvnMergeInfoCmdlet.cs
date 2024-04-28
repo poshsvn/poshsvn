@@ -54,7 +54,19 @@ namespace PoshSvn.CmdLets
                 SvnClient.GetMergingSummary(sharpSvnTarget, sharpSvnSource,
                                             args, out SvnMergingSummaryEventArgs mergingSummary);
 
-                WriteObject(mergingSummary); // TODO:
+                WriteObject(new SvnMergeInfo
+                {
+                    IsReintegration = mergingSummary.IsReintegration,
+                    RepositoryRootUrl = mergingSummary.RepositoryRootUrl,
+                    YoungestCommonAncestorUrl = mergingSummary.YoungestCommonAncestorUrl,
+                    YoungestCommonAncestorRevision = mergingSummary.YoungestCommonAncestorRevision,
+                    BaseUrl = mergingSummary.BaseUrl,
+                    BaseRevision = mergingSummary.BaseRevision,
+                    RightUrl = mergingSummary.RightUrl,
+                    RightRevision = mergingSummary.RightRevision,
+                    TargetUrl = mergingSummary.TargetUrl,
+                    TargetRevision = mergingSummary.TargetRevision,
+                });
             }
         }
 
