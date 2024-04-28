@@ -72,26 +72,27 @@ namespace PoshSvn.CmdLets
 
         private void MergesEligibleReceiver(object sender, SvnMergesEligibleEventArgs e)
         {
-            WriteObject(new SvnMergeInfoRevision
-            {
-                Revision = e.Revision,
-                LogMessage = e.LogMessage,
-                SourceUri = e.SourceUri,
-                Date = e.Time,
-                Author = e.Author,
-            });
+            SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
+            obj.SourceUri = e.SourceUri;
+            WriteObject(obj);
         }
 
         private void MergesMergedReceiver(object sender, SvnMergesMergedEventArgs e)
         {
-            WriteObject(new SvnMergeInfoRevision
+            SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
+            obj.SourceUri = e.SourceUri;
+            WriteObject(obj);
+        }
+
+        private SvnMergeInfoRevision CreateMergeInfoRevision(SvnLoggingEventArgs e)
+        {
+            return new SvnMergeInfoRevision
             {
                 Revision = e.Revision,
                 LogMessage = e.LogMessage,
-                SourceUri = e.SourceUri,
                 Date = e.Time,
                 Author = e.Author,
-            });
+            };
         }
     }
 }
