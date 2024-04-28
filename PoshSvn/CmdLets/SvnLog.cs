@@ -90,9 +90,9 @@ namespace PoshSvn.CmdLets
 
             args.Progress += ProgressEventHandler;
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
+            ResolvedTargetCollection targets = ResolveTargets(Target);
 
-            targets.ThrowIfHasPathsAndUris();
+            targets.ThrowIfHasPathsAndUris(nameof(Target));
 
             if (targets.HasPaths)
             {
@@ -100,7 +100,7 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                SvnClient.Log(targets.Uris, args, LogHandler);
+                SvnClient.Log(targets.Urls, args, LogHandler);
             }
         }
 

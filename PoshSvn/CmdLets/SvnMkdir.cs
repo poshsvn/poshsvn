@@ -30,8 +30,9 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
-            targets.ThrowIfHasPathsAndUris();
+            ResolvedTargetCollection targets = ResolveTargets(Target);
+            targets.ThrowIfHasPathsAndUris(nameof(Target));
+            targets.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (targets.HasPaths)
             {
@@ -40,7 +41,7 @@ namespace PoshSvn.CmdLets
             else
             {
                 UpdateProgressAction("Creating transaction...");
-                SvnClient.RemoteCreateDirectories(targets.Uris, args);
+                SvnClient.RemoteCreateDirectories(targets.Urls, args);
             }
         }
     }

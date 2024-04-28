@@ -40,17 +40,18 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            TargetCollection sources = TargetCollection.Parse(GetTargets(Source));
-            sources.ThrowIfHasPathsAndUris();
-            object destination = GetTarget(Destination);
+            ResolvedTargetCollection sources = ResolveTargets(Source);
+            sources.ThrowIfHasPathsAndUris(nameof(Source));
 
-            if (destination is string destinationPath)
+            SvnResolvedTarget destination = ResolveTarget(Destination);
+
+            if (destination.TryGetPath(out string destinationPath))
             {
                 SvnClient.Move(sources.Paths, destinationPath, args);
             }
-            else if (destination is Uri destinationUrl)
+            else if (destination.TryGetUrl(out Uri destinationUrl))
             {
-                SvnClient.RemoteMove(sources.Uris, destinationUrl, args);
+                SvnClient.RemoteMove(sources.Urls, destinationUrl, args);
             }
             else
             {

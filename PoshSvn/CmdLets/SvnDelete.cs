@@ -34,8 +34,9 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
-            targets.ThrowIfHasPathsAndUris();
+            ResolvedTargetCollection targets = ResolveTargets(Target);
+            targets.ThrowIfHasPathsAndUris(nameof(Target));
+            targets.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (targets.HasPaths)
             {
@@ -43,7 +44,7 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                SvnClient.RemoteDelete(targets.Uris, args);
+                SvnClient.RemoteDelete(targets.Urls, args);
             }
         }
     }

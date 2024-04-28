@@ -36,6 +36,16 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void ThrowIfHasAnyOperationalRevisions()
+        {
+            using (var sb = new WcSandbox())
+            {
+                Assert.Throws<ArgumentException>(() =>
+                    sb.RunScript($"svn-delete http://svn.example.com/repos/test/foo.c@123"));
+            }
+        }
+
+        [Test]
         public void OutputTest()
         {
             using (var sb = new WcSandbox())

@@ -128,5 +128,28 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void PegRev()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value abc");
+                sb.RunScript(@"svn-add wc\a.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value xyz");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript(@"svn-cat wc\a.txt@1");
+
+                PSObjectAssert.AreEqual(
+                    new[]
+                    {
+                        "abc"
+                    },
+                    actual);
+            }
+        }
     }
 }

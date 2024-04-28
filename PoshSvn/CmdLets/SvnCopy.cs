@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -42,16 +43,19 @@ namespace PoshSvn.CmdLets
                 IgnoreExternals = IgnoreExternals,
             };
 
-            TargetCollection sources = TargetCollection.Parse(GetTargets(Source));
-            object destination = GetTarget(Destination);
+            ResolvedTargetCollection resolvedSources = ResolveTargets(Source);
+            ICollection<SharpSvn.SvnTarget> sources = resolvedSources.ConvertToSharpSvnTargets();
 
-            if (destination is string destinationPath)
+            SvnResolvedTarget resolvedDestination = ResolveTarget(Destination);
+            resolvedDestination.ThrowIfHasOperationalRevision(nameof(Destination));
+
+            if (resolvedDestination.TryGetPath(out string destinationPath))
             {
-                SvnClient.Copy(sources.Targets, destinationPath, args);
+                SvnClient.Copy(sources, destinationPath, args);
             }
-            else if (destination is Uri destinationUrl)
+            else if (resolvedDestination.TryGetUrl(out Uri destinationUrl))
             {
-                SvnClient.RemoteCopy(sources.Targets, destinationUrl, args);
+                SvnClient.RemoteCopy(sources, destinationUrl, args);
             }
             else
             {

@@ -26,7 +26,8 @@ namespace PoshSvn.CmdLets
                 BreakLock = Force,
             };
 
-            TargetCollection target = TargetCollection.Parse(GetTargets(Target));
+            ResolvedTargetCollection target = ResolveTargets(Target);
+            target.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (target.HasPaths)
             {
@@ -34,7 +35,7 @@ namespace PoshSvn.CmdLets
             }
             else if (target.HasUris)
             {
-                SvnClient.RemoteUnlock(target.Uris, args);
+                SvnClient.RemoteUnlock(target.Urls, args);
             }
             else
             {

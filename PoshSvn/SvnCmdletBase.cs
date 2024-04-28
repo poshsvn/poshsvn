@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
-using PoshSvn.Enums;
 using SharpSvn;
 
 namespace PoshSvn
@@ -156,6 +155,74 @@ namespace PoshSvn
                 {
                     throw new NotImplementedException();
                 }
+            }
+        }
+
+        protected SvnResolvedTarget ResolveUriTarget(SvnTarget target)
+        {
+            if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
+            {
+                return new SvnResolvedTarget(null, url, true, target.Revision);
+            }
+            else
+            {
+                throw new ArgumentException("Wrong Url format.", "Url");
+            }
+        }
+
+        protected SvnResolvedTarget ResolveLiteralTarget(SvnTarget target)
+        {
+            string path = GetUnresolvedProviderPathFromPSPath(target.Value);
+            return new SvnResolvedTarget(path, null, false, target.Revision);
+        }
+
+        protected ResolvedTargetCollection ResolveTargets(IEnumerable<SvnTarget> targets)
+        {
+            List<SvnResolvedTarget> resolvedTargets = new List<SvnResolvedTarget>();
+
+            foreach (SvnTarget target in targets)
+            {
+                if (target.Type == SvnTargetType.Path)
+                {
+                    foreach (string path in GetPathTargets(target.Value))
+                    {
+                        resolvedTargets.Add(new SvnResolvedTarget(path, null, false, target.Revision));
+                    }
+                }
+                else if (target.Type == SvnTargetType.LiteralPath)
+                {
+                    resolvedTargets.Add(ResolveLiteralTarget(target));
+                }
+                else if (target.Type == SvnTargetType.Url)
+                {
+                    resolvedTargets.Add(ResolveUriTarget(target));
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            return new ResolvedTargetCollection(resolvedTargets);
+        }
+
+        protected SvnResolvedTarget ResolveTarget(SvnTarget target)
+        {
+            if (target.Type == SvnTargetType.Path)
+            {
+                return ResolveLiteralTarget(target);
+            }
+            else if (target.Type == SvnTargetType.LiteralPath)
+            {
+                return ResolveLiteralTarget(target);
+            }
+            else if (target.Type == SvnTargetType.Url)
+            {
+                return ResolveUriTarget(target);
+            }
+            else
+            {
+                throw new NotImplementedException();
             }
         }
 
