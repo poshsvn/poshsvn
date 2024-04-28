@@ -21,7 +21,23 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.Url)]
         public string Url { get; set; }
 
+        [Parameter()]
+        [Alias("r", "rev")]
+        public SvnRevision Revision { get; set; }
+
         protected override void ProcessRecord()
+        {
+            SvnTarget target = CreateInitialSvnTarget();
+
+            if (Revision != null)
+            {
+                target.Revision = Revision;
+            }
+
+            WriteObject(target);
+        }
+
+        private SvnTarget CreateInitialSvnTarget()
         {
             if (ParameterSetName == ParameterSetNames.InputObject)
             {
@@ -29,24 +45,28 @@ namespace PoshSvn.CmdLets
 
                 if (baseObject is FileSystemInfo fileSystemInfo)
                 {
-                    WriteObject(new SvnTarget(fileSystemInfo));
+                    return new SvnTarget(fileSystemInfo);
                 }
                 else
                 {
-                    WriteObject(new SvnTarget(InputObject.ToString()));
+                    return new SvnTarget(InputObject.ToString());
                 }
             }
             else if (ParameterSetName == ParameterSetNames.Path)
             {
-                WriteObject(SvnTarget.FromPath(Path));
+                return SvnTarget.FromPath(Path);
             }
             else if (ParameterSetName == ParameterSetNames.LiteralPath)
             {
-                WriteObject(SvnTarget.FromLiteralPath(LiteralPath));
+                return SvnTarget.FromLiteralPath(LiteralPath);
             }
             else if (ParameterSetName == ParameterSetNames.Url)
             {
-                WriteObject(SvnTarget.FromUrl(Url));
+                return SvnTarget.FromUrl(Url);
+            }
+            else
+            {
+                throw new PSNotImplementedException();
             }
         }
     }

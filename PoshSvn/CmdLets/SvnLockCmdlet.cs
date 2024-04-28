@@ -31,7 +31,8 @@ namespace PoshSvn.CmdLets
                 StealLock = Force,
             };
 
-            TargetCollection target = TargetCollection.Parse(GetTargets(Target));
+            ResolvedTargetCollection target = ResolveTargets(Target);
+            target.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (target.HasPaths)
             {
@@ -39,7 +40,7 @@ namespace PoshSvn.CmdLets
             }
             else if (target.HasUris)
             {
-                SvnClient.RemoteLock(target.Uris, args);
+                SvnClient.RemoteLock(target.Urls, args);
             }
             else
             {

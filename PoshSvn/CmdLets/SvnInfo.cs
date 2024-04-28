@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -43,9 +44,9 @@ namespace PoshSvn.CmdLets
                 Depth = Depth.ConvertToSharpSvnDepth(),
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
+            ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            foreach (SharpSvn.SvnTarget target in targets.Targets)
+            foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
             {
                 SvnClient.Info(target, args, InfoHandler);
             }

@@ -22,11 +22,12 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            SharpSvn.SvnTarget target = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Target));
+            SvnResolvedTarget resolvedTarget = ResolveTarget(Target);
+            SharpSvn.SvnTarget sharpSvnTarget = resolvedTarget.ConvertToSharpSvnTarget();
 
             using (Stream stream = GetStream())
             {
-                SvnClient.Write(target, stream);
+                SvnClient.Write(sharpSvnTarget, stream);
             }
         }
 

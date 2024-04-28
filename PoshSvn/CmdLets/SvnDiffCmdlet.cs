@@ -85,9 +85,9 @@ namespace PoshSvn.CmdLets
                 SharpSvn.SvnRevision endRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
                 SharpSvn.SvnRevisionRange rangeRevision = new SharpSvn.SvnRevisionRange(startRevision, endRevision);
 
-                TargetCollection targets = TargetCollection.Parse(GetTargets(Target));
+                ResolvedTargetCollection resolvedTarget = ResolveTargets(Target);
 
-                foreach (SharpSvn.SvnTarget target in targets.Targets)
+                foreach (var target in resolvedTarget.EnumerateSharpSvnTargets())
                 {
                     using (Stream stream = GetStream())
                     {
@@ -99,8 +99,8 @@ namespace PoshSvn.CmdLets
             {
                 using (Stream stream = GetStream())
                 {
-                    SharpSvn.SvnTarget oldTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Old));
-                    SharpSvn.SvnTarget newTarget = TargetCollection.ConvertTargetToSvnTarget(GetTarget(New));
+                    SharpSvn.SvnTarget oldTarget = ResolveTarget(Old).ConvertToSharpSvnTarget();
+                    SharpSvn.SvnTarget newTarget = ResolveTarget(New).ConvertToSharpSvnTarget();
 
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
                 };

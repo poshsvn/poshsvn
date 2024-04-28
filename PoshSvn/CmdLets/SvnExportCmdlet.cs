@@ -50,7 +50,9 @@ namespace PoshSvn.CmdLets
                 args.Revision = Revision.ToSharpSvnRevision();
             }
 
-            SharpSvn.SvnTarget source = TargetCollection.ConvertTargetToSvnTarget(GetTarget(Source));
+            SvnResolvedTarget resolvedSource = ResolveTarget(Source);
+            SharpSvn.SvnTarget source = resolvedSource.ConvertToSharpSvnTarget();
+
             string destination = GetUnresolvedProviderPathFromPSPath(Destination);
 
             SvnClient.Export(source, destination, args);
