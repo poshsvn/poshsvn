@@ -8,7 +8,7 @@ namespace PoshSvn.Tests
     public class SvnMergeInfoCmdletTests
     {
         [Test]
-        public void SimpleEligibleTest1()
+        public void EligibleTestAll()
         {
             using (var sb = new ProjectStructureSandbox())
             {
@@ -35,7 +35,7 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void SimpleEligibleTest2()
+        public void EligibleSomeTest()
         {
             using (var sb = new ProjectStructureSandbox())
             {
