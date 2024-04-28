@@ -1165,7 +1165,7 @@ namespace SharpSvn {
         bool GetMergesEligible(SvnTarget ^target, SvnTarget^ source, SvnMergesEligibleArgs^ args, [Out] Collection<SvnMergesEligibleEventArgs^>^% list);
 
     public:
-        bool GetMergingSummary(SvnTarget ^target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs mergingSummary);
+        bool GetMergingSummary(SvnTarget ^target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^ mergingSummary);
 
     public:
         /// <overloads>Retrieves a list of previously merged revisions from the specified source</overloads>
