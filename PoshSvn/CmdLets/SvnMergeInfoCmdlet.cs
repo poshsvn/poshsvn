@@ -47,8 +47,14 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                // TODO:
-                throw new NotImplementedException();
+                SvnMergingSummaryArgs args = new SvnMergingSummaryArgs
+                {
+                };
+
+                SvnClient.GetMergingSummary(sharpSvnTarget, sharpSvnSource,
+                                            args, out SvnMergingSummaryEventArgs mergingSummary);
+
+                WriteObject(mergingSummary); // TODO:
             }
         }
 
