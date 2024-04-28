@@ -75,6 +75,10 @@ namespace PoshSvn.CmdLets
             WriteObject(new SvnMergeInfoRevision
             {
                 Revision = e.Revision,
+                LogMessage = e.LogMessage,
+                SourceUri = e.SourceUri,
+                Date = e.Time,
+                Author = e.Author,
             });
         }
 
@@ -83,6 +87,10 @@ namespace PoshSvn.CmdLets
             WriteObject(new SvnMergeInfoRevision
             {
                 Revision = e.Revision,
+                LogMessage = e.LogMessage,
+                SourceUri = e.SourceUri,
+                Date = e.Time,
+                Author = e.Author,
             });
         }
     }
