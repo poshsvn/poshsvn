@@ -4,7 +4,7 @@
 
 using namespace SharpSvn;
 
-bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^ mergingSummary) {
+bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^% mergingSummary) {
     svn_boolean_t is_reintegration;
 
     const char* yca_url;
