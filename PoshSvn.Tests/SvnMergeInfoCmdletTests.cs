@@ -40,6 +40,36 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void SimpleLogTest()
+        {
+            using (var sb = new ProjectStructureSandbox())
+            {
+                sb.RunScript($@"svn-copy '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -m branch");
+                sb.RunScript($@"cd wc-trunk; 'abc' > a.txt; svn-add a.txt; svn-commit -m 'add a.txt'");
+                sb.RunScript($@"cd wc-trunk; 'abc' > b.txt; svn-add b.txt; svn-commit -m 'add b.txt'");
+                sb.RunScript($@"cd wc-trunk; 'abc' > c.txt; svn-add c.txt; svn-commit -m 'add c.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
+
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Eligible -Log");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnLogOutput { Revision = 3, Message = "add a.txt" },
+                        new SvnLogOutput { Revision = 4, Message = "add b.txt" },
+                        new SvnLogOutput { Revision = 5, Message = "add c.txt" },
+                        new SvnLogOutput { Revision = 6, Message = "add x.txt" },
+                        new SvnLogOutput { Revision = 7, Message = "add y.txt" },
+                    },
+                    actual,
+                    nameof(SvnLogOutput.Date),
+                    nameof(SvnLogOutput.Author),
+                    nameof(SvnLogOutput.RevisionProperties));
+            }
+        }
+
+        [Test]
         public void RevisionsFormatTableTest()
         {
             using (var sb = new ProjectStructureSandbox())

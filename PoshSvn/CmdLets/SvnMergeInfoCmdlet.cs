@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
+using System.Linq;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -20,6 +21,9 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         [Alias("ShowRevs")]
         public ShowRevisions? ShowRevisions { get; set; } = null;
+
+        [Parameter()]
+        public SwitchParameter Log { get; set; }
 
         protected override void Execute()
         {
@@ -72,16 +76,30 @@ namespace PoshSvn.CmdLets
 
         private void MergesEligibleReceiver(object sender, SvnMergesEligibleEventArgs e)
         {
-            SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
-            obj.SourceUri = e.SourceUri;
-            WriteObject(obj);
+            if (Log)
+            {
+                WriteObject(CreateLogOutput(e));
+            }
+            else
+            {
+                SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
+                obj.SourceUri = e.SourceUri;
+                WriteObject(obj);
+            }
         }
 
         private void MergesMergedReceiver(object sender, SvnMergesMergedEventArgs e)
         {
-            SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
-            obj.SourceUri = e.SourceUri;
-            WriteObject(obj);
+            if (Log)
+            {
+                WriteObject(CreateLogOutput(e));
+            }
+            else
+            {
+                SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
+                obj.SourceUri = e.SourceUri;
+                WriteObject(obj);
+            }
         }
 
         private SvnMergeInfoRevision CreateMergeInfoRevision(SvnLoggingEventArgs e)
@@ -93,6 +111,24 @@ namespace PoshSvn.CmdLets
                 Date = e.Time,
                 Author = e.Author,
             };
+        }
+
+        private SvnLogOutput CreateLogOutput(SvnLoggingEventArgs e)
+        {
+            SvnLogOutput obj = new SvnLogOutput
+            {
+                Revision = e.Revision,
+                Author = e.Author,
+                Message = e.LogMessage,
+                RevisionProperties = e.RevisionProperties.ToArray(),
+            };
+
+            if (e.Time != DateTime.MinValue)
+            {
+                obj.Date = new DateTimeOffset(e.Time);
+            }
+
+            return obj;
         }
     }
 }
