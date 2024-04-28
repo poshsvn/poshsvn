@@ -84,6 +84,70 @@ namespace SharpSvn {
             }
         }
 
+        property __int64 YoungestCommonAncestorRevision
+        {
+            __int64 get()
+            {
+                return _yca_rev;
+            }
+        }
+
+        property Uri^ BaseUrl
+        {
+            Uri^ get()
+            {
+                return SvnBase::Utf8_PtrToUri(_base_url, SvnNodeKind::None);
+            }
+        }
+
+        property __int64 BaseRevision
+        {
+            __int64 get()
+            {
+                return _base_rev;
+            }
+        }
+
+        property Uri^ RightUrl
+        {
+            Uri^ get()
+            {
+                return SvnBase::Utf8_PtrToUri(_right_url, SvnNodeKind::None);
+            }
+        }
+
+        property __int64 RightRevision
+        {
+            __int64 get()
+            {
+                return _right_rev;
+            }
+        }
+
+        property Uri^ TargetUrl
+        {
+            Uri^ get()
+            {
+                return SvnBase::Utf8_PtrToUri(_target_url, SvnNodeKind::None);
+            }
+        }
+
+        property __int64 TargetRevision
+        {
+            __int64 get()
+            {
+                return _target_rev;
+            }
+        }
+
+        property Uri^ RepositoryRootUrl
+        {
+            Uri^ get()
+            {
+                return SvnBase::Utf8_PtrToUri(_repos_root_url, SvnNodeKind::None);
+            }
+        }
+
     protected public:
         virtual void Detach(bool keepProperties) override
         {
