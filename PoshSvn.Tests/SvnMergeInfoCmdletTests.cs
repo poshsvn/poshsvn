@@ -39,7 +39,7 @@ namespace PoshSvn.Tests
             }
         }
         [Test]
-        public void EligibleAllFormatTest()
+        public void RevisionsFormatTableTest()
         {
             using (var sb = new ProjectStructureSandbox())
             {
