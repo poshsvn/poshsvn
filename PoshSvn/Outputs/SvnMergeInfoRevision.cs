@@ -2,7 +2,7 @@
 
 namespace PoshSvn
 {
-    public class SvnMergeInfo
+    public class SvnMergeInfoRevision
     {
         public long Revision { get; set; }
     }

@@ -24,11 +24,11 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfo { Revision = 3 },
-                        new SvnMergeInfo { Revision = 4 },
-                        new SvnMergeInfo { Revision = 5 },
-                        new SvnMergeInfo { Revision = 6 },
-                        new SvnMergeInfo { Revision = 7 },
+                        new SvnMergeInfoRevision { Revision = 3 },
+                        new SvnMergeInfoRevision { Revision = 4 },
+                        new SvnMergeInfoRevision { Revision = 5 },
+                        new SvnMergeInfoRevision { Revision = 6 },
+                        new SvnMergeInfoRevision { Revision = 7 },
                     },
                     actual);
             }
@@ -51,7 +51,7 @@ namespace PoshSvn.Tests
                     new object[]
                     {
                         // What???
-                        new SvnMergeInfo { Revision = 2 },
+                        new SvnMergeInfoRevision { Revision = 2 },
                     },
                     actual);
             }
@@ -80,9 +80,9 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfo { Revision = 6 },
-                        new SvnMergeInfo { Revision = 7 },
-                        new SvnMergeInfo { Revision = 8 },
+                        new SvnMergeInfoRevision { Revision = 6 },
+                        new SvnMergeInfoRevision { Revision = 7 },
+                        new SvnMergeInfoRevision { Revision = 8 },
                     },
                     actual);
             }
@@ -111,8 +111,8 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfo { Revision = 3 },
-                        new SvnMergeInfo { Revision = 4 },
+                        new SvnMergeInfoRevision { Revision = 3 },
+                        new SvnMergeInfoRevision { Revision = 4 },
                     },
                     actual);
             }
@@ -167,11 +167,11 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfo { Revision = 3 },
-                        new SvnMergeInfo { Revision = 4 },
-                        new SvnMergeInfo { Revision = 5 },
-                        new SvnMergeInfo { Revision = 6 },
-                        new SvnMergeInfo { Revision = 7 },
+                        new SvnMergeInfoRevision { Revision = 3 },
+                        new SvnMergeInfoRevision { Revision = 4 },
+                        new SvnMergeInfoRevision { Revision = 5 },
+                        new SvnMergeInfoRevision { Revision = 6 },
+                        new SvnMergeInfoRevision { Revision = 7 },
                     },
                     actual);
             }
