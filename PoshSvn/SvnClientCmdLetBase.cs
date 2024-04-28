@@ -25,6 +25,8 @@ namespace PoshSvn
 
         protected SharpSvn.SvnClient SvnClient;
 
+        protected bool isCancelled = false;
+
         public SvnClientCmdletBase()
         {
         }
@@ -37,6 +39,7 @@ namespace PoshSvn
             SvnClient.Notify += NotifyEventHandler;
             SvnClient.Progress += ProgressEventHandler;
             SvnClient.Committed += CommittedEventHandler;
+            SvnClient.Cancel += SvnClient_Cancel;
             SvnClient.Conflict += Conflict_Handler;
 
             if (Username != null || Password != null)
@@ -383,6 +386,18 @@ namespace PoshSvn
         protected override void EndProcessing()
         {
             SvnClient.Dispose();
+        }
+
+        protected override void StopProcessing()
+        {
+            isCancelled = true;
+
+            base.StopProcessing();
+        }
+
+        private void SvnClient_Cancel(object sender, SharpSvn.SvnCancelEventArgs e)
+        {
+            e.Cancel = isCancelled;
         }
 
         private void ApplyAuthPolicy(SharpSvn.Security.SvnAuthenticationEventArgs args)
