@@ -38,6 +38,7 @@ namespace PoshSvn.Tests
                     nameof(SvnMergeInfoRevision.Author));
             }
         }
+
         [Test]
         public void RevisionsFormatTableTest()
         {
