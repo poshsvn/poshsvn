@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PoshSvn
 {
-    public static class PegRevisionParser
+    public static class PegRevision
     {
         public static void ParsePegRevisionTarget(string target, out string remainingTarget, out SvnRevision revision)
         {
