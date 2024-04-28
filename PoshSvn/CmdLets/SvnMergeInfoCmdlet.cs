@@ -45,7 +45,7 @@ namespace PoshSvn.CmdLets
                 SvnMergesEligibleArgs args = new SvnMergesEligibleArgs
                 {
                     Depth = Depth.ConvertToSharpSvnDepth(),
-                    Range = Revision.ToSharpSvnRevisionRange(),
+                    Range = Revision?.ToSharpSvnRevisionRange(),
                 };
 
                 ConfigureRetrieveProperties(args.RetrieveProperties);
@@ -57,7 +57,7 @@ namespace PoshSvn.CmdLets
                 SvnMergesMergedArgs args = new SvnMergesMergedArgs
                 {
                     Depth = Depth.ConvertToSharpSvnDepth(),
-                    Range = Revision.ToSharpSvnRevisionRange(),
+                    Range = Revision?.ToSharpSvnRevisionRange(),
                 };
 
                 ConfigureRetrieveProperties(args.RetrieveProperties);
