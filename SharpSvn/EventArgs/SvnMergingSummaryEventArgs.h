@@ -20,11 +20,40 @@ namespace SharpSvn {
         AprPool^ _pool;
         initonly SvnCommandType _commandType;
 
+        initonly svn_boolean_t _is_reintegration;
+        initonly const char* _yca_url;
+        initonly svn_revnum_t _yca_rev;
+        initonly const char* _base_url;
+        initonly svn_revnum_t _base_rev;
+        initonly const char* _right_url;
+        initonly svn_revnum_t _right_rev;
+        initonly const char* _target_url;
+        initonly svn_revnum_t _target_rev;
+        initonly const char* _repos_root_url;
+
     internal:
-        SvnMergingSummaryEventArgs(SvnCommandType commandType, AprPool^ pool)
+        SvnMergingSummaryEventArgs(
+            svn_boolean_t is_reintegration,
+            const char* yca_url, svn_revnum_t yca_rev,
+            const char* base_url, svn_revnum_t base_rev,
+            const char* right_url, svn_revnum_t right_rev,
+            const char* target_url, svn_revnum_t target_rev,
+            const char* repos_root_url,
+            SvnCommandType commandType, AprPool^ pool)
         {
             if (!pool)
                 throw gcnew ArgumentNullException("pool");
+
+            _is_reintegration = is_reintegration;
+            _yca_url = yca_url;
+            _yca_rev = yca_rev;
+            _base_url = base_url;
+            _base_rev = base_rev;
+            _right_url = right_url;
+            _right_rev = right_rev;
+            _target_url = target_url;
+            _target_rev = target_rev;
+            _repos_root_url = repos_root_url;
 
             _pool = pool;
             _commandType = commandType;
@@ -36,6 +65,22 @@ namespace SharpSvn {
             SvnCommandType get()
             {
                 return _commandType;
+            }
+        }
+
+        property bool IsReintegration
+        {
+            bool get()
+            {
+                return _is_reintegration;
+            }
+        }
+
+        property Uri^ YcaUrl
+        {
+            Uri^ get()
+            {
+                return SvnBase::Utf8_PtrToUri(_yca_url, SvnNodeKind::None);
             }
         }
 

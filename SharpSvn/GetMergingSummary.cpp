@@ -36,5 +36,14 @@ bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergi
         _pool.Handle,
         _pool.Handle);
 
+    mergingSummary = gcnew SvnMergingSummaryEventArgs(
+        is_reintegration,
+        yca_url, yca_rev,
+        base_url, base_rev,
+        right_url, right_rev,
+        target_url, target_rev,
+        repos_root_url,
+        SvnCommandType::GetMergingSummary, % _pool);
+
     return args->HandleResult(this, r);
 }
