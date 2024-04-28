@@ -46,7 +46,7 @@ namespace PoshSvn.CmdLets
             }
         }
 
-        private void MergesEligibleReceiver(object sender, SharpSvn.SvnMergesEligibleEventArgs e)
+        private void MergesEligibleReceiver(object sender, SvnMergesEligibleEventArgs e)
         {
             WriteObject(new SvnMergeInfo
             {
@@ -54,7 +54,7 @@ namespace PoshSvn.CmdLets
             });
         }
 
-        private void MergesMergedReceiver(object sender, SharpSvn.SvnMergesMergedEventArgs e)
+        private void MergesMergedReceiver(object sender, SvnMergesMergedEventArgs e)
         {
             WriteObject(new SvnMergeInfo
             {
