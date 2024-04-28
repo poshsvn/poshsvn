@@ -34,7 +34,7 @@ namespace PoshSvn.Tests
             }
         }
         [Test]
-        public void EligibleTestNone()
+        public void EligibleNoneTest()
         {
             using (var sb = new ProjectStructureSandbox())
             {
