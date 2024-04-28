@@ -76,7 +76,7 @@ namespace SharpSvn {
             }
         }
 
-        property Uri^ YcaUrl
+        property Uri^ YoungestCommonAncestorUrl
         {
             Uri^ get()
             {
