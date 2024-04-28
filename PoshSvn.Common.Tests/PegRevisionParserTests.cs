@@ -11,7 +11,7 @@ namespace PoshSvn.Common.Tests
         [Test]
         public void ParsePegRevisionTargetTest1()
         {
-            PegRevisionParser.ParsePegRevisionTarget(@"C:\path\to\file", out var remainingTarget, out var revision);
+            PegRevision.ParsePegRevisionTarget(@"C:\path\to\file", out var remainingTarget, out var revision);
             ClassicAssert.AreEqual(@"C:\path\to\file", remainingTarget);
             ClassicAssert.AreEqual(null, revision);
         }
@@ -19,7 +19,7 @@ namespace PoshSvn.Common.Tests
         [Test]
         public void ParsePegRevisionTargetTest2()
         {
-            PegRevisionParser.ParsePegRevisionTarget(@"C:\path\to\file@123", out var remainingTarget, out var revision);
+            PegRevision.ParsePegRevisionTarget(@"C:\path\to\file@123", out var remainingTarget, out var revision);
             ClassicAssert.AreEqual(@"C:\path\to\file", remainingTarget);
             ClassicAssert.AreEqual(new SvnRevision("123"), revision);
         }
@@ -27,7 +27,7 @@ namespace PoshSvn.Common.Tests
         [Test]
         public void ParsePegRevisionTargetTest3()
         {
-            PegRevisionParser.ParsePegRevisionTarget(@"http://svn.example.com/svn/repo/trunk/test.txt@HEAD", out var remainingTarget, out var revision);
+            PegRevision.ParsePegRevisionTarget(@"http://svn.example.com/svn/repo/trunk/test.txt@HEAD", out var remainingTarget, out var revision);
             ClassicAssert.AreEqual(@"http://svn.example.com/svn/repo/trunk/test.txt", remainingTarget);
             ClassicAssert.AreEqual(new SvnRevision("HEAD"), revision);
         }
@@ -35,7 +35,7 @@ namespace PoshSvn.Common.Tests
         [Test]
         public void ParsePegRevisionTargetTest4()
         {
-            Assert.Throws<ArgumentException>(() => PegRevisionParser.ParsePegRevisionTarget(
+            Assert.Throws<ArgumentException>(() => PegRevision.ParsePegRevisionTarget(
                 @"http://svn.example.com/svn/repo/trunk/test.txt@the_incorrect_revision",
                 out var remainingTarget,
                 out var revision));
