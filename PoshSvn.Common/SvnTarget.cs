@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System.IO;
-using PoshSvn.Enums;
 
 namespace PoshSvn
 {
