@@ -4,7 +4,7 @@
 
 using namespace SharpSvn;
 
-bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs mergingSummary) {
+bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^ mergingSummary) {
     const char* yca_url;
     const char* base_url;
     const char* right_url;
