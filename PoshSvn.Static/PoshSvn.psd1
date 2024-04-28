@@ -76,6 +76,7 @@ Project website: https://www.poshsvn.com"
         "SvnLog.format.ps1xml"
         "SvnItem.format.ps1xml"
         "SvnBlame.format.ps1xml"
+        "SvnMergeInfo.format.ps1xml"
     )
     PrivateData            = @{
         PSData = @{
