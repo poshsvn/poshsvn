@@ -20,6 +20,7 @@ using namespace SharpSvn;
 
 bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^% mergingSummary) {
     EnsureState(SvnContextState::AuthorizationInitialized);
+    AprPool pool(% _pool);
 
     svn_boolean_t is_reintegration;
 
@@ -44,13 +45,13 @@ bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergi
         &right_url, &right_rev,
         &target_url, &target_rev,
         &repos_root_url,
-        source->AllocAsString(% _pool),
-        source->GetSvnRevision(SvnRevision::Working, SvnRevision::Head)->AllocSvnRevision(% _pool),
-        target->AllocAsString(% _pool),
-        target->GetSvnRevision(SvnRevision::Working, SvnRevision::Head)->AllocSvnRevision(% _pool),
+        source->AllocAsString(% pool),
+        source->GetSvnRevision(SvnRevision::Working, SvnRevision::Head)->AllocSvnRevision(% pool),
+        target->AllocAsString(% pool),
+        target->GetSvnRevision(SvnRevision::Working, SvnRevision::Head)->AllocSvnRevision(% pool),
         CtxHandle,
-        _pool.Handle,
-        _pool.Handle);
+        pool.Handle,
+        pool.Handle);
 
     mergingSummary = gcnew SvnMergingSummaryEventArgs(
         is_reintegration,
@@ -59,7 +60,7 @@ bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergi
         right_url, right_rev,
         target_url, target_rev,
         repos_root_url,
-        SvnCommandType::GetMergingSummary, % _pool);
+        SvnCommandType::GetMergingSummary, % pool);
 
     return args->HandleResult(this, r);
 }
