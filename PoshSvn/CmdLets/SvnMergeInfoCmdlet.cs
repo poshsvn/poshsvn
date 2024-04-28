@@ -39,6 +39,8 @@ namespace PoshSvn.CmdLets
                 {
                 };
 
+                ConfigureRetrieveProperties(args.RetrieveProperties);
+
                 SvnClient.ListMergesEligible(sharpSvnTarget, sharpSvnSource, args, MergesEligibleReceiver);
             }
             else if (ShowRevisions == PoshSvn.ShowRevisions.Merged)
@@ -46,6 +48,8 @@ namespace PoshSvn.CmdLets
                 SvnMergesMergedArgs args = new SvnMergesMergedArgs
                 {
                 };
+
+                ConfigureRetrieveProperties(args.RetrieveProperties);
 
                 SvnClient.ListMergesMerged(sharpSvnTarget, sharpSvnSource, args, MergesMergedReceiver);
             }
@@ -99,6 +103,18 @@ namespace PoshSvn.CmdLets
                 SvnMergeInfoRevision obj = CreateMergeInfoRevision(e);
                 obj.SourceUri = e.SourceUri;
                 WriteObject(obj);
+            }
+        }
+
+        private void ConfigureRetrieveProperties(SvnRevisionPropertyNameCollection retrieveProperties)
+        {
+            retrieveProperties.Clear();
+
+            if (Log)
+            {
+                retrieveProperties.Add(SvnRevisionPropertyNameCollection.Log);
+                retrieveProperties.Add(SvnRevisionPropertyNameCollection.Author);
+                retrieveProperties.Add(SvnRevisionPropertyNameCollection.Date);
             }
         }
 
