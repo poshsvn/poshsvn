@@ -37,6 +37,7 @@ namespace PoshSvn.Tests
                     nameof(SvnMergeInfoRevision.Author));
             }
         }
+
         [Test]
         public void EligibleNoneTest()
         {
