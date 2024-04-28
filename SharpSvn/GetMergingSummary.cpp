@@ -21,6 +21,7 @@ using namespace SharpSvn;
 bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^% mergingSummary) {
     EnsureState(SvnContextState::AuthorizationInitialized);
     AprPool pool(% _pool);
+    ArgsStore store(this, args, % pool);
 
     svn_boolean_t is_reintegration;
 
