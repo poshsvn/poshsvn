@@ -5,16 +5,21 @@
 using namespace SharpSvn;
 
 bool SvnClient::GetMergingSummary(SvnTarget^ target, SvnTarget^ source, SvnMergingSummaryArgs^ args, [Out] SvnMergingSummaryEventArgs^ mergingSummary) {
-    const char* yca_url;
-    const char* base_url;
-    const char* right_url;
-    const char *target_url;
-    svn_revnum_t yca_rev;
-    svn_revnum_t base_rev;
-    svn_revnum_t right_rev;
-    svn_revnum_t target_rev;
-    const char* repos_root_url;
     svn_boolean_t is_reintegration;
+
+    const char* yca_url;
+    svn_revnum_t yca_rev;
+
+    const char* base_url;
+    svn_revnum_t base_rev;
+
+    const char* right_url;
+    svn_revnum_t right_rev;
+
+    const char *target_url;
+    svn_revnum_t target_rev;
+
+    const char* repos_root_url;
 
     svn_error_t *r = svn_client_get_merging_summary(
         &is_reintegration,
