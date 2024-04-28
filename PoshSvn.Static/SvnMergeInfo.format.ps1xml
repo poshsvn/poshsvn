@@ -16,6 +16,7 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Revision</PropertyName>
+                <FormatString>r{0}</FormatString>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
