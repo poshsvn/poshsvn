@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System.IO;
 using NUnit.Framework;
 using PoshSvn.Tests.TestUtils;
 
@@ -141,6 +142,19 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
+                        new SvnMergeInfo
+                        {
+                            IsReintegration = false,
+                            RepositoryRootUrl = new System.Uri(Path.Combine(sb.ReposPath, "")),
+                            YoungestCommonAncestorUrl = new System.Uri(Path.Combine(sb.ReposPath, "trunk")),
+                            YoungestCommonAncestorRevision = 1,
+                            BaseUrl = new System.Uri(Path.Combine(sb.ReposPath, "trunk")),
+                            BaseRevision = 4,
+                            RightUrl = new System.Uri(Path.Combine(sb.ReposPath, "trunk")),
+                            RightRevision = 8,
+                            TargetUrl = new System.Uri(Path.Combine(sb.ReposPath, "branches/test")),
+                            TargetRevision = 8,
+                        }
                     },
                     actual);
             }
