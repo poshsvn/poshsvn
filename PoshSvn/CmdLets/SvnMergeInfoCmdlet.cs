@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -36,13 +37,18 @@ namespace PoshSvn.CmdLets
 
                 SvnClient.ListMergesEligible(sharpSvnTarget, sharpSvnSource, args, MergesEligibleReceiver);
             }
-            else
+            else if (ShowRevisions == PoshSvn.ShowRevisions.Merged)
             {
                 SvnMergesMergedArgs args = new SvnMergesMergedArgs
                 {
                 };
 
                 SvnClient.ListMergesMerged(sharpSvnTarget, sharpSvnSource, args, MergesMergedReceiver);
+            }
+            else
+            {
+                // TODO:
+                throw new NotImplementedException();
             }
         }
 
