@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.IO;
 using NUnit.Framework;
 using PoshSvn.Tests.TestUtils;
@@ -25,13 +26,15 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfoRevision { Revision = 3 },
-                        new SvnMergeInfoRevision { Revision = 4 },
-                        new SvnMergeInfoRevision { Revision = 5 },
-                        new SvnMergeInfoRevision { Revision = 6 },
-                        new SvnMergeInfoRevision { Revision = 7 },
+                        new SvnMergeInfoRevision { Revision = 3, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add a.txt" },
+                        new SvnMergeInfoRevision { Revision = 4, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add b.txt" },
+                        new SvnMergeInfoRevision { Revision = 5, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add c.txt" },
+                        new SvnMergeInfoRevision { Revision = 6, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add x.txt" },
+                        new SvnMergeInfoRevision { Revision = 7, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add y.txt" },
                     },
-                    actual);
+                    actual,
+                    nameof(SvnMergeInfoRevision.Date),
+                    nameof(SvnMergeInfoRevision.Author));
             }
         }
         [Test]
@@ -52,9 +55,11 @@ namespace PoshSvn.Tests
                     new object[]
                     {
                         // What???
-                        new SvnMergeInfoRevision { Revision = 2 },
+                        new SvnMergeInfoRevision { Revision = 2, SourceUri = new Uri($"{sb.ReposUrl}/branches/test"), LogMessage = "branch" },
                     },
-                    actual);
+                    actual,
+                    nameof(SvnMergeInfoRevision.Date),
+                    nameof(SvnMergeInfoRevision.Author));
             }
         }
 
@@ -81,11 +86,13 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfoRevision { Revision = 6 },
-                        new SvnMergeInfoRevision { Revision = 7 },
-                        new SvnMergeInfoRevision { Revision = 8 },
+                        new SvnMergeInfoRevision { Revision = 6, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add c.txt" },
+                        new SvnMergeInfoRevision { Revision = 7, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add x.txt" },
+                        new SvnMergeInfoRevision { Revision = 8, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add y.txt" },
                     },
-                    actual);
+                    actual,
+                    nameof(SvnMergeInfoRevision.Date),
+                    nameof(SvnMergeInfoRevision.Author));
             }
         }
 
@@ -112,10 +119,12 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfoRevision { Revision = 3 },
-                        new SvnMergeInfoRevision { Revision = 4 },
+                        new SvnMergeInfoRevision { Revision = 3, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add a.txt" },
+                        new SvnMergeInfoRevision { Revision = 4, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add b.txt" },
                     },
-                    actual);
+                    actual,
+                    nameof(SvnMergeInfoRevision.Date),
+                    nameof(SvnMergeInfoRevision.Author));
             }
         }
 
@@ -181,13 +190,15 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnMergeInfoRevision { Revision = 3 },
-                        new SvnMergeInfoRevision { Revision = 4 },
-                        new SvnMergeInfoRevision { Revision = 5 },
-                        new SvnMergeInfoRevision { Revision = 6 },
-                        new SvnMergeInfoRevision { Revision = 7 },
+                        new SvnMergeInfoRevision { Revision = 3, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add a.txt" },
+                        new SvnMergeInfoRevision { Revision = 4, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add b.txt" },
+                        new SvnMergeInfoRevision { Revision = 5, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add c.txt" },
+                        new SvnMergeInfoRevision { Revision = 6, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add x.txt" },
+                        new SvnMergeInfoRevision { Revision = 7, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add y.txt" },
                     },
-                    actual);
+                    actual,
+                    nameof(SvnMergeInfoRevision.Date),
+                    nameof(SvnMergeInfoRevision.Author));
             }
         }
 
