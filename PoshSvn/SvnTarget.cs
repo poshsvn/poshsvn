@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System.IO;
-using System.Text;
 using PoshSvn.Enums;
 
 namespace PoshSvn
@@ -14,7 +13,7 @@ namespace PoshSvn
 
         public SvnTarget(string pathOrUrl)
         {
-            ParsePegRevisionTarget(pathOrUrl, out string remainingTarget, out SvnRevision revision);
+            PegRevisionParser.ParsePegRevisionTarget(pathOrUrl, out string remainingTarget, out SvnRevision revision);
 
             if (remainingTarget.Contains("://"))
             {
@@ -60,46 +59,6 @@ namespace PoshSvn
         public static SvnTarget FromUrl(string url, SvnRevision revision = null)
         {
             return new SvnTarget(url, SvnTargetType.Url, revision);
-        }
-
-        public static void ParsePegRevisionTarget(string target, out string remainingTarget, out SvnRevision revision)
-        {
-            int i = 0;
-
-            StringBuilder remainingTargetSb = new StringBuilder();
-            for (; i < target.Length; i++)
-            {
-                if (target[i] == '@')
-                {
-                    i++; // Skip '@'
-                    break;
-                }
-                else
-                {
-                    remainingTargetSb.Append(target[i]);
-                }
-            }
-            remainingTarget = remainingTargetSb.ToString();
-
-            if (i < target.Length)
-            {
-                // We have revision
-
-                StringBuilder revisionSb = new StringBuilder();
-
-                for (; i < target.Length; i++)
-                {
-                    revisionSb.Append(target[i]);
-                }
-
-                revision = new SvnRevision(revisionSb.ToString());
-            }
-            else
-            {
-                // We don't have any more symbols, so peg-revision is not set.
-
-                revision = null;
-            }
         }
     }
 }
