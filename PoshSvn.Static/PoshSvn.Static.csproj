@@ -8,6 +8,14 @@
     <Content Include="$(MSBuildProjectDirectory)\*.ps1xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="SvnMergeInfo.format.ps1xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SvnMergeInfo.format.ps1xml" />
+  </ItemGroup>
+
   <Import Project="..\MSBuild\ConfigureFile.tasks" />
 
   <PropertyGroup>
@@ -23,25 +31,15 @@
     <ProcessorArchitecture>X86</ProcessorArchitecture>
   </PropertyGroup>
 
-  <Target Name="BuildModuleManifest"
-          BeforeTargets="BeforeBuild"
-          Inputs="$(ModuleManifestSource)"
-          Outputs="$(ModuleManifestDestination)">
+  <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild" Inputs="$(ModuleManifestSource)" Outputs="$(ModuleManifestDestination)">
 
-    <Copy SourceFiles="$(ModuleManifestSource)"
-          DestinationFiles="$(ModuleManifestDestination)" />
+    <Copy SourceFiles="$(ModuleManifestSource)" DestinationFiles="$(ModuleManifestDestination)" />
 
-    <ConfigureFile FileName="$(ModuleManifestDestination)"
-                   MatchExpression="@Version@"
-                   ReplacementText="$(Version)" />
+    <ConfigureFile FileName="$(ModuleManifestDestination)" MatchExpression="@Version@" ReplacementText="$(Version)" />
 
-    <ConfigureFile FileName="$(ModuleManifestDestination)"
-                   MatchExpression="@ReleaseNotes@"
-                   ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
+    <ConfigureFile FileName="$(ModuleManifestDestination)" MatchExpression="@ReleaseNotes@" ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
 
-    <ConfigureFile FileName="$(ModuleManifestDestination)"
-                   MatchExpression="@ProcessorArchitecture@"
-                   ReplacementText="$(ProcessorArchitecture)" />
+    <ConfigureFile FileName="$(ModuleManifestDestination)" MatchExpression="@ProcessorArchitecture@" ReplacementText="$(ProcessorArchitecture)" />
   </Target>
 
 </Project>

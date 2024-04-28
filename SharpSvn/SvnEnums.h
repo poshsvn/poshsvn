@@ -83,7 +83,9 @@ namespace SharpSvn {
         // Custom commands
         FileVersions = 0x2001,
         ReplayRevision,
-        WriteRelated
+        WriteRelated,
+
+        GetMergingSummary
     };
 
     public enum class SvnDepth
