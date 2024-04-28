@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -53,6 +54,38 @@ namespace PoshSvn.Tests
                         new SvnSwitchOutput { Revision = 3 },
                     },
                     actual);
+            }
+        }
+
+        [Test]
+        public void PegRev()
+        {
+            using (var sb = new ProjectStructureSandbox())
+            {
+                sb.RunScript($@"svn-copy '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -m branch");
+                sb.RunScript($@"svn-mkdir wc-trunk\a");
+                sb.RunScript($@"svn-commit wc-trunk -m test");
+                sb.RunScript($@"svn-mkdir '{sb.ReposUrl}/branches/test/b' -m test");
+
+                var actual = sb.RunScript($@"svn-switch {sb.ReposUrl}/branches/test@3 wc-trunk");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.TrunkPath, "a") },
+                        new SvnNotifyOutput { Action = SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.TrunkPath) },
+                        new SvnSwitchOutput { Revision = 3 },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void NotValidUrl()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                Assert.Throws<ArgumentException>(() => sb.RunScript($@"svn-switch not-an-url wc-trunk"));
             }
         }
 

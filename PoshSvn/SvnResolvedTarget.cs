@@ -59,6 +59,18 @@ namespace PoshSvn
             }
         }
 
+        public SharpSvn.SvnUriTarget ConvertToSharpSvnUriTarget(string paramName)
+        {
+            if (isUrl)
+            {
+                return new SharpSvn.SvnUriTarget(url, GetSharpSvnRevision());
+            }
+            else
+            {
+                throw new ArgumentException("The target is not an Url.", paramName);
+            }
+        }
+
         public SharpSvn.SvnRevision GetSharpSvnRevision()
         {
             if (revision == null)
