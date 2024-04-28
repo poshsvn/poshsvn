@@ -28,6 +28,10 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.ShowRevisions)]
         public SvnDepth Depth { get; set; }
 
+        [Parameter(ParameterSetName = ParameterSetNames.ShowRevisions)]
+        [Alias("r", "rev")]
+        public SvnRevisionRange Revision { get; set; }
+
         protected override void Execute()
         {
             SvnResolvedTarget resolvedTarget = ResolveTarget(Target);
@@ -41,6 +45,7 @@ namespace PoshSvn.CmdLets
                 SvnMergesEligibleArgs args = new SvnMergesEligibleArgs
                 {
                     Depth = Depth.ConvertToSharpSvnDepth(),
+                    Range = Revision.ToSharpSvnRevisionRange(),
                 };
 
                 ConfigureRetrieveProperties(args.RetrieveProperties);
@@ -52,6 +57,7 @@ namespace PoshSvn.CmdLets
                 SvnMergesMergedArgs args = new SvnMergesMergedArgs
                 {
                     Depth = Depth.ConvertToSharpSvnDepth(),
+                    Range = Revision.ToSharpSvnRevisionRange(),
                 };
 
                 ConfigureRetrieveProperties(args.RetrieveProperties);
