@@ -39,12 +39,23 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                throw new NotImplementedException();
-                // TODO:
+                SvnMergesMergedArgs args = new SvnMergesMergedArgs
+                {
+                };
+
+                SvnClient.ListMergesMerged(sharpSvnTarget, sharpSvnSource, args, MergesMergedReceiver);
             }
         }
 
         private void MergesEligibleReceiver(object sender, SharpSvn.SvnMergesEligibleEventArgs e)
+        {
+            WriteObject(new SvnMergeInfo
+            {
+                Revision = e.Revision,
+            });
+        }
+
+        private void MergesMergedReceiver(object sender, SharpSvn.SvnMergesMergedEventArgs e)
         {
             WriteObject(new SvnMergeInfo
             {
