@@ -13,10 +13,10 @@ namespace PoshSvn.CmdLets
     public class SvnMergeInfoCmdlet : SvnClientCmdletBase
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public SvnTarget Target { get; set; }
-
-        [Parameter(Mandatory = true, Position = 1)]
         public SvnTarget Source { get; set; }
+
+        [Parameter(Position = 1)]
+        public SvnTarget Target { get; set; } = new SvnTarget(".");
 
         [Parameter(ParameterSetName = "ShowRevisions")]
         [Alias("ShowRevs")]

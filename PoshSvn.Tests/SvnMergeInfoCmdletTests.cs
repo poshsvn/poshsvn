@@ -22,7 +22,37 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Eligible");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Eligible");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnMergeInfoRevision { Revision = 3, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add a.txt" },
+                        new SvnMergeInfoRevision { Revision = 4, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add b.txt" },
+                        new SvnMergeInfoRevision { Revision = 5, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add c.txt" },
+                        new SvnMergeInfoRevision { Revision = 6, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add x.txt" },
+                        new SvnMergeInfoRevision { Revision = 7, SourceUri = new Uri($"{sb.ReposUrl}/trunk"), LogMessage = "add y.txt" },
+                    },
+                    actual,
+                    nameof(SvnMergeInfoRevision.Date),
+                    nameof(SvnMergeInfoRevision.Author));
+            }
+        }
+
+        [Test]
+        public void SimpleTestViaTargetFromCurrentDirectory()
+        {
+            using (var sb = new ProjectStructureSandbox())
+            {
+                sb.RunScript($@"svn-copy '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -m branch");
+                sb.RunScript($@"cd wc-trunk; 'abc' > a.txt; svn-add a.txt; svn-commit -m 'add a.txt'");
+                sb.RunScript($@"cd wc-trunk; 'abc' > b.txt; svn-add b.txt; svn-commit -m 'add b.txt'");
+                sb.RunScript($@"cd wc-trunk; 'abc' > c.txt; svn-add c.txt; svn-commit -m 'add c.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
+                sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
+
+                sb.RunScript($@"svn-switch '{sb.ReposUrl}/branches/test' wc-trunk");
+                var actual = sb.RunScript($@"cd wc-trunk; svn-mergeinfo '{sb.ReposUrl}/trunk' -ShowRevs Eligible");
 
                 PSObjectAssert.AreEqual(
                     new object[]
@@ -51,7 +81,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Eligible -Log");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Eligible -Log");
 
                 PSObjectAssert.AreEqual(
                     new object[]
@@ -81,7 +111,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Eligible");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Eligible");
 
                 ClassicAssert.AreEqual(
                     new object[]
@@ -113,7 +143,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Eligible");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Eligible");
 
                 PSObjectAssert.AreEqual(
                     new object[]
@@ -145,7 +175,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Eligible");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Eligible");
 
                 PSObjectAssert.AreEqual(
                     new object[]
@@ -178,7 +208,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Merged");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Merged");
 
                 PSObjectAssert.AreEqual(
                     new object[]
@@ -210,7 +240,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"cd wc-trunk; 'xyz' > x.txt; svn-add x.txt; svn-commit -m 'add x.txt'");
                 sb.RunScript($@"cd wc-trunk; 'xyz' > y.txt; svn-add y.txt; svn-commit -m 'add y.txt'");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk'");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test'");
 
                 PSObjectAssert.AreEqual(
                     new object[]
@@ -249,7 +279,7 @@ namespace PoshSvn.Tests
                 sb.RunScript($@"svn-merge '{sb.ReposUrl}/trunk' wc-trunk");
                 sb.RunScript($@"svn-commit -m merge wc-trunk");
 
-                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/branches/test' '{sb.ReposUrl}/trunk' -ShowRevs Merged");
+                var actual = sb.RunScript($@"svn-mergeinfo '{sb.ReposUrl}/trunk' '{sb.ReposUrl}/branches/test' -ShowRevs Merged");
 
                 PSObjectAssert.AreEqual(
                     new object[]
