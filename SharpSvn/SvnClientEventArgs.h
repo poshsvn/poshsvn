@@ -50,5 +50,6 @@
 #include "EventArgs/SvnRemoteListEventArgs.h"
 #include "EventArgs/SvnRemoteListLockEventArgs.h"
 #include "EventArgs/SvnRemoteLocationSegmentEventArgs.h"
+#include "EventArgs/SvnMergingSummaryEventArgs.h"
 
 #include "ReposEventArgs/SvnRepositoryNotifyEventArgs.h"

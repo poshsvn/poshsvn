@@ -653,6 +653,12 @@
     <ClInclude Include="LookArgs\SvnLookLockArgs.h">
       <Filter>SvnLookClient\Args</Filter>
     </ClInclude>
+    <ClInclude Include="EventArgs\SvnMergingSummaryEventArgs.h">
+      <Filter>SvnClient\EventArgs</Filter>
+    </ClInclude>
+    <ClInclude Include="Args\SvnMergingSummaryArgs.h">
+      <Filter>SvnClient\Args</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SharpSvnStrings.resx">
@@ -1107,6 +1113,9 @@
     </ClCompile>
     <ClCompile Include="LookCommands\LookLock.cpp">
       <Filter>SvnLookClient\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GetMergingSummary.cpp">
+      <Filter>SvnClient\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
