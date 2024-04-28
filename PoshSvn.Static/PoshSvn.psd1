@@ -37,6 +37,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnLock"
         "Invoke-SvnUnlock"
         "Invoke-SvnMerge"
+        "Invoke-SvnMergeInfo"
         "New-SvnTarget"
     )
     AliasesToExport        = @(
@@ -64,6 +65,7 @@ Project website: https://www.poshsvn.com"
         "svn-lock"
         "svn-unlock"
         "svn-merge"
+        "svn-mergeinfo"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
