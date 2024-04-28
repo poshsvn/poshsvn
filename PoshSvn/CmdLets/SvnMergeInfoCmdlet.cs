@@ -18,11 +18,11 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 1)]
         public SvnTarget Target { get; set; } = new SvnTarget(".");
 
-        [Parameter(ParameterSetName = "ShowRevisions")]
+        [Parameter(ParameterSetName = ParameterSetNames.ShowRevisions)]
         [Alias("ShowRevs")]
         public ShowRevisions? ShowRevisions { get; set; } = null;
 
-        [Parameter(ParameterSetName = "ShowRevisions")]
+        [Parameter(ParameterSetName = ParameterSetNames.ShowRevisions)]
         public SwitchParameter Log { get; set; }
 
         protected override void Execute()
