@@ -13,6 +13,8 @@ namespace PoshSvn
     {
         protected ProgressRecord ProgressRecord;
 
+        protected bool isCancelled = false;
+
         protected SvnCmdletBase()
         {
             ProgressRecord = new ProgressRecord(0, GetActivityTitle(null), "Initializing...");
@@ -244,6 +246,18 @@ namespace PoshSvn
             {
                 throw new NotImplementedException();
             }
+        }
+
+        protected void SvnClient_Cancel(object sender, SharpSvn.SvnCancelEventArgs e)
+        {
+            e.Cancel = isCancelled;
+        }
+
+        protected override void StopProcessing()
+        {
+            isCancelled = true;
+
+            base.StopProcessing();
         }
     }
 }
