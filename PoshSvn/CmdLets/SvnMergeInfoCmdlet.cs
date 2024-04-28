@@ -8,7 +8,7 @@ namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnMergeInfo")]
     [Alias("svn-mergeinfo")]
-    [OutputType(typeof(SvnMergeInfo))]
+    [OutputType(typeof(SvnMergeInfoRevision))]
     public class SvnMergeInfoCmdlet : SvnClientCmdletBase
     {
         [Parameter(Mandatory = true, Position = 0)]
@@ -60,7 +60,7 @@ namespace PoshSvn.CmdLets
 
         private void MergesEligibleReceiver(object sender, SvnMergesEligibleEventArgs e)
         {
-            WriteObject(new SvnMergeInfo
+            WriteObject(new SvnMergeInfoRevision
             {
                 Revision = e.Revision,
             });
@@ -68,7 +68,7 @@ namespace PoshSvn.CmdLets
 
         private void MergesMergedReceiver(object sender, SvnMergesMergedEventArgs e)
         {
-            WriteObject(new SvnMergeInfo
+            WriteObject(new SvnMergeInfoRevision
             {
                 Revision = e.Revision,
             });
