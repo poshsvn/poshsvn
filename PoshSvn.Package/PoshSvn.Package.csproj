@@ -44,10 +44,6 @@
     <PackageItems Include="$(OutDir)libssl-3.dll" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net4.7.2</TargetFramework>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\PoshSvn.Docs\PoshSvn.Docs.csproj" />
     <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" />
