@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
+using System.Threading;
 using SharpSvn;
 
 namespace PoshSvn
@@ -13,11 +14,14 @@ namespace PoshSvn
     {
         protected ProgressRecord ProgressRecord;
 
-        protected bool isCancelled = false;
+        protected CancellationTokenSource cancellationTokenSource;
+        protected CancellationToken cancellationToken;
 
         protected SvnCmdletBase()
         {
             ProgressRecord = new ProgressRecord(0, GetActivityTitle(null), "Initializing...");
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationToken = cancellationTokenSource.Token;
         }
 
         protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
@@ -250,12 +254,12 @@ namespace PoshSvn
 
         protected void SvnClient_Cancel(object sender, SharpSvn.SvnCancelEventArgs e)
         {
-            e.Cancel = isCancelled;
+            e.Cancel = cancellationToken.IsCancellationRequested;
         }
 
         protected override void StopProcessing()
         {
-            isCancelled = true;
+            cancellationTokenSource.Cancel();
 
             base.StopProcessing();
         }
