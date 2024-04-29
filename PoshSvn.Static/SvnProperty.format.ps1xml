@@ -5,14 +5,28 @@
       <ViewSelectedBy>
         <TypeName>PoshSvn.SvnProperty</TypeName>
       </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>Path</PropertyName>
+        <CustomControl>
+          <CustomEntries>
+            <CustomEntry>
+              <CustomItem>
+                <Text>    Properties on '</Text>
+                <ExpressionBinding>
+                  <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+                </ExpressionBinding>
+                <Text>':</Text>
+              </CustomItem>
+            </CustomEntry>
+          </CustomEntries>
+        </CustomControl>
+        <!--<CustomControl>...</CustomControl>
+        <CustomControlName>NameOfControl</CustomControlName>-->
+      </GroupBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>Name</Label>
-            <Width>16</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Path</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -20,9 +34,6 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
