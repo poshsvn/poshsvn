@@ -37,6 +37,7 @@ namespace PoshSvn
             SvnClient.Notify += NotifyEventHandler;
             SvnClient.Progress += ProgressEventHandler;
             SvnClient.Committed += CommittedEventHandler;
+            SvnClient.Cancel += SvnClient_Cancel;
             SvnClient.Conflict += Conflict_Handler;
 
             if (Username != null || Password != null)

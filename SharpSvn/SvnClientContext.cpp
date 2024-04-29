@@ -998,7 +998,7 @@ sharpsvn_cancel_func(void *cancel_baton)
         client->HandleClientCancel(ea);
 
         if (ea->Cancel)
-            return svn_error_create(SVN_ERR_CANCELLED, nullptr, "Operation canceled from OnCancel");
+            return svn_error_create(SVN_ERR_CANCELLED, nullptr, "Caught signal");
 
         return nullptr;
     }
