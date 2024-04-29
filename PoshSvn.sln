@@ -8,12 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99FBE8C5-F431-4596-BB22-56EE1C9D9BC2}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		CHANGELOG.md = CHANGELOG.md
-		CONTRIBUTING.md = CONTRIBUTING.md
 		Directory.build.props = Directory.build.props
 		Directory.build.targets = Directory.build.targets
-		HACKING.md = HACKING.md
-		README.md = README.md
 		vcpkg-configuration.json = vcpkg-configuration.json
 		vcpkg.json = vcpkg.json
 		Version.props = Version.props
@@ -53,6 +49,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "platyPS", "platyPS\platyPS.csproj", "{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.MAML", "Markdown.MAML\Markdown.MAML.csproj", "{1705012C-1BF5-4660-B758-40D742D637BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{2CAA3EF3-C56B-444B-BC7C-1B72CF9B8BEB}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		HACKING.md = HACKING.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
