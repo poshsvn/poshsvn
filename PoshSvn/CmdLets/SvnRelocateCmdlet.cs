@@ -16,22 +16,31 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 1, Mandatory = true)]
         public Uri To { get; set; }
 
-        [Parameter(Position = 2)]
-        public string Path { get; set; } = ".";
+        [Parameter(Position = 2, ValueFromRemainingArguments = true)]
+        public string[] Path { get; set; }
 
         [Parameter()]
         public SwitchParameter IgnoreExternals;
 
+        public SvnRelocateCmdlet()
+        {
+            Path = new string[]
+            {
+                "."
+            };
+        }
+
         protected override void Execute()
         {
-            string path = GetUnresolvedProviderPathFromPSPath(Path);
-
             var args = new SvnRelocateArgs
             {
                 IgnoreExternals = IgnoreExternals,
             };
 
-            SvnClient.Relocate(path, From, To, args);
+            foreach (string path in GetPathTargets(Path, false))
+            {
+                SvnClient.Relocate(path, From, To, args);
+            }
         }
     }
 }

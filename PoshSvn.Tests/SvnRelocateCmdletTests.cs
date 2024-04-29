@@ -50,5 +50,17 @@ namespace PoshSvn.Tests
                     nameof(SvnInfoOutput.RepositoryId));
             }
         }
+
+        [Test]
+        public void ManyWorkingCopiesTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript("Copy-Item repos repos-new -Recurse");
+                sb.RunScript($"svn-checkout {sb.RootPath}/repos wc-1");
+                sb.RunScript($"svn-checkout {sb.RootPath}/repos wc-2");
+                sb.RunScript($"svn-relocate {sb.RootPath}/repos {sb.RootPath}/repos-new wc-1 wc-2");
+            }
+        }
     }
 }
