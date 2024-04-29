@@ -1,4 +1,22 @@
 <Configuration>
+  <Controls>
+    <Control>
+      <Name>SvnProperty-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Text>    Properties on '</Text>
+              <ExpressionBinding>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+              </ExpressionBinding>
+              <Text>':</Text>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
+  </Controls>
   <ViewDefinitions>
     <View>
       <Name>default</Name>
@@ -7,19 +25,7 @@
       </ViewSelectedBy>
       <GroupBy>
         <PropertyName>Path</PropertyName>
-        <CustomControl>
-          <CustomEntries>
-            <CustomEntry>
-              <CustomItem>
-                <Text>    Properties on '</Text>
-                <ExpressionBinding>
-                  <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
-                </ExpressionBinding>
-                <Text>':</Text>
-              </CustomItem>
-            </CustomEntry>
-          </CustomEntries>
-        </CustomControl>
+        <CustomControlName>SvnProperty-GroupingFormat</CustomControlName>
       </GroupBy>
       <TableControl>
         <TableHeaders>
