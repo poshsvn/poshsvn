@@ -24,10 +24,9 @@
 
   <PropertyGroup>
     <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
-    <VcpkgManifestRoot>$(SolutionDir)</VcpkgManifestRoot>
     <VcpkgTriplet>$(DisplayPlatform)-windows</VcpkgTriplet>
-    <VcpkgInstalledDir>$(VcpkgManifestRoot)\vcpkg_installed\$(DisplayPlatform)\</VcpkgInstalledDir>
-    <PackagesPath>$(VcpkgManifestRoot)vcpkg_installed\$(DisplayPlatform)\$(VcpkgTriplet)\</PackagesPath>
+    <VcpkgInstalledDir>$(SolutionDir)\vcpkg_installed\$(DisplayPlatform)\</VcpkgInstalledDir>
+    <PackagesPath>$(VcpkgInstalledDir)\$(VcpkgTriplet)\</PackagesPath>
   </PropertyGroup>
 
   <PropertyGroup>
