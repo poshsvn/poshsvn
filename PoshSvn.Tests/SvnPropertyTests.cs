@@ -9,7 +9,7 @@ namespace PoshSvn.Tests
     public class SvnPropertyTests
     {
         [Test]
-        public void OutputFormatTableTest()
+        public void OutputFormatTableFromPropsetTest()
         {
             using (var sb = new WcSandbox())
             {
