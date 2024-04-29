@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Management.Automation;
@@ -9,25 +8,17 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnLog", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnLog")]
     [Alias("svn-log")]
     [OutputType(typeof(SvnLogOutput))]
     public class SvnLog : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; } = new string[] { "" };
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public Uri[] Url { get; set; }
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
-        public SvnRevision Start { get; set; } = null;
-
-        [Parameter()]
-        public SvnRevision End { get; set; } = null;
+        [Alias("rev", "r")]
+        public SvnRevisionRange[] Revision { get; set; }
 
         [Parameter()]
         [Alias("v")]
@@ -38,7 +29,7 @@ namespace PoshSvn.CmdLets
         public int Limit { get; set; } = -1;
 
         [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
+        public SvnDepth Depth { get; set; }
 
         [Parameter()]
         [Alias("include-externals")]
@@ -56,16 +47,32 @@ namespace PoshSvn.CmdLets
         [Alias("with-revprop")]
         public string[] WithRevisionProperties { get; set; }
 
+        public SvnLog()
+        {
+            Depth = SvnDepth.Empty;
+            Target = new SvnTarget[]
+            {
+                SvnTarget.FromPath(".")
+            };
+            Revision = new SvnRevisionRange[]
+            {
+                new SvnRevisionRange("HEAD:0")
+            };
+        }
+
         protected override void Execute()
         {
             SvnLogArgs args = new SvnLogArgs
             {
                 Limit = Limit,
                 RetrieveChangedPaths = ChangedPaths,
-                Start = Start,
-                End = End,
                 RetrieveAllProperties = WithAllRevisionProperties,
             };
+
+            foreach (SvnRevisionRange range in Revision)
+            {
+                args.Ranges.Add(range.ToSharpSvnRevisionRange());
+            }
 
             if (WithRevisionProperties != null)
             {
@@ -83,9 +90,9 @@ namespace PoshSvn.CmdLets
 
             args.Progress += ProgressEventHandler;
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            ResolvedTargetCollection targets = ResolveTargets(Target);
 
-            targets.ThrowIfHasPathsAndUris();
+            targets.ThrowIfHasPathsAndUris(nameof(Target));
 
             if (targets.HasPaths)
             {
@@ -93,7 +100,7 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                SvnClient.Log(targets.Uris, args, LogHandler);
+                SvnClient.Log(targets.Urls, args, LogHandler);
             }
         }
 
@@ -115,7 +122,7 @@ namespace PoshSvn.CmdLets
 
             WriteObject(obj);
 
-            UpdateAction(string.Format("r{0}", e.Revision));
+            UpdateProgressAction(string.Format("r{0}", e.Revision));
         }
 
         private SvnChangeItem[] ConvertSvnChangedPaths(KeyedCollection<string, SharpSvn.SvnChangeItem> source)
@@ -141,68 +148,6 @@ namespace PoshSvn.CmdLets
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
         {
             return "svn-log";
-        }
-    }
-
-    public class SvnLogOutput
-    {
-        public long Revision { get; set; }
-        public string Author { get; set; }
-        public DateTimeOffset? Date { get; set; }
-        public string Message { get; set; }
-        public SvnChangeItem[] ChangedPaths { get; set; }
-        public SvnPropertyValue[] RevisionProperties { get; set; }
-    }
-
-    public class SvnChangeItem
-    {
-        public SvnChangeItem()
-        {
-        }
-
-        internal SvnChangeItem(SharpSvn.SvnChangeItem source)
-        {
-            PropertiesModified = source.PropertiesModified;
-            ContentModified = source.ContentModified;
-            NodeKind = source.NodeKind;
-            CopyFromRevision = source.CopyFromRevision;
-            CopyFromPath = source.CopyFromPath;
-            Action = source.Action.ToPoshSvnChangeAction();
-            Path = source.Path;
-        }
-
-        public bool? PropertiesModified { get; set; }
-        public bool? ContentModified { get; set; }
-        public SvnNodeKind NodeKind { get; set; } // TODO:
-        public long? CopyFromRevision { get; set; }
-        public string CopyFromPath { get; set; }
-        public SvnChangeAction Action { get; set; }
-        public string ActionString => SvnUtils.GetChangeActionString(Action);
-        public string Path { get; set; }
-    }
-
-    public enum SvnChangeAction
-    {
-        None,
-        Add,
-        Delete,
-        Modify,
-        Replace,
-    }
-
-    public static class SvnChangeActionExtensions
-    {
-        public static SvnChangeAction ToPoshSvnChangeAction(this SharpSvn.SvnChangeAction changeAction)
-        {
-            switch (changeAction)
-            {
-                case SharpSvn.SvnChangeAction.None: return SvnChangeAction.None;
-                case SharpSvn.SvnChangeAction.Add: return SvnChangeAction.Add;
-                case SharpSvn.SvnChangeAction.Delete: return SvnChangeAction.Delete;
-                case SharpSvn.SvnChangeAction.Modify: return SvnChangeAction.Modify;
-                case SharpSvn.SvnChangeAction.Replace: return SvnChangeAction.Replace;
-                default: throw new NotImplementedException();
-            }
         }
     }
 }

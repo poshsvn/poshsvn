@@ -1,0 +1,121 @@
+﻿<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnLogOutput</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Text>------------------------------------------------------------------------</Text>
+              <NewLine />
+              <ExpressionBinding>
+                <ScriptBlock>"r{0,-10}" -f $_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  if ($_.Author -eq $null) {
+                  $author = "(no author)"
+                  }
+                  else {
+                  $author = $_.Author
+                  }
+                  "{0,-20}" -f $author
+                </ScriptBlock>
+              </ExpressionBinding>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  if ($_.Date -eq $null) {
+                  "(no date)"
+                  }
+                  else {
+                  $_.Date.ToString('yyyy-MM-dd hh:mm zzzz')
+                  }
+                </ScriptBlock>
+              </ExpressionBinding>
+              <NewLine />
+              <ExpressionBinding>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.ChangedPaths -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <PropertyName>ChangedPaths</PropertyName>
+                <EnumerateCollection />
+                <CustomControl>
+                  <CustomEntries>
+                    <CustomEntry>
+                      <CustomItem>
+                        <ExpressionBinding>
+                          <ScriptBlock>"{0,4} " -f $_.ActionString</ScriptBlock>
+                        </ExpressionBinding>
+                        <ExpressionBinding>
+                          <PropertyName>Path</PropertyName>
+                        </ExpressionBinding>
+                        <NewLine />
+                      </CustomItem>
+                    </CustomEntry>
+                  </CustomEntries>
+                </CustomControl>
+              </ExpressionBinding>
+              <NewLine />
+              <ExpressionBinding>
+                <PropertyName>Message</PropertyName>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnLogOutput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Revision</Label>
+            <Alignment>right</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>16</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Date</Label>
+            <Width>22</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Revision</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Author</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.Date -eq $null) {
+                  "(no date)"
+                  }
+                  else {
+                  $_.Date.ToString('yyyy-MM-dd    hh:mm')
+                  }
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.Message.Replace("`n", " ")</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

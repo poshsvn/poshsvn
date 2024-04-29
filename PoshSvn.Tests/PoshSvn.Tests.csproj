@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net4.7.2</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <Platforms>x64;</Platforms>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" Private="False"/>
+    <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" Private="False" />
+    <ProjectReference Include="..\SharpSvn\SharpSvn.vcxproj" />
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0.0" />
-    <PackageReference Include="SharpSvn" Version="1.14003.272" />
   </ItemGroup>
 
 </Project>

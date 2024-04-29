@@ -1,0 +1,88 @@
+﻿<Project>
+  <Import Project="..\Directory.build.targets" />
+
+  <ItemGroup>
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_diff-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_fs_fs-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_fs_util-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_fs_x-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_fs-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_ra-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_repos-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_subr-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_wc-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libapr-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libaprutil-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_client-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_delta-1.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libexpat.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\sqlite3.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\zlib1.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)'=='x64'">
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libcrypto-3-x64.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libssl-3-x64.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)'=='Win32'">
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libcrypto-3.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libssl-3.dll" />
+  </ItemGroup>
+
+  <Import Project="..\MSBuild\GenerateLocalizationResources.tasks" />
+
+  <PropertyGroup>
+    <SvnTextDir>$(ProjectDir)SvnText</SvnTextDir>
+    <SvnPoDir>$(SolutionDir)svn-po\</SvnPoDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SvnPoFiles Include="$(SvnPoDir)*.po" />
+  </ItemGroup>
+
+  <Target Name="GenerateLocalizationResources"
+          BeforeTargets="ClCompile"
+          Inputs="@(SvnPoFiles)"
+          Outputs="$(SvnTextDir)\SvnText.$([System.String]::Copy(%(SvnPoFiles.Filename)).Replace('_','-')).resx">
+    <MakeDir Directories="$(SvnTextDir)" />
+    <GenerateLocalizationResources Prefix="SvnText"
+                                   OutputDirectory="$(SvnTextDir)"
+                                   InputFiles="@(SvnPoFiles)" />
+  </Target>
+
+  <Target Name="CleanLocalizationResources"
+          BeforeTargets="CoreClean">
+    <RemoveDir Directories="$(SvnTextDir)" />
+  </Target>
+
+  <Import Project="..\MSBuild\GenerateErrorEnums.tasks" />
+
+  <PropertyGroup>
+    <WinErrorHeaderPath>$(KIT_SHARED_IncludePath)\winerror.h</WinErrorHeaderPath>
+    <ErrnoHeaderPath>$(KIT_SHARED_IncludePath)\..\ucrt\errno.h</ErrnoHeaderPath>
+    <AprErrnoHeaderPath>$(PackagesPath)\include\apr_errno.h</AprErrnoHeaderPath>
+    <SerfHeaderPath>$(PackagesPath)\include\serf.h</SerfHeaderPath>
+    <OutputFilePath>$(ProjectDir)\SvnWindowsError.h</OutputFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GenerateErrorEnumsInputs Include="$(WinErrorHeaderPath)" />
+    <GenerateErrorEnumsInputs Include="$(ErrnoHeaderPath)" />
+    <GenerateErrorEnumsInputs Include="$(AprErrnoHeaderPath)" />
+    <GenerateErrorEnumsInputs Include="$(SerfHeaderPath)" />
+  </ItemGroup>
+
+  <Target Name="GenerateErrorEnums" BeforeTargets="ClCompile" Inputs="@(GenerateErrorEnumsInputs)" Outputs="$(OutputFilePath)">
+    <GenerateErrorEnums WinErrorHeaderPath="$(WinErrorHeaderPath)"
+                        ErrnoHeaderPath="$(ErrnoHeaderPath)"
+                        AprErrnoHeaderPath="$(AprErrnoHeaderPath)"
+                        SerfHeaderPath="$(SerfHeaderPath)"
+                        OutputFilePath="$(OutputFilePath)" />
+  </Target>
+
+  <Target Name="CleanErrorEnums"
+          BeforeTargets="CoreClean">
+    <Delete Files="$(OutputFilePath)" />
+  </Target>
+</Project>

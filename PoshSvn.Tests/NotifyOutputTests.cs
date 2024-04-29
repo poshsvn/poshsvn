@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System.IO;
-using System.Management.Automation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
@@ -21,17 +19,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = @"C:\path\to\wc\a"
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = @"C:\path\to\wc\b"
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = @"C:\path\to\wc\c"
                         },
                     },
@@ -63,17 +61,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = @"C:\path\to\wc\a"
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = @"C:\path\to\wc\b"
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = @"C:\path\to\wc\c"
                         },
                     },
@@ -103,17 +101,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = @"C:\path\to\wc\a"
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = @"C:\path\to\wc\b"
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = @"C:\path\to\wc\c"
                         },
                         new SvnCommitOutput
@@ -148,17 +146,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"path\to\item\a"),
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Add,
+                            Action = SvnNotifyAction.Add,
                             Path = Path.Combine(sb.WcPath, @"path\to\item\b"),
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Delete,
+                            Action = SvnNotifyAction.Delete,
                             Path = Path.Combine(sb.WcPath, @"c"),
                         },
                     },
@@ -201,17 +199,17 @@ namespace PoshSvn.Tests
                         {
                             new SvnNotifyOutput
                             {
-                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Action = SvnNotifyAction.Add,
                                 Path = Path.Combine(sb.WcPath, @"path\to\item\a"),
                             },
                             new SvnNotifyOutput
                             {
-                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Action = SvnNotifyAction.Add,
                                 Path = Path.Combine(sb.WcPath, @"path\to\item\b"),
                             },
                             new SvnNotifyOutput
                             {
-                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Action = SvnNotifyAction.Add,
                                 Path = Path.Combine(sb.WcPath, @"c"),
                             },
                             new SvnCheckoutOutput { Revision = 36743216 },
@@ -241,17 +239,17 @@ namespace PoshSvn.Tests
                         {
                             new SvnNotifyOutput
                             {
-                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Action = SvnNotifyAction.Add,
                                 Path = Path.Combine(sb.WcPath, @"path\to\item\a"),
                             },
                             new SvnNotifyOutput
                             {
-                                Action = SharpSvn.SvnNotifyAction.Add,
+                                Action = SvnNotifyAction.Add,
                                 Path = Path.Combine(sb.WcPath, @"path\to\item\b"),
                             },
                             new SvnNotifyOutput
                             {
-                                Action = SharpSvn.SvnNotifyAction.Delete,
+                                Action = SvnNotifyAction.Delete,
                                 Path = Path.Combine(sb.WcPath, @"c"),
                             },
                             new SvnUpdateOutput { Revision = 6783213 },
@@ -265,7 +263,7 @@ namespace PoshSvn.Tests
         {
             var item = new SvnNotifyOutput()
             {
-                Action = SharpSvn.SvnNotifyAction.Add,
+                Action = SvnNotifyAction.Add,
                 Path = @"C:\path\to\item"
             };
 
@@ -277,7 +275,7 @@ namespace PoshSvn.Tests
         {
             var item = new SvnNotifyOutput()
             {
-                Action = SharpSvn.SvnNotifyAction.Delete,
+                Action = SvnNotifyAction.Delete,
                 Path = @"C:\path\to\item"
             };
 
@@ -289,7 +287,7 @@ namespace PoshSvn.Tests
         {
             var item = new SvnNotifyOutput()
             {
-                Action = SharpSvn.SvnNotifyAction.Revert,
+                Action = SvnNotifyAction.Revert,
                 Path = @"C:\path\to\item"
             };
 
@@ -308,19 +306,69 @@ namespace PoshSvn.Tests
                         "D       a",
                         "A       b",
                         "U       .",
-                        "",
-                        "Revision : 4",
-                        "",
+                        "Updated to revision 4.",
                         "",
                         "",
                     },
                     sb.FormatObject(
                         new object[]
                         {
-                            new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.RootPath, "a") },
-                            new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateAdd, Path = Path.Combine(sb.RootPath, "b") },
-                            new SvnNotifyOutput { Action = SharpSvn.SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.RootPath) },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.UpdateDelete, Path = Path.Combine(sb.RootPath, "a") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.UpdateAdd, Path = Path.Combine(sb.RootPath, "b") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.UpdateUpdate, Path = Path.Combine(sb.RootPath) },
                             new SvnSwitchOutput { Revision = 4 },
+                        },
+                        "Format-Custom"));
+            }
+        }
+
+        [Test]
+        public void LockOutputTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                        "",
+                        "+L      tree.jpg",
+                        "+L      house.jpg",
+                        "+L      foo.c",
+                        "",
+                        "",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockLocked, Path = Path.Combine(sb.RootPath, "tree.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockLocked, Path = Path.Combine(sb.RootPath, "house.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockLocked, Path = Path.Combine(sb.RootPath, "foo.c") },
+                        },
+                        "Format-Custom"));
+            }
+        }
+
+        [Test]
+        public void UnlockOutputTest()
+        {
+            using (var sb = new PowerShellSandbox())
+            {
+                CollectionAssert.AreEqual(
+                    new[]
+                    {
+                        "",
+                        "-L      tree.jpg",
+                        "-L      house.jpg",
+                        "-L      foo.c",
+                        "",
+                        "",
+                    },
+                    sb.FormatObject(
+                        new object[]
+                        {
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockUnlocked, Path = Path.Combine(sb.RootPath, "tree.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockUnlocked, Path = Path.Combine(sb.RootPath, "house.jpg") },
+                            new SvnNotifyOutput { Action = SvnNotifyAction.LockUnlocked, Path = Path.Combine(sb.RootPath, "foo.c") },
                         },
                         "Format-Custom"));
             }

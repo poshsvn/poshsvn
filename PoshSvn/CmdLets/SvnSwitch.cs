@@ -12,7 +12,7 @@ namespace PoshSvn.CmdLets
     public class SvnSwitch : SvnClientCmdletBase
     {
         [Parameter(Position = 0)]
-        public Uri Url { get; set; }
+        public SvnTarget Target { get; set; }
 
         [PSDefaultValue(Value = ".")]
         [Parameter(Position = 1)]
@@ -20,7 +20,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; } = null;
+        public SharpSvn.SvnRevision Revision { get; set; } = null;
 
         [Parameter()]
         [PSDefaultValue(Value = "Infinity")]
@@ -37,8 +37,10 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            string path = GetPathTarget(Path);
-            SvnUriTarget target = SvnUriTarget.FromUri(Url);
+            string path = GetUnresolvedProviderPathFromPSPath(Path);
+
+            SvnResolvedTarget resolvedTarget = ResolveTarget(Target);
+            SvnUriTarget sharpSvnTarget = resolvedTarget.ConvertToSharpSvnUriTarget(nameof(Target));
 
             var args = new SvnSwitchArgs
             {
@@ -47,12 +49,7 @@ namespace PoshSvn.CmdLets
                 IgnoreExternals = IgnoreExternals,
             };
 
-            SvnClient.Switch(path, target, args);
+            SvnClient.Switch(path, sharpSvnTarget, args);
         }
-    }
-
-    public class SvnSwitchOutput
-    {
-        public long Revision { get; set; }
     }
 }

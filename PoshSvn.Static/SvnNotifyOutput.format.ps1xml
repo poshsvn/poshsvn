@@ -1,0 +1,156 @@
+﻿<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
+        <TypeName>PoshSvn.SvnCommitOutput</TypeName>
+        <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
+        <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
+        <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
+        <TypeName>PoshSvn.SvnSwitchOutput</TypeName>
+
+        <TypeName>PoshSvn.SvnTreeConflictSummary</TypeName>
+        <TypeName>PoshSvn.SvnTextConflictSummary</TypeName>
+        <TypeName>PoshSvn.SvnPropertyConflictSummary</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>$_.ToString($ExecutionContext)</ScriptBlock>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnCommitOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Committed revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnCommittingOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Committing transaction...</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnCheckoutOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Checked out revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnUpdateOutput</TypeName>
+              <TypeName>PoshSvn.SvnSwitchOutput</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Updated to revision </Text>
+              <ExpressionBinding>
+                <ScriptBlock>$_.Revision</ScriptBlock>
+              </ExpressionBinding>
+              <Text>.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnTreeConflictSummary</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Text conflict discovered in file </Text>
+              <Text>'</Text>
+              <ExpressionBinding>
+                <PropertyName>FileName</PropertyName>
+              </ExpressionBinding>
+              <Text>'.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnTextConflictSummary</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Text conflict discovered in file </Text>
+              <Text>'</Text>
+              <ExpressionBinding>
+                <PropertyName>FileName</PropertyName>
+              </ExpressionBinding>
+              <Text>'.</Text>
+            </CustomItem>
+          </CustomEntry>
+          <CustomEntry>
+            <EntrySelectedBy>
+              <TypeName>PoshSvn.SvnTreeConflictSummary</TypeName>
+            </EntrySelectedBy>
+            <CustomItem>
+              <Text>Tree conflict discovered in file </Text>
+              <Text>'</Text>
+              <ExpressionBinding>
+                <PropertyName>FileName</PropertyName>
+              </ExpressionBinding>
+              <Text>'.</Text>
+              <NewLine />
+              <Text>It was </Text>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  $action = $_.Action;
+                  if ($action -eq [PoshSvn.SvnConflictAction]::Add) { "added" }
+                  elseif ($_.action -eq [PoshSvn.SvnConflictAction]::Edit) { "edited" }
+                  elseif ($_.action -eq [PoshSvn.SvnConflictAction]::Delete) { "deleted" }
+                  elseif ($_.action -eq [PoshSvn.SvnConflictAction]::Replace) { "replaced" }
+                  else { $action }
+                </ScriptBlock>
+              </ExpressionBinding>
+              <Text> by sally in r36.</Text>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnNotifyOutput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Action</Label>
+            <Width>7</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Path</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ActionString</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

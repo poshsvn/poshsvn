@@ -23,7 +23,7 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = Path.Combine(sb.WcPath, "a")
                         }
                     },
@@ -88,17 +88,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = Path.Combine(sb.WcPath, "a")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = Path.Combine(sb.WcPath, "b")
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = Path.Combine(sb.WcPath, "c")
                         },
                     },
@@ -204,17 +204,17 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = @"C:\path\to\wc\a",
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = @"C:\path\to\wc\b",
                         },
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.Revert,
+                            Action = SvnNotifyAction.Revert,
                             Path = @"C:\path\to\wc\c",
                         },
                     },

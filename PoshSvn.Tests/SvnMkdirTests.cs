@@ -7,7 +7,6 @@ using System.Linq;
 using System.Management.Automation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
 using SharpSvn;
 
@@ -121,7 +120,6 @@ namespace PoshSvn.Tests
                 PSObjectAssert.AreEqual(
                     new object[]
                     {
-                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
@@ -142,7 +140,6 @@ namespace PoshSvn.Tests
                     new string[]
                     {
                         $@"",
-                        $@"Committing transaction...",
                         $@"Committed revision 1.",
                         $@"",
                         $@"",

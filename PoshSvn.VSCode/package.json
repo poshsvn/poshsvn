@@ -1,0 +1,53 @@
+﻿{
+  "name": "poshsvn",
+  "displayName": "PoshSvn",
+  "description": "Apache Subversion client for PowerShell, integrated to vscode.",
+  "version": "@Version@",
+  "engines": {
+    "vscode": "^1.53.0"
+  },
+  "homepage": "https://www.poshsvn.com",
+  "publisher": "rinrab",
+  "icon": "./icon.png",
+  "author": "Timofei Zhakov",
+  "keywords": [
+    "Subversion",
+    "Svn",
+    "PowerShell"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rinrab/poshsvn"
+  },
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "PoshSvn.open.terminal",
+        "title": "Open PoshSvn terminal"
+      }
+    ],
+    "terminal": {
+      "profiles": [
+        {
+          "title": "PoshSvn terminal",
+          "id": "PoshSvn.terminal.profile"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "powershell.exe ../Scripts/Build-PoshSvnVSCodeExtension.ps1",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.53.0",
+    "@types/node": "18.x",
+    "typescript": "^5.3.3"
+  }
+}

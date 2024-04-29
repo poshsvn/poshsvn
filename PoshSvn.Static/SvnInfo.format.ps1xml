@@ -1,0 +1,87 @@
+﻿<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PowerShell/PowerShell/master/src/Schemas/Format.xsd"?-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.CmdLets.SvnInfoOutput</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <Label>Path</Label>
+                <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.WorkingCopyRoot -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <Label>Working Copy Root Path</Label>
+                <PropertyName>WorkingCopyRoot</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>URL</Label>
+                <PropertyName>Url</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Relative URL</Label>
+                <PropertyName>RelativeUrl</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Repository Root</Label>
+                <PropertyName>RepositoryRoot</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Repository UUID</Label>
+                <PropertyName>RepositoryId</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Revision</Label>
+                <PropertyName>Revision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Node Kind</Label>
+                <PropertyName>NodeKind</PropertyName>
+              </ListItem>
+              <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.Schedule -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <Label>Schedule</Label>
+                <PropertyName>Schedule</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Author</Label>
+                <PropertyName>LastChangedAuthor</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Revision</Label>
+                <PropertyName>LastChangedRevision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Last Changed Date</Label>
+                <ScriptBlock>$_.LastChangedDate.ToLocalTime().ToString("yyyy-MM-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.TextLastUpdated -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <Label>TextLastUpdated</Label>
+                <ScriptBlock>$_.TextLastUpdated.ToLocalTime().ToString("yyyy-MM-dd hh:mm:ss zzzz (ddd, dd MMM yyyy)")</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <ItemSelectionCondition>
+                  <ScriptBlock>$_.Checksum -ne $null</ScriptBlock>
+                </ItemSelectionCondition>
+                <Label>Checksum</Label>
+                <PropertyName>Checksum</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

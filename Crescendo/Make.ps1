@@ -1,4 +1,4 @@
-if (!(Test-Path "$PSScriptRoot\out\")) {
+﻿if (!(Test-Path "$PSScriptRoot\out\")) {
     $null = mkdir "$PSScriptRoot\out\"
 }
 if (!(Test-Path "$PSScriptRoot\tmp\")) {

@@ -1,69 +1,160 @@
-name: Release
+﻿name: Release
 
 on:
   push:
     tags:
       - '*'
+  workflow_dispatch:
 
 permissions: write-all
 
 jobs:
-  create_release:
+  create-release:
     runs-on: windows-latest
 
     steps:
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        draft: true
-        prerelease: false
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
 
     outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      release_id: ${{ steps.create_release.outputs.id }}
+      upload_url: ${{ steps.create-release.outputs.upload_url }}
+      release_id: ${{ steps.create-release.outputs.id }}
 
-  build:
-    needs: create_release
+  build-poshsvn:
+    needs:
+      - create-release
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        platform:
+        - x64
+        - x86
 
     env:
-      Configuration: Release
-
-    runs-on: windows-latest
+      MSBuildCommonParameters: /property:Configuration=Release /property:Platform=${{ matrix.platform }}
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    - name: Build
-      run: .\Scripts\Build-PoshSvn.ps1
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
 
-    - name: Upload package to release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: .\bin\poshsvn.zip
-        asset_name: poshsvn.zip
-        asset_content_type: application/zip
+      # Doesn't work at GitHub actions
+      # Throws the following error:
+      # > Import-Module : The specified module 'C:\program 
+      # > files\powershell\7\Modules\PackageManagement\fullclr\Microsoft.PackageManagement.dll' was not loaded because no valid 
+      # > module file was found in any module directory.
+      - uses: actions/checkout@v4
 
-    - name: Publish to PowerShell gallery
-      run: .\Scripts\Publish-PoshSvn.ps1 -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
+      # Build
+      - name: Restore
+        run: MSBuild.exe /target:restore ${{ env.MSBuildCommonParameters }}
 
-  publish_release:
-    needs: 
-      - create_release
-      - build
+      - name: vcpkg
+        run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
 
+      - name: Build
+        run: MSBuild.exe /target:build ${{ env.MSBuildCommonParameters }}
+
+      # Release
+      - name: Upload package to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: .\bin\poshsvn.zip
+          asset_name: PoshSvn-${{ matrix.platform }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload installer to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn.msi
+          asset_name: PoshSvn-${{ matrix.platform }}.msi
+          asset_content_type: application/msi
+
+      # Artifacts
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Release-${{ matrix.platform }}
+          path: .\bin\Release-${{ matrix.platform }}
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PoshSvn-${{ matrix.platform }}
+          path: .\bin\poshsvn
+  
+      - name: Setup VSTest Path
+        uses: darenm/Setup-VSTest@v1.2
+
+      - name: Test PoshSvn
+        run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Tests.dll
+
+      - name: Test PoshSvn.Common
+        run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Common.Tests.dll
+
+  publish-powershellgallery:
     runs-on: windows-latest
+    needs:
+      - build-poshsvn
+    steps:
+      - name: Download package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PoshSvn-x64
+          path: PoshSvn
+      - name: Publish package to PowerShell gallery
+        run: Publish-Module -Path PoshSvn -NuGetApiKey ${{ secrets.PS_GALLERY_TOKEN }}
 
+  publish-vscode-extension:
+    runs-on: windows-latest
+    needs:
+      - build-poshsvn
+      - create-release
+    steps:
+      - name: Download Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Release-x64
+          path: .\bin\Release-x64
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
+      - name: Publish
+        run: vsce publish --packagePath .\bin\Release-x64\PoshSvn.VSCode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
+      - name: Upload package to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: .\bin\Release-x64\PoshSvn.VSCode.vsix
+          asset_name: PoshSvn.VSCode.vsix
+          asset_content_type: application/vsix
+
+  publish-release:
+    needs:
+      - build-poshsvn
+      - create-release
+    runs-on: windows-latest
     steps:
       - uses: eregon/publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_id: ${{ needs.create_release.outputs.release_id }}
+          release_id: ${{ needs.create-release.outputs.release_id }}

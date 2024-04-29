@@ -6,25 +6,18 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnMove")]
+    [Cmdlet("Invoke", "SvnMove", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-move")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnMove : SvnClientCmdletBase
     {
         [Parameter(Position = 0, Mandatory = true)]
-        public string[] Source { get; set; }
+        public SvnTarget[] Source { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target)]
-        public string Destination { get; set; }
+        [Parameter(Position = 1, Mandatory = true)]
+        public SvnTarget Destination { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string DestinationPath { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public Uri DestinationUrl { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote, Mandatory = true)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -47,17 +40,18 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            TargetCollection sources = TargetCollection.Parse(GetTargets(Source, null, null, true));
-            sources.ThrowIfHasPathsAndUris();
-            object destination = GetTarget(Destination, DestinationPath, DestinationUrl);
+            ResolvedTargetCollection sources = ResolveTargets(Source);
+            sources.ThrowIfHasPathsAndUris(nameof(Source));
 
-            if (destination is string destinationPath)
+            SvnResolvedTarget destination = ResolveTarget(Destination);
+
+            if (destination.TryGetPath(out string destinationPath))
             {
                 SvnClient.Move(sources.Paths, destinationPath, args);
             }
-            else if (destination is Uri destinationUrl)
+            else if (destination.TryGetUrl(out Uri destinationUrl))
             {
-                SvnClient.RemoteMove(sources.Uris, destinationUrl, args);
+                SvnClient.RemoteMove(sources.Urls, destinationUrl, args);
             }
             else
             {

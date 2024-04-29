@@ -1,8 +1,45 @@
-<Project>
+﻿<Project>
+  <PropertyGroup>
+    <DisplayPlatform>$(Platform)</DisplayPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='Win32'">
+    <DisplayPlatform>x86</DisplayPlatform>
+  </PropertyGroup>
+
  <PropertyGroup>
-   <IntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
-   <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
+   <BaseIntermediateOutputPath>$(SolutionDir)\obj\$(Configuration)-$(DisplayPlatform)\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+   <OutDirBase>$(SolutionDir)\bin\</OutDirBase>
+   <OutputPath>$(OutDirBase)$(Configuration)-$(DisplayPlatform)\</OutputPath>
    <OutDir>$(OutputPath)</OutDir>
+   <IntDir>$(BaseIntermediateOutputPath)</IntDir>
+   <ToolsDir>$(OutDirBase)tools\</ToolsDir>
+   <TargetFramework>net4.7.2</TargetFramework>
    <!--<UseCommonOutputDirectory>True</UseCommonOutputDirectory>-->
- </PropertyGroup>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Platforms>x64;x86</Platforms>
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VCPkgLocalAppDataDisabled>true</VCPkgLocalAppDataDisabled>
+    <VcpkgTriplet>$(DisplayPlatform)-windows</VcpkgTriplet>
+    <VcpkgInstalledDir>$(SolutionDir)\vcpkg_installed\$(DisplayPlatform)\</VcpkgInstalledDir>
+    <PackagesPath>$(VcpkgInstalledDir)\$(VcpkgTriplet)\</PackagesPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackagePath>$(OutDirBase)poshsvn\</PackagePath>
+    <ZipPackagePath>$(OutDirBase)poshsvn.zip</ZipPackagePath>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <Import Project="Version.props" />
 </Project>

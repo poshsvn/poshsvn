@@ -1,24 +1,17 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
 using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnList", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnList")]
     [Alias("svn-list")]
     [OutputType(typeof(SvnItem), typeof(SvnItemDetailed))]
     public class SvnList : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; } = new string[] { "" };
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public Uri[] Url { get; set; }
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         [Alias("v")]
@@ -26,14 +19,23 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; }
+        public SharpSvn.SvnRevision Revision { get; set; }
 
         [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Immediates;
+        public SvnDepth Depth { get; set; }
 
         [Parameter()]
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
+
+        public SvnList()
+        {
+            Depth = SvnDepth.Immediates;
+            Target = new SvnTarget[]
+            {
+                SvnTarget.FromPath(".")
+            };
+        }
 
         protected override void Execute()
         {
@@ -49,9 +51,9 @@ namespace PoshSvn.CmdLets
                 args.RetrieveEntries = SvnDirEntryItems.AllFieldsV15;
             }
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            foreach (SvnTarget target in targets.Targets)
+            foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
             {
                 SvnClient.List(target, args, ListHandler);
             }
@@ -80,7 +82,8 @@ namespace PoshSvn.CmdLets
                 }
 
                 obj.Date = e.Entry.Time;
-                obj.NodeKind = e.Entry.NodeKind;
+                obj.NodeKind = e.Entry.NodeKind.ToPoshSvnNodeKind();
+                obj.NodeKind = e.Entry.NodeKind.ToPoshSvnNodeKind();
                 obj.Path = e.Path;
                 obj.Uri = e.Uri;
                 obj.ExternalTarget = e.ExternalTarget;

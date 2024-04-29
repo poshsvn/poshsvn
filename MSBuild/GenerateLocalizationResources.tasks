@@ -1,0 +1,15 @@
+﻿<Project>
+  <UsingTask TaskName="GenerateLocalizationResources"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
+    <ParameterGroup>
+      <Prefix />
+      <OutputDirectory />
+      <InputFiles ParameterType="System.String[]" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)\GenerateLocalizationResources.cs" />
+    </Task>
+  </UsingTask>
+</Project>

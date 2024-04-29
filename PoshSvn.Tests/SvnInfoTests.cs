@@ -4,7 +4,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Management.Automation;
-using System.Reflection;
 using NUnit.Framework;
 using PoshSvn.CmdLets;
 using PoshSvn.Tests.TestUtils;
@@ -17,7 +16,6 @@ namespace PoshSvn.Tests
         [Test]
         public void SimpleTest()
         {
-            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
             using (WcSandbox sb = new WcSandbox())
             {
                 PSObjectAssert.AreEqual(
@@ -31,7 +29,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         }
                     },
@@ -49,7 +47,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         }
                     },
@@ -78,7 +76,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         },
                         new SvnInfoOutput
@@ -87,7 +85,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                         }
                     },
@@ -103,15 +101,14 @@ namespace PoshSvn.Tests
         {
             using (WcSandbox sb = new WcSandbox())
             {
-                Assert.Throws<DriveNotFoundException>(() => sb.RunScript($"svn-info -Path '{sb.ReposUrl}'"));
-                Assert.Throws<ArgumentException>(() => sb.RunScript($"svn-info -Url wc"));
+                Assert.Throws<DriveNotFoundException>(() => sb.RunScript($"svn-info (New-SvnTarget -Path '{sb.ReposUrl}')"));
+                Assert.Throws<ArgumentException>(() => sb.RunScript($"svn-info (New-SvnTarget -Url wc)"));
             }
         }
 
         [Test]
         public void CreateDirectoryTest()
         {
-            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
             using (WcSandbox sb = new WcSandbox())
             {
                 Collection<PSObject> actual = sb.RunScript(
@@ -129,7 +126,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/test/"),
                             RelativeUrl = new Uri("test/", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                             Revision = -1,
                             LastChangedRevision = -1,
@@ -156,7 +153,7 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/test/"),
                             RelativeUrl = new Uri("test/", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             LastChangedAuthor = null,
                             Revision = 1,
                             LastChangedRevision = 1,
@@ -168,6 +165,8 @@ namespace PoshSvn.Tests
                    nameof(SvnInfoOutput.RepositoryId),
                    nameof(SvnInfoOutput.LastChangedAuthor));
 
+                actual = sb.RunScript($"svn-info '{sb.ReposUrl}'");
+
                 PSObjectAssert.AreEqual(
                    new[]
                    {
@@ -177,12 +176,12 @@ namespace PoshSvn.Tests
                             Url = new Uri(sb.ReposUrl + "/"),
                             RelativeUrl = new Uri("", UriKind.Relative),
                             RepositoryRoot = new Uri(sb.ReposUrl + "/"),
-                            NodeKind = SharpSvn.SvnNodeKind.Directory,
+                            NodeKind = SvnNodeKind.Directory,
                             Revision = 1,
                             LastChangedRevision = 1,
                         }
                    },
-                   sb.RunScript($"svn-info '{sb.ReposUrl}'"),
+                   actual,
                    nameof(SvnInfoOutput.RepositoryId),
                    nameof(SvnInfoOutput.LastChangedDate),
                    nameof(SvnInfoOutput.RepositoryId),

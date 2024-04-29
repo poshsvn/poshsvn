@@ -1,36 +1,30 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnCopy", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnCopy", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-copy")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnCopy : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target)]
-        public string[] Source { get; set; }
+        [Parameter(Position = 0, Mandatory = true)]
+        public SvnTarget[] Source { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target)]
-        public string Destination { get; set; }
+        [Parameter(Position = 1, Mandatory = true)]
+        public SvnTarget Destination { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string DestinationPath { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public string DestinationUrl { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(Mandatory = true, ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; }
+        public SharpSvn.SvnRevision Revision { get; set; }
 
         [Parameter()]
         [Alias("ignore-externals")]
@@ -49,16 +43,19 @@ namespace PoshSvn.CmdLets
                 IgnoreExternals = IgnoreExternals,
             };
 
-            TargetCollection sources = TargetCollection.Parse(GetTargets(Source, null, null, true));
-            object destination = GetTarget(Destination, null, null);
+            ResolvedTargetCollection resolvedSources = ResolveTargets(Source);
+            ICollection<SharpSvn.SvnTarget> sources = resolvedSources.ConvertToSharpSvnTargets();
 
-            if (destination is string destinationPath)
+            SvnResolvedTarget resolvedDestination = ResolveTarget(Destination);
+            resolvedDestination.ThrowIfHasOperationalRevision(nameof(Destination));
+
+            if (resolvedDestination.TryGetPath(out string destinationPath))
             {
-                SvnClient.Copy(sources.Targets, destinationPath, args);
+                SvnClient.Copy(sources, destinationPath, args);
             }
-            else if (destination is Uri destinationUrl)
+            else if (resolvedDestination.TryGetUrl(out Uri destinationUrl))
             {
-                SvnClient.RemoteCopy(sources.Targets, destinationUrl, args);
+                SvnClient.RemoteCopy(sources, destinationUrl, args);
             }
             else
             {
