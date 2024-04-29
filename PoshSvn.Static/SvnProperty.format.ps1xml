@@ -9,9 +9,11 @@
         <TableHeaders>
           <TableColumnHeader>
             <Label>Name</Label>
+            <Width>16</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Value</Label>
+            <Width>20</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Path</Label>
