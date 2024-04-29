@@ -32,7 +32,7 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            var args = new SvnRelocateArgs
+            SvnRelocateArgs args = new SvnRelocateArgs
             {
                 IgnoreExternals = IgnoreExternals,
             };
