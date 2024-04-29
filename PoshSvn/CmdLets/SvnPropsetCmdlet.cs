@@ -21,10 +21,14 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 2, ValueFromRemainingArguments = true, Mandatory = true)]
         public string[] Path { get; set; }
 
+        [Parameter()]
+        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
+
         protected override void Execute()
         {
             SvnSetPropertyArgs args = new SvnSetPropertyArgs
             {
+                Depth = Depth.ConvertToSharpSvnDepth()
             };
 
             foreach (string path in GetPathTargets(Path, true))
