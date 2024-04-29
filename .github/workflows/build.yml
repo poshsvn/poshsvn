@@ -44,8 +44,6 @@ jobs:
       # > files\powershell\7\Modules\PackageManagement\fullclr\Microsoft.PackageManagement.dll' was not loaded because no valid 
       # > module file was found in any module directory.
       - uses: actions/checkout@v4
-      - name: Install platyPS
-        run: Install-Module platyPS -Force
 
       - name: Restore
         run: MSBuild.exe /target:restore ${{ env.MSBuildCommonParameters }}
