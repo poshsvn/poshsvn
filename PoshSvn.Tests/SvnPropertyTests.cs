@@ -175,5 +175,92 @@ namespace PoshSvn.Tests
                     actual);
             }
         }
+
+        [Test]
+        public void ListFormatTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-propset name value wc\test");
+                sb.RunScript(@"svn-propset foo bar wc\test");
+                sb.RunScript(@"svn-propset 'svn:mergeinfo' '/subversion/branches/resolve-incoming-add:1762797-1764284' wc\test");
+
+                var actual = sb.FormatObject(sb.RunScript(@"svn-proplist wc\test | Sort-Object -Property Name"), "Format-Table");
+
+                CollectionAssert.AreEquivalent(
+                    new object[]
+                    {
+                        @"",
+                        @"",
+                        @"    Properties on 'wc\test':",
+                        @"",
+                        @"Name          Value",
+                        @"----          -----",
+                        @"foo           bar",
+                        @"name          value",
+                        @"svn:mergeinfo /subversion/branches/resolve-incoming-add:1762797-1764284",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void ListFormatManyGroupsRecurseTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\Project1");
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-propset svn:ignore ""bin`nobj`n.vs`n"" wc");
+                sb.RunScript(@"svn-propset 'svn:mergeinfo' '/subversion/branches/resolve-incoming-add:1762797-1764284' wc");
+                sb.RunScript(@"svn-propset svn:ignore ""bin`nobj`n.vs`nx64`nx86"" wc\Project1");
+                sb.RunScript(@"svn-propset foo 'this is a foo value!!' wc\test");
+                sb.RunScript(@"svn-propset bar 'this is a bar value!!1!' wc\test");
+
+                var actual = sb.FormatObject(sb.RunScript(@"svn-proplist -Depth Infinity wc | Sort-Object -Property Name"), "Format-Table");
+
+                CollectionAssert.AreEquivalent(
+                    new object[]
+                    {
+                        @"",
+                        @"",
+                        @"    Properties on 'wc\test':",
+                        @"",
+                        @"Name Value",
+                        @"---- -----",
+                        @"bar  this is a bar value!!1!",
+                        @"foo  this is a foo value!!",
+                        @"",
+                        @"",
+                        @"    Properties on 'wc':",
+                        @"",
+                        @"Name       Value",
+                        @"----       -----",
+                        @"svn:ignore bin...",
+                        @"",
+                        @"",
+                        @"    Properties on 'wc\Project1':",
+                        @"",
+                        @"Name       Value",
+                        @"----       -----",
+                        @"svn:ignore bin...",
+                        @"",
+                        @"",
+                        @"    Properties on 'wc':",
+                        @"",
+                        @"Name          Value",
+                        @"----          -----",
+                        @"svn:mergeinfo /subversion/branches/resolve-incoming-add:1762797-1764284",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
     }
 }
