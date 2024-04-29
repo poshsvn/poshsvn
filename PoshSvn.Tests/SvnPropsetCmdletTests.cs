@@ -6,7 +6,7 @@ using PoshSvn.Tests.TestUtils;
 
 namespace PoshSvn.Tests
 {
-    public class SvnPropertiesTests
+    public class SvnPropsetCmdletTests
     {
         [Test]
         public void PropsetStatusTest()
