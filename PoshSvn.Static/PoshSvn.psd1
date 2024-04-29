@@ -79,6 +79,7 @@ Project website: https://www.poshsvn.com"
         "SvnNotifyOutput.format.ps1xml"
         "SvnLog.format.ps1xml"
         "SvnItem.format.ps1xml"
+        "SvnProperty.format.ps1xml"
         "SvnBlame.format.ps1xml"
         "SvnMergeInfo.format.ps1xml"
     )
