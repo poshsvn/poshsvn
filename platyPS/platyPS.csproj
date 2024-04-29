@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+    <PropertyGroup>
+        <TargetFramework>net4.7.2</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Markdown.MAML\Markdown.MAML.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="platyPS.psd1">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="platyPS.psm1">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="platyPS.Resources.psd1">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+</Project>
