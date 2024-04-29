@@ -20,8 +20,6 @@
             </CustomEntry>
           </CustomEntries>
         </CustomControl>
-        <!--<CustomControl>...</CustomControl>
-        <CustomControlName>NameOfControl</CustomControlName>-->
       </GroupBy>
       <TableControl>
         <TableHeaders>
