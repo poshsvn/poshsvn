@@ -12,10 +12,6 @@
             <Width>16</Width>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Value</Label>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Path</Label>
           </TableColumnHeader>
         </TableHeaders>
@@ -24,9 +20,6 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Value</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>[PoshSvn.PathUtils]::FormatRelativePath($ExecutionContext, $_.Path)</ScriptBlock>
