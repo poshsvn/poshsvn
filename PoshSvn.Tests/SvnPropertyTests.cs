@@ -33,7 +33,7 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void SimpleFormatTableWithValueTest()
+        public void ManyProperties()
         {
             using (var sb = new WcSandbox())
             {
