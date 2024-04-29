@@ -22,9 +22,12 @@ namespace PoshSvn.Tests
                     new object[]
                     {
                         @"",
-                        @"Name             Path",
-                        @"----             ----",
-                        @"name             wc\test",
+                        @"",
+                        @"    Properties on 'wc\test':",
+                        @"",
+                        @"Name",
+                        @"----",
+                        @"name",
                         @"",
                         @"",
                     },
@@ -61,11 +64,82 @@ namespace PoshSvn.Tests
                     new object[]
                     {
                         @"",
-                        @"Name             Path",
-                        @"----             ----",
-                        @"name             wc\test",
-                        @"foo              wc\test",
-                        @"svn:mergeinfo    wc\test",
+                        @"",
+                        @"    Properties on 'wc\test':",
+                        @"",
+                        @"Name",
+                        @"----",
+                        @"name",
+                        @"foo",
+                        @"svn:mergeinfo",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void ManyGroups()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var actual = sb.FormatObject(new object[]
+                {
+                    new SvnProperty
+                    {
+                        Name = "svn:ignore",
+                        Path = Path.Combine(sb.WcPath),
+                    },
+                    new SvnProperty
+                    {
+                        Name = "svn:mergeinfo",
+                        Path = Path.Combine(sb.WcPath),
+                    },
+                    new SvnProperty
+                    {
+                        Name = "svn:ignore",
+                        Path = Path.Combine(sb.WcPath, "Project1"),
+                    },
+                    new SvnProperty
+                    {
+                        Name = "foo",
+                        Path = Path.Combine(sb.WcPath, "test"),
+                    },
+                    new SvnProperty
+                    {
+                        Name = "bar",
+                        Path = Path.Combine(sb.WcPath, "test"),
+                    },
+                },
+                "Format-Table");
+
+                ClassicAssert.AreEqual(
+                    new object[]
+                    {
+                        @"",
+                        @"",
+                        @"    Properties on 'wc':",
+                        @"",
+                        @"Name",
+                        @"----",
+                        @"svn:ignore",
+                        @"svn:mergeinfo",
+                        @"",
+                        @"",
+                        @"    Properties on 'wc\Project1':",
+                        @"",
+                        @"Name",
+                        @"----",
+                        @"svn:ignore",
+                        @"",
+                        @"",
+                        @"    Properties on 'wc\test':",
+                        @"",
+                        @"Name",
+                        @"----",
+                        @"foo",
+                        @"bar",
                         @"",
                         @"",
                     },
