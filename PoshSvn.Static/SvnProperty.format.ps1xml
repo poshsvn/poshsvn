@@ -28,12 +28,18 @@
           <TableColumnHeader>
             <Label>Name</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

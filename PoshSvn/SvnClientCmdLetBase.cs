@@ -121,6 +121,7 @@ namespace PoshSvn
                 WriteObject(new SvnProperty
                 {
                     Name = e.PropertyName,
+                    Value = null,
                     Path = e.Path,
                 });
             }
