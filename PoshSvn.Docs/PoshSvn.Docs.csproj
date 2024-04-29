@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
   <PropertyGroup>
-    <TargetFramework>net4.7.2</TargetFramework>
     <ScriptsPath>$(SolutionDir)\Scripts</ScriptsPath>
     <PowerShell>powershell.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
   </PropertyGroup>
