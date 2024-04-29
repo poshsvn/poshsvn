@@ -2,6 +2,7 @@
 
 using System;
 using System.Management.Automation;
+using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
@@ -18,11 +19,19 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 2)]
         public string Path { get; set; } = ".";
 
+        [Parameter()]
+        public SwitchParameter IgnoreExternals;
+
         protected override void Execute()
         {
             string path = GetUnresolvedProviderPathFromPSPath(Path);
 
-            SvnClient.Relocate(path, From, To);
+            var args = new SvnRelocateArgs
+            {
+                IgnoreExternals = IgnoreExternals,
+            };
+
+            SvnClient.Relocate(path, From, To, args);
         }
     }
 }
