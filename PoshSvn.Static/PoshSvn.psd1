@@ -40,6 +40,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnMergeInfo"
         "Invoke-SvnRelocate"
         "Invoke-SvnPropset"
+        "Invoke-SvnProplist"
         "New-SvnTarget"
     )
     AliasesToExport        = @(
@@ -70,6 +71,7 @@ Project website: https://www.poshsvn.com"
         "svn-mergeinfo"
         "svn-relocate"
         "svn-propset"
+        "svn-proplist"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
