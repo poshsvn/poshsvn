@@ -25,4 +25,8 @@
     <Message Importance="high" Text="Building help." />
     <Exec Command="$(PowerShell) $(ScriptsPath)\Build-PoshSvnDocs.ps1 -InputDir $(MSBuildProjectDirectory) -OutputDir $(OutDir)" />
   </Target>
+
+  <Target Name="CleanDocs" AfterTargets="Clean">
+    <Delete Files="@(Outputs)" />
+  </Target>
 </Project>
