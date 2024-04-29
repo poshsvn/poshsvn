@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using SharpSvn;
 
 namespace PoshSvn
 {
@@ -73,75 +72,6 @@ namespace PoshSvn
             }
         }
 
-        public static string GetActionStringShort(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.UpdateAdd:
-                case SvnNotifyAction.Add:
-                    return "A";
-
-                case SvnNotifyAction.UpdateDelete:
-                case SvnNotifyAction.Delete:
-                    return "D";
-
-                case SvnNotifyAction.Revert:
-                    return "Revert";
-
-                case SvnNotifyAction.CommitAdded:
-                case SvnNotifyAction.CommitAddCopy:
-                    return "Added";
-
-                case SvnNotifyAction.CommitReplaced:
-                case SvnNotifyAction.CommitReplacedWithCopy:
-                    return "Replaced";
-
-                case SvnNotifyAction.CommitDeleted:
-                    return "Deleted";
-
-                case SvnNotifyAction.CommitModified:
-                    return "Modified";
-
-                case SvnNotifyAction.CommitSendData:
-                    return "Sending";
-
-                case SvnNotifyAction.UpdateUpdate: return "U";
-                // case SvnNotifyAction.Conflict: return "C";
-                // case SvnNotifyAction.UpdateMerge: return "G";
-                // case SvnNotifyAction.UpdateExist: return "E";
-                case SvnNotifyAction.UpdateReplace: return "R";
-                default: return action.ToString();
-            }
-        }
-
-        public static string GetActionStringLong(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.UpdateAdd: return "Added";
-                case SvnNotifyAction.UpdateDelete: return "Deleted";
-                case SvnNotifyAction.UpdateUpdate: return "Updated";
-                // case SvnNotifyAction.Conflict: return "Conflict";
-                // case SvnNotifyAction.UpdateMerge: return "Merged";
-                // case SvnNotifyAction.UpdateExist: return "Existed";
-                case SvnNotifyAction.UpdateReplace: return "Replaced";
-                default: return action.ToString();
-            }
-        }
-
-        public static string GetCommitActionString(SvnNotifyAction action)
-        {
-            switch (action)
-            {
-                case SvnNotifyAction.CommitAdded: return "Added";
-                case SvnNotifyAction.CommitDeleted: return "Deleted";
-                case SvnNotifyAction.CommitModified: return "Modified";
-                case SvnNotifyAction.CommitReplaced: return "Replaced";
-                case SvnNotifyAction.CommitSendData: return "Transmitting file data";
-                default: return action.ToString();
-            }
-        }
-
         public static string FormatProgress(long progress)
         {
             if (progress == -1)
@@ -150,34 +80,34 @@ namespace PoshSvn
             }
             else
             {
-                return string.Format("Transfered: {0} KB", progress / 1024);
+                return string.Format("Transferred: {0} KB", progress / 1024);
             }
         }
 
-        public static string GetChangeActionString(CmdLets.SvnChangeAction action)
+        public static string GetChangeActionString(SvnChangeAction action)
         {
             switch (action)
             {
-                case CmdLets.SvnChangeAction.None: return " ";
-                case CmdLets.SvnChangeAction.Add: return "A";
-                case CmdLets.SvnChangeAction.Delete: return "D";
-                case CmdLets.SvnChangeAction.Modify: return "M";
-                case CmdLets.SvnChangeAction.Replace: return "R";
+                case SvnChangeAction.None: return " ";
+                case SvnChangeAction.Add: return "A";
+                case SvnChangeAction.Delete: return "D";
+                case SvnChangeAction.Modify: return "M";
+                case SvnChangeAction.Replace: return "R";
                 default: throw new NotImplementedException();
             }
         }
 
-        internal static char GetPropetyStatusString(SvnStatus localPropertyStatus, SvnStatus localNodeStatus)
+        internal static char GetPropetyStatusString(SharpSvn.SvnStatus localPropertyStatus, SharpSvn.SvnStatus localNodeStatus)
         {
-            if (localNodeStatus == SvnStatus.Added)
+            if (localNodeStatus == SharpSvn.SvnStatus.Added)
             {
                 return ' ';
             }
-            else if (localPropertyStatus == SvnStatus.Conflicted)
+            else if (localPropertyStatus == SharpSvn.SvnStatus.Conflicted)
             {
                 return 'C';
             }
-            else if (localPropertyStatus == SvnStatus.Modified)
+            else if (localPropertyStatus == SharpSvn.SvnStatus.Modified)
             {
                 return 'M';
             }
@@ -187,7 +117,7 @@ namespace PoshSvn
             }
         }
 
-        internal static char GetLockedString(SvnLockInfo lockInfo)
+        internal static char GetLockedString(SharpSvn.SvnLockInfo lockInfo)
         {
             if (lockInfo == null)
             {

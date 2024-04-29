@@ -1,28 +1,19 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
 using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnDelete")]
+    [Cmdlet("Invoke", "SvnDelete", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-delete", "svn-remove")]
     [OutputType(typeof(SvnCommitOutput))]
     public class SvnDelete : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
-                   ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; }
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
+        public SvnTarget[] Target { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path, Mandatory = true)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
-        public Uri[] Url { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -30,7 +21,7 @@ namespace PoshSvn.CmdLets
         [Alias("f")]
         public SwitchParameter Force { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("keep-local")]
         public SwitchParameter KeepLocal { get; set; }
 
@@ -43,8 +34,9 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
-            targets.ThrowIfHasPathsAndUris();
+            ResolvedTargetCollection targets = ResolveTargets(Target);
+            targets.ThrowIfHasPathsAndUris(nameof(Target));
+            targets.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (targets.HasPaths)
             {
@@ -52,7 +44,7 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                SvnClient.RemoteDelete(targets.Uris, args);
+                SvnClient.RemoteDelete(targets.Urls, args);
             }
         }
     }

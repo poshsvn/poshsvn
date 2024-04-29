@@ -1,4 +1,4 @@
-// Copyright (c) Timofei Zhakov. All rights reserved.
+﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
 using System.Collections.ObjectModel;

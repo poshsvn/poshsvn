@@ -1,0 +1,20 @@
+﻿<Project>
+  <UsingTask TaskName="ConfigureFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <FileName  />
+      <MatchExpression />
+      <ReplacementText />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        string text = File.ReadAllText(FileName);
+
+        text = Regex.Replace(text, MatchExpression, ReplacementText);
+
+        File.WriteAllText(FileName, text);
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>

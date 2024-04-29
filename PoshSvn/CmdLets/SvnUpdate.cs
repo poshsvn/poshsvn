@@ -15,7 +15,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; } = null;
+        public SharpSvn.SvnRevision Revision { get; set; } = null;
 
         protected override string GetActivityTitle(SvnNotifyEventArgs e)
         {
@@ -33,10 +33,5 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Update(resolvedPaths, args);
         }
-    }
-
-    public class SvnUpdateOutput
-    {
-        public long Revision { get; set; }
     }
 }

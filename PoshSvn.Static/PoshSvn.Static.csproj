@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+  <ItemGroup>
+    <Content Include="$(MSBuildProjectDirectory)\*.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="SvnMergeInfo.format.ps1xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SvnMergeInfo.format.ps1xml" />
+  </ItemGroup>
+
+  <Import Project="..\MSBuild\ConfigureFile.tasks" />
+
+  <PropertyGroup>
+    <ModuleManifestSource>$(MSBuildProjectDirectory)\PoshSvn.psd1</ModuleManifestSource>
+    <ModuleManifestDestination>$(OutDir)\PoshSvn.psd1</ModuleManifestDestination>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <ProcessorArchitecture>Amd64</ProcessorArchitecture>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+    <ProcessorArchitecture>X86</ProcessorArchitecture>
+  </PropertyGroup>
+
+  <Target Name="BuildModuleManifest" BeforeTargets="BeforeBuild" Inputs="$(ModuleManifestSource)" Outputs="$(ModuleManifestDestination)">
+
+    <Copy SourceFiles="$(ModuleManifestSource)" DestinationFiles="$(ModuleManifestDestination)" />
+
+    <ConfigureFile FileName="$(ModuleManifestDestination)" MatchExpression="@Version@" ReplacementText="$(Version)" />
+
+    <ConfigureFile FileName="$(ModuleManifestDestination)" MatchExpression="@ReleaseNotes@" ReplacementText="$([System.IO.File]::ReadAllText('$(SolutionDir)CHANGELOG.md'))" />
+
+    <ConfigureFile FileName="$(ModuleManifestDestination)" MatchExpression="@ProcessorArchitecture@" ReplacementText="$(ProcessorArchitecture)" />
+  </Target>
+
+</Project>

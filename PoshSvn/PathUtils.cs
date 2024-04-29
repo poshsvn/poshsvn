@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System.IO;
 using System.Management.Automation;
 
 namespace PoshSvn

@@ -1,28 +1,19 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
 using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = "Path")]
+    [Cmdlet("Invoke", "SvnMkdir", DefaultParameterSetName = ParameterSetNames.Local)]
     [Alias("svn-mkdir")]
     [OutputType(typeof(SvnNotifyOutput))]
     public class SvnMkDir : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = TargetParameterSetNames.Target,
-                   ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; }
+        [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ValueFromRemainingArguments = true)]
+        public SvnTarget[] Target { get; set; }
 
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path, Mandatory = true)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
-        public Uri[] Url { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Target)]
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url, Mandatory = true)]
+        [Parameter(ParameterSetName = ParameterSetNames.Remote)]
         [Alias("m")]
         public string Message { get; set; }
 
@@ -39,8 +30,9 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, false));
-            targets.ThrowIfHasPathsAndUris();
+            ResolvedTargetCollection targets = ResolveTargets(Target);
+            targets.ThrowIfHasPathsAndUris(nameof(Target));
+            targets.ThrowIfHasAnyOperationalRevisions(nameof(Target));
 
             if (targets.HasPaths)
             {
@@ -48,8 +40,8 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                UpdateAction("Creating transaction...");
-                SvnClient.RemoteCreateDirectories(targets.Uris, args);
+                UpdateProgressAction("Creating transaction...");
+                SvnClient.RemoteCreateDirectories(targets.Urls, args);
             }
         }
     }

@@ -1,0 +1,18 @@
+﻿{
+  "default-registry": {
+    "kind": "git",
+    "baseline": "000d1bda1ffa95a73e0b40334fa4103d6f4d3d48",
+    "repository": "https://github.com/microsoft/vcpkg"
+  },
+  "registries": [
+    {
+      "kind": "git",
+      "repository": "https://github.com/rinrab/vcpkg.git",
+      "baseline": "c7e4a0fba169b1101d81f1ff5abf57351a642386",
+      "packages": [
+        "serf",
+        "subversion"
+      ]
+    }
+  ]
+}

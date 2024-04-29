@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
-using System.Reflection;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -12,8 +10,6 @@ namespace PoshSvn.Tests
         [Test]
         public void GetRelativePathTests()
         {
-            Console.Error.WriteLine(Assembly.GetExecutingAssembly().Location);
-
             ClassicAssert.AreEqual(@"b", PathUtils.GetRelativePath(@"C:\a", @"C:\a\b"));
             ClassicAssert.AreEqual(@"C:\b", PathUtils.GetRelativePath(@"C:\a", @"C:\b"));
             ClassicAssert.AreEqual(@"C:\ab", PathUtils.GetRelativePath(@"C:\a", @"C:\ab"));

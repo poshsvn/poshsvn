@@ -1,4 +1,4 @@
-svn-mkdir -url file:///C:/Demo/repos/foo -m "Add foo."
+﻿svn-mkdir -url file:///C:/Demo/repos/foo -m "Add foo."
 svn-mkdir -url file:///C:/Demo/repos/bar -m "Add bar."
 Clear-Host
 svn-checkout file:///C:/Demo/repos wc

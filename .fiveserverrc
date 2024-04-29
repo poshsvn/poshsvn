@@ -1,5 +1,0 @@
-{
-  "port": 5500,
-  "root": "www/build",
-  "open": "/"
-}

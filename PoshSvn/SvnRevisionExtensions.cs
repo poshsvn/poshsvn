@@ -1,53 +1,36 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using SharpSvn;
 
 namespace PoshSvn
 {
-    public static class SvnRevisionParser
+    public static class SvnRevisionExtensions
     {
-        public static SvnRevision ParseSvnRevision(string str)
+        public static SvnRevision ToPoshSvnRevision(this SharpSvn.SvnRevision revision)
         {
-            int i = 0;
-
-            while (i < str.Length && str[i] == 'r')
+            if (revision.RevisionType == SharpSvn.SvnRevisionType.Number)
             {
-                i++;
+                return new SvnRevision(revision.Revision);
             }
-
-            if (i < str.Length && str[i] == '{')
+            else if (revision.RevisionType == SharpSvn.SvnRevisionType.Time)
             {
-                throw new NotImplementedException(); // TODO:
-            }
-            else if (long.TryParse(str.Substring(i), out long revisionNumber))
-            {
-                return new SvnRevision(revisionNumber);
+                throw new NotImplementedException();
             }
             else
             {
-                string word = str.Substring(i).Trim();
+                return new SvnRevision(revision.RevisionType.ToPoshSvnRevisionType());
+            }
+        }
 
-                if (word.Equals("head", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return new SvnRevision(SvnRevisionType.Head);
-                }
-                else if (word.Equals("prev", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return new SvnRevision(SvnRevisionType.Previous);
-                }
-                else if (word.Equals("base", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return new SvnRevision(SvnRevisionType.Base);
-                }
-                else if (word.Equals("committed", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return new SvnRevision(SvnRevisionType.Committed);
-                }
-                else
-                {
-                    throw new ArgumentException("Cannot parse revision.");
-                }
+        public static SharpSvn.SvnRevision ToSharpSvnRevision(this SvnRevision revision)
+        {
+            if (revision.RevisionType == SvnRevisionType.Number)
+            {
+                return new SharpSvn.SvnRevision(revision.Revision);
+            }
+            else
+            {
+                return new SharpSvn.SvnRevision(revision.RevisionType.ToSharpSvnRevisionType());
             }
         }
     }

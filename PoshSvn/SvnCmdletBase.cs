@@ -3,8 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Management.Automation;
-using PoshSvn.CmdLets;
+using System.Threading;
 using SharpSvn;
 
 namespace PoshSvn
@@ -13,9 +14,14 @@ namespace PoshSvn
     {
         protected ProgressRecord ProgressRecord;
 
+        protected CancellationTokenSource cancellationTokenSource;
+        protected CancellationToken cancellationToken;
+
         protected SvnCmdletBase()
         {
             ProgressRecord = new ProgressRecord(0, GetActivityTitle(null), "Initializing...");
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationToken = cancellationTokenSource.Token;
         }
 
         protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
@@ -87,124 +93,138 @@ namespace PoshSvn
             return GetUnresolvedProviderPathFromPSPath(path);
         }
 
-        protected void NotifyEventHandler(object sender, SvnNotifyEventArgs e)
-        {
-            if (e.Action == SvnNotifyAction.UpdateStarted)
-            {
-                UpdateAction(GetActivityTitle(e));
-            }
-            else if (e.Action == SvnNotifyAction.UpdateCompleted)
-            {
-                if (e.CommandType == SvnCommandType.Update)
-                {
-                    WriteObject(new SvnUpdateOutput
-                    {
-                        Revision = e.Revision
-                    });
-                }
-                else if (e.CommandType == SvnCommandType.CheckOut)
-                {
-                    WriteObject(new SvnCheckoutOutput
-                    {
-                        Revision = e.Revision
-                    });
-                }
-                else if (e.CommandType == SvnCommandType.Switch)
-                {
-                    WriteObject(new SvnSwitchOutput
-                    {
-                        Revision = e.Revision
-                    });
-                }
-            }
-            else if (e.Action == SvnNotifyAction.CommitFinalizing)
-            {
-                WriteObject(new SvnCommittingOutput());
-                UpdateAction("Committing transaction...");
-            }
-            else
-            {
-                WriteObject(new SvnNotifyOutput
-                {
-                    Action = e.Action,
-                    Path = e.Path
-                });
-            }
-        }
-
-        protected void ProgressEventHandler(object sender, SvnProgressEventArgs e)
-        {
-            ProgressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
-            WriteProgress(ProgressRecord);
-        }
-
         protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
-        protected virtual object GetNotifyOutput(SvnNotifyEventArgs e) => null;
 
-        protected void UpdateAction(string action)
+        protected void UpdateProgressAction(string action)
         {
             WriteVerbose(action);
             ProgressRecord.StatusDescription = action;
             WriteProgress(ProgressRecord);
         }
 
-        protected IEnumerable<object> GetTargets(string[] Target, string[] Path, Uri[] Url, bool resolved)
+        protected void UpdateProgressTitile(string title)
         {
-            if (ParameterSetName == TargetParameterSetNames.Target)
-            {
-                foreach (string target in Target)
-                {
-                    if (target.Contains("://") && SvnUriTarget.TryParse(target, false, out _))
-                    {
-                        yield return new Uri(target);
-                    }
-                    else
-                    {
-                        foreach (string path in GetPathTargets(target, resolved))
-                        {
-                            // TODO: check providerInfo
+            ProgressRecord.Activity = title;
+            WriteProgress(ProgressRecord);
+        }
 
-                            yield return path;
-                        }
-                    }
-                }
-            }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+        protected string[] GetPathTargets(string path)
+        {
+            try
             {
-                foreach (string path in GetPathTargets(Path, null))
-                {
-                    yield return path;
-                }
+                return GetPathTargets(path, true).ToArray();
             }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
+            catch (ItemNotFoundException)
             {
-                foreach (Uri url in Url)
+                return GetPathTargets(path, false).ToArray();
+            }
+        }
+
+        protected IEnumerable<string> GetPathTargets(string[] paths)
+        {
+            foreach (string path in paths)
+            {
+                foreach (string resolvedPath in GetPathTargets(path))
                 {
-                    yield return url;
+                    yield return resolvedPath;
                 }
             }
         }
 
-        protected object GetTarget(string Target, string Path, Uri Url)
+        protected IEnumerable<object> GetTargets(SvnTarget[] targets)
         {
-            if (ParameterSetName == TargetParameterSetNames.Target)
+            foreach (SvnTarget target in targets)
             {
-                if (Target.Contains("://") && SvnUriTarget.TryParse(Target, false, out _))
+                if (target.Type == SvnTargetType.Path)
                 {
-                    return new Uri(Target);
+                    foreach (string path in GetPathTargets(target.Value))
+                    {
+                        yield return path;
+                    }
+                }
+                else if (target.Type == SvnTargetType.LiteralPath)
+                {
+                    yield return GetUnresolvedProviderPathFromPSPath(target.Value);
+                }
+                else if (target.Type == SvnTargetType.Url)
+                {
+                    if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri uri))
+                    {
+                        yield return uri;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Wrong Url format.", "Url");
+                    }
                 }
                 else
                 {
-                    return GetPathTarget(Target);
+                    throw new NotImplementedException();
                 }
             }
-            else if (ParameterSetName == TargetParameterSetNames.Path)
+        }
+
+        protected SvnResolvedTarget ResolveUriTarget(SvnTarget target)
+        {
+            if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
             {
-                return GetPathTarget(Path);
+                return new SvnResolvedTarget(null, url, true, target.Revision);
             }
-            else if (ParameterSetName == TargetParameterSetNames.Url)
+            else
             {
-                return Url;
+                throw new ArgumentException("Wrong Url format.", "Url");
+            }
+        }
+
+        protected SvnResolvedTarget ResolveLiteralTarget(SvnTarget target)
+        {
+            string path = GetUnresolvedProviderPathFromPSPath(target.Value);
+            return new SvnResolvedTarget(path, null, false, target.Revision);
+        }
+
+        protected ResolvedTargetCollection ResolveTargets(IEnumerable<SvnTarget> targets)
+        {
+            List<SvnResolvedTarget> resolvedTargets = new List<SvnResolvedTarget>();
+
+            foreach (SvnTarget target in targets)
+            {
+                if (target.Type == SvnTargetType.Path)
+                {
+                    foreach (string path in GetPathTargets(target.Value))
+                    {
+                        resolvedTargets.Add(new SvnResolvedTarget(path, null, false, target.Revision));
+                    }
+                }
+                else if (target.Type == SvnTargetType.LiteralPath)
+                {
+                    resolvedTargets.Add(ResolveLiteralTarget(target));
+                }
+                else if (target.Type == SvnTargetType.Url)
+                {
+                    resolvedTargets.Add(ResolveUriTarget(target));
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            return new ResolvedTargetCollection(resolvedTargets);
+        }
+
+        protected SvnResolvedTarget ResolveTarget(SvnTarget target)
+        {
+            if (target.Type == SvnTargetType.Path)
+            {
+                return ResolveLiteralTarget(target);
+            }
+            else if (target.Type == SvnTargetType.LiteralPath)
+            {
+                return ResolveLiteralTarget(target);
+            }
+            else if (target.Type == SvnTargetType.Url)
+            {
+                return ResolveUriTarget(target);
             }
             else
             {
@@ -212,12 +232,36 @@ namespace PoshSvn
             }
         }
 
-        protected void CommittedEventHandler(object sender, SvnCommittedEventArgs e)
+        protected object GetTarget(SvnTarget target)
         {
-            WriteObject(new SvnCommitOutput
+            if (target.Type == SvnTargetType.Path)
             {
-                Revision = e.Revision
-            });
+                return GetUnresolvedProviderPathFromPSPath(target.Value);
+            }
+            else if (target.Type == SvnTargetType.LiteralPath)
+            {
+                return GetUnresolvedProviderPathFromPSPath(target.Value);
+            }
+            else if (target.Type == SvnTargetType.Url)
+            {
+                return new Uri(target.Value);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        protected void SvnClient_Cancel(object sender, SharpSvn.SvnCancelEventArgs e)
+        {
+            e.Cancel = cancellationToken.IsCancellationRequested;
+        }
+
+        protected override void StopProcessing()
+        {
+            cancellationTokenSource.Cancel();
+
+            base.StopProcessing();
         }
     }
 }

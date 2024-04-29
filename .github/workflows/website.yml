@@ -1,11 +1,11 @@
-name: Deploy static content to Pages
+﻿name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: ["trunk"]
     paths:
       - 'www/**'
-      - 'scripts/Build-PoshSvnWebsite.ps1'
+      - 'Scripts/Build-PoshSvnWebsite.ps1'
       - 'docs/**'
       - '.github/workflows/website.yml'
 

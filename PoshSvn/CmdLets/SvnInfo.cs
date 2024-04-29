@@ -1,35 +1,39 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnInfo", DefaultParameterSetName = TargetParameterSetNames.Target)]
+    [Cmdlet("Invoke", "SvnInfo")]
     [Alias("svn-info")]
     [OutputType(typeof(SvnInfoOutput))]
     public class SvnInfo : SvnClientCmdletBase
     {
-        [Parameter(Position = 0, ParameterSetName = TargetParameterSetNames.Target, ValueFromRemainingArguments = true)]
-        public string[] Target { get; set; } = new string[] { "" };
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Path)]
-        public string[] Path { get; set; }
-
-        [Parameter(ParameterSetName = TargetParameterSetNames.Url)]
-        public Uri[] Url { get; set; }
+        [Parameter(Position = 0, ValueFromRemainingArguments = true)]
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         [Alias("rev")]
-        public SvnRevision Revision { get; set; } = null;
+        public SharpSvn.SvnRevision Revision { get; set; }
 
         [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
+        public SvnDepth Depth { get; set; }
 
         [Parameter()]
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
+
+        public SvnInfo()
+        {
+            Depth = SvnDepth.Empty;
+            Target = new SvnTarget[]
+            {
+                SvnTarget.FromPath(".")
+            };
+        }
 
         protected override void Execute()
         {
@@ -40,9 +44,9 @@ namespace PoshSvn.CmdLets
                 Depth = Depth.ConvertToSharpSvnDepth(),
             };
 
-            TargetCollection targets = TargetCollection.Parse(GetTargets(Target, Path, Url, true));
+            ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            foreach (SvnTarget target in targets.Targets)
+            foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
             {
                 SvnClient.Info(target, args, InfoHandler);
             }
@@ -63,7 +67,7 @@ namespace PoshSvn.CmdLets
                 RepositoryRoot = e.RepositoryRoot,
                 RepositoryId = e.RepositoryId,
                 Revision = e.Revision,
-                NodeKind = e.NodeKind,
+                NodeKind = e.NodeKind.ToPoshSvnNodeKind(),
                 LastChangedAuthor = e.LastChangeAuthor,
                 LastChangedRevision = e.LastChangeRevision,
             };
@@ -84,14 +88,14 @@ namespace PoshSvn.CmdLets
                 svnInfo.WorkingCopyRoot = e.WorkingCopyRoot;
             }
 
-            if (e.NodeKind == SvnNodeKind.File)
+            if (e.NodeKind == SharpSvn.SvnNodeKind.File)
             {
                 svnInfo.Checksum = e.Checksum;
             }
 
             WriteObject(svnInfo);
 
-            UpdateAction(e.HasLocalInfo ? e.Path : e.Uri.ToString());
+            UpdateProgressAction(e.HasLocalInfo ? e.Path : e.Uri.ToString());
         }
     }
 

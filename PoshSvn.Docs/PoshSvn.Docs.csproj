@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+  <PropertyGroup>
+    <ScriptsPath>$(SolutionDir)\Scripts</ScriptsPath>
+    <PowerShell>powershell.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Languages Include="$(MSBuildProjectDirectory)\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Inputs Include="$(MSBuildProjectDirectory)\**\*.md" />
+    <Outputs Include="$(OutDir)\en-US\PoshSvn.dll-Help.xml" />
+    <Outputs Include="$(OutDir)\fr-FR\PoshSvn.dll-Help.xml" />
+    <Outputs Include="$(OutDir)\en-US\*" />
+    <Outputs Include="$(OutDir)\fr-FR\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\platyPS\platyPS.csproj" />
+  </ItemGroup>
+
+  <Target Name="BuildDocs" BeforeTargets="PrepareForRun" Inputs="@(Inputs)" Outputs="@(Outputs)">
+    <Message Importance="high" Text="Building help." />
+    <Exec Command="$(PowerShell) $(ScriptsPath)\Build-PoshSvnDocs.ps1 -InputDir $(MSBuildProjectDirectory) -OutputDir $(OutDir)" />
+  </Target>
+
+  <Target Name="CleanDocs" AfterTargets="Clean">
+    <Delete Files="@(Outputs)" />
+  </Target>
+</Project>

@@ -2,13 +2,10 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
 using System.Text;
-using SharpSvn;
-using SharpSvn.Security;
 
 namespace PoshSvn
 {
@@ -23,7 +20,10 @@ namespace PoshSvn
         [Parameter(DontShow = true)]
         public SecureString Password { get; set; }
 
-        protected SvnClient SvnClient;
+        [Parameter(DontShow = true)]
+        public SvnAccept Accept { get; set; }
+
+        protected SharpSvn.SvnClient SvnClient;
 
         public SvnClientCmdletBase()
         {
@@ -33,10 +33,12 @@ namespace PoshSvn
 
         protected override void BeginProcessing()
         {
-            SvnClient = new SvnClient();
+            SvnClient = new SharpSvn.SvnClient();
             SvnClient.Notify += NotifyEventHandler;
             SvnClient.Progress += ProgressEventHandler;
             SvnClient.Committed += CommittedEventHandler;
+            SvnClient.Cancel += SvnClient_Cancel;
+            SvnClient.Conflict += Conflict_Handler;
 
             if (Username != null || Password != null)
             {
@@ -46,9 +48,171 @@ namespace PoshSvn
             SvnClient.Authentication.UserNameHandlers += Authentication_UserNameHandlers;
             SvnClient.Authentication.UserNamePasswordHandlers += Authentication_UserNamePasswordHandlers;
             SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
+            SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
         }
 
-        private void Authentication_SslServerTrustHandlers(object sender, SvnSslServerTrustEventArgs e)
+        protected void NotifyEventHandler(object sender, SharpSvn.SvnNotifyEventArgs e)
+        {
+            if (e.Action == SharpSvn.SvnNotifyAction.UpdateStarted)
+            {
+                UpdateProgressAction(GetActivityTitle(e));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.UpdateCompleted)
+            {
+                if (e.CommandType == SharpSvn.SvnCommandType.Update)
+                {
+                    WriteObject(new SvnUpdateOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+                else if (e.CommandType == SharpSvn.SvnCommandType.CheckOut)
+                {
+                    WriteObject(new SvnCheckoutOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+                else if (e.CommandType == SharpSvn.SvnCommandType.Switch)
+                {
+                    WriteObject(new SvnSwitchOutput
+                    {
+                        Revision = e.Revision
+                    });
+                }
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.BlameRevision)
+            {
+                UpdateProgressAction($"Processing revision {e.Revision}...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.CommitFinalizing)
+            {
+                UpdateProgressAction("Committing transaction...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.CommitSendData)
+            {
+                UpdateProgressAction(string.Format("Sending '{0}'", e.Path));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeBegin)
+            {
+                string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
+                UpdateProgressTitile(string.Format("Merging {0} into '{1}'", e.MergeRange, resolvedPath));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.RecordMergeInfoStarted)
+            {
+                string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
+                UpdateProgressTitile(string.Format("Recording mergeinfo for merge of {0} into '{1}'", e.MergeRange, resolvedPath));
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.ConflictResolverStarting)
+            {
+                UpdateProgressAction("Resolving conflicts...");
+            }
+            else if (e.Action == SharpSvn.SvnNotifyAction.MergeCompleted ||
+                     e.Action == SharpSvn.SvnNotifyAction.ConflictResolverDone)
+            {
+                // Do nothing.
+            }
+            else
+            {
+                SvnNotifyOutput obj = new SvnNotifyOutput
+                {
+                    Action = e.Action.ToPoshSvnNotifyAction(),
+                    Path = e.Path
+                };
+
+                WriteObject(obj);
+                UpdateProgressAction(obj.ToString());
+            }
+        }
+
+        protected void CommittedEventHandler(object sender, SharpSvn.SvnCommittedEventArgs e)
+        {
+            WriteObject(new SvnCommitOutput
+            {
+                Revision = e.Revision
+            });
+        }
+
+        protected void ProgressEventHandler(object sender, SharpSvn.SvnProgressEventArgs e)
+        {
+            ProgressRecord.CurrentOperation = SvnUtils.FormatProgress(e.Progress);
+            WriteProgress(ProgressRecord);
+        }
+
+        private void Conflict_Handler(object sender, SharpSvn.SvnConflictEventArgs e)
+        {
+            SvnConflictSummary conflict = CreateConflict(e);
+
+            conflict.FileName = e.Conflict.Name;
+            conflict.Action = e.Conflict.ConflictAction.ToPoshSvnConflictActions();
+
+            WriteObject(conflict);
+
+            if (Accept == SvnAccept.Prompt)
+            {
+                Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+                {
+                    new ChoiceDescription("&Postpone", "(Postpone) Skip this conflict and leave it unresolved."),
+                    new ChoiceDescription("Accept &Base", "(Accept Base) Accept incoming version of entire."),
+                    new ChoiceDescription("&Merge", "(Merge) Accept the result file of the automatic merging."),
+                    new ChoiceDescription("Accept &Theirs", "(Accept Theirs) Accept incoming version of entire."),
+                    new ChoiceDescription("Accept &Mine", "(Accept Mine) Accept local version of entire."),
+                };
+
+                int selectedChoice = Host.UI.PromptForChoice(null, string.Format("Merge conflict discovered in file '{0}'", e.Path), choices, 0);
+
+                if (selectedChoice == 0)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Postpone;
+                }
+                else if (selectedChoice == 1)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Base;
+                }
+                else if (selectedChoice == 2)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Working;
+                }
+                else if (selectedChoice == 3)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Theirs;
+                }
+                else if (selectedChoice == 4)
+                {
+                    e.Choice = SharpSvn.SvnAccept.Mine;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                e.Choice = Accept.ToSharpSvnAccept();
+            }
+        }
+
+        private static SvnConflictSummary CreateConflict(SharpSvn.SvnConflictEventArgs e)
+        {
+            if (e.ConflictType == SharpSvn.SvnConflictType.Tree)
+            {
+                return new SvnTreeConflictSummary();
+            }
+            else if (e.ConflictType == SharpSvn.SvnConflictType.Content)
+            {
+                return new SvnTextConflictSummary();
+            }
+            else if (e.ConflictType == SharpSvn.SvnConflictType.Property)
+            {
+                return new SvnPropertyConflictSummary();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private void Authentication_SslServerTrustHandlers(object sender, SharpSvn.Security.SvnSslServerTrustEventArgs e)
         {
             Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
             {
@@ -147,7 +311,7 @@ namespace PoshSvn
             {
                 e.Cancel = true;
             }
-            catch(PSInvalidOperationException)
+            catch (PSInvalidOperationException)
             {
                 e.Break = true;
             }
@@ -182,7 +346,7 @@ namespace PoshSvn
             {
                 Execute();
             }
-            catch (SvnException ex)
+            catch (SharpSvn.SvnException ex)
             {
                 WriteSvnError(ex);
             }
@@ -195,7 +359,7 @@ namespace PoshSvn
             }
         }
 
-        protected void WriteSvnError(SvnException ex)
+        protected void WriteSvnError(SharpSvn.SvnException ex)
         {
             StringBuilder errorDetails = new StringBuilder();
 
@@ -222,7 +386,7 @@ namespace PoshSvn
             SvnClient.Dispose();
         }
 
-        private void ApplyAuthPolicy(SvnAuthenticationEventArgs args)
+        private void ApplyAuthPolicy(SharpSvn.Security.SvnAuthenticationEventArgs args)
         {
             args.Save = !NoAuthCache;
         }

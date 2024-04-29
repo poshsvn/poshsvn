@@ -1,0 +1,64 @@
+﻿<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnBlameLine</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>"{0,9} {1,-16}" -f ("r" + $_.Revision), $_.Author</ScriptBlock>
+              </ExpressionBinding>
+              <Text> </Text>
+              <ExpressionBinding>
+                <PropertyName>Line</PropertyName>
+              </ExpressionBinding>
+              <Text> </Text>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnBlameLine</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Revision</Label>
+            <Alignment>right</Alignment>
+            <Width>8</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Author</Label>
+            <Alignment>left</Alignment>
+            <Width>16</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Line</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Revision</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Author</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Line</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

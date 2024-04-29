@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Reflection;
+using NUnit.Framework;
 
 namespace PoshSvn.Tests.TestUtils
 {
@@ -35,14 +36,14 @@ namespace PoshSvn.Tests.TestUtils
 
             var result = ps.Invoke();
 
-            foreach (var o in ps.Streams.Warning)
+            foreach (var warning in ps.Streams.Warning)
             {
-                Console.WriteLine(o);
+                TestContext.Error.WriteLine(warning);
             }
 
-            foreach (var o in ps.Streams.Error)
+            foreach (var error in ps.Streams.Error)
             {
-                throw o.Exception;
+                throw error.Exception;
             }
 
             return result;
@@ -67,7 +68,7 @@ namespace PoshSvn.Tests.TestUtils
             foreach (PSObject obj in result)
             {
                 var str = obj.BaseObject.ToString().TrimEnd();
-                Console.WriteLine("\"{0}\"", str);
+                Trace.WriteLine(string.Format("\"{0}\"", str));
                 rv.Add(str);
             }
 

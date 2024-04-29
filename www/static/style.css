@@ -1,4 +1,4 @@
-.container {
+﻿.container {
     max-width: 1000px;
 }
 
@@ -71,3 +71,16 @@ p code {
 .topics a:visited {
     color: #ac7ee1;
 } */
+
+
+html[lang] [lang] {
+  display: none;
+}
+
+html[lang="en"] [lang="en"] {
+  display: unset;
+}
+
+html[lang="fr"] [lang="fr"] {
+  display: unset;
+}

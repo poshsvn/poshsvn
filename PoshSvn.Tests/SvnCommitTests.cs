@@ -77,10 +77,9 @@ namespace PoshSvn.Tests
                     {
                         new SvnNotifyOutput
                         {
-                            Action = SharpSvn.SvnNotifyAction.CommitAdded,
+                            Action = SvnNotifyAction.CommitAdded,
                             Path = Path.Combine(sb.WcPath, "a")
                         },
-                        new SvnCommittingOutput(),
                         new SvnCommitOutput
                         {
                             Revision = 1
@@ -98,7 +97,7 @@ namespace PoshSvn.Tests
                 sb.RunScript(@"svn-mkdir wc\a");
                 sb.RunScript(@"svn-commit wc -m 'test' -revprop @{ prop = 'val' }");
                 var actual = sb.FormatObject(
-                    sb.RunScript($@"(svn-log -End 1 -WithRevisionProperties prop, svn:log {sb.ReposUrl}).RevisionProperties | foreach {{ ""$($_.Key) : $($_.StringValue)"" }}"),
+                    sb.RunScript($@"(svn-log -Revision 1 -WithRevisionProperties prop, svn:log {sb.ReposUrl}).RevisionProperties | foreach {{ ""$($_.Key) : $($_.StringValue)"" }}"),
                     "Format-Custom");
 
                 CollectionAssert.AreEqual(
@@ -132,17 +131,14 @@ namespace PoshSvn.Tests
                 var actual = sb.FormatObject(sb.RunScript("svn-commit wc -m test"),
                                              "Format-Custom");
 
-                CollectionAssert.AreEqual(
+                CollectionAssert.AreEquivalent(
                     new string[]
                     {
                         @"",
-                        @"Deleted wc\README",
-                        @"Added   wc\src\README",
-                        @"Modified wc\src\bar.c",
-                        @"Modified wc\src\foo.c",
-                        @"Sending wc\src\foo.c",
-                        @"Sending wc\src\bar.c",
-                        @"Committing transaction...",
+                        @"D       wc\README",
+                        @"A       wc\src\README",
+                        @"M       wc\src\bar.c",
+                        @"M       wc\src\foo.c",
                         @"Committed revision 2.",
                         @"",
                         @"",
