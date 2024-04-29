@@ -9,17 +9,7 @@ param (
     $OutputDir
 )
 
-if (Get-Module -ListAvailable -Name platyPS) {
-    "platyPS is already installed." 
-}
-else {
-    "Importing PowerShellGet."
-    Import-Module -Name PowerShellGet -Force -Function Install-Module -Scope Local
-
-    "Installing platyPS."
-    Install-Module -Name platyPS -Force -Scope CurrentUser -ErrorAction Stop
-    "platyPS has installed successfully."
-}
+Import-Module -Name "$OutputDir\platyPS.psd1" -Force
 
 foreach ($path in Get-ChildItem $InputDir -Exclude obj -Directory) {
     $outputPath = "$OutputDir\$($path.Name)"

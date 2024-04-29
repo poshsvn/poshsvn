@@ -17,6 +17,10 @@
     <Outputs Include="$(OutDir)\fr-FR\*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\platyPS\platyPS.csproj" />
+  </ItemGroup>
+
   <Target Name="BuildDocs" BeforeTargets="PrepareForRun" Inputs="@(Inputs)" Outputs="@(Outputs)">
     <Message Importance="high" Text="Building help." />
     <Exec Command="$(PowerShell) $(ScriptsPath)\Build-PoshSvnDocs.ps1 -InputDir $(MSBuildProjectDirectory) -OutputDir $(OutDir)" />
