@@ -113,4 +113,4 @@ winget install rinrab.poshsvn
 
 ### Linux?
 
-For now, PoshSvn doesn't support linux.
+For now, PoshSvn doesn't support Linux.
