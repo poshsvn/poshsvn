@@ -52,6 +52,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MSBuild", "MSBuild\MSBuild.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.MAML", "Markdown.MAML\Markdown.MAML.csproj", "{819A669D-86ED-4118-8E1D-DECAE20F37BD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "platyPS", "platyPS\platyPS.csproj", "{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -164,6 +166,14 @@ Global
 		{819A669D-86ED-4118-8E1D-DECAE20F37BD}.Release|x64.Build.0 = Release|x64
 		{819A669D-86ED-4118-8E1D-DECAE20F37BD}.Release|x86.ActiveCfg = Release|x86
 		{819A669D-86ED-4118-8E1D-DECAE20F37BD}.Release|x86.Build.0 = Release|x86
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Debug|x64.ActiveCfg = Debug|x64
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Debug|x64.Build.0 = Debug|x64
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Debug|x86.ActiveCfg = Debug|x86
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Debug|x86.Build.0 = Debug|x86
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Release|x64.ActiveCfg = Release|x64
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Release|x64.Build.0 = Release|x64
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Release|x86.ActiveCfg = Release|x86
+		{7D53B016-218B-43D6-B5EA-10D2FB6A74CE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
