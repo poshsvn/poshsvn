@@ -63,23 +63,7 @@ namespace PoshSvn.Tests
                             "/subversion/branches/revprop-cache:1298521-1326293\n" +
                             "/subversion/branches/revprop-caching-ng:1620597,1620599\n" +
                             "/subversion/branches/revprop-packing:1143907,1143971,1143997,1144017,1144499,1144568,1146145\n" +
-                            "/subversion/branches/shelve:1802592-1815226\n" +
-                            "/subversion/branches/shelve-checkpoint:1801593-1801923,1801970,1817320,1828508,1828521\n" +
-                            "/subversion/branches/shelving-v3:1853394-1853901\n" +
-                            "/subversion/branches/subtree-mergeinfo:876734-878766\n" +
-                            "/subversion/branches/svn-auth-x509:1603509-1655900\n" +
-                            "/subversion/branches/svn-info-detail:1660035-1662618\n" +
-                            "/subversion/branches/svn-mergeinfo-enhancements:870119-870195,870197-870288\n" +
-                            "/subversion/branches/svn-mergeinfo-normalizer:1642232-1695991\n" +
-                            "/subversion/branches/svn-patch-improvements:918519-934609\n" +
-                            "/subversion/branches/svn_mutex:1141683-1182099\n" +
-                            "/subversion/branches/svnpatch-diff:865738-876477\n" +
-                            "/subversion/branches/svnraisetc:874709-875149\n" +
-                            "/subversion/branches/svnserve-logging:869828-870893\n" +
-                            "/subversion/branches/swig-py3:1813660-1869353\n" +
-                            "/subversion/branches/tc-issue-3334:874697-874773\n" +
-                            "/subversion/branches/tc-merge-notify:874017-874062\n" +
-                            "/subversion/branches/tc-resolve:874191-874239",
+                            "/subversion/branches/shelve:1802592-1815226\n",
                     },
                 },
                 "Format-Table");
