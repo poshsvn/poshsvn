@@ -112,6 +112,19 @@ namespace PoshSvn
             {
                 // Do nothing.
             }
+            else if (e.Action == SharpSvn.SvnNotifyAction.PropertyAdded ||
+                     e.Action == SharpSvn.SvnNotifyAction.PropertyModified ||
+                     e.Action == SharpSvn.SvnNotifyAction.PropertyDeleted)
+            {
+                // TODO: is it best decision ??
+
+                WriteObject(new SvnProperty
+                {
+                    Name = e.PropertyName,
+                    Value = null,
+                    Path = e.Path,
+                });
+            }
             else
             {
                 SvnNotifyOutput obj = new SvnNotifyOutput
