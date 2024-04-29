@@ -13,6 +13,9 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 0, ValueFromRemainingArguments = true)]
         public SvnTarget[] Target { get; set; }
 
+        [Parameter()]
+        public SvnDepth Depth { get; set; }
+
         public SvnProplistCmdlet()
         {
             Target = new SvnTarget[]
@@ -25,6 +28,7 @@ namespace PoshSvn.CmdLets
         {
             SvnPropertyListArgs args = new SvnPropertyListArgs
             {
+               Depth = Depth.ConvertToSharpSvnDepth()
             };
 
             ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
