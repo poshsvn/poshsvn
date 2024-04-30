@@ -47,7 +47,7 @@ namespace PoshSvn.CmdLets
                     {
                         Name = property.Key,
                         Value = property.StringValue,
-                        Path = target.TargetName,
+                        Path = property.Target.TargetName,
                     });
                 }
             }
