@@ -35,6 +35,31 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void CurrentDirectoryTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-propset name value wc\test");
+
+                var actual = sb.RunScript(@"cd wc\test; svn-proplist");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "name",
+                            Value = "value",
+                            Path = Path.Combine(sb.WcPath, "test"),
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void RemoteTest()
         {
             using (var sb = new WcSandbox())
