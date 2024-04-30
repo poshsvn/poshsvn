@@ -34,6 +34,78 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void RevporopBasicTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"svn-propget svn:log {sb.ReposUrl} -Revprop -Revision 1");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Path = sb.ReposUrl,
+                            Value = "test"
+                        },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RevporopByPathTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"svn-propget svn:log wc -Revprop -Revision 1");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Path = sb.ReposUrl + "/",
+                            Value = "test"
+                        },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RevporopByCurrentDirectoryTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"cd wc; svn-propget svn:log -Revprop -Revision 1");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Path = sb.ReposUrl + "/",
+                            Value = "test"
+                        },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void RemoteTest()
         {
             using (var sb = new WcSandbox())

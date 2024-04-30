@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -21,6 +22,15 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SvnDepth Depth { get; set; }
 
+        [Parameter(ParameterSetName = ParameterSetNames.Revision)]
+        [Alias("revprop")]
+        public SwitchParameter RevisionProperty { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.Node)] // TODO:
+        [Parameter(ParameterSetName = ParameterSetNames.Revision, Mandatory = true)]
+        [Alias("r", "rev")]
+        public SvnRevision Revision { get; set; }
+
         public SvnPropgetCmdlet()
         {
             Target = new SvnTarget[]
@@ -31,25 +41,46 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            SvnGetPropertyArgs args = new SvnGetPropertyArgs
-            {
-                Depth = Depth.ConvertToSharpSvnDepth(),
-            };
-
             ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
+            if (RevisionProperty)
             {
-                SvnClient.GetProperty(target, PropertyName, args, out SvnTargetPropertyCollection properties);
-
-                foreach (SvnPropertyValue property in properties)
+                foreach (SvnResolvedTarget target in resolvedTargets.Targets)
                 {
+                    SharpSvn.SvnRevision sharpSvnRevision = Revision.ToSharpSvnRevision();
+                    Uri url = GetUrlFromTarget(target);
+
+                    SvnClient.GetRevisionProperty(url, sharpSvnRevision, PropertyName,
+                                                  out SvnPropertyValue property);
+
                     WriteObject(new SvnProperty
                     {
                         Name = property.Key,
                         Value = property.StringValue,
-                        Path = property.Target.TargetName,
+                        Path = url.OriginalString
                     });
+                }
+            }
+            else
+            {
+                SvnGetPropertyArgs args = new SvnGetPropertyArgs
+                {
+                    Depth = Depth.ConvertToSharpSvnDepth()
+                };
+
+                foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
+                {
+                    SvnClient.GetProperty(target, PropertyName, args, out SvnTargetPropertyCollection properties);
+
+                    foreach (SvnPropertyValue property in properties)
+                    {
+                        WriteObject(new SvnProperty
+                        {
+                            Name = property.Key,
+                            Value = property.StringValue,
+                            Path = property.Target.TargetName,
+                        });
+                    }
                 }
             }
         }
