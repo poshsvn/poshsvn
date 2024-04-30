@@ -35,6 +35,108 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void RevporopBasicTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"svn-proplist {sb.ReposUrl} -Revprop -Revision 1 | sort -Property Name");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:author",
+                            Path = sb.ReposUrl,
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:date",
+                            Path = sb.ReposUrl,
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Path = sb.ReposUrl,
+                        },
+                    },
+                    actual,
+                    nameof(SvnProperty.Value));
+            }
+        }
+
+        [Test]
+        public void RevporopByPathTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"svn-proplist wc -Revprop -Revision 1 | sort -Property Name");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:author",
+                            Path = sb.ReposUrl + "/",
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:date",
+                            Path = sb.ReposUrl + "/",
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Path = sb.ReposUrl + "/",
+                        },
+                    },
+                    actual,
+                    nameof(SvnProperty.Value));
+            }
+        }
+
+        [Test]
+        public void RevporopByCurrentDirectoryTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"cd wc; svn-proplist -Revprop -Revision 1 | sort -Property Name");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:author",
+                            Path = sb.ReposUrl + "/",
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:date",
+                            Path = sb.ReposUrl + "/",
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Path = sb.ReposUrl + "/",
+                        },
+                    },
+                    actual,
+                    nameof(SvnProperty.Value));
+            }
+        }
+
+        [Test]
         public void CurrentDirectoryTest()
         {
             using (var sb = new WcSandbox())

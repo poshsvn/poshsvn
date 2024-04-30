@@ -16,5 +16,8 @@ namespace PoshSvn
         public const string TwoFiles = "TwoFiles";
 
         public const string ShowRevisions = "ShowRevisions";
+
+        public const string Node = "Node";
+        public const string Revision = "Revision";
     }
 }
