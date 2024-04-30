@@ -117,13 +117,7 @@ namespace PoshSvn
                      e.Action == SharpSvn.SvnNotifyAction.PropertyDeleted)
             {
                 // TODO: is it best decision ??
-
-                WriteObject(new SvnProperty
-                {
-                    Name = e.PropertyName,
-                    Value = null,
-                    Path = e.Path,
-                });
+                HandlePropertyNotifyAction(e);
             }
             else
             {
@@ -136,6 +130,13 @@ namespace PoshSvn
                 WriteObject(obj);
                 UpdateProgressAction(obj.ToString());
             }
+        }
+
+        protected virtual void HandlePropertyNotifyAction(SharpSvn.SvnNotifyEventArgs e)
+        {
+#if DEBUG
+            throw new NotImplementedException();
+#endif
         }
 
         protected void CommittedEventHandler(object sender, SharpSvn.SvnCommittedEventArgs e)

@@ -27,7 +27,7 @@ namespace PoshSvn.Tests
                         @"",
                         @"Name Value",
                         @"---- -----",
-                        @"name",
+                        @"name value",
                         @"",
                         @"",
                     },

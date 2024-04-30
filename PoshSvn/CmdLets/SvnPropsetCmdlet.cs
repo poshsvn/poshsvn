@@ -36,5 +36,15 @@ namespace PoshSvn.CmdLets
                 SvnClient.SetProperty(path, PropertyName, PropertyValue, args);
             }
         }
+
+        protected override void HandlePropertyNotifyAction(SvnNotifyEventArgs e)
+        {
+            WriteObject(new SvnProperty
+            {
+                Name = e.PropertyName,
+                Value = PropertyValue,
+                Path = e.Path,
+            });
+        }
     }
 }

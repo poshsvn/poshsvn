@@ -47,7 +47,7 @@ namespace PoshSvn.Tests
                         new SvnProperty
                         {
                             Name = "name",
-                            Value = null,
+                            Value = "value",
                             Path = Path.Combine(sb.WcPath, "test"),
                         }
                     },
@@ -71,7 +71,7 @@ namespace PoshSvn.Tests
                         new SvnProperty
                         {
                             Name = "name",
-                            Value = null,
+                            Value = "value2",
                             Path = Path.Combine(sb.WcPath, "test"),
                         }
                     },
