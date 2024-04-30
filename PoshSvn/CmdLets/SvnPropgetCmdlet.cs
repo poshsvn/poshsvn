@@ -12,7 +12,7 @@ namespace PoshSvn.CmdLets
     {
         [Parameter(Position = 0, Mandatory = true)]
         [Alias("propname")]
-        [ArgumentCompleter(typeof(SvnPropertyArgumentCompleter))]
+        [ArgumentCompleter(typeof(SvnPropertyNameArgumentCompleter))]
         public string PropertyName { get; set; }
 
         [Parameter(Position = 1, ValueFromRemainingArguments = true)]

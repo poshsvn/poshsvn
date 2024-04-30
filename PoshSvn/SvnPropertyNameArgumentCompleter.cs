@@ -8,7 +8,7 @@ using SharpSvn;
 
 namespace PoshSvn
 {
-    public class SvnPropertyArgumentCompleter : IArgumentCompleter
+    public class SvnPropertyNameArgumentCompleter : IArgumentCompleter
     {
         public IEnumerable<CompletionResult> CompleteArgument(string commandName,
                                                               string parameterName,
