@@ -34,6 +34,89 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void RemoteTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-propset name value wc\test");
+                sb.RunScript(@"svn-commit wc -m 'setup props'");
+
+                var actual = sb.RunScript($@"svn-propget name {sb.ReposUrl}/test");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "name",
+                            Value = "value",
+                            Path = $"{sb.ReposUrl}/test",
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void NonExistingTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-propset name value wc\test");
+                sb.RunScript(@"svn-commit wc -m 'setup props'");
+
+                var actual = sb.RunScript($@"svn-propget non-existing {sb.ReposUrl}/test");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RemoteManyRecurseTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\Project1");
+                sb.RunScript(@"svn-mkdir wc\test");
+                sb.RunScript(@"svn-propset svn:ignore ""bin`nobj`n.vs`n"" wc");
+                sb.RunScript(@"svn-propset 'svn:mergeinfo' '/subversion/branches/resolve-incoming-add:1762797-1764284' wc");
+                sb.RunScript(@"svn-propset svn:ignore ""bin`nobj`n.vs`nx64`nx86"" wc\Project1");
+                sb.RunScript(@"svn-propset foo 'this is a foo value!!' wc\test");
+                sb.RunScript(@"svn-propset bar 'this is a bar value!!1!' wc\test");
+
+                sb.RunScript(@"svn-commit wc -m 'setup props'");
+
+                var actual = sb.RunScript($@"svn-propget svn:ignore {sb.ReposUrl} -Depth Infinity | Sort-Object -Property Path");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:ignore",
+                            Value = "bin\r\nobj\r\n.vs\r\n",
+                            Path = $"{sb.ReposUrl}",
+                        },
+                        new SvnProperty
+                        {
+                            Name = "svn:ignore",
+                            Value = "bin\r\nobj\r\n.vs\r\nx64\r\nx86\r\n",
+                            Path = $"{sb.ReposUrl}/Project1",
+                        },
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void FromCurrentDirectoryTest()
         {
             using (var sb = new WcSandbox())
