@@ -78,7 +78,7 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void MnayTargets()
+        public void ManyTargets()
         {
             using (var sb = new WcSandbox())
             {
