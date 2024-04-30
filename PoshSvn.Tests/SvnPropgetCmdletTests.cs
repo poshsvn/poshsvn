@@ -142,7 +142,7 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void NotExisting()
+        public void NotExistingTest()
         {
             using (var sb = new WcSandbox())
             {
@@ -161,7 +161,7 @@ namespace PoshSvn.Tests
         }
 
         [Test]
-        public void ManyTargets()
+        public void ManyTargetsTest()
         {
             using (var sb = new WcSandbox())
             {
