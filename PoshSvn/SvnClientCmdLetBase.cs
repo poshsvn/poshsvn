@@ -404,5 +404,21 @@ namespace PoshSvn
         {
             args.Save = !NoAuthCache;
         }
+
+        protected Uri GetUrlFromTarget(SvnResolvedTarget target)
+        {
+            if (target.TryGetUrl(out Uri url))
+            {
+                return url;
+            }
+            else if (target.TryGetPath(out string path))
+            {
+                return SvnClient.GetUriFromWorkingCopy(path);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
