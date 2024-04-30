@@ -19,8 +19,13 @@ namespace PoshSvn.CmdLets
         [Alias("propval")]
         public string PropertyValue { get; set; }
 
-        [Parameter(Position = 2, ValueFromRemainingArguments = true, Mandatory = true)]
+        [Parameter(Position = 2, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; }
+
+        public SvnPropsetCmdlet()
+        {
+            Path = new string[] { "." };
+        }
 
         [Parameter()]
         public SvnDepth Depth { get; set; } = SvnDepth.Empty;
