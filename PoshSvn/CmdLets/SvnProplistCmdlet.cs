@@ -43,7 +43,12 @@ namespace PoshSvn.CmdLets
         {
             foreach (SvnPropertyValue property in e.Properties)
             {
-                WriteObject(new SvnProperty(property));
+                WriteObject(new SvnProperty
+                {
+                    Name = property.Key,
+                    Value = property.StringValue,
+                    Path = e.Path,
+                });
             }
         }
     }
