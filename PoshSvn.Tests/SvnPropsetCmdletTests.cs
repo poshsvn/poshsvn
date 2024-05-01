@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -99,6 +100,16 @@ namespace PoshSvn.Tests
                         }
                     },
                     actual);
+            }
+        }
+
+        [Test]
+        public void ThrowOnRemoteTarget()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\test");
+                Assert.Throws<ArgumentException>(() => sb.RunScript($@"svn-propset name value {sb.ReposUrl}"));
             }
         }
     }
