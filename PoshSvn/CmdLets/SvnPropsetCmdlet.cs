@@ -36,10 +36,11 @@ namespace PoshSvn.CmdLets
         public string[] ChangeList { get; set; }
 
         [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
+        public SvnDepth Depth { get; set; }
 
         public SvnPropsetCmdlet()
         {
+            Depth = SvnDepth.Empty;
             Target = new SvnTarget[] { SvnTarget.FromPath(".") };
         }
 
