@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <None Remove="SvnMergeInfo.format.ps1xml" />
+    <None Remove="SvnProperty.format.ps1xml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="SvnMergeInfo.format.ps1xml" />
+    <Content Include="SvnProperty.format.ps1xml" />
   </ItemGroup>
 
   <Import Project="..\MSBuild\ConfigureFile.tasks" />

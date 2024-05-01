@@ -112,6 +112,13 @@ namespace PoshSvn
             {
                 // Do nothing.
             }
+            else if (e.Action == SharpSvn.SvnNotifyAction.PropertyAdded ||
+                     e.Action == SharpSvn.SvnNotifyAction.PropertyModified ||
+                     e.Action == SharpSvn.SvnNotifyAction.RevisionPropertySet)
+            {
+                // TODO: is it best decision ??
+                HandlePropertyNotifyAction(e);
+            }
             else
             {
                 SvnNotifyOutput obj = new SvnNotifyOutput
@@ -123,6 +130,13 @@ namespace PoshSvn
                 WriteObject(obj);
                 UpdateProgressAction(obj.ToString());
             }
+        }
+
+        protected virtual void HandlePropertyNotifyAction(SharpSvn.SvnNotifyEventArgs e)
+        {
+#if DEBUG
+            throw new NotImplementedException($"'{GetType()}' does not override the HandlePropertyNotifyAction method.");
+#endif
         }
 
         protected void CommittedEventHandler(object sender, SharpSvn.SvnCommittedEventArgs e)
@@ -389,6 +403,22 @@ namespace PoshSvn
         private void ApplyAuthPolicy(SharpSvn.Security.SvnAuthenticationEventArgs args)
         {
             args.Save = !NoAuthCache;
+        }
+
+        protected Uri GetUrlFromTarget(SvnResolvedTarget target)
+        {
+            if (target.TryGetUrl(out Uri url))
+            {
+                return url;
+            }
+            else if (target.TryGetPath(out string path))
+            {
+                return SvnClient.GetUriFromWorkingCopy(path);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

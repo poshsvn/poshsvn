@@ -19,5 +19,10 @@ namespace PoshSvn.Tests.TestUtils
             RunScript($@"svnadmin-create .\repos",
                       $@"svn-checkout '{ReposUrl}' .\wc");
         }
+
+        public void EnableRevpropChange()
+        {
+            RunScript($@"Set-Content -Path '.\repos\hooks\pre-revprop-change.bat' 'exit 0;'");
+        }
     }
 }
