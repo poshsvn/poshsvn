@@ -34,6 +34,96 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void RevisionTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-propset name value1 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value2 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value3 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript(@"svn-proplist wc -r 2");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "name",
+                            Value = "value2",
+                            Path = sb.ReposUrl.Replace('/', '\\'), // Little bug in Subversion
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void UrlRevisionTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-propset name value1 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value2 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value3 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"svn-proplist {sb.ReposUrl} -r 2");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "name",
+                            Value = "value2",
+                            Path = sb.ReposUrl,
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void UrlPegRevisionTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-propset name value1 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value2 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value3 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript($@"svn-proplist {sb.ReposUrl}@2");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "name",
+                            Value = "value2",
+                            Path = sb.ReposUrl,
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void RevporopBasicTest()
         {
             using (var sb = new WcSandbox())
