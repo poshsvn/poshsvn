@@ -49,11 +49,6 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
 
-      # Doesn't work at GitHub actions
-      # Throws the following error:
-      # > Import-Module : The specified module 'C:\program 
-      # > files\powershell\7\Modules\PackageManagement\fullclr\Microsoft.PackageManagement.dll' was not loaded because no valid 
-      # > module file was found in any module directory.
       - uses: actions/checkout@v4
 
       # Build
@@ -136,21 +131,23 @@ jobs:
       - name: Install vsce
         run: npm install -g @vscode/vsce
       - name: Publish
-        run: vsce publish --packagePath .\bin\Release-x64\PoshSvn.VSCode.vsix --pat ${{ secrets.VSCODE_STORE_TOKEN }}
-      - name: Upload package to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: .\bin\Release-x64\PoshSvn.VSCode.vsix
-          asset_name: PoshSvn.VSCode.vsix
-          asset_content_type: application/vsix
+        run: vsce publish --pat ${{ secrets.VSCODE_STORE_TOKEN }}
+        working-directory: .\bin\Release-x64\PoshSvn.VSCode
+      # - name: Upload package to release
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ needs.create-release.outputs.upload_url }}
+      #     asset_path: .\bin\Release-x64\PoshSvn.VSCode.vsix
+      #     asset_name: PoshSvn.VSCode.vsix
+      #     asset_content_type: application/vsix
 
   publish-release:
     needs:
       - build-poshsvn
       - create-release
+      - publish-vscode-extension
     runs-on: windows-latest
     steps:
       - uses: eregon/publish-release@v1

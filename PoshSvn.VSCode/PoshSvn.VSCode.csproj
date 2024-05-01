@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
   <PropertyGroup>
     <VSCodeOutDir>$(OutDir)PoshSvn.VSCode</VSCodeOutDir>
-    <VSCodePackagePath>$(OutDir)PoshSvn.VSCode.vsix</VSCodePackagePath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,15 +22,9 @@
     <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
-  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\extension\%(TsCompilerInputs.Filename).js">
-    <Exec Command="npx tsc --outDir $(VSCodeOutDir)\extension" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
+    <Exec Command="npx tsc --outDir $(VSCodeOutDir)" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
-
-  <ItemDefinitionGroup>
-    <VSCodeExtensionItems>
-      <Destination>extension</Destination>
-    </VSCodeExtensionItems>
-  </ItemDefinitionGroup>
 
   <ItemGroup>
     <VSCodeExtensionItems Include="README.md" />
@@ -39,9 +32,7 @@
     <VSCodeExtensionItems Include="package.json" />
     <VSCodeExtensionItems Include="icon.png" />
     <VSCodeExtensionItems Include="icon.svg" />
-    <VSCodeExtensionItems Destination="" Include="extension.vsixmanifest" />
-    <VSCodeExtensionItems Destination="" Include="[Content_Types].xml" />
-    <VSCodeExtensionItems Destination="extension\poshsvn" Include="$(PackagePath)\**\*.*" />
+    <VSCodeExtensionItems Destination="poshsvn" Include="$(PackagePath)\**\*.*" />
   </ItemGroup>
 
   <Import Project="..\MSBuild\ConfigureFile.tasks" />
@@ -53,12 +44,7 @@
   </Target>
 
   <Target Name="ConfigureVersion" AfterTargets="CopyAssets">
-    <ConfigureFile FileName="$(VSCodeOutDir)\extension\package.json" MatchExpression="@Version@" ReplacementText="$(Version)" />
-    <ConfigureFile FileName="$(VSCodeOutDir)\extension.vsixmanifest" MatchExpression="@Version@" ReplacementText="$(Version)" />
-  </Target>
-
-  <Target Name="PackageExtension" DependsOnTargets="CopyAssets;TsCompiler" BeforeTargets="AfterBuild">
-    <ZipDirectory SourceDirectory="$(VSCodeOutDir)" DestinationFile="$(VSCodePackagePath)" Overwrite="true" />
+    <ConfigureFile FileName="$(VSCodeOutDir)\package.json" MatchExpression="@Version@" ReplacementText="$(Version)" />
   </Target>
 
   <Target Name="TsClean" AfterTargets="Clean">
