@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Fix peg-revision.
 - Fix version of the MSI installer.
 - Minor fixes and improvements.
+- Build and publish improvements.
 
 ## [0.6.2]
 
