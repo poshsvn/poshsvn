@@ -35,13 +35,13 @@ namespace PoshSvn.CmdLets
         [Alias("cl")]
         public string[] ChangeList { get; set; }
 
+        [Parameter()]
+        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
+
         public SvnPropsetCmdlet()
         {
             Target = new SvnTarget[] { SvnTarget.FromPath(".") };
         }
-
-        [Parameter()]
-        public SvnDepth Depth { get; set; } = SvnDepth.Empty;
 
         protected override void Execute()
         {
