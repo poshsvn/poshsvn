@@ -151,6 +151,7 @@ jobs:
     needs:
       - build-poshsvn
       - create-release
+      - publish-vscode-extension
     runs-on: windows-latest
     steps:
       - uses: eregon/publish-release@v1
