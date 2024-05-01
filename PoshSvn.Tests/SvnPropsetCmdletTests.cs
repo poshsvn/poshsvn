@@ -112,5 +112,90 @@ namespace PoshSvn.Tests
                 Assert.Throws<ArgumentException>(() => sb.RunScript($@"svn-propset name value {sb.ReposUrl}"));
             }
         }
+
+        [Test]
+        public void RevpropNoPreRevpropChangeHookTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-propset name value1 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value2 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value3 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                Assert.Throws<SharpSvn.SvnRepositoryException>(() =>
+                sb.RunScript($@"svn-propset svn:log 'new log message' {sb.ReposUrl} -revprop -r 2 "));
+            }
+        }
+
+        [Test]
+        public void SimpleRevpropTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-propset name value1 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value2 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value3 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.EnableRevpropChange();
+
+                var actual = sb.RunScript($@"svn-propset svn:log 'new log message' {sb.ReposUrl} -revprop -r 2 ");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Value = "new log message",
+                            Path = sb.ReposUrl,
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void SimpleRevpopTestByPropget()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-propset name value1 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value2 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.RunScript(@"svn-propset name value3 wc");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                sb.EnableRevpropChange();
+
+                sb.RunScript($@"svn-propset svn:log 'new log message' {sb.ReposUrl} -revprop -r 2 ");
+
+                var actual = sb.RunScript($@"svn-propget svn:log {sb.ReposUrl} -revprop -r 2 ");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnProperty
+                        {
+                            Name = "svn:log",
+                            Value = "new log message",
+                            Path = sb.ReposUrl,
+                        }
+                    },
+                    actual);
+            }
+        }
     }
 }
