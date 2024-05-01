@@ -150,6 +150,67 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void FormatCustomTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var actual = sb.FormatObject(new object[]
+                {
+                    new SvnProperty
+                    {
+                        Name = "name",
+                        Value = "value",
+                        Path = Path.Combine(sb.WcPath, "test"),
+                    },
+                    new SvnProperty
+                    {
+                        Name = "foo",
+                        Value = "bar",
+                        Path = Path.Combine(sb.WcPath, "test"),
+                    },
+                    new SvnProperty
+                    {
+                        Name = "svn:mergeinfo",
+                        Path = Path.Combine(sb.WcPath, "test"),
+                        Value =
+                            "/subversion/branches/resolve-incoming-add:1762797-1764284\n" +
+                            "/subversion/branches/revprop-cache:1298521-1326293\n" +
+                            "/subversion/branches/revprop-caching-ng:1620597,1620599\n" +
+                            "/subversion/branches/revprop-packing:1143907,1143971,1143997,1144017,1144499,1144568,1146145\n" +
+                            "/subversion/branches/shelve:1802592-1815226\n",
+                    },
+                },
+                "Format-Custom");
+
+                ClassicAssert.AreEqual(
+                    new object[]
+                    {
+                        @"",
+                        @"",
+                        @"    Properties on 'wc\test':",
+                        @"",
+                        @"name",
+                        @"  value",
+                        @"",
+                        @"foo",
+                        @"  bar",
+                        @"",
+                        @"svn:mergeinfo",
+                        @"  /subversion/branches/resolve-incoming-add:1762797-1764284",
+                        @"  /subversion/branches/revprop-cache:1298521-1326293",
+                        @"  /subversion/branches/revprop-caching-ng:1620597,1620599",
+                        @"  /subversion/branches/revprop-packing:1143907,1143971,1143997,1144017,1144499,1144568,1146145",
+                        @"  /subversion/branches/shelve:1802592-1815226",
+                        @"",
+                        @"",
+                        @"",
+                        @"",
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void FormatListManyGroupsTest()
         {
             using (var sb = new WcSandbox())
