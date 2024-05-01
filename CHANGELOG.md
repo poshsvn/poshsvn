@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.1]
+
+- Build and publish improvements.
+
 ## [0.7.0]
 
 - Added properties cmdlets.
