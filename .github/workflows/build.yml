@@ -78,8 +78,5 @@ jobs:
       - name: Install vsce
         run: npm install -g @vscode/vsce
 
-      - name: Dry run vsce publish
-        run: vsce publish --packagePath .\bin\Release-${{ matrix.platform }}\PoshSvn.VSCode.vsix
-
       - name: Verify vsce token
         run: vsce verify-pat --pat ${{ secrets.VSCODE_STORE_TOKEN }}
