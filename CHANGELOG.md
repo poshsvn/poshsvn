@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0]
+
+- Added properties cmdlets.
+  - Implement `svn-propdel` cmdlet.
+  - Implement `svn-propget` cmdlet.
+  - Implement `svn-proplist` cmdlet.
+  - Implement `svn-propset` cmdlet.
+  - Functions works over rvision properties
+  - Added formatters for SvnProperty object.
+- Implement `svn-mergeinfo` cmdlet.
+- Implement `svn-relocate` cmdlet.
+- Some fixes with targets of cmdlets.
+- Fix peg-revision.
+- Minor fixes and improvements.
+
 ## [0.6.2]
 
 - Build and publish improvements.
