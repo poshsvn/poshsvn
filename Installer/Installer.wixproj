@@ -2,6 +2,7 @@
   <PropertyGroup>
     <SubversionPath>$(PackagesPath)tools\subversion</SubversionPath>
     <DefineConstants>
+      Version=$(Version);
       PackageDir=$(OutDir);
       SubversionPath=$(SubversionPath);
       $(DefineConstants);
