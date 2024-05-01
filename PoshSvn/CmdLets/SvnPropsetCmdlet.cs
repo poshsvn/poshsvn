@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.Management.Automation;
 using SharpSvn;
 
@@ -20,7 +21,7 @@ namespace PoshSvn.CmdLets
         public string PropertyValue { get; set; }
 
         [Parameter(Position = 2, ValueFromRemainingArguments = true)]
-        public string[] Path { get; set; }
+        public SvnTarget[] Target { get; set; }
 
         [Parameter()]
         [Alias("cl")]
@@ -28,7 +29,7 @@ namespace PoshSvn.CmdLets
 
         public SvnPropsetCmdlet()
         {
-            Path = new string[] { "." };
+            Target = new SvnTarget[] { SvnTarget.FromPath(".") };
         }
 
         [Parameter()]
@@ -36,6 +37,8 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
+            ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
+
             SvnSetPropertyArgs args = new SvnSetPropertyArgs
             {
                 Depth = Depth.ConvertToSharpSvnDepth()
@@ -49,9 +52,20 @@ namespace PoshSvn.CmdLets
                 }
             }
 
-            foreach (string path in GetPathTargets(Path, true))
+            foreach (SvnResolvedTarget target in resolvedTargets.Targets)
             {
-                SvnClient.SetProperty(path, PropertyName, PropertyValue, args);
+                if (target.TryGetPath(out string path))
+                {
+                    SvnClient.SetProperty(path, PropertyName, PropertyValue, args);
+                }
+                else if (target.TryGetUrl(out Uri url))
+                {
+                    throw new ArgumentException("This cmdlet does not support remote target.", "Target");
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
 
