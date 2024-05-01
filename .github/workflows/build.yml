@@ -74,9 +74,3 @@ jobs:
 
       - name: Test PoshSvn.Common
         run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Common.Tests.dll
-
-      - name: Install vsce
-        run: npm install -g @vscode/vsce
-
-      - name: Verify vsce token
-        run: vsce verify-pat --pat ${{ secrets.VSCODE_STORE_TOKEN }}
