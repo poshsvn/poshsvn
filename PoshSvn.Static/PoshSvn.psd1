@@ -42,6 +42,7 @@ Project website: https://www.poshsvn.com"
         "Invoke-SvnPropset"
         "Invoke-SvnProplist"
         "Invoke-SvnPropget"
+        "Invoke-SvnPropdel"
         "New-SvnTarget"
     )
     AliasesToExport        = @(
@@ -74,6 +75,7 @@ Project website: https://www.poshsvn.com"
         "svn-propset"
         "svn-proplist"
         "svn-propget"
+        "svn-propdel"
         "svnadmin-create"
     )
     FunctionsToExport      = @()
