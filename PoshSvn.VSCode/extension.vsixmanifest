@@ -15,7 +15,7 @@
 
         <Properties>
             <Property Id="Microsoft.VisualStudio.Code.Engine"
-                      Value="^1.87.0" />
+                      Value="^1.53.0" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies"
                       Value="" />
             <Property Id="Microsoft.VisualStudio.Code.ExtensionPack"
