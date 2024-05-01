@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Implement `svn-relocate` cmdlet.
 - Some fixes with targets of cmdlets.
 - Fix peg-revision.
+- Fix version of the MSI installer.
 - Minor fixes and improvements.
 
 ## [0.6.2]
