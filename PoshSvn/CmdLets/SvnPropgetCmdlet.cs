@@ -26,7 +26,7 @@ namespace PoshSvn.CmdLets
         [Alias("revprop")]
         public SwitchParameter RevisionProperty { get; set; }
 
-        [Parameter(ParameterSetName = ParameterSetNames.Node)] // TODO:
+        [Parameter(ParameterSetName = ParameterSetNames.Node)]
         [Parameter(ParameterSetName = ParameterSetNames.Revision, Mandatory = true)]
         [Alias("r", "rev")]
         public SvnRevision Revision { get; set; }
@@ -65,7 +65,8 @@ namespace PoshSvn.CmdLets
             {
                 SvnGetPropertyArgs args = new SvnGetPropertyArgs
                 {
-                    Depth = Depth.ConvertToSharpSvnDepth()
+                    Depth = Depth.ConvertToSharpSvnDepth(),
+                    Revision = Revision?.ToSharpSvnRevision(),
                 };
 
                 foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
