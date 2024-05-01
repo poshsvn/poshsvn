@@ -27,6 +27,10 @@ namespace PoshSvn.CmdLets
         [Alias("r", "rev")]
         public SvnRevision Revision { get; set; }
 
+        [Parameter(ParameterSetName = ParameterSetNames.Node)]
+        [Alias("cl")]
+        public string[] ChangeList { get; set; }
+
         public SvnProplistCmdlet()
         {
             Target = new SvnTarget[]
@@ -67,6 +71,14 @@ namespace PoshSvn.CmdLets
                     Depth = Depth.ConvertToSharpSvnDepth(),
                     Revision = Revision?.ToSharpSvnRevision(),
                 };
+
+                if (ChangeList != null)
+                {
+                    foreach (string changelist in ChangeList)
+                    {
+                        args.ChangeLists.Add(changelist);
+                    }
+                }
 
                 foreach (SharpSvn.SvnTarget target in resolvedTargets.EnumerateSharpSvnTargets())
                 {

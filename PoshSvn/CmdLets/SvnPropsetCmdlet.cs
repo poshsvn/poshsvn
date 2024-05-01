@@ -22,6 +22,10 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 2, ValueFromRemainingArguments = true)]
         public string[] Path { get; set; }
 
+        [Parameter()]
+        [Alias("cl")]
+        public string[] ChangeList { get; set; }
+
         public SvnPropsetCmdlet()
         {
             Path = new string[] { "." };
@@ -36,6 +40,14 @@ namespace PoshSvn.CmdLets
             {
                 Depth = Depth.ConvertToSharpSvnDepth()
             };
+
+            if (ChangeList != null)
+            {
+                foreach (string changelist in ChangeList)
+                {
+                    args.ChangeLists.Add(changelist);
+                }
+            }
 
             foreach (string path in GetPathTargets(Path, true))
             {
