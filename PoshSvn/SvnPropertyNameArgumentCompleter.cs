@@ -10,19 +10,34 @@ namespace PoshSvn
 {
     public class SvnPropertyNameArgumentCompleter : IArgumentCompleter
     {
+        public const string RevisionPropertyParameterName = "RevisionProperty";
+
         public IEnumerable<CompletionResult> CompleteArgument(string commandName,
                                                               string parameterName,
                                                               string wordToComplete,
                                                               CommandAst commandAst,
                                                               IDictionary fakeBoundParameters)
         {
-            // TODO: use real isRevprop
-            foreach (string property in GetPropertiesToComplete(false))
+            bool isRevprop = GetIsRevisionProperty(fakeBoundParameters);
+
+            foreach (string property in GetPropertiesToComplete(isRevprop))
             {
                 if (property.StartsWith(wordToComplete))
                 {
                     yield return new CompletionResult(property);
                 }
+            }
+        }
+
+        private static bool GetIsRevisionProperty(IDictionary fakeBoundParameters)
+        {
+            if (fakeBoundParameters.Contains(RevisionPropertyParameterName))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
