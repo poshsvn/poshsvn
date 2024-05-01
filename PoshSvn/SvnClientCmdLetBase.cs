@@ -136,7 +136,7 @@ namespace PoshSvn
         protected virtual void HandlePropertyNotifyAction(SharpSvn.SvnNotifyEventArgs e)
         {
 #if DEBUG
-            throw new NotImplementedException();
+            throw new NotImplementedException($"'{GetType()}' does not override the HandlePropertyNotifyAction method.");
 #endif
         }
 
