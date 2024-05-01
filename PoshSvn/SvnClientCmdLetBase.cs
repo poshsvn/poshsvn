@@ -114,7 +114,6 @@ namespace PoshSvn
             }
             else if (e.Action == SharpSvn.SvnNotifyAction.PropertyAdded ||
                      e.Action == SharpSvn.SvnNotifyAction.PropertyModified ||
-                     e.Action == SharpSvn.SvnNotifyAction.PropertyDeleted ||
                      e.Action == SharpSvn.SvnNotifyAction.RevisionPropertySet)
             {
                 // TODO: is it best decision ??
