@@ -2,7 +2,7 @@
 
   <Package Name="PoshSvn"
            Manufacturer="Rinrab"
-           Version="1.0.0.0"
+           Version="$(var.Version)"
            UpgradeCode="2223213a-2458-4706-b606-54a455bcae05"
            Scope="perUserOrMachine">
 
