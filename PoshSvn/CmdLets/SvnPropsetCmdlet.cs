@@ -6,7 +6,7 @@ using SharpSvn;
 
 namespace PoshSvn.CmdLets
 {
-    [Cmdlet("Invoke", "SvnPropset")]
+    [Cmdlet("Invoke", "SvnPropset", DefaultParameterSetName = ParameterSetNames.Node)]
     [Alias("svn-propset")]
     [OutputType(typeof(SvnProperty))]
     public class SvnPropsetCmdlet : SvnClientCmdletBase
@@ -23,7 +23,15 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 2, ValueFromRemainingArguments = true)]
         public SvnTarget[] Target { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = ParameterSetNames.Revision)]
+        [Alias("revprop")]
+        public SwitchParameter RevisionProperty { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.Revision, Mandatory = true)]
+        [Alias("r", "rev")]
+        public SvnRevision Revision { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.Node)]
         [Alias("cl")]
         public string[] ChangeList { get; set; }
 
@@ -39,32 +47,45 @@ namespace PoshSvn.CmdLets
         {
             ResolvedTargetCollection resolvedTargets = ResolveTargets(Target);
 
-            SvnSetPropertyArgs args = new SvnSetPropertyArgs
+            if (RevisionProperty)
             {
-                Depth = Depth.ConvertToSharpSvnDepth()
-            };
-
-            if (ChangeList != null)
-            {
-                foreach (string changelist in ChangeList)
+                foreach (SvnResolvedTarget target in resolvedTargets.Targets)
                 {
-                    args.ChangeLists.Add(changelist);
+                    SharpSvn.SvnRevision sharpSvnRevision = Revision.ToSharpSvnRevision();
+                    Uri url = GetUrlFromTarget(target);
+
+                    SvnClient.SetRevisionProperty(url, sharpSvnRevision, PropertyName, PropertyValue);
                 }
             }
-
-            foreach (SvnResolvedTarget target in resolvedTargets.Targets)
+            else
             {
-                if (target.TryGetPath(out string path))
+                SvnSetPropertyArgs args = new SvnSetPropertyArgs
                 {
-                    SvnClient.SetProperty(path, PropertyName, PropertyValue, args);
+                    Depth = Depth.ConvertToSharpSvnDepth()
+                };
+
+                if (ChangeList != null)
+                {
+                    foreach (string changelist in ChangeList)
+                    {
+                        args.ChangeLists.Add(changelist);
+                    }
                 }
-                else if (target.TryGetUrl(out Uri url))
+
+                foreach (SvnResolvedTarget target in resolvedTargets.Targets)
                 {
-                    throw new ArgumentException("This cmdlet does not support remote target.", "Target");
-                }
-                else
-                {
-                    throw new NotImplementedException();
+                    if (target.TryGetPath(out string path))
+                    {
+                        SvnClient.SetProperty(path, PropertyName, PropertyValue, args);
+                    }
+                    else if (target.TryGetUrl(out Uri url))
+                    {
+                        throw new ArgumentException("This cmdlet does not support remote target.", "Target");
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
                 }
             }
         }
@@ -75,7 +96,7 @@ namespace PoshSvn.CmdLets
             {
                 Name = e.PropertyName,
                 Value = PropertyValue,
-                Path = e.Path,
+                Path = e.Path ?? e.Uri.OriginalString,
             });
         }
     }
