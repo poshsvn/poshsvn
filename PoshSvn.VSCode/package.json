@@ -8,7 +8,7 @@
   },
   "homepage": "https://www.poshsvn.com",
   "publisher": "rinrab",
-  "icon": "./icon.png",
+  "icon": "icon.png",
   "author": "Timofei Zhakov",
   "keywords": [
     "Subversion",
@@ -23,7 +23,7 @@
     "url": "https://github.com/rinrab/poshsvn"
   },
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "extension.js",
   "contributes": {
     "commands": [
       {
