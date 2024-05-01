@@ -76,5 +76,36 @@
         </ListEntries>
       </ListControl>
     </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnProperty</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>Path</PropertyName>
+        <CustomControlName>SvnProperty-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <PropertyName>Name</PropertyName>
+              </ExpressionBinding>
+              <NewLine />
+              <Frame>
+                <LeftIndent>2</LeftIndent>
+                <CustomItem>
+                  <ExpressionBinding>
+                    <PropertyName>Value</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine />
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
   </ViewDefinitions>
 </Configuration>
