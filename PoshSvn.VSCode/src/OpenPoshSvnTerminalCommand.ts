@@ -43,6 +43,7 @@ export class OpenPoshSvnTerminalCommand implements vscode.Disposable {
     }
 
     static isTerminalPoshSvn(terminal: vscode.Terminal) {
+        // TODO: use better way to chech terminal type ???
         return terminal.name == "PoshSvn terminal";
     }
 }
