@@ -1,4 +1,5 @@
 import child_process from 'child_process';
+import { powerShellNotFoundError } from './texts';
 
 function checkIsCommandExists(command: string): boolean {
     try {
@@ -21,8 +22,5 @@ export function findPowerShell(): string {
         }
     }
 
-    throw new Error(
-        "Couldn't find PowerShell installation." +
-        "Please make sure you have PowerShell installed and added to PATH."
-    );
+    throw new Error(powerShellNotFoundError);
 }
