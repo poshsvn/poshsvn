@@ -23,6 +23,11 @@ export class OpenPoshSvnTerminalCommand extends CommandBase {
     }
 
     static findFirstPoshsvnTerminal(): vscode.Terminal | null {
+        const activeTerminal = vscode.window.activeTerminal;
+        if (activeTerminal && OpenPoshSvnTerminalCommand.isTerminalPoshSvn(activeTerminal)) {
+            return activeTerminal;
+        }
+
         for (const terminal of vscode.window.terminals) {
             if (OpenPoshSvnTerminalCommand.isTerminalPoshSvn(terminal)) {
                 return terminal;
