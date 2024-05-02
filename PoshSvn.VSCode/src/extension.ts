@@ -5,13 +5,25 @@ import { PoshSvnTerminalProfileProvider, terminalOptions } from './terminalProvi
 
 const logger: ILogger = new Logger();
 
+export class OpenPoshSvnTerminalCommand implements vscode.Disposable {
+    private command: vscode.Disposable;
+
+    constructor() {
+        this.command = vscode.commands.registerCommand("PoshSvn.openTerminal", () => {
+            let terminal = vscode.window.createTerminal(terminalOptions);
+            terminal.show();
+        });
+    }
+
+    public dispose(): void {
+        this.command.dispose();
+    }
+}
+
 export function activate(context: vscode.ExtensionContext) {
     logger.log("Activating extension.");
 
-    context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.openTerminal', () => {
-        let terminal = vscode.window.createTerminal(terminalOptions);
-        terminal.show();
-    }))
+    context.subscriptions.push(new OpenPoshSvnTerminalCommand());
 
     vscode.window.registerTerminalProfileProvider(
         'PoshSvn.terminalProfile',
