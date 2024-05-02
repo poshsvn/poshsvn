@@ -23,7 +23,7 @@
   </Target>
 
   <ItemGroup>
-    <DependencyFiles Include="$(MSBuildProjectDirectory)\node_modules\**\*.js" />
+    <DependencyFiles Include="$(MSBuildProjectDirectory)\node_modules\**\*.*" />
   </ItemGroup>
 
   <Target Name="CopyDeps" AfterTargets="NpmInstall">
