@@ -27,7 +27,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "PoshSvn.open.terminal",
+        "command": "PoshSvn.openTerminal",
         "title": "Open PoshSvn terminal"
       }
     ],
@@ -35,13 +35,13 @@
       "profiles": [
         {
           "title": "PoshSvn terminal",
-          "id": "PoshSvn.terminal.profile"
+          "id": "PoshSvn.terminalProfile"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "PoshSvn.open.terminal",
+        "command": "PoshSvn.openTerminal",
         "key": "alt+U"
       }
     ]
