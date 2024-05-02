@@ -38,7 +38,13 @@
           "id": "PoshSvn.terminal.profile"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "PoshSvn.open.terminal",
+        "key": "alt+U"
+      }
+    ]
   },
   "devDependencies": {
     "@types/node": "18.x",
