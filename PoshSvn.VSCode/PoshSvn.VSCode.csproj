@@ -27,8 +27,7 @@
   </ItemGroup>
 
   <Target Name="CopyDeps" AfterTargets="NpmInstall">
-    <Copy SourceFiles="@(DependencyFiles)"
-          DestinationFolder="$(VSCodeOutDir)\node_modules\%(RecursiveDir)" />
+    <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(VSCodeOutDir)\node_modules\%(RecursiveDir)" />
   </Target>
 
   <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
@@ -46,10 +45,8 @@
 
   <Import Project="..\MSBuild\ConfigureFile.tasks" />
 
-  <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)"
-          Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
-    <Copy SourceFiles="@(VSCodeExtensionItems)"
-          DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
+  <Target Name="CopyAssets" BeforeTargets="Build" Inputs="@(VSCodeExtensionItems)" Outputs="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)">
+    <Copy SourceFiles="@(VSCodeExtensionItems)" DestinationFiles="$(VSCodeOutDir)\%(VSCodeExtensionItems.Destination)\%(RecursiveDir)\%(VSCodeExtensionItems.FileName)%(VSCodeExtensionItems.Extension)" />
   </Target>
 
   <Target Name="ConfigureVersion" AfterTargets="CopyAssets">
