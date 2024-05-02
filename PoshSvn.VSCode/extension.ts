@@ -1,11 +1,15 @@
 ﻿import * as vscode from 'vscode';
 import child_process from 'child_process';
 
+import { ILogger, Logger } from './logging';
+
 const helpMessage =
     "   Welcome to PoshSvn Terminal!\r\n" +
     "\r\n" +
     "Type Get-Command -Module PoshSvn to list avalible commands.\r\n" +
     "Type Get-Help <cmdlet-name> to get help of a specific command.\r\n";
+
+const logger: ILogger = new Logger();
 
 function checkIsCommandExists(command: string): boolean {
     try {
@@ -53,6 +57,8 @@ function provideTerminalProfile(token: vscode.CancellationToken):
 }
 
 export function activate(context: vscode.ExtensionContext) {
+    logger.log("Activating extension.");
+
     context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.open.terminal', () => {
         let terminal = vscode.window.createTerminal(terminalOptions);
         terminal.show();
@@ -61,6 +67,8 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.registerTerminalProfileProvider('PoshSvn.terminal.profile', {
         provideTerminalProfile: provideTerminalProfile
     });
+
+    logger.log("Extension activation finished.");
 }
 
 export function deactivate() { }
