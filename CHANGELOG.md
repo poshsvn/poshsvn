@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.2]
+
+- Upload svn-dist to release.
+- Enable SSPI in serf.
+
 ## [0.7.1]
 
 - Build and publish improvements.
