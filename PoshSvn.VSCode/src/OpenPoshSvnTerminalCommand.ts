@@ -1,20 +1,14 @@
 ﻿import * as vscode from 'vscode';
 import { terminalOptions } from './terminalProvider';
+import { CommandBase } from './CommandBase';
 
-
-export class OpenPoshSvnTerminalCommand implements vscode.Disposable {
-    private command: vscode.Disposable;
-
+export class OpenPoshSvnTerminalCommand extends CommandBase {
     constructor() {
-        this.command = vscode.commands.registerCommand("PoshSvn.openTerminal", this.invokeCommand);
+        super("PoshSvn.openTerminal");
     }
 
-    private invokeCommand() {
+    invokeCommand(): void {
         let terminal = vscode.window.createTerminal(terminalOptions);
         terminal.show();
-    }
-
-    public dispose(): void {
-        this.command.dispose();
     }
 }
