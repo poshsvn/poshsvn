@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.4]
+
+- Fix name of svn-dist in release.
+
 ## [0.7.3]
 
 - Fix upload of svn-dist to release.
