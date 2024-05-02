@@ -82,6 +82,16 @@ jobs:
           asset_name: PoshSvn-${{ matrix.platform }}.msi
           asset_content_type: application/msi
 
+      - name: Upload svn-dist to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: .\bin\Release-${{ matrix.platform }}\Installer\en-US\svn-dist.zip
+          asset_name: svn-dist-${{ matrix.platform }}.msi
+          asset_content_type: application/zip
+
       # Artifacts
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
