@@ -89,7 +89,7 @@ jobs:
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: .\bin\Release-${{ matrix.platform }}\svn-dist.zip
-          asset_name: svn-dist-${{ matrix.platform }}.msi
+          asset_name: svn-dist-${{ matrix.platform }}.zip
           asset_content_type: application/zip
 
       # Artifacts
