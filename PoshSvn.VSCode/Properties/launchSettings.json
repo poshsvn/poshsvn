@@ -2,8 +2,8 @@
   "profiles": {
     "VSCode": {
       "commandName": "Executable",
-      "executablePath": "cmd.exe",
-      "commandLineArgs": "/C code --extensionDevelopmentPath $(OutDir)PoshSvn.VSCode"
+      "executablePath": "powershell.exe",
+      "commandLineArgs": "-WindowStyle Hidden -Command Start-Process -WindowStyle Hidden code -ArgumentList --extensionDevelopmentPath,\"$(OutDir)PoshSvn.VSCode\""
     }
   }
 }
