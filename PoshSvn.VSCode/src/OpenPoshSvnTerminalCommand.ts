@@ -8,13 +8,17 @@ export class OpenPoshSvnTerminalCommand extends CommandBase {
     }
 
     invokeCommand(): void {
-        const oldTerminal = OpenPoshSvnTerminalCommand.findFirstPoshsvnTerminal();
+        const terminal = OpenPoshSvnTerminalCommand.ensurePoshSvnTerminal();
+        terminal.show();
+    }
 
-        if (oldTerminal) {
-            oldTerminal.show();
+    static ensurePoshSvnTerminal(): vscode.Terminal {
+        const terminal = OpenPoshSvnTerminalCommand.findFirstPoshsvnTerminal();
+
+        if (terminal) {
+            return terminal;
         } else {
-            let terminal = vscode.window.createTerminal(terminalOptions);
-            terminal.show();
+            return vscode.window.createTerminal(terminalOptions);
         }
     }
 
