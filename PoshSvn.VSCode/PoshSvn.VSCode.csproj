@@ -22,6 +22,15 @@
     <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
+  <ItemGroup>
+    <DependencyFiles Include="$(MSBuildProjectDirectory)\node_modules\**\*.js" />
+  </ItemGroup>
+
+  <Target Name="CopyDeps" AfterTargets="NpmInstall">
+    <Copy SourceFiles="@(DependencyFiles)"
+          DestinationFolder="$(VSCodeOutDir)\node_modules\%(RecursiveDir)" />
+  </Target>
+
   <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
     <Exec Command="npx tsc --outDir $(VSCodeOutDir)" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
