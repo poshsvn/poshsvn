@@ -1,7 +1,7 @@
 ﻿import * as vscode from 'vscode';
-import child_process from 'child_process';
 
 import { ILogger, Logger } from './logging';
+import { findPowerShell } from './findPowerShell';
 
 const helpMessage =
     "   Welcome to PoshSvn Terminal!\r\n" +
@@ -10,33 +10,6 @@ const helpMessage =
     "Type Get-Help <cmdlet-name> to get help of a specific command.\r\n";
 
 const logger: ILogger = new Logger();
-
-function checkIsCommandExists(command: string): boolean {
-    try {
-        var stdout = child_process.execSync(`where "${command}"`);
-        return !!stdout;
-    } catch (ex) {
-        return false;
-    }
-}
-
-function* enumeratePowerShellInstallations(): Iterable<string> {
-    yield "pwsh.exe";
-    yield "powershell.exe";
-}
-
-function findPowerShell(): string {
-    for (const powershell of enumeratePowerShellInstallations()) {
-        if (checkIsCommandExists(powershell)) {
-            return powershell;
-        }
-    }
-
-    throw new Error(
-        "Couldn't find PowerShell installation." +
-        "Please make sure you have PowerShell installed and added to PATH."
-    );
-}
 
 let terminalOptions: vscode.TerminalOptions = {
     name: "PoshSvn terminal",
