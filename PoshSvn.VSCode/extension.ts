@@ -59,12 +59,12 @@ function provideTerminalProfile(token: vscode.CancellationToken):
 export function activate(context: vscode.ExtensionContext) {
     logger.log("Activating extension.");
 
-    context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.open.terminal', () => {
+    context.subscriptions.push(vscode.commands.registerCommand('PoshSvn.openTerminal', () => {
         let terminal = vscode.window.createTerminal(terminalOptions);
         terminal.show();
     }))
 
-    vscode.window.registerTerminalProfileProvider('PoshSvn.terminal.profile', {
+    vscode.window.registerTerminalProfileProvider('PoshSvn.terminalProfile', {
         provideTerminalProfile: provideTerminalProfile
     });
 
