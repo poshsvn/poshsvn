@@ -21,5 +21,5 @@ jobs:
       - name: Checkout PoshSvn wiki 
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.action_repository }}.wiki
+          repository: ${{ github.repository }}.wiki
           path: poshsvn.wiki
