@@ -36,7 +36,7 @@ jobs:
         run: |
           if (git status --porcelain) {
             Write-Output "Changes were found."
-            Write-Output "has_changed=true" >> $GITHUB_OUTPUT
+            Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "has_changed=true"
           }
 
       - name: Setup name
