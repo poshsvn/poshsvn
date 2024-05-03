@@ -1,7 +1,7 @@
 ---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
-online version: https://www.poshsvn.com/docs/Invoke-SvnMove/
+online version: https://www.poshsvn.com/docs/Invoke-SvnPropget
 schema: 2.0.0
 ---
 
@@ -30,7 +30,7 @@ Invoke-SvnPropget [-PropertyName] <String> [[-Target] <SvnTarget[]>] [-Depth <Sv
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -121,7 +121,7 @@ Aliases: revprop
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -147,11 +147,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PoshSvn.SvnTarget[]
-
 ## OUTPUTS
 
 ### PoshSvn.SvnProperty
-
 ## NOTES
 
 ## RELATED LINKS

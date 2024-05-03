@@ -1,7 +1,7 @@
 ---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
-online version: https://www.poshsvn.com/docs/Invoke-SvnMove/
+online version: https://www.poshsvn.com/docs/Invoke-SvnPropset
 schema: 2.0.0
 ---
 
@@ -26,16 +26,12 @@ Invoke-SvnPropset [-PropertyName] <String> [-PropertyValue] <String> [[-Target] 
 
 ## DESCRIPTION
 Set -PropertyName to -PropertyValue on files, directories, or revisions.
-The first example creates a versioned, local property change in the working copy,
-and the second creates an unversioned, remote property change on a repository revision
-(TARGET determines only which repository to access).
+The first example creates a versioned, local property change in the working copy, and the second creates an unversioned, remote property change on a repository revision (TARGET determines only which repository to access).
 
 ## EXAMPLES
 
 ### Example 1
-Set the MIME type for a file:
-
-```powershell
+```
 svn-propset svn:mime-type image/jpeg foo.jpg
 
 
@@ -47,9 +43,7 @@ svn:mime-type image/jpeg
 ```
 
 ### Example 2
-Perhaps you have an internal policy to set certain properties for the benefit of your coworkers:
-
-```powershell
+```
 svn-propset owner sally foo.c
 
 
@@ -61,10 +55,7 @@ owner sally
 ```
 
 ### Example 2
-If you made a mistake in a log message for a particular revision and want to change it,
-use -RevisionProperty and set svn:log to the new log message:
-
-```powershell
+```
 svn-propset -RevisionProperty -Revision 26 svn:log "Document nap." http://svn.example.com/repos/
 
 
@@ -163,7 +154,7 @@ Aliases: revprop
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -189,11 +180,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PoshSvn.SvnTarget[]
-
 ## OUTPUTS
 
 ### PoshSvn.SvnProperty
-
 ## NOTES
 
 ## RELATED LINKS
