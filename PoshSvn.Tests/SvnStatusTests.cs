@@ -156,5 +156,32 @@ namespace PoshSvn.Tests
                        sb.FormatObject(actual, "Format-Table"));
             }
         }
+
+        [Test]
+        public void ShowUpdatesTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"'abc' > wc\a.txt");
+                sb.RunScript(@"svn-add wc\a.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"svn-update wc -r 0");
+
+                var actual = sb.RunScript(@"svn-status wc -ShowUpdates");
+
+                CollectionAssert.AreEqual(
+                       new[]
+                       {
+                            @"",
+                            @"Status  Revision Path",
+                            @"------  -------- ----",
+                            @"        1        wc\a.txt",
+                            @"        1        wc",
+                            @"",
+                            @"",
+                       },
+                       sb.FormatObject(actual, "Format-Table"));
+            }
+        }
     }
 }
