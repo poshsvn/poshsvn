@@ -233,7 +233,7 @@ function New-MarkdownHelp
 
                     $newMetadata = ($Metadata + @{
                         $script:EXTERNAL_HELP_FILE_YAML_HEADER = $helpFileName
-                        $script:ONLINE_VERSION_YAML_HEADER = $online
+                        $script:ONLINE_VERSION_YAML_HEADER = "https://www.poshsvn.com/docs/$($mamlObject.Name)"
                         $script:MODULE_PAGE_MODULE_NAME = $mamlObject.ModuleName
                     })
                 }
