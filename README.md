@@ -95,13 +95,25 @@ Repository UUID       : 13f79535-47bb-0310-9956-ffa450edef68
 ...
 ```
 
-#### Batch script
+### Build via PowerShell script
 
-Maybe I will add a `build.bat` script, which does everything shown before.
+You could use the PowerShell script to build PoshSvn. This script is located at the root of the PoshSvn repository.
 
-### Via MSI installer
+Simle usage:
 
-Not ready yet.
+```powershell
+.\build.ps1
+```
+
+Or if you want to build specific component of the PoshSvn:
+
+```powershell
+.\build.ps1 -Target Core
+```
+
+### Install from MSI installer
+
+You could install PoshSvn from the MSI installer. It is available at the [Latest GitHub Release](https://github.com/rinrab/poshsvn/releases/latest)
 
 ### From winget
 
