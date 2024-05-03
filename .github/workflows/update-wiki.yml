@@ -30,23 +30,35 @@ jobs:
       - name: Copy new docs pages
         run: Copy-Item .\poshsvn\PoshSvn.Docs\en-US\* -Recurse .\poshsvn.wiki\
 
+      - name: Check status
+        id: check_status
+        run: |
+          if (git status --porcelain) {
+            Write-Output "::set-output name=has_changed::true"
+          }
+
       - name: Setup name
+        if: steps.check_status.outputs.has_changed == 'true'
         run: git config user.name "github-actions[bot]"
         working-directory: poshsvn.wiki
 
       - name: Setup email
+        if: steps.check_status.outputs.has_changed == 'true'
         run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         working-directory: poshsvn.wiki
 
       - name: Add new files
+        if: steps.check_status.outputs.has_changed == 'true'
         run: git add .
         working-directory: poshsvn.wiki
 
       - name: Git Commit
+        if: steps.check_status.outputs.has_changed == 'true'
         run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}" --no-verify
         working-directory: poshsvn.wiki
         continue-on-error: true
 
       - name: Git Push
+        if: steps.check_status.outputs.has_changed == 'true'
         run: git push
         working-directory: poshsvn.wiki
