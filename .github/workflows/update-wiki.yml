@@ -45,3 +45,4 @@ jobs:
       - name: Git Commit
         run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}"
         working-directory: poshsvn.wiki
+        continue-on-error: true
