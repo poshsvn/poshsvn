@@ -1,33 +1,37 @@
 ﻿<Project>
   <Import Project="..\Directory.build.targets" />
 
-  <ItemGroup>
-    <SubversionFiles Include="$(PackagesPath)tools\subversion\*" />
-  </ItemGroup>
-
   <PropertyGroup>
+    <SubversionDirectory>$(PackagesPath)tools\subversion\</SubversionDirectory>
     <SvnDistDir>$(OutDir)svn-dist</SvnDistDir>
     <SvnDistZip>$(OutDir)svn-dist.zip</SvnDistZip>
   </PropertyGroup>
 
-  <Target Name="CopySvnDist">
-    <Copy SourceFiles="@(SubversionFiles)" DestinationFolder="$(SvnDistDir)" />
-  </Target>
+  <ItemGroup>
+    <SubversionFiles Include="$(SubversionDirectory)\*" />
+    <SubversionFiles Remove="$(SubversionDirectory)\svnauthz-validate.exe" />
+    <SubversionFiles Remove="$(SubversionDirectory)\svnmover.exe" />
+    <SubversionFiles Remove="$(SubversionDirectory)\svnraisetreeconflict.exe" />
+    <SubversionFiles Remove="$(SubversionDirectory)\svnauthz.exe" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(Platform)'=='x64'">
-    <VcRuntime Include="$(OutDir)vcruntime140.dll"></VcRuntime>
-    <VcRuntime Include="$(OutDir)vcruntime140_1.dll"></VcRuntime>
+    <SubversionFiles Include="$(OutDir)vcruntime140.dll" />
+    <SubversionFiles Include="$(OutDir)vcruntime140_1.dll" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Platform)'=='Win32'">
-    <VcRuntime Include="$(OutDir)vcruntime140.dll"></VcRuntime>
+    <SubversionFiles Include="$(OutDir)vcruntime140.dll" />
   </ItemGroup>
 
-  <Target Name="CopyCRT">
-    <Copy SourceFiles="@(VcRuntime)" DestinationFolder="$(SvnDistDir)" />
-  </Target>
+  <ItemGroup>
+    <Content Include="@(SubversionFiles)"
+             CopyToOutputDirectory="PreserveNewest">
+      <Link>svn-dist\%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
 
-  <Target Name="CreateZip" DependsOnTargets="CopySvnDist;CopyCRT" AfterTargets="FinalizeBuildStatus">
+  <Target Name="CreateZip" AfterTargets="FinalizeBuildStatus">
     <ZipDirectory SourceDirectory="$(SvnDistDir)" DestinationFile="$(SvnDistZip)" Overwrite="true" />
   </Target>
 </Project>
