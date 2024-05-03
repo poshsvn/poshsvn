@@ -35,6 +35,7 @@ jobs:
         working-directory: poshsvn.wiki
         run: |
           if (git status --porcelain) {
+            Write-Output "Changes were found."
             Write-Output "has_changed=true" >> $GITHUB_OUTPUT
           }
 
