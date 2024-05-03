@@ -40,7 +40,6 @@
     <VSCodeExtensionItems Include="package.json" />
     <VSCodeExtensionItems Include="icon.png" />
     <VSCodeExtensionItems Include="icon.svg" />
-    <VSCodeExtensionItems Include="demo.gif" />
     <VSCodeExtensionItems Destination="poshsvn" Include="$(PackagePath)\**\*.*" />
   </ItemGroup>
 
