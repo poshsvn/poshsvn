@@ -10,7 +10,7 @@ PoshSvn provides subversion cmdlets for powershell and integrated vscode termina
 
 ## Demo
 
-![](demo.gif)
+![](https://github.com/rinrab/poshsvn/blob/trunk/PoshSvn.VSCode/demo.gif?raw=true)
 
 ## Requirements
 
