@@ -46,3 +46,7 @@ jobs:
         run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}"
         working-directory: poshsvn.wiki
         continue-on-error: true
+
+      - name: Git Push
+        run: git push
+        working-directory: poshsvn.wiki
