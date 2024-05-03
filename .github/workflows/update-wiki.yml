@@ -43,7 +43,7 @@ jobs:
         working-directory: poshsvn.wiki
 
       - name: Git Commit
-        run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}"
+        run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}" --no-verify
         working-directory: poshsvn.wiki
         continue-on-error: true
 
