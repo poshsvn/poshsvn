@@ -8,6 +8,7 @@ on:
       - 'Scripts/Build-PoshSvnWebsite.ps1'
       - 'docs/**'
       - '.github/workflows/website.yml'
+      - PoshSvn.Docs/**
 
   workflow_dispatch:
 
