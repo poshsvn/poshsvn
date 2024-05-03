@@ -32,6 +32,7 @@ jobs:
 
       - name: Check status
         id: check_status
+        working-directory: poshsvn.wiki
         run: |
           if (git status --porcelain) {
             Write-Output "::set-output name=has_changed::true"
