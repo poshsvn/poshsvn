@@ -38,6 +38,7 @@ namespace PoshSvn.CmdLets
                 CreateParents = Parents,
                 AllowMixedRevisions = AllowMixedRevisions,
                 LogMessage = Message,
+                AlwaysMoveAsChild = true,
             };
 
             ResolvedTargetCollection sources = ResolveTargets(Source);

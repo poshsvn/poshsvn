@@ -41,6 +41,7 @@ namespace PoshSvn.CmdLets
                 LogMessage = Message,
                 Revision = Revision,
                 IgnoreExternals = IgnoreExternals,
+                AlwaysCopyAsChild = true
             };
 
             ResolvedTargetCollection resolvedSources = ResolveTargets(Source);

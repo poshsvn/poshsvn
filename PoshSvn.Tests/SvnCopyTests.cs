@@ -32,6 +32,75 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void CopyAsChild()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\dir");
+                sb.RunScript(@"set-content -path wc\file.txt -value abc");
+                sb.RunScript(@"svn-add wc\file.txt");
+                var actual = sb.RunScript(@"svn-copy wc\file.txt wc\dir");
+
+                PSObjectAssert.AreEqual(
+                    new SvnNotifyOutput[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, @"dir\file.txt")
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RemoteCopyAsChild()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\dir");
+                sb.RunScript(@"set-content -path wc\file.txt -value abc");
+                sb.RunScript(@"svn-add wc\file.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+                var actual = sb.RunScript($@"svn-copy {sb.ReposUrl}/file.txt {sb.ReposUrl}/dir -m test");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnCommitOutput
+                        {
+                            Revision = 2
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void CopyNotAsChild()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\dir");
+                sb.RunScript(@"set-content -path wc\file.txt -value abc");
+                sb.RunScript(@"svn-add wc\file.txt");
+                var actual = sb.RunScript(@"svn-copy wc\file.txt wc\dir\file.txt");
+
+                PSObjectAssert.AreEqual(
+                    new SvnNotifyOutput[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, @"dir\file.txt")
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void BasicStatusTest()
         {
             using (var sb = new WcSandbox())
