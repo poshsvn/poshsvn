@@ -23,3 +23,25 @@ jobs:
         with:
           repository: ${{ github.repository }}.wiki
           path: poshsvn.wiki
+
+      - name: Cleanup wiki directory
+        run: Remove-Item .\poshsvn.wiki\* -Recurse
+
+      - name: Copy new docs pages
+        run: Copy-Item .\poshsvn\PoshSvn.Docs\en-US\* -Recurse .\poshsvn.wiki\
+
+      - name: Setup name
+        run: git config user.name "github-actions[bot]"
+        working-directory: poshsvn.wiki
+
+      - name: Setup email
+        run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        working-directory: poshsvn.wiki
+
+      - name: Add new files
+        run: git add .
+        working-directory: poshsvn.wiki
+
+      - name: Git Commit
+        run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}"
+        working-directory: poshsvn.wiki
