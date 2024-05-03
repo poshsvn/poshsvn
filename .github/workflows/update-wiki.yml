@@ -54,7 +54,7 @@ jobs:
 
       - name: Git Commit
         if: steps.check_status.outputs.has_changed == 'true'
-        run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}" --no-verify
+        run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}"
         working-directory: poshsvn.wiki
         continue-on-error: true
 
