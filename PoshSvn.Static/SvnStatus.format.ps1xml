@@ -9,6 +9,7 @@
         <TableHeaders>
           <TableColumnHeader>
             <Width>7</Width>
+            <Label>Status</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Path</Label>
@@ -38,6 +39,7 @@
         <TableHeaders>
           <TableColumnHeader>
             <Width>7</Width>
+            <Label>Status</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Revision</Label>
@@ -98,12 +100,14 @@
         <TableHeaders>
           <TableColumnHeader>
             <Width>7</Width>
+            <Label>Status</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Revision</Label>
             <Width>8</Width>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Path</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
