@@ -6,6 +6,7 @@ on:
     - trunk
     paths:
     - PoshSvn.Docs/en-US/**
+    - .github/workflows/update-wiki.yml
   workflow_dispatch:
 
 jobs:
