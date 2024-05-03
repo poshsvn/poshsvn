@@ -3,15 +3,17 @@ param (
     [Parameter()]
     [ValidateSet("Core", "Installer", "All")]
     [string]
-    $Target
+    $Target = "All"
 )
 
-$msbuildTarget = "build"
-if ($Target -eq "Core") {
+if ($Target -eq "All") {
+    $msbuildTarget = "build"
+}
+elseif ($Target -eq "Core") {
     $msbuildTarget = "PoshSvn"
 }
-if ($Target -eq "Installer") {
-    $msbuildTarget = "Installer"
+else {
+    $msbuildTarget = $Target
 }
 
 $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
