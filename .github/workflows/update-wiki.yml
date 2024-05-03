@@ -1,0 +1,24 @@
+name: Update wiki
+
+on:
+  push:
+    branches:
+    - trunk
+    paths:
+    - 'PoshSvn.Docs/en-US/**'
+  workflow_dispatch:
+
+jobs:
+  update-wiki:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout PoshSvn
+        uses: actions/checkout@v4
+        with:
+          path: poshsvn
+
+      - name: Checkout PoshSvn wiki 
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.action_repository }}.wiki
+          path: poshsvn.wiki
