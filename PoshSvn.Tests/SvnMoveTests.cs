@@ -91,6 +91,85 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void MoveAsChild()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\dir");
+                sb.RunScript(@"set-content -path wc\file.txt -value abc");
+                sb.RunScript(@"svn-add wc\file.txt");
+                var actual = sb.RunScript(@"svn-move wc\file.txt wc\dir");
+
+                PSObjectAssert.AreEqual(
+                    new SvnNotifyOutput[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, @"dir\file.txt")
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SvnNotifyAction.Delete,
+                            Path = Path.Combine(sb.WcPath, @"file.txt")
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void RemoteMoveAsChild()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\dir");
+                sb.RunScript(@"set-content -path wc\file.txt -value abc");
+                sb.RunScript(@"svn-add wc\file.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+                var actual = sb.RunScript($@"svn-move {sb.ReposUrl}/file.txt {sb.ReposUrl}/dir -m test");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        new SvnCommitOutput
+                        {
+                            Revision = 2
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
+        public void MoveNotAsChild()
+        {
+            using (var sb = new WcSandbox())
+            {
+                sb.RunScript(@"svn-mkdir wc\dir");
+                sb.RunScript(@"set-content -path wc\file.txt -value abc");
+                sb.RunScript(@"svn-add wc\file.txt");
+                var actual = sb.RunScript(@"svn-move wc\file.txt wc\dir\file.txt");
+
+                PSObjectAssert.AreEqual(
+                    new SvnNotifyOutput[]
+                    {
+                        new SvnNotifyOutput
+                        {
+                            Action = SvnNotifyAction.Add,
+                            Path = Path.Combine(sb.WcPath, @"dir\file.txt")
+                        },
+                        new SvnNotifyOutput
+                        {
+                            Action = SvnNotifyAction.Delete,
+                            Path = Path.Combine(sb.WcPath, @"file.txt")
+                        }
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void MoveCommittedNode()
         {
             using (var sb = new WcSandbox())
