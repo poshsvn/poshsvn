@@ -31,7 +31,8 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="CreateZip" AfterTargets="FinalizeBuildStatus">
+  <Target Name="CreateZip" AfterTargets="FinalizeBuildStatus"
+          Inputs="@(SubversionFiles)" Outputs="$(SvnDistZip)">
     <ZipDirectory SourceDirectory="$(SvnDistDir)" DestinationFile="$(SvnDistZip)" Overwrite="true" />
   </Target>
 </Project>
