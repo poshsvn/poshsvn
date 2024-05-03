@@ -42,11 +42,6 @@ jobs:
         run: git add .
         working-directory: poshsvn.wiki
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: test
-          path: .
-
       - name: Git Commit
         run: git commit -m "[automatic] Update wikis for commit ${{ github.sha }}"
         working-directory: poshsvn.wiki
