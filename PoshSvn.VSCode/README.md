@@ -8,6 +8,10 @@ PoshSvn provides subversion cmdlets for powershell and integrated vscode termina
 - Typed output of cmdlets.
 - Formatted output to repeat the Subversion command line interface user experience.
 
+## Demo
+
+![](demo.gif)
+
 ## Requirements
 
 Works only with Windows.
