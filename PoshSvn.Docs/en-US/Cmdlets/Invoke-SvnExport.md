@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnExport/
@@ -14,8 +14,8 @@ Create an unversioned copy of a tree.
 ## SYNTAX
 
 ```
-Invoke-SvnExport [-Source] <SvnTarget> [[-Destination] <String>] [-Revision <PoshSvnRevision>]
- [-Depth <SvnDepth>] [-Force] [-IgnoreExternals] [-IgnoreKeywords] [<CommonParameters>]
+Invoke-SvnExport [-Source] <SvnTarget> [[-Destination] <String>] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
+ [-Force] [-IgnoreExternals] [-IgnoreKeywords] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -135,7 +135,7 @@ Accept wildcard characters: False
 Specifies revision to operate.
 
 ```yaml
-Type: PoshSvnRevision
+Type: SvnRevision
 Parameter Sets: (All)
 Aliases: rev, r
 

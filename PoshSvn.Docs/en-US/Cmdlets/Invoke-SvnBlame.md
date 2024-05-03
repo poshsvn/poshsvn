@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnAdminCreate/
@@ -14,7 +14,7 @@ Show author and revision information inline for the specified files or URLs.
 ## SYNTAX
 
 ```
-Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <PoshSvnRevisionRange>] [-RetrieveMergedRevisions]
+Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <SvnRevisionRange>] [-RetrieveMergedRevisions]
  [-IgnoreMimeType] [-IgnoreLineEndings] [-IgnoreSpacing <SvnIgnoreSpacing>] [<CommonParameters>]
 ```
 
@@ -35,7 +35,6 @@ svn-blame https://svn.example.com/repos/README
        r3 sally            This is a README file.
        r1 harry            Don't bother reading it.  The boss is a knucklehead.
        r3 sally
-
 ```
 
 ### Example 2
@@ -61,7 +60,6 @@ EndRevision              : 7
 StartRevision            : 0
 
 ...
-
 ```
 
 ## PARAMETERS
@@ -132,7 +130,7 @@ Accept wildcard characters: False
 Specifies revision to operate.
 
 ```yaml
-Type: PoshSvnRevisionRange
+Type: SvnRevisionRange
 Parameter Sets: (All)
 Aliases: rev, r
 

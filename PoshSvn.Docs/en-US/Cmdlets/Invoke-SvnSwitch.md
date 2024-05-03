@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnSwitch/
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-SvnSwitch [[-Url] <Uri>] [[-Path] <String>] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
+Invoke-SvnSwitch [[-Target] <SvnTarget>] [[-Path] <String>] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
  [-IgnoreExternals] [<CommonParameters>]
 ```
 
@@ -96,7 +96,7 @@ Accept wildcard characters: False
 {{ Fill Url Description }}
 
 ```yaml
-Type: Uri
+Type: SvnTarget
 Parameter Sets: (All)
 Aliases:
 

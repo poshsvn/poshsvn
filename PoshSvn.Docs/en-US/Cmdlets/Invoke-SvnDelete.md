@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnDelete/
@@ -14,7 +14,7 @@ Remove files and directories from version control.
 
 ### Local (Default)
 ```
-Invoke-SvnDelete [-Target] <SvnTarget[]> [-Force] [-KeepLocal] [<CommonParameters>]
+Invoke-SvnDelete [-Target] <SvnTarget[]> [-Force] [<CommonParameters>]
 ```
 
 ### Remote
@@ -72,7 +72,7 @@ Keep item in working copy.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: Remote
 Aliases: keep-local
 
 Required: False
