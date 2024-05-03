@@ -4,6 +4,11 @@
       "commandName": "Executable",
       "executablePath": "powershell.exe",
       "commandLineArgs": "-WindowStyle Hidden -Command Start-Process -WindowStyle Hidden code -ArgumentList --extensionDevelopmentPath,\"$(OutDir)PoshSvn.VSCode\""
+    },
+    "VSCode no extesnions": {
+      "commandName": "Executable",
+      "executablePath": "powershell.exe",
+      "commandLineArgs": "-WindowStyle Hidden -Command Start-Process -WindowStyle Hidden code -ArgumentList --extensionDevelopmentPath,\"$(OutDir)PoshSvn.VSCode\",--disable-extensions"
     }
   }
 }
