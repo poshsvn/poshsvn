@@ -81,6 +81,10 @@ namespace PoshSvn
                     });
                 }
             }
+            else if (e.Action == SharpSvn.SvnNotifyAction.StatusCompleted)
+            {
+                WriteVerbose(string.Format("Status against revision:     {0}", e.Revision));
+            }
             else if (e.Action == SharpSvn.SvnNotifyAction.BlameRevision)
             {
                 UpdateProgressAction($"Processing revision {e.Revision}...");
