@@ -35,7 +35,7 @@ jobs:
         working-directory: poshsvn.wiki
         run: |
           if (git status --porcelain) {
-            Write-Output "::set-output name=has_changed::true"
+            Write-Output "name=has_changed::true" >> $GITHUB_OUTPUT
           }
 
       - name: Setup name
