@@ -1,20 +1,27 @@
 ---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
-online version: https://www.poshsvn.com/docs/Invoke-SvnSwitch/
+online version: https://www.poshsvn.com/docs/Invoke-SvnProplist
 schema: 2.0.0
 ---
 
-# Invoke-SvnSwitch
+# Invoke-SvnProplist
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
+### Node (Default)
 ```
-Invoke-SvnSwitch [[-Target] <SvnTarget>] [[-Path] <String>] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
- [-IgnoreExternals] [<CommonParameters>]
+Invoke-SvnProplist [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Revision <SvnRevision>]
+ [-ChangeList <String[]>] [<CommonParameters>]
+```
+
+### Revision
+```
+Invoke-SvnProplist [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-RevisionProperty] -Revision <SvnRevision>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,13 +30,28 @@ Invoke-SvnSwitch [[-Target] <SvnTarget>] [[-Path] <String>] [-Revision <SvnRevis
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -ChangeList
+{{ Fill ChangeList Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: Node
+Aliases: cl
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Depth
 {{ Fill Depth Description }}
@@ -47,43 +69,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -IgnoreExternals
-{{ Fill IgnoreExternals Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: ignore-externals
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-{{ Fill Path Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Revision
 {{ Fill Revision Description }}
 
 ```yaml
 Type: SvnRevision
-Parameter Sets: (All)
-Aliases: rev
+Parameter Sets: Node
+Aliases: r, rev
 
 Required: False
 Position: Named
@@ -92,11 +84,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Target
-{{ Fill Url Description }}
+```yaml
+Type: SvnRevision
+Parameter Sets: Revision
+Aliases: r, rev
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RevisionProperty
+{{ Fill RevisionProperty Description }}
 
 ```yaml
-Type: SvnTarget
+Type: SwitchParameter
+Parameter Sets: Revision
+Aliases: revprop
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Target
+{{ Fill Target Description }}
+
+```yaml
+Type: SvnTarget[]
 Parameter Sets: (All)
 Aliases:
 
@@ -112,12 +131,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
+### PoshSvn.SvnTarget[]
 ## OUTPUTS
 
-### PoshSvn.SvnNotifyOutput
-
+### PoshSvn.SvnProperty
 ## NOTES
 
 ## RELATED LINKS

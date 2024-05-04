@@ -1,11 +1,11 @@
 ---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
-online version: https://www.poshsvn.com/docs/Invoke-SvnSwitch/
+online version: https://www.poshsvn.com/docs/Invoke-SvnLock
 schema: 2.0.0
 ---
 
-# Invoke-SvnSwitch
+# Invoke-SvnLock
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-SvnSwitch [[-Target] <SvnTarget>] [[-Path] <String>] [-Revision <SvnRevision>] [-Depth <SvnDepth>]
- [-IgnoreExternals] [<CommonParameters>]
+Invoke-SvnLock [-Target] <SvnTarget[]> [-Message <String>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,29 +30,13 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Depth
-{{ Fill Depth Description }}
-
-```yaml
-Type: SvnDepth
-Parameter Sets: (All)
-Aliases:
-Accepted values: Empty, Files, Immediates, Infinity
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -IgnoreExternals
-{{ Fill IgnoreExternals Description }}
+### -Force
+{{ Fill Force Description }}
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: ignore-externals
+Aliases: StealLock
 
 Required: False
 Position: Named
@@ -62,28 +45,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-{{ Fill Path Description }}
+### -Message
+{{ Fill Message Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Revision
-{{ Fill Revision Description }}
-
-```yaml
-Type: SvnRevision
-Parameter Sets: (All)
-Aliases: rev
+Aliases: Comment, m
 
 Required: False
 Position: Named
@@ -93,17 +61,17 @@ Accept wildcard characters: False
 ```
 
 ### -Target
-{{ Fill Url Description }}
+{{ Fill Target Description }}
 
 ```yaml
-Type: SvnTarget
+Type: SvnTarget[]
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -112,7 +80,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### PoshSvn.SvnTarget[]
 
 ## OUTPUTS
 

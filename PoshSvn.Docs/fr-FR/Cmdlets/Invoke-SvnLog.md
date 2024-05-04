@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnLog/
@@ -13,7 +13,7 @@ Affiche les messages de journal pour un ensemble de révision(s) et/ou de chemin
 ## SYNTAX
 
 ```
-Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Revision <PoshSvnRevisionRange[]>] [-ChangedPaths] [-Limit <Int32>]
+Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Revision <SvnRevisionRange[]>] [-ChangedPaths] [-Limit <Int32>]
  [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
  [-WithRevisionProperties <String[]>] [<CommonParameters>]
 ```
@@ -171,7 +171,7 @@ Accept wildcard characters: False
 {{ Fill Revision Description }}
 
 ```yaml
-Type: PoshSvnRevisionRange[]
+Type: SvnRevisionRange[]
 Parameter Sets: (All)
 Aliases: rev, r
 

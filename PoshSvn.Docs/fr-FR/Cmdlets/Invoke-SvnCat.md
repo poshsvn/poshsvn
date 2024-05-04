@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnAdminCreate/
@@ -51,7 +51,8 @@ Install-Module -Name PoshSvn
 
 Vous pouvez également visualiser des versions spécifiques de fichiers.
 
-````powershell
+```
+`powershell
 svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
 
 # Client Apache Subversion pour PowerShell
@@ -61,8 +62,9 @@ svn-cat https://svn.rinrab.com/rinrab/poshsvn/trunk/README.md -Revision 489
 - Complétion automatique (expansion de tabulation) des commandes et des paramètres.
 - Sortie typée des cmdlets.
 ...
+```
 
-````
+`
 
 ## PARAMETERS
 
