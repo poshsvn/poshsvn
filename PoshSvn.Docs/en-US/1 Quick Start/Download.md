@@ -31,4 +31,3 @@ https://github.com/rinrab/aovpn-manager/releases/latest/download/AOVpnManager-x6
 
 - [Subversion Binaries (x64)](https://github.com/poshsvn/poshsvn/releases/latest/download/svn-dist-x64.zip)
 - [Subversion Binaries (x86)](https://github.com/poshsvn/poshsvn/releases/latest/download/svn-dist-x86.zip)
-
