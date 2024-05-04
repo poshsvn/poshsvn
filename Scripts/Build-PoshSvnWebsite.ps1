@@ -28,7 +28,10 @@ function RenderPage {
     $topics = ""
 
     foreach ($folder in Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US" -Directory -Exclude "obj") {
-        $topics += "<li class='mt-4'><h6>$($folder.Name)</h6></li><li><hr class='sidebar-divider'></li>"
+        $null = $folder.Name -match "[0-9]* *(.*)"
+        $folderName = $Matches[1]
+
+        $topics += "<li class='mt-4'><h6>$folderName</h6></li><li><hr class='sidebar-divider'></li>"
 
         foreach ($path in $folder | Get-ChildItem -Filter "*.md" -File -Recurse) {
             if ($Title -eq $path.BaseName) {
