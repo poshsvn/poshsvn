@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnAdminCreate/
@@ -14,7 +14,7 @@ Affiche les informations sur l'auteur et la révision en ligne pour les fichiers
 ## SYNTAX
 
 ```
-Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <PoshSvnRevisionRange>] [-RetrieveMergedRevisions]
+Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <SvnRevisionRange>] [-RetrieveMergedRevisions]
  [-IgnoreMimeType] [-IgnoreLineEndings] [-IgnoreSpacing <SvnIgnoreSpacing>] [<CommonParameters>]
 ```
 
@@ -126,7 +126,7 @@ Accept wildcard characters: False
 Spécifie la révision sur laquelle opérer.
 
 ```yaml
-Type: PoshSvnRevisionRange
+Type: SvnRevisionRange
 Parameter Sets: (All)
 Aliases: rev, r
 

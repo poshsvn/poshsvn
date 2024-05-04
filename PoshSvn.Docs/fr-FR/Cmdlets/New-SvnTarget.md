@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/New-SvnTarget/
@@ -14,22 +14,22 @@ schema: 2.0.0
 
 ### PathOrUrl (Default)
 ```
-New-SvnTarget [-PathOrUrl] <String> [<CommonParameters>]
+New-SvnTarget -InputObject <PSObject> [-Revision <SvnRevision>] [<CommonParameters>]
 ```
 
 ### Path
 ```
-New-SvnTarget [-Path <String>] [<CommonParameters>]
+New-SvnTarget [-Path <String>] [-Revision <SvnRevision>] [<CommonParameters>]
 ```
 
 ### LiteralPath
 ```
-New-SvnTarget [-LiteralPath <String>] [<CommonParameters>]
+New-SvnTarget [-LiteralPath <String>] [-Revision <SvnRevision>] [<CommonParameters>]
 ```
 
 ### Url
 ```
-New-SvnTarget [-Url <String>] [<CommonParameters>]
+New-SvnTarget [-Url <String>] [-Revision <SvnRevision>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +45,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -InputObject
+{{ Fill InputObject Description }}
+
+```yaml
+Type: PSObject
+Parameter Sets: PathOrUrl
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
 
 ### -LiteralPath
 {{ Fill LiteralPath Description }}
@@ -76,16 +91,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PathOrUrl
-{{ Fill PathOrUrl Description }}
+### -Revision
+{{ Fill Revision Description }}
 
 ```yaml
-Type: String
-Parameter Sets: PathOrUrl
-Aliases:
+Type: SvnRevision
+Parameter Sets: (All)
+Aliases: r, rev
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
