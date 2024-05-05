@@ -37,11 +37,12 @@ namespace PoshSvn.CmdLets
                 {
                     if (RemoveUnversioned || RemoveIgnored || VacuumPristines)
                     {
-                        // SharpSvn doesn't implement all arguments
-                        // TODO: Add them ?
-                        // https://github.com/AmpScm/SharpSvn/blob/main/src/SharpSvn/Commands/Vacuum.cpp
                         SvnClient.Vacuum(path, new SvnVacuumArgs
                         {
+                            RemoveUnversionedItems = RemoveUnversioned,
+                            RemoveIgnoredItems = RemoveIgnored,
+                            FixRrecordedTimestamps = true,
+                            VacuumPristines = VacuumPristines,
                             IncludeExternals = IncludeExternals,
                         });
                     }
