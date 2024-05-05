@@ -1,16 +1,18 @@
-#include <assert.h>
-#include <node_api.h>
+#include <napi.h>
+
 #include <svn_client.h>
 #include <svn_pools.h>
 #include <svn_dirent_uri.h>
 
-static napi_value Method(napi_env env, napi_callback_info info) {
+Napi::String Method(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+
     apr_initialize();
 
     apr_pool_t* pool;
     apr_pool_create(&pool, NULL);
 
-    svn_client_ctx_t *ctx;
+    svn_client_ctx_t* ctx;
     svn_client_create_context2(&ctx, NULL, pool);
 
     svn_opt_revision_t rev;
@@ -37,21 +39,14 @@ static napi_value Method(napi_env env, napi_callback_info info) {
 
     apr_pool_destroy(pool);
 
-    napi_status status;
-    napi_value world;
-    status = napi_create_string_utf8(env, "world", 5, &world);
-    assert(status == napi_ok);
-    return world;
+    return Napi::String::New(env, path);
 }
 
-#define DECLARE_NAPI_METHOD(name, func) { name, 0, func, 0, 0, 0, napi_default, 0 }
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+    exports.Set(Napi::String::New(env, "hello"),
+                Napi::Function::New(env, Method));
 
-static napi_value Init(napi_env env, napi_value exports) {
-    napi_status status;
-    napi_property_descriptor desc = DECLARE_NAPI_METHOD("hello", Method);
-    status = napi_define_properties(env, exports, 1, &desc);
-    assert(status == napi_ok);
     return exports;
 }
 
-NAPI_MODULE(NODE_GYP_MODULE_NAME, Init)
+NODE_API_MODULE(addon, Init)
