@@ -58,11 +58,11 @@ namespace PoshSvn.CmdLets
                 LineNumber = e.LineNumber,
                 EndRevision = e.EndRevision,
                 LocalChange = e.LocalChange,
-                Time = e.Time,
-                MergedTime = e.MergedTime,
+                Time = SvnUtils.ConvertTime(e.Time),
+                MergedTime = SvnUtils.ConvertTime(e.MergedTime),
                 MergedAuthor = e.MergedAuthor,
                 MergedPath = e.MergedPath,
-                MergedRevision = e.MergedRevision,
+                MergedRevision = SvnUtils.ConvertRevision(e.MergedRevision),
                 MergedRevisionProperties = e.MergedRevisionProperties?.ToArray(),
             });
         }
