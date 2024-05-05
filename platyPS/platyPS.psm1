@@ -2543,7 +2543,11 @@ function ConvertPsObjectsToMamlModel
                 'OutVariable',
                 'OutBuffer',
                 'PipelineVariable',
-                'ProgressAction'
+                'ProgressAction',
+                'NoAuthCache',
+                'Username',
+                'Password',
+                'ProgressAction',
         ) -contains $parameterName) {
             return $true
         }
