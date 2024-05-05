@@ -4,7 +4,6 @@ Download PoshSvn sources or precompiled binaries.
 
 ## MSI Installer for PoshSvn
 
-https://github.com/rinrab/aovpn-manager/releases/latest/download/AOVpnManager-x64.msi
 - [MSI Installer (x64)](https://github.com/poshsvn/poshsvn/releases/latest/download/PoshSvn-x64.msi)
 - [MSI Installer (x86)](https://github.com/poshsvn/poshsvn/releases/latest/download/PoshSvn-x86.msi)
 
