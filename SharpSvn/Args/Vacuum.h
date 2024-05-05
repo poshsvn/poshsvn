@@ -23,6 +23,11 @@ namespace SharpSvn {
     public ref class SvnVacuumArgs : public SvnClientArgs
     {
         bool _includeExternals;
+        bool _removeUnversionedItems;
+        bool _removeIgnoredItems;
+        bool _fixRrecordedTimestamps;
+        bool _vacuumPristines;
+
     public:
         SvnVacuumArgs()
         {
@@ -37,6 +42,54 @@ namespace SharpSvn {
             void set(bool value)
             {
                 _includeExternals = value;
+            }
+        }
+
+        property bool RemoveUnversionedItems
+        {
+            bool get()
+            {
+                return _removeUnversionedItems;
+            }
+            void set(bool value)
+            {
+                _removeUnversionedItems = value;
+            }
+        }
+
+        property bool RemoveIgnoredItems
+        {
+            bool get()
+            {
+                return _removeIgnoredItems;
+            }
+            void set(bool value)
+            {
+                _removeIgnoredItems = value;
+            }
+        }
+
+        property bool FixRrecordedTimestamps
+        {
+            bool get()
+            {
+                return _fixRrecordedTimestamps;
+            }
+            void set(bool value)
+            {
+                _fixRrecordedTimestamps = value;
+            }
+        }
+
+        property bool VacuumPristines
+        {
+            bool get()
+            {
+                return _vacuumPristines;
+            }
+            void set(bool value)
+            {
+                _vacuumPristines = value;
             }
         }
 

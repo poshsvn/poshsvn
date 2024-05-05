@@ -41,10 +41,10 @@ bool SvnClient::Vacuum(String ^path, SvnVacuumArgs^ args)
 
     svn_error_t *r = svn_client_vacuum(
                       pool.AllocAbsoluteDirent(path),
-                      TRUE /* remove_unversioned_items */,
-                      TRUE /* remove_ignored_items */,
-                      TRUE /* fix_recorded_timestamps*/,
-                      FALSE /* vacuum_pristines */,
+                      args->RemoveUnversionedItems,
+                      args->RemoveIgnoredItems,
+                      args->FixRrecordedTimestamps,
+                      args->VacuumPristines,
                       args->IncludeExternals,
                       CtxHandle,
                       pool.Handle);
