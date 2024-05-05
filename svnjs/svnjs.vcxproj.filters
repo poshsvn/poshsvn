@@ -4,13 +4,6 @@
     <ClCompile Include="hello.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="js_native_api.h" />
-    <ClInclude Include="js_native_api_types.h" />
-    <ClInclude Include="napi.h" />
-    <ClInclude Include="node_api.h" />
-    <ClInclude Include="node_api_types.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="hello.js" />
   </ItemGroup>
 </Project>
