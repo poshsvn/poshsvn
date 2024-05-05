@@ -82,19 +82,6 @@ RenderDocsLanguage -SourceDir "$PSScriptRoot\..\PoshSvn.Docs\fr-FR" -Destination
 
 Copy-Item "$siteRoot\static\*" $outDir -Recurse
 
-foreach ($path in Get-ChildItem "$siteRoot\pages" -ErrorAction SilentlyContinue) {
-    $content = Get-Content $path
-    
-    if ($path.Name -eq "index.html") {
-        $pageName = ""
-    }
-    else {
-        $pageName = $path.BaseName
-    }
-
-    RenderPage -Content $content -PageName $pageName -Title $path.BaseName
-}
-
 Copy-Item "$PSScriptRoot\..\Assets\icon-minimal.svg" "$outDir\favicon.svg"
 Copy-Item "$PSScriptRoot\..\Assets\icon.svg" "$outDir\icon.svg"
 
