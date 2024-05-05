@@ -11,7 +11,7 @@ namespace PoshSvn.CmdLets
     [OutputType(typeof(SvnBlameLine))]
     public class SvnBlameCmdlet : SvnClientCmdletBase
     {
-        [Parameter(Position = 0)]
+        [Parameter(Position = 0, Mandatory = true)]
         public SvnTarget Target { get; set; }
 
         [Parameter()]
