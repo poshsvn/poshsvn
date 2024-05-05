@@ -161,9 +161,7 @@
     <ClInclude Include="node_api_types.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="binding.gyp" />
     <None Include="hello.js" />
-    <None Include="package.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

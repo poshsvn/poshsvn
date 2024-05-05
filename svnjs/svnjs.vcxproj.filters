@@ -11,8 +11,6 @@
     <ClInclude Include="node_api_types.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="binding.gyp" />
-    <None Include="package.json" />
     <None Include="hello.js" />
   </ItemGroup>
 </Project>
