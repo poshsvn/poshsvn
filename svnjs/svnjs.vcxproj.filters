@@ -3,11 +3,13 @@
   <ItemGroup>
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SvnClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hello.js" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SvnClient.h" />
   </ItemGroup>
 </Project>
