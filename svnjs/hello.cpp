@@ -66,7 +66,7 @@ Napi::String Info(const Napi::CallbackInfo& info) {
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
     apr_initialize();
 
-    exports.Set(Napi::String::New(env, "hello"), Napi::Function::New(env, Info));
+    exports.Set(Napi::String::New(env, "info"), Napi::Function::New(env, Info));
 
     return exports;
 }

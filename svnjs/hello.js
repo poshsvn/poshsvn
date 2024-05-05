@@ -1,3 +1,3 @@
 var addon = require('../bin/Debug-x64/svnjs.node');;
 
-console.log(addon.hello((o) => { console.log(o) })); // 'world'
+console.log(addon.info((o) => { console.log(o) })); // 'world'
