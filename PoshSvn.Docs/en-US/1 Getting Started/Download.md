@@ -2,6 +2,16 @@
 
 Download PoshSvn sources or precompiled binaries.
 
+## PowerShell Gallery
+
+You can find the PoshSvn module on the PowerShell Gallery and
+install it with just one simple command in your PowerShell terminal.
+Use the following command to install PoshSvn from the PowerShell Gallery:
+
+```powershell
+Install-Module -Name PoshSvn
+```
+
 ## MSI Installer for PoshSvn
 
 - [MSI Installer (x64)](https://github.com/poshsvn/poshsvn/releases/latest/download/PoshSvn-x64.msi)
