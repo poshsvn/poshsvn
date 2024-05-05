@@ -53,7 +53,7 @@ namespace PoshSvn.CmdLets
                             BreakLocks = true,
                             FixTimestamps = true,
                             ClearDavCache = true,
-                            VacuumPristines = VacuumPristines,
+                            VacuumPristines = true,
                             IncludeExternals = IncludeExternals,
                         });
                     }
