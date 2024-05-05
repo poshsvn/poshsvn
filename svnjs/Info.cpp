@@ -23,7 +23,7 @@ info_receiver(void* baton,
     return svn_error_create(1, NULL, NULL);
 }
 
-Napi::String Info(const Napi::CallbackInfo& info) {
+void SvnClient::Info(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
 
     Napi::Function callback = info[0].As<Napi::Function>();
@@ -61,6 +61,4 @@ Napi::String Info(const Napi::CallbackInfo& info) {
         pool);
 
     apr_pool_destroy(pool);
-
-    return Napi::String::New(env, path);
 }
