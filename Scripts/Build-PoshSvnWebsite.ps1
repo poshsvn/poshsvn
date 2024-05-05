@@ -3,7 +3,6 @@
 
 $siteRoot = "$PSScriptRoot\..\www"
 $outDir = "$siteRoot\build"
-$docsPages = Get-ChildItem "$PSScriptRoot\..\PoshSvn.Docs\en-US\*" -Include "*.md"
 
 function Add-PageToSiteMap {
     param (
