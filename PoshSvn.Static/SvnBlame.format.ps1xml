@@ -60,5 +60,55 @@
         </TableRowEntries>
       </TableControl>
     </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PoshSvn.SvnBlameLine</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <Label>Revision</Label>
+                <PropertyName>Revision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Author</Label>
+                <PropertyName>Author</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Line</Label>
+                <PropertyName>Line</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>RevisionProperties</Label>
+                <PropertyName>RevisionProperties</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>LocalChange</Label>
+                <PropertyName>LocalChange</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Time</Label>
+                <PropertyName>Time</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>LineNumber</Label>
+                <PropertyName>LineNumber</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>EndRevision</Label>
+                <PropertyName>EndRevision</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>StartRevision</Label>
+                <PropertyName>StartRevision</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
   </ViewDefinitions>
 </Configuration>
