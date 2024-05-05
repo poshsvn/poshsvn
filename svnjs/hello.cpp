@@ -7,8 +7,6 @@
 Napi::String Info(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
 
-    apr_initialize();
-
     apr_pool_t* pool;
     apr_pool_create(&pool, NULL);
 
@@ -43,6 +41,8 @@ Napi::String Info(const Napi::CallbackInfo& info) {
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
+    apr_initialize();
+
     exports.Set(Napi::String::New(env, "hello"), Napi::Function::New(env, Info));
 
     return exports;
