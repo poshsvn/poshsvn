@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include "SvnClient.h"
+
 typedef struct info_receiver_baton_t
 {
     Napi::Function callback;
@@ -62,13 +64,3 @@ Napi::String Info(const Napi::CallbackInfo& info) {
 
     return Napi::String::New(env, path);
 }
-
-Napi::Object Init(Napi::Env env, Napi::Object exports) {
-    apr_initialize();
-
-    exports.Set(Napi::String::New(env, "info"), Napi::Function::New(env, Info));
-
-    return exports;
-}
-
-NODE_API_MODULE(addon, Init)
