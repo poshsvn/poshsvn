@@ -56,7 +56,7 @@ namespace PoshSvn.CmdLets
                     textStream  = new LineDecoderTextStream(lineStream);
                 }
 
-                return new DecoderStream(textStream, Encoding.UTF8);
+                return new DecoderStream(textStream, Encoding);
             }
         }
 
