@@ -20,6 +20,11 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter Raw { get; set; }
 
+        [Parameter()]
+        [ArgumentCompleter(typeof(EncodingArgumentCompletions))]
+        [EncodingArgumentTransformation()]
+        public Encoding Encoding { get; set; } = Encoding.UTF8;
+
         protected override void Execute()
         {
             SvnResolvedTarget resolvedTarget = ResolveTarget(Target);
