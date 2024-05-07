@@ -30,9 +30,6 @@ namespace PoshSvn
                                                               CommandAst commandAst,
                                                               IDictionary fakeBoundParameters)
         {
-            string pattern = string.IsNullOrWhiteSpace(wordToComplete) ? "*" : wordToComplete + "*";
-            WildcardPattern wordToCompletePattern = WildcardPattern.Get(pattern, WildcardOptions.IgnoreCase);
-
             foreach (string encoding in commonEncodings)
             {
                 if (encoding.StartsWith(wordToComplete))
