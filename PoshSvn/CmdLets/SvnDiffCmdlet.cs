@@ -114,20 +114,5 @@ namespace PoshSvn.CmdLets
 
             return new DecoderStream(lineStream, Encoding.UTF8);
         }
-
-        private class TextLineStream : ITextLineStream
-        {
-            private readonly SvnDiffCmdlet owner;
-
-            public TextLineStream(SvnDiffCmdlet owner)
-            {
-                this.owner = owner;
-            }
-
-            public void WriteLine(string line)
-            {
-                owner.WriteObject(line);
-            }
-        }
     }
 }
