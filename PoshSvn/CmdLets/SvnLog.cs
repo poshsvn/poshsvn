@@ -112,7 +112,7 @@ namespace PoshSvn.CmdLets
                 Author = e.Author,
                 Message = e.LogMessage,
                 ChangedPaths = ConvertSvnChangedPaths(e.ChangedPaths),
-                RevisionProperties = e.RevisionProperties.ToArray(),
+                RevisionProperties = e.RevisionProperties.ToPoshSvnPropertyCollection(),
             };
 
             if (e.Time != DateTime.MinValue)
