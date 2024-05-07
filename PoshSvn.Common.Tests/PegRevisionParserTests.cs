@@ -40,5 +40,23 @@ namespace PoshSvn.Common.Tests
                 out var remainingTarget,
                 out var revision));
         }
+
+        [Test]
+        [Ignore("TODO:")]
+        public void NotPegRevisionTest()
+        {
+            PegRevision.Parse(@"C:\path\to\file\@not-peg-rev\test.txt@123", out var remainingTarget, out var revision);
+            ClassicAssert.AreEqual(@"C:\path\to\file\@not-peg-rev", remainingTarget);
+            ClassicAssert.AreEqual(new SvnRevision("123"), revision);
+        }
+
+        [Test]
+        [Ignore("TODO:")]
+        public void NotPegRevisionTestNoPegRevision()
+        {
+            PegRevision.Parse(@"C:\path\to\file\@not-peg-rev\test.txt", out var remainingTarget, out var revision);
+            ClassicAssert.AreEqual(@"C:\path\to\file\@not-peg-rev", remainingTarget);
+            ClassicAssert.AreEqual(null, revision);
+        }
     }
 }
