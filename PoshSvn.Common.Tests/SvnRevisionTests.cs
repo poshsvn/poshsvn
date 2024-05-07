@@ -4,7 +4,7 @@ using System;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace PoshSvn.Tests
+namespace PoshSvn.Common.Tests
 {
     public class SvnRevisionTests
     {
