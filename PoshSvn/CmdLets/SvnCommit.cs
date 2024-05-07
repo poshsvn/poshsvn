@@ -28,7 +28,7 @@ namespace PoshSvn.CmdLets
         public SwitchParameter NoUnlock { get; set; }
 
         [Parameter()]
-        public SvnDepth Depth { get; set; }
+        public SvnDepth Depth { get; set; } = SvnDepth.Infinity;
 
         [Parameter()]
         [Alias("with-revprop", "rp", "revprop")]
