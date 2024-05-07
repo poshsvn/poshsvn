@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using SharpSvn;
 
 namespace PoshSvn
 {
@@ -12,6 +11,6 @@ namespace PoshSvn
         public DateTimeOffset? Date { get; set; }
         public string Message { get; set; }
         public SvnChangeItem[] ChangedPaths { get; set; }
-        public SvnPropertyValue[] RevisionProperties { get; set; }
+        public SvnProperty[] RevisionProperties { get; set; }
     }
 }

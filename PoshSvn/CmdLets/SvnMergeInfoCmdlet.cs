@@ -147,7 +147,7 @@ namespace PoshSvn.CmdLets
                 Revision = e.Revision,
                 Author = e.Author,
                 Message = e.LogMessage,
-                RevisionProperties = e.RevisionProperties.ToArray(),
+                RevisionProperties = e.RevisionProperties.ToPoshSvnPropertyCollection(),
             };
 
             if (e.Time != DateTime.MinValue)
