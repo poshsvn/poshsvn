@@ -18,6 +18,19 @@ namespace PoshSvn.CmdLets
         public string Message { get; set; }
 
         [Parameter()]
+        [Alias("cl")]
+        public string[] ChangeList { get; set; }
+
+        [Parameter()]
+        public SwitchParameter KeepChangeLists { get; set; }
+
+        [Parameter()]
+        public SwitchParameter NoUnlock { get; set; }
+
+        [Parameter()]
+        public SvnDepth Depth { get; set; }
+
+        [Parameter()]
         [Alias("with-revprop", "rp", "revprop")]
         public Hashtable RevisionProperties { get; set; }
 
@@ -25,8 +38,19 @@ namespace PoshSvn.CmdLets
         {
             SvnCommitArgs args = new SvnCommitArgs
             {
+                Depth = Depth.ConvertToSharpSvnDepth(),
                 LogMessage = Message,
+                KeepChangeLists = KeepChangeLists,
+                KeepLocks = NoUnlock,
             };
+
+            if (ChangeList != null)
+            {
+                foreach (string changelist in ChangeList)
+                {
+                    args.ChangeLists.Add(changelist);
+                }
+            }
 
             if (RevisionProperties != null)
             {
