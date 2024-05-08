@@ -24,6 +24,9 @@ namespace PoshSvn.CmdLets
         public SvnDepth Depth { get; set; }
 
         [Parameter()]
+        public SwitchParameter Recursive { get; set; }
+
+        [Parameter()]
         public SwitchParameter NoDiffAdded { get; set; }
 
         [Parameter()]
@@ -64,7 +67,7 @@ namespace PoshSvn.CmdLets
         {
             SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
             {
-                Depth = Depth.ConvertToSharpSvnDepth(),
+                Depth = Depth.ConvertToSharpSvnDepth(Recursive),
                 NoAdded = NoDiffAdded,
                 NoDeleted = NoDiffDeleted,
                 NoProperties = IgnoreProperties || PatchCompatible,

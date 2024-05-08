@@ -29,6 +29,9 @@ namespace PoshSvn.CmdLets
         public SvnDepth Depth { get; set; }
 
         [Parameter(ParameterSetName = ParameterSetNames.ShowRevisions)]
+        public SwitchParameter Recursive { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.ShowRevisions)]
         [Alias("r", "rev")]
         public SvnRevisionRange Revision { get; set; }
 
@@ -44,7 +47,7 @@ namespace PoshSvn.CmdLets
             {
                 SvnMergesEligibleArgs args = new SvnMergesEligibleArgs
                 {
-                    Depth = Depth.ConvertToSharpSvnDepth(),
+                    Depth = Depth.ConvertToSharpSvnDepth(Recursive),
                     Range = Revision?.ToSharpSvnRevisionRange(),
                 };
 

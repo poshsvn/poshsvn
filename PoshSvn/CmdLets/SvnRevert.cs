@@ -37,7 +37,7 @@ namespace PoshSvn.CmdLets
             }
             else
             {
-                args.Depth = Depth.ConvertToSharpSvnDepth();
+                args.Depth = Depth.ConvertToSharpSvnDepth(Recursive);
             }
 
             SvnClient.Revert(GetPathTargets(Path, true).ToArray(), args);

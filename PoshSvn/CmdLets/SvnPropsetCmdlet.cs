@@ -38,6 +38,9 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SvnDepth Depth { get; set; }
 
+        [Parameter()]
+        public SwitchParameter Recursive { get; set; }
+
         public SvnPropsetCmdlet()
         {
             Depth = SvnDepth.Empty;
@@ -62,7 +65,7 @@ namespace PoshSvn.CmdLets
             {
                 SvnSetPropertyArgs args = new SvnSetPropertyArgs
                 {
-                    Depth = Depth.ConvertToSharpSvnDepth()
+                    Depth = Depth.ConvertToSharpSvnDepth(Recursive)
                 };
 
                 if (ChangeList != null)
