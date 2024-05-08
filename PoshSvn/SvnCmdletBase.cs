@@ -17,10 +17,12 @@ namespace PoshSvn
 
         protected SvnCmdletBase()
         {
-            ProgressRecord = new ProgressRecord(0, "Processing", "Initializing...");
+            ProgressRecord = new ProgressRecord(0, GetProcessTitle(), "Initializing...");
             cancellationTokenSource = new CancellationTokenSource();
             cancellationToken = cancellationTokenSource.Token;
         }
+
+        protected abstract string GetProcessTitle();
 
         protected string[] GetPathTargets(string[] pathList, string[] literalPathList)
         {

@@ -102,5 +102,7 @@ namespace PoshSvn.CmdLets
                 });
             }
         }
+
+        protected override string GetProcessTitle() => "svn-proplist";
     }
 }

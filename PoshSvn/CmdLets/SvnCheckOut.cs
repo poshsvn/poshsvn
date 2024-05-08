@@ -51,5 +51,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.CheckOut(new SvnUriTarget(Url), resolvedPath, args);
         }
+
+        protected override string GetProcessTitle() => "Checking out...";
     }
 }

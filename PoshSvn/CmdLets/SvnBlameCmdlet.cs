@@ -66,5 +66,7 @@ namespace PoshSvn.CmdLets
                 MergedRevisionProperties = e.MergedRevisionProperties?.ToArray(),
             });
         }
+
+        protected override string GetProcessTitle() => "svn-blame";
     }
 }

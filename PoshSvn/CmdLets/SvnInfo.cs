@@ -94,5 +94,7 @@ namespace PoshSvn.CmdLets
 
             UpdateProgressAction(e.HasLocalInfo ? e.Path : e.Uri.ToString());
         }
+
+        protected override string GetProcessTitle() => "svn-info";
     }
 }

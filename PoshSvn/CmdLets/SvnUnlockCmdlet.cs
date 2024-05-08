@@ -42,5 +42,7 @@ namespace PoshSvn.CmdLets
                 throw new ArgumentException("No targets are specified.", "Target");
             }
         }
+
+        protected override string GetProcessTitle() => "svn-unlock";
     }
 }

@@ -160,5 +160,7 @@ namespace PoshSvn.CmdLets
 
             return obj;
         }
+
+        protected override string GetProcessTitle() => "svn-mergeinfo";
     }
 }

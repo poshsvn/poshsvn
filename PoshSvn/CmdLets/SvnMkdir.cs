@@ -42,5 +42,7 @@ namespace PoshSvn.CmdLets
                 SvnClient.RemoteCreateDirectories(targets.Urls, args);
             }
         }
+
+        protected override string GetProcessTitle() => "svn-mkdir";
     }
 }

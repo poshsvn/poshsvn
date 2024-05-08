@@ -46,5 +46,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Switch(path, sharpSvnTarget, args);
         }
+
+        protected override string GetProcessTitle() => "Switching working copy...";
     }
 }

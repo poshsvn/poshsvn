@@ -33,5 +33,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.RemoteImport(GetUnresolvedProviderPathFromPSPath(Source), Destination, args);
         }
+
+        protected override string GetProcessTitle() => "Importing...";
     }
 }

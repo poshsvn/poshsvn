@@ -42,5 +42,7 @@ namespace PoshSvn.CmdLets
                 SvnClient.Relocate(path, From, To, args);
             }
         }
+
+        protected override string GetProcessTitle() => "Relocating working copy...";
     }
 }

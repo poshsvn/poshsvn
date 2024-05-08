@@ -47,5 +47,7 @@ namespace PoshSvn.CmdLets
                 SvnClient.RemoteDelete(targets.Urls, args);
             }
         }
+
+        protected override string GetProcessTitle() => "svn-delete";
     }
 }
