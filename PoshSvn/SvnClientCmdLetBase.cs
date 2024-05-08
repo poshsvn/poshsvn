@@ -48,7 +48,6 @@ namespace PoshSvn
             SvnClient.Authentication.UserNameHandlers += Authentication_UserNameHandlers;
             SvnClient.Authentication.UserNamePasswordHandlers += Authentication_UserNamePasswordHandlers;
             SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
-            SvnClient.Authentication.SslServerTrustHandlers += Authentication_SslServerTrustHandlers;
         }
 
         protected void NotifyEventHandler(object sender, SharpSvn.SvnNotifyEventArgs e)
