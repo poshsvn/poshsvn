@@ -22,6 +22,9 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SvnDepth Depth { get; set; }
 
+        [Parameter()]
+        public SwitchParameter Recursive { get; set; }
+
         [Parameter(ParameterSetName = ParameterSetNames.Revision)]
         [Alias("revprop")]
         public SwitchParameter RevisionProperty { get; set; }
@@ -69,7 +72,7 @@ namespace PoshSvn.CmdLets
             {
                 SvnGetPropertyArgs args = new SvnGetPropertyArgs
                 {
-                    Depth = Depth.ConvertToSharpSvnDepth(),
+                    Depth = Depth.ConvertToSharpSvnDepth(Recursive),
                     Revision = Revision?.ToSharpSvnRevision(),
                 };
 

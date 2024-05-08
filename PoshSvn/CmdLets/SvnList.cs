@@ -25,6 +25,9 @@ namespace PoshSvn.CmdLets
         public SvnDepth Depth { get; set; }
 
         [Parameter()]
+        public SwitchParameter Recursive { get; set; }
+
+        [Parameter()]
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
 
@@ -43,7 +46,7 @@ namespace PoshSvn.CmdLets
             {
                 Revision = Revision,
                 IncludeExternals = IncludeExternals,
-                Depth = Depth.ConvertToSharpSvnDepth(),
+                Depth = Depth.ConvertToSharpSvnDepth(Recursive),
             };
 
             if (Detailed)

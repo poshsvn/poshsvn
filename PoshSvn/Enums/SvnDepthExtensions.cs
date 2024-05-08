@@ -6,8 +6,13 @@ namespace PoshSvn
 {
     public static class SvnDepthExtensions
     {
-        public static SharpSvn.SvnDepth ConvertToSharpSvnDepth(this SvnDepth depth)
+        public static SharpSvn.SvnDepth ConvertToSharpSvnDepth(this SvnDepth depth, bool forceRecursive = false)
         {
+            if (forceRecursive)
+            {
+                return SharpSvn.SvnDepth.Infinity;
+            }
+
             switch (depth)
             {
                 case SvnDepth.Empty:
