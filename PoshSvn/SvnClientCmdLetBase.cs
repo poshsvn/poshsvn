@@ -59,15 +59,15 @@ namespace PoshSvn
             {
                 if (e.CommandType == SharpSvn.SvnCommandType.Update)
                 {
-                    UpdateProgressTitile(string.Format("Updating '{0}'", e.Path));
+                    UpdateProgressTitle(string.Format("Updating '{0}'", e.Path));
                 }
                 else if (e.CommandType == SharpSvn.SvnCommandType.CheckOut)
                 {
-                    UpdateProgressTitile(string.Format("Checking out '{0}'", e.Path));
+                    UpdateProgressTitle(string.Format("Checking out '{0}'", e.Path));
                 }
                 else if (e.CommandType == SharpSvn.SvnCommandType.Switch)
                 {
-                    UpdateProgressTitile(string.Format("Switching '{0}'", e.Path));
+                    UpdateProgressTitle(string.Format("Switching '{0}'", e.Path));
                 }
             }
             else if (e.Action == SharpSvn.SvnNotifyAction.UpdateCompleted)
@@ -113,12 +113,12 @@ namespace PoshSvn
             else if (e.Action == SharpSvn.SvnNotifyAction.MergeBegin)
             {
                 string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
-                UpdateProgressTitile(string.Format("Merging {0} into '{1}'", e.MergeRange, resolvedPath));
+                UpdateProgressTitle(string.Format("Merging {0} into '{1}'", e.MergeRange, resolvedPath));
             }
             else if (e.Action == SharpSvn.SvnNotifyAction.RecordMergeInfoStarted)
             {
                 string resolvedPath = PathUtils.GetRelativePath(SessionState.Path.CurrentLocation.Path, e.Path);
-                UpdateProgressTitile(string.Format("Recording mergeinfo for merge of {0} into '{1}'", e.MergeRange, resolvedPath));
+                UpdateProgressTitle(string.Format("Recording mergeinfo for merge of {0} into '{1}'", e.MergeRange, resolvedPath));
             }
             else if (e.Action == SharpSvn.SvnNotifyAction.ConflictResolverStarting)
             {
