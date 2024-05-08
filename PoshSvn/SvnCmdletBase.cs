@@ -117,6 +117,14 @@ namespace PoshSvn
             return new SvnResolvedTarget(path, null, false, target.Revision);
         }
 
+        private IEnumerable<SvnResolvedTarget> ResolveResolvedPathTargets(SvnTarget target)
+        {
+            foreach (string path in GetPathTargets(new string[] { target.Value }))
+            {
+                yield return new SvnResolvedTarget(path, null, false, target.Revision);
+            }
+        }
+
         protected ResolvedTargetCollection ResolveTargets(IEnumerable<SvnTarget> targets)
         {
             List<SvnResolvedTarget> resolvedTargets = new List<SvnResolvedTarget>();
@@ -125,10 +133,7 @@ namespace PoshSvn
             {
                 if (target.Type == SvnTargetType.Path)
                 {
-                    foreach (string path in GetPathTargets(new string[] { target.Value }))
-                    {
-                        resolvedTargets.Add(new SvnResolvedTarget(path, null, false, target.Revision));
-                    }
+                    resolvedTargets.AddRange(ResolveResolvedPathTargets(target));
                 }
                 else if (target.Type == SvnTargetType.LiteralPath)
                 {
