@@ -145,7 +145,7 @@ namespace PoshSvn
                 };
 
                 WriteObject(obj);
-                UpdateProgressAction(obj.ToString());
+                UpdateProgressAction(obj.ToString(), false);
             }
         }
 
