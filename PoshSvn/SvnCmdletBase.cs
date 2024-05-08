@@ -87,18 +87,6 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected string[] GetPathTargets(string[] paths)
-        {
-            try
-            {
-                return GetPathTargets(paths, true).ToArray();
-            }
-            catch (ItemNotFoundException)
-            {
-                return GetPathTargets(paths, false).ToArray();
-            }
-        }
-
         private SvnResolvedTarget ResolveUriTarget(SvnTarget target)
         {
             if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
@@ -119,9 +107,21 @@ namespace PoshSvn
 
         private IEnumerable<SvnResolvedTarget> ResolveResolvedPathTargets(SvnTarget target)
         {
-            foreach (string path in GetPathTargets(new string[] { target.Value }))
+            try
             {
-                yield return new SvnResolvedTarget(path, null, false, target.Revision);
+                List<SvnResolvedTarget> rv = new List<SvnResolvedTarget>();
+
+                foreach (string path in GetResolvedProviderPathFromPSPath(target.Value, out ProviderInfo providerInfo))
+                {
+                    // TODO: check providerInfo
+                    rv.Add(new SvnResolvedTarget(path, null, false, target.Revision));
+                }
+
+                return rv;
+            }
+            catch (ItemNotFoundException)
+            {
+                return new SvnResolvedTarget[] { ResolveLiteralTarget(target) };
             }
         }
 
