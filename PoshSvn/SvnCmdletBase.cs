@@ -83,6 +83,7 @@ namespace PoshSvn
 
         protected void UpdateProgressTitle(string title)
         {
+            WriteVerbose(title);
             ProgressRecord.Activity = title;
             WriteProgress(ProgressRecord);
         }
