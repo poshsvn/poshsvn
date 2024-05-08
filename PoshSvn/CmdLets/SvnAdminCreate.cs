@@ -20,7 +20,7 @@ namespace PoshSvn.CmdLets
         {
             using (SvnRepositoryClient client = new SvnRepositoryClient())
             {
-                foreach (string resolvedPath in GetPathTargets(Path))
+                foreach (string resolvedPath in GetPathTargets(Path, true))
                 {
                     client.CreateRepository(resolvedPath, new SvnCreateRepositoryArgs
                     {
