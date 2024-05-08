@@ -30,11 +30,6 @@ namespace PoshSvn.CmdLets
         [Alias("f")]
         public SwitchParameter Force { get; set; }
 
-        protected override string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return e == null ? "Checking out" : string.Format("Checking out '{0}'", e.Path);
-        }
-
         protected override void Execute()
         {
             var args = new SvnCheckOutArgs

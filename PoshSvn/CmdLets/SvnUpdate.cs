@@ -17,11 +17,6 @@ namespace PoshSvn.CmdLets
         [Alias("rev")]
         public SharpSvn.SvnRevision Revision { get; set; } = null;
 
-        protected override string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return e == null ? "Updating" : string.Format("Updating '{0}'", e.Path);
-        }
-
         protected override void Execute()
         {
             string[] resolvedPaths = GetPathTargets(Path, null);
