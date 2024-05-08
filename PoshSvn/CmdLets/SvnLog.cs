@@ -29,9 +29,6 @@ namespace PoshSvn.CmdLets
         public int Limit { get; set; } = -1;
 
         [Parameter()]
-        public SvnDepth Depth { get; set; }
-
-        [Parameter()]
         [Alias("include-externals")]
         public SwitchParameter IncludeExternals { get; set; }
 
@@ -49,7 +46,6 @@ namespace PoshSvn.CmdLets
 
         public SvnLog()
         {
-            Depth = SvnDepth.Empty;
             Target = new SvnTarget[]
             {
                 SvnTarget.FromPath(".")
