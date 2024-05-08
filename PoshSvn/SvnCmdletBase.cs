@@ -99,7 +99,7 @@ namespace PoshSvn
             }
         }
 
-        protected SvnResolvedTarget ResolveUriTarget(SvnTarget target)
+        private SvnResolvedTarget ResolveUriTarget(SvnTarget target)
         {
             if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
             {
@@ -111,7 +111,7 @@ namespace PoshSvn
             }
         }
 
-        protected SvnResolvedTarget ResolveLiteralTarget(SvnTarget target)
+        private SvnResolvedTarget ResolveLiteralTarget(SvnTarget target)
         {
             string path = GetUnresolvedProviderPathFromPSPath(target.Value);
             return new SvnResolvedTarget(path, null, false, target.Revision);
