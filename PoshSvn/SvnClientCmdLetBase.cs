@@ -57,7 +57,18 @@ namespace PoshSvn
         {
             if (e.Action == SharpSvn.SvnNotifyAction.UpdateStarted)
             {
-                UpdateProgressAction(GetActivityTitle(e));
+                if (e.CommandType == SharpSvn.SvnCommandType.Update)
+                {
+                    UpdateProgressTitile(string.Format("Updating '{0}'", e.Path));
+                }
+                else if (e.CommandType == SharpSvn.SvnCommandType.CheckOut)
+                {
+                    UpdateProgressTitile(string.Format("Checking out '{0}'", e.Path));
+                }
+                else if (e.CommandType == SharpSvn.SvnCommandType.Switch)
+                {
+                    UpdateProgressTitile(string.Format("Switching '{0}'", e.Path));
+                }
             }
             else if (e.Action == SharpSvn.SvnNotifyAction.UpdateCompleted)
             {

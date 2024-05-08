@@ -20,8 +20,6 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter Parents { get; set; }
 
-        protected override string GetActivityTitle(SvnNotifyEventArgs e) => "Creating directory";
-
         protected override void Execute()
         {
             SvnCreateDirectoryArgs args = new SvnCreateDirectoryArgs

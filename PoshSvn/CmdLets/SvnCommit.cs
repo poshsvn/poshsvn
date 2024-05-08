@@ -63,10 +63,5 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Commit(GetPathTargets(Path, null), args);
         }
-
-        protected override string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return "Committing";
-        }
     }
 }

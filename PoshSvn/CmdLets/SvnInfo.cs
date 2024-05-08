@@ -54,11 +54,6 @@ namespace PoshSvn.CmdLets
             }
         }
 
-        protected override string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return "svn-info";
-        }
-
         private void InfoHandler(object sender, SvnInfoEventArgs e)
         {
             SvnInfoOutput svnInfo = new SvnInfoOutput

@@ -140,10 +140,5 @@ namespace PoshSvn.CmdLets
                 return result.ToArray();
             }
         }
-
-        protected override string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return "svn-log";
-        }
     }
 }

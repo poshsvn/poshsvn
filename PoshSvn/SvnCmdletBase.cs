@@ -19,7 +19,7 @@ namespace PoshSvn
 
         protected SvnCmdletBase()
         {
-            ProgressRecord = new ProgressRecord(0, GetActivityTitle(null), "Initializing...");
+            ProgressRecord = new ProgressRecord(0, "Processing", "Initializing...");
             cancellationTokenSource = new CancellationTokenSource();
             cancellationToken = cancellationTokenSource.Token;
         }
@@ -71,8 +71,6 @@ namespace PoshSvn
                 }
             }
         }
-
-        protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
 
         protected void UpdateProgressAction(string action)
         {

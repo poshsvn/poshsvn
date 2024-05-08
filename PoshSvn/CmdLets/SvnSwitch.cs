@@ -30,11 +30,6 @@ namespace PoshSvn.CmdLets
         [Alias("ignore-externals")]
         public SwitchParameter IgnoreExternals { get; set; }
 
-        protected override string GetActivityTitle(SvnNotifyEventArgs e)
-        {
-            return "svn-switch";
-        }
-
         protected override void Execute()
         {
             string path = GetUnresolvedProviderPathFromPSPath(Path);
