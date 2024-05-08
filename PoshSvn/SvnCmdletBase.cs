@@ -131,39 +131,6 @@ namespace PoshSvn
             }
         }
 
-        protected IEnumerable<object> GetTargets(SvnTarget[] targets)
-        {
-            foreach (SvnTarget target in targets)
-            {
-                if (target.Type == SvnTargetType.Path)
-                {
-                    foreach (string path in GetPathTargets(target.Value))
-                    {
-                        yield return path;
-                    }
-                }
-                else if (target.Type == SvnTargetType.LiteralPath)
-                {
-                    yield return GetUnresolvedProviderPathFromPSPath(target.Value);
-                }
-                else if (target.Type == SvnTargetType.Url)
-                {
-                    if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri uri))
-                    {
-                        yield return uri;
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Wrong Url format.", "Url");
-                    }
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
-        }
-
         protected SvnResolvedTarget ResolveUriTarget(SvnTarget target)
         {
             if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
