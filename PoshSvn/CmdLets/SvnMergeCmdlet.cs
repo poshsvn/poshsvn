@@ -77,5 +77,7 @@ namespace PoshSvn.CmdLets
                 return ranges;
             }
         }
+
+        protected override string GetProcessTitle() => "Merging...";
     }
 }

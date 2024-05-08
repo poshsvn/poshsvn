@@ -31,5 +31,7 @@ namespace PoshSvn.CmdLets
                 }
             }
         }
+
+        protected override string GetProcessTitle() => "Creating repository...";
     }
 }

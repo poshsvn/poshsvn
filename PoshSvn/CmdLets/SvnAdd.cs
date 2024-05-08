@@ -46,5 +46,7 @@ namespace PoshSvn.CmdLets
                 SvnClient.Add(path, args);
             }
         }
+
+        protected override string GetProcessTitle() => "svn-add";
     }
 }

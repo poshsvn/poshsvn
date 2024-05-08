@@ -105,6 +105,8 @@ namespace PoshSvn.CmdLets
                 });
             }
         }
+
+        protected override string GetProcessTitle() => "svn-status";
     }
 
     public class SvnLocalStatusOutput

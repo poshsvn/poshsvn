@@ -59,5 +59,7 @@ namespace PoshSvn.CmdLets
                 return new DecoderStream(textStream, Encoding);
             }
         }
+
+        protected override string GetProcessTitle() => "svn-cat";
     }
 }

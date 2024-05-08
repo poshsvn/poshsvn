@@ -63,5 +63,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Commit(GetPathTargets(Path, null), args);
         }
+
+        protected override string GetProcessTitle() => "Committing...";
     }
 }

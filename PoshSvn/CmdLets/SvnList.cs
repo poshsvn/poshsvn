@@ -99,5 +99,7 @@ namespace PoshSvn.CmdLets
                 WriteObject(obj);
             }
         }
+
+        protected override string GetProcessTitle() => "svn-list";
     }
 }

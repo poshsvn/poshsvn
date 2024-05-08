@@ -57,5 +57,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Export(source, destination, args);
         }
+
+        protected override string GetProcessTitle() => "Exporting...";
     }
 }

@@ -42,5 +42,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Revert(GetPathTargets(Path, true).ToArray(), args);
         }
+
+        protected override string GetProcessTitle() => "Reverting changes...";
     }
 }

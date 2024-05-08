@@ -63,5 +63,7 @@ namespace PoshSvn.CmdLets
                 throw new NotImplementedException();
             }
         }
+
+        protected override string GetProcessTitle() => "svn-copy";
     }
 }

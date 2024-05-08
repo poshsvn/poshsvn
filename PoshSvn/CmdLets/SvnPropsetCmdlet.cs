@@ -103,5 +103,7 @@ namespace PoshSvn.CmdLets
                 Path = e.Path ?? e.Uri.OriginalString,
             });
         }
+
+        protected override string GetProcessTitle() => "svn-propset";
     }
 }

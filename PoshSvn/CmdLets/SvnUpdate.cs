@@ -28,5 +28,7 @@ namespace PoshSvn.CmdLets
 
             SvnClient.Update(resolvedPaths, args);
         }
+
+        protected override string GetProcessTitle() => "Updating working copy...";
     }
 }

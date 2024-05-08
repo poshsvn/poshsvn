@@ -71,5 +71,7 @@ namespace PoshSvn.CmdLets
                 }
             }
         }
+
+        protected override string GetProcessTitle() => "Cleaning up working copy...";
     }
 }

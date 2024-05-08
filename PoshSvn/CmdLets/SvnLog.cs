@@ -140,5 +140,7 @@ namespace PoshSvn.CmdLets
                 return result.ToArray();
             }
         }
+
+        protected override string GetProcessTitle() => "svn-log";
     }
 }
