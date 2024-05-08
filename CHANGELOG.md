@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] [Unreleased]
+
+- Added `-Recursive` parameter to cmdlets that has `-Depth` parameter.
+- Added all parameters to the svn-commit cmdlet.
+- Remove SharpSvn.SvnPropertyCollection from output of cmdlets.
+- Added `-Encoding` parameter to the `svn-cat` and `svn-diff` cmdlet.
+- Properties to the `svn-cleanup` cmdlet.
+- Added custom `Format-List` formatter for the `svn-blame` cmdlet.
+- Ignore `StatusCompleted` notify action; write it only to verbose.
+- Minor fixes and improvement.
+- Build improvements.
+- [VSCode extension] Add hotkey of alt+U to open poshsvn terminal.
+- [VSCode extension] Do not create new terminal if it is already exists.
+
 ## [0.7.4]
 
 - Fix name of svn-dist in release.
