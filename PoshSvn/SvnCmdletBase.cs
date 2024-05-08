@@ -199,26 +199,6 @@ namespace PoshSvn
             }
         }
 
-        protected object GetTarget(SvnTarget target)
-        {
-            if (target.Type == SvnTargetType.Path)
-            {
-                return GetUnresolvedProviderPathFromPSPath(target.Value);
-            }
-            else if (target.Type == SvnTargetType.LiteralPath)
-            {
-                return GetUnresolvedProviderPathFromPSPath(target.Value);
-            }
-            else if (target.Type == SvnTargetType.Url)
-            {
-                return new Uri(target.Value);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         protected void SvnClient_Cancel(object sender, SharpSvn.SvnCancelEventArgs e)
         {
             e.Cancel = cancellationToken.IsCancellationRequested;
