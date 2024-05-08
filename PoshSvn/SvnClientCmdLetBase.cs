@@ -23,6 +23,9 @@ namespace PoshSvn
         [Parameter()]
         public SvnAccept Accept { get; set; }
 
+        [Parameter()]
+        public SvnTrustCertificateFailures? TrustServerCertificateFailures { get; set; }
+
         protected SharpSvn.SvnClient SvnClient;
 
         public SvnClientCmdletBase()
@@ -231,71 +234,79 @@ namespace PoshSvn
 
         private void Authentication_SslServerTrustHandlers(object sender, SharpSvn.Security.SvnSslServerTrustEventArgs e)
         {
-            Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+            if (TrustServerCertificateFailures == null)
             {
-                new ChoiceDescription("&Reject", "Reject"),
-                new ChoiceDescription("Accept &temporarily", "Accept temporarily")
-            };
-            if (!NoAuthCache)
-            {
-                choices.Add(new ChoiceDescription("Accept &permanently", "Accept permanently"));
-            }
+                Collection<ChoiceDescription> choices = new Collection<ChoiceDescription>
+                {
+                    new ChoiceDescription("&Reject", "Reject"),
+                    new ChoiceDescription("Accept &temporarily", "Accept temporarily")
+                };
+                if (!NoAuthCache)
+                {
+                    choices.Add(new ChoiceDescription("Accept &permanently", "Accept permanently"));
+                }
 
-            StringBuilder message = new StringBuilder();
-            message.AppendLine(string.Format("Error validating server certificate for '{0}':", e.Realm));
+                StringBuilder message = new StringBuilder();
+                message.AppendLine(string.Format("Error validating server certificate for '{0}':", e.Realm));
 
-            if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.UnknownCertificateAuthority))
-            {
-                message.AppendLine(" - The certificate is not issued by a trusted authority. Use the fingerprint to validate the certificate manually!");
-            }
+                if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.UnknownCertificateAuthority))
+                {
+                    message.AppendLine(" - The certificate is not issued by a trusted authority. Use the fingerprint to validate the certificate manually!");
+                }
 
-            if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.CommonNameMismatch))
-            {
-                message.AppendLine(" - The certificate hostname does not match.");
-            }
+                if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.CommonNameMismatch))
+                {
+                    message.AppendLine(" - The certificate hostname does not match.");
+                }
 
-            if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.CertificateNotValidYet))
-            {
-                message.AppendLine(" - The certificate is not yet valid.");
-            }
+                if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.CertificateNotValidYet))
+                {
+                    message.AppendLine(" - The certificate is not yet valid.");
+                }
 
-            if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.CertificateExpired))
-            {
-                message.AppendLine(" - The certificate is has expired.");
-            }
+                if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.CertificateExpired))
+                {
+                    message.AppendLine(" - The certificate is has expired.");
+                }
 
-            if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.UnknownSslProviderFailure))
-            {
-                message.AppendLine(" - The certificate has an unknown error.");
-            }
+                if (e.Failures.HasFlag(SharpSvn.Security.SvnCertificateTrustFailures.UnknownSslProviderFailure))
+                {
+                    message.AppendLine(" - The certificate has an unknown error.");
+                }
 
-            message.AppendLine("Certificate information:");
-            message.AppendLine(string.Format(" - Hostname: {0}", e.CommonName));
-            message.AppendLine(string.Format(" - Valid: from {0} until {1}", e.ValidFrom, e.ValidUntil));
-            message.AppendLine(string.Format(" - Issuer: {0}", e.Issuer));
-            message.AppendLine(string.Format(" - Fingerprint: {0}", e.Fingerprint));
+                message.AppendLine("Certificate information:");
+                message.AppendLine(string.Format(" - Hostname: {0}", e.CommonName));
+                message.AppendLine(string.Format(" - Valid: from {0} until {1}", e.ValidFrom, e.ValidUntil));
+                message.AppendLine(string.Format(" - Issuer: {0}", e.Issuer));
+                message.AppendLine(string.Format(" - Fingerprint: {0}", e.Fingerprint));
 
-            int selectedChoice = Host.UI.PromptForChoice(null, message.ToString(), choices, 0);
-            if (selectedChoice == 0)
-            {
-                // Reject
-                e.Break = true;
-            }
-            else if (selectedChoice == 1)
-            {
-                // Accept temporary
-                e.AcceptedFailures = e.Failures;
-                e.Save = false;
-            }
-            else if (selectedChoice == 2)
-            {
-                // Accept permanently
-                e.AcceptedFailures = e.Failures;
-                e.Save = true;
+                int selectedChoice = Host.UI.PromptForChoice(null, message.ToString(), choices, 0);
+                if (selectedChoice == 0)
+                {
+                    // Reject
+                    e.Break = true;
+                }
+                else if (selectedChoice == 1)
+                {
+                    // Accept temporary
+                    e.AcceptedFailures = e.Failures;
+                    e.Save = false;
+                }
+                else if (selectedChoice == 2)
+                {
+                    // Accept permanently
+                    e.AcceptedFailures = e.Failures;
+                    e.Save = true;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
             else
             {
-                e.Cancel = true;
+                e.AcceptedFailures = TrustServerCertificateFailures.Value.ToSharpSvnTrustCertificateFailures();
+                e.Save = false;
             }
         }
 
