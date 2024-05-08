@@ -72,7 +72,6 @@ namespace PoshSvn
 
         protected void UpdateProgressAction(string action)
         {
-            WriteVerbose(action);
             ProgressRecord.StatusDescription = action;
             WriteProgress(ProgressRecord);
         }
