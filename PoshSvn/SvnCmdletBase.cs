@@ -72,11 +72,6 @@ namespace PoshSvn
             }
         }
 
-        protected string GetPathTarget(string path)
-        {
-            return GetUnresolvedProviderPathFromPSPath(path);
-        }
-
         protected virtual string GetActivityTitle(SvnNotifyEventArgs e) => "Processing";
 
         protected void UpdateProgressAction(string action)
