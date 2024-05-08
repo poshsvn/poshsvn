@@ -50,22 +50,6 @@ namespace PoshSvn
             return result.ToArray();
         }
 
-        protected IEnumerable<string> GetPathTargets(string path, bool resolved)
-        {
-            if (resolved)
-            {
-                foreach (string resolvedPath in GetResolvedProviderPathFromPSPath(path, out ProviderInfo providerInfo))
-                {
-                    // TODO: check providerInfo
-                    yield return resolvedPath;
-                }
-            }
-            else
-            {
-                yield return GetUnresolvedProviderPathFromPSPath(path);
-            }
-        }
-
         protected IEnumerable<string> GetPathTargets(string[] paths, bool resolved)
         {
             if (resolved)
@@ -108,26 +92,15 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
-        protected string[] GetPathTargets(string path)
+        protected string[] GetPathTargets(string[] paths)
         {
             try
             {
-                return GetPathTargets(path, true).ToArray();
+                return GetPathTargets(paths, true).ToArray();
             }
             catch (ItemNotFoundException)
             {
-                return GetPathTargets(path, false).ToArray();
-            }
-        }
-
-        protected IEnumerable<string> GetPathTargets(string[] paths)
-        {
-            foreach (string path in paths)
-            {
-                foreach (string resolvedPath in GetPathTargets(path))
-                {
-                    yield return resolvedPath;
-                }
+                return GetPathTargets(paths, false).ToArray();
             }
         }
 
@@ -157,7 +130,7 @@ namespace PoshSvn
             {
                 if (target.Type == SvnTargetType.Path)
                 {
-                    foreach (string path in GetPathTargets(target.Value))
+                    foreach (string path in GetPathTargets(new string[] { target.Value }))
                     {
                         resolvedTargets.Add(new SvnResolvedTarget(path, null, false, target.Revision));
                     }
