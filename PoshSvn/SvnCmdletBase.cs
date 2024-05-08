@@ -70,8 +70,13 @@ namespace PoshSvn
             }
         }
 
-        protected void UpdateProgressAction(string action)
+        protected void UpdateProgressAction(string action, bool writeVerbose = true)
         {
+            if (writeVerbose)
+            {
+                WriteVerbose(action);
+            }
+
             ProgressRecord.StatusDescription = action;
             WriteProgress(ProgressRecord);
         }
