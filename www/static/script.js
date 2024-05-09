@@ -14,7 +14,7 @@ function toggleDarkMode() {
 }
 
 (function () {
-    var langs = ["en", "fr", "ru"];
+    var langs = ["en"];
     for (var lang of navigator.languages) {
         for (var l of langs) {
             if (lang.match(l)) {
