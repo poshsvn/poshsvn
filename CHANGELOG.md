@@ -11,8 +11,6 @@ All notable changes to this project will be documented in this file.
 - Properties to the `svn-cleanup` cmdlet.
 - Added custom `Format-List` formatter for the `svn-blame` cmdlet.
 - Ignore `StatusCompleted` notify action; write it only to verbose.
-- Minor fixes and improvement.
-- Build improvements.
 - Added short aliases to cmdlets.
 - Do not write action to verbose if it is already written to output.
 - Added -TrustServerCertificateFailures parameter to all cmdlets.
@@ -21,6 +19,8 @@ All notable changes to this project will be documented in this file.
 - [VSCode extension] Do not create new terminal if it is already exists.
 - [VSCode extension] Fix Ctrl+Backspace and other shortcuts in terminal.
 - [VSCode extension] Added demo screenshot.
+- Minor fixes and improvement.
+- Build improvements.
 
 ## [0.7.4]
 
