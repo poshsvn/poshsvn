@@ -1,0 +1,51 @@
+Index: PoshSvn/CmdLets/SvnAdd.cs
+===================================================================
+--- PoshSvn/CmdLets/SvnAdd.cs	(revision 1641)
++++ PoshSvn/CmdLets/SvnAdd.cs	(working copy)
+@@ -2,7 +2,7 @@
+ 
+ using System.Management.Automation;
+ using SharpSvn;
+-
++ 
+ namespace PoshSvn.CmdLets
+ {
+     [Cmdlet("Invoke", "SvnAdd")]
+Index: PoshSvn/CmdLets/SvnLog.cs
+===================================================================
+--- PoshSvn/CmdLets/SvnLog.cs	(revision 1641)
++++ PoshSvn/CmdLets/SvnLog.cs	(working copy)
+@@ -5,7 +5,7 @@
+ using System.Linq;
+ using System.Management.Automation;
+ using SharpSvn;
+-
++ 
+ namespace PoshSvn.CmdLets
+ {
+     [Cmdlet("Invoke", "SvnLog")]
+Index: PoshSvn/SvnCmdletBase.cs
+===================================================================
+--- PoshSvn/SvnCmdletBase.cs	(revision 1641)
++++ PoshSvn/SvnCmdletBase.cs	(working copy)
+@@ -1,4 +1,4 @@
+-﻿// Copyright (c) Timofei Zhakov. All rights reserved.
++﻿ // Copyright (c) Timofei Zhakov. All rights reserved.
+ 
+ using System;
+ using System.Collections.Generic;
+Index: README.md
+===================================================================
+--- README.md	(revision 1624)
++++ README.md	(working copy)
+@@ -3,7 +3,7 @@
+ Apache Subversion client for PowerShell.
+ 
+ ## Features
+-
++ 
+ - Tab tab-completion (tab-expansion) for commands and parameters.
+ - Typed output of cmdlets.
+ - Formatted output to repeat the Subversion command line interface user experience.
+Index: www/newpage.html
+===================================================================
