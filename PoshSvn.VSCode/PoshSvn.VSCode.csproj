@@ -31,7 +31,8 @@
   </Target>
 
   <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
-    <Exec Command="npx tsc --outDir $(VSCodeOutDir)" WorkingDirectory="$(MSBuildProjectDirectory)" />
+    <Exec Command="node $(MSBuildProjectDirectory)\node_modules\typescript\lib\tsc.js --outDir $(VSCodeOutDir)"
+          WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
   <ItemGroup>
