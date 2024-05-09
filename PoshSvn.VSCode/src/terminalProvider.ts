@@ -4,17 +4,6 @@ import { findPowerShell } from "./findPowerShell";
 import { helpMessage } from "./texts";
 import path from 'path';
 
-const shellIntegrationScript = path.join(
-    vscode.env.appRoot,
-    "out",
-    "vs",
-    "workbench",
-    "contrib",
-    "terminal",
-    "browser",
-    "media",
-    "shellIntegration.ps1");
-
 export const terminalOptions: vscode.TerminalOptions = {
     name: "PoshSvn terminal",
     shellPath: findPowerShell(),
