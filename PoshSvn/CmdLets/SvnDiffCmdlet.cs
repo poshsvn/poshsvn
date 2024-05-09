@@ -118,6 +118,6 @@ namespace PoshSvn.CmdLets
             return new DecoderStream(lineStream, Encoding.UTF8);
         }
 
-        protected override string GetProcessTitle() => "";
+        protected override string GetProcessTitle() => "svn-diff";
     }
 }
