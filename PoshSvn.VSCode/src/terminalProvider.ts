@@ -19,12 +19,12 @@ export const terminalOptions: vscode.TerminalOptions = {
     name: "PoshSvn terminal",
     shellPath: findPowerShell(),
     message: helpMessage,
-    env: {
-        "PSModulePath": __dirname
-    },
-    // It should work, but it doesn't. I don't know why.
-    // TODO: fix it
-    shellArgs: `-NoExit -NoLogo -ExecutionPolicy RemoteSigned -Command "& '${shellIntegrationScript}'"`,
+    shellArgs: [
+        "-NoExit", "-NoLogo",
+        "-ExecutionPolicy", "RemoteSigned",
+        "-Command", `Import-Module "${__dirname}/PoshSvn/PoshSvn.psd1"`
+    ],
+
     // TODO: fill other parameters
 }
 
