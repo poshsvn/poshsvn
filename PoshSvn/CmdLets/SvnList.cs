@@ -6,7 +6,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnList")]
-    [Alias("svn-list")]
+    [Alias("svn-list", "svn-ls")]
     [OutputType(typeof(SvnItem), typeof(SvnItemDetailed))]
     public class SvnList : SvnClientCmdletBase
     {

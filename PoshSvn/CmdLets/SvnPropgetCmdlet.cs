@@ -7,7 +7,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnPropget", DefaultParameterSetName = ParameterSetNames.Node)]
-    [Alias("svn-propget")]
+    [Alias("svn-propget", "svn-pg")]
     [OutputType(typeof(SvnProperty))]
     public class SvnPropgetCmdlet : SvnClientCmdletBase
     {

@@ -8,7 +8,7 @@ namespace PoshSvn.CmdLets
 {
 
     [Cmdlet("Invoke", "SvnProplist", DefaultParameterSetName = ParameterSetNames.Node)]
-    [Alias("svn-proplist")]
+    [Alias("svn-proplist", "svn-pl")]
     [OutputType(typeof(SvnProperty))]
     public class SvnProplistCmdlet : SvnClientCmdletBase
     {

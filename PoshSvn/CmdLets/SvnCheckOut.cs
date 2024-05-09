@@ -8,7 +8,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnCheckout")]
-    [Alias("svn-checkout")]
+    [Alias("svn-checkout", "svn-co")]
     [OutputType(typeof(SvnCheckoutOutput))]
     public class SvnCheckout : SvnClientCmdletBase
     {
