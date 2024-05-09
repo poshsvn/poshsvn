@@ -12,7 +12,7 @@ function Add-PageToSiteMap {
 
     $url = ($PagePath | Resolve-Path -Relative -RelativeBasePath $outDir)
     $url = $url -replace "\.\\"
-    $url = "https://www.poshsvn.com/$url"
+    $url = "https://www.poshsvn.com/$url/"
     $url = $url -replace "\\", "/" -replace "/index.html"
     Add-Content -Path "$outDir\sitemap.txt" -Value $url
 }
