@@ -13,8 +13,14 @@ All notable changes to this project will be documented in this file.
 - Ignore `StatusCompleted` notify action; write it only to verbose.
 - Minor fixes and improvement.
 - Build improvements.
+- Added short aliases to cmdlets.
+- Do not write action to verbose if it is already written to output.
+- Added -TrustServerCertificateFailures parameter to all cmdlets.
+- Fix progress title (replace 'Processing' with correct titile).
 - [VSCode extension] Add hotkey of alt+U to open poshsvn terminal.
 - [VSCode extension] Do not create new terminal if it is already exists.
+- [VSCode extension] Fix Ctrl+Backspace and other shortcuts in terminal.
+- [VSCode extension] Added demo screenshot.
 
 ## [0.7.4]
 
