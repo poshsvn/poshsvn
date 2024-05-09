@@ -7,7 +7,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnMove", DefaultParameterSetName = ParameterSetNames.Local)]
-    [Alias("svn-move")]
+    [Alias("svn-move", "svn-mv", "svn-rename")]
     [OutputType(typeof(SvnNotifyOutput), typeof(SvnCommitOutput))]
     public class SvnMove : SvnClientCmdletBase
     {

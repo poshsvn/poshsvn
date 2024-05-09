@@ -7,7 +7,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnCommit")]
-    [Alias("svn-commit")]
+    [Alias("svn-commit", "svn-ci")]
     [OutputType(typeof(SvnCommitOutput))]
     public class SvnCommit : SvnClientCmdletBase
     {

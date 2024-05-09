@@ -7,7 +7,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnStatus", DefaultParameterSetName = ParameterSetNames.Local)]
-    [Alias("svn-status")]
+    [Alias("svn-status", "svn-st")]
     [OutputType(typeof(SvnLocalStatusOutput))]
     public class SvnStatus : SvnClientCmdletBase
     {

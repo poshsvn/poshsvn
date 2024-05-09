@@ -7,7 +7,7 @@ using SharpSvn;
 namespace PoshSvn.CmdLets
 {
     [Cmdlet("Invoke", "SvnBlame")]
-    [Alias("svn-blame")]
+    [Alias("svn-blame", "svn-praise", "svn-annotate", "svn-ann")]
     [OutputType(typeof(SvnBlameLine))]
     public class SvnBlameCmdlet : SvnClientCmdletBase
     {
