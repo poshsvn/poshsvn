@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 - Do not write action to verbose if it is already written to output.
 - Added -TrustServerCertificateFailures parameter to all cmdlets.
 - Fix progress title (replace 'Processing' with correct titile).
-- [VSCode extension] Add hotkey of alt+U to open poshsvn terminal.
+- [VSCode extension] Add Alt+U hotkey to open poshsvn terminal.
 - [VSCode extension] Do not create new terminal if it is already exists.
 - [VSCode extension] Fix Ctrl+Backspace and other shortcuts in terminal.
 - [VSCode extension] Added demo screenshot.
