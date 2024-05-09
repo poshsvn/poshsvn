@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 
 import { findPowerShell } from "./findPowerShell";
 import { helpMessage } from "./texts";
-import path from 'path';
 
 export const terminalOptions: vscode.TerminalOptions = {
     name: "PoshSvn terminal",
