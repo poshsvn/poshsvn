@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] [Unreleased]
+## [1.0.0]
 
 - Added `-Recursive` parameter to cmdlets that has `-Depth` parameter.
 - Added all parameters to the `svn-commit` cmdlet.
