@@ -2,10 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] [Unreleased]
+## [1.0.0]
 
 - Added `-Recursive` parameter to cmdlets that has `-Depth` parameter.
-- Added all parameters to the svn-commit cmdlet.
+- Added all parameters to the `svn-commit` cmdlet.
 - Remove SharpSvn.SvnPropertyCollection from output of cmdlets.
 - Added `-Encoding` parameter to the `svn-cat` and `svn-diff` cmdlet.
 - Properties to the `svn-cleanup` cmdlet.
@@ -15,9 +15,9 @@ All notable changes to this project will be documented in this file.
 - Do not write action to verbose if it is already written to output.
 - Added -TrustServerCertificateFailures parameter to all cmdlets.
 - Fix progress title (replace 'Processing' with correct titile).
-- [VSCode extension] Add hotkey of alt+U to open poshsvn terminal.
+- [VSCode extension] Add `Alt+U` hotkey to open poshsvn terminal.
 - [VSCode extension] Do not create new terminal if it is already exists.
-- [VSCode extension] Fix Ctrl+Backspace and other shortcuts in terminal.
+- [VSCode extension] Fix `Ctrl+Backspace` and other shortcuts in terminal.
 - [VSCode extension] Added demo screenshot.
 - Minor fixes and improvement.
 - Build improvements.
