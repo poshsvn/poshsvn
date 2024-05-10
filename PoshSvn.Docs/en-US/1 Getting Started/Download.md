@@ -36,8 +36,3 @@ use the guest account with the username guest and an empty password.
 
 Alternatively, you can clone the official GitHub mirror of the
 PoshSvn project using the following link: https://github.com/poshsvn/poshsvn.
-
-## Apcahe Subversion command-line tools
-
-- [Subversion Binaries (x64)](https://github.com/poshsvn/poshsvn/releases/latest/download/svn-dist-x64.zip)
-- [Subversion Binaries (x86)](https://github.com/poshsvn/poshsvn/releases/latest/download/svn-dist-x86.zip)
