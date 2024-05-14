@@ -14,7 +14,7 @@ Show author and revision information inline for the specified files or URLs.
 ## SYNTAX
 
 ```
-Invoke-SvnBlame [[-Target] <SvnTarget>] [-Revision <SvnRevisionRange>] [-RetrieveMergedRevisions]
+Invoke-SvnBlame [-Target] <SvnTarget> [-Revision <SvnRevisionRange>] [-RetrieveMergedRevisions]
  [-IgnoreMimeType] [-IgnoreLineEndings] [-IgnoreSpacing <SvnIgnoreSpacing>] [<CommonParameters>]
 ```
 
@@ -149,7 +149,7 @@ Type: SvnTarget
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False

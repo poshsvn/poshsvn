@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnInfo/
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-SvnInfo [[-Target] <SvnTarget[]>] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-IncludeExternals]
- [<CommonParameters>]
+Invoke-SvnInfo [[-Target] <SvnTarget[]>] [-Revision <SvnRevision>] [-Depth <SvnDepth>] [-Recursive]
+ [-IncludeExternals] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,6 +58,21 @@ Aliases: include-externals
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recursive
+{{ Fill Recursive Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
