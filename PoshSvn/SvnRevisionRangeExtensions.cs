@@ -4,7 +4,7 @@ namespace PoshSvn
 {
     public static class SvnRevisionRangeExtensions
     {
-        public static SharpSvn.SvnRevisionRange ToSharpSvnRevisionRange(this SvnRevisionRange revisionRange)
+        public static SharpSvn.SvnRevisionRange ToSharpSvnRevisionRange(this SvnRevisionRangeBase revisionRange)
         {
             return new SharpSvn.SvnRevisionRange(
                 revisionRange.StartRevision.ToSharpSvnRevision(),
