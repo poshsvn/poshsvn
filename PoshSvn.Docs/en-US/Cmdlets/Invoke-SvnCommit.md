@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnCommit/
@@ -13,7 +13,8 @@ Send changes from your working copy to the repository.
 ## SYNTAX
 
 ```
-Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-RevisionProperties <Hashtable>] [<CommonParameters>]
+Invoke-SvnCommit [[-Path] <String[]>] -Message <String> [-ChangeList <String[]>] [-KeepChangeLists] [-NoUnlock]
+ [-Depth <SvnDepth>] [-RevisionProperties <Hashtable>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,6 +60,51 @@ Committed revision 3.
 
 ## PARAMETERS
 
+### -ChangeList
+{{ Fill ChangeList Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases: cl
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Depth
+{{ Fill Depth Description }}
+
+```yaml
+Type: SvnDepth
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -KeepChangeLists
+{{ Fill KeepChangeLists Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Message
 Indicates that you will specify either a log message or a lock comment on the command line, following this option. For example: `svn-commit -Message "They don't make Sunday."`
 
@@ -70,6 +116,21 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoUnlock
+{{ Fill NoUnlock Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

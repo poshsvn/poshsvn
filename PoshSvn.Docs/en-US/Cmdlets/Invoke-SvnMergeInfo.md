@@ -20,7 +20,7 @@ Invoke-SvnMergeInfo [-Source] <SvnTarget> [[-Target] <SvnTarget>] [<CommonParame
 ### ShowRevisions
 ```
 Invoke-SvnMergeInfo [-Source] <SvnTarget> [[-Target] <SvnTarget>] [-ShowRevisions <ShowRevisions>] [-Log]
- [-Depth <SvnDepth>] [-Revision <SvnRevisionRange>] [<CommonParameters>]
+ [-Depth <SvnDepth>] [-Recursive] [-Revision <SvnRevisionRange>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,6 +64,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recursive
+{{ Fill Recursive Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: ShowRevisions
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
