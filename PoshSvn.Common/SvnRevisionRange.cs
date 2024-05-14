@@ -1,15 +1,11 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
 using System;
-using System.Collections.Generic;
 
 namespace PoshSvn
 {
-    public class SvnRevisionRange
+    public class SvnRevisionRange : SvnRevisionRangeBase
     {
-        public SvnRevision EndRevision { get; set; }
-        public SvnRevision StartRevision { get; set; }
-
         public SvnRevisionRange(string str)
         {
             string[] tokens = str.Split(new char[] { ':' });
@@ -47,13 +43,6 @@ namespace PoshSvn
         {
             StartRevision = new SvnRevision(start);
             EndRevision = new SvnRevision(end);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is SvnRevisionRange range &&
-                   EqualityComparer<SvnRevision>.Default.Equals(EndRevision, range.EndRevision) &&
-                   EqualityComparer<SvnRevision>.Default.Equals(StartRevision, range.StartRevision);
         }
     }
 }
