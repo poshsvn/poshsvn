@@ -33,6 +33,17 @@ namespace PoshSvn.CmdLets
         public SvnDepth Depth { get; set; }
 
         [Parameter()]
+        public SwitchParameter AsByteStream { get; set; }
+
+        [Parameter()]
+        public SwitchParameter Raw { get; set; }
+
+        [Parameter()]
+        [ArgumentCompleter(typeof(EncodingArgumentCompletions))]
+        [EncodingArgumentTransformation()]
+        public Encoding Encoding { get; set; } = Encoding.UTF8;
+
+        [Parameter()]
         public SwitchParameter NoDiffAdded { get; set; }
 
         [Parameter()]
@@ -145,10 +156,26 @@ namespace PoshSvn.CmdLets
 
         protected Stream GetStream()
         {
-            ITextLineStream textStream = new TextLineStream(this);
-            ITextStream lineStream = new LineDecoderTextStream(textStream);
+            if (AsByteStream)
+            {
+                return new ByteStream(this);
+            }
+            else
+            {
+                ITextStream textStream;
 
-            return new DecoderStream(lineStream, Encoding.UTF8);
+                if (Raw)
+                {
+                    textStream = new TextStream(this);
+                }
+                else
+                {
+                    ITextLineStream lineStream = new TextLineStream(this);
+                    textStream = new LineDecoderTextStream(lineStream);
+                }
+
+                return new DecoderStream(textStream, Encoding);
+            }
         }
 
         protected override string GetProcessTitle() => "svn-diff";
