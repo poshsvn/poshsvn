@@ -65,3 +65,18 @@ Valeur par défaut: Aucune
 Accepter l'entrée du pipeline: Faux
 Accepter les caractères génériques: Faux
 ```
+
+### -TrustServerCertificateFailures
+Accept SSL server certificates with failures.
+
+```yaml
+Type: SvnTrustCertificateFailures
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```

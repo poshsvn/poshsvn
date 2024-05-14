@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: PoshSvn.dll-Help.xml
 Module Name: PoshSvn
 online version: https://www.poshsvn.com/docs/Invoke-SvnDelete/
@@ -14,16 +14,16 @@ Cela affiche les différences entre deux révisions ou chemins.
 
 ### Target (Default)
 ```
-Invoke-SvnDiff [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-NoDiffAdded] [-NoDiffDeleted]
+Invoke-SvnDiff [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Recursive] [-NoDiffAdded] [-NoDiffDeleted]
  [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry] [-Changelist <String>] [-Git]
  [-PatchCompatible] [<CommonParameters>]
 ```
 
 ### TwoFiles
 ```
-Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-NoDiffAdded] [-NoDiffDeleted]
- [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry] [-Changelist <String>] [-Git]
- [-PatchCompatible] [<CommonParameters>]
+Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-Recursive] [-NoDiffAdded]
+ [-NoDiffDeleted] [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry]
+ [-Changelist <String>] [-Git] [-PatchCompatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -245,6 +245,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recursive
+{{ Fill Recursive Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
