@@ -24,6 +24,7 @@ namespace PoshSvn
         public SecureString Password { get; set; }
 
         [Parameter()]
+        [SvnCommonParameter]
         public SvnAccept Accept { get; set; }
 
         [Parameter()]
