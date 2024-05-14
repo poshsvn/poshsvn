@@ -20,12 +20,11 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.TwoFiles)]
         public SvnTarget New { get; set; }
 
-        [Parameter(ParameterSetName = ParameterSetNames.Target)]
-        [Alias("rev", "r")]
-        public SvnRevisionRange Revision { get; set; }
-
         [Parameter()]
         public SvnDepth Depth { get; set; }
+
+        [Parameter()]
+        public SwitchParameter Recursive { get; set; }
 
         [Parameter()]
         public SwitchParameter NoDiffAdded { get; set; }
@@ -58,11 +57,6 @@ namespace PoshSvn.CmdLets
         public SvnDiffCmdlet()
         {
             Depth = SvnDepth.Infinity;
-
-            Revision = new SvnRevisionRange(
-                new SvnRevision(SvnRevisionType.Base),
-                new SvnRevision(SvnRevisionType.Working));
-
             Target = new[]
             {
                 SvnTarget.FromPath(".")
@@ -73,7 +67,7 @@ namespace PoshSvn.CmdLets
         {
             SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
             {
-                Depth = Depth.ConvertToSharpSvnDepth(),
+                Depth = Depth.ConvertToSharpSvnDepth(Recursive),
                 NoAdded = NoDiffAdded,
                 NoDeleted = NoDiffDeleted,
                 NoProperties = IgnoreProperties || PatchCompatible,
@@ -90,11 +84,13 @@ namespace PoshSvn.CmdLets
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
-                SharpSvn.SvnRevisionRange rangeRevision = Revision.ToSharpSvnRevisionRange();
+                SharpSvn.SvnRevision startRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Base);
+                SharpSvn.SvnRevision endRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
+                SharpSvn.SvnRevisionRange rangeRevision = new SharpSvn.SvnRevisionRange(startRevision, endRevision);
 
                 ResolvedTargetCollection resolvedTarget = ResolveTargets(Target);
 
-                foreach (SharpSvn.SvnTarget target in resolvedTarget.EnumerateSharpSvnTargets())
+                foreach (var target in resolvedTarget.EnumerateSharpSvnTargets())
                 {
                     using (Stream stream = GetStream())
                     {
