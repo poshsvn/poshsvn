@@ -4,7 +4,7 @@
     <WarningsAsErrors />
   </PropertyGroup>
   <PropertyGroup>
-    <Platform>x86</Platform>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="5.0.0" />
