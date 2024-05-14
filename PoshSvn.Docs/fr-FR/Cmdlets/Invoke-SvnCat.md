@@ -14,7 +14,7 @@ Obtient le contenu de l'élément au chemin, à l'URL et à la révision spécif
 ## SYNTAX
 
 ```
-Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [<CommonParameters>]
+Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [-Encoding <Encoding>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -73,6 +73,21 @@ Spécifie que le contenu doit être lu comme un flux d'octets.
 
 ```yaml
 Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Encoding
+{{ Fill Encoding Description }}
+
+```yaml
+Type: Encoding
 Parameter Sets: (All)
 Aliases:
 

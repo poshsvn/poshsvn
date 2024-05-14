@@ -14,7 +14,7 @@ Gets the content of the item at the specified path, Url, and revision.
 ## SYNTAX
 
 ```
-Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [<CommonParameters>]
+Invoke-SvnCat [[-Target] <SvnTarget>] [-AsByteStream] [-Raw] [-Encoding <Encoding>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -77,6 +77,21 @@ Specifies that the content should be read as a stream of bytes.
 
 ```yaml
 Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Encoding
+{{ Fill Encoding Description }}
+
+```yaml
+Type: Encoding
 Parameter Sets: (All)
 Aliases:
 

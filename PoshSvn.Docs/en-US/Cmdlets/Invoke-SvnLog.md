@@ -14,7 +14,7 @@ Show the log messages for a set of revision(s) and/or path(s).
 
 ```
 Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Revision <SvnRevisionRange[]>] [-ChangedPaths] [-Limit <Int32>]
- [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
+ [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
  [-WithRevisionProperties <String[]>] [<CommonParameters>]
 ```
 
@@ -113,22 +113,6 @@ This command show the log messages and formats them to table. You may use it to 
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: v
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Depth
-Limit the scope of the operation by specified depth (Empty, Files, Immediates, or Infinity).
-
-```yaml
-Type: SvnDepth
-Parameter Sets: (All)
-Aliases:
-Accepted values: Empty, Files, Immediates, Infinity
 
 Required: False
 Position: Named
