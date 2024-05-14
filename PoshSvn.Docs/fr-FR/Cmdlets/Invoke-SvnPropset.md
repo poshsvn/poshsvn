@@ -15,13 +15,13 @@ Set the value of a property on files, dirs, or revisions.
 ### Node (Default)
 ```
 Invoke-SvnPropset [-PropertyName] <String> [-PropertyValue] <String> [[-Target] <SvnTarget[]>]
- [-ChangeList <String[]>] [-Depth <SvnDepth>] [<CommonParameters>]
+ [-ChangeList <String[]>] [-Depth <SvnDepth>] [-Recursive] [<CommonParameters>]
 ```
 
 ### Revision
 ```
 Invoke-SvnPropset [-PropertyName] <String> [-PropertyValue] <String> [[-Target] <SvnTarget[]>]
- [-RevisionProperty] -Revision <SvnRevision> [-Depth <SvnDepth>] [<CommonParameters>]
+ [-RevisionProperty] -Revision <SvnRevision> [-Depth <SvnDepth>] [-Recursive] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -125,6 +125,21 @@ Aliases: propval
 Required: True
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recursive
+{{ Fill Recursive Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

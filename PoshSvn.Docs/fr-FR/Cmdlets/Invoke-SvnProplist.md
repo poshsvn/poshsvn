@@ -14,14 +14,14 @@ schema: 2.0.0
 
 ### Node (Default)
 ```
-Invoke-SvnProplist [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Revision <SvnRevision>]
+Invoke-SvnProplist [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Recursive] [-Revision <SvnRevision>]
  [-ChangeList <String[]>] [<CommonParameters>]
 ```
 
 ### Revision
 ```
-Invoke-SvnProplist [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-RevisionProperty] -Revision <SvnRevision>
- [<CommonParameters>]
+Invoke-SvnProplist [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Recursive] [-RevisionProperty]
+ -Revision <SvnRevision> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,6 +65,21 @@ Accepted values: Empty, Files, Immediates, Infinity
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recursive
+{{ Fill Recursive Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
