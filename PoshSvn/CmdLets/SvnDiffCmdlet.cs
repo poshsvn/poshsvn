@@ -90,7 +90,7 @@ namespace PoshSvn.CmdLets
 
                 ResolvedTargetCollection resolvedTarget = ResolveTargets(Target);
 
-                foreach (var target in resolvedTarget.EnumerateSharpSvnTargets())
+                foreach (SharpSvn.SvnTarget target in resolvedTarget.EnumerateSharpSvnTargets())
                 {
                     using (Stream stream = GetStream())
                     {
