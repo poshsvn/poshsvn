@@ -2543,10 +2543,6 @@ function ConvertPsObjectsToMamlModel
                 'OutVariable',
                 'OutBuffer',
                 'PipelineVariable',
-                'ProgressAction',
-                'NoAuthCache',
-                'Username',
-                'Password',
                 'ProgressAction'
         ) -contains $parameterName) {
             return $true
@@ -2713,6 +2709,7 @@ function ConvertPsObjectsToMamlModel
                 }
 
                 $hasDontShow = $false
+                $hasCommon = $false
                 $hasSupportsWildsCards = $false
 
                 foreach ($Attribute in $Parameter.Attributes)
@@ -2725,6 +2722,11 @@ function ConvertPsObjectsToMamlModel
                         }
                     }
 
+                    if ($Attribute.TypeId.ToString() -eq 'PoshSvn.SvnCommonParameterAttribute')
+                    {
+                        $hasCommon = $true
+                    }
+
                     if ($Attribute.TypeId.ToString() -eq 'System.Management.Automation.SupportsWildcardsAttribute')
                     {
                         $hasSupportsWildsCards = $true
@@ -2732,6 +2734,11 @@ function ConvertPsObjectsToMamlModel
                 }
 
                 if ($hasDontShow)
+                {
+                    continue
+                }
+
+                if ($hasCommon)
                 {
                     continue
                 }

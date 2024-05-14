@@ -12,18 +12,23 @@ namespace PoshSvn
     public abstract class SvnClientCmdletBase : SvnCmdletBase
     {
         [Parameter()]
+        [SvnCommonParameter]
         public SwitchParameter NoAuthCache { get; set; }
 
         [Parameter()]
+        [SvnCommonParameter]
         public string Username { get; set; }
 
         [Parameter()]
+        [SvnCommonParameter]
         public SecureString Password { get; set; }
 
         [Parameter()]
+        [SvnCommonParameter]
         public SvnAccept Accept { get; set; }
 
         [Parameter()]
+        [SvnCommonParameter]
         public SvnTrustCertificateFailures? TrustServerCertificateFailures { get; set; }
 
         protected SharpSvn.SvnClient SvnClient;
