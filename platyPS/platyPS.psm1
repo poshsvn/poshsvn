@@ -2546,7 +2546,8 @@ function ConvertPsObjectsToMamlModel
                 'ProgressAction',
                 'NoAuthCache',
                 'Username',
-                'Password'
+                'Password',
+                "TrustServerCertificateFailures"
         ) -contains $parameterName) {
             return $true
         }
