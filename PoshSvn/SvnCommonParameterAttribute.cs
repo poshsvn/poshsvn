@@ -4,7 +4,7 @@ using System;
 
 namespace PoshSvn
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class SvnCommonParameterAttribute : Attribute
     {
     }
