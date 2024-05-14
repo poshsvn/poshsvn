@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Timofei Zhakov. All rights reserved.
 
+using System;
 using System.IO;
 using System.Management.Automation;
 using System.Text;
@@ -23,6 +24,10 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.Target)]
         [Alias("rev", "r")]
         public SvnRevisionRange Revision { get; set; }
+
+        [Parameter(ParameterSetName = ParameterSetNames.Target)]
+        [Alias("c")]
+        public SvnRevisionChange Change { get; set; }
 
         [Parameter()]
         public SvnDepth Depth { get; set; }
@@ -59,10 +64,6 @@ namespace PoshSvn.CmdLets
         {
             Depth = SvnDepth.Infinity;
 
-            Revision = new SvnRevisionRange(
-                new SvnRevision(SvnRevisionType.Base),
-                new SvnRevision(SvnRevisionType.Working));
-
             Target = new[]
             {
                 SvnTarget.FromPath(".")
@@ -90,7 +91,7 @@ namespace PoshSvn.CmdLets
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
-                SharpSvn.SvnRevisionRange rangeRevision = Revision.ToSharpSvnRevisionRange();
+                SharpSvn.SvnRevisionRange rangeRevision = GetRange();
 
                 ResolvedTargetCollection resolvedTarget = ResolveTargets(Target);
 
@@ -112,6 +113,34 @@ namespace PoshSvn.CmdLets
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
                 };
             }
+        }
+
+        protected SharpSvn.SvnRevisionRange GetRange()
+        {
+            // Throw if -r and -c are specified.
+            if (Revision != null && Change != null)
+            {
+                throw new ArgumentException("Multiple revision arguments encountered; can't specify -c twice, or both -c and -r.");
+            }
+
+            // -r is specified
+            if (Revision != null)
+            {
+                return Revision.ToSharpSvnRevisionRange();
+            }
+
+            // -c is specified
+            if (Change != null)
+            {
+                return Change.ToSharpSvnRevisionRange();
+            }
+
+            // No revision range is specified, so return default.
+            SvnRevisionRange revision = new SvnRevisionRange(
+                new SvnRevision(SvnRevisionType.Base),
+                new SvnRevision(SvnRevisionType.Working));
+
+            return revision.ToSharpSvnRevisionRange();
         }
 
         protected Stream GetStream()
