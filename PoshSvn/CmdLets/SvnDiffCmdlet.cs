@@ -20,6 +20,10 @@ namespace PoshSvn.CmdLets
         [Parameter(ParameterSetName = ParameterSetNames.TwoFiles)]
         public SvnTarget New { get; set; }
 
+        [Parameter(ParameterSetName = ParameterSetNames.Target)]
+        [Alias("rev", "r")]
+        public SvnRevisionRange Revision { get; set; }
+
         [Parameter()]
         public SvnDepth Depth { get; set; }
 
@@ -54,6 +58,11 @@ namespace PoshSvn.CmdLets
         public SvnDiffCmdlet()
         {
             Depth = SvnDepth.Infinity;
+
+            Revision = new SvnRevisionRange(
+                new SvnRevision(SvnRevisionType.Base),
+                new SvnRevision(SvnRevisionType.Working));
+
             Target = new[]
             {
                 SvnTarget.FromPath(".")
@@ -81,9 +90,7 @@ namespace PoshSvn.CmdLets
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
-                SharpSvn.SvnRevision startRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Base);
-                SharpSvn.SvnRevision endRevision = new SharpSvn.SvnRevision(SharpSvn.SvnRevisionType.Working);
-                SharpSvn.SvnRevisionRange rangeRevision = new SharpSvn.SvnRevisionRange(startRevision, endRevision);
+                SharpSvn.SvnRevisionRange rangeRevision = Revision.ToSharpSvnRevisionRange();
 
                 ResolvedTargetCollection resolvedTarget = ResolveTargets(Target);
 
