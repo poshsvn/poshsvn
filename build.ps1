@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [ValidateSet("Core", "Installer", "All", "SvnDist")]
+    [ValidateSet("Core", "Installer", "All", "SvnDist", "platyPS")]
     [string]
     $Target = "All"
 )
