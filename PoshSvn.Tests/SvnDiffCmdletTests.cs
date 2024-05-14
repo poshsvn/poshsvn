@@ -39,6 +39,39 @@ namespace PoshSvn.Tests
         }
 
         [Test]
+        public void RevisionRangeTest()
+        {
+            using (var sb = new WcSandbox())
+            {
+                var forwardSlashWcPath = sb.WcPath.Replace('\\', '/');
+
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value line1,line2,line3");
+                sb.RunScript(@"svn-add wc\a.txt");
+                sb.RunScript(@"svn-commit wc -m test");
+                sb.RunScript(@"Set-Content -Path wc\a.txt -Value line1,'modified line2',line3");
+                sb.RunScript(@"svn-commit wc -m test");
+
+                var actual = sb.RunScript(@"svn-diff wc\a.txt -r 1:2");
+
+                PSObjectAssert.AreEqual(
+                    new object[]
+                    {
+                        $@"Index: {forwardSlashWcPath}/a.txt",
+                        $@"===================================================================",
+                        $@"--- {forwardSlashWcPath}/a.txt	(revision 1)",
+                        $@"+++ {forwardSlashWcPath}/a.txt	(revision 2)",
+                        $@"@@ -1,3 +1,3 @@",
+                        $@" line1",
+                        $@"-line2",
+                        $@"+modified line2",
+                        $@" line3",
+
+                    },
+                    actual);
+            }
+        }
+
+        [Test]
         public void OldNewTest()
         {
             using (var sb = new WcSandbox())
