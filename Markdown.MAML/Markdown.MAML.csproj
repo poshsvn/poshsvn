@@ -3,6 +3,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
+  <PropertyGroup>
+    <Platform>AnyCPU</Platform>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="5.0.0" />
   </ItemGroup>
