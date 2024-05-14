@@ -14,7 +14,7 @@ Affiche les messages de journal pour un ensemble de révision(s) et/ou de chemin
 
 ```
 Invoke-SvnLog [[-Target] <SvnTarget[]>] [-Revision <SvnRevisionRange[]>] [-ChangedPaths] [-Limit <Int32>]
- [-Depth <SvnDepth>] [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
+ [-IncludeExternals] [-WithAllRevisionProperties] [-WithNoRevisionProperties]
  [-WithRevisionProperties <String[]>] [<CommonParameters>]
 ```
 
@@ -113,22 +113,6 @@ Cette commande affiche les messages de journal et les formate en tableau. Vous p
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: v
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Depth
-Limitez la portée de l'opération en spécifiant la profondeur (Vide, Fichiers, Immédiats ou Infini).
-
-```yaml
-Type: SvnDepth
-Parameter Sets: (All)
-Aliases:
-Accepted values: Empty, Files, Immediates, Infinity
 
 Required: False
 Position: Named

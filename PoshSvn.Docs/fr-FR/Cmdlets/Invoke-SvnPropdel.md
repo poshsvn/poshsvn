@@ -15,13 +15,13 @@ schema: 2.0.0
 ### Node (Default)
 ```
 Invoke-SvnPropdel [-PropertyName] <String> [[-Target] <SvnTarget[]>] [-ChangeList <String[]>]
- [-Depth <SvnDepth>] [<CommonParameters>]
+ [-Depth <SvnDepth>] [-Recursive] [<CommonParameters>]
 ```
 
 ### Revision
 ```
 Invoke-SvnPropdel [-PropertyName] <String> [[-Target] <SvnTarget[]>] [-RevisionProperty]
- -Revision <SvnRevision> [-Depth <SvnDepth>] [<CommonParameters>]
+ -Revision <SvnRevision> [-Depth <SvnDepth>] [-Recursive] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,6 +80,21 @@ Aliases: propname
 Required: True
 Position: 0
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Recursive
+{{ Fill Recursive Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
