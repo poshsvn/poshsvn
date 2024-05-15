@@ -39,16 +39,16 @@ function RenderPage {
         $topics += "<li class='mt-4'><h6>$(TrimName -Name $folder.Name)</h6></li><li><hr class='sidebar-divider'></li>"
 
         foreach ($path in $folder | Get-ChildItem -Filter "*.md" -File -Recurse) {
-            $trimedName = TrimName -Name $path.BaseName
+            $trimmedName = TrimName -Name $path.BaseName
 
-            if ($Title -eq $trimedName) {
+            if ($Title -eq $trimmedName) {
                 $active = "active"
             }
             else {
                 $active = ""
             }
     
-            $topics += "<li class='nav-item'><a class='nav-link $active' href='../$trimedName/'>$trimedName</a></li>"
+            $topics += "<li class='nav-item'><a class='nav-link $active' href='../$trimmedName/'>$trimmedName</a></li>"
         }
     }
 
@@ -81,8 +81,8 @@ function RenderDocsLanguage {
 
     foreach ($path in Get-ChildItem -Path "$SourceDir" -Filter "*.md" -File -Recurse) {
         $content = (ConvertFrom-Markdown $path).Html
-        $trimedName = TrimName -Name $path.BaseName
-        RenderPage -Content $content -PageName "$DestinationPrefix\docs\$trimedName" -Title $trimedName
+        $trimmedName = TrimName -Name $path.BaseName
+        RenderPage -Content $content -PageName "$DestinationPrefix\docs\$trimmedName" -Title $trimmedName
     }
 }
 
