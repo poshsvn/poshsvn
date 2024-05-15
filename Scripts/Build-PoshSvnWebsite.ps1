@@ -22,7 +22,7 @@ function TrimName {
         $Name
     )
 
-    $Name -match "[0-9]* *(.*)";
+    $null = $Name -match "[0-9]* *(.*)";
     return $Matches[1];
 }
 
