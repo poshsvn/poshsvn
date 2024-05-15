@@ -1,6 +1,6 @@
 ﻿# PoshSvn
 
-PoshSvn provides subversion cmdlets for powershell and integrated vscode terminal.
+PoshSvn provides subversion cmdlets for powershell and integrated VSCode terminal.
 
 ## Features
 
