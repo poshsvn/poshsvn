@@ -102,7 +102,11 @@ namespace PoshSvn.CmdLets
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
-                SharpSvn.SvnRevisionRange rangeRevision = GetRange();
+                SvnRevisionRangeBase svnRevision =
+                    SvnRevisionUtils.CreateRangeFromRevisionOrChange(
+                        Revision, Change, SvnRevisionUtils.WorkingChangesRange);
+
+                SharpSvn.SvnRevisionRange sharpSvnRevision = svnRevision.ToSharpSvnRevisionRange();
 
                 ResolvedTargetCollection resolvedTarget = ResolveTargets(Target);
 
@@ -110,7 +114,7 @@ namespace PoshSvn.CmdLets
                 {
                     using (Stream stream = GetStream())
                     {
-                        SvnClient.Diff(target, rangeRevision, args, stream);
+                        SvnClient.Diff(target, sharpSvnRevision, args, stream);
                     }
                 }
             }
@@ -124,34 +128,6 @@ namespace PoshSvn.CmdLets
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
                 };
             }
-        }
-
-        protected SharpSvn.SvnRevisionRange GetRange()
-        {
-            // Throw if -r and -c are specified.
-            if (Revision != null && Change != null)
-            {
-                throw new ArgumentException("Multiple revision arguments encountered; can't specify -c twice, or both -c and -r.");
-            }
-
-            // -r is specified
-            if (Revision != null)
-            {
-                return Revision.ToSharpSvnRevisionRange();
-            }
-
-            // -c is specified
-            if (Change != null)
-            {
-                return Change.ToSharpSvnRevisionRange();
-            }
-
-            // No revision range is specified, so return default.
-            SvnRevisionRange revision = new SvnRevisionRange(
-                new SvnRevision(SvnRevisionType.Base),
-                new SvnRevision(SvnRevisionType.Working));
-
-            return revision.ToSharpSvnRevisionRange();
         }
 
         protected Stream GetStream()
