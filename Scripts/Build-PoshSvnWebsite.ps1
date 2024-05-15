@@ -41,7 +41,7 @@ function RenderPage {
         foreach ($path in $folder | Get-ChildItem -Filter "*.md" -File -Recurse) {
             $trimedName = TrimName -Name $path.BaseName
 
-            if ($Title -eq $path.BaseName) {
+            if ($Title -eq $trimedName) {
                 $active = "active"
             }
             else {
