@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnImport
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Imports an unversioned file or tree into the repository.
 
 ## SYNTAX
 
@@ -18,7 +18,11 @@ Invoke-SvnImport [[-Source] <String>] [-Destination] <Uri> -Message <String> [-D
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Recursively commit a copy of Path to Url.
+If Path is omitted '.' is assumed.
+Parent directories are created as necessary in the repository.
+If Path is a directory, the contents of the directory are added
+directly under Url.
 
 ## EXAMPLES
 

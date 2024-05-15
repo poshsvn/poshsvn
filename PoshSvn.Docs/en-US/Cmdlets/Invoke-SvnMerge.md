@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnMerge
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Merges changes into a working copy.
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Invoke-SvnMerge [-Source] <SvnTarget> [[-Path] <String>] [[-Revision] <SvnRevisi
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Merges changes into a working copy.
 
 ## EXAMPLES
 
