@@ -6,8 +6,7 @@ schema: 2.0.0
 title: About PoshSvn Cmdlet Target
 ---
 
-# PoshSvn
-## about_PoshSvnTarget
+# about_PoshSvnTarget
 
 ## Short description
 Describes how to specify cmdlet target.

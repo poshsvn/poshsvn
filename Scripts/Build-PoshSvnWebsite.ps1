@@ -72,7 +72,7 @@ function RenderDocsLanguage {
     )
 
     foreach ($path in Get-ChildItem -Path "$SourceDir" -Filter "*.md" -File -Recurse) {
-        $content = (ConvertFrom-Markdown $path).Html -replace '<h1 id="poshsvn">PoshSvn</h1>'
+        $content = (ConvertFrom-Markdown $path).Html
         RenderPage -Content $content -PageName "$DestinationPrefix\docs\$($path.BaseName)" -Title $path.BaseName
     }
 }
