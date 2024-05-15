@@ -8,7 +8,8 @@ schema: 2.0.0
 # Invoke-SvnLock
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Lock working copy paths or URLs in the repository, so that
+no other user can commit changes to them.
 
 ## SYNTAX
 
@@ -17,7 +18,8 @@ Invoke-SvnLock [-Target] <SvnTarget[]> [-Message <String>] [-Force] [<CommonPara
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Lock working copy paths or URLs in the repository, so that
+no other user can commit changes to them.
 
 ## EXAMPLES
 

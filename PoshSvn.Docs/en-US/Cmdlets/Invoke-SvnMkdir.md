@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnMkdir
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Create a new directory under version control.
 
 ## SYNTAX
 
@@ -23,7 +23,15 @@ Invoke-SvnMkdir [-Target] <SvnTarget[]> [-Message <String>] [-Parents] [<CommonP
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Create version controlled directories.
+
+1. Each directory specified by a working copy PATH is created locally
+   and scheduled for addition upon the next commit.
+2. Each directory specified by a URL is created in the repository via
+   an immediate commit.
+
+In both cases, all the intermediate directories must already exist,
+unless the -Parents option is given.
 
 ## EXAMPLES
 
