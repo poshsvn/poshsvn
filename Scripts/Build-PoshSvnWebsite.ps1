@@ -48,7 +48,7 @@ function RenderPage {
                 $active = ""
             }
     
-            $topics += "<li class='nav-item'><a class='nav-link $active' href='../$trimedName'>$trimedName</a></li>"
+            $topics += "<li class='nav-item'><a class='nav-link $active' href='../$trimedName/'>$trimedName</a></li>"
         }
     }
 
