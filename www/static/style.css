@@ -1,4 +1,8 @@
-﻿.container {
+﻿:root {
+    --bs-font-size-base: 1rem;
+}
+
+.container {
     max-width: 1000px;
 }
 
