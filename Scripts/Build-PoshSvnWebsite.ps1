@@ -48,7 +48,7 @@ function RenderPage {
     $Content = $template -replace "{{content}}", $Content
     $Content = $Content -replace "{{title}}", $Title
     $Content = $Content -replace "{{topics}}", $topics
-    $Content = $Content -replace "{{description}}", $Title
+    $Content = $Content -replace "{{description}}", "$Title PoshSvn | Apache Subversion for PowerShell."
     $Content = $Content -replace "<h1", '<h1 class="h3"'
     $Content = $Content -replace "<h2", '<h2 class="h4"'
     $Content = $Content -replace "<h3", '<h2 class="h5"'
