@@ -1,3 +1,11 @@
+---
+description: Describes how to download PoshSvn binaries and sources.
+Locale: en-US
+online version: https://www.poshsvn.com/docs/Download/
+schema: 2.0.0
+title: Download PoshSvn
+---
+
 # Download
 
 Download PoshSvn sources or precompiled binaries.
