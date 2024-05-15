@@ -154,12 +154,12 @@ namespace PoshSvn.Tests
                     {
                         $@"Index: {forwardSlashWcPath}/a.txt",
                         $@"===================================================================",
-                        $@"--- {forwardSlashWcPath}/a.txt	(revision 1)",
-                        $@"+++ {forwardSlashWcPath}/a.txt	(revision 2)",
+                        $@"--- {forwardSlashWcPath}/a.txt	(revision 2)",
+                        $@"+++ {forwardSlashWcPath}/a.txt	(revision 1)",
                         $@"@@ -1,3 +1,3 @@",
                         $@" line1",
-                        $@"-line2",
-                        $@"+modified line2",
+                        $@"-modified line2",
+                        $@"+line2",
                         $@" line3",
 
                     },
