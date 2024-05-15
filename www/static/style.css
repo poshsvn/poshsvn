@@ -17,6 +17,10 @@ pre {
     border-radius: var(--bs-border-radius-lg);
 }
 
+code {
+    font-size: var(--bs-font-size-base);
+}
+
 .docs-content>hr:first-of-type,
 .docs-content>h2:first-of-type,
 #synopsis {
