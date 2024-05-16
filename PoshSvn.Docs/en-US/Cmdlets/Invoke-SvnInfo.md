@@ -23,7 +23,6 @@ Target may be either a working-copy path or a Url. If specified, -Revision
 determines in which revision the target is first looked up; the default
 is HEAD for a URL or BASE for a WC path.
 
-
 ## EXAMPLES
 
 ### Example 1
