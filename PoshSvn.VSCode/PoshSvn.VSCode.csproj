@@ -18,7 +18,7 @@
     <MakeDir Directories="$(VSCodeOutDir)" />
   </Target>
 
-  <Target Name="NpmInstall" AfterTargets="Restore" Inputs="package.json" Outputs="node_modules\.package-lock.json">
+  <Target Name="NpmInstall" AfterTargets="Restore" Inputs="$(MSBuildProjectDirectory)\package.json" Outputs="$(MSBuildProjectDirectory)\node_modules\.package-lock.json">
     <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
