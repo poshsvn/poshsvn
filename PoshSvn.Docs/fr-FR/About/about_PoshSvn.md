@@ -6,8 +6,7 @@ schema: 2.0.0
 title: About PoshSvn
 ---
 
-# PoshSvn
-## about_PoshSvn
+# about_PoshSvn
 
 ## Short description
 

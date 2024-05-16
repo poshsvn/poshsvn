@@ -6,8 +6,7 @@ schema: 2.0.0
 title: about CommonParameters
 ---
 
-# PoshSvn
-## about_SvnCommonParameters
+# about_SvnCommonParameters
 
 ## Short description
 
