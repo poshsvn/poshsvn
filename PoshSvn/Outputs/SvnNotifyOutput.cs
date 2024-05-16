@@ -65,6 +65,9 @@ namespace PoshSvn
                 case SvnNotifyAction.TreeConflict:
                     return "C";
 
+                case SvnNotifyAction.UpgradedDirectory:
+                    return "Upgraded";
+
                 // case SvnNotifyAction.UpdateMerge: return "G";
                 // case SvnNotifyAction.UpdateExist: return "E";
 
