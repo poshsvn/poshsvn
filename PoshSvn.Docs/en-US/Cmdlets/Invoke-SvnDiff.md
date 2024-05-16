@@ -14,16 +14,17 @@ This displays the differences between two revisions or paths.
 
 ### Target (Default)
 ```
-Invoke-SvnDiff [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Recursive] [-NoDiffAdded] [-NoDiffDeleted]
+Invoke-SvnDiff [[-Target] <SvnTarget[]>] [-Revision <SvnRevisionRange>] [-Change <SvnRevisionChange>]
+ [-Depth <SvnDepth>] [-AsByteStream] [-Raw] [-Encoding <Encoding>] [-NoDiffAdded] [-NoDiffDeleted]
  [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry] [-Changelist <String>] [-Git]
  [-PatchCompatible] [<CommonParameters>]
 ```
 
 ### TwoFiles
 ```
-Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-Recursive] [-NoDiffAdded]
- [-NoDiffDeleted] [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry]
- [-Changelist <String>] [-Git] [-PatchCompatible] [<CommonParameters>]
+Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-AsByteStream] [-Raw]
+ [-Encoding <Encoding>] [-NoDiffAdded] [-NoDiffDeleted] [-IgnoreProperties] [-PropertiesOnly]
+ [-ShowCopiesAsAdds] [-NoticeAncestry] [-Changelist <String>] [-Git] [-PatchCompatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,6 +84,36 @@ Index: COMMITTERS
 
 ## PARAMETERS
 
+### -AsByteStream
+{{ Fill AsByteStream Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Change
+{{ Fill Change Description }}
+
+```yaml
+Type: SvnRevisionChange
+Parameter Sets: Target
+Aliases: c
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Changelist
 Specifies a changlist to operate.
 
@@ -106,6 +137,21 @@ Type: SvnDepth
 Parameter Sets: (All)
 Aliases:
 Accepted values: Empty, Files, Immediates, Infinity
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Encoding
+{{ Fill Encoding Description }}
+
+```yaml
+Type: Encoding
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -250,8 +296,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Recursive
-{{ Fill Recursive Description }}
+### -Raw
+{{ Fill Raw Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -260,7 +306,22 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Revision
+{{ Fill Revision Description }}
+
+```yaml
+Type: SvnRevisionRange
+Parameter Sets: Target
+Aliases: rev, r
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
