@@ -14,16 +14,17 @@ Cela affiche les différences entre deux révisions ou chemins.
 
 ### Target (Default)
 ```
-Invoke-SvnDiff [[-Target] <SvnTarget[]>] [-Depth <SvnDepth>] [-Recursive] [-NoDiffAdded] [-NoDiffDeleted]
+Invoke-SvnDiff [[-Target] <SvnTarget[]>] [-Revision <SvnRevisionRange>] [-Change <SvnRevisionChange>]
+ [-Depth <SvnDepth>] [-AsByteStream] [-Raw] [-Encoding <Encoding>] [-NoDiffAdded] [-NoDiffDeleted]
  [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry] [-Changelist <String>] [-Git]
  [-PatchCompatible] [<CommonParameters>]
 ```
 
 ### TwoFiles
 ```
-Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-Recursive] [-NoDiffAdded]
- [-NoDiffDeleted] [-IgnoreProperties] [-PropertiesOnly] [-ShowCopiesAsAdds] [-NoticeAncestry]
- [-Changelist <String>] [-Git] [-PatchCompatible] [<CommonParameters>]
+Invoke-SvnDiff [-Old <SvnTarget>] [-New <SvnTarget>] [-Depth <SvnDepth>] [-AsByteStream] [-Raw]
+ [-Encoding <Encoding>] [-NoDiffAdded] [-NoDiffDeleted] [-IgnoreProperties] [-PropertiesOnly]
+ [-ShowCopiesAsAdds] [-NoticeAncestry] [-Changelist <String>] [-Git] [-PatchCompatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -82,6 +83,36 @@ Index: COMMITTERS
 
 ## PARAMETERS
 
+### -AsByteStream
+Specifies that the content should be read as a stream of bytes.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Change
+Specifies the revision as a change. Equal to `-Revision Change-1:Change`
+
+```yaml
+Type: SvnRevisionChange
+Parameter Sets: Target
+Aliases: c
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Changelist
 Specifies a changelist to operate.
 
@@ -109,6 +140,21 @@ Accepted values: Empty, Files, Immediates, Infinity
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Encoding
+Specifies the type of encoding for the target file. The default value is UTF8.
+
+```yaml
+Type: Encoding
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: UTF8
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -249,8 +295,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Recursive
-{{ Fill Recursive Description }}
+### -Raw
+Ignores newline characters and returns the entire contents of a file in one string with the newlines preserved. By default, newline characters in a file are used as delimiters to separate the input into an array of strings.
 
 ```yaml
 Type: SwitchParameter
@@ -259,7 +305,22 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Revision
+Specifies the revision to operate.
+
+```yaml
+Type: SvnRevisionRange
+Parameter Sets: Target
+Aliases: rev, r
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

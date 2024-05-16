@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnInfo
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Display information about a local or remote item.
 
 ## SYNTAX
 
@@ -18,7 +18,10 @@ Invoke-SvnInfo [[-Target] <SvnTarget[]>] [-Revision <SvnRevision>] [-Depth <SvnD
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Print information about each Target (default: '.').
+Target may be either a working-copy path or a Url. If specified, -Revision
+determines in which revision the target is first looked up; the default
+is HEAD for a URL or BASE for a WC path.
 
 ## EXAMPLES
 
