@@ -33,7 +33,7 @@
     <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(VSCodeOutDir)\node_modules\%(RecursiveDir)" />
   </Target>
 
-  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompilerInputs.Filename).js">
+  <Target Name="TsCompiler" BeforeTargets="Build" DependsOnTargets="NpmInstall;CreateOutDir" Inputs="@(TsCompilerInputs)" Outputs="$(VSCodeOutDir)\%(TsCompiler.Filename).js">
     <Exec Command="node $(MSBuildProjectDirectory)\node_modules\typescript\lib\tsc.js --outDir $(VSCodeOutDir)"
           WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
