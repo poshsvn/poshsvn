@@ -49,11 +49,14 @@
     <ProjectReference Include="..\PoshSvn\PoshSvn.csproj" />
   </ItemGroup>
 
-  <Target Name="CopyFiles" BeforeTargets="AfterBuild" Inputs="@(PackageItems)" Outputs="$(PackagePath)\%(PackageItems.Destination)\%(PackageItems.FileName)%(PackageItems.Extension)">
-    <Copy SourceFiles="@(PackageItems)" DestinationFolder="$(PackagePath)%(PackageItems.Destination)" />
-  </Target>
+  <ItemGroup>
+    <Content Include="@(PackageItems)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>..\poshsvn\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
 
-  <Target Name="ZipPackage" AfterTargets="CopyFiles" Inputs="@(PackageItems)" Outputs="$(ZipPackagePath)">
+  <Target Name="ZipPackage" BeforeTargets="_CopyOutOfDateSourceItemsToOutputDirectory" Inputs="@(PackageItems)" Outputs="$(ZipPackagePath)">
     <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ZipPackagePath)" Overwrite="true" />
   </Target>
 
