@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+﻿<Project Sdk="Microsoft.Build.NoTargets">
   <PropertyGroup>
     <ScriptsPath>$(SolutionDir)\Scripts</ScriptsPath>
     <PowerShell>powershell.exe –NonInteractive –ExecutionPolicy Unrestricted</PowerShell>
