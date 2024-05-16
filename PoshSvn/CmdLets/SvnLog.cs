@@ -52,7 +52,9 @@ namespace PoshSvn.CmdLets
             };
             Revision = new SvnRevisionRange[]
             {
-                new SvnRevisionRange("HEAD:0")
+                new SvnRevisionRange(
+                    new SvnRevision(SvnRevisionType.Head),
+                    new SvnRevision(0L))
             };
         }
 
