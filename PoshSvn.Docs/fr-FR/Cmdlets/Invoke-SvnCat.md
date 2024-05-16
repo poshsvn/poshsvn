@@ -84,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -Encoding
-{{ Fill Encoding Description }}
+Specifies the type of encoding for the target file. The default value is UTF8.
 
 ```yaml
 Type: Encoding
@@ -93,7 +93,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: UTF8
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

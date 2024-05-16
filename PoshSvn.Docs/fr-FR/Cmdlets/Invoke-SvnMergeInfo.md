@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnMergeInfo
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieves merge-related information.
 
 ## SYNTAX
 
@@ -24,7 +24,8 @@ Invoke-SvnMergeInfo [-Source] <SvnTarget> [[-Target] <SvnTarget>] [-ShowRevision
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+1. Retrieves merge-related information.
+2. Retrieves the revision numbers on Source that have been merged or could be merged to the Target.
 
 ## EXAMPLES
 

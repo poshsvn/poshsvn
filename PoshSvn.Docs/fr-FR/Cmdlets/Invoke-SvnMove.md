@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnMove
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Moves an item from one location to another in a working copy or repository.
 
 ## SYNTAX
 
@@ -25,7 +25,10 @@ Invoke-SvnMove [-Source] <SvnTarget[]> [-Destination] <SvnTarget> -Message <Stri
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Source and Destination can each be either a working copy (WC) path or Url:
+- `WC` to `WC`: move and schedule for addition (with history), as a local change to
+  be committed later (with or without further changes).
+- `Url` to `Url`: complete server-side move, immediately creating a new revision in the repository.
 
 ## EXAMPLES
 
