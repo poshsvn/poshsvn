@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+﻿<Project Sdk="Microsoft.Build.NoTargets">
     <ItemGroup>
       <ProjectReference Include="..\Markdown.MAML\Markdown.MAML.csproj" />
     </ItemGroup>
