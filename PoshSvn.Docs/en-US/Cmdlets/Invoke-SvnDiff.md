@@ -85,7 +85,7 @@ Index: COMMITTERS
 ## PARAMETERS
 
 ### -AsByteStream
-{{ Fill AsByteStream Description }}
+Specifies that the content should be read as a stream of bytes.
 
 ```yaml
 Type: SwitchParameter
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 ```
 
 ### -Change
-{{ Fill Change Description }}
+Specifies the revision as a change. Equal to `-Revision Change-1:Change`
 
 ```yaml
 Type: SvnRevisionChange
@@ -146,7 +146,7 @@ Accept wildcard characters: False
 ```
 
 ### -Encoding
-{{ Fill Encoding Description }}
+Specifies the type of encoding for the target file. The default value is UTF8.
 
 ```yaml
 Type: Encoding
@@ -155,7 +155,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: UTF8
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -297,7 +297,7 @@ Accept wildcard characters: False
 ```
 
 ### -Raw
-{{ Fill Raw Description }}
+Ignores newline characters and returns the entire contents of a file in one string with the newlines preserved. By default, newline characters in a file are used as delimiters to separate the input into an array of strings.
 
 ```yaml
 Type: SwitchParameter
@@ -312,7 +312,7 @@ Accept wildcard characters: False
 ```
 
 ### -Revision
-{{ Fill Revision Description }}
+Specifies the revision to operate.
 
 ```yaml
 Type: SvnRevisionRange
