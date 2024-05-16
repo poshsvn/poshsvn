@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-SvnUpgrade
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Upgrade the metadata storage format for a working copy.
 
 ## SYNTAX
 
@@ -17,21 +17,23 @@ Invoke-SvnUpgrade [[-Path] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Upgrade the metadata storage format for a working copy.
+Local modifications are preserved.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+svn-upgrade path/to/wc
+Upgraded '.'
 ```
 
-{{ Add example description here }}
+Upgrade the working copy, located at 'path/to/wc'.
 
 ## PARAMETERS
 
 ### -Path
-{{ Fill Path Description }}
+Specifies the Path of a working copy to upgrade. By default is `.` (current directory).
 
 ```yaml
 Type: String[]
