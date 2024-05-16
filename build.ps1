@@ -29,7 +29,7 @@ $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.e
 $installationPath = & $vswhere -property "installationPath"
 $msbuild = "$installationPath\MSBuild\Current\Bin\MSBuild.exe"
 
-& $msbuild /property:Configuration=Release /t:$msbuildTarget /restore
+& $msbuild /property:Configuration=Release /t:$msbuildTarget /restore /fileLogger
 
 if ($Install) {
     msiexec.exe /i bin\Release-x64\Installer\en-US\PoshSvn.msi /qb
