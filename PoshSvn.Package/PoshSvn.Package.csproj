@@ -56,7 +56,7 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="ZipPackage" BeforeTargets="_CopyOutOfDateSourceItemsToOutputDirectory" Inputs="@(PackageItems)" Outputs="$(ZipPackagePath)">
+  <Target Name="ZipPackage" AfterTargets="_CopyOutOfDateSourceItemsToOutputDirectory" Inputs="@(PackageItems)" Outputs="$(ZipPackagePath)">
     <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ZipPackagePath)" Overwrite="true" />
   </Target>
 
