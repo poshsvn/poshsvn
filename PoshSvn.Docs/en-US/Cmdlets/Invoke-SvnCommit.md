@@ -136,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Specifies a Path of a the item commit. By default is `.` (current directory).
+Specifies the Path of an item commit. By default is `.` (current directory).
 
 ```yaml
 Type: String[]
