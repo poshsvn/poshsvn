@@ -1,3 +1,11 @@
+---
+description: Quick Start guide with PoshSvn.
+Locale: en-US
+online version: https://www.poshsvn.com/docs/Quick Start/
+schema: 2.0.0
+title: Quick Start with PoshSvn
+---
+
 # Quick Start with PoshSvn
 
 ## 1. Install PoshSvn
