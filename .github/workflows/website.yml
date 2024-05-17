@@ -30,8 +30,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Install PoshSvn
+        run: Install-Module -Name PoshSvn
+
       - name: Checkout
-        uses: actions/checkout@v4
+        run: |
+          $password = New-Object SecureString
+          svn-checkout -Url "https://svn.rinrab.com/rinrab/poshsvn/trunk" -Path "." `
+                       -Username guest -Password $password
 
       - name: Build website
         run: .\Scripts\Build-PoshSvnWebsite.ps1
