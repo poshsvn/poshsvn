@@ -4,6 +4,8 @@
 $siteRoot = "$PSScriptRoot\..\www"
 $outDir = "$siteRoot\build"
 
+$sitemap = "$outDir\sitemap.xml"
+
 function Add-PageToSiteMap {
     param (
         [string]
@@ -14,7 +16,13 @@ function Add-PageToSiteMap {
     $url = $url -replace "\.\\"
     $url = "https://www.poshsvn.com/$url/"
     $url = $url -replace "\\", "/" -replace "/index.html"
-    Add-Content -Path "$outDir\sitemap.txt" -Value $url
+
+    $newNode = 
+"  <url>
+    <loc>$url</loc>
+  </url>"
+
+    Add-Content -Path $sitemap -Value $newNode
 }
 
 function TrimName {
@@ -73,6 +81,10 @@ if ($null -eq (Get-Module -ListAvailable -Name platyPS)) {
 
 Remove-Item -Recurse -Force $outDir -ErrorAction SilentlyContinue
 
+New-Item -ItemType File -Path $sitemap -Force
+Add-Content -Path $sitemap -Value '<?xml version="1.0" encoding="utf-8"?>'
+Add-Content -Path $sitemap -Value '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+
 function RenderDocsLanguage {
     param (
         $SourceDir,
@@ -95,3 +107,5 @@ Copy-Item "$PSScriptRoot\..\Assets\icon-minimal.svg" "$outDir\favicon.svg"
 Copy-Item "$PSScriptRoot\..\Assets\icon.svg" "$outDir\icon.svg"
 
 Add-PageToSiteMap -PagePath "$outDir\index.html"
+
+Add-Content -Path $sitemap -Value "</urlset>"
