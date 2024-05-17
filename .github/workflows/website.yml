@@ -37,7 +37,8 @@ jobs:
         run: |
           $password = New-Object SecureString
           svn-checkout -Url "https://svn.rinrab.com/rinrab/poshsvn/trunk" -Path "." `
-                       -Username guest -Password $password
+                       -Username guest -Password $password `
+                       -TrustServerCertificateFailures UnknownCertificateAuthority
 
       - name: Build website
         run: .\Scripts\Build-PoshSvnWebsite.ps1
