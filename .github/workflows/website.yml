@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Install PoshSvn
-        run: Install-Module -Name PoshSvn
+        run: Install-Module -Name PoshSvn -Force
 
       - name: Checkout
         run: |
