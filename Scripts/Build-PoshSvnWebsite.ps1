@@ -20,6 +20,8 @@ function Add-PageToSiteMap {
     $newNode = 
 "  <url>
     <loc>$url</loc>
+    <changefreq>always</changefreq>
+    <priority>1.0</priority>
   </url>"
 
     Add-Content -Path $sitemap -Value $newNode
