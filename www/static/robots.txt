@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /*
-Host: www.poshs.com
+Host: www.poshsvn.com
 Sitemap: https://www.poshsvn.com/sitemap.xml
