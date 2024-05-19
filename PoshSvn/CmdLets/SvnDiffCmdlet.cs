@@ -70,6 +70,10 @@ namespace PoshSvn.CmdLets
         [Parameter()]
         public SwitchParameter PatchCompatible { get; set; }
 
+        [Parameter()]
+        [Alias("x")]
+        public string[] Extensions { get; set; }
+
         public SvnDiffCmdlet()
         {
             Depth = SvnDepth.Infinity;
@@ -97,6 +101,14 @@ namespace PoshSvn.CmdLets
             if (Changelist != null)
             {
                 args.ChangeLists.Add(Changelist);
+            }
+
+            if (Extensions != null)
+            {
+                foreach (string extension in Extensions)
+                {
+                    args.DiffArguments.Add(extension);
+                }
             }
 
             if (ParameterSetName == ParameterSetNames.Target)
