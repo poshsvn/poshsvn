@@ -86,8 +86,6 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            SharpSvn.SvnDiffArgs args = CreateSvnDiffArgs();
-
             if (ParameterSetName == ParameterSetNames.Target)
             {
                 SvnRevisionRangeBase svnRevision =
@@ -102,6 +100,8 @@ namespace PoshSvn.CmdLets
                 {
                     using (Stream stream = GetStream())
                     {
+                        SharpSvn.SvnDiffArgs args = CreateSvnDiffArgs();
+
                         SvnClient.Diff(target, sharpSvnRevision, args, stream);
                     }
                 }
@@ -112,6 +112,7 @@ namespace PoshSvn.CmdLets
                 {
                     SharpSvn.SvnTarget oldTarget = ResolveTarget(Old).ConvertToSharpSvnTarget();
                     SharpSvn.SvnTarget newTarget = ResolveTarget(New).ConvertToSharpSvnTarget();
+                    SharpSvn.SvnDiffArgs args = CreateSvnDiffArgs();
 
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
                 };
