@@ -32,7 +32,6 @@ namespace PoshSvn.Tests
                         $@"-line2",
                         $@"+modified line2",
                         $@" line3",
-
                     },
                     actual);
             }
@@ -95,7 +94,6 @@ namespace PoshSvn.Tests
                         $@"-line2",
                         $@"+modified line2",
                         $@" line3",
-
                     },
                     actual);
             }
@@ -128,7 +126,6 @@ namespace PoshSvn.Tests
                         $@"-line2",
                         $@"+modified line2",
                         $@" line3",
-
                     },
                     actual);
             }
@@ -161,7 +158,6 @@ namespace PoshSvn.Tests
                         $@"-modified line2",
                         $@"+line2",
                         $@" line3",
-
                     },
                     actual);
             }
@@ -190,7 +186,6 @@ namespace PoshSvn.Tests
                         $@"-line2",
                         $@"+modified line2",
                         $@" line3",
-
                     },
                     actual);
             }
