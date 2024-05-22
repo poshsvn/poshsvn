@@ -86,27 +86,7 @@ namespace PoshSvn.CmdLets
 
         protected override void Execute()
         {
-            SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
-            {
-                Depth = Depth.ConvertToSharpSvnDepth(),
-                NoAdded = NoDiffAdded,
-                NoDeleted = NoDiffDeleted,
-                NoProperties = IgnoreProperties || PatchCompatible,
-                PropertiesOnly = PropertiesOnly,
-                CopiesAsAdds = ShowCopiesAsAdds || PatchCompatible,
-                IgnoreAncestry = !NoticeAncestry,
-                UseGitFormat = Git,
-            };
-
-            if (Changelist != null)
-            {
-                args.ChangeLists.Add(Changelist);
-            }
-
-            foreach (string extension in Extensions.ConvertToArgumentCollection())
-            {
-                args.DiffArguments.Add(extension);
-            }
+            SharpSvn.SvnDiffArgs args = CreateSvnDiffArgs();
 
             if (ParameterSetName == ParameterSetNames.Target)
             {
@@ -136,6 +116,33 @@ namespace PoshSvn.CmdLets
                     SvnClient.Diff(oldTarget, newTarget, args, stream);
                 };
             }
+        }
+
+        protected SharpSvn.SvnDiffArgs CreateSvnDiffArgs()
+        {
+            SharpSvn.SvnDiffArgs args = new SharpSvn.SvnDiffArgs
+            {
+                Depth = Depth.ConvertToSharpSvnDepth(),
+                NoAdded = NoDiffAdded,
+                NoDeleted = NoDiffDeleted,
+                NoProperties = IgnoreProperties || PatchCompatible,
+                PropertiesOnly = PropertiesOnly,
+                CopiesAsAdds = ShowCopiesAsAdds || PatchCompatible,
+                IgnoreAncestry = !NoticeAncestry,
+                UseGitFormat = Git,
+            };
+
+            if (Changelist != null)
+            {
+                args.ChangeLists.Add(Changelist);
+            }
+
+            foreach (string extension in Extensions.ConvertToArgumentCollection())
+            {
+                args.DiffArguments.Add(extension);
+            }
+
+            return args;
         }
 
         protected Stream GetStream()
