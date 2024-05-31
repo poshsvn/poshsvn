@@ -72,7 +72,7 @@ namespace PoshSvn.CmdLets
 
         [Parameter()]
         [Alias("x")]
-        public DiffExtension Extensions { get; set; }
+        public string[] Extensions { get; set; }
 
         public SvnDiffCmdlet()
         {
@@ -138,9 +138,12 @@ namespace PoshSvn.CmdLets
                 args.ChangeLists.Add(Changelist);
             }
 
-            foreach (string extension in Extensions.ConvertToArgumentCollection())
+            if (Extensions != null)
             {
-                args.DiffArguments.Add(extension);
+                foreach (string extension in Extensions)
+                {
+                    args.DiffArguments.Add(extension);
+                }
             }
 
             return args;
