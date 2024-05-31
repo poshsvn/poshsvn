@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.1.0]
+
+- Added `-Change` parameter to all cmdlets.
+- Added `-AsByteStream`, `-Raw`, and `-Encoding` parameters to the `svn-diff` cmdlet.
+- Implement the svn-upgrade cmdlet.
+- Minor fixes and improvement, specialy for the `svn-diff` and `svn-log` cmdlets.
+- Build improvements.
+
 ## [1.0.1]
 
 - Fixed help build.
