@@ -1,7 +1,5 @@
 {
-  "sdk": {
-    "version": "8.0.204"
-  },
+  "sdk": {},
   "msbuild-sdks": {
     "Microsoft.Build.NoTargets": "3.7.56"
   }
