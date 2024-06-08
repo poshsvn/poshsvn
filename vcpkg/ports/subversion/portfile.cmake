@@ -12,10 +12,19 @@ vcpkg_extract_source_archive_ex(
         "fix-expatdir.patch"
 )
 
+vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+    FEATURES
+        ra-serf RA_SERF
+)
+
 vcpkg_find_acquire_program(PYTHON3)
 
 if(VCPKG_LIBRARY_LINKAGE STREQUAL static)
   set(BUILD_MODE --with-static-apr --with-static-openssl --disable-shared)
+endif()
+
+if(${RA_SERF})
+    set(RA_SERF_OPTIONS --with-serf=${CURRENT_INSTALLED_DIR})
 endif()
 
 vcpkg_execute_build_process(
@@ -27,6 +36,7 @@ vcpkg_execute_build_process(
         --with-serf=${CURRENT_INSTALLED_DIR}
         --with-sqlite=${CURRENT_INSTALLED_DIR}
         --with-zlib=${CURRENT_INSTALLED_DIR}
+        ${RA_SERF_OPTIONS}
         ${BUILD_MODE}
     WORKING_DIRECTORY "${SOURCE_PATH}"
     LOGNAME "gen-make"
