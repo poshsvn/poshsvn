@@ -18,6 +18,10 @@
   "dependencies": [
     "apr",
     "apr-util",
-    "zlib"
+    "zlib",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    }
   ]
 }

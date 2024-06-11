@@ -1,0 +1,528 @@
+﻿Index: build/cmake/dependencies.cmake
+===================================================================
+--- build/cmake/dependencies.cmake	(nonexistent)
++++ build/cmake/dependencies.cmake	(working copy)
+@@ -0,0 +1,194 @@
++### APR and APR-Util
++
++# APR config might not exist, so don't warn if it is not found.
++# It will be handled later.
++find_package(apr QUIET)
++
++if(apr_FOUND)
++  # It could rather APR-1 or APR-2
++  message("Found APR config.")
++else()
++  message("APR config not found. Looking for libraries and includes...")
++endif()
++
++## APR-2 (APR and APR-Util are merged)
++
++# 1. Look for shared APR-2 config then for its static version.
++# 2. If APR-2 was not found, look for shared or static APR-1.
++# 3. If APR config was not found, import the target manually.
++# 4. Import APR-Util target manually, because it doesn't have a config.
++if(TARGET apr::libapr-2)
++  add_library(external-apr ALIAS apr::libapr-2)
++  add_library(external-aprutil ALIAS apr::libapr-2)
++  message("Using shared APR-2 as APR and APR-Util in config mode.")
++elseif(TARGET apr::apr-2)
++  add_library(external-apr ALIAS apr::apr-2)
++  add_library(external-aprutil ALIAS apr::apr-2)
++  message("Using static APR-2 as APR and APR-Util in config mode.")
++else()
++  ## APR
++
++  if(TARGET apr::libapr-1)
++    add_library(external-apr ALIAS apr::libapr-1)
++    message("Using shared APR-1 as APR in config mode.")
++  elseif(TARGET apr::apr-1)
++    add_library(external-apr ALIAS apr::apr-1)
++    message("Using static APR-1 as APR in config mode.")
++  else()
++    find_path(APR_INCLUDE_DIR
++      NAMES apr.h
++      PATH_SUFFIXES
++        include
++        include/apr-1
++    )
++
++    if(${APR_INCLUDE_DIR} STREQUAL "APR_INCLUDE_DIR-NOTFOUND")
++      message(FATAL_ERROR "APR include dir not found")
++    else()
++      message("Found APR include dir: ${APR_LIBRARY}")
++    endif()
++
++    find_library(APR_LIBRARY
++      NAMES libapr-1
++      PATH_SUFFIXES lib
++    )
++
++    if(${APR_LIBRARY} STREQUAL "APR_LIBRARY-NOTFOUND")
++      find_library(APR_LIBRARY
++        NAMES libapr-1
++        PATH_SUFFIXES lib
++      )
++
++      if(${APR_LIBRARY} STREQUAL "APR_LIBRARY-NOTFOUND")
++        message(FATAL_ERROR "APR library not found")
++      else()
++        set(APR_STATIC ON)
++        message("Found APR library (static): ${APR_LIBRARY}")
++      endif()
++    else()
++      set(APR_STATIC OFF)
++      message("Found APR library (shared): ${APR_LIBRARY}")
++    endif()
++
++    add_library(external-apr STATIC IMPORTED)
++
++    set_target_properties(external-apr PROPERTIES
++      INTERFACE_INCLUDE_DIRECTORIES ${APR_INCLUDE_DIR}
++      IMPORTED_LOCATION ${APR_LIBRARY}
++    )
++
++    if (APR_STATIC)
++      target_compile_definitions(external-aprutil IMPORTED "APR_DECLARE_STATIC")
++    endif()
++  endif()
++
++  ## APR-Util
++
++  find_path(APRUTIL_INCLUDE_DIR
++    NAMES apu.h
++    PATHS ${CMAKE_PREFIX_PATH}
++    PATH_SUFFIXES
++      include
++      include/apr-1 # Not yet in apr
++  )
++  
++  if(${APRUTIL_INCLUDE_DIR} STREQUAL "APRUTIL_INCLUDE_DIR-NOTFOUND")
++    message(FATAL_ERROR "APR-Util include dir not found")
++  else()
++    message("Found APR-Util include dir: ${APRUTIL_INCLUDE_DIR}")
++  endif()
++
++  find_library(APRUTIL_LIBRARY
++    NAMES libaprutil-1
++    PATH_SUFFIXES lib
++  )
++
++  if(${APRUTIL_LIBRARY} STREQUAL "APRUTIL_LIBRARY-NOTFOUND")
++    find_library(APRUTIL_LIBRARY
++      NAMES aprutil-1
++      PATH_SUFFIXES lib
++    )
++
++    if(${APRUTIL_LIBRARY} STREQUAL "APRUTIL_LIBRARY-NOTFOUND")
++      message(FATAL_ERROR "APR-Util library not found")
++    else()
++      set(APRUTIL_STATIC ON)
++      message("Found APR-Util library (static): ${APRUTIL_LIBRARY}")
++    endif()
++  else()
++    set(APRUTIL_STATIC OFF)
++    message("Found APR-Util library (shared): ${APRUTIL_LIBRARY}")
++  endif()
++
++  add_library(external-aprutil STATIC IMPORTED)
++
++  set_target_properties(external-aprutil PROPERTIES
++    INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
++    IMPORTED_LOCATION ${APRUTIL_LIBRARY}
++  )
++
++  if (APRUTIL_STATIC)
++    target_compile_definitions(external-aprutil INTERFACE "APU_DECLARE_STATIC")
++  endif()
++endif()
++
++find_package(ZLIB)
++add_library(external-zlib ALIAS ZLIB::ZLIB)
++
++### EXPAT
++
++# 1. Looking for EXPAT package
++# 2. Try using built-in FindEXPAT CMake module.
++# 3. TODO: Import the target manually.
++find_package(expat CONFIG QUIET)
++
++if (expat_FOUND)
++  message("Found EXPAT package.")
++  add_library(external-xml ALIAS expat::expat)
++else()
++  message("EXPAT package not found. Using module.")
++  set(EXPAT_NAMES expat expatw xml)
++  find_package(EXPAT MODULE QUIET)
++
++  if (EXPAT_FOUND)
++    message("EXPAT found via module.")
++    add_library(external-xml ALIAS EXPAT::EXPAT)
++  else()
++    # TODO: this is probably `xml.lib` from prebuilt HTTPD, which is
++    # not supported by default FindEXPAT CMake module.
++    message(FATAL_ERROR "EXPAT module not found. Not done yet.")
++  endif()
++endif()
++
++### LZ4
++
++if(SVN_USE_INTERNAL_LZ4)
++  add_library(external-lz4 STATIC "build/win32/empty.c")
++  target_compile_definitions(external-lz4 PUBLIC "SVN_INTERNAL_LZ4")
++else()
++  find_package(lz4 CONFIG REQUIRED)
++  add_library(external-lz4 ALIAS lz4::lz4)
++endif()
++
++### UTF8PROC
++
++if(SVN_USE_INTERNAL_UTF8PROC)
++  add_library(external-utf8proc STATIC "build/win32/empty.c")
++  target_compile_definitions(external-utf8proc PUBLIC "SVN_INTERNAL_UTF8PROC")
++else()
++  # TODO:
++  # find_package(utf8proc CONFIG REQUIRED)
++  # add_library(external-utf8proc ALIAS utf8proc)
++endif()
++
++### SQLite3
++
++if(SVN_SQLITE_USE_AMALGAMATION)
++  add_library(external-sqlite STATIC "build/win32/empty.c")
++  target_include_directories(external-sqlite
++                             PUBLIC "${SVN_SQLITE_AMALGAMATION_DIR}")
++  target_compile_definitions(external-sqlite PUBLIC SVN_SQLITE_INLINE)
++else()
++  find_package(SQLite3 REQUIRED)
++  add_library(external-sqlite ALIAS SQLite::SQLite3)
++endif()
+Index: build/generator/gen_cmake.py
+===================================================================
+--- build/generator/gen_cmake.py	(nonexistent)
++++ build/generator/gen_cmake.py	(working copy)
+@@ -0,0 +1,209 @@
++import os
++import stat
++import sys
++from build.generator.gen_make import UnknownDependency, _normstr
++import ezt
++import gen_base
++
++class _eztdata(object):
++  def __init__(self, **kw):
++    vars(self).update(kw)
++
++class cmake_target():
++  def __init__(self, name: str, type: str, deps: str, libs: str,
++               sources, msvc_libs, msvc_export, msvc_static, msvc_objects, msvc_force_static):
++    self.name = name
++    self.type = type
++    self.deps = deps
++    self.libs = libs
++    self.sources = sources
++    self.msvc_libs = msvc_libs
++    self.msvc_export = msvc_export
++    self.msvc_static = ezt.boolean(msvc_static)
++    self.msvc_objects = msvc_objects
++    self.msvc_force_static = ezt.boolean(msvc_force_static)
++
++    self.has_msvc_libs = ezt.boolean(len(msvc_libs) > 0)
++    self.has_msvc_objects = ezt.boolean(len(msvc_objects) > 0)
++
++def get_target_type(target: gen_base.Target):
++  if isinstance(target, gen_base.TargetExe):
++    if target.install == "test" or target.install == "sub-test":
++      return "test"
++    else:
++      return "exe"
++  if isinstance(target, gen_base.TargetSWIG):
++    return "swig"
++  if isinstance(target, gen_base.TargetSWIGProject):
++    return "swig-project"
++  if isinstance(target, gen_base.TargetSWIGLib):
++    return "swig-lib"
++  if isinstance(target, gen_base.TargetLib):
++    return "lib"
++  else:
++    return str(type(target))
++
++class Generator(gen_base.GeneratorBase):
++  _extension_map = {
++    ('exe', 'target'): '.exe',
++    ('exe', 'object'): '.obj',
++    ('lib', 'target'): '.dll',
++    ('lib', 'object'): '.obj',
++    ('pyd', 'target'): '.pyd',
++    ('pyd', 'object'): '.obj',
++    ('so', 'target'): '.so',
++    ('so', 'object'): '.obj',
++  }
++
++  def __init__(self, fname, verfname, options=None):
++    gen_base.GeneratorBase.__init__(self, fname, verfname, options)
++
++  def write(self):
++    install_deps = self.graph.get_deps(gen_base.DT_INSTALL)
++
++    install_sources = self.get_install_sources()
++
++    # ensure consistency between runs
++    install_deps.sort()
++
++    targets = []
++    ra_modules = []
++    fs_modules = []
++
++    for target_ob in self.graph.get_sources(gen_base.DT_LINK, "ra-libs"):
++      name = target_ob.name
++      if name == "libsvn_ra_serf":
++        pass
++      else:
++        ra_modules.append(target_ob.name)
++    for target_ob in self.graph.get_sources(gen_base.DT_LINK, "fs-libs"):
++      name = target_ob.name
++      if name == "libsvn_fs_base":
++        pass
++      else:
++        fs_modules.append(target_ob.name)
++
++    for target_ob in install_sources:
++      target_ob: gen_base.Target
++
++      if isinstance(target_ob, gen_base.TargetScript):
++        # there is nothing to build
++        continue
++
++      sources = []
++      deps = []
++      libs = []
++
++      for link_dep in self.graph.get_sources(gen_base.DT_LINK, target_ob.name):
++        if isinstance(link_dep, gen_base.TargetJava):
++          deps.append(link_dep.name)
++        elif isinstance(link_dep, gen_base.TargetLinked):
++          if link_dep.external_lib:
++            name = link_dep.name
++            if name == "ra-libs":
++              libs += ra_modules
++            elif name == "fs-libs":
++              libs += fs_modules
++            elif name in ["apriconv",
++                          "apr_memcache",
++                          "magic",
++                          "intl",
++                          "macos-plist",
++                          "macos-keychain",
++                          "sasl"]:
++              pass
++            else:
++              libs.append("external-" + name)
++          elif link_dep.external_project:
++            pass
++          else:
++            libs.append(link_dep.name)
++        elif isinstance(link_dep, gen_base.ObjectFile):
++          deps = self.graph.get_sources(gen_base.DT_OBJECT,
++                                        link_dep,
++                                        gen_base.SourceFile)
++          for dep in deps:
++            sources.append(dep.filename)
++        elif isinstance(link_dep, gen_base.HeaderFile):
++          pass
++        else:
++          raise UnknownDependency
++
++      target_type = get_target_type(target_ob)
++      target_name = target_ob.name
++      msvc_objects = []
++
++      if target_type == "exe" or target_type == "lib" or target_type == "test":
++        msvc_libs = []
++        for lib in target_ob.msvc_libs:
++          if lib == "setargv.obj": # check on .obj
++            msvc_objects.append(lib)
++          else:
++            msvc_libs.append(lib)
++
++        msvc_export = []
++        msvc_static = False
++        msvc_force_static = False
++
++        if isinstance(target_ob, gen_base.TargetLib):
++          for export in target_ob.msvc_export:
++            path = "subversion/include/" + export.replace("\\", "/")
++            msvc_export.append(path)
++          msvc_static = target_ob.msvc_static
++
++        if isinstance(target_ob, gen_base.TargetExe):
++          msvc_force_static = target_ob.msvc_force_static
++
++        targets.append(cmake_target(target_name, target_type,
++                                    deps, libs, sources,
++                                    msvc_libs, msvc_export, msvc_static, msvc_objects,
++                                    msvc_force_static))
++
++    data = _eztdata(
++      targets = targets,
++    )
++
++    template = ezt.Template(os.path.join('build', 'generator', 'templates',
++                                         'CMakeLists.txt.ezt'),
++                            compress_whitespace=False)
++    template.generate(open('CMakeLists.txt', 'w'), data)
++
++  def get_install_sources(self):
++    install_sources = self.graph.get_all_sources(gen_base.DT_INSTALL)
++    result = []
++
++    for target in install_sources:
++      target: gen_base.Target
++
++      if not self.check_ignore_target(target):
++        result.append(target)
++
++    result.sort(key = lambda s: s.name)
++
++    return result
++
++  def check_ignore_target(self, target: gen_base.Target):
++    ignore_names = [
++      "libsvn_fs_base",
++      "libsvn_auth_gnome_keyring",
++      "libsvn_auth_kwallet",
++      "libsvn_ra_serf",
++      "libsvnxx",
++      "svnxx-tests",
++      "mod_dav_svn",
++      "mod_authz_svn",
++      "mod_dontdothat",
++      "__JAVAHL__",
++      "__JAVAHL_TESTS__",
++      "libsvnjavahl",
++    ]
++
++    for name in ignore_names:
++      if target.name == name:
++        return True
++
++      if isinstance(target, gen_base.TargetExe):
++        if target.install == "bdb-test":
++          return True
++
++    return False
+Index: build/generator/templates/CMakeLists.txt.ezt
+===================================================================
+--- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
++++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
+@@ -0,0 +1,98 @@
++cmake_minimum_required(VERSION 3.5)
++
++project("Subversion")
++
++option(SVN_BUILD_PROGRAMS "Build Subversion programs (such as svn.exe)" ON)
++option(SVN_BUILD_TEST "Build Subversion test-suite" OFF)
++
++option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
++option(SVN_SQLITE_USE_AMALGAMATION "Use sqlite amalgamation" ON)
++set(SVN_SQLITE_AMALGAMATION_DIR "${CMAKE_SOURCE_DIR}/sqlite-amalgamation"
++    CACHE STRING "Directory with sqlite amalgamation"
++)
++option(SVN_USE_INTERNAL_UTF8PROC "Use internal version of utf8proc" ON)
++option(SVN_USE_INTERNAL_LZ4 "Use internal version of lz4" ON)
++
++find_package(Python COMPONENTS Interpreter REQUIRED)
++
++configure_file(
++  "${CMAKE_CURRENT_SOURCE_DIR}/subversion/svn_private_config.hw"
++  "${CMAKE_CURRENT_BINARY_DIR}/svn_private_config.h"
++)
++
++set(SVN_INCLUDE_DIRECTORIES
++  "${CMAKE_CURRENT_SOURCE_DIR}/subversion/include"
++  "${CMAKE_CURRENT_BINARY_DIR}"
++)
++
++if (WIN32)
++  add_compile_definitions(
++    "alloca=_alloca"
++  )
++endif()
++
++include(build/cmake/dependencies.cmake)
++
++install(DIRECTORY "subversion/include/" DESTINATION "include/subversion-1")
++[for targets][is targets.type "exe"]
++if (SVN_BUILD_PROGRAMS)
++  add_executable([targets.name][for targets.sources]
++    [targets.sources][end]
++  )
++  install(TARGETS [targets.name])
++  [end][is targets.type "lib"]
++if (TRUE) # TODO:
++  add_library([targets.name][if-any targets.msvc_static] STATIC[end][for targets.sources]
++    [targets.sources][end]
++  )
++  set_target_properties([targets.name] PROPERTIES OUTPUT_NAME "[targets.name]-1")
++  if(BUILD_SHARED_LIBS)
++    set([targets.name]_HEADERS[for targets.msvc_export]
++      "[targets.msvc_export]"[end]
++    )
++    add_custom_command(
++      WORKING_DIRECTORY
++        ${CMAKE_SOURCE_DIR}
++      COMMAND
++        ${Python_EXECUTABLE}
++      ARGS
++        "build/generator/extractor.py"
++        ${[targets.name]_HEADERS}
++        ">${CMAKE_BINARY_DIR}/[targets.name].def"
++      OUTPUT
++        "${CMAKE_BINARY_DIR}/[targets.name].def"
++      DEPENDS
++        "build/generator/extractor.py"
++        ${[targets.name]_HEADERS}
++    )
++    target_sources([targets.name] PRIVATE "${CMAKE_BINARY_DIR}/[targets.name].def")
++  endif()
++  target_include_directories([targets.name] PUBLIC ${SVN_INCLUDE_DIRECTORIES})
++  install(TARGETS [targets.name])
++[end][is targets.type "test"]
++[if-any targets.msvc_force_static]if (SVN_BUILD_TEST AND BUILD_SHARED_LIBS)
++  message(WARNING "Ignoring test '[targets.name]', because it requires static"
++                  " libraries to build. Please disable BUILD_SHARED_LIBS"
++                  " option to build the test.")
++endif()
++[end]if(SVN_BUILD_TEST[if-any targets.msvc_force_static] AND NOT BUILD_SHARED_LIBS[end])
++  add_executable([targets.name][for targets.sources] [targets.sources][end])
++  add_test([targets.name] [targets.name])
++[end]  target_link_libraries([targets.name] PRIVATE[for targets.libs]
++    [targets.libs][end]
++  )[if-any targets.has_msvc_libs targets.has_msvc_objects]
++  if(WIN32)
++[if-any targets.has_msvc_libs]target_link_libraries([targets.name] PRIVATE[for targets.msvc_libs] [targets.msvc_libs][end])
++[end][if-any targets.has_msvc_objects]target_link_libraries([targets.name] PRIVATE[for targets.msvc_libs] [targets.msvc_libs][end])
++[end]
++  endif()[end]
++endif()
++[end]
++if(SVN_BUILD_TEST)
++  enable_testing()
++endif()
++
++# Enable globbing for all executables
++if(MSVC)
++  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} setargv.obj")
++endif()
+Index: gen-make.py
+===================================================================
+--- gen-make.py	(revision 1918259)
++++ gen-make.py	(working copy)
+@@ -49,6 +49,7 @@
+ gen_modules = {
+   'make' : ('gen_make', 'Makefiles for POSIX systems'),
+   'vcproj' : ('gen_vcnet_vcproj', 'VC.Net project files'),
++  'cmake' : ('gen_cmake', 'CMake build system'),
+   }
+ 
+ def main(fname, gentype, verfname=None,

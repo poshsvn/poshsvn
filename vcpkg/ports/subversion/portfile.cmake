@@ -8,8 +8,8 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE "${ARCHIVE}"
     PATCHES
-        "fix-serfdir.patch"
-        "fix-expatdir.patch"
+        "svn-fix-ws2_32.patch"
+        "svn-cmake.patch"
 )
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
@@ -30,35 +30,18 @@ vcpkg_extract_source_archive_ex(
 
 vcpkg_find_acquire_program(PYTHON3)
 
-if(VCPKG_LIBRARY_LINKAGE STREQUAL static)
-  set(BUILD_MODE --with-static-apr --with-static-openssl --disable-shared)
-endif()
-
-if(${RA_SERF})
-    set(RA_SERF_OPTIONS --with-serf=${CURRENT_INSTALLED_DIR})
-endif()
-
 vcpkg_execute_build_process(
-    COMMAND ${PYTHON3} gen-make.py
-        -t vcproj --vsnet-version=2022
-        --with-apr=${CURRENT_INSTALLED_DIR}
-        --with-apr-util=${CURRENT_INSTALLED_DIR}
-        --with-openssl=${CURRENT_INSTALLED_DIR}
-        --with-serf=${CURRENT_INSTALLED_DIR}
-        --with-sqlite=${SQLITE_AMALGAMATION_SOURCE_PATH}
-        --with-zlib=${CURRENT_INSTALLED_DIR}
-        ${RA_SERF_OPTIONS}
-        ${BUILD_MODE}
+    COMMAND ${PYTHON3} gen-make.py -t cmake
     WORKING_DIRECTORY "${SOURCE_PATH}"
     LOGNAME "gen-make"
 )
 
-vcpkg_install_msbuild(
+vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
-    PROJECT_SUBPATH "subversion_vcnet.sln"
-    TARGET "__ALL__"
+    OPTIONS
+        -DSVN_SQLITE_AMALGAMATION_DIR=${SQLITE_AMALGAMATION_SOURCE_PATH}
 )
 
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+vcpkg_cmake_install()
 
-file(COPY "${SOURCE_PATH}/subversion/include" DESTINATION "${CURRENT_PACKAGES_DIR}")
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
