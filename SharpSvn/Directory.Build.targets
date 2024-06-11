@@ -16,7 +16,6 @@
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_client-1.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_delta-1.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libexpat.dll" />
-    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\sqlite3.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\zlib1.dll" />
   </ItemGroup>
 
