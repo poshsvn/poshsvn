@@ -1,7 +1,7 @@
-﻿Index: build/cmake/dependencies.cmake
+﻿Index: a/build/cmake/dependencies.cmake
 ===================================================================
---- build/cmake/dependencies.cmake	(nonexistent)
-+++ build/cmake/dependencies.cmake	(working copy)
+--- a/build/cmake/dependencies.cmake	(nonexistent)
++++ a/build/cmake/dependencies.cmake	(working copy)
 @@ -0,0 +1,194 @@
 +### APR and APR-Util
 +
@@ -197,10 +197,10 @@
 +  find_package(SQLite3 REQUIRED)
 +  add_library(external-sqlite ALIAS SQLite::SQLite3)
 +endif()
-Index: build/generator/gen_cmake.py
+Index: a/build/generator/gen_cmake.py
 ===================================================================
---- build/generator/gen_cmake.py	(nonexistent)
-+++ build/generator/gen_cmake.py	(working copy)
+--- a/build/generator/gen_cmake.py	(nonexistent)
++++ a/build/generator/gen_cmake.py	(working copy)
 @@ -0,0 +1,209 @@
 +import os
 +import stat
@@ -411,11 +411,11 @@ Index: build/generator/gen_cmake.py
 +          return True
 +
 +    return False
-Index: build/generator/templates/CMakeLists.txt.ezt
+Index: a/build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
---- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
-+++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,98 @@
+--- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
++++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
+@@ -0,0 +1,93 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -514,10 +514,10 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +if(MSVC)
 +  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} setargv.obj")
 +endif()
-Index: gen-make.py
+Index: a/gen-make.py
 ===================================================================
---- gen-make.py	(revision 1918259)
-+++ gen-make.py	(working copy)
+--- a/gen-make.py	(revision 1918259)
++++ a/gen-make.py	(working copy)
 @@ -49,6 +49,7 @@
  gen_modules = {
    'make' : ('gen_make', 'Makefiles for POSIX systems'),
