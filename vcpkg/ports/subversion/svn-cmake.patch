@@ -516,10 +516,9 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +    [targets.libs][end]
 +  )[if-any targets.has_msvc_libs targets.has_msvc_objects]
 +  if(WIN32)
-+[if-any targets.has_msvc_libs]target_link_libraries([targets.name] PRIVATE[for targets.msvc_libs] [targets.msvc_libs][end])
-+[end][if-any targets.has_msvc_objects]target_link_libraries([targets.name] PRIVATE[for targets.msvc_libs] [targets.msvc_libs][end])
-+[end]
-+  endif()[end]
++[if-any targets.has_msvc_libs]    target_link_libraries([targets.name] PRIVATE[for targets.msvc_libs] [targets.msvc_libs][end])
++[end][if-any targets.has_msvc_objects]    set_target_properties([targets.name] PROPERTIES LINK_FLAGS[for targets.msvc_objects] [targets.msvc_objects][end])
++[end]  endif()[end]
 +endif()
 +[end]
 +function(generate_sql_header SQL_PATH)
@@ -540,10 +539,6 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +  enable_testing()
 +endif()
 +
-+# Enable globbing for all executables
-+if(MSVC)
-+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} setargv.obj")
-+endif()
 Index: a/gen-make.py
 ===================================================================
 --- a/gen-make.py	(revision 1918259)
