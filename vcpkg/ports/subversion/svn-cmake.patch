@@ -423,7 +423,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,114 @@
+@@ -0,0 +1,126 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -431,6 +431,19 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +option(SVN_BUILD_PROGRAMS "Build Subversion programs (such as svn.exe)" ON)
 +option(SVN_BUILD_TOOLS "Build Subversion tools" OFF)
 +option(SVN_BUILD_TEST "Build Subversion test-suite" OFF)
++
++# set(SVN_INSTALL_BIN_DIR "bin" CACHE STRING
++#   "Subversion binaries install directory."
++# )
++set(SVN_INSTALL_PROGRAMS_DIR "bin" CACHE STRING
++  "Subversion tools and programs install directory."
++)
++# set(SVN_INSTALL_LIB_DIR "lib" CACHE STRING
++#   "Subversion libraries install directory."
++# )
++set(SVN_INSTALL_INCLUDE_DIR "include/subversion-1" CACHE STRING
++  "Subversion include install directory."
++)
 +
 +option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 +option(SVN_SQLITE_USE_AMALGAMATION "Use sqlite amalgamation" ON)
@@ -460,19 +473,19 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +
 +include(build/cmake/dependencies.cmake)
 +
-+install(DIRECTORY "subversion/include/" DESTINATION "include/subversion-1")
++install(DIRECTORY "subversion/include/" DESTINATION ${SVN_INSTALL_INCLUDE_DIR})
 +[for targets][is targets.type "exe"]
 +if (SVN_BUILD_PROGRAMS)
 +  add_executable([targets.name][for targets.sources]
 +    [targets.sources][end]
 +  )
-+  install(TARGETS [targets.name] DESTINATION tools)
++  install(TARGETS [targets.name] DESTINATION ${SVN_INSTALL_PROGRAMS_DIR})
 +[end][is targets.type "tool"]
 +if (SVN_BUILD_TOOLS)
 +  add_executable([targets.name][for targets.sources]
 +    [targets.sources][end]
 +  )
-+  install(TARGETS [targets.name] DESTINATION tools)
++  install(TARGETS [targets.name] DESTINATION ${SVN_INSTALL_PROGRAMS_DIR})
 +[end][is targets.type "lib"]
 +if (TRUE) # TODO:
 +  add_library([targets.name][if-any targets.msvc_static] STATIC[end][for targets.sources]
