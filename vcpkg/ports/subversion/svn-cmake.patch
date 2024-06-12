@@ -2,7 +2,7 @@
 ===================================================================
 --- a/build/cmake/dependencies.cmake	(nonexistent)
 +++ a/build/cmake/dependencies.cmake	(working copy)
-@@ -0,0 +1,194 @@
+@@ -0,0 +1,250 @@
 +### APR and APR-Util
 +
 +# APR config might not exist, so don't warn if it is not found.
@@ -197,11 +197,67 @@
 +  find_package(SQLite3 REQUIRED)
 +  add_library(external-sqlite ALIAS SQLite::SQLite3)
 +endif()
++
++### SERF
++
++# TODO: determine SVN_BUILD_RA_SERF based on SERF existing.
++
++if (TRUE)
++  find_path(SERF_INCLUDE_DIR
++    NAMES serf.h
++    PATH_SUFFIXES
++      include
++      include/serf-1
++  )
++
++  if(${SERF_INCLUDE_DIR} STREQUAL "SERF_INCLUDE_DIR-NOTFOUND")
++    message(FATAL_ERROR "SERF include dir not found")
++  else()
++    message("Found SERF include dir: ${APRUTIL_INCLUDE_DIR}")
++  endif()
++
++  find_library(SERF_LIBRARY
++    NAMES serf-1
++    PATH_SUFFIXES lib
++  )
++
++  if(${SERF_LIBRARY} STREQUAL "SERF_LIBRARY-NOTFOUND")
++    message(FATAL_ERROR "SERF library not found")
++  else()
++    message("Found SERF library (static): ${SERF_LIBRARY}")
++  endif()
++
++  add_library(external-serf STATIC IMPORTED)
++
++  set_target_properties(external-serf PROPERTIES
++    INTERFACE_INCLUDE_DIRECTORIES ${SERF_INCLUDE_DIR}
++    IMPORTED_LOCATION ${SERF_LIBRARY}
++    # TODO: Link with SERF dependencies
++  )
++
++  find_package(OpenSSL REQUIRED)
++  target_link_libraries(external-serf INTERFACE
++    external-apr
++    external-aprutil
++    OpenSSL::SSL
++    external-zlib
++  )
++
++  if (WIN32)
++    target_link_libraries(external-serf INTERFACE
++      crypt32.lib
++      rpcrt4.lib
++      mswsock.lib
++      secur32.lib
++      ws2_32.lib
++    )
++  endif()
++endif()
 Index: a/build/generator/gen_cmake.py
 ===================================================================
 --- a/build/generator/gen_cmake.py	(nonexistent)
 +++ a/build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,217 @@
+@@ -0,0 +1,212 @@
 +import os
 +import stat
 +import sys
@@ -278,10 +334,7 @@ Index: a/build/generator/gen_cmake.py
 +
 +    for target_ob in self.graph.get_sources(gen_base.DT_LINK, "ra-libs"):
 +      name = target_ob.name
-+      if name == "libsvn_ra_serf":
-+        pass # TODO: build ra-serf
-+      else:
-+        ra_modules.append(target_ob.name)
++      ra_modules.append(target_ob.name)
 +    for target_ob in self.graph.get_sources(gen_base.DT_LINK, "fs-libs"):
 +      name = target_ob.name
 +      if name == "libsvn_fs_base":
@@ -399,7 +452,6 @@ Index: a/build/generator/gen_cmake.py
 +      "libsvn_fs_base",
 +      "libsvn_auth_gnome_keyring",
 +      "libsvn_auth_kwallet",
-+      "libsvn_ra_serf",
 +      "libsvnxx",
 +      "svnxx-tests",
 +      "mod_dav_svn",
@@ -423,7 +475,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,126 @@
+@@ -0,0 +1,129 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -470,6 +522,8 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +    "alloca=_alloca"
 +  )
 +endif()
++
++add_compile_definitions("SVN_LIBSVN_RA_LINKS_RA_SERF")
 +
 +include(build/cmake/dependencies.cmake)
 +
