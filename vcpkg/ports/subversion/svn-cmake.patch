@@ -466,13 +466,13 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +  add_executable([targets.name][for targets.sources]
 +    [targets.sources][end]
 +  )
-+  install(TARGETS [targets.name])
++  install(TARGETS [targets.name] DESTINATION tools)
 +[end][is targets.type "tool"]
 +if (SVN_BUILD_TOOLS)
 +  add_executable([targets.name][for targets.sources]
 +    [targets.sources][end]
 +  )
-+  install(TARGETS [targets.name])
++  install(TARGETS [targets.name] DESTINATION tools)
 +[end][is targets.type "lib"]
 +if (TRUE) # TODO:
 +  add_library([targets.name][if-any targets.msvc_static] STATIC[end][for targets.sources]
