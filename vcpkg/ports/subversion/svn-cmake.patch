@@ -365,8 +365,15 @@ Index: a/build/generator/gen_cmake.py
 +                                    msvc_libs, msvc_export, msvc_static, msvc_objects,
 +                                    msvc_force_static))
 +
++    sql_headers = []
++    for header in self.graph.get_all_sources(gen_base.DT_SQLHDR):
++      header: gen_base.TargetSQLHeader
++      print(header)
++      sql_headers.append(str(header).replace("\\", "/"))
++
 +    data = _eztdata(
 +      targets = targets,
++      sql_headers = sql_headers
 +    )
 +
 +    template = ezt.Template(os.path.join('build', 'generator', 'templates',
@@ -514,6 +521,20 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +[end]
 +  endif()[end]
 +endif()
++[end]
++function(generate_sql_header SQL_PATH)
++  # get a filename without extension and directory name
++  get_filename_component(SQL_HEADER_PATH ${SQL_PATH} NAME_WE)
++
++  execute_process(
++    COMMAND
++      ${Python_EXECUTABLE}
++      "${CMAKE_SOURCE_DIR}/build/transform_sql.py"
++      "${SQL_PATH}" "${SQL_HEADER_PATH}.h"
++  )
++endfunction()
++
++[for sql_headers]generate_sql_header("${CMAKE_SOURCE_DIR}/[sql_headers]")
 +[end]
 +if(SVN_BUILD_TEST)
 +  enable_testing()
