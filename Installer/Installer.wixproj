@@ -1,10 +1,13 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.0">
   <PropertyGroup>
+    <SvnDistDir>$(OutDir)svn-dist</SvnDistDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <SubversionPath>$(PackagesPath)tools\subversion</SubversionPath>
     <DefineConstants>
       Version=$(Version);
       PackageDir=$(OutDir);
-      SubversionPath=$(SubversionPath);
+      SvnDistDir=$(SvnDistDir);
       $(DefineConstants);
       bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
       dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
@@ -38,12 +41,12 @@
     </HarvestDirectory>
   </ItemGroup>
   <ItemGroup>
-    <HarvestDirectory Include="$(SubversionPath)">
+    <HarvestDirectory Include="$(SvnDistDir)">
       <ComponentGroupName>SubversionFiles</ComponentGroupName>
       <DirectoryRefId>BinDirectory</DirectoryRefId>
       <SuppressRootDirectory>true</SuppressRootDirectory>
       <SuppressRegistry>true</SuppressRegistry>
-      <PreprocessorVariable>var.SubversionPath</PreprocessorVariable>
+      <PreprocessorVariable>var.SvnDistDir</PreprocessorVariable>
     </HarvestDirectory>
   </ItemGroup>
   <ItemGroup>
