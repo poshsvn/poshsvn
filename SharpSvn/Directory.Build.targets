@@ -61,7 +61,7 @@
     <WinErrorHeaderPath>$(KIT_SHARED_IncludePath)\winerror.h</WinErrorHeaderPath>
     <ErrnoHeaderPath>$(KIT_SHARED_IncludePath)\..\ucrt\errno.h</ErrnoHeaderPath>
     <AprErrnoHeaderPath>$(PackagesPath)\include\apr_errno.h</AprErrnoHeaderPath>
-    <SerfHeaderPath>$(PackagesPath)\include\serf.h</SerfHeaderPath>
+    <SerfHeaderPath>$(PackagesPath)\include\serf-1\serf.h</SerfHeaderPath>
     <OutputFilePath>$(ProjectDir)\SvnWindowsError.h</OutputFilePath>
   </PropertyGroup>
 
