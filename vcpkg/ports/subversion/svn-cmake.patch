@@ -201,7 +201,7 @@ Index: a/build/generator/gen_cmake.py
 ===================================================================
 --- a/build/generator/gen_cmake.py	(nonexistent)
 +++ a/build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,209 @@
+@@ -0,0 +1,217 @@
 +import os
 +import stat
 +import sys
@@ -424,7 +424,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,93 @@
+@@ -0,0 +1,114 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
