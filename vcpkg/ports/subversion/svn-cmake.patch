@@ -277,13 +277,13 @@ Index: a/build/generator/gen_cmake.py
 +    for target_ob in self.graph.get_sources(gen_base.DT_LINK, "ra-libs"):
 +      name = target_ob.name
 +      if name == "libsvn_ra_serf":
-+        pass
++        pass # TODO: build ra-serf
 +      else:
 +        ra_modules.append(target_ob.name)
 +    for target_ob in self.graph.get_sources(gen_base.DT_LINK, "fs-libs"):
 +      name = target_ob.name
 +      if name == "libsvn_fs_base":
-+        pass
++        pass # TODO: build BDB?
 +      else:
 +        fs_modules.append(target_ob.name)
 +
