@@ -234,6 +234,8 @@ Index: a/build/generator/gen_cmake.py
 +  if isinstance(target, gen_base.TargetExe):
 +    if target.install == "test" or target.install == "sub-test":
 +      return "test"
++    elif target.install == "tools":
++      return "tool"
 +    else:
 +      return "exe"
 +  if isinstance(target, gen_base.TargetSWIG):
@@ -337,10 +339,10 @@ Index: a/build/generator/gen_cmake.py
 +      target_name = target_ob.name
 +      msvc_objects = []
 +
-+      if target_type == "exe" or target_type == "lib" or target_type == "test":
++      if target_type in ["exe", "lib", "test", "tool"]:
 +        msvc_libs = []
 +        for lib in target_ob.msvc_libs:
-+          if lib == "setargv.obj": # check on .obj
++          if lib == "setargv.obj": # TODO: check for .obj
 +            msvc_objects.append(lib)
 +          else:
 +            msvc_libs.append(lib)
@@ -421,6 +423,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +project("Subversion")
 +
 +option(SVN_BUILD_PROGRAMS "Build Subversion programs (such as svn.exe)" ON)
++option(SVN_BUILD_TOOLS "Build Subversion tools" OFF)
 +option(SVN_BUILD_TEST "Build Subversion test-suite" OFF)
 +
 +option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
@@ -458,7 +461,13 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +    [targets.sources][end]
 +  )
 +  install(TARGETS [targets.name])
-+  [end][is targets.type "lib"]
++[end][is targets.type "tool"]
++if (SVN_BUILD_TOOLS)
++  add_executable([targets.name][for targets.sources]
++    [targets.sources][end]
++  )
++  install(TARGETS [targets.name])
++[end][is targets.type "lib"]
 +if (TRUE) # TODO:
 +  add_library([targets.name][if-any targets.msvc_static] STATIC[end][for targets.sources]
 +    [targets.sources][end]
