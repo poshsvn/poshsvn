@@ -40,6 +40,7 @@ vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
         -DSVN_SQLITE_AMALGAMATION_DIR=${SQLITE_AMALGAMATION_SOURCE_PATH}
+        -DSVN_INSTALL_PROGRAMS_DIR="tools/subversion"
 )
 
 vcpkg_cmake_install()
