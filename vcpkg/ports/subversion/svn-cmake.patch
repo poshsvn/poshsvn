@@ -368,7 +368,6 @@ Index: a/build/generator/gen_cmake.py
 +    sql_headers = []
 +    for header in self.graph.get_all_sources(gen_base.DT_SQLHDR):
 +      header: gen_base.TargetSQLHeader
-+      print(header)
 +      sql_headers.append(str(header).replace("\\", "/"))
 +
 +    data = _eztdata(
