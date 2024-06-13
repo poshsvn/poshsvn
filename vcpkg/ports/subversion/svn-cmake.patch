@@ -536,6 +536,13 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +option(SVN_BUILD_FS_FS "Build Subversion FSFS Repository Filesystem Library" ON)
 +option(SVN_BUILD_FS_X "Build Subversion FSX Repository Filesystem Library" ON)
 +
++# TODO: correctly detect system and platform
++string(TOLOWER "${CMAKE_HOST_SYSTEM_PROCESSOR}-${CMAKE_HOST_SYSTEM_NAME}" _default_build_host)
++set(SVN_BUILD_HOST ${_default_build_host} CACHE STRING "qq")
++
++string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_SYSTEM_NAME}" _default_build_target)
++set(SVN_BUILD_TARGET ${_default_build_target} CACHE STRING "qq")
++
 +find_package(Python COMPONENTS Interpreter REQUIRED)
 +
 +configure_file(
@@ -664,7 +671,7 @@ Index: a/subversion/svn_private_config.hc
 ===================================================================
 --- a/subversion/svn_private_config.hc	(nonexistent)
 +++ a/subversion/svn_private_config.hc	(working copy)
-@@ -0,0 +1,127 @@
+@@ -0,0 +1,119 @@
 +/*
 + * svn_private_config.hc : Template for svn_private_config.h for CMake.
 + *
@@ -698,17 +705,9 @@ Index: a/subversion/svn_private_config.hc
 +
 +
 +/* Define to a Windows-specific equivalent of config.guess output */
-+#define SVN_BUILD_HOST "x86-microsoft-windows"
++#define SVN_BUILD_HOST "@SVN_BUILD_HOST@"
 +
-+#if defined(_M_X64)
-+#define SVN_BUILD_TARGET "x64-microsoft-windows"
-+#elif defined(_M_IA64)
-+#define SVN_BUILD_TARGET "ia64-microsoft-windows"
-+#elif defined( _M_IX86)
-+#define SVN_BUILD_TARGET "x86-microsoft-windows"
-+#else
-+#error Unsupported build target.
-+#endif
++#define SVN_BUILD_TARGET "@SVN_BUILD_TARGET@"
 +
 +/* The minimal version of Berkeley DB we want */
 +#define SVN_FS_WANT_DB_MAJOR    4
