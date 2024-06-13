@@ -257,7 +257,7 @@ Index: a/build/generator/gen_cmake.py
 ===================================================================
 --- a/build/generator/gen_cmake.py	(nonexistent)
 +++ a/build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,221 @@
+@@ -0,0 +1,227 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
@@ -293,8 +293,6 @@ Index: a/build/generator/gen_cmake.py
 +  if isinstance(target, gen_base.TargetExe):
 +    if target.install == "test" or target.install == "sub-test":
 +      return "test"
-+    elif target.install == "tools":
-+      return "tool"
 +    else:
 +      return "exe"
 +  if isinstance(target, gen_base.TargetSWIG):
@@ -350,7 +348,14 @@ Index: a/build/generator/gen_cmake.py
 +      # name of the module: strip 'libsvn_' and upper-case it
 +      module_name = target_ob.name[7:].upper()
 +
-+      if isinstance(target_ob, gen_base.TargetRaModule):
++      if isinstance(target_ob, gen_base.TargetExe):
++        if target_ob.install == "test" or target_ob.install == "sub-test":
++          enable_condition = "SVN_BUILD_TEST";
++        elif target_ob.install == "tools":
++          enable_condition = "SVN_BUILD_TOOLS";
++        else:
++          enable_condition = "SVN_BUILD_PROGRAMS";
++      elif isinstance(target_ob, gen_base.TargetRaModule):
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_RA_MODULES"
 +      elif isinstance(target_ob, gen_base.TargetFsModule):
@@ -484,7 +489,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,148 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -562,13 +567,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +set(SVN_RA_MODULES)
 +set(SVN_FS_MODULES)
 +[for targets][is targets.type "exe"]
-+if (SVN_BUILD_PROGRAMS)
-+  add_executable([targets.name][for targets.sources]
-+    [targets.sources][end]
-+  )
-+  install(TARGETS [targets.name] DESTINATION ${SVN_INSTALL_PROGRAMS_DIR})
-+[end][is targets.type "tool"]
-+if (SVN_BUILD_TOOLS)
++if ([targets.enable_condition])
 +  add_executable([targets.name][for targets.sources]
 +    [targets.sources][end]
 +  )
