@@ -355,6 +355,9 @@ Index: a/build/generator/gen_cmake.py
 +          enable_condition = "SVN_BUILD_TOOLS";
 +        else:
 +          enable_condition = "SVN_BUILD_PROGRAMS";
++
++        if target_ob.msvc_force_static:
++          enable_condition += " AND NOT BUILD_SHARED_LIBS"
 +      elif isinstance(target_ob, gen_base.TargetRaModule):
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_RA_MODULES"
@@ -608,7 +611,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +                  " libraries to build. Please disable BUILD_SHARED_LIBS"
 +                  " option to build the test.")
 +endif()
-+[end]if(SVN_BUILD_TEST[if-any targets.msvc_force_static] AND NOT BUILD_SHARED_LIBS[end])
++[end]if([targets.enable_condition])
 +  add_executable([targets.name][for targets.sources] [targets.sources][end])
 +  add_test([targets.name] [targets.name])
 +[end]  target_link_libraries([targets.name] PRIVATE[for targets.libs]
