@@ -388,7 +388,14 @@ Index: a/build/generator/gen_cmake.py
 +          elif link_dep.external_project:
 +            pass
 +          else:
-+            libs.append(link_dep.name)
++            name: str = link_dep.name
++
++            if name in ["libsvn_ra_local", "libsvn_ra_serf", "libsvn_ra_svn",
++                        "libsvn_fs_base", "libsvn_fs_fs", "libsvn_fs_x"]:
++              # name of the module: strip 'libsvn_' and upper-case it
++              enable_condition += " AND SVN_BUILD_" + name[7:].upper()
++
++            libs.append(name)
 +        elif isinstance(link_dep, gen_base.ObjectFile):
 +          deps = self.graph.get_sources(gen_base.DT_OBJECT,
 +                                        link_dep,
