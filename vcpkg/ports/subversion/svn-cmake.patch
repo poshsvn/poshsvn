@@ -347,6 +347,9 @@ Index: a/build/generator/gen_cmake.py
 +      enable_condition = "TRUE"
 +      group = "SVN_LIBRARIES"
 +
++      # name of the module: strip 'libsvn_' and upper-case it
++      module_name = target_ob.name[7:].upper()
++
 +      if isinstance(target_ob, gen_base.TargetRaModule):
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_RA_MODULES"
@@ -413,9 +416,6 @@ Index: a/build/generator/gen_cmake.py
 +
 +        if isinstance(target_ob, gen_base.TargetExe):
 +          msvc_force_static = target_ob.msvc_force_static
-+
-+        # name of the module: strip 'libsvn_' and upper-case it
-+        module_name = target_ob.name[7:].upper()
 +
 +        target = cmake_target(target_name, target_type,
 +                              deps, libs, sources,
