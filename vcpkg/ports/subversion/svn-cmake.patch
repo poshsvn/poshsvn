@@ -499,7 +499,7 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,148 @@
+@@ -0,0 +1,154 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
