@@ -257,7 +257,7 @@ Index: a/build/generator/gen_cmake.py
 ===================================================================
 --- a/build/generator/gen_cmake.py	(nonexistent)
 +++ a/build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,227 @@
+@@ -0,0 +1,230 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
