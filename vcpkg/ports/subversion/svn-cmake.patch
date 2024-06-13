@@ -651,10 +651,10 @@ Index: a/gen-make.py
    }
  
  def main(fname, gentype, verfname=None,
-Index: subversion/svn_private_config.hc
+Index: a/subversion/svn_private_config.hc
 ===================================================================
---- subversion/svn_private_config.hc	(nonexistent)
-+++ subversion/svn_private_config.hc	(working copy)
+--- a/subversion/svn_private_config.hc	(nonexistent)
++++ a/subversion/svn_private_config.hc	(working copy)
 @@ -0,0 +1,127 @@
 +/*
 + * svn_private_config.hc : Template for svn_private_config.h for CMake.
