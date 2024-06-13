@@ -257,7 +257,7 @@ Index: a/build/generator/gen_cmake.py
 ===================================================================
 --- a/build/generator/gen_cmake.py	(nonexistent)
 +++ a/build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,230 @@
+@@ -0,0 +1,235 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
@@ -473,7 +473,6 @@ Index: a/build/generator/gen_cmake.py
 +
 +  def check_ignore_target(self, target: gen_base.Target):
 +    ignore_names = [
-+      "libsvn_fs_base",
 +      "libsvn_auth_gnome_keyring",
 +      "libsvn_auth_kwallet",
 +      "libsvnxx",
