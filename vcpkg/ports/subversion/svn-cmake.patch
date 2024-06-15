@@ -508,7 +508,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,154 @@
+@@ -0,0 +1,156 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -516,6 +516,8 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +option(SVN_BUILD_PROGRAMS "Build Subversion programs (such as svn.exe)" ON)
 +option(SVN_BUILD_TOOLS "Build Subversion tools" OFF)
 +option(SVN_BUILD_TEST "Build Subversion test-suite" OFF)
++
++option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 +
 +# set(SVN_INSTALL_BIN_DIR "bin" CACHE STRING
 +#   "Subversion binaries install directory."
