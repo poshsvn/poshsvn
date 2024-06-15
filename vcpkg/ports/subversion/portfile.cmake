@@ -9,7 +9,21 @@ vcpkg_extract_source_archive_ex(
     ARCHIVE "${ARCHIVE}"
     PATCHES
         "svn-fix-ws2_32.patch"
-        "svn-cmake.patch"
+)
+
+configure_file(
+    "${CMAKE_CURRENT_LIST_DIR}/svn-cmake.patch"
+    "${SOURCE_PATH}/svn-cmake.patch"
+    COPYONLY
+)
+
+vcpkg_replace_string("${SOURCE_PATH}/svn-cmake.patch" "Index: " "Index: a/")
+vcpkg_replace_string("${SOURCE_PATH}/svn-cmake.patch" "--- " "--- a/")
+vcpkg_replace_string("${SOURCE_PATH}/svn-cmake.patch" "+++ " "+++ b/")
+
+z_vcpkg_apply_patches(
+    SOURCE_PATH ${SOURCE_PATH}
+    PATCHES "${SOURCE_PATH}/svn-cmake.patch"
 )
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS

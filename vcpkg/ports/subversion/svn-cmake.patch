@@ -1,7 +1,7 @@
-﻿Index: a/build/cmake/dependencies.cmake
+﻿Index: build/cmake/dependencies.cmake
 ===================================================================
---- a/build/cmake/dependencies.cmake	(nonexistent)
-+++ a/build/cmake/dependencies.cmake	(working copy)
+--- build/cmake/dependencies.cmake	(nonexistent)
++++ build/cmake/dependencies.cmake	(working copy)
 @@ -0,0 +1,250 @@
 +### APR and APR-Util
 +
@@ -253,10 +253,10 @@
 +    )
 +  endif()
 +endif()
-Index: a/build/generator/gen_cmake.py
+Index: build/generator/gen_cmake.py
 ===================================================================
---- a/build/generator/gen_cmake.py	(nonexistent)
-+++ a/build/generator/gen_cmake.py	(working copy)
+--- build/generator/gen_cmake.py	(nonexistent)
++++ build/generator/gen_cmake.py	(working copy)
 @@ -0,0 +1,235 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
@@ -494,10 +494,10 @@ Index: a/build/generator/gen_cmake.py
 +          return True
 +
 +    return False
-Index: a/build/generator/templates/CMakeLists.txt.ezt
+Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
---- a/build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
-+++ a/build/generator/templates/CMakeLists.txt.ezt	(working copy)
+--- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
++++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
 @@ -0,0 +1,154 @@
 +cmake_minimum_required(VERSION 3.5)
 +
@@ -654,10 +654,10 @@ Index: a/build/generator/templates/CMakeLists.txt.ezt
 +  enable_testing()
 +endif()
 +
-Index: a/gen-make.py
+Index: gen-make.py
 ===================================================================
---- a/gen-make.py	(revision 1918259)
-+++ a/gen-make.py	(working copy)
+--- gen-make.py	(revision 1918259)
++++ gen-make.py	(working copy)
 @@ -49,6 +49,7 @@
  gen_modules = {
    'make' : ('gen_make', 'Makefiles for POSIX systems'),
@@ -666,10 +666,10 @@ Index: a/gen-make.py
    }
  
  def main(fname, gentype, verfname=None,
-Index: a/subversion/svn_private_config.hc
+Index: subversion/svn_private_config.hc
 ===================================================================
---- a/subversion/svn_private_config.hc	(nonexistent)
-+++ a/subversion/svn_private_config.hc	(working copy)
+--- subversion/svn_private_config.hc	(nonexistent)
++++ subversion/svn_private_config.hc	(working copy)
 @@ -0,0 +1,119 @@
 +/*
 + * svn_private_config.hc : Template for svn_private_config.h for CMake.
