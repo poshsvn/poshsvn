@@ -497,7 +497,13 @@ Index: build/generator/gen_cmake.py
 +        if target.install == "bdb-test":
 +          return True
 +
-+    return False
+
+Property changes on: build/generator/gen_cmake.py
+___________________________________________________________________
+Added: svn:eol-style
+## -0,0 +1 ##
++native
+\ No newline at end of property
 Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
@@ -657,7 +663,13 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +if(SVN_BUILD_TEST)
 +  enable_testing()
 +endif()
-+
+
+Property changes on: build/generator/templates/CMakeLists.txt.ezt
+___________________________________________________________________
+Added: svn:eol-style
+## -0,0 +1 ##
++LF
+\ No newline at end of property
 Index: gen-make.py
 ===================================================================
 --- gen-make.py	(revision 1918334)
@@ -794,3 +806,18 @@ Index: subversion/svn_private_config.hc
 +#define APU_WANT_DB
 +#include <apu_want.h>
 +#endif
+Index: .
+===================================================================
+--- .	(revision 1918334)
++++ .	(working copy)
+
+Property changes on: .
+___________________________________________________________________
+Modified: svn:ignore
+## -65,3 +65,6 ##
+ .swig_pl_checked
+ .swig_py_checked
+ .swig_rb_checked
++out
++CMakeLists.txt
++CMakeSettings.json
