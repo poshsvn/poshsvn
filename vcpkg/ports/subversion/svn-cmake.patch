@@ -508,7 +508,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,160 @@
+@@ -0,0 +1,164 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -547,6 +547,8 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +option(SVN_BUILD_FS_X "Build Subversion FSX Repository Filesystem Library" ON)
 +
 +option(SVN_USE_DSO "Use DSO for FS and RA modules" ON)
++set(SVN_DSO_SUFFIX_FMT "%%d-${CMAKE_SHARED_LIBRARY_SUFFIX}" CACHE STRING "qq")
++set(SVN_SOVERSION "1" CACHE STRING "DSO version to load")
 +
 +# TODO: correctly detect system and platform
 +string(TOLOWER "${CMAKE_HOST_SYSTEM_PROCESSOR}-${CMAKE_HOST_SYSTEM_NAME}" _default_build_host)
@@ -590,6 +592,8 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +endif()
 +if (SVN_USE_DSO)
 +  add_compile_definitions("SVN_USE_DSO")
++  add_compile_definitions("SVN_DSO_SUFFIX_FMT=\"${SVN_DSO_SUFFIX_FMT}\"")
++  add_compile_definitions("SVN_SOVERSION=${SVN_SOVERSION}")
 +endif()
 +
 +include(build/cmake/dependencies.cmake)
