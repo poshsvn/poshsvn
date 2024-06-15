@@ -10,7 +10,7 @@
 +find_package(apr QUIET)
 +
 +if(apr_FOUND)
-+  # It could rather APR-1 or APR-2
++  # It could be rather APR-1 or APR-2
 +  message("Found APR config.")
 +else()
 +  message("APR config not found. Looking for libraries and includes...")
