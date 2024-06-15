@@ -508,7 +508,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,155 @@
+@@ -0,0 +1,160 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -545,6 +545,8 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +
 +option(SVN_BUILD_FS_FS "Build Subversion FSFS Repository Filesystem Library" ON)
 +option(SVN_BUILD_FS_X "Build Subversion FSX Repository Filesystem Library" ON)
++
++option(SVN_USE_DSO "Use DSO for FS and RA modules" ON)
 +
 +# TODO: correctly detect system and platform
 +string(TOLOWER "${CMAKE_HOST_SYSTEM_PROCESSOR}-${CMAKE_HOST_SYSTEM_NAME}" _default_build_host)
@@ -585,6 +587,9 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +endif()
 +if (SVN_BUILD_FS_X)
 +  add_compile_definitions("SVN_LIBSVN_FS_LINKS_FS_X")
++endif()
++if (SVN_USE_DSO)
++  add_compile_definitions("SVN_USE_DSO")
 +endif()
 +
 +include(build/cmake/dependencies.cmake)
