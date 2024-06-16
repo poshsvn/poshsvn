@@ -83,7 +83,7 @@
 +    )
 +
 +    if (APR_STATIC)
-+      target_compile_definitions(external-apr IMPORTED "APR_DECLARE_STATIC")
++      target_compile_definitions(external-apr INTERFACE "APR_DECLARE_STATIC")
 +    endif()
 +  endif()
 +
