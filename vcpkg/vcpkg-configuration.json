@@ -8,5 +8,8 @@
   "overlay-ports": [
     "ports/serf",
     "ports/subversion"
+  ],
+  "overlay-triplets": [
+    "triplets"
   ]
 }
