@@ -60,7 +60,7 @@
 +
 +    if(${APR_LIBRARY} STREQUAL "APR_LIBRARY-NOTFOUND")
 +      find_library(APR_LIBRARY
-+        NAMES libapr-1
++        NAMES apr-1
 +        PATH_SUFFIXES lib
 +      )
 +
