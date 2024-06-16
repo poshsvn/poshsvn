@@ -50,7 +50,7 @@
 +    if(${APR_INCLUDE_DIR} STREQUAL "APR_INCLUDE_DIR-NOTFOUND")
 +      message(FATAL_ERROR "APR include dir not found")
 +    else()
-+      message("Found APR include dir: ${APR_LIBRARY}")
++      message("Found APR include dir: ${APR_INCLUDE_DIR}")
 +    endif()
 +
 +    find_library(APR_LIBRARY
