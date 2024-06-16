@@ -15,8 +15,6 @@
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libaprutil-1.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_client-1.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_delta-1.dll" />
-    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libexpat.dll" />
-    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\zlib1.dll" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Platform)'=='x64'">

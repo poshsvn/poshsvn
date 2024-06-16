@@ -18,6 +18,7 @@
   "dependencies": [
     "apr",
     "apr-util",
+    "expat",
     "zlib",
     {
       "name": "vcpkg-cmake",
