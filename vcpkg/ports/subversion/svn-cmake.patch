@@ -501,7 +501,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,183 @@
+@@ -0,0 +1,181 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -541,15 +541,13 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +set(SVN_DSO_SUFFIX_FMT "%%d-${CMAKE_SHARED_LIBRARY_SUFFIX}" CACHE STRING "qq")
 +set(SVN_SOVERSION "1" CACHE STRING "DSO version to load")
 +
-+option(SVN_BUILD_SHARED_LIBS "Build using shared libraries" ON)
-+option(SVN_BUILD_SHARED_FS "Build shared FS modules" ${SVN_BUILD_SHARED_LIBS})
++option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
++option(SVN_BUILD_SHARED_FS "Build shared FS modules" ${BUILD_SHARED_LIBS})
 +option(SVN_BUILD_SHARED_RA "Build shared RA modules" OFF)
 +
 +if(SVN_BUILD_SHARED_RA)
 +  message(FATAL_ERROR "SVN_BUILD_SHARED_RA not yet supported")
 +endif()
-+
-+set(BUILD_SHARED_LIBS ${SVN_BUILD_SHARED_LIBS})
 +
 +if(SVN_BUILD_SHARED_FS)
 +  set(SVN_FS_BUILD_TYPE SHARED)
@@ -651,9 +649,9 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +  list(APPEND [targets.group] [targets.name])
 +  install(TARGETS [targets.name])
 +[end][is targets.type "test"]
-+[if-any targets.msvc_force_static]if (SVN_BUILD_TEST AND SVN_BUILD_SHARED_LIBS)
++[if-any targets.msvc_force_static]if (SVN_BUILD_TEST AND BUILD_SHARED_LIBS)
 +  message(WARNING "Ignoring test '[targets.name]', because it requires static"
-+                  " libraries to build. Please disable SVN_BUILD_SHARED_LIBS"
++                  " libraries to build. Please disable BUILD_SHARED_LIBS"
 +                  " option to build the test.")
 +endif()
 +[end]if([targets.enable_condition])
