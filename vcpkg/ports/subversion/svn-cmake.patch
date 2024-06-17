@@ -43,7 +43,7 @@
 +    )
 +
 +    if (WIN32)
-+      target_link_libraries(apr::apr INTERFACE ws2_32 rpcrt4 mswsock)
++      target_link_libraries(apr::apr INTERFACE ws2_32 rpcrt4)
 +    endif()
 +
 +    if (APR_LIBRARY_STATIC)
@@ -55,7 +55,7 @@ Index: build/cmake/FindAPRUtil.cmake
 ===================================================================
 --- build/cmake/FindAPRUtil.cmake	(nonexistent)
 +++ build/cmake/FindAPRUtil.cmake	(working copy)
-@@ -0,0 +1,49 @@
+@@ -0,0 +1,45 @@
 +find_path(APRUTIL_INCLUDE_DIR
 +  NAMES apu.h
 +  PATHS ${CMAKE_PREFIX_PATH}
@@ -95,10 +95,6 @@ Index: build/cmake/FindAPRUtil.cmake
 +      INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
 +      IMPORTED_LOCATION ${APRUTIL_LIBRARY}
 +    )
-+
-+    if (WIN32)
-+      target_link_libraries(apr::aprutil INTERFACE bcrypt)
-+    endif()
 +
 +    if (APRUTIL_LIBRARY_STATIC)
 +      target_compile_definitions(apr::aprutil INTERFACE "APU_DECLARE_STATIC")
