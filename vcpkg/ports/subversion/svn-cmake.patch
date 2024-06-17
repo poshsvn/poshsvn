@@ -514,7 +514,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,182 @@
+@@ -0,0 +1,183 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -633,6 +633,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +  add_executable([targets.name][for targets.sources]
 +    [targets.sources][end]
 +  )
++  target_sources([targets.name] PRIVATE "build/win32/svn.rc")
 +  install(TARGETS [targets.name] DESTINATION ${SVN_INSTALL_PROGRAMS_DIR})
 +[end][is targets.type "lib"]
 +if ([targets.enable_condition]) # TODO:
