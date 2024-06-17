@@ -1,141 +1,175 @@
-﻿Index: build/cmake/dependencies.cmake
+﻿Index: build/cmake/FindAPR.cmake
 ===================================================================
---- build/cmake/dependencies.cmake	(nonexistent)
-+++ build/cmake/dependencies.cmake	(working copy)
-@@ -0,0 +1,254 @@
-+### APR and APR-Util
+--- build/cmake/FindAPR.cmake	(nonexistent)
++++ build/cmake/FindAPR.cmake	(working copy)
+@@ -0,0 +1,44 @@
++find_path(APR_INCLUDE_DIR
++  NAMES apr.h
++  PATH_SUFFIXES
++    include
++    include/apr-1
++)
 +
-+# APR config might not exist, so don't warn if it is not found.
-+# It will be handled later.
-+find_package(apr QUIET)
++find_library(APR_LIBRARY
++  NAMES libapr-1
++  PATH_SUFFIXES lib
++)
 +
-+if(apr_FOUND)
-+  # It could be rather APR-1 or APR-2
-+  message("Found APR config.")
++if(${APR_LIBRARY} STREQUAL "APR_LIBRARY-NOTFOUND")
++  find_library(APR_LIBRARY
++    NAMES apr-1
++    PATH_SUFFIXES lib
++  )
++
++  set(APR_STATIC ON)
 +else()
-+  message("APR config not found. Looking for libraries and includes...")
++  set(APR_STATIC OFF)
 +endif()
 +
-+## APR-2 (APR and APR-Util are merged)
++FIND_PACKAGE_HANDLE_STANDARD_ARGS(
++  APR
++  REQUIRED_VARS
++    APR_LIBRARY
++    APR_INCLUDE_DIR
++)
 +
-+# 1. Look for shared APR-2 config then for its static version.
-+# 2. If APR-2 was not found, look for shared or static APR-1.
-+# 3. If APR config was not found, import the target manually.
-+# 4. Import APR-Util target manually, because it doesn't have a config.
-+if(TARGET apr::libapr-2)
-+  add_library(external-apr ALIAS apr::libapr-2)
-+  add_library(external-aprutil ALIAS apr::libapr-2)
-+  message("Using shared APR-2 as APR and APR-Util in config mode.")
-+elseif(TARGET apr::apr-2)
-+  add_library(external-apr ALIAS apr::apr-2)
-+  add_library(external-aprutil ALIAS apr::apr-2)
-+  message("Using static APR-2 as APR and APR-Util in config mode.")
-+else()
-+  ## APR
++if(APR_FOUND)
++  if (NOT TARGET apr::apr)
++    add_library(apr::apr STATIC IMPORTED)
 +
-+  if(TARGET apr::libapr-1)
-+    add_library(external-apr ALIAS apr::libapr-1)
-+    message("Using shared APR-1 as APR in config mode.")
-+  elseif(TARGET apr::apr-1)
-+    add_library(external-apr ALIAS apr::apr-1)
-+    message("Using static APR-1 as APR in config mode.")
-+  else()
-+    find_path(APR_INCLUDE_DIR
-+      NAMES apr.h
-+      PATH_SUFFIXES
-+        include
-+        include/apr-1
-+    )
-+
-+    if(${APR_INCLUDE_DIR} STREQUAL "APR_INCLUDE_DIR-NOTFOUND")
-+      message(FATAL_ERROR "APR include dir not found")
-+    else()
-+      message("Found APR include dir: ${APR_INCLUDE_DIR}")
-+    endif()
-+
-+    find_library(APR_LIBRARY
-+      NAMES libapr-1
-+      PATH_SUFFIXES lib
-+    )
-+
-+    if(${APR_LIBRARY} STREQUAL "APR_LIBRARY-NOTFOUND")
-+      find_library(APR_LIBRARY
-+        NAMES apr-1
-+        PATH_SUFFIXES lib
-+      )
-+
-+      if(${APR_LIBRARY} STREQUAL "APR_LIBRARY-NOTFOUND")
-+        message(FATAL_ERROR "APR library not found")
-+      else()
-+        set(APR_STATIC ON)
-+        message("Found APR library (static): ${APR_LIBRARY}")
-+      endif()
-+    else()
-+      set(APR_STATIC OFF)
-+      message("Found APR library (shared): ${APR_LIBRARY}")
-+    endif()
-+
-+    add_library(external-apr STATIC IMPORTED)
-+
-+    set_target_properties(external-apr PROPERTIES
++    set_target_properties(apr::apr PROPERTIES
 +      INTERFACE_INCLUDE_DIRECTORIES ${APR_INCLUDE_DIR}
 +      IMPORTED_LOCATION ${APR_LIBRARY}
 +    )
 +
 +    if (APR_STATIC)
-+      target_compile_definitions(external-apr INTERFACE "APR_DECLARE_STATIC")
++      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_STATIC")
 +    endif()
 +  endif()
++endif()
+Index: build/cmake/FindAPRUtil.cmake
+===================================================================
+--- build/cmake/FindAPRUtil.cmake	(nonexistent)
++++ build/cmake/FindAPRUtil.cmake	(working copy)
+@@ -0,0 +1,45 @@
++find_path(APRUTIL_INCLUDE_DIR
++  NAMES apu.h
++  PATHS ${CMAKE_PREFIX_PATH}
++  PATH_SUFFIXES
++    include
++    include/apr-1 # Not yet in apr
++)
 +
-+  ## APR-Util
++find_library(APRUTIL_LIBRARY
++  NAMES libaprutil-1
++  PATH_SUFFIXES lib
++)
 +
-+  find_path(APRUTIL_INCLUDE_DIR
-+    NAMES apu.h
-+    PATHS ${CMAKE_PREFIX_PATH}
-+    PATH_SUFFIXES
-+      include
-+      include/apr-1 # Not yet in apr
-+  )
-+  
-+  if(${APRUTIL_INCLUDE_DIR} STREQUAL "APRUTIL_INCLUDE_DIR-NOTFOUND")
-+    message(FATAL_ERROR "APR-Util include dir not found")
-+  else()
-+    message("Found APR-Util include dir: ${APRUTIL_INCLUDE_DIR}")
-+  endif()
-+
++if(${APRUTIL_LIBRARY} STREQUAL "APRUTIL_LIBRARY-NOTFOUND")
 +  find_library(APRUTIL_LIBRARY
-+    NAMES libaprutil-1
++    NAMES aprutil-1
 +    PATH_SUFFIXES lib
 +  )
 +
-+  if(${APRUTIL_LIBRARY} STREQUAL "APRUTIL_LIBRARY-NOTFOUND")
-+    find_library(APRUTIL_LIBRARY
-+      NAMES aprutil-1
-+      PATH_SUFFIXES lib
++  set(APRUTIL_STATIC ON)
++else()
++  set(APRUTIL_STATIC OFF)
++endif()
++
++FIND_PACKAGE_HANDLE_STANDARD_ARGS(
++  APRUtil
++  REQUIRED_VARS
++    APRUTIL_LIBRARY
++    APRUTIL_INCLUDE_DIR
++)
++
++if(APRUtil_FOUND)
++  if(NOT TARGET apr::aprutil)
++    add_library(apr::aprutil STATIC IMPORTED)
++
++    set_target_properties(apr::aprutil PROPERTIES
++      INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
++      IMPORTED_LOCATION ${APRUTIL_LIBRARY}
 +    )
 +
-+    if(${APRUTIL_LIBRARY} STREQUAL "APRUTIL_LIBRARY-NOTFOUND")
-+      message(FATAL_ERROR "APR-Util library not found")
-+    else()
-+      set(APRUTIL_STATIC ON)
-+      message("Found APR-Util library (static): ${APRUTIL_LIBRARY}")
++    if (APRUTIL_STATIC)
++      target_compile_definitions(apr::aprutil INTERFACE "APU_DECLARE_STATIC")
 +    endif()
-+  else()
-+    set(APRUTIL_STATIC OFF)
-+    message("Found APR-Util library (shared): ${APRUTIL_LIBRARY}")
-+  endif()
-+
-+  add_library(external-aprutil STATIC IMPORTED)
-+
-+  set_target_properties(external-aprutil PROPERTIES
-+    INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
-+    IMPORTED_LOCATION ${APRUTIL_LIBRARY}
-+  )
-+
-+  if (APRUTIL_STATIC)
-+    target_compile_definitions(external-aprutil INTERFACE "APU_DECLARE_STATIC")
 +  endif()
 +endif()
+Index: build/cmake/FindSERF.cmake
+===================================================================
+--- build/cmake/FindSERF.cmake	(nonexistent)
++++ build/cmake/FindSERF.cmake	(working copy)
+@@ -0,0 +1,48 @@
++find_path(SERF_INCLUDE_DIR
++  NAMES serf.h
++  PATH_SUFFIXES
++    include
++    include/serf-1
++)
++
++find_library(SERF_LIBRARY
++  NAMES serf-1
++  PATH_SUFFIXES lib
++)
++
++FIND_PACKAGE_HANDLE_STANDARD_ARGS(
++  SERF
++  REQUIRED_VARS
++    SERF_LIBRARY
++    SERF_INCLUDE_DIR
++)
++
++add_library(SERF::SERF STATIC IMPORTED)
++
++set_target_properties(SERF::SERF PROPERTIES
++  INTERFACE_INCLUDE_DIRECTORIES ${SERF_INCLUDE_DIR}
++  IMPORTED_LOCATION ${SERF_LIBRARY}
++  # TODO: Link with SERF dependencies
++)
++
++find_package(OpenSSL REQUIRED)
++find_package(APR REQUIRED)
++find_package(APRUtil REQUIRED)
++find_package(ZLIB REQUIRED)
++
++target_link_libraries(SERF::SERF INTERFACE
++  apr::apr
++  apr::aprutil
++  OpenSSL::SSL
++  ZLIB::ZLIB
++)
++
++if (WIN32)
++  target_link_libraries(SERF::SERF INTERFACE
++    crypt32.lib
++    rpcrt4.lib
++    mswsock.lib
++    secur32.lib
++    ws2_32.lib
++  )
++endif()
+Index: build/cmake/dependencies.cmake
+===================================================================
+--- build/cmake/dependencies.cmake	(nonexistent)
++++ build/cmake/dependencies.cmake	(working copy)
+@@ -0,0 +1,89 @@
++# Setup modules path
++
++list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/build/cmake")
++
++### APR
++
++find_package(APR REQUIRED)
++add_library(external-apr ALIAS apr::apr)
++
++### APR-Util
++
++find_package(APRUtil REQUIRED)
++add_library(external-aprutil ALIAS apr::aprutil)
++
++### ZLIB
 +
 +find_package(ZLIB)
 +add_library(external-zlib ALIAS ZLIB::ZLIB)
@@ -207,55 +241,8 @@
 +# TODO: determine SVN_BUILD_RA_SERF based on SERF existing.
 +
 +if (SVN_BUILD_RA_SERF)
-+  find_path(SERF_INCLUDE_DIR
-+    NAMES serf.h
-+    PATH_SUFFIXES
-+      include
-+      include/serf-1
-+  )
-+
-+  if(${SERF_INCLUDE_DIR} STREQUAL "SERF_INCLUDE_DIR-NOTFOUND")
-+    message(FATAL_ERROR "SERF include dir not found")
-+  else()
-+    message("Found SERF include dir: ${APRUTIL_INCLUDE_DIR}")
-+  endif()
-+
-+  find_library(SERF_LIBRARY
-+    NAMES serf-1
-+    PATH_SUFFIXES lib
-+  )
-+
-+  if(${SERF_LIBRARY} STREQUAL "SERF_LIBRARY-NOTFOUND")
-+    message(FATAL_ERROR "SERF library not found")
-+  else()
-+    message("Found SERF library (static): ${SERF_LIBRARY}")
-+  endif()
-+
-+  add_library(external-serf STATIC IMPORTED)
-+
-+  set_target_properties(external-serf PROPERTIES
-+    INTERFACE_INCLUDE_DIRECTORIES ${SERF_INCLUDE_DIR}
-+    IMPORTED_LOCATION ${SERF_LIBRARY}
-+    # TODO: Link with SERF dependencies
-+  )
-+
-+  find_package(OpenSSL REQUIRED)
-+  target_link_libraries(external-serf INTERFACE
-+    external-apr
-+    external-aprutil
-+    OpenSSL::SSL
-+    external-zlib
-+  )
-+
-+  if (WIN32)
-+    target_link_libraries(external-serf INTERFACE
-+      crypt32.lib
-+      rpcrt4.lib
-+      mswsock.lib
-+      secur32.lib
-+      ws2_32.lib
-+    )
-+  endif()
++  find_package(SERF)
++  add_library(external-serf ALIAS SERF::SERF)
 +endif()
 Index: build/generator/gen_cmake.py
 ===================================================================
