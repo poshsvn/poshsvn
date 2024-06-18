@@ -256,7 +256,7 @@ Index: build/generator/gen_cmake.py
 ===================================================================
 --- build/generator/gen_cmake.py	(nonexistent)
 +++ build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,241 @@
+@@ -0,0 +1,240 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
@@ -268,7 +268,7 @@ Index: build/generator/gen_cmake.py
 +
 +class cmake_target():
 +  def __init__(self, name: str, type: str, deps: str, libs: str,
-+               sources, msvc_libs, msvc_export, msvc_static,
++               sources, msvc_libs, msvc_export,
 +               msvc_objects, msvc_force_static,
 +               enable_condition: str, group: str, build_type: str):
 +    self.name = name
@@ -278,7 +278,6 @@ Index: build/generator/gen_cmake.py
 +    self.sources = sources
 +    self.msvc_libs = msvc_libs
 +    self.msvc_export = msvc_export
-+    self.msvc_static = ezt.boolean(msvc_static)
 +    self.msvc_objects = msvc_objects
 +    self.msvc_force_static = ezt.boolean(msvc_force_static)
 +
@@ -359,7 +358,6 @@ Index: build/generator/gen_cmake.py
 +
 +        if target_ob.msvc_force_static:
 +          enable_condition += " AND NOT BUILD_SHARED_LIBS"
-+          build_type = " STATIC"
 +      elif isinstance(target_ob, gen_base.TargetRaModule):
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_RA_MODULES"
@@ -368,6 +366,9 @@ Index: build/generator/gen_cmake.py
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_FS_MODULES"
 +        build_type = " ${SVN_FS_BUILD_TYPE}"
++      elif isinstance(target_ob, gen_base.TargetLib):
++        if target_ob.msvc_static:
++          build_type = " STATIC"
 +
 +      for link_dep in self.graph.get_sources(gen_base.DT_LINK, target_ob.name):
 +        if isinstance(link_dep, gen_base.TargetJava):
@@ -424,21 +425,19 @@ Index: build/generator/gen_cmake.py
 +            msvc_libs.append(lib)
 +
 +        msvc_export = []
-+        msvc_static = False
 +        msvc_force_static = False
 +
 +        if isinstance(target_ob, gen_base.TargetLib):
 +          for export in target_ob.msvc_export:
 +            path = "subversion/include/" + export.replace("\\", "/")
 +            msvc_export.append(path)
-+          msvc_static = target_ob.msvc_static
 +
 +        if isinstance(target_ob, gen_base.TargetExe):
 +          msvc_force_static = target_ob.msvc_force_static
 +
 +        target = cmake_target(target_name, target_type,
 +                              deps, libs, sources,
-+                              msvc_libs, msvc_export, msvc_static, msvc_objects,
++                              msvc_libs, msvc_export, msvc_objects,
 +                              msvc_force_static, enable_condition, group,
 +                              build_type)
 +
