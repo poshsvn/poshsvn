@@ -1,8 +1,8 @@
-﻿Index: build/cmake/FindAPR.cmake
+Index: build/cmake/FindAPR.cmake
 ===================================================================
 --- build/cmake/FindAPR.cmake	(nonexistent)
 +++ build/cmake/FindAPR.cmake	(working copy)
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,50 @@
 +find_path(APR_INCLUDE_DIR
 +  NAMES apr.h
 +  PATH_SUFFIXES
@@ -46,7 +46,9 @@
 +      target_link_libraries(apr::apr INTERFACE ws2_32 rpcrt4)
 +    endif()
 +
-+    if (APR_LIBRARY_STATIC)
++    if (APR_LIBRARY_SHARED)
++      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_IMPORT")
++    else()
 +      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_STATIC")
 +    endif()
 +  endif()
@@ -55,7 +57,7 @@ Index: build/cmake/FindAPRUtil.cmake
 ===================================================================
 --- build/cmake/FindAPRUtil.cmake	(nonexistent)
 +++ build/cmake/FindAPRUtil.cmake	(working copy)
-@@ -0,0 +1,45 @@
+@@ -0,0 +1,47 @@
 +find_path(APRUTIL_INCLUDE_DIR
 +  NAMES apu.h
 +  PATHS ${CMAKE_PREFIX_PATH}
@@ -96,7 +98,9 @@ Index: build/cmake/FindAPRUtil.cmake
 +      IMPORTED_LOCATION ${APRUTIL_LIBRARY}
 +    )
 +
-+    if (APRUTIL_LIBRARY_STATIC)
++    if (APRUTIL_LIBRARY_SHARED)
++      target_compile_definitions(apr::aprutil INTERFACE "APU_DECLARE_IMPORT")
++    else()
 +      target_compile_definitions(apr::aprutil INTERFACE "APU_DECLARE_STATIC")
 +    endif()
 +  endif()
