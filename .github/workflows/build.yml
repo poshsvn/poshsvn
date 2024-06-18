@@ -47,6 +47,7 @@ jobs:
         run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
 
       - name: Upload build logs to artifact
+        continue-on-error: true
         if: always()
         uses: actions/upload-artifact@v1
         with:
