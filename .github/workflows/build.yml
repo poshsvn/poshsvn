@@ -47,11 +47,11 @@ jobs:
         run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
 
       - name: Upload build logs to artifact
-        if: failed()
-        uses: actions/upload-artifact@v1
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: logs-${{ matrix.platform }}
-          path: .\vcpkg_installed
+          path: vcpkg_installed\${{ matrix.platform }}\**\*.log
 
       - name: Build
         run: MSBuild.exe /target:build ${{ env.MSBuildCommonParameters }}
