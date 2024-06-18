@@ -256,7 +256,7 @@ Index: build/generator/gen_cmake.py
 ===================================================================
 --- build/generator/gen_cmake.py	(nonexistent)
 +++ build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,240 @@
+@@ -0,0 +1,238 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
@@ -344,6 +344,7 @@ Index: build/generator/gen_cmake.py
 +      enable_condition = "TRUE"
 +      group = "SVN_LIBRARIES"
 +      build_type = ""
++      msvc_force_static = False
 +
 +      # name of the module: strip 'libsvn_' and upper-case it
 +      module_name = target_ob.name[7:].upper()
@@ -358,6 +359,7 @@ Index: build/generator/gen_cmake.py
 +
 +        if target_ob.msvc_force_static:
 +          enable_condition += " AND NOT BUILD_SHARED_LIBS"
++          msvc_force_static = True
 +      elif isinstance(target_ob, gen_base.TargetRaModule):
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_RA_MODULES"
@@ -425,15 +427,11 @@ Index: build/generator/gen_cmake.py
 +            msvc_libs.append(lib)
 +
 +        msvc_export = []
-+        msvc_force_static = False
 +
 +        if isinstance(target_ob, gen_base.TargetLib):
 +          for export in target_ob.msvc_export:
 +            path = "subversion/include/" + export.replace("\\", "/")
 +            msvc_export.append(path)
-+
-+        if isinstance(target_ob, gen_base.TargetExe):
-+          msvc_force_static = target_ob.msvc_force_static
 +
 +        target = cmake_target(target_name, target_type,
 +                              deps, libs, sources,
