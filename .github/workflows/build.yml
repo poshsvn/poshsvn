@@ -69,3 +69,10 @@ jobs:
 
       - name: Test PoshSvn.Common
         run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Common.Tests.dll
+
+      - name: Upload build logs to artifact
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: logs-${{ matrix.platform }}
+          path: vcpkg_installed/${{ matrix.platform }}/vcpkg/blds/*/*.log
