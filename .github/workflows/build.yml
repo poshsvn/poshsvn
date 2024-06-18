@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: logs-${{ matrix.platform }}
-          path: vcpkg_installed/${{ matrix.platform }}/vcpkg/blds/*/*.log
+          path: vcpkg_installed\${{ matrix.platform }}\vcpkg\blds\*\*.log
 
       - name: Build
         run: MSBuild.exe /target:build ${{ env.MSBuildCommonParameters }}
