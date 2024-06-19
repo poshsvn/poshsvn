@@ -2,7 +2,7 @@ Index: build/cmake/FindAPR.cmake
 ===================================================================
 --- build/cmake/FindAPR.cmake	(nonexistent)
 +++ build/cmake/FindAPR.cmake	(working copy)
-@@ -0,0 +1,50 @@
+@@ -0,0 +1,59 @@
 +find_path(APR_INCLUDE_DIR
 +  NAMES apr.h
 +  PATH_SUFFIXES
@@ -20,6 +20,11 @@ Index: build/cmake/FindAPR.cmake
 +  PATH_SUFFIXES lib
 +)
 +
++find_file(APR_DLL
++  NAMES libapr-1.dll
++  PATH_SUFFIXES bin
++)
++
 +if(APR_LIBRARY_SHARED)
 +  set(APR_LIBRARY ${APR_LIBRARY_SHARED})
 +elseif(APR_LIBRARY_STATIC)
@@ -35,21 +40,25 @@ Index: build/cmake/FindAPR.cmake
 +
 +if(APR_FOUND)
 +  if (NOT TARGET apr::apr)
-+    add_library(apr::apr STATIC IMPORTED)
-+
-+    set_target_properties(apr::apr PROPERTIES
-+      INTERFACE_INCLUDE_DIRECTORIES ${APR_INCLUDE_DIR}
-+      IMPORTED_LOCATION ${APR_LIBRARY}
-+    )
++    if (APR_LIBRARY_SHARED)
++      add_library(apr::apr SHARED IMPORTED)
++      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_IMPORT")
++      set_target_properties(apr::apr PROPERTIES
++        INTERFACE_INCLUDE_DIRECTORIES ${APR_INCLUDE_DIR}
++        IMPORTED_LOCATION ${APR_DLL}
++        IMPORTED_IMPLIB ${APR_LIBRARY}
++      )
++    else()
++      add_library(apr::apr STATIC IMPORTED)
++      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_STATIC")
++      set_target_properties(apr::apr PROPERTIES
++        INTERFACE_INCLUDE_DIRECTORIES ${APR_INCLUDE_DIR}
++        IMPORTED_LOCATION ${APR_LIBRARY}
++      )
++    endif()
 +
 +    if (WIN32)
 +      target_link_libraries(apr::apr INTERFACE ws2_32 rpcrt4)
-+    endif()
-+
-+    if (APR_LIBRARY_SHARED)
-+      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_IMPORT")
-+    else()
-+      target_compile_definitions(apr::apr INTERFACE "APR_DECLARE_STATIC")
 +    endif()
 +  endif()
 +endif()
@@ -57,7 +66,7 @@ Index: build/cmake/FindAPRUtil.cmake
 ===================================================================
 --- build/cmake/FindAPRUtil.cmake	(nonexistent)
 +++ build/cmake/FindAPRUtil.cmake	(working copy)
-@@ -0,0 +1,47 @@
+@@ -0,0 +1,56 @@
 +find_path(APRUTIL_INCLUDE_DIR
 +  NAMES apu.h
 +  PATHS ${CMAKE_PREFIX_PATH}
@@ -76,6 +85,11 @@ Index: build/cmake/FindAPRUtil.cmake
 +  PATH_SUFFIXES lib
 +)
 +
++find_file(APRUTIL_DLL
++  NAMES libaprutil-1.dll
++  PATH_SUFFIXES bin
++)
++
 +if(APRUTIL_LIBRARY_SHARED)
 +  set(APRUTIL_LIBRARY ${APRUTIL_LIBRARY_SHARED})
 +elseif(APRUTIL_LIBRARY_STATIC)
@@ -91,17 +105,21 @@ Index: build/cmake/FindAPRUtil.cmake
 +
 +if(APRUtil_FOUND)
 +  if(NOT TARGET apr::aprutil)
-+    add_library(apr::aprutil STATIC IMPORTED)
-+
-+    set_target_properties(apr::aprutil PROPERTIES
-+      INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
-+      IMPORTED_LOCATION ${APRUTIL_LIBRARY}
-+    )
-+
 +    if (APRUTIL_LIBRARY_SHARED)
++      add_library(apr::aprutil SHARED IMPORTED)
 +      target_compile_definitions(apr::aprutil INTERFACE "APU_DECLARE_IMPORT")
++      set_target_properties(apr::aprutil PROPERTIES
++        INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
++        IMPORTED_LOCATION ${APRUTIL_DLL}
++        IMPORTED_IMPLIB ${APRUTIL_LIBRARY}
++      )
 +    else()
++      add_library(apr::aprutil STATIC IMPORTED)
 +      target_compile_definitions(apr::aprutil INTERFACE "APU_DECLARE_STATIC")
++      set_target_properties(apr::aprutil PROPERTIES
++        INTERFACE_INCLUDE_DIRECTORIES ${APRUTIL_INCLUDE_DIR}
++        IMPORTED_LOCATION ${APRUTIL_LIBRARY}
++      )
 +    endif()
 +  endif()
 +endif()
@@ -511,7 +529,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,181 @@
+@@ -0,0 +1,204 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -693,6 +711,29 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +if(SVN_BUILD_TEST)
 +  enable_testing()
 +endif()
++
++add_library(copydeps "build/win32/empty.c")
++
++target_link_libraries(copydeps PRIVATE
++  external-apr
++  external-aprutil
++  external-lz4
++  external-sqlite
++  external-utf8proc
++  external-xml
++  external-zlib
++)
++
++if(SVN_BUILD_RA_SERF)
++  target_link_libraries(copydeps PRIVATE external-serf)
++endif()
++
++add_custom_command(TARGET copydeps POST_BUILD
++  COMMAND ${CMAKE_COMMAND} -E copy
++    $<TARGET_RUNTIME_DLLS:copydeps>
++    -t $<TARGET_FILE_DIR:copydeps>
++  COMMAND_EXPAND_LISTS
++)
 
 Property changes on: build/generator/templates/CMakeLists.txt.ezt
 ___________________________________________________________________
