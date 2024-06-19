@@ -290,7 +290,7 @@ Index: build/generator/gen_cmake.py
 +
 +def get_target_type(target: gen_base.Target):
 +  if isinstance(target, gen_base.TargetExe):
-+    if target.install == "test" or target.install == "sub-test":
++    if target.install == "test" and target.testing != "skip":
 +      return "test"
 +    else:
 +      return "exe"
