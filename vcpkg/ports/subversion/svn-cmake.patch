@@ -256,7 +256,7 @@ Index: build/generator/gen_cmake.py
 ===================================================================
 --- build/generator/gen_cmake.py	(nonexistent)
 +++ build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,238 @@
+@@ -0,0 +1,243 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
@@ -270,7 +270,8 @@ Index: build/generator/gen_cmake.py
 +  def __init__(self, name: str, type: str, deps: str, libs: str,
 +               sources, msvc_libs, msvc_export,
 +               msvc_objects, msvc_force_static,
-+               enable_condition: str, group: str, build_type: str):
++               enable_condition: str, group: str, build_type: str,
++               srcdir: str):
 +    self.name = name
 +    self.type = type
 +    self.deps = deps
@@ -287,6 +288,8 @@ Index: build/generator/gen_cmake.py
 +    self.enable_condition = enable_condition
 +    self.group = group
 +    self.build_type = build_type
++
++    self.srcdir = srcdir
 +
 +def get_target_type(target: gen_base.Target):
 +  if isinstance(target, gen_base.TargetExe):
@@ -345,6 +348,7 @@ Index: build/generator/gen_cmake.py
 +      group = "SVN_LIBRARIES"
 +      build_type = ""
 +      msvc_force_static = False
++      srcdir = ""
 +
 +      # name of the module: strip 'libsvn_' and upper-case it
 +      module_name = target_ob.name[7:].upper()
@@ -352,6 +356,7 @@ Index: build/generator/gen_cmake.py
 +      if isinstance(target_ob, gen_base.TargetExe):
 +        if target_ob.install == "test" or target_ob.install == "sub-test":
 +          enable_condition = "SVN_BUILD_TEST";
++          srcdir = target_ob.path
 +        elif target_ob.install == "tools":
 +          enable_condition = "SVN_BUILD_TOOLS";
 +        else:
@@ -437,7 +442,7 @@ Index: build/generator/gen_cmake.py
 +                              deps, libs, sources,
 +                              msvc_libs, msvc_export, msvc_objects,
 +                              msvc_force_static, enable_condition, group,
-+                              build_type)
++                              build_type, srcdir)
 +
 +        if group.endswith("_MODULES"):
 +          targets.insert(0, target)
@@ -506,7 +511,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,181 @@
+@@ -0,0 +1,182 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -661,7 +666,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +endif()
 +[end]if([targets.enable_condition])
 +  add_executable([targets.name][for targets.sources] [targets.sources][end])
-+  add_test([targets.name] [targets.name])
++  add_test([targets.name] [targets.name] --srcdir ${CMAKE_SOURCE_DIR}/[targets.srcdir])
 +[end]  target_link_libraries([targets.name] PRIVATE[for targets.libs]
 +    [targets.libs][end]
 +  )[if-any targets.has_msvc_libs targets.has_msvc_objects]
