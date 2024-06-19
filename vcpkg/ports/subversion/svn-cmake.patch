@@ -529,7 +529,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,204 @@
+@@ -0,0 +1,206 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -647,6 +647,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +    [targets.sources][end]
 +  )
 +  target_sources([targets.name] PRIVATE "build/win32/svn.rc")
++  add_dependencies([targets.name] copydeps)
 +  install(TARGETS [targets.name] DESTINATION ${SVN_INSTALL_PROGRAMS_DIR})
 +[end][is targets.type "lib"]
 +if ([targets.enable_condition]) # TODO:
@@ -688,6 +689,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +[end]  target_link_libraries([targets.name] PRIVATE[for targets.libs]
 +    [targets.libs][end]
 +  )[if-any targets.has_msvc_libs targets.has_msvc_objects]
++  add_dependencies([targets.name] copydeps)
 +  if(WIN32)
 +[if-any targets.has_msvc_libs]    target_link_libraries([targets.name] PRIVATE[for targets.msvc_libs] [targets.msvc_libs][end])
 +[end][if-any targets.has_msvc_objects]    set_target_properties([targets.name] PROPERTIES LINK_FLAGS[for targets.msvc_objects] [targets.msvc_objects][end])
