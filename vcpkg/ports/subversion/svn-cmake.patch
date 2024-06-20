@@ -123,6 +123,74 @@ Index: build/cmake/FindAPRUtil.cmake
 +    endif()
 +  endif()
 +endif()
+Index: build/cmake/FindHTTPD.cmake
+===================================================================
+--- build/cmake/FindHTTPD.cmake	(nonexistent)
++++ build/cmake/FindHTTPD.cmake	(working copy)
+@@ -0,0 +1,63 @@
++find_path(HTTPD_INCLUDE_DIR
++  NAMES httpd.h
++  PATH_SUFFIXES
++    include
++)
++
++find_library(HTTPD_LIBRARY
++  NAMES libhttpd
++  PATH_SUFFIXES lib
++)
++
++find_file(HTTPD_DLL
++  NAMES libhttpd.dll
++  PATH_SUFFIXES bin
++)
++
++find_library(MOD_DAV_LIBRARY
++  NAMES mod_dav
++  PATH_SUFFIXES lib
++)
++
++FIND_PACKAGE_HANDLE_STANDARD_ARGS(
++  HTTPD
++  REQUIRED_VARS
++    HTTPD_LIBRARY
++    HTTPD_DLL
++    HTTPD_INCLUDE_DIR
++    MOD_DAV_LIBRARY
++)
++
++
++if(HTTPD_FOUND AND NOT TARGET httpd::httpd)
++  add_library(httpd::httpd SHARED IMPORTED)
++  set_target_properties(httpd::httpd PROPERTIES
++    INTERFACE_INCLUDE_DIRECTORIES ${HTTPD_INCLUDE_DIR}
++    IMPORTED_LOCATION ${HTTPD_DLL}
++    IMPORTED_IMPLIB ${HTTPD_LIBRARY}
++  )
++
++  add_library(httpd::mod_dav STATIC IMPORTED)
++  set_target_properties(httpd::mod_dav PROPERTIES
++    # TODO: allow different mod_dav include dir?
++    INTERFACE_INCLUDE_DIRECTORIES ${HTTPD_INCLUDE_DIR}
++    IMPORTED_LOCATION ${MOD_DAV_LIBRARY}
++  )
++
++  find_package(APR REQUIRED)
++  find_package(APRUtil REQUIRED)
++
++  target_link_libraries(httpd::httpd INTERFACE
++    apr::apr
++    apr::aprutil
++  )
++
++  target_link_libraries(httpd::mod_dav INTERFACE
++    apr::apr
++    apr::aprutil
++    httpd::httpd
++  )
++
++  # TODO: all dependecies
++endif()
++
 Index: build/cmake/FindSERF.cmake
 ===================================================================
 --- build/cmake/FindSERF.cmake	(nonexistent)
@@ -180,7 +248,7 @@ Index: build/cmake/dependencies.cmake
 ===================================================================
 --- build/cmake/dependencies.cmake	(nonexistent)
 +++ build/cmake/dependencies.cmake	(working copy)
-@@ -0,0 +1,89 @@
+@@ -0,0 +1,97 @@
 +# Setup modules path
 +
 +list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/build/cmake")
@@ -270,11 +338,19 @@ Index: build/cmake/dependencies.cmake
 +  find_package(SERF)
 +  add_library(external-serf ALIAS SERF::SERF)
 +endif()
++
++### HTTPD
++
++if (SVN_BUILD_APACHE_MODS)
++  find_package(HTTPD)
++  add_library(external-libhttpd ALIAS httpd::httpd)
++  add_library(external-mod_dav ALIAS httpd::mod_dav)
++endif()
 Index: build/generator/gen_cmake.py
 ===================================================================
 --- build/generator/gen_cmake.py	(nonexistent)
 +++ build/generator/gen_cmake.py	(working copy)
-@@ -0,0 +1,243 @@
+@@ -0,0 +1,251 @@
 +import os
 +from build.generator.gen_make import UnknownDependency
 +import ezt
@@ -391,11 +467,14 @@ Index: build/generator/gen_cmake.py
 +        enable_condition = "SVN_BUILD_" + module_name;
 +        group = "SVN_FS_MODULES"
 +        build_type = " ${SVN_FS_BUILD_TYPE}"
++      elif isinstance(target_ob, gen_base.TargetApacheMod):
++        enable_condition = "SVN_BUILD_APACHE_MODS";
++        build_type = " SHARED"
 +      elif isinstance(target_ob, gen_base.TargetLib):
 +        if target_ob.msvc_static:
 +          build_type = " STATIC"
 +
-+      for link_dep in self.graph.get_sources(gen_base.DT_LINK, target_ob.name):
++      for link_dep in self.get_dependecies(target_ob.name):
 +        if isinstance(link_dep, gen_base.TargetJava):
 +          deps.append(link_dep.name)
 +        elif isinstance(link_dep, gen_base.TargetLinked):
@@ -496,15 +575,20 @@ Index: build/generator/gen_cmake.py
 +
 +    return result
 +
++  def get_dependecies(self, target_name):
++    deps = []
++
++    deps += self.graph.get_sources(gen_base.DT_LINK, target_name)
++    deps += self.graph.get_sources(gen_base.DT_NONLIB, target_name)
++
++    return deps
++
 +  def check_ignore_target(self, target: gen_base.Target):
 +    ignore_names = [
 +      "libsvn_auth_gnome_keyring",
 +      "libsvn_auth_kwallet",
 +      "libsvnxx",
 +      "svnxx-tests",
-+      "mod_dav_svn",
-+      "mod_authz_svn",
-+      "mod_dontdothat",
 +      "__JAVAHL__",
 +      "__JAVAHL_TESTS__",
 +      "libsvnjavahl",
@@ -529,7 +613,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,210 @@
+@@ -0,0 +1,212 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -568,6 +652,8 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +
 +option(SVN_BUILD_FS_FS "Build Subversion FSFS Repository Filesystem Library" ON)
 +option(SVN_BUILD_FS_X "Build Subversion FSX Repository Filesystem Library" ON)
++
++option(SVN_BUILD_APACHE_MODS "Build Subversion plug-in for the Apache DAV module" OFF)
 +
 +option(SVN_USE_DSO "Use DSO for FS and RA modules" ON)
 +set(SVN_DSO_SUFFIX_FMT "%%d-${CMAKE_SHARED_LIBRARY_SUFFIX}" CACHE STRING "qq")
