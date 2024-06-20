@@ -56,6 +56,7 @@ vcpkg_cmake_configure(
         -DSVN_SQLITE_AMALGAMATION_DIR=${SQLITE_AMALGAMATION_SOURCE_PATH}
         -DSVN_INSTALL_PROGRAMS_DIR="tools/subversion"
         -DSVN_BUILD_RA_SERF=${RA_SERF}
+        -DCMAKE_PREFIX_PATH=${CURRENT_INSTALLED_DIR}
 )
 
 vcpkg_cmake_install()
