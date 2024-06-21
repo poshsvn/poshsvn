@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PoshSvn.Package\PoshSvn.Package.csproj" />
+    <ProjectReference Include="..\SvnDist\SvnDist.vcxproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Common.wxs" />
