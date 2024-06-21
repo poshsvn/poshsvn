@@ -1,18 +1,15 @@
 ﻿{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg-configuration.schema.json",
   "default-registry": {
     "kind": "git",
     "baseline": "000d1bda1ffa95a73e0b40334fa4103d6f4d3d48",
     "repository": "https://github.com/microsoft/vcpkg"
   },
-  "registries": [
-    {
-      "kind": "git",
-      "repository": "https://github.com/rinrab/vcpkg.git",
-      "baseline": "debd11b12374604a8688a80be93fa3eeb15d380c",
-      "packages": [
-        "serf",
-        "subversion"
-      ]
-    }
+  "overlay-ports": [
+    "ports/serf",
+    "ports/subversion"
+  ],
+  "overlay-triplets": [
+    "triplets"
   ]
 }
