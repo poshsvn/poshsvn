@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.1.1]
+
+- Build improvements
+  - Build EXPAT and ZLIB libraries as static.
+  - Use SQLite amalgamation.
+  - Other small build fixes and improvements.
+- Little installer improvements.
+  - Make 'Add Subversion to PATH' as separate feature.
+  - Drop 'PoshSvn offline docs' feature, because it wasn't supported.
+
 # [1.1.0]
 
 - Added `-Change` parameter to all cmdlets.
