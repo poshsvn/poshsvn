@@ -6,8 +6,11 @@
   <String Id="PoshSvnModuleFeatureDescription" Value="The PoshSvn module for PowerShell." />
 
   <String Id="SubversionCLIFeatureTitle" Value="Subversion command-line tools" />
-  <String Id="SubversionCLIFeatureDescription" Value="Install svn.exe, svnadmin.exe and other Subversion command-line tools and add them to the PATH." />
+  <String Id="SubversionCLIFeatureDescription" Value="Install svn.exe, svnadmin.exe and other Subversion command-line tools." />
 
   <String Id="PoshSvnVSCodeFeatureTitle" Value="PoshSvn VSCode extension" />
   <String Id="PoshSvnVSCodeFeatureDescription" Value="VSCode plugin to access PoshSvn directly from VSCode." />
+
+  <String Id="AddToPathTitle" Value="Add to PATH"></String>
+  <String Id="AddToPathDescription" Value="Add the component to the PATH enviroment variable, to make it accessible from command line."></String>
 </WixLocalization>
