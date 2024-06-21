@@ -31,8 +31,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackagePath>$(OutDirBase)poshsvn\</PackagePath>
-    <ZipPackagePath>$(OutDirBase)poshsvn.zip</ZipPackagePath>
+    <PackagePath>$(OutDir)PoshSvn\</PackagePath>
+    <ZipPackagePath>$(OutDir)PoshSvn.zip</ZipPackagePath>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
