@@ -49,7 +49,8 @@
   <ItemGroup>
     <Content Include="@(PackageItems)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>..\poshsvn\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Link>PoshSvn\%(Destination)\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>false</Visible>
     </Content>
   </ItemGroup>
 
