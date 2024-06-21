@@ -1,0 +1,16 @@
+Index: build/generator/gen_win_dependencies.py
+===================================================================
+--- a/build/generator/gen_win_dependencies.py	(revision 1916797)
++++ b/build/generator/gen_win_dependencies.py	(working copy)
+@@ -1318,6 +1318,11 @@
+       inc_dir = os.path.join(self.serf_path, 'include/serf-2')
+       lib_dir = os.path.join(self.serf_path, 'lib')
+       debug_lib_dir = None
++    elif os.path.isfile(os.path.join(self.serf_path, 'include/serf.h')):
++      # Install layout
++      inc_dir = os.path.join(self.serf_path, 'include')
++      lib_dir = os.path.join(self.serf_path, 'lib')
++      debug_lib_dir = None
+     else:
+       if show_warnings:
+         print('WARNING: \'serf.h\' not found')

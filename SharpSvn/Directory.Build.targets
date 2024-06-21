@@ -15,9 +15,6 @@
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libaprutil-1.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_client-1.dll" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libsvn_delta-1.dll" />
-    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\libexpat.dll" />
-    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\sqlite3.dll" />
-    <Content CopyToOutputDirectory="PreserveNewest" Include="$(PackagesPath)bin\zlib1.dll" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Platform)'=='x64'">
@@ -62,7 +59,7 @@
     <WinErrorHeaderPath>$(KIT_SHARED_IncludePath)\winerror.h</WinErrorHeaderPath>
     <ErrnoHeaderPath>$(KIT_SHARED_IncludePath)\..\ucrt\errno.h</ErrnoHeaderPath>
     <AprErrnoHeaderPath>$(PackagesPath)\include\apr_errno.h</AprErrnoHeaderPath>
-    <SerfHeaderPath>$(PackagesPath)\include\serf.h</SerfHeaderPath>
+    <SerfHeaderPath>$(PackagesPath)\include\serf-1\serf.h</SerfHeaderPath>
     <OutputFilePath>$(ProjectDir)\SvnWindowsError.h</OutputFilePath>
   </PropertyGroup>
 

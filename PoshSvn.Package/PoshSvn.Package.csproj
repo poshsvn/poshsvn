@@ -12,11 +12,8 @@
     <PackageItems Include="$(OutDir)\SharpSvn.dll" />
 
     <PackageItems Include="$(OutDir)libsvn_wc-1.dll" />
-    <PackageItems Include="$(OutDir)sqlite3.dll" />
-    <PackageItems Include="$(OutDir)zlib1.dll" />
     <PackageItems Include="$(OutDir)libapr-1.dll" />
     <PackageItems Include="$(OutDir)libaprutil-1.dll" />
-    <PackageItems Include="$(OutDir)libexpat.dll" />
     <PackageItems Include="$(OutDir)libsvn_client-1.dll" />
     <PackageItems Include="$(OutDir)libsvn_delta-1.dll" />
     <PackageItems Include="$(OutDir)libsvn_diff-1.dll" />
