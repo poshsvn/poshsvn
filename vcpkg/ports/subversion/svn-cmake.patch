@@ -804,9 +804,9 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +  enable_testing()
 +endif()
 +
-+add_library(copydeps "build/win32/empty.c")
++add_custom_target(copydeps)
 +
-+target_link_libraries(copydeps PRIVATE
++set(EXTERNALS
 +  external-apr
 +  external-aprutil
 +  external-lz4
@@ -816,16 +816,17 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +  external-zlib
 +)
 +
-+if(SVN_BUILD_RA_SERF)
-+  target_link_libraries(copydeps PRIVATE external-serf)
-+endif()
++foreach (ext ${EXTERNALS})
++  get_target_property(ext_type ${ext} TYPE)
 +
-+add_custom_command(TARGET copydeps POST_BUILD
-+  COMMAND ${CMAKE_COMMAND} -E copy
-+    $<TARGET_RUNTIME_DLLS:copydeps>
-+    -t $<TARGET_FILE_DIR:copydeps>
-+  COMMAND_EXPAND_LISTS
-+)
++  if (${ext_type} STREQUAL "SHARED_LIBRARY")
++    add_custom_command(
++      TARGET copydeps
++      COMMAND ${CMAKE_COMMAND} -E copy
++        $<TARGET_FILE:${ext}> -t ${CMAKE_BINARY_DIR}
++    )
++  endif()
++endforeach()
 
 Property changes on: build/generator/templates/CMakeLists.txt.ezt
 ___________________________________________________________________
