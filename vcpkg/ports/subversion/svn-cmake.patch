@@ -613,14 +613,12 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,212 @@
+@@ -0,0 +1,211 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
 +
-+set(CMAKE_PREFIX_PATH ${CMAKE_INSTALL_PREFIX} CACHE STRING
-+  "Directory with installed dependecies"
-+)
++set(CMAKE_PREFIX_PATH CACHE STRING "Directory with installed dependecies")
 +
 +option(SVN_BUILD_PROGRAMS "Build Subversion programs (such as svn.exe)" ON)
 +option(SVN_BUILD_TOOLS "Build Subversion tools" OFF)
