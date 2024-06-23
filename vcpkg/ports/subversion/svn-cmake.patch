@@ -613,7 +613,7 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 ===================================================================
 --- build/generator/templates/CMakeLists.txt.ezt	(nonexistent)
 +++ build/generator/templates/CMakeLists.txt.ezt	(working copy)
-@@ -0,0 +1,211 @@
+@@ -0,0 +1,215 @@
 +cmake_minimum_required(VERSION 3.5)
 +
 +project("Subversion")
@@ -721,6 +721,10 @@ Index: build/generator/templates/CMakeLists.txt.ezt
 +  add_compile_definitions("SVN_USE_DSO")
 +  add_compile_definitions("SVN_DSO_SUFFIX_FMT=\"${SVN_DSO_SUFFIX_FMT}\"")
 +  add_compile_definitions("SVN_SOVERSION=${SVN_SOVERSION}")
++endif()
++
++if (WIN32)
++  add_compile_definitions("WIN32")
 +endif()
 +
 +include(build/cmake/dependencies.cmake)
