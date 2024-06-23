@@ -32,7 +32,7 @@
     <None Include="LICENSE.rtf" />
   </ItemGroup>
   <ItemGroup>
-    <HarvestDirectory Include="$(OutDir)PoshSvn">
+    <HarvestDirectory Include="$(OutDir)..\PoshSvn">
       <ComponentGroupName>PoshSvnModuleFiles</ComponentGroupName>
       <DirectoryRefId>PoshSvnModuleFolder</DirectoryRefId>
       <SuppressRootDirectory>true</SuppressRootDirectory>
