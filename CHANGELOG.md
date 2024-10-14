@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-# [1.1.2]
+# [1.1.2, 1.1.3]
 
 - Update Subversion from 1.14.3 to 1.14.4
 - Update APR from 1.7.4 to 1.7.5
