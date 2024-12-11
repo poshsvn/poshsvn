@@ -1,7 +1,7 @@
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://dlcdn.apache.org/subversion/subversion-1.14.4.zip"
-    FILENAME "subversion-1.14.4.zip"
-    SHA512 663e39543205d115c04142a24e9ae86a334142f5d8ba0dca58985df95eb21fe84036034ad6b1483f46e9d244f099b8a171b1a7337bc9c00f193838fe7f46ab89
+    URLS "https://dlcdn.apache.org/subversion/subversion-1.14.5.zip"
+    FILENAME "subversion-1.14.5.zip"
+    SHA512 595844a8c69d0ad6a56a8f831d7d793a9eed28b63e5ac0373cc9b969e1c408ac25ccaf6bd97c32d5789ac8787030c80bdb33eee8b8e80330d53f0eb7c5cd96d1
 )
 
 vcpkg_extract_source_archive_ex(
