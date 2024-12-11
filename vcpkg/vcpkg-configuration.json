@@ -6,7 +6,6 @@
     "repository": "https://github.com/microsoft/vcpkg"
   },
   "overlay-ports": [
-    "ports/serf",
     "ports/subversion"
   ],
   "overlay-triplets": [
