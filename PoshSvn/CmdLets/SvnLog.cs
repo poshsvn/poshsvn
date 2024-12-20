@@ -41,6 +41,10 @@ namespace PoshSvn.CmdLets
         public SwitchParameter WithNoRevisionProperties { get; set; }
 
         [Parameter()]
+        [Alias("StopOnCopy", "stop-on-copy")]
+        public SwitchParameter StrictNodeHistory { get; set; }
+
+        [Parameter()]
         [Alias("with-revprop")]
         public string[] WithRevisionProperties { get; set; }
 
@@ -63,6 +67,7 @@ namespace PoshSvn.CmdLets
                 Limit = Limit,
                 RetrieveChangedPaths = ChangedPaths,
                 RetrieveAllProperties = WithAllRevisionProperties,
+                StrictNodeHistory = StrictNodeHistory,
             };
 
             foreach (SvnRevisionRange range in Revision)
