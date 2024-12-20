@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 # [1.2.0]
 
 - Added -StopOnCopy argument to the svn-log cmdlet (r3389).
+- Improve cmdlets for interacting with the Subversion properties.
 
 # [1.1.4]
 
