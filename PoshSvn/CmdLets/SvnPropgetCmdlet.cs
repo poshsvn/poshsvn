@@ -60,12 +60,19 @@ namespace PoshSvn.CmdLets
                     SvnClient.GetRevisionProperty(url, sharpSvnRevision, PropertyName,
                                                   out SvnPropertyValue property);
 
-                    WriteObject(new SvnProperty
+                    if (property != null)
                     {
-                        Name = property.Key,
-                        Value = property.StringValue,
-                        Path = url.OriginalString
-                    });
+                        WriteObject(new SvnProperty
+                        {
+                            Name = property.Key,
+                            Value = property.StringValue,
+                            Path = url.OriginalString
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception($"Property '{PropertyName}' not found on '{url}'");
+                    }
                 }
             }
             else
