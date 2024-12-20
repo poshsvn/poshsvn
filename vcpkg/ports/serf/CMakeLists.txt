@@ -252,6 +252,7 @@ else()
     "/DNOUSER" "/DNOGDI" "/DNONLS" "/DNOCRYPT"
     "/D_CRT_SECURE_NO_WARNINGS"
     "/D_CRT_NONSTDC_NO_WARNINGS"
+    "/DSERF_HAVE_SSPI"
   )
   if(SERF_WIN64)
     add_definitions("/DWIN64")
