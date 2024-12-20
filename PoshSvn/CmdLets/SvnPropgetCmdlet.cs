@@ -19,7 +19,7 @@ namespace PoshSvn.CmdLets
         [Parameter(Position = 1, ValueFromRemainingArguments = true)]
         public SvnTarget[] Target { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = ParameterSetNames.Node)]
         public SvnDepth Depth { get; set; }
 
         [Parameter()]
