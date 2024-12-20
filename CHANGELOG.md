@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.2.0]
+
+- Added -StopOnCopy argument to the svn-log cmdlet (r3389).
+
 # [1.1.4]
 
 - Update Subversion from 1.14.4 to 1.14.5
