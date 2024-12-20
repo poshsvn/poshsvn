@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.1.4]
+
+- Update Subversion from 1.14.4 to 1.14.5
+- Use CMake build system for Serf dependency, which should also fix a problem with Windows auth.
+
 # [1.1.2, 1.1.3]
 
 - Update Subversion from 1.14.3 to 1.14.4
