@@ -8,6 +8,14 @@
     "apr",
     "apr-util",
     "openssl",
-    "zlib"
+    "zlib",
+    {
+        "name": "vcpkg-cmake",
+        "host": true
+    },
+    {
+        "name": "vcpkg-cmake-config",
+        "host": true
+    }
   ]
 }
