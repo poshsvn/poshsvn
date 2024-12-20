@@ -35,7 +35,7 @@ namespace PoshSvn.CmdLets
         [Alias("cl")]
         public string[] ChangeList { get; set; }
 
-        [Parameter()]
+        [Parameter(ParameterSetName = ParameterSetNames.Node)]
         public SvnDepth Depth { get; set; }
 
         [Parameter()]
