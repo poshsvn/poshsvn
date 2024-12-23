@@ -19,7 +19,7 @@
     </DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
-    <OutputName>PoshSvn</OutputName>
+    <OutputName>PoshSvn-$(Version)-$(Platform)</OutputName>
     <OutDir>$(OutDir)Installer</OutDir>
   </PropertyGroup>
   <PropertyGroup>
