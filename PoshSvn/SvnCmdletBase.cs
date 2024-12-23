@@ -90,6 +90,12 @@ namespace PoshSvn
             WriteProgress(ProgressRecord);
         }
 
+        protected void FinishProgress()
+        {
+            ProgressRecord.RecordType = ProgressRecordType.Completed;
+            WriteProgress(ProgressRecord);
+        }
+
         private SvnResolvedTarget ResolveUriTarget(SvnTarget target)
         {
             if (Uri.TryCreate(target.Value, UriKind.Absolute, out Uri url))
