@@ -401,6 +401,10 @@ namespace PoshSvn
                     ErrorDetails = new ErrorDetails(ex.Message)
                 });
             }
+            finally
+            {
+                FinishProgress();
+            }
         }
 
         protected void WriteSvnError(SharpSvn.SvnException ex)
