@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.3.0]
+
+- Clear the progress after each operation.
+- Minor fixes in the property cmdlets.
+- Build and package improvements.
+  - Include version to the output name.
+  - Sign installer.
+
 # [1.2.0]
 
 - Added -StopOnCopy argument to the svn-log cmdlet (r3389).
