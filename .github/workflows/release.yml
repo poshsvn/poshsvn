@@ -52,14 +52,8 @@ jobs:
       - uses: actions/checkout@v4
 
       # Build
-      - name: Restore
-        run: MSBuild.exe /target:restore ${{ env.MSBuildCommonParameters }}
-
-      - name: vcpkg
-        run: MSBuild.exe /target:vcpkg ${{ env.MSBuildCommonParameters }}
-
       - name: Build
-        run: MSBuild.exe /target:build ${{ env.MSBuildCommonParameters }}
+        run: ./build.ps1
 
       # Release
       - name: Upload package to release
