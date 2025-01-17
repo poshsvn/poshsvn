@@ -45,6 +45,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+  
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
@@ -54,6 +61,18 @@ jobs:
       # Build
       - name: Build
         run: ./build.ps1
+
+      - name: Sign Installer
+        uses: azure/trusted-signing-action@v0.5.1
+        with:
+          endpoint: https://eus.codesigning.azure.net/
+          trusted-signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
+          certificate-profile-name: ${{ secrets.AZURE_CERTIFICATE_PROFILE_NAME }}
+          files: |
+            .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref }}-${{ matrix.platform }}.msi
+          file-digest: SHA256
+          timestamp-rfc3161: http://timestamp.acs.microsoft.com
+          timestamp-digest: SHA256
 
       # Release
       - name: Upload package to release
