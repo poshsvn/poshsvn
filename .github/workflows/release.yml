@@ -47,13 +47,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-  
-      - name: Azure login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
@@ -63,6 +56,14 @@ jobs:
       # Build
       - name: Build
         run: ./build.ps1 -Platform ${{ matrix.platform }}
+
+      # Sign Installer
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Sign Installer
         uses: azure/trusted-signing-action@v0.5.1
@@ -75,6 +76,7 @@ jobs:
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
+          cache-dependencies: false
 
       - uses: actions/attest-build-provenance@v2
         with:
