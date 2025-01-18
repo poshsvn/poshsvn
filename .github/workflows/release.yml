@@ -71,7 +71,7 @@ jobs:
           trusted-signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
           certificate-profile-name: ${{ secrets.AZURE_CERTIFICATE_PROFILE_NAME }}
           files: |
-            .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
+            ${{ github.workspace }}\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
