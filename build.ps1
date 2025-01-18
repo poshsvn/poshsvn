@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [ValidateSet("Core", "Installer", "All", "SvnDist", "platyPS")]
+    [ValidateSet("Core", "Installer", "All", "SvnDist", "platyPS", "Package")]
     [string]
     $Target = "All",
 
@@ -20,6 +20,9 @@ if ($Target -eq "All") {
 }
 elseif ($Target -eq "Core") {
     $msbuildTarget = "PoshSvn"
+}
+elseif ($Target -eq "Package") {
+    $msbuildTarget = "PoshSvn_Package"
 }
 else {
     $msbuildTarget = $Target
