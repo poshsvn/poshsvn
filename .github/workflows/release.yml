@@ -62,7 +62,7 @@ jobs:
 
       # Build
       - name: Build
-        run: ./build.ps1
+        run: ./build.ps1 -Platform ${{ matrix.platform }}
 
       - name: Sign Installer
         uses: azure/trusted-signing-action@v0.5.1
