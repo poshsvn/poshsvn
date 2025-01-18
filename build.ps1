@@ -18,7 +18,7 @@ param (
     [Parameter()]
     [ValidateSet("x64", "x86")]
     [string]
-    $Platform = "x64",
+    $Platform = "x64"
 )
 
 if ($Target -ne "All" -and $Target -ne "Installer" -and $Install) {
