@@ -44,6 +44,7 @@ jobs:
 
     env:
       MSBuildCommonParameters: /property:Configuration=Release /property:Platform=${{ matrix.platform }}
+      outdir: ${{ github.workspace }}\bin\Release-${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v4
@@ -71,7 +72,7 @@ jobs:
           trusted-signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
           certificate-profile-name: ${{ secrets.AZURE_CERTIFICATE_PROFILE_NAME }}
           files: |
-            .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
+            ${{ env.outdir }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
@@ -83,7 +84,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: .\bin\Release-${{ matrix.platform }}\PoshSvn.zip
+          asset_path: ${{ env.outdir }}\PoshSvn.zip
           asset_name: PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.zip
           asset_content_type: application/zip
 
@@ -93,7 +94,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
+          asset_path: ${{ env.outdir }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
           asset_name: PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
           asset_content_type: application/msi
 
@@ -102,16 +103,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Release-${{ matrix.platform }}
-          path: .\bin\Release-${{ matrix.platform }}
+          path: ${{ env.outdir }}
   
       - name: Setup VSTest Path
         uses: darenm/Setup-VSTest@v1.2
 
       - name: Test PoshSvn
-        run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Tests.dll
+        run: vstest.console.exe ${{ env.outdir }}\PoshSvn.Tests.dll
 
       - name: Test PoshSvn.Common
-        run: vstest.console.exe .\bin\Release-${{ matrix.platform }}\PoshSvn.Common.Tests.dll
+        run: vstest.console.exe ${{ env.outdir }}\PoshSvn.Common.Tests.dll
 
   publish-powershellgallery:
     runs-on: windows-latest
