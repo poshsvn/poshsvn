@@ -1,14 +1,24 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [ValidateSet("Core", "Installer", "All", "SvnDist", "platyPS")]
+    [ValidateSet("Core", "Installer", "All", "SvnDist", "platyPS", "Package")]
     [string]
     $Target = "All",
 
     # Launches the installer after build.
     [Parameter()]
     [switch]
-    $Install
+    $Install,
+
+    [Parameter()]
+    [ValidateSet("Release", "Debug")]
+    [string]
+    $Configuration = "Release",
+
+    [Parameter()]
+    [ValidateSet("x64", "x86")]
+    [string]
+    $Platform = "x64",
 )
 
 if ($Target -ne "All" -and $Target -ne "Installer" -and $Install) {
@@ -21,6 +31,9 @@ if ($Target -eq "All") {
 elseif ($Target -eq "Core") {
     $msbuildTarget = "PoshSvn"
 }
+elseif ($Target -eq "Package") {
+    $msbuildTarget = "PoshSvn_Package"
+}
 else {
     $msbuildTarget = $Target
 }
@@ -29,7 +42,9 @@ $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.e
 $installationPath = & $vswhere -property "installationPath"
 $msbuild = "$installationPath\MSBuild\Current\Bin\MSBuild.exe"
 
-& $msbuild /property:Configuration=Release /t:$msbuildTarget /restore /fileLogger /fileLoggerParameters:verbosity=normal
+& $msbuild /property:Configuration=$Configuration /property:Platform=$Platform `
+    /t:$msbuildTarget /restore `
+    /fileLogger /fileLoggerParameters:verbosity=normal
 
 if ($Install) {
     msiexec.exe /i bin\Release-x64\Installer\en-US\PoshSvn.msi /qb

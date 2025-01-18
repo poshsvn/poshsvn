@@ -43,7 +43,6 @@ jobs:
         - x86
 
     env:
-      MSBuildCommonParameters: /property:Configuration=Release /property:Platform=${{ matrix.platform }}
       outdir: ${{ github.workspace }}\bin\Release-${{ matrix.platform }}
 
     steps:
@@ -63,7 +62,7 @@ jobs:
 
       # Build
       - name: Build
-        run: ./build.ps1
+        run: ./build.ps1 -Platform ${{ matrix.platform }}
 
       - name: Sign Installer
         uses: azure/trusted-signing-action@v0.5.1
