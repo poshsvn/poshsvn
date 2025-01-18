@@ -76,6 +76,12 @@ jobs:
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
 
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            ${{ env.outdir }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
+            ${{ env.outdir }}\PoshSvn.zip
+
       # Release
       - name: Upload package to release
         uses: actions/upload-release-asset@v1

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+# [1.3.4]
+
+- Attest artifacts with GitHub attestation.
+- Release and build improvements.
+- Fix build.ps1 script.
+
 # [1.3.3]
 
 - Release improvements.
