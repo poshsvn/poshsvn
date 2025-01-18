@@ -34,6 +34,8 @@ jobs:
 
     runs-on: windows-latest
 
+    environment: release
+
     strategy:
       matrix:
         platform:
@@ -69,7 +71,7 @@ jobs:
           trusted-signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
           certificate-profile-name: ${{ secrets.AZURE_CERTIFICATE_PROFILE_NAME }}
           files: |
-            .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref }}-${{ matrix.platform }}.msi
+            .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
@@ -82,7 +84,7 @@ jobs:
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
           asset_path: .\bin\Release-${{ matrix.platform }}\PoshSvn.zip
-          asset_name: PoshSvn-${{ github.ref }}-${{ matrix.platform }}.zip
+          asset_name: PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.zip
           asset_content_type: application/zip
 
       - name: Upload installer to release
@@ -91,8 +93,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref }}-${{ matrix.platform }}.msi
-          asset_name: PoshSvn-${{ github.ref }}-${{ matrix.platform }}.msi
+          asset_path: .\bin\Release-${{ matrix.platform }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
+          asset_name: PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
           asset_content_type: application/msi
 
       # Artifacts
