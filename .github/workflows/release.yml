@@ -76,6 +76,7 @@ jobs:
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
+          cache-dependencies: false
 
       - uses: actions/attest-build-provenance@v2
         with:
