@@ -53,17 +53,37 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      # Build
-      - name: Build
-        run: ./build.ps1 -Platform ${{ matrix.platform }}
+      - name: Build Package
+        run: ./build.ps1 -Target Package -Platform ${{ matrix.platform }}
 
-      # Sign Installer
       - name: Azure login
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Sign Package
+        uses: azure/trusted-signing-action@v0.5.1
+        with:
+          endpoint: https://eus.codesigning.azure.net/
+          trusted-signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT_NAME }}
+          certificate-profile-name: ${{ secrets.AZURE_CERTIFICATE_PROFILE_NAME }}
+          # I'm signing my own libraries and files, SharpSvn, and libsvn, but I'm not gonna
+          # sign libapr, libserf, and other third-party libs, because im not considering their
+          # sources as "verified". At least not yet.
+          files-folder: ${{ env.outdir }}\PoshSvn
+          files-folder-recurse: true
+          files-folder-filter: psd1,ps1xml,PoshSvn*.dll,libsvn*.dll,SharpSvn.dll
+          files: |
+            ${{ env.outdir }}\Installer\en-US\PoshSvn-${{ github.ref_name }}-${{ matrix.platform }}.msi
+          file-digest: SHA256
+          timestamp-rfc3161: http://timestamp.acs.microsoft.com
+          timestamp-digest: SHA256
+          cache-dependencies: false
+
+      - name: Build All
+        run: ./build.ps1 -Target All -Platform ${{ matrix.platform }}
 
       - name: Sign Installer
         uses: azure/trusted-signing-action@v0.5.1
