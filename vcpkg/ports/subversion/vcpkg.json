@@ -19,6 +19,7 @@
     "apr",
     "apr-util",
     "zlib",
-    "expat"
+    "expat",
+    "sqlite3"
   ]
 }
