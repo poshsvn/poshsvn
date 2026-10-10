@@ -5,6 +5,10 @@
   "homepage": "https://subversion.apache.org",
   "supports": "windows & !staticcrt",
   "dependencies": [
+    {
+      "vcpkg-cmake",
+      "host": true
+    },
     "apr",
     "apr-util",
     "zlib",
