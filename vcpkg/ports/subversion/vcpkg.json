@@ -6,7 +6,7 @@
   "supports": "windows & !staticcrt",
   "dependencies": [
     {
-      "vcpkg-cmake",
+      "name": "vcpkg-cmake",
       "host": true
     },
     "apr",
