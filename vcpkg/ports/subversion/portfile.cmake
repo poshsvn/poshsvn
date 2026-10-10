@@ -12,6 +12,7 @@ vcpkg_extract_source_archive_ex(
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
+        -DSVN_INSTALL_PRIVATE_H=ON
 )
 
 vcpkg_cmake_install()
